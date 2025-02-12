@@ -469,13 +469,10 @@ $$</description>
         <guid>https://rooobeam.github.io/p/</guid>
         <description>&lt;p&gt;author = &amp;ldquo;rooobeam&amp;rdquo;
 title = &amp;lsquo;汇编语言第二章&amp;rsquo;
-date = &amp;lsquo;2025-02-12T22:10:35+08:00&amp;rsquo;
-description = &amp;ldquo;Guide to emoji usage in Hugo&amp;rdquo;
-categories = [
-&amp;ldquo;汇编语言&amp;rdquo;
-]&lt;/p&gt;
+date = &amp;lsquo;2025-02-12T22:10:35+08:00&amp;rsquo;&lt;/p&gt;
 &lt;p&gt;+++&lt;/p&gt;
-&lt;p&gt;8086cpu有14个寄存器：AX BX CX DS SI DI SP BP IP CS SS DS ES PSW。&lt;/p&gt;
+&lt;h2 id=&#34;正文&#34;&gt;正文
+&lt;/h2&gt;&lt;p&gt;8086cpu有14个寄存器：AX BX CX DS SI DI SP BP IP CS SS DS ES PSW。&lt;/p&gt;
 &lt;p&gt;8086cpu寄存器都是16位的。&lt;/p&gt;
 &lt;p&gt;ABCD-X通常用来存放一般性数据，被成为通用寄存器。&lt;/p&gt;
 &lt;p&gt;寄存器?X可被分为?H和?L，如AX分为AH AL，即分为AHigh ALow，前者是高八位，后者是第八位。&lt;/p&gt;
@@ -484,6 +481,20 @@ categories = [
 &lt;p&gt;数字默认16进制。&lt;/p&gt;
 &lt;p&gt;mov ax,bx; mov ax,7。&lt;/p&gt;
 &lt;p&gt;两个操作对象位数一致，第一个位置要是变量，如mov ah,bl; mov bh, AA。&lt;/p&gt;
+&lt;p&gt;物理地址即内存在统一的逻辑存储器中的地址。&lt;/p&gt;
+&lt;p&gt;内存地址空间:cpu将系统中各类存储器看作一个逻辑存储器。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;D:%5c%e5%8a%9e%e5%85%ac%e7%a8%8b%e5%ba%8f%5cgithub_blog%5chugo_extended_withdeploy_0.141.0_windows-amd64%5crublog%5ccontent%5cpost%5c%e6%b1%87%e7%bc%96%e8%af%ad%e8%a8%80%e7%ac%ac%e4%ba%8c%e7%ab%a0%5c1.jpg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;1&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;物理地址=段地址*16+偏移地址，由于十六进制，故其实即 “段地址0+偏移地址”，由一个地址加法器合成。&lt;/p&gt;
+&lt;p&gt;段的概念：段地址固定，偏移地址连续的内存空间。故其最大范围0000~FFFF。实践发现，0-1会自动变成FFFF，FFFF+1变成0000。&lt;/p&gt;
 </description>
         </item>
         

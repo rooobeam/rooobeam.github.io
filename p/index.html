@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="author = &ldquo;rooobeam&rdquo; title = &lsquo;汇编语言第二章&rsquo; date = &lsquo;2025-02-12T22:10:35+08:00&rsquo; description = &ldquo;Guide to emoji usage in Hugo&rdquo; categories = [ &ldquo;汇编语言&rdquo; ]\n+++\n8086cpu有14个寄存器：AX BX CX DS SI DI SP BP IP CS SS DS ES PSW。\n">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="author = &ldquo;rooobeam&rdquo; title = &lsquo;汇编语言第二章&rsquo; date = &lsquo;2025-02-12T22:10:35+08:00&rsquo;\n+++\n正文 8086cpu有14个寄存器：AX BX CX DS SI DI SP BP IP CS SS DS ES PSW。\n8086cpu寄存器都是16位的。\n">
 <title></title>
 
 <link rel='canonical' href='https://rooobeam.github.io/p/'>
 
 <link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="">
-<meta property='og:description' content="author = &ldquo;rooobeam&rdquo; title = &lsquo;汇编语言第二章&rsquo; date = &lsquo;2025-02-12T22:10:35+08:00&rsquo; description = &ldquo;Guide to emoji usage in Hugo&rdquo; categories = [ &ldquo;汇编语言&rdquo; ]\n+++\n8086cpu有14个寄存器：AX BX CX DS SI DI SP BP IP CS SS DS ES PSW。\n">
+<meta property='og:description' content="author = &ldquo;rooobeam&rdquo; title = &lsquo;汇编语言第二章&rsquo; date = &lsquo;2025-02-12T22:10:35+08:00&rsquo;\n+++\n正文 8086cpu有14个寄存器：AX BX CX DS SI DI SP BP IP CS SS DS ES PSW。\n8086cpu寄存器都是16位的。\n">
 <meta property='og:url' content='https://rooobeam.github.io/p/'>
 <meta property='og:site_name' content='rooobeam'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' />
 <meta name="twitter:title" content="">
-<meta name="twitter:description" content="author = &ldquo;rooobeam&rdquo; title = &lsquo;汇编语言第二章&rsquo; date = &lsquo;2025-02-12T22:10:35+08:00&rsquo; description = &ldquo;Guide to emoji usage in Hugo&rdquo; categories = [ &ldquo;汇编语言&rdquo; ]\n+++\n8086cpu有14个寄存器：AX BX CX DS SI DI SP BP IP CS SS DS ES PSW。\n">
+<meta name="twitter:description" content="author = &ldquo;rooobeam&rdquo; title = &lsquo;汇编语言第二章&rsquo; date = &lsquo;2025-02-12T22:10:35+08:00&rsquo;\n+++\n正文 8086cpu有14个寄存器：AX BX CX DS SI DI SP BP IP CS SS DS ES PSW。\n8086cpu寄存器都是16位的。\n">
     <link rel="shortcut icon" href="/favicon.ico" />
 
     </head>
@@ -305,13 +305,10 @@
     
     <p>author = &ldquo;rooobeam&rdquo;
 title = &lsquo;汇编语言第二章&rsquo;
-date = &lsquo;2025-02-12T22:10:35+08:00&rsquo;
-description = &ldquo;Guide to emoji usage in Hugo&rdquo;
-categories = [
-&ldquo;汇编语言&rdquo;
-]</p>
+date = &lsquo;2025-02-12T22:10:35+08:00&rsquo;</p>
 <p>+++</p>
-<p>8086cpu有14个寄存器：AX BX CX DS SI DI SP BP IP CS SS DS ES PSW。</p>
+<h2 id="正文">正文
+</h2><p>8086cpu有14个寄存器：AX BX CX DS SI DI SP BP IP CS SS DS ES PSW。</p>
 <p>8086cpu寄存器都是16位的。</p>
 <p>ABCD-X通常用来存放一般性数据，被成为通用寄存器。</p>
 <p>寄存器?X可被分为?H和?L，如AX分为AH AL，即分为AHigh ALow，前者是高八位，后者是第八位。</p>
@@ -320,6 +317,20 @@ categories = [
 <p>数字默认16进制。</p>
 <p>mov ax,bx; mov ax,7。</p>
 <p>两个操作对象位数一致，第一个位置要是变量，如mov ah,bl; mov bh, AA。</p>
+<p>物理地址即内存在统一的逻辑存储器中的地址。</p>
+<p>内存地址空间:cpu将系统中各类存储器看作一个逻辑存储器。</p>
+<p><img src="D:%5c%e5%8a%9e%e5%85%ac%e7%a8%8b%e5%ba%8f%5cgithub_blog%5chugo_extended_withdeploy_0.141.0_windows-amd64%5crublog%5ccontent%5cpost%5c%e6%b1%87%e7%bc%96%e8%af%ad%e8%a8%80%e7%ac%ac%e4%ba%8c%e7%ab%a0%5c1.jpg"
+	
+	
+	
+	loading="lazy"
+	
+		alt="1"
+	
+	
+></p>
+<p>物理地址=段地址*16+偏移地址，由于十六进制，故其实即 “段地址0+偏移地址”，由一个地址加法器合成。</p>
+<p>段的概念：段地址固定，偏移地址连续的内存空间。故其最大范围0000~FFFF。实践发现，0-1会自动变成FFFF，FFFF+1变成0000。</p>
 
 </section>
 
