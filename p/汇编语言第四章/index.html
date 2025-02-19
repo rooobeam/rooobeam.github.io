@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="第一个程序 ✅\n源程序写出到执行简要过程，后文有实例： 编写会变源程序 —— 写一个文本文件 —— 使用edit、笔记本等。 编译连接 —— 用汇编语言编译程序对文本文件编译产生目标文件；再用连接程序对目标文件进行连接，生成可执行文件。 在操作系统中执行文件。 ✅\n">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="第一个程序 ✅\n源程序写出到执行简要过程，后文有实例： 编写源程序 —— 写一个文本文件 —— 使用edit、笔记本等。 编译连接 —— 用汇编语言编译程序对文本文件编译产生目标文件；再用连接程序对目标文件进行连接，生成可执行文件。 在操作系统中执行文件。 ✅\n">
 <title>汇编语言第四章</title>
 
 <link rel='canonical' href='https://rooobeam.github.io/p/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AC%AC%E5%9B%9B%E7%AB%A0/'>
 
 <link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="汇编语言第四章">
-<meta property='og:description' content="第一个程序 ✅\n源程序写出到执行简要过程，后文有实例： 编写会变源程序 —— 写一个文本文件 —— 使用edit、笔记本等。 编译连接 —— 用汇编语言编译程序对文本文件编译产生目标文件；再用连接程序对目标文件进行连接，生成可执行文件。 在操作系统中执行文件。 ✅\n">
+<meta property='og:description' content="第一个程序 ✅\n源程序写出到执行简要过程，后文有实例： 编写源程序 —— 写一个文本文件 —— 使用edit、笔记本等。 编译连接 —— 用汇编语言编译程序对文本文件编译产生目标文件；再用连接程序对目标文件进行连接，生成可执行文件。 在操作系统中执行文件。 ✅\n">
 <meta property='og:url' content='https://rooobeam.github.io/p/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AC%AC%E5%9B%9B%E7%AB%A0/'>
 <meta property='og:site_name' content='rooobeam'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-02-19T19:59:18&#43;08:00'/><meta property='article:modified_time' content='2025-02-19T19:59:18&#43;08:00'/><meta property='og:image' content='https://rooobeam.github.io/p/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AC%AC%E5%9B%9B%E7%AB%A0/%E4%B8%89%E9%BE%99.png' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-02-19T19:59:18&#43;08:00'/><meta property='article:modified_time' content='2025-02-19T19:59:18&#43;08:00'/><meta property='og:image' content='https://rooobeam.github.io/p/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AC%AC%E5%9B%9B%E7%AB%A0/%E4%B8%89%E9%BE%99.jpg' />
 <meta name="twitter:title" content="汇编语言第四章">
-<meta name="twitter:description" content="第一个程序 ✅\n源程序写出到执行简要过程，后文有实例： 编写会变源程序 —— 写一个文本文件 —— 使用edit、笔记本等。 编译连接 —— 用汇编语言编译程序对文本文件编译产生目标文件；再用连接程序对目标文件进行连接，生成可执行文件。 在操作系统中执行文件。 ✅\n"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='https://rooobeam.github.io/p/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AC%AC%E5%9B%9B%E7%AB%A0/%E4%B8%89%E9%BE%99.png' />
+<meta name="twitter:description" content="第一个程序 ✅\n源程序写出到执行简要过程，后文有实例： 编写源程序 —— 写一个文本文件 —— 使用edit、笔记本等。 编译连接 —— 用汇编语言编译程序对文本文件编译产生目标文件；再用连接程序对目标文件进行连接，生成可执行文件。 在操作系统中执行文件。 ✅\n"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://rooobeam.github.io/p/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AC%AC%E5%9B%9B%E7%AB%A0/%E4%B8%89%E9%BE%99.jpg' />
     <link rel="shortcut icon" href="/favicon.ico" />
 
     </head>
@@ -312,8 +312,8 @@
     <header class="article-header">
         <div class="article-image">
             <a href="/p/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AC%AC%E5%9B%9B%E7%AB%A0/">
-                <img src="/p/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AC%AC%E5%9B%9B%E7%AB%A0/%E4%B8%89%E9%BE%99_hu_df9ea1ba14c5c9dc.png"
-                        srcset="/p/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AC%AC%E5%9B%9B%E7%AB%A0/%E4%B8%89%E9%BE%99_hu_df9ea1ba14c5c9dc.png 800w, /p/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AC%AC%E5%9B%9B%E7%AB%A0/%E4%B8%89%E9%BE%99_hu_5a3b5aefb63cce8d.png 1600w"
+                <img src="/p/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AC%AC%E5%9B%9B%E7%AB%A0/%E4%B8%89%E9%BE%99_hu_973d3d5b2907835d.jpg"
+                        srcset="/p/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AC%AC%E5%9B%9B%E7%AB%A0/%E4%B8%89%E9%BE%99_hu_973d3d5b2907835d.jpg 800w, /p/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AC%AC%E5%9B%9B%E7%AB%A0/%E4%B8%89%E9%BE%99_hu_3c4ebd44f123dc49.jpg 1600w"
                         width="800" 
                         height="338" 
                         loading="lazy"
@@ -371,7 +371,7 @@
 <ul>
 <li>源程序写出到执行简要过程，后文有实例：
 <ol>
-<li>编写会变源程序 —— 写一个文本文件 —— 使用edit、笔记本等。</li>
+<li>编写源程序 —— 写一个文本文件 —— 使用edit、笔记本等。</li>
 <li>编译连接 —— 用汇编语言编译程序对文本文件编译产生目标文件；再用连接程序对目标文件进行连接，生成可执行文件。</li>
 <li>在操作系统中执行文件。</li>
 </ol>
@@ -420,7 +420,32 @@
 </ul>
 <p>✅</p>
 <ul>
-<li>实例</li>
+<li>
+<p>实例</p>
+<ul>
+<li>
+<p>编写源程序</p>
+<p>​	桌面右键新建txt命名123，记事本里写好源程序。</p>
+</li>
+<li>
+<p>编译</p>
+<ol>
+<li>win+R  输入command打开命令提示符，输入“cd masm”（masm.exe所在目录），输入“masm”启动masm.exe。</li>
+<li>提示我们输入源文件名，txt文件放在了c:\asm，且不是asm文件，输入c:\asm\123.txt。</li>
+<li>询问生成obj文件名，我们选择默认，回车即可。</li>
+<li>提示输入列表文件名，该文件为编译为目标文件的中间结果，我们不生成，回车即可。</li>
+<li>提示输入交叉引用文件名，也是中间结果，不生成，回车即可。</li>
+<li>无错误则masm.exe所在目录下生成123.obj</li>
+</ol>
+</li>
+<li>
+<p>连接</p>
+<ul>
+<li></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 
 </section>
