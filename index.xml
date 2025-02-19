@@ -14,17 +14,48 @@
         
         <guid>https://rooobeam.github.io/p/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%BA%8C%E7%AB%A0/</guid>
         <description>&lt;h2 id=&#34;正文&#34;&gt;正文
-&lt;/h2&gt;&lt;p&gt;8086cpu有14个寄存器：AX BX CX DS SI DI SP BP IP CS SS DS ES PSW。&lt;/p&gt;
+&lt;/h2&gt;&lt;p&gt;✅&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;8086cpu有14个寄存器：AX BX CX DS SI DI SP BP IP CS SS DS ES PSW。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
 &lt;p&gt;8086cpu寄存器都是16位的。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
 &lt;p&gt;ABCD-X通常用来存放一般性数据，被成为通用寄存器。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
 &lt;p&gt;寄存器?X可被分为?H和?L，如AX分为AH AL，即分为AHigh ALow，前者是高八位，后者是第八位。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
 &lt;p&gt;所谓高位和数字的高位联想，都是左边是高位。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;✅&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
 &lt;p&gt;几条汇编指令：mov add，用法一样。add ax,18H; add ax,8H。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
 &lt;p&gt;数字默认16进制。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
 &lt;p&gt;mov ax,bx; mov ax,7。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
 &lt;p&gt;两个操作对象位数一致，第一个位置要是变量，如mov ah,bl; mov bh, AA。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;✅&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
 &lt;p&gt;物理地址即内存在统一的逻辑存储器中的地址。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
 &lt;p&gt;内存地址空间:cpu将系统中各类存储器看作一个逻辑存储器。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;&lt;img src=&#34;D:%5c%e5%8a%9e%e5%85%ac%e7%a8%8b%e5%ba%8f%5cgithub_blog%5chugo_extended_withdeploy_0.141.0_windows-amd64%5crublog%5ccontent%5cpost%5c%e6%b1%87%e7%bc%96%e8%af%ad%e8%a8%80%e7%ac%ac%e4%ba%8c%e7%ab%a0%5c1.jpg&#34;
 	
 	
@@ -35,17 +66,38 @@
 	
 	
 &gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
 &lt;p&gt;物理地址=段地址*16+偏移地址，通常写作  段地址:偏移地址，如cpu指令读取开始地址CS:IP。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
 &lt;p&gt;由于十六进制，故其实即 “段地址0+偏移地址”，由一个地址加法器合成。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
 &lt;p&gt;段的概念：段地址固定，偏移地址连续的内存空间。故其最大范围0000~FFFF。实践发现，0-1会自动变成FFFF，FFFF+1变成0000。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;✅&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
 &lt;p&gt;8086有四个段寄存器：CS DS SS ES。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
 &lt;p&gt;CS和IP：CS叫代码 段寄存器，IP 叫指令指针寄存器，CS存段地址IP存偏移量。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
 &lt;p&gt;cpu将从CS:IP单元开始读取一条指令并执行。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
 &lt;p&gt;取指执行过程：从CS:IP读取指令，该指令进入指令缓冲器；IP=IP+该指令长度，从而指向下一指令首单元；执行指令；从CS:IP读取指令&amp;hellip;&amp;hellip;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
 &lt;p&gt;修改CS IP命令——jmp
 jmp 段地址:偏移地址	段地址修改CS 偏移地址修改IP
 jmp “四位数” 	仅修改IP
 jmp 某合法寄存器	仅修改IP，IP=某合法寄存器的值&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
 </description>
         </item>
         <item>
