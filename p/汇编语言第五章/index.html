@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="第一个程序 ✅\n源程序写出到执行简要过程，后文有实例： 编写源程序 —— 写一个文本文件 —— 使用edit、笔记本等。 编译连接 —— 用汇编语言编译程序对文本文件编译产生目标文件；再用连接程序对目标文件进行连接，生成可执行文件。 在操作系统中执行文件。 ✅\n">
-<title>汇编语言第四章&#39;</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="">
+<title>汇编语言第五章</title>
 
-<link rel='canonical' href='https://rooobeam.github.io/p/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AC%AC%E5%9B%9B%E7%AB%A0/'>
+<link rel='canonical' href='https://rooobeam.github.io/p/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%BA%94%E7%AB%A0/'>
 
-<link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="汇编语言第四章'">
-<meta property='og:description' content="第一个程序 ✅\n源程序写出到执行简要过程，后文有实例： 编写源程序 —— 写一个文本文件 —— 使用edit、笔记本等。 编译连接 —— 用汇编语言编译程序对文本文件编译产生目标文件；再用连接程序对目标文件进行连接，生成可执行文件。 在操作系统中执行文件。 ✅\n">
-<meta property='og:url' content='https://rooobeam.github.io/p/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AC%AC%E5%9B%9B%E7%AB%A0/'>
+<link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="汇编语言第五章">
+<meta property='og:description' content="">
+<meta property='og:url' content='https://rooobeam.github.io/p/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%BA%94%E7%AB%A0/'>
 <meta property='og:site_name' content='rooobeam'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-02-19T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-02-19T00:00:00&#43;00:00'/><meta property='og:image' content='https://rooobeam.github.io/p/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AC%AC%E5%9B%9B%E7%AB%A0/%E4%B8%89%E9%BE%99.jpg' />
-<meta name="twitter:title" content="汇编语言第四章'">
-<meta name="twitter:description" content="第一个程序 ✅\n源程序写出到执行简要过程，后文有实例： 编写源程序 —— 写一个文本文件 —— 使用edit、笔记本等。 编译连接 —— 用汇编语言编译程序对文本文件编译产生目标文件；再用连接程序对目标文件进行连接，生成可执行文件。 在操作系统中执行文件。 ✅\n"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='https://rooobeam.github.io/p/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AC%AC%E5%9B%9B%E7%AB%A0/%E4%B8%89%E9%BE%99.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-02-22T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-02-22T00:00:00&#43;00:00'/><meta property='og:image' content='https://rooobeam.github.io/p/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%BA%94%E7%AB%A0/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250222101607.jpg' />
+<meta name="twitter:title" content="汇编语言第五章">
+<meta name="twitter:description" content=""><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://rooobeam.github.io/p/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%BA%94%E7%AB%A0/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250222101607.jpg' />
     <link rel="shortcut icon" href="/favicon.ico" />
 
     </head>
@@ -274,50 +274,19 @@
     </ol>
 </aside>
 
-    <aside class="sidebar right-sidebar sticky">
-        
-            
-                
-    <section class="widget archives">
-        <div class="widget-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <line x1="5" y1="9" x2="19" y2="9" />
-  <line x1="5" y1="15" x2="19" y2="15" />
-  <line x1="11" y1="4" x2="7" y2="20" />
-  <line x1="17" y1="4" x2="13" y2="20" />
-</svg>
-
-
-
-        </div>
-        <h2 class="widget-title section-title">Table of contents</h2>
-        
-        <div class="widget--toc">
-            <nav id="TableOfContents">
-  <ol>
-    <li><a href="#第一个程序">第一个程序</a></li>
-  </ol>
-</nav>
-        </div>
-    </section>
-
-            
-        
-    </aside>
-
+    
 
             <main class="main full-width">
     <article class="has-image main-article">
     <header class="article-header">
         <div class="article-image">
-            <a href="/p/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AC%AC%E5%9B%9B%E7%AB%A0/">
-                <img src="/p/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AC%AC%E5%9B%9B%E7%AB%A0/%E4%B8%89%E9%BE%99_hu_973d3d5b2907835d.jpg"
-                        srcset="/p/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AC%AC%E5%9B%9B%E7%AB%A0/%E4%B8%89%E9%BE%99_hu_973d3d5b2907835d.jpg 800w, /p/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AC%AC%E5%9B%9B%E7%AB%A0/%E4%B8%89%E9%BE%99_hu_3c4ebd44f123dc49.jpg 1600w"
+            <a href="/p/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%BA%94%E7%AB%A0/">
+                <img src="/p/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%BA%94%E7%AB%A0/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250222101607_hu_ebb958b3669d2e51.jpg"
+                        srcset="/p/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%BA%94%E7%AB%A0/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250222101607_hu_ebb958b3669d2e51.jpg 800w, /p/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%BA%94%E7%AB%A0/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250222101607_hu_8b14a98db5bfa5e4.jpg 1600w"
                         width="800" 
-                        height="338" 
+                        height="392" 
                         loading="lazy"
-                        alt="Featured image of post 汇编语言第四章&#39;" />
+                        alt="Featured image of post 汇编语言第五章" />
                 
             </a>
         </div>
@@ -328,7 +297,7 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AC%AC%E5%9B%9B%E7%AB%A0/">汇编语言第四章&#39;</a>
+            <a href="/p/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%BA%94%E7%AB%A0/">汇编语言第五章</a>
         </h2>
     
         
@@ -350,7 +319,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2025-02-19</time>
+                <time class="article-time--published">2025-02-22</time>
             </div>
         
 
@@ -366,138 +335,7 @@
     <section class="article-content">
     
     
-    <h2 id="第一个程序">第一个程序
-</h2><p>✅</p>
-<ul>
-<li>源程序写出到执行简要过程，后文有实例：
-<ol>
-<li>编写源程序 —— 写一个文本文件 —— 使用edit、笔记本等。</li>
-<li>编译连接 —— 用汇编语言编译程序对文本文件编译产生目标文件；再用连接程序对目标文件进行连接，生成可执行文件。</li>
-<li>在操作系统中执行文件。</li>
-</ol>
-</li>
-</ul>
-<p>✅</p>
-<ul>
-<li>源程序简单结构</li>
-</ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">assume 寄存器:某segment段, 寄存器:某segment段, 寄存器:某segment段
-</span></span><span class="line"><span class="cl">XXX segment
-</span></span><span class="line"><span class="cl">	:
-</span></span><span class="line"><span class="cl">	:
-</span></span><span class="line"><span class="cl">	:
-</span></span><span class="line"><span class="cl">XXX ends
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">YYY segment
-</span></span><span class="line"><span class="cl">	:
-</span></span><span class="line"><span class="cl">	mov ax,4c00H
-</span></span><span class="line"><span class="cl">	int 21H
-</span></span><span class="line"><span class="cl">YYY ends
-</span></span><span class="line"><span class="cl">end
-</span></span></code></pre></td></tr></table>
-</div>
-</div><ul>
-<li>伪指令：提供给编译器的，编译器根据伪指令进行编译工作。上面代码中assume，XXX segment……XXX ends 和 end。</li>
-<li>标号，如segment段的名称 上面代码中的XXX、YYY，一个标号指代一个地址。</li>
-<li>程序返回：将CPU的控制权还给 使他得以运行的程序（shell)。代码中的 mov ax,4C00H   \n  int 21H 。</li>
-</ul>
-<p>✅</p>
-<ul>
-<li>
-<p>实例</p>
-<ul>
-<li>
-<p>编写源程序
-svg</p>
-<p>​	桌面右键新建txt命名123，记事本里写好源程序。</p>
-</li>
-<li>
-<p>编译
-svg</p>
-<ol>
-<li>win+R  输入command打开命令提示符，输入“cd masm”（masm.exe所在目录），输入“masm”启动masm.exe。</li>
-<li>提示我们输入源文件名，txt文件放在了c:\asm，且不是asm文件，输入c:\asm\123.txt。</li>
-<li>询问生成obj文件名，我们选择默认，回车即可。</li>
-<li>提示输入列表文件名，该文件为编译为目标文件的中间结果，我们不生成，回车即可。</li>
-<li>提示输入交叉引用文件名，也是中间结果，不生成，回车即可。</li>
-<li>无错误则masm.exe所在目录下生成123.obj</li>
-</ol>
-</li>
-<li>
-<p>连接
-svg</p>
-<ol>
-<li>进入DOS方式(win+R 输command)，进入c:/masm (Overlay Linker3.60，link.exe所在目录),输入link启动link.exe。</li>
-<li>提示输入目标文件名，[.OBJ]提示默认扩展名为obj，正合我意，输入123即可。</li>
-<li>提示生成的exe文件名，默认名就行，回车即可。</li>
-<li>提示输入映像文件名，提示输入库文件名，我们都回车即可。</li>
-<li>无error则当前目录下生成123.exe。</li>
-</ol>
-</li>
-<li>
-<p>执行，命令行输入文件名就行了，masm.exe 或 masm          123.exe 或 123 。</p>
-</li>
-</ul>
-</li>
-<li>
-<p>debug跟踪程序的运行过程：debug 可以将程序载入内存，设置CS:IP指向程序的入口，但debug不放弃cpu的控制权</p>
-<ul>
-<li>具体方法：debug 123.exe
-svg</li>
-<li>运用第二章的debug的使用方法
-<ul>
-<li>R命令查看、改变寄存器内容</li>
-<li>D查看内存中内容</li>
-<li>E改写内存内容</li>
-<li>U将内存中机器指令(01&hellip;)翻译以为汇编命令(mov&hellip;)</li>
-<li>T执行一条机器指令</li>
-<li>A以汇编指令格式往内存写入机器指令</li>
-<li>P正常结束程序。</li>
-</ul>
-</li>
-<li>实操如下图：
-svg</li>
-</ul>
-</li>
-</ul>
-<p>✅</p>
-<ul>
-<li>exe执行过程与shell
-<ul>
-<li>DOS中，123.exe若要运行，要有一个正在运行的程序p2将其载入内存，123.exe运行完后即将cpu控制权交还程序p2。
-p2即command.com，被成为命令解释器，即DOS系统的shell。输入cd、dir、type等都由command执行。</li>
-<li>提示符&quot;c:\masm“后输入123.exe，此时command.com运行。
-输入123.3exe后，command根据文件名找到该可执行文件，将程序载入内存，设置CS:IP指向程序入口，随后执行程序。
-执行完回到command。</li>
-<li>dos中.exe的加载过程（上面第二步——载入内存）
-找到SA:0000空闲内存区——&gt;前256即偏移地址0-255创程序段前缀(PSP)，DOS要用它和.exe通信——&gt;后面装入程序，即从SA+10H:0000——&gt;CS:IP=SA+10H:0000
-svg</li>
-</ul>
-</li>
-</ul>
-<p>✅</p>
-<ul>
-<li>习题
-svg</li>
-</ul>
-
+    
 </section>
 
 
