@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content=":one: [bx] 内存单元 loop &ldquo;()&rdquo; idata\n[bx]\n类似[0]，[bx]表示 ds:bx上的1/2字节的内存内容，bx内的4位作为偏移地址\nmov ax, [0] 将地址为ds:0 的内存字单元存入ax mov al, [0] 将地址为ds:0 的内存半字单元存入al mov ax, [bx] 将地址为ds:bx的内存单元存入ax mov al, [bx] 将地址为ds:bx的内存半字单元存入al\n">
 <title>汇编语言第五章</title>
 
 <link rel='canonical' href='https://rooobeam.github.io/p/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%BA%94%E7%AB%A0/'>
 
 <link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="汇编语言第五章">
-<meta property='og:description' content="">
+<meta property='og:description' content=":one: [bx] 内存单元 loop &ldquo;()&rdquo; idata\n[bx]\n类似[0]，[bx]表示 ds:bx上的1/2字节的内存内容，bx内的4位作为偏移地址\nmov ax, [0] 将地址为ds:0 的内存字单元存入ax mov al, [0] 将地址为ds:0 的内存半字单元存入al mov ax, [bx] 将地址为ds:bx的内存单元存入ax mov al, [bx] 将地址为ds:bx的内存半字单元存入al\n">
 <meta property='og:url' content='https://rooobeam.github.io/p/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%BA%94%E7%AB%A0/'>
 <meta property='og:site_name' content='rooobeam'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-02-22T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-02-22T00:00:00&#43;00:00'/><meta property='og:image' content='https://rooobeam.github.io/p/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%BA%94%E7%AB%A0/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250222101607.jpg' />
 <meta name="twitter:title" content="汇编语言第五章">
-<meta name="twitter:description" content=""><meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:description" content=":one: [bx] 内存单元 loop &ldquo;()&rdquo; idata\n[bx]\n类似[0]，[bx]表示 ds:bx上的1/2字节的内存内容，bx内的4位作为偏移地址\nmov ax, [0] 将地址为ds:0 的内存字单元存入ax mov al, [0] 将地址为ds:0 的内存半字单元存入al mov ax, [bx] 将地址为ds:bx的内存单元存入ax mov al, [bx] 将地址为ds:bx的内存半字单元存入al\n"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://rooobeam.github.io/p/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%BA%94%E7%AB%A0/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250222101607.jpg' />
     <link rel="shortcut icon" href="/favicon.ico" />
 
@@ -335,7 +335,41 @@
     <section class="article-content">
     
     
-    
+    <p>:one: [bx] 内存单元 loop &ldquo;()&rdquo; idata</p>
+<ul>
+<li>
+<p>[bx]</p>
+<ol>
+<li>
+<p>类似[0]，[bx]表示 ds:bx上的1/2字节的内存内容，bx内的4位作为偏移地址</p>
+</li>
+<li>
+<p>mov ax, [0] 将地址为ds:0 的内存字单元存入ax
+mov al, [0]  将地址为ds:0 的内存半字单元存入al
+mov ax, [bx] 将地址为ds:bx的内存单元存入ax
+mov al, [bx] 将地址为ds:bx的内存半字单元存入al</p>
+</li>
+<li>
+<p>实例
+bx.svg</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># 
+</span></span><span class="line"><span class="cl">mov ax,2000H
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+</li>
+<li></li>
+</ul>
+<p>☝</p>
+<p>☝</p>
+
 </section>
 
 
