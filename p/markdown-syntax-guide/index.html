@@ -295,66 +295,40 @@
         
         <div class="widget--toc">
             <nav id="TableOfContents">
-  <ol>
+  <ul>
     <li><a href="#headings">Headings</a></li>
-  </ol>
+  </ul>
 
-  <ol>
+  <ul>
     <li><a href="#h2">H2</a>
-      <ol>
-        <li><a href="#h3">H3</a>
-          <ol>
-            <li><a href="#h4">H4</a></li>
-          </ol>
-        </li>
-      </ol>
+      <ul>
+        <li><a href="#h3">H3</a></li>
+      </ul>
     </li>
     <li><a href="#paragraph">Paragraph</a></li>
     <li><a href="#blockquotes">Blockquotes</a>
-      <ol>
-        <li>
-          <ol>
-            <li><a href="#blockquote-without-attribution">Blockquote without attribution</a></li>
-            <li><a href="#blockquote-with-attribution">Blockquote with attribution</a></li>
-          </ol>
-        </li>
-      </ol>
+      <ul>
+        <li></li>
+      </ul>
     </li>
     <li><a href="#tables">Tables</a>
-      <ol>
-        <li>
-          <ol>
-            <li><a href="#inline-markdown-within-tables">Inline Markdown within tables</a></li>
-          </ol>
-        </li>
-      </ol>
+      <ul>
+        <li></li>
+      </ul>
     </li>
     <li><a href="#code-blocks">Code Blocks</a>
-      <ol>
-        <li>
-          <ol>
-            <li><a href="#code-block-with-backticks">Code block with backticks</a></li>
-            <li><a href="#code-block-indented-with-four-spaces">Code block indented with four spaces</a></li>
-            <li><a href="#code-block-with-hugos-internal-highlight-shortcode">Code block with Hugo&rsquo;s internal highlight shortcode</a></li>
-            <li><a href="#diff-code-block">Diff code block</a></li>
-          </ol>
-        </li>
-      </ol>
+      <ul>
+        <li></li>
+      </ul>
     </li>
     <li><a href="#list-types">List Types</a>
-      <ol>
-        <li>
-          <ol>
-            <li><a href="#ordered-list">Ordered List</a></li>
-            <li><a href="#unordered-list">Unordered List</a></li>
-            <li><a href="#nested-list">Nested list</a></li>
-          </ol>
-        </li>
-      </ol>
+      <ul>
+        <li></li>
+      </ul>
     </li>
     <li><a href="#other-elements--abbr-sub-sup-kbd-mark">Other Elements — abbr, sub, sup, kbd, mark</a></li>
     <li><a href="#hyperlinked-image">Hyperlinked image</a></li>
-  </ol>
+  </ul>
 </nav>
         </div>
     </section>
@@ -715,52 +689,6 @@
      
     
         
-    <script src="https://utteranc.es/client.js" 
-        repo=""
-        issue-term="pathname"
-        
-        crossorigin="anonymous"
-        async
-        >
-</script>
-
-<style>
-    .utterances {
-        max-width: unset;
-    }
-</style>
-
-<script>
-    let utterancesLoaded = false;
-
-    function setUtterancesTheme(theme) {
-        let utterances = document.querySelector('.utterances iframe');
-        if (utterances) {
-            utterances.contentWindow.postMessage(
-                {
-                    type: 'set-theme',
-                    theme: `github-${theme}`
-                },
-                'https://utteranc.es'
-            );
-        }
-    }
-
-    addEventListener('message', event => {
-        if (event.origin !== 'https://utteranc.es') return;
-
-        
-        utterancesLoaded = true;
-        setUtterancesTheme(document.documentElement.dataset.scheme)
-    });
-
-    window.addEventListener('onColorSchemeChange', (e) => {
-        if (!utterancesLoaded) return;
-        setUtterancesTheme(e.detail)
-    })
-</script>
-
-
     
 
     <footer class="site-footer">

@@ -295,7 +295,7 @@
         
         <div class="widget--toc">
             <nav id="TableOfContents">
-  <ol>
+  <ul>
     <li><a href="#abs">abs</a></li>
     <li><a href="#dict">dict</a></li>
     <li><a href="#help">help</a></li>
@@ -318,7 +318,7 @@
     <li><a href="#open">open</a></li>
     <li><a href="#eval">eval</a></li>
     <li><a href="#int">int</a></li>
-  </ol>
+  </ul>
 </nav>
         </div>
     </section>
@@ -439,26 +439,43 @@ class dict(iterable, **kwarg)</p>
 <p>返回对象帮助信息。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">help</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 输出：</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># </span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Help on class list in module builtins:</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># class list(object)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#  |  list(iterable=(), /)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#  |  </span>
+</span></span><span class="line"><span class="cl"><span class="c1">#  |  Built-in mutable sequence.</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#  |  </span>
+</span></span><span class="line"><span class="cl"><span class="c1">#  |  If no argument is given, the constructor creates a new empty list.</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#  |  The argument must be an iterable if specified.</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#  |  </span>
+</span></span><span class="line"><span class="cl"><span class="c1">#  |  Methods defined here:</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#  |  </span>
+</span></span><span class="line"><span class="cl"><span class="c1"># ......</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>输出：</p>
-<p>Help on class list in module builtins:
-class list(object)
-|  list(iterable=(), /)
-|<br>
-|  Built-in mutable sequence.
-|<br>
-|  If no argument is given, the constructor creates a new empty list.
-|  The argument must be an iterable if specified.
-|<br>
-|  Methods defined here:
-|<br>
-&hellip;&hellip;</p>
-<h2 id="minmax">min、max
+</div><h2 id="minmax">min、max
 </h2><p>返回可迭代参数中的最小、最大元素。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1878,52 +1895,6 @@ x 可以为整数/浮点数，y 也如此</p>
      
     
         
-    <script src="https://utteranc.es/client.js" 
-        repo=""
-        issue-term="pathname"
-        
-        crossorigin="anonymous"
-        async
-        >
-</script>
-
-<style>
-    .utterances {
-        max-width: unset;
-    }
-</style>
-
-<script>
-    let utterancesLoaded = false;
-
-    function setUtterancesTheme(theme) {
-        let utterances = document.querySelector('.utterances iframe');
-        if (utterances) {
-            utterances.contentWindow.postMessage(
-                {
-                    type: 'set-theme',
-                    theme: `github-${theme}`
-                },
-                'https://utteranc.es'
-            );
-        }
-    }
-
-    addEventListener('message', event => {
-        if (event.origin !== 'https://utteranc.es') return;
-
-        
-        utterancesLoaded = true;
-        setUtterancesTheme(document.documentElement.dataset.scheme)
-    });
-
-    window.addEventListener('onColorSchemeChange', (e) => {
-        if (!utterancesLoaded) return;
-        setUtterancesTheme(e.detail)
-    })
-</script>
-
-
     
 
     <footer class="site-footer">
