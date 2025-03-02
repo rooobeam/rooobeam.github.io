@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="☝内存单元 、&quot;()&quot;、 loop 和 idata [bx]\n类似[0]，[bx]表示 ds:bx上的字节单元或字单元的内存内容，bx内的4位作为偏移地址\n[0] [bx] mov ax, [0] 将地址为ds:0 的内存字单元存入ax mov ax, [bx] 将地址为ds:bx的内存单元存入ax mov al, [0] 将地址为ds:0 的内存半字单元存入al mov al, [bx] 将地址为ds:bx的内存半字单元存入al 实例 问题5.1.svg\n">
+<title>汇编语言第五、六章</title>
+
+<link rel='canonical' href='https://rooobeam.github.io/p/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%BA%94%E5%85%AD%E7%AB%A0/'>
+
+<link rel="stylesheet" href="/scss/style.min.a396f93d13972177774da34b7aabdd4857291f5ce9113104ceb0746cb724125a.css"><meta property='og:title' content="汇编语言第五、六章">
+<meta property='og:description' content="☝内存单元 、&quot;()&quot;、 loop 和 idata [bx]\n类似[0]，[bx]表示 ds:bx上的字节单元或字单元的内存内容，bx内的4位作为偏移地址\n[0] [bx] mov ax, [0] 将地址为ds:0 的内存字单元存入ax mov ax, [bx] 将地址为ds:bx的内存单元存入ax mov al, [0] 将地址为ds:0 的内存半字单元存入al mov al, [bx] 将地址为ds:bx的内存半字单元存入al 实例 问题5.1.svg\n">
+<meta property='og:url' content='https://rooobeam.github.io/p/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%BA%94%E5%85%AD%E7%AB%A0/'>
+<meta property='og:site_name' content='rooobeam'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-02-22T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-02-22T00:00:00&#43;00:00'/><meta property='og:image' content='https://rooobeam.github.io/p/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%BA%94%E5%85%AD%E7%AB%A0/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250222101607.jpg' />
+<meta name="twitter:title" content="汇编语言第五、六章">
+<meta name="twitter:description" content="☝内存单元 、&quot;()&quot;、 loop 和 idata [bx]\n类似[0]，[bx]表示 ds:bx上的字节单元或字单元的内存内容，bx内的4位作为偏移地址\n[0] [bx] mov ax, [0] 将地址为ds:0 的内存字单元存入ax mov ax, [bx] 将地址为ds:bx的内存单元存入ax mov al, [0] 将地址为ds:0 的内存半字单元存入al mov al, [bx] 将地址为ds:bx的内存半字单元存入al 实例 问题5.1.svg\n"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://rooobeam.github.io/p/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%BA%94%E5%85%AD%E7%AB%A0/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250222101607.jpg' />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_51c49b55d0a39bb4.png" width="300"
+                            height="299" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">😚</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">rooobeam</a></h1>
+            <h2 class="site-description">rooobeam&#39;s blogs</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://space.bilibili.com/3461571462302229'
+                        target="_blank"
+                        title="Bilibili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-brand-bilibili"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z" /><path d="M8 3l2 3" /><path d="M16 3l-2 3" /><path d="M9 13v-2" /><path d="M15 11v2" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://blog.csdn.net/rooobeam?'
+                        target="_blank"
+                        title="CSDN"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-copyright"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M14 9.75a3.016 3.016 0 0 0 -4.163 .173a2.993 2.993 0 0 0 0 4.154a3.016 3.016 0 0 0 4.163 .173" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/rooobeam?'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/_index.zh-cn/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%BA%94%E5%85%AD%E7%AB%A0/">
+                <img src="/p/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%BA%94%E5%85%AD%E7%AB%A0/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250222101607_hu_ebb958b3669d2e51.jpg"
+                        srcset="/p/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%BA%94%E5%85%AD%E7%AB%A0/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250222101607_hu_ebb958b3669d2e51.jpg 800w, /p/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%BA%94%E5%85%AD%E7%AB%A0/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250222101607_hu_8b14a98db5bfa5e4.jpg 1600w"
+                        width="800" 
+                        height="392" 
+                        loading="lazy"
+                        alt="Featured image of post 汇编语言第五、六章" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%BA%94%E5%85%AD%E7%AB%A0/">汇编语言第五、六章</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-02-22</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="内存单元--loop-和--idata">☝内存单元 、&quot;()&quot;、 loop 和  idata
+</h2><ul>
+<li>
+<p>[bx]</p>
+<ol>
+<li>
+<p>类似[0]，[bx]表示 ds:bx上的字节单元或字单元的内存内容，bx内的4位作为偏移地址</p>
+</li>
+<li>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>[0]</th>
+          <th>[bx]</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>mov ax, [0] 将地址为ds:0 的内存字单元存入ax</td>
+          <td>mov ax, [bx] 将地址为ds:bx的内存单元存入ax</td>
+      </tr>
+      <tr>
+          <td>mov al, [0]  将地址为ds:0 的内存半字单元存入al</td>
+          <td>mov al, [bx] 将地址为ds:bx的内存半字单元存入al</td>
+      </tr>
+  </tbody>
+</table></div>
+<ol start="3">
+<li>实例</li>
+</ol>
+</li>
+</ol>
+</li>
+</ul>
+<p>问题5.1.svg</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">忘了要写啥了
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>“()&quot;，机组中“(地址)”——描述某地址上的内容</p>
+<p>()中的元素有三种类型： 寄存器名，段寄存器名 和 五位十六进制的物理地址</p>
+<p>如 (ax)、(al)、(ds)、(20000H)、**((ds)*16+(bx))**注意里面的ds、bx都有括号</p>
+<p>ax=10000H，则(ax)=(10000H)即地址10000H上的字节单元或字单元</p>
+</li>
+<li>
+<p>loop 类似“goto”</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">assume</span> <span class="n">cs</span><span class="p">:</span><span class="n">code</span>
+</span></span><span class="line"><span class="cl"><span class="n">code</span> <span class="n">segment</span>
+</span></span><span class="line"><span class="cl">	<span class="n">cx</span><span class="o">=</span><span class="mi">8</span>
+</span></span><span class="line"><span class="cl"><span class="n">s</span><span class="p">:</span>	<span class="n">ax</span><span class="o">=</span><span class="mi">0</span>
+</span></span><span class="line"><span class="cl">	<span class="n">loop</span> <span class="n">s</span>
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	<span class="n">mov</span> <span class="n">ax</span><span class="p">,</span><span class="mi">4</span><span class="n">c00h</span>
+</span></span><span class="line"><span class="cl">	<span class="nb">int</span> <span class="mi">21</span>
+</span></span><span class="line"><span class="cl"><span class="n">code</span> <span class="n">ends</span>
+</span></span><span class="line"><span class="cl"><span class="n">end</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>​	首先(cx)=(cx)-1，然后判断(cx)是否等于0，如果等于0则执行下一指令，如果不等于0则跳转到s处执行。</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th style="text-align: center">loop 可能情境</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center">cx初始化8，循环8次后继续执行</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">cx为人为初始化，然后为0，(cx)=(cx)-1变成大数(如65535)</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">cx设置指令在循环体内，死循环</td>
+      </tr>
+  </tbody>
+</table></div>
+<ul>
+<li>
+<p>idata</p>
+<p>约定符号好idata表示常量，mov ax,[idata]代表mov ax,[1]、mov ax,[2]等。</p>
+<p>又如 mov ds,idata  都是非法指令</p>
+</li>
+</ul>
+<h2 id="实验四-程序">☝实验四 程序
+</h2><p>编程，向内存0:200<del>0:23F依次传送数据0</del>63(3FH)，程序中只能使用9条指令，9条指令中包括‘mov ax,4c00h’和‘int 21h’。</p>
+<p>在常见的x86汇编语言（如MASM、NASM）中，分号 <code>;</code> 是标准的<strong>行注释符号</strong>。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">assume cs:codesg
+</span></span><span class="line"><span class="cl">codesg segment
+</span></span><span class="line"><span class="cl">    mov ax,020H		
+</span></span><span class="line"><span class="cl">    mov ds,ax		; 初始化ds，不能直接将数字传入段寄存器
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    mov bx,0H		; 初始化bx因为从0
+</span></span><span class="line"><span class="cl">    mov cx,40H		; cx=40H即循环64次存入数据0~63
+</span></span><span class="line"><span class="cl">s:				    ; 标记loop跳转位置
+</span></span><span class="line"><span class="cl">    mov [bx],bl		; 内存0:200~0:23F是40H个字节数据,要存入字节数据，bl存入cs:bx的字节单元，因为要对应bl的大小是1字节
+</span></span><span class="line"><span class="cl">    inc bx			; 把bx+=1  移动偏移地址
+</span></span><span class="line"><span class="cl">    loop s			; 减小cx, 检查判断是否跳转
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    mov ax,4c00H	
+</span></span><span class="line"><span class="cl">    int 21H			; 结束
+</span></span><span class="line"><span class="cl">codesg ends
+</span></span><span class="line"><span class="cl">end
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="实验五倒二题">☝实验五倒二题
+</h2><p>编写code段中的代码，将a段和b段中的数据依次相加，将结果保存到c段中。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">assume cs:code
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">a segment
+</span></span><span class="line"><span class="cl">    db 1,2,3,4,5,6,7,8  ; a 原始数据
+</span></span><span class="line"><span class="cl">a ends
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">b segment
+</span></span><span class="line"><span class="cl">    db 1,2,3,4,5,6,7,8  ; b 原始数据
+</span></span><span class="line"><span class="cl">b ends
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">c segment
+</span></span><span class="line"><span class="cl">    db 0,0,0,0,0,0,0,0  ; c 结果存储区
+</span></span><span class="line"><span class="cl">c ends
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">code segment
+</span></span><span class="line"><span class="cl">start: 	
+</span></span><span class="line"><span class="cl">	mov bx,0
+</span></span><span class="line"><span class="cl">	mov cx,8
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">s:	
+</span></span><span class="line"><span class="cl">	mov dx,a
+</span></span><span class="line"><span class="cl">	mov ds,dx
+</span></span><span class="line"><span class="cl">	mov al,[bx]
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	mov dx,b
+</span></span><span class="line"><span class="cl">	mov ds,dx
+</span></span><span class="line"><span class="cl">	add al,[bx]
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	mov dx,c
+</span></span><span class="line"><span class="cl">	mov ds,dx
+</span></span><span class="line"><span class="cl">	mov [bx],al
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	inc bx
+</span></span><span class="line"><span class="cl">	loop s
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    mov ax,4c00h	; 程序退出
+</span></span><span class="line"><span class="cl">    int 21h
+</span></span><span class="line"><span class="cl">code ends
+</span></span><span class="line"><span class="cl">end start	# 指明程序的开始结尾，start处设置cs=start
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="实验五最后一题">☝实验五最后一题
+</h2><p>编写code段代码，用push指令将a段中的前8个字型数据，逆序存储到b段。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">assume cs:code
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">a segment           ; 数据段a
+</span></span><span class="line"><span class="cl">  dw 1,2,3,4,5,6,7,8,0ah,0bh,0ch,0dh,0fh,0ffh  
+</span></span><span class="line"><span class="cl">a ends
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">b segment           ; 数据段b
+</span></span><span class="line"><span class="cl">  dw 0,0,0,0,0,0,0,0                  
+</span></span><span class="line"><span class="cl">b ends
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">code segment
+</span></span><span class="line"><span class="cl">start:
+</span></span><span class="line"><span class="cl">  mov ax, a       ; 赋值ds为a段的段地址
+</span></span><span class="line"><span class="cl">  mov ds, ax      
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  mov ax, b      ; 赋值堆栈段ss为b段的段地址
+</span></span><span class="line"><span class="cl">  mov ss, ax     
+</span></span><span class="line"><span class="cl">  mov sp,10h	;偏移到堆栈最后的字型数据后，8个字，16个字节，0c24:0~0c24:0f，ss:sp指向0c24:10，即前者加一。
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  mov bx, 0       ; 初始化偏移量
+</span></span><span class="line"><span class="cl">  mov cx, 8       ; 循环次数
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">s:                
+</span></span><span class="line"><span class="cl">  push [bx]       ; 将a段第i个字型数据存入b段倒数第i个字单元内
+</span></span><span class="line"><span class="cl">  add bx, 2h      ; 按字 (word) 处理数据，故+2
+</span></span><span class="line"><span class="cl">  loop s
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  mov ax, 4c00h   ; 退出程序
+</span></span><span class="line"><span class="cl">  int 21h
+</span></span><span class="line"><span class="cl">code ends
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">end start
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>各种段是如何安排的，怎么让CPU会把dode段当作代码段</p>
+<ul>
+<li>
+<p>❌</p>
+<p>code data stack等段名如何设置只是为了方便阅读，不能起到修改cs ds ss的作用</p>
+<p>assume cs:code,ds:data,ss:stack  也不能</p>
+</li>
+<li>
+<p>✅</p>
+<p>程序末尾end start可以设置程序入口CS:IP</p>
+</li>
+<li>
+<p>✅</p>
+<p>mov ax,stack</p>
+<p>mov ss,ax</p>
+<p>mov sp,20h</p>
+<p>设置堆栈段，stacK是你设置的作为堆栈段的段名，可以是a、c what ever you want  符合一定命名规范即可。</p>
+</li>
+<li>
+<p>✅</p>
+<p>mov ax,data</p>
+<p>mov ds,ax</p>
+<p>设置数据段</p>
+</li>
+<li>
+<p>每个段势必占据N行，即：</p>
+<p>前一个段最后一个字节单元为所在行被前一个段占有，当前段从下一行开始，每行16字节。</p>
+<p>前一个段最后一个字节单元 a:b，则当前段的第一个字节单元为a+[b/10h]+1:0，[ ]取整数，10h十六个字节</p>
+<p>a:b=2:34h	a+[34h/10h]+1:0=2+3+1:0=6:0</p>
+</li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2025 rooobeam
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
