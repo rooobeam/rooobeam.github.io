@@ -543,32 +543,46 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">code segment
 </span></span><span class="line"><span class="cl">start: 	
-</span></span><span class="line"><span class="cl">	mov bx,0
-</span></span><span class="line"><span class="cl">	mov cx,8
+</span></span><span class="line"><span class="cl">	mov bx,0	; 初始化偏移，从0开始
+</span></span><span class="line"><span class="cl">	mov cx,8	; 设置好循环次数
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">s:	
-</span></span><span class="line"><span class="cl">	mov dx,a
-</span></span><span class="line"><span class="cl">	mov ds,dx
-</span></span><span class="line"><span class="cl">	mov al,[bx]
+</span></span><span class="line"><span class="cl">	mov dx,a	
+</span></span><span class="line"><span class="cl">	mov ds,dx	; ds=a
+</span></span><span class="line"><span class="cl">	mov al,[bx]	; al=a[bx]
 </span></span><span class="line"><span class="cl">	
-</span></span><span class="line"><span class="cl">	mov dx,b
-</span></span><span class="line"><span class="cl">	mov ds,dx
-</span></span><span class="line"><span class="cl">	add al,[bx]
+</span></span><span class="line"><span class="cl">	mov dx,b	
+</span></span><span class="line"><span class="cl">	mov ds,dx	; ds=b
+</span></span><span class="line"><span class="cl">	add al,[bx]	; al=
 </span></span><span class="line"><span class="cl">	
-</span></span><span class="line"><span class="cl">	mov dx,c
-</span></span><span class="line"><span class="cl">	mov ds,dx
-</span></span><span class="line"><span class="cl">	mov [bx],al
+</span></span><span class="line"><span class="cl">	mov dx,c	
+</span></span><span class="line"><span class="cl">	mov ds,dx	; ds=c
+</span></span><span class="line"><span class="cl">	mov [bx],al	; c[bx]=al=a[bx]+b[bx]
 </span></span><span class="line"><span class="cl">	
-</span></span><span class="line"><span class="cl">	inc bx
-</span></span><span class="line"><span class="cl">	loop s
+</span></span><span class="line"><span class="cl">	inc bx		;bx++
+</span></span><span class="line"><span class="cl">	loop s		;跳转
 </span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    mov ax,4c00h	; 程序退出
-</span></span><span class="line"><span class="cl">    int 21h
+</span></span><span class="line"><span class="cl">    mov ax,4c00h	
+</span></span><span class="line"><span class="cl">    int 21h		; 程序退出
 </span></span><span class="line"><span class="cl">code ends
 </span></span><span class="line"><span class="cl">end start	# 指明程序的开始结尾，start处设置cs=start
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="实验五最后一题">☝实验五最后一题
+</div><ol>
+<li>创建txt，将上述代码写入，保存。</li>
+<li>win+R进入DOS，输入&quot;cd masm5&quot;，再输入&quot;masm&quot;启动。</li>
+<li>源文件输入  &ldquo;file_name.txt&rdquo; 然后四个回车</li>
+<li>没有error后，输入&quot;link&quot;，obj文件输入file_name，然后回车回车回车</li>
+<li>输入&quot;debug file_name.exe&quot;，进入对该exe的debug模式</li>
+<li>输入&quot;u&quot;查看当前能看到的指令，看不到&quot;mov ax,4c00H&quot;就输入t执行一条指令，输入个三四个再输入&quot;u&quot;查看，总之看到结束指令的偏移地址bx</li>
+<li>输入&quot;g bx&quot;，直接执行到bx处</li>
+<li>输入&quot;r&quot;，查看DS，因为它是c段的首地址，因为最后一次设置DS就是用的c</li>
+<li>实验中ds=0c25，输入“d 0c25:0&quot;便能查看c处的值是不是2 4 6 8&hellip;，或者输入&quot;d 0c23:0&quot;能对比a、b、c段的内容。</li>
+</ol>
+<ul>
+<li>db、dw：定义数据，db即define bytes，dw即define words，</li>
+</ul>
+<h2 id="实验五最后一题">☝实验五最后一题
 </h2><p>编写code段代码，用push指令将a段中的前8个字型数据，逆序存储到b段。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -640,7 +654,7 @@
 </span></span><span class="line"><span class="cl">end start
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>各种段是如何安排的，怎么让CPU会把dode段当作代码段</p>
+</div><p>读代码代码后思考：各种段是如何安排的，怎么让CPU会把dode段当作代码段</p>
 <ul>
 <li>
 <p>❌</p>
