@@ -3436,8 +3436,195 @@ x 可以为整数/浮点数，y 也如此</p>
   </tbody>
 </table></div>
 <h2 id="list">list
-</h2><h2 id="range">range
-</h2><h2 id="classmethod">classmethod
+</h2><ul>
+<li>list(iterable=(), /),</li>
+</ul>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>函数/操作</th>
+          <th>作用</th>
+          <th>示例</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>定义列表</td>
+          <td>创建列表</td>
+          <td><code>my_list = [1, &quot;a&quot;, True]</code></td>
+      </tr>
+      <tr>
+          <td>索引</td>
+          <td>访问单个元素（支持正负索引）</td>
+          <td><code>my_list[0]</code>，<code>my_list[-1]</code></td>
+      </tr>
+      <tr>
+          <td>切片</td>
+          <td>截取子列表</td>
+          <td>my_list[1:3]</td>
+      </tr>
+      <tr>
+          <td>直接赋值</td>
+          <td>修改单个元素</td>
+          <td>my_list[0] = 100</td>
+      </tr>
+      <tr>
+          <td><strong>切片赋值</strong></td>
+          <td>修改或替换子列表</td>
+          <td>my_list[1:2] = [200, 300]</td>
+      </tr>
+      <tr>
+          <td><code>append(x)</code></td>
+          <td>在末尾添加单个元素</td>
+          <td>list = [1,2]; list.append(3)</td>
+      </tr>
+      <tr>
+          <td><strong><code>extend(iterable)</code></strong></td>
+          <td>合并可迭代对象到末尾</td>
+          <td>list = [1,2]; list.extend([3,4]) → [1,2,3,4]</td>
+      </tr>
+      <tr>
+          <td><code>del list[0:2]</code></td>
+          <td>删除元素</td>
+          <td>list = [1,2,3]; del list[1] → [1,3]</td>
+      </tr>
+      <tr>
+          <td>列表推导式</td>
+          <td>生成列表</td>
+          <td>y=[x if x&gt;1 else -1 for x in [1,2,3] ]</td>
+      </tr>
+      <tr>
+          <td><code>sort()</code></td>
+          <td>原地排序</td>
+          <td>list = [3,1,2]; list.sort()</td>
+      </tr>
+      <tr>
+          <td><code>reverse()</code></td>
+          <td>原地反转列表顺序</td>
+          <td>list = [1,2,3]; list.reverse()</td>
+      </tr>
+      <tr>
+          <td><code>copy()</code></td>
+          <td>创建浅拷贝列表</td>
+          <td>new_list = list.copy()</td>
+      </tr>
+      <tr>
+          <td><code>count(x)</code></td>
+          <td>统计元素 <code>x</code> 的出现次数</td>
+          <td>list = [1,2,2,3]; list.count(2) -&gt; 2</td>
+      </tr>
+      <tr>
+          <td><code>index(x)</code></td>
+          <td>返回 <code>x</code> 第一次出现的索引</td>
+          <td>list = [1,2,2,3]; list.index(2) -&gt; 1</td>
+      </tr>
+      <tr>
+          <td>浅拷贝</td>
+          <td>复制外层对象（嵌套共享引用）</td>
+          <td>a = [[1,2],3]; b = a.copy()</td>
+      </tr>
+      <tr>
+          <td><code>len(list)</code></td>
+          <td>返回列表长度</td>
+          <td><code>len([1,2,3])</code></td>
+      </tr>
+      <tr>
+          <td><code>max(list)</code></td>
+          <td>返回最大值</td>
+          <td><code>max([1,3,2])</code></td>
+      </tr>
+      <tr>
+          <td><code>min(list)</code></td>
+          <td>返回最小值</td>
+          <td><code>min([1,3,2])</code></td>
+      </tr>
+      <tr>
+          <td><code>sum(list)</code></td>
+          <td>对数值列表求和</td>
+          <td><code>sum([1,2,3])</code></td>
+      </tr>
+      <tr>
+          <td><code>any(list)</code></td>
+          <td>检查是否存在为 <code>True</code> 的元素</td>
+          <td><code>any([0, False, 1])</code></td>
+      </tr>
+      <tr>
+          <td><code>all(list)</code></td>
+          <td>检查是否所有元素为 <code>True</code></td>
+          <td><code>all([1, True, 0])</code></td>
+      </tr>
+      <tr>
+          <td><code>enumerate(list)</code></td>
+          <td>返回索引-值对的迭代器</td>
+          <td><code>list(enumerate([&quot;a&quot;, &quot;b&quot;]))</code></td>
+      </tr>
+  </tbody>
+</table></div>
+<ul>
+<li>列表推导式</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>enumerate 同时获取 索引和元素</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">ls</span><span class="o">=</span><span class="p">[</span><span class="s2">&#34;i&#34;</span><span class="p">,</span><span class="s2">&#34;love&#34;</span><span class="p">,</span><span class="s2">&#34;you&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">elem</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">ls</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">	<span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">elem</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="s1">&#39;       &#39;</span><span class="p">)</span>	<span class="c1"># 0 is i       1 is love       2 is you   </span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="range">range
+</h2><ul>
+<li>range(end) -&gt; [0, end,1)  “从0开始，到end之前，包括0不包括end，步长为1”</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">for</span> <span class="n">number</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">number</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>	<span class="c1"># 0 1 2 3 4 5</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>range(start, end, step) -&gt; [start, end, step)  “从start开始，到end之前，包括start不包括end，步长为step”</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">for</span> <span class="n">number</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">number</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>	<span class="c1"># 1 3 5</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>range(start, end, -1) -&gt; [start, end, -1)  从大到小的range，step为负值，start必须&gt;=end</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">for</span> <span class="n">number</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">number</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>	<span class="c1"># 6 4 2</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="classmethod">classmethod
 </h2><h2 id="repr">repr
 </h2><h2 id="zip">zip
 </h2><h2 id="map">map
