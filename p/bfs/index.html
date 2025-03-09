@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="BFS and DFS in tree search 给你一棵二叉树的根节点 root ，翻转这棵二叉树，并返回其根节点。 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 # Definition for a binary tree node. # class TreeNode: # def __init__(self, val=0, left=None, right=None): # self.val = val # self.left = left # self.right = right class Solution: def invertTree(self, root: Optional[TreeNode]) -&gt; Optional[TreeNode]: # 排除root为空的情况 if not root: return root # 队列 &lt;——&gt; list que=[root]\t# 循环条件：队列不为空 while que: # 出队 tnode=que[0] del que[0] # 如果左子树存在，入队 if tnode.left: que.append(tnode.left) # 如果右子树存在，入队 if tnode.right: que.append(tnode.right) # 将开头出队的左右子树换位 a=tnode.right tnode.right=tnode.left tnode.left=a return root #关键在于，队列初始化、出入队操作，以及存在才入队。 给你两棵二叉树的根节点 p 和 q ，编写一个函数来检验这两棵树是否相同。\n">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="（BFS and DFS） in tree search 给你一棵二叉树的根节点 root ，翻转这棵二叉树，并返回其根节点。 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 # Definition for a binary tree node. # class TreeNode: # def __init__(self, val=0, left=None, right=None): # self.val = val # self.left = left # self.right = right class Solution: def invertTree(self, root: Optional[TreeNode]) -&gt; Optional[TreeNode]: # 排除root为空的情况 if not root: return root # 队列 &lt;——&gt; list que=[root]\t# 循环条件：队列不为空 while que: # 出队 tnode=que[0] del que[0] # 如果左子树存在，入队 if tnode.left: que.append(tnode.left) # 如果右子树存在，入队 if tnode.right: que.append(tnode.right) # 将开头出队的左右子树换位 a=tnode.right tnode.right=tnode.left tnode.left=a return root #关键在于，队列初始化、出入队操作，以及存在才入队。 给你两棵二叉树的根节点 p 和 q ，编写一个函数来检验这两棵树是否相同。\n">
 <title>BFS</title>
 
 <link rel='canonical' href='https://rooobeam.github.io/p/bfs/'>
 
 <link rel="stylesheet" href="/scss/style.min.a396f93d13972177774da34b7aabdd4857291f5ce9113104ceb0746cb724125a.css"><meta property='og:title' content="BFS">
-<meta property='og:description' content="BFS and DFS in tree search 给你一棵二叉树的根节点 root ，翻转这棵二叉树，并返回其根节点。 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 # Definition for a binary tree node. # class TreeNode: # def __init__(self, val=0, left=None, right=None): # self.val = val # self.left = left # self.right = right class Solution: def invertTree(self, root: Optional[TreeNode]) -&gt; Optional[TreeNode]: # 排除root为空的情况 if not root: return root # 队列 &lt;——&gt; list que=[root]\t# 循环条件：队列不为空 while que: # 出队 tnode=que[0] del que[0] # 如果左子树存在，入队 if tnode.left: que.append(tnode.left) # 如果右子树存在，入队 if tnode.right: que.append(tnode.right) # 将开头出队的左右子树换位 a=tnode.right tnode.right=tnode.left tnode.left=a return root #关键在于，队列初始化、出入队操作，以及存在才入队。 给你两棵二叉树的根节点 p 和 q ，编写一个函数来检验这两棵树是否相同。\n">
+<meta property='og:description' content="（BFS and DFS） in tree search 给你一棵二叉树的根节点 root ，翻转这棵二叉树，并返回其根节点。 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 # Definition for a binary tree node. # class TreeNode: # def __init__(self, val=0, left=None, right=None): # self.val = val # self.left = left # self.right = right class Solution: def invertTree(self, root: Optional[TreeNode]) -&gt; Optional[TreeNode]: # 排除root为空的情况 if not root: return root # 队列 &lt;——&gt; list que=[root]\t# 循环条件：队列不为空 while que: # 出队 tnode=que[0] del que[0] # 如果左子树存在，入队 if tnode.left: que.append(tnode.left) # 如果右子树存在，入队 if tnode.right: que.append(tnode.right) # 将开头出队的左右子树换位 a=tnode.right tnode.right=tnode.left tnode.left=a return root #关键在于，队列初始化、出入队操作，以及存在才入队。 给你两棵二叉树的根节点 p 和 q ，编写一个函数来检验这两棵树是否相同。\n">
 <meta property='og:url' content='https://rooobeam.github.io/p/bfs/'>
 <meta property='og:site_name' content='rooobeam'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-03-04T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-03-04T00:00:00&#43;00:00'/>
 <meta name="twitter:title" content="BFS">
-<meta name="twitter:description" content="BFS and DFS in tree search 给你一棵二叉树的根节点 root ，翻转这棵二叉树，并返回其根节点。 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 # Definition for a binary tree node. # class TreeNode: # def __init__(self, val=0, left=None, right=None): # self.val = val # self.left = left # self.right = right class Solution: def invertTree(self, root: Optional[TreeNode]) -&gt; Optional[TreeNode]: # 排除root为空的情况 if not root: return root # 队列 &lt;——&gt; list que=[root]\t# 循环条件：队列不为空 while que: # 出队 tnode=que[0] del que[0] # 如果左子树存在，入队 if tnode.left: que.append(tnode.left) # 如果右子树存在，入队 if tnode.right: que.append(tnode.right) # 将开头出队的左右子树换位 a=tnode.right tnode.right=tnode.left tnode.left=a return root #关键在于，队列初始化、出入队操作，以及存在才入队。 给你两棵二叉树的根节点 p 和 q ，编写一个函数来检验这两棵树是否相同。\n">
+<meta name="twitter:description" content="（BFS and DFS） in tree search 给你一棵二叉树的根节点 root ，翻转这棵二叉树，并返回其根节点。 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 # Definition for a binary tree node. # class TreeNode: # def __init__(self, val=0, left=None, right=None): # self.val = val # self.left = left # self.right = right class Solution: def invertTree(self, root: Optional[TreeNode]) -&gt; Optional[TreeNode]: # 排除root为空的情况 if not root: return root # 队列 &lt;——&gt; list que=[root]\t# 循环条件：队列不为空 while que: # 出队 tnode=que[0] del que[0] # 如果左子树存在，入队 if tnode.left: que.append(tnode.left) # 如果右子树存在，入队 if tnode.right: que.append(tnode.right) # 将开头出队的左右子树换位 a=tnode.right tnode.right=tnode.left tnode.left=a return root #关键在于，队列初始化、出入队操作，以及存在才入队。 给你两棵二叉树的根节点 p 和 q ，编写一个函数来检验这两棵树是否相同。\n">
     <link rel="shortcut icon" href="/favicon.ico" />
 
     </head>
@@ -322,7 +322,7 @@
     <section class="article-content">
     
     
-    <h1 id="bfs-and-dfs-in-tree-search">BFS and DFS in tree search
+    <h1 id="bfs-and-dfs-in-tree-search">（BFS and DFS） in tree search
 </h1><ol>
 <li>给你一棵二叉树的根节点 <code>root</code> ，翻转这棵二叉树，并返回其根节点。</li>
 </ol>
@@ -436,8 +436,6 @@
 </span><span class="lnt">26
 </span><span class="lnt">27
 </span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># Definition for a binary tree node.</span>
@@ -452,10 +450,8 @@
 </span></span><span class="line"><span class="cl">        <span class="n">q_ls</span><span class="o">=</span><span class="p">[</span><span class="n">q</span><span class="p">]</span>
 </span></span><span class="line"><span class="cl">        
 </span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="n">p_ls</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">            <span class="n">p_n</span><span class="o">=</span><span class="n">p_ls</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">            <span class="k">del</span> <span class="n">p_ls</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">            <span class="n">q_n</span><span class="o">=</span><span class="n">q_ls</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">            <span class="k">del</span> <span class="n">q_ls</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">            <span class="n">p_n</span><span class="o">=</span><span class="n">p_ls</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">q_n</span><span class="o">=</span><span class="n">q_ls</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">p_n</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">q_n</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">q_n</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">p_n</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">):</span>
 </span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="kc">False</span>
@@ -470,6 +466,234 @@
 </span></span><span class="line"><span class="cl">                <span class="n">q_ls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">q_n</span><span class="o">.</span><span class="n">right</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="kc">True</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="3">
+<li>给你一个二叉树的根节点 root ，一层一层地打印并标明位置，包括空结点。</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 在 104. 二叉树的最大深度 测试的</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">maxDepth</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">TreeNode</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="ow">not</span> <span class="n">root</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">print</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span>
+</span></span><span class="line"><span class="cl">        <span class="n">q</span> <span class="o">=</span> <span class="p">[(</span><span class="n">root</span><span class="p">,</span> <span class="mi">0</span><span class="p">)]</span>  <span class="c1"># 初始化队列</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cnt</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># 初始化第一层要分析的结点数</span>
+</span></span><span class="line"><span class="cl">        <span class="n">n_lay</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># 当前层的位置总个数</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span> <span class="n">q</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">n</span><span class="o">=</span><span class="n">cnt</span>   <span class="c1"># 该层 还要 分析结点数，不停地减一</span>
+</span></span><span class="line"><span class="cl">            <span class="n">cp_cnt</span><span class="o">=</span><span class="n">cnt</span>  <span class="c1"># 该层 结点总数</span>
+</span></span><span class="line"><span class="cl">            <span class="n">cnt</span><span class="o">=</span><span class="mi">0</span>   <span class="c1"># 清零保存下层结点数</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="c1"># 遍历当前层</span>
+</span></span><span class="line"><span class="cl">            <span class="k">while</span> <span class="p">(</span><span class="n">n</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="n">tnode</span><span class="o">=</span><span class="n">q</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># (root,0)  (Treenode,int)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="n">tnode</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">q</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">tnode</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">left</span><span class="p">,</span><span class="n">tnode</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">0</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">q</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">tnode</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">right</span><span class="p">,</span><span class="n">tnode</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">cnt</span><span class="o">+=</span><span class="mi">2</span>
+</span></span><span class="line"><span class="cl">                    <span class="nb">print</span><span class="p">(</span><span class="n">tnode</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">val</span><span class="p">,</span><span class="n">tnode</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">end</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="k">else</span><span class="p">:</span> 
+</span></span><span class="line"><span class="cl">                    <span class="nb">print</span><span class="p">(</span><span class="n">tnode</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">tnode</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">end</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">n</span><span class="o">-=</span><span class="mi">1</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">print</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="n">n_lay</span><span class="o">*=</span><span class="mi">2</span>
+</span></span><span class="line"><span class="cl">             
+</span></span><span class="line"><span class="cl">        <span class="k">return</span>    
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="4">
+<li>给你一个二叉树的根节点 root ， 检查它是否轴对称。</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 暴力标出行点位</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 变量说明</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># q: que 队列		cnt: 记录某层存在的结点的个数	n_lay: 当前层总位置数，即2^k个，k=0,1,2...</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># n: 当前层未分析的结点个数，初始为cnt，然后-1-1-1...</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># cp_cnt: 记录当前层的结点总个数，初始和n一样，只不过不会变化</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># stack: 栈，进栈一半结点后，开始分析对称性时，通过出栈互消除</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">isSymmetric</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">TreeNode</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    	<span class="k">if</span> <span class="ow">not</span> <span class="n">root</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="kc">True</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="n">q</span><span class="o">=</span><span class="p">[(</span><span class="n">root</span><span class="p">,</span><span class="mi">0</span><span class="p">)]</span>	<span class="c1"># 队列</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cnt</span><span class="o">=</span><span class="mi">1</span>   <span class="c1"># 初始化第一层要分析的结点数</span>
+</span></span><span class="line"><span class="cl">        <span class="n">n_lay</span><span class="o">=</span><span class="mi">1</span>     <span class="c1"># 当前层的位置总个数</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="n">q</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="n">n</span><span class="o">=</span><span class="n">cnt</span>   <span class="c1"># 该层 还要 分析结点数，不停地减一</span>
+</span></span><span class="line"><span class="cl">            <span class="n">cp_cnt</span><span class="o">=</span><span class="n">cnt</span>  <span class="c1"># 该层 结点总数</span>
+</span></span><span class="line"><span class="cl">            <span class="n">cnt</span><span class="o">=</span><span class="mi">0</span>   <span class="c1"># 清零保存下层结点数</span>
+</span></span><span class="line"><span class="cl">            <span class="n">stack</span><span class="o">=</span><span class="p">[]</span>
+</span></span><span class="line"><span class="cl">            <span class="c1"># 遍历当前层</span>
+</span></span><span class="line"><span class="cl">            <span class="k">while</span> <span class="p">(</span><span class="n">n</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="n">tnode</span><span class="o">=</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># (root,0)  (Treenode,int)</span>
+</span></span><span class="line"><span class="cl">                <span class="k">del</span> <span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="n">n</span><span class="o">&lt;=</span><span class="n">cp_cnt</span><span class="o">/</span><span class="mi">2</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                    <span class="c1"># 出栈</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">pop_node</span><span class="o">=</span><span class="n">stack</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>  
+</span></span><span class="line"><span class="cl">                    <span class="k">del</span> <span class="n">stack</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                    <span class="c1"># 都是真，核对位置和值</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">if</span> <span class="n">tnode</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> <span class="n">pop_node</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">                        <span class="k">if</span> <span class="n">tnode</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">val</span><span class="o">!=</span><span class="n">pop_node</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">val</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                            <span class="k">return</span> <span class="kc">False</span>     
+</span></span><span class="line"><span class="cl">                        <span class="k">if</span> <span class="p">(</span><span class="n">tnode</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">pop_node</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">!=</span><span class="n">n_lay</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                            <span class="k">return</span> <span class="kc">False</span>    
+</span></span><span class="line"><span class="cl">                    <span class="c1"># 排除了都是真，但不都None，则必为一真一None</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">elif</span> <span class="n">tnode</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">or</span> <span class="n">pop_node</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">                        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                        <span class="k">return</span> <span class="kc">False</span> 
+</span></span><span class="line"><span class="cl">                    <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                        <span class="c1"># 都是None，核对位置</span>
+</span></span><span class="line"><span class="cl">                        <span class="k">if</span> <span class="p">(</span><span class="n">tnode</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">pop_node</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">!=</span><span class="n">n_lay</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                            <span class="k">return</span> <span class="kc">False</span>            
+</span></span><span class="line"><span class="cl">                                           
+</span></span><span class="line"><span class="cl">                    <span class="c1"># 都是None则已经出栈完成互消</span>
+</span></span><span class="line"><span class="cl">                <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tnode</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="n">tnode</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">q</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">tnode</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">left</span><span class="p">,</span><span class="n">tnode</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">0</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">q</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">tnode</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">right</span><span class="p">,</span><span class="n">tnode</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">cnt</span><span class="o">+=</span><span class="mi">2</span>
+</span></span><span class="line"><span class="cl">                    
+</span></span><span class="line"><span class="cl">                <span class="n">n</span><span class="o">-=</span><span class="mi">1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="n">n_lay</span><span class="o">*=</span><span class="mi">2</span>
+</span></span><span class="line"><span class="cl">             
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="kc">True</span>        
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 递归</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">isSymmetric</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">TreeNode</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">def</span> <span class="nf">recur</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">R</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="ow">not</span> <span class="n">L</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">R</span><span class="p">:</span> <span class="k">return</span> <span class="kc">True</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="ow">not</span> <span class="n">L</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">R</span> <span class="ow">or</span> <span class="n">L</span><span class="o">.</span><span class="n">val</span> <span class="o">!=</span> <span class="n">R</span><span class="o">.</span><span class="n">val</span><span class="p">:</span> <span class="k">return</span> <span class="kc">False</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">recur</span><span class="p">(</span><span class="n">L</span><span class="o">.</span><span class="n">left</span><span class="p">,</span> <span class="n">R</span><span class="o">.</span><span class="n">right</span><span class="p">)</span> <span class="ow">and</span> <span class="n">recur</span><span class="p">(</span><span class="n">L</span><span class="o">.</span><span class="n">right</span><span class="p">,</span> <span class="n">R</span><span class="o">.</span><span class="n">left</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="ow">not</span> <span class="n">root</span> <span class="ow">or</span> <span class="n">recur</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">left</span><span class="p">,</span> <span class="n">root</span><span class="o">.</span><span class="n">right</span><span class="p">)</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div>
