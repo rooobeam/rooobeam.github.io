@@ -462,8 +462,10 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="kc">True</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="三给你一个二叉树的根节点-root-一层一层地打印并标明位置包括空结点">三、给你一个二叉树的根节点 root ，一层一层地打印并标明位置，包括空结点。
-</h2><div class="highlight"><div class="chroma">
+</div><h2 id="三层序遍历并标序自定义通解性">三、层序遍历并标序（自定义）（通解性）
+</h2><p>此题为自定义的，具有通解性质，可暴力解决很多题目。</p>
+<p>给你一个二叉树的根节点 root ，一层一层地打印并标明位置，包括空结点。</p>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -816,8 +818,8 @@
 </span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">recur</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">left</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span> <span class="k">if</span> <span class="n">root</span><span class="o">.</span><span class="n">left</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">recur</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">right</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>七、路径总和</p>
-<p>给你二叉树的根节点 <code>root</code> 和一个表示目标和的整数 <code>targetSum</code> 。判断该树中是否存在 <strong>根节点到叶子节点</strong> 的路径，这条路径上所有节点值相加等于目标和 <code>targetSum</code> 。如果存在，返回 <code>true</code> ；否则，返回 <code>false</code> 。</p>
+</div><h2 id="七路径总和">七、路径总和
+</h2><p>给你二叉树的根节点 <code>root</code> 和一个表示目标和的整数 <code>targetSum</code> 。判断该树中是否存在 <strong>根节点到叶子节点</strong> 的路径，这条路径上所有节点值相加等于目标和 <code>targetSum</code> 。如果存在，返回 <code>true</code> ；否则，返回 <code>false</code> 。</p>
 <p><strong>叶子节点</strong> 是指没有子节点的节点。</p>
 <p><a class="link" href="https://leetcode.cn/problems/path-sum/description/"  target="_blank" rel="noopener"
     >112. 路径总和 - 力扣（LeetCode）</a></p>
@@ -885,6 +887,85 @@
 </span></span><span class="line"><span class="cl">        <span class="c1"># 一空一非空</span>
 </span></span><span class="line"><span class="cl">        <span class="k">else</span><span class="p">:</span>
 </span></span><span class="line"><span class="cl">             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">recur</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">left</span><span class="p">,</span><span class="n">cur_sum</span><span class="p">)</span> <span class="k">if</span> <span class="n">root</span><span class="o">.</span><span class="n">left</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">recur</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">right</span><span class="p">,</span><span class="n">cur_sum</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="八二叉树层序遍历无标序号">八、二叉树层序遍历无标序号
+</h2><p>给你二叉树的根节点 <code>root</code> ，返回其节点值的 <strong>层序遍历</strong> 。 （即逐层地，从左到右访问所有节点）。</p>
+<p>“三、层序遍历并标序”的简单版。</p>
+<p><a class="link" href="https://leetcode.cn/problems/binary-tree-level-order-traversal/description/"  target="_blank" rel="noopener"
+    >102. 二叉树的层序遍历 - 力扣（LeetCode）</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># Definition for a binary tree node.</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># class TreeNode:</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#     def __init__(self, val=0, left=None, right=None):</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#         self.val = val</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#         self.left = left</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#         self.right = right</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">levelOrder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">TreeNode</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]:</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># 保证root有val</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="ow">not</span> <span class="n">root</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">        <span class="n">q</span><span class="o">=</span><span class="p">[</span><span class="n">root</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cnt</span><span class="o">=</span><span class="mi">1</span>
+</span></span><span class="line"><span class="cl">        <span class="n">nodes</span><span class="o">=</span><span class="p">[]</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># 全部遍历（相对层内而言）</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="n">q</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="c1"># 初始化下一层的非空结点个数</span>
+</span></span><span class="line"><span class="cl">            <span class="n">lay_cnt</span><span class="o">=</span><span class="mi">0</span>   
+</span></span><span class="line"><span class="cl">            <span class="c1"># 当前层结点list</span>
+</span></span><span class="line"><span class="cl">            <span class="n">lay_nodes</span><span class="o">=</span><span class="p">[]</span>
+</span></span><span class="line"><span class="cl">            <span class="c1"># 层内遍历</span>
+</span></span><span class="line"><span class="cl">            <span class="k">while</span><span class="p">(</span><span class="n">cnt</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">                <span class="n">tnode</span><span class="o">=</span><span class="n">q</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">lay_nodes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tnode</span><span class="o">.</span><span class="n">val</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">tnode</span><span class="o">.</span><span class="n">left</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">q</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tnode</span><span class="o">.</span><span class="n">left</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">lay_cnt</span><span class="o">+=</span><span class="mi">1</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">tnode</span><span class="o">.</span><span class="n">right</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">q</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tnode</span><span class="o">.</span><span class="n">right</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">lay_cnt</span><span class="o">+=</span><span class="mi">1</span>
+</span></span><span class="line"><span class="cl">                <span class="n">cnt</span><span class="o">-=</span><span class="mi">1</span>
+</span></span><span class="line"><span class="cl">            <span class="n">nodes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lay_nodes</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">cnt</span><span class="o">=</span><span class="n">lay_cnt</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">nodes</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div>

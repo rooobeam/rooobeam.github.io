@@ -365,7 +365,7 @@
 </span><span class="lnt">18
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">rag</span> <span class="o">=</span> <span class="n">LightRAG</span><span class="p">(</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">rag</span> <span class="o">=</span> <span class="n">LightRAG</span><span class="p">(</span>			<span class="c1">#  lightrag_ollama_demo.py - line 22</span>
 </span></span><span class="line"><span class="cl">        <span class="n">working_dir</span><span class="o">=</span><span class="n">WORKING_DIR</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">        <span class="n">llm_model_func</span><span class="o">=</span><span class="n">ollama_model_complete</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">        <span class="n">llm_model_name</span><span class="o">=</span><span class="s2">&#34;deepseek-r1:7b&#34;</span><span class="p">,</span>
@@ -420,9 +420,10 @@
 </span><span class="lnt">30
 </span><span class="lnt">31
 </span><span class="lnt">32
+</span><span class="lnt">33
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl">    <span class="k">async</span> <span class="k">def</span> <span class="nf">initialize_storages</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl">    <span class="k">async</span> <span class="k">def</span> <span class="nf">initialize_storages</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>	<span class="c1">#  lightrag.py - line 456</span>
 </span></span><span class="line"><span class="cl">        <span class="s2">&#34;&#34;&#34;Asynchronously initialize the storages&#34;&#34;&#34;</span>
 </span></span><span class="line"><span class="cl">        
 </span></span><span class="line"><span class="cl">        <span class="c1"># StoragesStatus.CREATED即&#39;created&#39; str</span>
@@ -432,11 +433,11 @@
 </span></span><span class="line"><span class="cl">        <span class="c1"># &#34;第二初始化&#34;，在自动__init__后执行</span>
 </span></span><span class="line"><span class="cl">        <span class="c1"># 用于在对象初始化完成后执行额外的操作。</span>
 </span></span><span class="line"><span class="cl">        <span class="c1"># post 是拉丁语前缀，表示“在……之后”</span>
-</span></span><span class="line"><span class="cl">        <span class="c1"># ====== 此时跳到下一个三级标题查看__post_init__的内容 ======</span>
+</span></span><span class="line"><span class="cl">        
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_storages_status</span> <span class="o">==</span> <span class="n">StoragesStatus</span><span class="o">.</span><span class="n">CREATED</span><span class="p">:</span>
 </span></span><span class="line"><span class="cl">            <span class="n">tasks</span> <span class="o">=</span> <span class="p">[]</span>
-</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="c1"># ====== 此时跳到下一个三级标题查看__post_init__的内容 ======</span>
 </span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="n">storage</span> <span class="ow">in</span> <span class="p">(</span>
 </span></span><span class="line"><span class="cl">                    <span class="bp">self</span><span class="o">.</span><span class="n">full_docs</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">                    <span class="bp">self</span><span class="o">.</span><span class="n">text_chunks</span><span class="p">,</span>
@@ -448,6 +449,7 @@
 </span></span><span class="line"><span class="cl">                    <span class="bp">self</span><span class="o">.</span><span class="n">doc_status</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">            <span class="p">):</span>
 </span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="n">storage</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                    <span class="c1"># 每个存储模块的初始化</span>
 </span></span><span class="line"><span class="cl">                    <span class="n">tasks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">storage</span><span class="o">.</span><span class="n">initialize</span><span class="p">())</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">            <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="o">*</span><span class="n">tasks</span><span class="p">)</span>
@@ -464,7 +466,9 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"></code></pre></td></tr></table>
 </div>
-</div>
+</div><p>这里初始化了各个组件的，调用各种模块</p>
+<p>就拿self.full_docs举例而言，它是 BaseKVStorage的实例化，该实例的初始化，由key_string_value_json_storage_cls 类 传入  namespace和embedding_func返回</p>
+
 </section>
 
 

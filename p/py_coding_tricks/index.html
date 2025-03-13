@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content=" .pop(self,index)方法 1 2 3 a=[1,2,3] a.pop(1) print(a)\t# [1,3] 函数传实参还是形参问题\n在 Python 中，参数传递始终是 引用传递（传地址的）。但根据对象类型（可变/不可变）的不同，会产生类似「值传递」或「引用传递」的表象：\n">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content=".pop(self,index)方法 1 2 3 a=[1,2,3] a.pop(1) print(a)\t# [1,3] 函数传实参还是形参问题 在 Python 中，参数传递始终是 引用传递（传地址的）。但根据对象类型（可变/不可变）的不同，会产生类似「值传递」或「引用传递」的表象：\n">
 <title>Py_coding_tricks</title>
 
 <link rel='canonical' href='https://rooobeam.github.io/p/py_coding_tricks/'>
 
 <link rel="stylesheet" href="/scss/style.min.a396f93d13972177774da34b7aabdd4857291f5ce9113104ceb0746cb724125a.css"><meta property='og:title' content="Py_coding_tricks">
-<meta property='og:description' content=" .pop(self,index)方法 1 2 3 a=[1,2,3] a.pop(1) print(a)\t# [1,3] 函数传实参还是形参问题\n在 Python 中，参数传递始终是 引用传递（传地址的）。但根据对象类型（可变/不可变）的不同，会产生类似「值传递」或「引用传递」的表象：\n">
+<meta property='og:description' content=".pop(self,index)方法 1 2 3 a=[1,2,3] a.pop(1) print(a)\t# [1,3] 函数传实参还是形参问题 在 Python 中，参数传递始终是 引用传递（传地址的）。但根据对象类型（可变/不可变）的不同，会产生类似「值传递」或「引用传递」的表象：\n">
 <meta property='og:url' content='https://rooobeam.github.io/p/py_coding_tricks/'>
 <meta property='og:site_name' content='rooobeam'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-03-09T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-03-09T00:00:00&#43;00:00'/>
 <meta name="twitter:title" content="Py_coding_tricks">
-<meta name="twitter:description" content=" .pop(self,index)方法 1 2 3 a=[1,2,3] a.pop(1) print(a)\t# [1,3] 函数传实参还是形参问题\n在 Python 中，参数传递始终是 引用传递（传地址的）。但根据对象类型（可变/不可变）的不同，会产生类似「值传递」或「引用传递」的表象：\n">
+<meta name="twitter:description" content=".pop(self,index)方法 1 2 3 a=[1,2,3] a.pop(1) print(a)\t# [1,3] 函数传实参还是形参问题 在 Python 中，参数传递始终是 引用传递（传地址的）。但根据对象类型（可变/不可变）的不同，会产生类似「值传递」或「引用传递」的表象：\n">
     <link rel="shortcut icon" href="/favicon.ico" />
 
     </head>
@@ -322,10 +322,8 @@
     <section class="article-content">
     
     
-    <ul>
-<li>.pop(self,index)方法</li>
-</ul>
-<div class="highlight"><div class="chroma">
+    <h2 id="popselfindex方法">.pop(self,index)方法
+</h2><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -337,10 +335,8 @@
 </span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>	<span class="c1"># [1,3]</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><ul>
-<li>
-<p>函数传实参还是形参问题</p>
-<p>在 Python 中，参数传递<strong>始终是</strong> <strong>引用传递</strong>（传地址的）。但根据对象类型（可变/不可变）的不同，会产生类似「值传递」或「引用传递」的<strong>表象</strong>：</p>
+</div><h2 id="函数传实参还是形参问题">函数传实参还是形参问题
+</h2><p>在 Python 中，参数传递<strong>始终是</strong> <strong>引用传递</strong>（传地址的）。但根据对象类型（可变/不可变）的不同，会产生类似「值传递」或「引用传递」的<strong>表象</strong>：</p>
 <p>结论：看<strong>对象类型</strong></p>
 <ol>
 <li><strong>不可变对象</strong>（<strong>字符串、数字、元组等</strong>）作为参数时：
@@ -356,8 +352,6 @@
 </ul>
 </li>
 </ol>
-</li>
-</ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -390,7 +384,124 @@
 </span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;函数调用后obj2:&#34;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">obj2</span><span class="p">))</span>  <span class="c1"># [1,2,3,1,2,3]（已变）</span>
 </span></span></code></pre></td></tr></table>
 </div>
+</div><h2 id="pychram-来回查看代码">pychram 来回查看代码
+</h2><p>pycharm会用ctrl+鼠标左键点击函数来进入函数体查看函数具体实现部分。但是我常常点击后就回不来了，不同文件的函数调用来回找让人头大。</p>
+<p>可以来回的方法是：</p>
+<ul>
+<li>
+<p>ctrl+alt+左方向键(←)    后退(回退回原来位置, 不行就多摁几次，因为光标点击的地方好像也会记录)</p>
+</li>
+<li>
+<p>ctrl+alt+右方向键(→)    前进(即回到刚才点击的函数位置)</p>
+</li>
+</ul>
+<p>参考链接：https://blog.csdn.net/shmily_ke/article/details/136975710</p>
+<h2 id="for-_-in-rangelenqueue">for _ in range(len(queue))
+</h2><p>下划线 &lsquo;<strong>_</strong>&rsquo;：<code>_</code> 是一个占位符，表示“我不关心这个索引值”</p>
+<p>忽略循环中queue的元素个数的变化</p>
+<p><a class="link" href="https://leetcode.cn/problems/binary-tree-zigzag-level-order-traversal/"  target="_blank" rel="noopener"
+    >103. 二叉树的锯齿形层序遍历 - 力扣（LeetCode）</a></p>
+<p>对比我的代码和题解代码如下：</p>
+<p>我的还要用cnt记录下一层的结点个数，它只需要for _ in range(len(queue))中的len(queue)就能保留一层的值然后循环。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">zigzagLevelOrder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">TreeNode</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="ow">not</span> <span class="n">root</span><span class="p">:</span> <span class="k">return</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">        <span class="n">res</span><span class="p">,</span> <span class="n">queue</span> <span class="o">=</span> <span class="p">[],</span> <span class="n">collections</span><span class="o">.</span><span class="n">deque</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">queue</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span> <span class="n">queue</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">tmp</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">queue</span><span class="p">)):</span>
+</span></span><span class="line"><span class="cl">                <span class="n">node</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">                <span class="n">tmp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">val</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">left</span><span class="p">:</span> <span class="n">queue</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">left</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">right</span><span class="p">:</span> <span class="n">queue</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">right</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tmp</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span> <span class="k">else</span> <span class="n">tmp</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">链接</span><span class="err">：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">leetcode</span><span class="o">.</span><span class="n">cn</span><span class="o">/</span><span class="n">problems</span><span class="o">/</span><span class="n">binary</span><span class="o">-</span><span class="n">tree</span><span class="o">-</span><span class="n">zigzag</span><span class="o">-</span><span class="n">level</span><span class="o">-</span><span class="n">order</span><span class="o">-</span><span class="n">traversal</span><span class="o">/</span><span class="n">solutions</span><span class="o">/</span><span class="mi">2361613</span><span class="o">/</span><span class="mi">103</span><span class="o">-</span><span class="n">er</span><span class="o">-</span><span class="n">cha</span><span class="o">-</span><span class="n">shu</span><span class="o">-</span><span class="n">de</span><span class="o">-</span><span class="n">ju</span><span class="o">-</span><span class="n">chi</span><span class="o">-</span><span class="n">xing</span><span class="o">-</span><span class="n">ceng</span><span class="o">-</span><span class="n">xu</span><span class="o">-</span><span class="n">bi</span><span class="o">-</span><span class="n">qz2q</span><span class="o">/</span>
+</span></span></code></pre></td></tr></table>
 </div>
+</div><h2 id="部分-可迭代型数据-逆序">部分 可迭代型数据 逆序
+</h2><ul>
+<li>list.reverse()</li>
+<li>reversed(iterable)</li>
+<li>list[::-1]——需要对象有__getitem__</li>
+</ul>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>特性</th>
+          <th><code>reverse()</code></th>
+          <th><code>reversed()</code></th>
+          <th><code>[::-1]</code></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>‌<strong>功能</strong>‌</td>
+          <td><strong>原地</strong>反转列表</td>
+          <td>返回反转后的<strong>迭代器</strong></td>
+          <td>返回反转后的<strong>新对象</strong></td>
+      </tr>
+      <tr>
+          <td>‌<strong>适用对象</strong>‌</td>
+          <td>仅<strong>列表</strong>（<code>list</code>）</td>
+          <td>所有<strong>可迭代</strong>对象（列表、元组、字符串等）</td>
+          <td>所有<strong>支持切片</strong>的有序序列（列表、字符串、元组等）</td>
+      </tr>
+      <tr>
+          <td>‌<strong>返回值</strong>‌</td>
+          <td><code>None</code></td>
+          <td>迭代器</td>
+          <td>反转后的新对象</td>
+      </tr>
+      <tr>
+          <td>‌<strong>内存效率</strong>‌</td>
+          <td>高（原地操作，不生成新对象）</td>
+          <td>高（返回迭代器，不生成完整副本）</td>
+          <td>低（生成完整副本，占用额外内存）</td>
+      </tr>
+      <tr>
+          <td>‌<strong>时间复杂度</strong>‌</td>
+          <td>O(n)（直接交换元素）</td>
+          <td>O(1)（延迟计算，实际遍历时 O(n)）</td>
+          <td>O(n)（复制所有元素）</td>
+      </tr>
+      <tr>
+          <td>‌<strong>修改原数据</strong>‌</td>
+          <td>✅ 是</td>
+          <td>❌ 否</td>
+          <td>❌ 否</td>
+      </tr>
+      <tr>
+          <td>‌<strong>支持链式操作</strong>‌</td>
+          <td>❌ 否（返回 <code>None</code>）</td>
+          <td>✅ 是（可与 <code>list()</code>、<code>join()</code> 等结合）</td>
+          <td>✅ 是（直接生成新对象）</td>
+      </tr>
+  </tbody>
+</table></div>
+
 </section>
 
 
