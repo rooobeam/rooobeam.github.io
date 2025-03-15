@@ -1043,13 +1043,44 @@ SPOOLing是一种独占设备技术（&lt;strong&gt;C错误&lt;/strong&gt;，正
 &lt;/div&gt;</description>
         </item>
         <item>
-        <title>Tree Search</title>
-        <link>https://rooobeam.github.io/p/tree-search/</link>
+        <title>Tree_search</title>
+        <link>https://rooobeam.github.io/p/tree_search/</link>
         <pubDate>Tue, 04 Mar 2025 00:00:00 +0000</pubDate>
         
-        <guid>https://rooobeam.github.io/p/tree-search/</guid>
-        <description>&lt;h1 id=&#34;bfs-and-dfs-in-tree-search&#34;&gt;（BFS and DFS） in tree search
-&lt;/h1&gt;&lt;h2 id=&#34;一翻转树&#34;&gt;一、翻转树
+        <guid>https://rooobeam.github.io/p/tree_search/</guid>
+        <description>&lt;h1 id=&#34;tree-search&#34;&gt;Tree Search
+&lt;/h1&gt;&lt;h2 id=&#34;目录结构&#34;&gt;目录结构
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;-&lt;/th&gt;
+          &lt;th&gt;-&lt;/th&gt;
+          &lt;th&gt;-&lt;/th&gt;
+          &lt;th&gt;-&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#%e4%b8%80%e7%bf%bb%e8%bd%ac%e6%a0%91&#34; &gt;一、翻转树&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#%e4%ba%8c%e7%9b%b8%e5%90%8c%e6%a0%91&#34; &gt;二、相同树&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#%e4%b8%89%e5%b1%82%e5%ba%8f%e9%81%8d%e5%8e%86%e5%b9%b6%e6%a0%87%e5%ba%8f&#34; &gt;三、层序遍历并标序&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#%e5%9b%9b%e5%af%b9%e7%a7%b0%e6%a0%91&#34; &gt;四、对称树&lt;/a&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#%e4%ba%94%e4%ba%8c%e5%8f%89%e6%a0%91%e7%9a%84%e6%9c%80%e5%a4%a7%e6%b7%b1%e5%ba%a6&#34; &gt;五、二叉树的最大深度&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#%e5%85%ad%e4%ba%8c%e5%8f%89%e6%a0%91%e7%9a%84%e6%9c%80%e5%b0%8f%e6%b7%b1%e5%ba%a6&#34; &gt;六、二叉树的最小深度&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#%e4%b8%83%e8%b7%af%e5%be%84%e6%80%bb%e5%92%8c&#34; &gt;七、路径总和&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#%e5%85%ab%e4%ba%8c%e5%8f%89%e6%a0%91%e5%b1%82%e5%ba%8f%e9%81%8d%e5%8e%86%e6%97%a0%e6%a0%87%e5%ba%8f%e5%8f%b7&#34; &gt;八、二叉树层序遍历无标序号&lt;/a&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#%e4%b9%9d%e5%b2%9b%e5%b1%bf%e7%9a%84%e5%91%a8%e9%95%bf&#34; &gt;九、岛屿的周长&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#%e5%8d%81%e5%b7%a6%e5%8f%b6%e5%ad%90%e4%b9%8b%e5%92%8c&#34; &gt;十、左叶子之和&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;一翻转树&#34;&gt;一、翻转树
 &lt;/h2&gt;&lt;p&gt;给你一棵二叉树的根节点 &lt;code&gt;root&lt;/code&gt; ，翻转这棵二叉树，并返回其根节点。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -2211,51 +2242,100 @@ SPOOLing是一种独占设备技术（&lt;strong&gt;C错误&lt;/strong&gt;，正
         
         <guid>https://rooobeam.github.io/p/python3%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0/</guid>
         <description>&lt;img src="https://rooobeam.github.io/p/python3%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0/rz0sefu53fe.webp" alt="Featured image of post Python3内置函数" /&gt;&lt;h2 id=&#34;目录&#34;&gt;目录
+&lt;/h2&gt;&lt;h2 id=&#34;目录结构&#34;&gt;目录结构
 &lt;/h2&gt;&lt;table&gt;
   &lt;thead&gt;
       &lt;tr&gt;
-          &lt;th&gt;&lt;/th&gt;
-          &lt;th&gt;&lt;/th&gt;
-          &lt;th&gt;&lt;/th&gt;
-          &lt;th&gt;&lt;/th&gt;
+          &lt;th&gt;-&lt;/th&gt;
+          &lt;th&gt;-&lt;/th&gt;
+          &lt;th&gt;-&lt;/th&gt;
+          &lt;th&gt;-&lt;/th&gt;
       &lt;/tr&gt;
   &lt;/thead&gt;
   &lt;tbody&gt;
       &lt;tr&gt;
-          &lt;td&gt;abs&lt;/td&gt;
-          &lt;td&gt;dict&lt;/td&gt;
-          &lt;td&gt;help&lt;/td&gt;
-          &lt;td&gt;min、max&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#abs&#34; &gt;abs&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#dict&#34; &gt;dict&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#help&#34; &gt;help&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#minmax&#34; &gt;min、max&lt;/a&gt;&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
-          &lt;td&gt;setattr&lt;/td&gt;
-          &lt;td&gt;getattr&lt;/td&gt;
-          &lt;td&gt;all、any&lt;/td&gt;
-          &lt;td&gt;dir&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#setattrgetattr&#34; &gt;setattr、getattr&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#allany&#34; &gt;all、any&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#dir&#34; &gt;dir&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#hexoct&#34; &gt;hex、oct&lt;/a&gt;&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
-          &lt;td&gt;hex、oct&lt;/td&gt;
-          &lt;td&gt;next&lt;/td&gt;
-          &lt;td&gt;slice&lt;/td&gt;
-          &lt;td&gt;divmod&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#next&#34; &gt;next&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#slice&#34; &gt;slice&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#divmod&#34; &gt;divmod&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#id&#34; &gt;id&lt;/a&gt;&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
-          &lt;td&gt;id&lt;/td&gt;
-          &lt;td&gt;object&lt;/td&gt;
-          &lt;td&gt;sorted&lt;/td&gt;
-          &lt;td&gt;ascii&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#object&#34; &gt;object&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#sorted&#34; &gt;sorted&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#ascii&#34; &gt;ascii&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#enumerate&#34; &gt;enumerate&lt;/a&gt;&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
-          &lt;td&gt;enumerate&lt;/td&gt;
-          &lt;td&gt;input&lt;/td&gt;
-          &lt;td&gt;staticmethod&lt;/td&gt;
-          &lt;td&gt;bin&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#input&#34; &gt;input&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#staticmethod&#34; &gt;staticmethod&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#bin&#34; &gt;bin&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#open&#34; &gt;open&lt;/a&gt;&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
-          &lt;td&gt;open&lt;/td&gt;
-          &lt;td&gt;eval&lt;/td&gt;
-          &lt;td&gt;int&lt;/td&gt;
-          &lt;td&gt;str&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#eval&#34; &gt;eval&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#int&#34; &gt;int&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#str&#34; &gt;str&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#bool&#34; &gt;bool&lt;/a&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#exec&#34; &gt;exec&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#isinstance&#34; &gt;isinstance&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#ordchr&#34; &gt;ord、chr&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#sum&#34; &gt;sum&lt;/a&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#bytes&#34; &gt;bytes&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#bytearray&#34; &gt;bytearray&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#filter&#34; &gt;filter&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#issubclass&#34; &gt;issubclass&lt;/a&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#pow&#34; &gt;pow&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#super&#34; &gt;super&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#float&#34; &gt;float&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#iter&#34; &gt;iter&lt;/a&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#print&#34; &gt;print&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#tuple&#34; &gt;tuple&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#callable&#34; &gt;callable&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#formatfstring&#34; &gt;format、f-string&lt;/a&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#len&#34; &gt;len&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#property&#34; &gt;property&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#type&#34; &gt;type&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#set&#34; &gt;set&lt;/a&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#frozenset&#34; &gt;frozenset&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#list&#34; &gt;list&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#range&#34; &gt;range&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#classmethod&#34; &gt;classmethod&lt;/a&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#repr&#34; &gt;repr&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#zip&#34; &gt;zip&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#map&#34; &gt;map&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#reversed&#34; &gt;reversed&lt;/a&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#import_module&#34; &gt;import_module&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#complex&#34; &gt;complex&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#hasattr&#34; &gt;hasattr&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;-&lt;/td&gt;
       &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
@@ -3359,6 +3439,7 @@ x 可以为整数/浮点数，y 也如此&lt;/p&gt;
 &lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;open(name[, mode[, buffering]])&lt;/p&gt;
+&lt;p&gt;常与&lt;strong&gt;with&lt;/strong&gt;联用&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -3407,7 +3488,7 @@ x 可以为整数/浮点数，y 也如此&lt;/p&gt;
 &lt;p&gt;共	3*2*2=12种&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;模式对照表&lt;/p&gt;
+&lt;p&gt;模式对照表 和 &lt;strong&gt;f.seek(n)&lt;/strong&gt;&lt;/p&gt;
 &lt;table&gt;
   &lt;thead&gt;
       &lt;tr&gt;
@@ -5807,7 +5888,7 @@ x 可以为整数/浮点数，y 也如此&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;list&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;m&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;# [&amp;#39;A&amp;#39;, &amp;#39;B&amp;#39;]&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;reverse&#34;&gt;reverse
+&lt;/div&gt;&lt;h2 id=&#34;reversed&#34;&gt;reversed
 &lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;reversed(sequence, /)  Return a reverse iterator over the values of the given sequence.&lt;/li&gt;
 &lt;li&gt;迭代器类型，占用空间没那么大，惰性计算，过一遍就没了&amp;hellip;   注意要加&amp;rsquo;d&amp;rsquo;  reverse&lt;strong&gt;d&lt;/strong&gt;&lt;/li&gt;
@@ -5822,6 +5903,19 @@ x 可以为整数/浮点数，y 也如此&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;reversed&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;([&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;e&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;e&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;])&lt;/span&gt;	&lt;span class=&#34;c1&#34;&gt;# [3,2,1]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;-更常用的方式：[::-1]。但得是可切片型数据，即要有__getitem__方法&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;ls&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;new_ls&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ls&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[::&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;new_ls&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;	&lt;span class=&#34;c1&#34;&gt;# [3,2,1]&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h2 id=&#34;import_module&#34;&gt;import_module
