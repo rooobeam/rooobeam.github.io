@@ -398,7 +398,33 @@
 <p>参考链接：https://blog.csdn.net/shmily_ke/article/details/136975710</p>
 <h2 id="for-_-in-rangelenqueue">for _ in range(len(queue))
 </h2><p>下划线 &lsquo;<strong>_</strong>&rsquo;：<code>_</code> 是一个占位符，表示“我不关心这个索引值”</p>
-<p>忽略循环中queue的元素个数的变化</p>
+<p>len(queue)忽略循环中queue本身的变化</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>特性</th>
+          <th><code>for _ in range(len(queue))</code></th>
+          <th><code>for _ in queue</code></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>遍历方式</strong></td>
+          <td>基于索引，范围固定</td>
+          <td>动态跟踪变化</td>
+      </tr>
+      <tr>
+          <td><strong><code>q</code> 增加元素</strong></td>
+          <td>不会遍历到新添加的元素</td>
+          <td>可能会遍历到新添加的元素</td>
+      </tr>
+      <tr>
+          <td>**<code>q</code> 删除元素 **</td>
+          <td>可能导致索引越界</td>
+          <td>可能导致跳过元素或提前结束</td>
+      </tr>
+  </tbody>
+</table></div>
 <p><a class="link" href="https://leetcode.cn/problems/binary-tree-zigzag-level-order-traversal/"  target="_blank" rel="noopener"
     >103. 二叉树的锯齿形层序遍历 - 力扣（LeetCode）</a></p>
 <p>对比我的代码和题解代码如下：</p>
@@ -445,7 +471,7 @@
 </h2><ul>
 <li>list.reverse()</li>
 <li>reversed(iterable)</li>
-<li>list[::-1]——需要对象有__getitem__</li>
+<li>list[::-1]——需要对象有__getitem__，最好用</li>
 </ul>
 <div class="table-wrapper"><table>
   <thead>
