@@ -364,7 +364,26 @@ SPOOLing是一种独占设备技术（&lt;strong&gt;C错误&lt;/strong&gt;，正
         <pubDate>Tue, 11 Mar 2025 16:25:24 +0800</pubDate>
         
         <guid>https://rooobeam.github.io/p/lightrag%E4%BB%A3%E7%A0%81%E8%A7%A3%E8%AF%BB/</guid>
-        <description>&lt;p&gt;main()开始&lt;/p&gt;
+        <description>&lt;h2 id=&#34;项目结构&#34;&gt;项目结构
+&lt;/h2&gt;&lt;p&gt;边看边更新&lt;/p&gt;
+&lt;p&gt;LightRAG-main
+|__examples
+|	|__lightrag_ollama_demo.py
+|
+|__lightrag
+|	|__ kg
+|	|	|__ json_kv_impl.py
+|	|
+|	|__ __init__.py
+|	|__ base.py
+|	|__ lightrag.py
+|	|__ utils.py
+|
+|
+|__setup.py
+|
+|&lt;/p&gt;
+&lt;p&gt;main()开始&lt;/p&gt;
 &lt;h2 id=&#34;执行rag--asyncioruninitialize_rag初始化&#34;&gt;执行“rag = asyncio.run(initialize_rag())”初始化
 &lt;/h2&gt;&lt;p&gt;进入initialize_rag()&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;

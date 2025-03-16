@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="main()开始\n执行“rag = asyncio.run(initialize_rag())”初始化 进入initialize_rag()\n1 2 3 4 5 async def initialize_rag(): rag = LightRAG(...........)\tawait rag.initialize_storages() await initialize_pipeline_status() return rag rag = LightRAG(&hellip;&hellip;&hellip;..) 初始化 LightRAG的对象 各个属性，主要是llm_model_X和embedding_func，两个模型均由本例ollama提供\n">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="项目结构 边看边更新\nLightRAG-main |__examples |\t|__lightrag_ollama_demo.py | |__lightrag |\t|__ kg |\t|\t|__ json_kv_impl.py |\t| |\t|__ __init__.py |\t|__ base.py |\t|__ lightrag.py |\t|__ utils.py | | |__setup.py | |\nmain()开始\n执行“rag = asyncio.run(initialize_rag())”初始化 进入initialize_rag()\n">
 <title>Lightrag代码解读</title>
 
 <link rel='canonical' href='https://rooobeam.github.io/p/lightrag%E4%BB%A3%E7%A0%81%E8%A7%A3%E8%AF%BB/'>
 
 <link rel="stylesheet" href="/scss/style.min.a396f93d13972177774da34b7aabdd4857291f5ce9113104ceb0746cb724125a.css"><meta property='og:title' content="Lightrag代码解读">
-<meta property='og:description' content="main()开始\n执行“rag = asyncio.run(initialize_rag())”初始化 进入initialize_rag()\n1 2 3 4 5 async def initialize_rag(): rag = LightRAG(...........)\tawait rag.initialize_storages() await initialize_pipeline_status() return rag rag = LightRAG(&hellip;&hellip;&hellip;..) 初始化 LightRAG的对象 各个属性，主要是llm_model_X和embedding_func，两个模型均由本例ollama提供\n">
+<meta property='og:description' content="项目结构 边看边更新\nLightRAG-main |__examples |\t|__lightrag_ollama_demo.py | |__lightrag |\t|__ kg |\t|\t|__ json_kv_impl.py |\t| |\t|__ __init__.py |\t|__ base.py |\t|__ lightrag.py |\t|__ utils.py | | |__setup.py | |\nmain()开始\n执行“rag = asyncio.run(initialize_rag())”初始化 进入initialize_rag()\n">
 <meta property='og:url' content='https://rooobeam.github.io/p/lightrag%E4%BB%A3%E7%A0%81%E8%A7%A3%E8%AF%BB/'>
 <meta property='og:site_name' content='rooobeam'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-03-11T16:25:24&#43;08:00'/><meta property='article:modified_time' content='2025-03-11T16:25:24&#43;08:00'/>
 <meta name="twitter:title" content="Lightrag代码解读">
-<meta name="twitter:description" content="main()开始\n执行“rag = asyncio.run(initialize_rag())”初始化 进入initialize_rag()\n1 2 3 4 5 async def initialize_rag(): rag = LightRAG(...........)\tawait rag.initialize_storages() await initialize_pipeline_status() return rag rag = LightRAG(&hellip;&hellip;&hellip;..) 初始化 LightRAG的对象 各个属性，主要是llm_model_X和embedding_func，两个模型均由本例ollama提供\n">
+<meta name="twitter:description" content="项目结构 边看边更新\nLightRAG-main |__examples |\t|__lightrag_ollama_demo.py | |__lightrag |\t|__ kg |\t|\t|__ json_kv_impl.py |\t| |\t|__ __init__.py |\t|__ base.py |\t|__ lightrag.py |\t|__ utils.py | | |__setup.py | |\nmain()开始\n执行“rag = asyncio.run(initialize_rag())”初始化 进入initialize_rag()\n">
     <link rel="shortcut icon" href="/favicon.ico" />
 
     </head>
@@ -322,7 +322,26 @@
     <section class="article-content">
     
     
-    <p>main()开始</p>
+    <h2 id="项目结构">项目结构
+</h2><p>边看边更新</p>
+<p>LightRAG-main
+|__examples
+|	|__lightrag_ollama_demo.py
+|
+|__lightrag
+|	|__ kg
+|	|	|__ json_kv_impl.py
+|	|
+|	|__ __init__.py
+|	|__ base.py
+|	|__ lightrag.py
+|	|__ utils.py
+|
+|
+|__setup.py
+|
+|</p>
+<p>main()开始</p>
 <h2 id="执行rag--asyncioruninitialize_rag初始化">执行“rag = asyncio.run(initialize_rag())”初始化
 </h2><p>进入initialize_rag()</p>
 <div class="highlight"><div class="chroma">
