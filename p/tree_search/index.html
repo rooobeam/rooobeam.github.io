@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Tree Search 目录结构 - - - - 一、翻转树 二、相同树 三、层序遍历并标序 四、对称树 五、二叉树的最大深度 六、二叉树的最小深度 七、路径总和 八、二叉树层序遍历无标序号 九、岛屿的周长 十、左叶子之和 十一、二叉搜索树的最小绝对差 十二、二叉树层序遍历II 十三、合并二叉树 队列的运用：一、二、\n">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Tree Search 目录结构 - - - - 一、翻转树 二、相同树 三、层序遍历并标序 四、对称树 五、二叉树的最大深度 六、二叉树的最小深度 七、路径总和 八、二叉树层序遍历无标序号 九、岛屿的周长 十、左叶子之和 十一、二叉搜索树的最小绝对差 十二、二叉树层序遍历II 十三、合并二叉树 十四、二叉树的层平均值 队列的运用：一、二、\n">
 <title>Tree_search</title>
 
 <link rel='canonical' href='https://rooobeam.github.io/p/tree_search/'>
 
 <link rel="stylesheet" href="/scss/style.min.a396f93d13972177774da34b7aabdd4857291f5ce9113104ceb0746cb724125a.css"><meta property='og:title' content="Tree_search">
-<meta property='og:description' content="Tree Search 目录结构 - - - - 一、翻转树 二、相同树 三、层序遍历并标序 四、对称树 五、二叉树的最大深度 六、二叉树的最小深度 七、路径总和 八、二叉树层序遍历无标序号 九、岛屿的周长 十、左叶子之和 十一、二叉搜索树的最小绝对差 十二、二叉树层序遍历II 十三、合并二叉树 队列的运用：一、二、\n">
+<meta property='og:description' content="Tree Search 目录结构 - - - - 一、翻转树 二、相同树 三、层序遍历并标序 四、对称树 五、二叉树的最大深度 六、二叉树的最小深度 七、路径总和 八、二叉树层序遍历无标序号 九、岛屿的周长 十、左叶子之和 十一、二叉搜索树的最小绝对差 十二、二叉树层序遍历II 十三、合并二叉树 十四、二叉树的层平均值 队列的运用：一、二、\n">
 <meta property='og:url' content='https://rooobeam.github.io/p/tree_search/'>
 <meta property='og:site_name' content='rooobeam'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-03-04T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-03-04T00:00:00&#43;00:00'/>
 <meta name="twitter:title" content="Tree_search">
-<meta name="twitter:description" content="Tree Search 目录结构 - - - - 一、翻转树 二、相同树 三、层序遍历并标序 四、对称树 五、二叉树的最大深度 六、二叉树的最小深度 七、路径总和 八、二叉树层序遍历无标序号 九、岛屿的周长 十、左叶子之和 十一、二叉搜索树的最小绝对差 十二、二叉树层序遍历II 十三、合并二叉树 队列的运用：一、二、\n">
+<meta name="twitter:description" content="Tree Search 目录结构 - - - - 一、翻转树 二、相同树 三、层序遍历并标序 四、对称树 五、二叉树的最大深度 六、二叉树的最小深度 七、路径总和 八、二叉树层序遍历无标序号 九、岛屿的周长 十、左叶子之和 十一、二叉搜索树的最小绝对差 十二、二叉树层序遍历II 十三、合并二叉树 十四、二叉树的层平均值 队列的运用：一、二、\n">
     <link rel="shortcut icon" href="/favicon.ico" />
 
     </head>
@@ -354,7 +354,7 @@
       </tr>
       <tr>
           <td><a class="link" href="#%e5%8d%81%e4%b8%89%e5%90%88%e5%b9%b6%e4%ba%8c%e5%8f%89%e6%a0%91" >十三、合并二叉树</a></td>
-          <td></td>
+          <td><a class="link" href="#%e5%8d%81%e5%9b%9b%e4%ba%8c%e5%8f%89%e6%a0%91%e7%9a%84%e5%b1%82%e5%b9%b3%e5%9d%87%e5%80%bc" >十四、二叉树的层平均值</a></td>
           <td></td>
           <td></td>
       </tr>
@@ -1280,6 +1280,54 @@
 </span></span><span class="line"><span class="cl">        <span class="n">root1</span><span class="o">.</span><span class="n">right</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mergeTrees</span><span class="p">(</span><span class="n">root1</span><span class="o">.</span><span class="n">right</span><span class="p">,</span><span class="n">root2</span><span class="o">.</span><span class="n">right</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">        
 </span></span><span class="line"><span class="cl">       	<span class="k">return</span> <span class="n">root1</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="十四二叉树的层平均值">十四、二叉树的层平均值
+</h2><p><a class="link" href="https://leetcode.cn/problems/average-of-levels-in-binary-tree/description/"  target="_blank" rel="noopener"
+    >637. 二叉树的层平均值 - 力扣（LeetCode）</a></p>
+<p>给定一个非空二叉树的根节点 <code>root</code> , 以数组的形式返回每一层节点的平均值。与实际答案相差 <code>10-5</code> 以内的答案可以被接受。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">averageOfLevels</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">TreeNode</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="ow">not</span> <span class="n">root</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">        <span class="n">q</span><span class="o">=</span><span class="p">[</span><span class="n">root</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ave</span><span class="o">=</span><span class="p">[]</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="n">q</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="n">tmp</span><span class="o">=</span><span class="mf">0.0</span>		    <span class="c1">#当前层的和</span>
+</span></span><span class="line"><span class="cl">            <span class="n">q_len</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>	<span class="c1"># 当前层长度</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">q_len</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">                <span class="n">tnode</span><span class="o">=</span><span class="n">q</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">tmp</span><span class="o">+=</span><span class="n">tnode</span><span class="o">.</span><span class="n">val</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="n">tnode</span><span class="o">.</span><span class="n">left</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">q</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tnode</span><span class="o">.</span><span class="n">left</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="n">tnode</span><span class="o">.</span><span class="n">right</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">q</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tnode</span><span class="o">.</span><span class="n">right</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ave</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tmp</span><span class="o">/</span><span class="n">q_len</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ave</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div>
