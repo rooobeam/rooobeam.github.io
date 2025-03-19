@@ -10,7 +10,7 @@
 <meta property='og:description' content=".pop(self,index)方法 1 2 3 a=[1,2,3] a.pop(1) print(a)\t# [1,3] 函数传实参还是形参问题 在 Python 中，参数传递始终是 引用传递（传地址的）。但根据对象类型（可变/不可变）的不同，会产生类似「值传递」或「引用传递」的表象：\n">
 <meta property='og:url' content='https://rooobeam.github.io/p/py_coding_tricks/'>
 <meta property='og:site_name' content='rooobeam'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-03-09T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-03-09T00:00:00&#43;00:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-03-18T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-03-18T00:00:00&#43;00:00'/>
 <meta name="twitter:title" content="Py_coding_tricks">
 <meta name="twitter:description" content=".pop(self,index)方法 1 2 3 a=[1,2,3] a.pop(1) print(a)\t# [1,3] 函数传实参还是形参问题 在 Python 中，参数传递始终是 引用传递（传地址的）。但根据对象类型（可变/不可变）的不同，会产生类似「值传递」或「引用传递」的表象：\n">
     <link rel="shortcut icon" href="/favicon.ico" />
@@ -306,7 +306,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2025-03-09</time>
+                <time class="article-time--published">2025-03-18</time>
             </div>
         
 
@@ -471,7 +471,7 @@
 </h2><ul>
 <li>list.reverse()</li>
 <li>reversed(iterable)</li>
-<li>list[::-1]——需要对象有__getitem__，最好用</li>
+<li><strong>list[::-1]</strong>——需要对象有__getitem__，<strong>最好用</strong></li>
 </ul>
 <div class="table-wrapper"><table>
   <thead>
@@ -527,7 +527,54 @@
       </tr>
   </tbody>
 </table></div>
-
+<h2 id="for-key-in-dic_1-if-key-in-dic_2">for key in dic_1 if key in dic_2
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">dic_1</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">:</span><span class="mi">3</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="n">dic_2</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;b&#39;</span><span class="p">:</span><span class="mi">2</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="n">dic_3</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">key</span><span class="p">:</span> <span class="n">dic_1</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">dic_1</span> <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">dic_2</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">dic_3</span><span class="p">)</span>	<span class="c1"># {&#39;b&#39;: 2}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>声明多个全局变量</p>
+<p>逗号 隔开，“ \ ”连接下一行</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">global</span> \
+</span></span><span class="line"><span class="cl">    <span class="n">_manager</span><span class="p">,</span> \
+</span></span><span class="line"><span class="cl">    <span class="n">is_multiprocess</span><span class="p">,</span> \
+</span></span><span class="line"><span class="cl">    <span class="n">_storage_lock</span><span class="p">,</span> \
+</span></span><span class="line"><span class="cl">    <span class="n">_internal_lock</span><span class="p">,</span> \
+</span></span><span class="line"><span class="cl">    <span class="n">_pipeline_status_lock</span><span class="p">,</span> \
+</span></span><span class="line"><span class="cl">    <span class="n">_shared_dicts</span><span class="p">,</span> \
+</span></span><span class="line"><span class="cl">    <span class="n">_init_flags</span><span class="p">,</span> \
+</span></span><span class="line"><span class="cl">    <span class="n">_initialized</span><span class="p">,</span> \
+</span></span><span class="line"><span class="cl">    <span class="n">_update_flags</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
 </section>
 
 

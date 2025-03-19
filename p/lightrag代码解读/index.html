@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="项目结构 边看边更新\nLightRAG-main |__examples |\t|__lightrag_ollama_demo.py | |__lightrag |\t|__ kg |\t|\t|__ json_kv_impl.py |\t| |\t|__ __init__.py |\t|__ base.py |\t|__ lightrag.py |\t|__ utils.py | | |__setup.py | |\nmain()开始\t（lightrag_ollama_demo.py）\nmain()内容 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 def main(): # Initialize RAG instance rag = asyncio.run(initialize_rag()) # Insert example text with open(&#34;./book.txt&#34;, &#34;r&#34;, encoding=&#34;utf-8&#34;) as f: rag.insert(f.read()) # Test different query modes print(&#34;\\nNaive Search:&#34;) print( rag.query( &#34;What are the top themes in this story?&#34;, param=QueryParam(mode=&#34;naive&#34;) ) ) print(&#34;\\nLocal Search:&#34;) print( rag.query( &#34;What are the top themes in this story?&#34;, param=QueryParam(mode=&#34;local&#34;) ) ) print(&#34;\\nGlobal Search:&#34;) print( rag.query( &#34;What are the top themes in this story?&#34;, param=QueryParam(mode=&#34;global&#34;) ) ) print(&#34;\\nHybrid Search:&#34;) print( rag.query( &#34;What are the top themes in this story?&#34;, param=QueryParam(mode=&#34;hybrid&#34;) ) ) # stream response resp = rag.query( &#34;What are the top themes in this story?&#34;, param=QueryParam(mode=&#34;hybrid&#34;, stream=True), ) if inspect.isasyncgen(resp): asyncio.run(print_stream(resp)) else: print(resp) 初始化: rag = asyncio.run(initialize_rag()) 进入initialize_rag()，\t（lightrag_ollama_demo.py）\n">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="项目 目的 极简版 得到 文本块，处理为 实体 和 关系\na. 文本块（chunks） 文本内容：&ldquo;Alice and Bob are collaborating on quantum computing research.&rdquo; 来源id：doc-1 b. 实体（entities） 实体名称 类型 描述 来源 Alice person 量子物理领域的研究员 doc-1 Bob person 数学家 doc-1 Quantum Computing technology 利用量子力学现象进行计算的技术 doc-1 c. 关系（relationships） 关系编号 起点（src_id） 终点（tgt_id） 描述 关键词 权重 来源 1 Alice Bob Alice和Bob是研究伙伴 collaboration, research 1.0 doc-1 2 Alice Quantum Computing Alice从事量子计算研究 research, expertise 1.0 doc-1 3 Bob Quantum Computing Bob研究量子计算的应用 research, application 1.0 doc-1 项目结构 边看边更新\n">
 <title>Lightrag代码解读</title>
 
 <link rel='canonical' href='https://rooobeam.github.io/p/lightrag%E4%BB%A3%E7%A0%81%E8%A7%A3%E8%AF%BB/'>
 
 <link rel="stylesheet" href="/scss/style.min.a396f93d13972177774da34b7aabdd4857291f5ce9113104ceb0746cb724125a.css"><meta property='og:title' content="Lightrag代码解读">
-<meta property='og:description' content="项目结构 边看边更新\nLightRAG-main |__examples |\t|__lightrag_ollama_demo.py | |__lightrag |\t|__ kg |\t|\t|__ json_kv_impl.py |\t| |\t|__ __init__.py |\t|__ base.py |\t|__ lightrag.py |\t|__ utils.py | | |__setup.py | |\nmain()开始\t（lightrag_ollama_demo.py）\nmain()内容 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 def main(): # Initialize RAG instance rag = asyncio.run(initialize_rag()) # Insert example text with open(&#34;./book.txt&#34;, &#34;r&#34;, encoding=&#34;utf-8&#34;) as f: rag.insert(f.read()) # Test different query modes print(&#34;\\nNaive Search:&#34;) print( rag.query( &#34;What are the top themes in this story?&#34;, param=QueryParam(mode=&#34;naive&#34;) ) ) print(&#34;\\nLocal Search:&#34;) print( rag.query( &#34;What are the top themes in this story?&#34;, param=QueryParam(mode=&#34;local&#34;) ) ) print(&#34;\\nGlobal Search:&#34;) print( rag.query( &#34;What are the top themes in this story?&#34;, param=QueryParam(mode=&#34;global&#34;) ) ) print(&#34;\\nHybrid Search:&#34;) print( rag.query( &#34;What are the top themes in this story?&#34;, param=QueryParam(mode=&#34;hybrid&#34;) ) ) # stream response resp = rag.query( &#34;What are the top themes in this story?&#34;, param=QueryParam(mode=&#34;hybrid&#34;, stream=True), ) if inspect.isasyncgen(resp): asyncio.run(print_stream(resp)) else: print(resp) 初始化: rag = asyncio.run(initialize_rag()) 进入initialize_rag()，\t（lightrag_ollama_demo.py）\n">
+<meta property='og:description' content="项目 目的 极简版 得到 文本块，处理为 实体 和 关系\na. 文本块（chunks） 文本内容：&ldquo;Alice and Bob are collaborating on quantum computing research.&rdquo; 来源id：doc-1 b. 实体（entities） 实体名称 类型 描述 来源 Alice person 量子物理领域的研究员 doc-1 Bob person 数学家 doc-1 Quantum Computing technology 利用量子力学现象进行计算的技术 doc-1 c. 关系（relationships） 关系编号 起点（src_id） 终点（tgt_id） 描述 关键词 权重 来源 1 Alice Bob Alice和Bob是研究伙伴 collaboration, research 1.0 doc-1 2 Alice Quantum Computing Alice从事量子计算研究 research, expertise 1.0 doc-1 3 Bob Quantum Computing Bob研究量子计算的应用 research, application 1.0 doc-1 项目结构 边看边更新\n">
 <meta property='og:url' content='https://rooobeam.github.io/p/lightrag%E4%BB%A3%E7%A0%81%E8%A7%A3%E8%AF%BB/'>
 <meta property='og:site_name' content='rooobeam'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-03-11T16:25:24&#43;08:00'/><meta property='article:modified_time' content='2025-03-11T16:25:24&#43;08:00'/>
 <meta name="twitter:title" content="Lightrag代码解读">
-<meta name="twitter:description" content="项目结构 边看边更新\nLightRAG-main |__examples |\t|__lightrag_ollama_demo.py | |__lightrag |\t|__ kg |\t|\t|__ json_kv_impl.py |\t| |\t|__ __init__.py |\t|__ base.py |\t|__ lightrag.py |\t|__ utils.py | | |__setup.py | |\nmain()开始\t（lightrag_ollama_demo.py）\nmain()内容 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 def main(): # Initialize RAG instance rag = asyncio.run(initialize_rag()) # Insert example text with open(&#34;./book.txt&#34;, &#34;r&#34;, encoding=&#34;utf-8&#34;) as f: rag.insert(f.read()) # Test different query modes print(&#34;\\nNaive Search:&#34;) print( rag.query( &#34;What are the top themes in this story?&#34;, param=QueryParam(mode=&#34;naive&#34;) ) ) print(&#34;\\nLocal Search:&#34;) print( rag.query( &#34;What are the top themes in this story?&#34;, param=QueryParam(mode=&#34;local&#34;) ) ) print(&#34;\\nGlobal Search:&#34;) print( rag.query( &#34;What are the top themes in this story?&#34;, param=QueryParam(mode=&#34;global&#34;) ) ) print(&#34;\\nHybrid Search:&#34;) print( rag.query( &#34;What are the top themes in this story?&#34;, param=QueryParam(mode=&#34;hybrid&#34;) ) ) # stream response resp = rag.query( &#34;What are the top themes in this story?&#34;, param=QueryParam(mode=&#34;hybrid&#34;, stream=True), ) if inspect.isasyncgen(resp): asyncio.run(print_stream(resp)) else: print(resp) 初始化: rag = asyncio.run(initialize_rag()) 进入initialize_rag()，\t（lightrag_ollama_demo.py）\n">
+<meta name="twitter:description" content="项目 目的 极简版 得到 文本块，处理为 实体 和 关系\na. 文本块（chunks） 文本内容：&ldquo;Alice and Bob are collaborating on quantum computing research.&rdquo; 来源id：doc-1 b. 实体（entities） 实体名称 类型 描述 来源 Alice person 量子物理领域的研究员 doc-1 Bob person 数学家 doc-1 Quantum Computing technology 利用量子力学现象进行计算的技术 doc-1 c. 关系（relationships） 关系编号 起点（src_id） 终点（tgt_id） 描述 关键词 权重 来源 1 Alice Bob Alice和Bob是研究伙伴 collaboration, research 1.0 doc-1 2 Alice Quantum Computing Alice从事量子计算研究 research, expertise 1.0 doc-1 3 Bob Quantum Computing Bob研究量子计算的应用 research, application 1.0 doc-1 项目结构 边看边更新\n">
     <link rel="shortcut icon" href="/favicon.ico" />
 
     </head>
@@ -322,8 +322,91 @@
     <section class="article-content">
     
     
-    <h2 id="项目结构">项目结构
-</h2><p>边看边更新</p>
+    <h1 id="项目--目的--极简版">项目  目的  极简版
+</h1><p>得到 <strong>文本块</strong>，处理为 实体 和 <strong>关系</strong></p>
+<h3 id="a-文本块chunks">a. 文本块（chunks）
+</h3><ul>
+<li><strong>文本内容</strong>：&ldquo;Alice and Bob are collaborating on quantum computing research.&rdquo;</li>
+<li><strong>来源id</strong>：doc-1</li>
+</ul>
+<hr>
+<h3 id="b-实体entities">b. 实体（entities）
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>实体名称</th>
+          <th>类型</th>
+          <th>描述</th>
+          <th>来源</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Alice</td>
+          <td>person</td>
+          <td>量子物理领域的研究员</td>
+          <td>doc-1</td>
+      </tr>
+      <tr>
+          <td>Bob</td>
+          <td>person</td>
+          <td>数学家</td>
+          <td>doc-1</td>
+      </tr>
+      <tr>
+          <td>Quantum Computing</td>
+          <td>technology</td>
+          <td>利用量子力学现象进行计算的技术</td>
+          <td>doc-1</td>
+      </tr>
+  </tbody>
+</table></div>
+<hr>
+<h3 id="c-关系relationships">c. 关系（relationships）
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>关系编号</th>
+          <th>起点（src_id）</th>
+          <th>终点（tgt_id）</th>
+          <th>描述</th>
+          <th>关键词</th>
+          <th>权重</th>
+          <th>来源</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>1</td>
+          <td>Alice</td>
+          <td>Bob</td>
+          <td>Alice和Bob是研究伙伴</td>
+          <td>collaboration, research</td>
+          <td>1.0</td>
+          <td>doc-1</td>
+      </tr>
+      <tr>
+          <td>2</td>
+          <td>Alice</td>
+          <td>Quantum Computing</td>
+          <td>Alice从事量子计算研究</td>
+          <td>research, expertise</td>
+          <td>1.0</td>
+          <td>doc-1</td>
+      </tr>
+      <tr>
+          <td>3</td>
+          <td>Bob</td>
+          <td>Quantum Computing</td>
+          <td>Bob研究量子计算的应用</td>
+          <td>research, application</td>
+          <td>1.0</td>
+          <td>doc-1</td>
+      </tr>
+  </tbody>
+</table></div>
+<h1 id="项目结构">项目结构
+</h1><p>边看边更新</p>
 <p>LightRAG-main
 |__examples
 |	|__lightrag_ollama_demo.py
@@ -509,6 +592,8 @@
 </div>
 </div><h3 id="await-raginitialize_storages">await rag.initialize_storages()
 </h3><p>（lightrag_ollama_demo.py）</p>
+<p>每个storages的初始化都类似，其父类都时base里的Base&hellip;Storage</p>
+<p>kg文件夹里的 各种_impl里定义具体的子类（如JsonDocStatusStorage） 继承了父类</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -698,7 +783,82 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="插入-raginsertfread">插入: rag.insert(f.read())
-</h2>
+</h2><p>rag.insert(f.read())</p>
+<p>​	-&gt; self.ainsert(input)</p>
+<p>​		-&gt; self.apipeline_enqueue_documents</p>
+<p>​		-&gt; self.apipeline_process_enqueue_documents</p>
+<h3 id="进入raginsert内">进入rag.insert内
+</h3><p>rag.<strong>insert</strong>(f.read()) -&gt; 转到 self.<strong>ainsert</strong>(input)，input即 f.read()（字符串），</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">insert</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">input</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="n">split_by_character</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">split_by_character_only</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ids</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 创建事件循环，然后把self.ainsert加入循环，执行时传入input，其他参数都默认</span>
+</span></span><span class="line"><span class="cl">    <span class="n">loop</span> <span class="o">=</span> <span class="n">always_get_an_event_loop</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">loop</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">ainsert</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">split_by_character</span><span class="p">,</span> <span class="n">split_by_character_only</span><span class="p">,</span> <span class="n">ids</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="进入selfainsert内">进入self.ainsert内
+</h3><p>两个内容，一个是 添加 文档状态信息，另一个是 处理文档</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl">    <span class="k">async</span> <span class="k">def</span> <span class="nf">ainsert</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="bp">self</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">input</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">            <span class="n">split_by_character</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">split_by_character_only</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ids</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># 将input，即文档或list of 文档 的status信息加入doc_status数据库</span>
+</span></span><span class="line"><span class="cl">        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">apipeline_enqueue_documents</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">ids</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="c1"># 处理文档，创建知识库的主要部分</span>
+</span></span><span class="line"><span class="cl">        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">apipeline_process_enqueue_documents</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="n">split_by_character</span><span class="p">,</span> <span class="n">split_by_character_only</span>
+</span></span><span class="line"><span class="cl">        <span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="selfapipeline_enqueue_documents">self.apipeline_enqueue_documents
+</h3>
 </section>
 
 
