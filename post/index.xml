@@ -7,7 +7,578 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>rooobeam</copyright>
-        <lastBuildDate>Thu, 20 Mar 2025 22:09:22 +0800</lastBuildDate><atom:link href="https://rooobeam.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 22 Mar 2025 22:34:32 +0800</lastBuildDate><atom:link href="https://rooobeam.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>操作系统原理PPT总结</title>
+        <link>https://rooobeam.github.io/p/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86ppt%E6%80%BB%E7%BB%93/</link>
+        <pubDate>Sat, 22 Mar 2025 22:34:32 +0800</pubDate>
+        
+        <guid>https://rooobeam.github.io/p/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86ppt%E6%80%BB%E7%BB%93/</guid>
+        <description>&lt;h1 id=&#34;第三章-进程管理&#34;&gt;第三章 进程管理
+&lt;/h1&gt;&lt;h2 id=&#34;31-概述&#34;&gt;3.1 概述
+&lt;/h2&gt;&lt;h3 id=&#34;311-程序的顺序执行和并发执行&#34;&gt;3.1.1 程序的顺序执行和并发执行
+&lt;/h3&gt;&lt;h4 id=&#34;1-程序的顺序执行&#34;&gt;1. 程序的顺序执行
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;特点&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;顺序性&lt;/strong&gt;：按程序结构依次执行（可能包含分支或循环）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;封闭性&lt;/strong&gt;：独占所有资源，程序执行不受外界影响。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;可再现性&lt;/strong&gt;：相同初始条件必定得到相同结果。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-程序的并发执行&#34;&gt;2. 程序的并发执行
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;定义&lt;/strong&gt;：多个程序段在时间上重叠执行（一个未结束，另一个已开始）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;并发 vs 并行&lt;/strong&gt;：
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;&lt;strong&gt;并发&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;并行&lt;/strong&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;一段时间内交替执行&lt;/td&gt;
+          &lt;td&gt;同一物理时刻同时执行&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;特征&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;间断性&lt;/strong&gt;：程序执行“走走停停”，时序可能被打断。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;失去封闭性&lt;/strong&gt;：共享资源导致状态受其他程序影响。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;失去可再现性&lt;/strong&gt;：执行结果因调度顺序不同而不同。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;问题举例&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;共享堆栈时，&lt;code&gt;getaddr()&lt;/code&gt;和&lt;code&gt;reladdr()&lt;/code&gt;并发执行可能导致错误结果。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;并发执行条件&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;需避免共享资源冲突（通过互斥、同步机制）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;312-进程的定义与特征&#34;&gt;3.1.2 进程的定义与特征
+&lt;/h3&gt;&lt;h4 id=&#34;1-进程定义&#34;&gt;1. 进程定义
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;定义&lt;/strong&gt;：程序在数据集上的一次动态执行活动，是资源分配的基本单位。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;组成&lt;/strong&gt;：程序 + 数据 + &lt;strong&gt;PCB（进程控制块）&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-进程特征&#34;&gt;2. 进程特征
+&lt;/h4&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;&lt;strong&gt;特征&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;说明&lt;/strong&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;动态性&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;进程从创建到消亡经历状态变化（运行、就绪、阻塞）。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;独立性&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;各进程拥有独立地址空间，除非通过进程间通信（IPC）交互。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;并发性&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;多个进程可同时推进执行。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;异步性&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;进程执行速度不可预测，需同步机制协调。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;结构化&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;由代码段、数据段和 PCB 组成。&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;313-进程与程序的区别&#34;&gt;3.1.3 进程与程序的区别
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;&lt;strong&gt;对比项&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;进程&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;程序&lt;/strong&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;本质&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;动态执行实体&lt;/td&gt;
+          &lt;td&gt;静态指令集合&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;生命周期&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;短暂（创建→运行→终止）&lt;/td&gt;
+          &lt;td&gt;永久存储&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;组成&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;程序 + 数据 + PCB&lt;/td&gt;
+          &lt;td&gt;代码文件&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;资源竞争&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;是资源分配的基本单位&lt;/td&gt;
+          &lt;td&gt;无资源竞争&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;并发性&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;支持并发/并行执行&lt;/td&gt;
+          &lt;td&gt;无&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;314-进程与作业的关系&#34;&gt;3.1.4 进程与作业的关系
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;作业&lt;/strong&gt;：用户提交的任务实体（如批处理作业）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;关系&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;一个作业由多个进程组成（至少一个进程）。&lt;/li&gt;
+&lt;li&gt;作业概念主要用于批处理系统；进程用于所有多道系统。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：编译作业可能包含预处理、编译、链接等多个进程。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;qa&#34;&gt;Q&amp;amp;A
+&lt;/h2&gt;&lt;h3 id=&#34;q1-并发执行可能导致结果不可再现的原因是什么&#34;&gt;Q1: 并发执行可能导致结果不可再现的原因是什么？
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;A&lt;/strong&gt;：&lt;strong&gt;共享资源冲突&lt;/strong&gt;。例如，两个进程同时修改共享变量 &lt;code&gt;x&lt;/code&gt; 时，若未同步，执行顺序不同会导致结果不同。&lt;/p&gt;
+&lt;h3 id=&#34;q2-进程的基本特征包括哪些&#34;&gt;Q2: 进程的基本特征包括哪些？
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;A&lt;/strong&gt;：&lt;strong&gt;动态性、独立性、并发性、异步性、结构化&lt;/strong&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;q3-进程和程序的本质区别是什么&#34;&gt;Q3: 进程和程序的本质区别是什么？
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;A&lt;/strong&gt;：&lt;strong&gt;动态性 vs 静态性&lt;/strong&gt;。进程是执行中的动态实体，程序是静态代码。&lt;/p&gt;
+&lt;h3 id=&#34;q4-进程从运行态变为阻塞态的原因可能是什么&#34;&gt;Q4: 进程从运行态变为阻塞态的原因可能是什么？
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;A&lt;/strong&gt;：&lt;strong&gt;等待 I/O 完成&lt;/strong&gt; 或 &lt;strong&gt;请求系统服务未就绪&lt;/strong&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;q5-进程控制块pcb的作用是什么&#34;&gt;Q5: 进程控制块（PCB）的作用是什么？
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;A&lt;/strong&gt;：&lt;strong&gt;记录进程状态、资源分配、调度信息&lt;/strong&gt;，是操作系统感知和管理进程的唯一标识。&lt;/p&gt;
+&lt;h2 id=&#34;32-进程的描述&#34;&gt;3.2 进程的描述
+&lt;/h2&gt;&lt;h3 id=&#34;321-进程的组成&#34;&gt;3.2.1 进程的组成
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;进程 = 程序 + 数据 + PCB（进程控制块）&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;程序&lt;/strong&gt;：进程执行的代码段。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;数据&lt;/strong&gt;：进程处理的对象（变量、堆栈等）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;PCB&lt;/strong&gt;：记录进程状态、资源分配、调度信息等，是操作系统的管理依据。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;322-进程控制块pcb&#34;&gt;3.2.2 进程控制块（PCB）
+&lt;/h3&gt;&lt;h4 id=&#34;1-pcb的功能&#34;&gt;1. &lt;strong&gt;PCB的功能&lt;/strong&gt;
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;唯一标识进程，操作系统通过PCB感知和管理进程。&lt;/li&gt;
+&lt;li&gt;记录动态特性（状态、优先级、资源占用等）。&lt;/li&gt;
+&lt;li&gt;存储&lt;strong&gt;CPU现场保护信息&lt;/strong&gt;（寄存器值、程序计数器等）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-pcb的特征&#34;&gt;2. &lt;strong&gt;PCB的特征&lt;/strong&gt;
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;常驻内存，随进程创建/撤销而出现/消失。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;与进程一一对应&lt;/strong&gt;，是进程存在的唯一标志。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;3-pcb的内容&#34;&gt;3. &lt;strong&gt;PCB的内容&lt;/strong&gt;
+&lt;/h4&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;&lt;strong&gt;分类&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;具体内容&lt;/strong&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;描述信息&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;进程ID、进程名、用户ID、进程组关系。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;控制信息&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;当前状态、优先级、代码入口地址、同步机制（如信号量）。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;资源信息&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;虚拟地址空间状态、打开文件列表、内存分配情况。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;CPU现场&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;寄存器值（通用寄存器、程序计数器PC、状态寄存器PSW、栈指针）。&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;323-进程上下文&#34;&gt;3.2.3 进程上下文
+&lt;/h3&gt;&lt;h4 id=&#34;1-定义&#34;&gt;1. &lt;strong&gt;定义&lt;/strong&gt;
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;进程执行全过程的静态描述，包括用户地址空间、寄存器和核心数据结构。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-组成&#34;&gt;2. &lt;strong&gt;组成&lt;/strong&gt;
+&lt;/h4&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;&lt;strong&gt;类型&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;内容&lt;/strong&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;用户级上下文&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;用户程序段（代码、数据、堆栈）。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;寄存器级上下文&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;CPU寄存器值（PC、PSW、栈指针等）。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;系统级上下文&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;静态部分（PCB）、动态部分（核心栈，用于系统调用时的上下文切换）。&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;324-pcb的组织方式&#34;&gt;3.2.4 PCB的组织方式
+&lt;/h3&gt;&lt;h4 id=&#34;1-链表方式&#34;&gt;1. 链表方式
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;按状态分类：就绪链表、阻塞链表。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;优点&lt;/strong&gt;：动态管理灵活，适合频繁插入/删除。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;br&gt;
+&lt;img src=&#34;https://wy-static.wenxiaobai.com/chat-doc/c98a03b6ad06f4b59bcdb5f7171c69a9-image.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-索引表方式&#34;&gt;2. 索引表方式
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;每个状态对应一个索引表（如就绪索引表、阻塞索引表）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;优点&lt;/strong&gt;：查询速度快，适合固定状态管理。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;br&gt;
+&lt;img src=&#34;https://wy-static.wenxiaobai.com/chat-doc/1daa14538c2f36f6b06fd6824273174b-image.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;325-进程的状态及其转换&#34;&gt;3.2.5 进程的状态及其转换
+&lt;/h3&gt;&lt;h4 id=&#34;1-三种基本状态&#34;&gt;1. 三种基本状态
+&lt;/h4&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;&lt;strong&gt;状态&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;说明&lt;/strong&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;就绪态&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;已具备运行条件，等待CPU分配。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;运行态&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;占用CPU执行指令。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;阻塞态&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;因等待事件（如I/O完成）无法继续执行。&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h4 id=&#34;2-状态转换&#34;&gt;2. 状态转换
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;此处少内容&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://wy-static.wenxiaobai.com/chat-doc/c0b9ae32adf7d96a1f69ace27590ce58-image.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;运行→就绪&lt;/strong&gt;：时间片用完或高优先级进程抢占。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;运行→阻塞&lt;/strong&gt;：等待资源或事件（如I/O请求）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;阻塞→就绪&lt;/strong&gt;：等待事件完成（如I/O结束）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;3-扩展状态&#34;&gt;3. 扩展状态
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;创建态&lt;/strong&gt;：进程正在被创建（分配PCB、初始化资源）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;终止态&lt;/strong&gt;：进程已结束，释放资源但保留PCB信息。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;挂起态&lt;/strong&gt;：进程被移到外存，分为&lt;strong&gt;就绪挂起&lt;/strong&gt;和&lt;strong&gt;阻塞挂起&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;4-挂起模型&#34;&gt;4. 挂起模型
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;此处少内容&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;&lt;strong&gt;状态&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;内存/外存&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;是否可运行&lt;/strong&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;就绪挂起&lt;/td&gt;
+          &lt;td&gt;外存&lt;/td&gt;
+          &lt;td&gt;是（需激活）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;阻塞挂起&lt;/td&gt;
+          &lt;td&gt;外存&lt;/td&gt;
+          &lt;td&gt;否（需事件）&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;qa-1&#34;&gt;Q&amp;amp;A
+&lt;/h2&gt;&lt;p&gt;Q1: &lt;strong&gt;PCB中存储哪些关键控制信息？&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;A&lt;/strong&gt;：包括&lt;strong&gt;当前状态&lt;/strong&gt;、&lt;strong&gt;优先级&lt;/strong&gt;、&lt;strong&gt;代码入口地址&lt;/strong&gt;、&lt;strong&gt;同步机制&lt;/strong&gt;（如信号量）、&lt;strong&gt;资源占用信息&lt;/strong&gt;（如打开文件列表）。&lt;/p&gt;
+&lt;p&gt;Q2: &lt;strong&gt;进程从运行态转为阻塞态的可能原因是什么？&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;A&lt;/strong&gt;：&lt;strong&gt;等待I/O操作完成&lt;/strong&gt;、&lt;strong&gt;请求系统服务未就绪&lt;/strong&gt;（如申请内存失败）。&lt;/p&gt;
+&lt;p&gt;Q3: &lt;strong&gt;挂起状态的进程如何恢复执行？&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;A&lt;/strong&gt;：通过&lt;strong&gt;激活原语&lt;/strong&gt;将进程从外存移回内存，状态转换为&lt;strong&gt;就绪态&lt;/strong&gt;或&lt;strong&gt;阻塞态&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;Q4: &lt;strong&gt;进程上下文切换时，哪些内容需要保存？&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;A&lt;/strong&gt;：&lt;strong&gt;寄存器值&lt;/strong&gt;（PC、PSW、栈指针）、&lt;strong&gt;核心栈信息&lt;/strong&gt;、&lt;strong&gt;资源占用状态&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;Q5: &lt;strong&gt;为什么PCB需要常驻内存？&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;A&lt;/strong&gt;：操作系统需快速访问PCB以管理进程状态，若存于外存会导致频繁I/O，降低效率。&lt;/p&gt;
+&lt;h2 id=&#34;33-进程控制&#34;&gt;3.3 进程控制
+&lt;/h2&gt;&lt;h3 id=&#34;331-进程控制的功能&#34;&gt;3.3.1 进程控制的功能
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;核心功能&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;创建/撤销进程、挂起/激活进程、管理进程状态转换。&lt;/li&gt;
+&lt;li&gt;确保进程有序共享资源并正确执行。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;1-原语primitive&#34;&gt;1. 原语（Primitive）
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;定义&lt;/strong&gt;：由多条指令构成的&lt;strong&gt;原子操作&lt;/strong&gt;，执行不可中断（要么全部完成，要么全部不执行）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;类型&lt;/strong&gt;：
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;&lt;strong&gt;类型&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;说明&lt;/strong&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;机器指令级原语&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;硬件支持，禁止中断（如 &lt;code&gt;test-and-set&lt;/code&gt; 指令）。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;功能级原语&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;软件实现，允许中断但不可并发（如进程创建原语 &lt;code&gt;fork()&lt;/code&gt;）。&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;332-进程控制的主要原语&#34;&gt;3.3.2 进程控制的主要原语
+&lt;/h3&gt;&lt;h4 id=&#34;1-进程创建原语&#34;&gt;1. 进程创建原语
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;主要任务&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;分配 PCB、分配唯一 PID、初始化资源（内存、文件）、设置进程上下文、链接到就绪队列。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;触发事件&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;用户登录（分时系统）&lt;/li&gt;
+&lt;li&gt;作业调度（批处理系统）&lt;/li&gt;
+&lt;li&gt;提供服务（如打印进程）&lt;/li&gt;
+&lt;li&gt;应用请求（用户程序主动创建）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;子进程创建方式&lt;/strong&gt;：
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;&lt;strong&gt;方式&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;说明&lt;/strong&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;fork()&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;复制父进程上下文，生成新进程（UNIX 常用）。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;spawn()&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;创建新进程并加载新程序（Windows 常用）。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;exec()&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;加载新程序覆盖当前进程（不生成新进程）。&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;父子进程关系&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;继承内容&lt;/strong&gt;：环境变量、打开文件、共享存储区、信号处理表等。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;不继承内容&lt;/strong&gt;：进程 ID（PID）、父进程 PID、资源占用统计。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-进程撤销原语destroy&#34;&gt;2. 进程撤销原语（Destroy）
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;触发原因&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;进程正常结束、发生致命错误、被父进程终止、系统资源不足。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;释放资源（内存、文件）、移除 PCB、更新进程树结构。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;3-进程阻塞原语block&#34;&gt;3. 进程阻塞原语（Block）
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;触发原因&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;等待 I/O 完成、请求资源未就绪、等待同步信号（如信号量）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;处理过程&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;保存 CPU 现场 → 更新 PCB 状态为阻塞 → 移入阻塞队列 → 触发调度。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;4-进程唤醒原语wakeup&#34;&gt;4. 进程唤醒原语（Wakeup）
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;触发原因&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;等待事件完成（如 I/O 结束）、其他进程释放资源。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;处理方式&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;更新 PCB 状态为就绪 → 移入就绪队列 → 触发调度。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;5-挂起原语suspend&#34;&gt;5. 挂起原语（Suspend）
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;原因&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;系统负载过高、调试需要、用户主动挂起。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;操作&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;将进程内存映像移至外存 → 更新状态为&lt;strong&gt;就绪挂起/阻塞挂起&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;6-激活原语activate&#34;&gt;6. 激活原语（Activate）
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;将挂起进程移回内存 → 状态转换为&lt;strong&gt;就绪态/阻塞态&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;333-unix-的进程管理&#34;&gt;3.3.3 Unix 的进程管理
+&lt;/h3&gt;&lt;h4 id=&#34;1-进程建立过程&#34;&gt;1. 进程建立过程
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;fork()&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;复制父进程上下文生成子进程，返回子进程 PID（父进程）和 0（子进程）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;exec()&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;加载新程序覆盖当前进程空间（不生成新进程）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-进程状态转换&#34;&gt;2. 进程状态转换
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;UNIX 进程状态&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;运行态（用户态/内核态）、就绪态、睡眠态（可中断/不可中断）、僵死态（Zombie）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;状态转换触发&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;系统调用（如 &lt;code&gt;read()&lt;/code&gt; 导致阻塞）、信号处理（如 &lt;code&gt;SIGKILL&lt;/code&gt; 终止进程）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;3-进程控制相关系统调用&#34;&gt;3. 进程控制相关系统调用
+&lt;/h4&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;&lt;strong&gt;系统调用&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;功能&lt;/strong&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;fork()&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;创建子进程，继承父进程上下文。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;exec()&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;加载新程序覆盖当前进程。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;wait()&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;父进程阻塞，等待子进程终止。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;exit()&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;终止当前进程，释放资源。&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;qa-2&#34;&gt;Q&amp;amp;A
+&lt;/h2&gt;&lt;p&gt;Q1: &lt;strong&gt;什么是原语？为什么进程控制需要原语？&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;A&lt;/strong&gt;：原语是&lt;strong&gt;原子操作&lt;/strong&gt;的指令集合，不可分割执行。进程控制需保证操作的完整性（如创建进程时分配 PCB 和资源必须一次性完成），避免因中断导致系统状态不一致。&lt;/p&gt;
+&lt;p&gt;Q2: &lt;strong&gt;fork() 和 exec() 的区别是什么？&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;A&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;fork()&lt;/code&gt; 会&lt;strong&gt;复制父进程&lt;/strong&gt;生成新进程，子进程与父进程独立执行。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;exec()&lt;/code&gt; &lt;strong&gt;加载新程序覆盖当前进程&lt;/strong&gt;，不生成新进程，仅替换代码段和数据段。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Q3: &lt;strong&gt;进程阻塞和挂起的区别是什么？&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;A&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;阻塞&lt;/strong&gt;：进程因等待事件（如 I/O）&lt;strong&gt;留在内存&lt;/strong&gt;，状态为阻塞。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;挂起&lt;/strong&gt;：进程被&lt;strong&gt;移至外存&lt;/strong&gt;，状态为挂起（如就绪挂起、阻塞挂起）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Q4: &lt;strong&gt;UNIX 中 Zombie 进程是如何产生的？&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;A&lt;/strong&gt;：当进程终止但&lt;strong&gt;父进程未调用 wait()&lt;/strong&gt; 回收其资源时，PCB 仍保留在系统中，形成&lt;strong&gt;僵死进程&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;Q5: &lt;strong&gt;激活原语的操作步骤是什么？&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;A&lt;/strong&gt;：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;将进程从外存移回内存；&lt;/li&gt;
+&lt;li&gt;更新状态为&lt;strong&gt;就绪态或阻塞态&lt;/strong&gt;；&lt;/li&gt;
+&lt;li&gt;若就绪，加入就绪队列等待调度。&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
         <title>Lightrag1.0.3解读</title>
         <link>https://rooobeam.github.io/p/lightrag1.0.3%E8%A7%A3%E8%AF%BB/</link>
         <pubDate>Thu, 20 Mar 2025 22:09:22 +0800</pubDate>
@@ -684,6 +1255,12 @@
           &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#%e5%8d%81%e4%b8%89%e5%90%88%e5%b9%b6%e4%ba%8c%e5%8f%89%e6%a0%91&#34; &gt;十三、合并二叉树&lt;/a&gt;&lt;/td&gt;
           &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#%e5%8d%81%e5%9b%9b%e4%ba%8c%e5%8f%89%e6%a0%91%e7%9a%84%e5%b1%82%e5%b9%b3%e5%9d%87%e5%80%bc&#34; &gt;十四、二叉树的层平均值&lt;/a&gt;&lt;/td&gt;
           &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#%e5%8d%81%e4%ba%94%e6%89%be%e5%87%ba%e5%85%8b%e9%9a%86%e4%ba%8c%e5%8f%89%e6%a0%91%e4%b8%ad%e7%9a%84%e7%9b%b8%e5%90%8c%e8%8a%82%e7%82%b9&#34; &gt;十五、找出克隆二叉树中的相同节点&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#%e5%8d%81%e5%85%ad%e5%9b%be%e5%83%8f%e6%b8%b2%e6%9f%93&#34; &gt;十六、图像渲染&lt;/a&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;[十七、N 叉树的最大深度](#十七N 叉树的最大深度)&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#%e5%8d%81%e5%85%ab%e5%8d%95%e5%80%bc%e4%ba%8c%e5%8f%89%e6%a0%91&#34; &gt;十八、单值二叉树&lt;/a&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#%e5%8d%81%e4%b9%9d%e4%ba%8c%e5%8f%89%e6%a0%91%e7%9a%84%e5%a0%82%e5%85%84%e5%bc%9f%e8%8a%82%e7%82%b9&#34; &gt;十九、二叉树的堂兄弟节点&lt;/a&gt;&lt;/td&gt;
           &lt;td&gt;&lt;/td&gt;
       &lt;/tr&gt;
   &lt;/tbody&gt;
@@ -1452,7 +2029,7 @@
 &lt;p&gt;差值是一个正数，其数值等于两值之差的绝对值。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;What I learn&lt;/strong&gt;:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;类里的全局变量——类属性&lt;/li&gt;
+&lt;li&gt;类里的全局变量——类属性（见 十九 ，嵌套函数里声明外部变量 nonelocal）&lt;/li&gt;
 &lt;li&gt;调用类的属性、方法都要“self.” “self.” “self.” !!!&lt;/li&gt;
 &lt;/ul&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -1833,6 +2410,177 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;root&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;children&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; 
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;&#34;&gt;
+&lt;/h2&gt;&lt;h2 id=&#34;十八单值二叉树&#34;&gt;十八、单值二叉树
+&lt;/h2&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://leetcode.cn/problems/univalued-binary-tree/description/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;965. 单值二叉树 - 力扣（LeetCode）&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;如果二叉树每个节点都具有相同的值，那么该二叉树就是&lt;em&gt;单值&lt;/em&gt;二叉树。&lt;/p&gt;
+&lt;p&gt;只有给定的树是单值二叉树时，才返回 &lt;code&gt;true&lt;/code&gt;；否则返回 &lt;code&gt;false&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;What I learn&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;方法里定义的&lt;strong&gt;临时变量&lt;/strong&gt;（代码里的 &lt;strong&gt;v&lt;/strong&gt; ），对于方法里的函数（哪怕递归了）是&lt;strong&gt;全局&lt;/strong&gt;的。&lt;/p&gt;
+&lt;p&gt;—— 当&lt;code&gt;dfs&lt;/code&gt;被定义为嵌套函数时，它可以访问外部函数&lt;code&gt;isUnivalTree&lt;/code&gt;中的变量&lt;code&gt;v&lt;/code&gt;（闭包机制）&lt;/p&gt;
+&lt;p&gt;—— 如果将&lt;code&gt;dfs&lt;/code&gt;改为实例方法（如&lt;code&gt;self.dfs&lt;/code&gt;），则需通过实例属性（如&lt;code&gt;self.v&lt;/code&gt;）来共享变量&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;如果有多个、多重if else，看看能不能用 or  and 代替&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;定义参数时不要和外边变量重名，如：def dfs(node): 而非 def dfs(root):&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-py&#34; data-lang=&#34;py&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# Definition for a binary tree node.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# class TreeNode:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#     def __init__(self, val=0, left=None, right=None):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#         self.val = val&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#         self.left = left&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#         self.right = right&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;Solution&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;isUnivalTree&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;bp&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;root&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;TreeNode&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;bool&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;# 变量v对于dfs是全局的&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;v&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;root&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;val&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;dfs&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;node&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;node&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;is&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;None&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;or&lt;/span&gt; \
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;node&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;val&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;v&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;and&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;dfs&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;node&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;left&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;and&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;dfs&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;node&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;right&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;dfs&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;root&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;作者&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;：&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Benhao&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&amp;#39;&amp;#39; 
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s1&#34;&gt;return node is None or &lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;        (node.val == v and dfs(node.left) and dfs(node.right))
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s1&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s1&#34;&gt;===== 等价于 =====
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s1&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s1&#34;&gt;if not root:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s1&#34;&gt;	return True
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s1&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s1&#34;&gt;if root.val==self.n:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s1&#34;&gt;	return self.recur(root.left) and self.recur(root.right)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s1&#34;&gt;else:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s1&#34;&gt;	return False
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;十九二叉树的堂兄弟节点&#34;&gt;十九、二叉树的堂兄弟节点
+&lt;/h2&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://leetcode.cn/problems/cousins-in-binary-tree/description/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;993. 二叉树的堂兄弟节点 - 力扣（LeetCode）&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;在二叉树中，两个节点深度相同，但 &lt;strong&gt;父节点不同&lt;/strong&gt; ，则它们是一对&lt;em&gt;堂兄弟节点&lt;/em&gt;。&lt;/p&gt;
+&lt;p&gt;我们给出了具有唯一值的二叉树的根节点 &lt;code&gt;root&lt;/code&gt; ，以及树中两个不同节点的值 &lt;code&gt;x&lt;/code&gt; 和 &lt;code&gt;y&lt;/code&gt; 。&lt;/p&gt;
+&lt;p&gt;只有与值 &lt;code&gt;x&lt;/code&gt; 和 &lt;code&gt;y&lt;/code&gt; 对应的节点是堂兄弟节点时，才返回 &lt;code&gt;true&lt;/code&gt; 。否则，返回 &lt;code&gt;false&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;What I learn&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;当你想得清楚当前层的处理时，发现要上层数据，想想能不能传递上层数据下去&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;嵌套函数 对 外部作用域变量的访问 的关键区别：&lt;strong&gt;读取&lt;/strong&gt;和&lt;strong&gt;修改&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;只要函数内部存在对变量 &lt;code&gt;pre_dep&lt;/code&gt; 的 &lt;strong&gt;修改&lt;/strong&gt;（如 &lt;code&gt;pre_dep = dep&lt;/code&gt;），Python 默认将其视为 &lt;strong&gt;局部变量&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;仅&lt;strong&gt;读取&lt;/strong&gt;，则会视为&lt;strong&gt;外部变量&lt;/strong&gt;（见 十八 的 v）&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-py&#34; data-lang=&#34;py&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 当你想得清楚当前层的处理时，发现要上层数据，想想能不能传递上层数据下去&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;Solution&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;isCousins&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;bp&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;root&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Optional&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;TreeNode&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;int&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;y&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;int&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;bool&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;root&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;val&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;or&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;root&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;val&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;y&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;False&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;pre_dep&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;pre_par&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;None&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;recur&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;root&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;dep&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;par&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;k&#34;&gt;nonlocal&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;pre_dep&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;pre_par&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;not&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;root&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;False&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;c1&#34;&gt;# 如果有一个值对上了，说明遇上了一个结点&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;root&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;val&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;or&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;root&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;val&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;y&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                &lt;span class=&#34;c1&#34;&gt;# 如果pre_dep不为0，前者已找到，必须深度一样且父节点不同&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;pre_dep&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;dep&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;pre_dep&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;and&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;par&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;is&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;not&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;pre_par&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                &lt;span class=&#34;k&#34;&gt;else&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                    &lt;span class=&#34;n&#34;&gt;pre_dep&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;dep&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                    &lt;span class=&#34;n&#34;&gt;pre_par&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;par&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;recur&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;root&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;left&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;dep&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;root&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;or&lt;/span&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                &lt;span class=&#34;n&#34;&gt;recur&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;root&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;right&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;dep&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;root&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;recur&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;root&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;left&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;root&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;or&lt;/span&gt; \
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;               &lt;span class=&#34;n&#34;&gt;recur&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;root&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;right&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;root&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
 &lt;/div&gt;</description>
         </item>
         <item>
@@ -2095,7 +2843,19 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;h2 id=&#34;字典&#34;&gt;字典
 &lt;/h2&gt;&lt;h2 id=&#34;join方法&#34;&gt;.join方法
-&lt;/h2&gt;</description>
+&lt;/h2&gt;&lt;h2 id=&#34;dataclasses&#34;&gt;dataclasses
+&lt;/h2&gt;&lt;p&gt;dataclasses 的 dataclass, field&lt;/p&gt;
+&lt;h2 id=&#34;pycharm书签功能&#34;&gt;pycharm书签功能
+&lt;/h2&gt;&lt;p&gt;按 &lt;strong&gt;F11&lt;/strong&gt; 对光标那行生成书签&lt;/p&gt;
+&lt;h2 id=&#34;pycharm关警告&#34;&gt;pycharm关警告
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;右上角有 &lt;strong&gt;黄色三角形警告图标⚠&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;直接鼠标放置⚠处&lt;/li&gt;
+&lt;li&gt;会自动显示  如 “25个警告，3个弱警告         &lt;strong&gt;高亮显示：所有问题&lt;/strong&gt;”&lt;/li&gt;
+&lt;li&gt;点击 &lt;strong&gt;高亮显示：所有问题&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;弹出“无   语法   所有问题”，点击  &lt;strong&gt;无&lt;/strong&gt;  即可。&lt;/li&gt;
+&lt;/ol&gt;
+</description>
         </item>
         <item>
         <title>Vim常用操作</title>
