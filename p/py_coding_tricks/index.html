@@ -10,7 +10,7 @@
 <meta property='og:description' content=".pop(self,index)方法 1 2 3 a=[1,2,3] a.pop(1) print(a)\t# [1,3] 函数传实参还是形参问题 在 Python 中，参数传递始终是 引用传递（传地址的）。但根据对象类型（可变/不可变）的不同，会产生类似「值传递」或「引用传递」的表象：\n">
 <meta property='og:url' content='https://rooobeam.github.io/p/py_coding_tricks/'>
 <meta property='og:site_name' content='rooobeam'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-03-18T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-03-18T00:00:00&#43;00:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-03-24T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-03-24T00:00:00&#43;00:00'/>
 <meta name="twitter:title" content="Py_coding_tricks">
 <meta name="twitter:description" content=".pop(self,index)方法 1 2 3 a=[1,2,3] a.pop(1) print(a)\t# [1,3] 函数传实参还是形参问题 在 Python 中，参数传递始终是 引用传递（传地址的）。但根据对象类型（可变/不可变）的不同，会产生类似「值传递」或「引用传递」的表象：\n">
     <link rel="shortcut icon" href="/favicon.ico" />
@@ -306,7 +306,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2025-03-18</time>
+                <time class="article-time--published">2025-03-24</time>
             </div>
         
 
@@ -576,7 +576,23 @@
 </div>
 </div><h2 id="字典">字典
 </h2><h2 id="join方法">.join方法
-</h2><h2 id="dataclasses">dataclasses
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">content</span> <span class="o">=</span> <span class="s2">&#34;数据1|数据2#数据3@需要保留的+符号+数据4&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">markers</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;|&#34;</span><span class="p">,</span> <span class="s2">&#34;#&#34;</span><span class="p">,</span> <span class="s2">&#34;@&#34;</span><span class="p">,</span> <span class="s2">&#34;+&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">results</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;|&#34;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">marker</span><span class="p">)</span> <span class="k">for</span> <span class="n">marker</span> <span class="ow">in</span> <span class="n">markers</span><span class="p">),</span> <span class="n">content</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="dataclasses">dataclasses
 </h2><p>dataclasses 的 dataclass, field</p>
 <h2 id="pycharm书签功能">pycharm书签功能
 </h2><p>按 <strong>F11</strong> 对光标那行生成书签</p>
@@ -584,11 +600,94 @@
 </h2><ol>
 <li>右上角有 <strong>黄色三角形警告图标⚠</strong></li>
 <li>直接鼠标放置⚠处</li>
-<li>会自动显示  如 “25个警告，3个弱警告         <strong>高亮显示：所有问题</strong>”</li>
+<li>会自动显示  如  “ 25个警告，3个弱警告         <strong>高亮显示：所有问题</strong> ”</li>
 <li>点击 <strong>高亮显示：所有问题</strong></li>
 <li>弹出“无   语法   所有问题”，点击  <strong>无</strong>  即可。</li>
 </ol>
-
+<h2 id="funcargskwargs">func(*args,**kwargs)
+</h2><p>函数定义中，可以有一个 <strong>*args</strong>  和 一个 <strong>**kwargs</strong> 参数，args 和 kwargs 是<strong>约定俗成</strong>的参数命名。也就是说可以func(*a,**b)</p>
+<p>我的理解：</p>
+<ul>
+<li>args是一个元组，*args是解包，即 未知元组(a,b&hellip;) 解包成 a,b&hellip; 放到func的括号里，变成 func(a,b&hellip;)</li>
+<li>kwargs是一个字典未知字典{a: b, c: d&hellip;}，解包放func里，变成 func(a=b, c=d&hellip;)</li>
+</ul>
+<p><strong>使用式理解</strong>：</p>
+<p>*<em>func(fixed_arg, <em>args, obvious_kwarg=123, **kwargs)中</em></em></p>
+<ol>
+<li><strong><code>fixed_arg</code> 传递</strong>：它是固定位置参数，没有默认值。</li>
+<li><strong><code>*args</code> 接收所有多余的位置参数</strong>：所有未被 <code>fixed_arg</code> 接收的位置参数都会被打包到 <code>*args</code>。</li>
+<li><strong><code>obvious_kwarg</code> 是仅限关键字参数</strong>：它只能通过关键字传递，不能通过位置传递。</li>
+<li><strong><code>**kwargs</code> 接收所有多余的关键字参数</strong>：所有未被 <code>fixed_arg</code>、<code>*args</code> 和 <code>obvious</code> 接收的关键字参数都会被打包到 <code>**kwargs</code>。</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">fixed_arg</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">obvious_kwarg</span><span class="o">=</span><span class="mi">123</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;位置参数: </span><span class="si">{</span><span class="n">fixed_arg</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>		 <span class="c1"># 10</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;多余的位置参数: </span><span class="si">{</span><span class="n">args</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>	   <span class="c1"># (20, 30)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;显式传递的关键字参数: </span><span class="si">{</span><span class="n">obvious_kwarg</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>	<span class="c1"># 60</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;可变关键字参数: </span><span class="si">{</span><span class="n">kwargs</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>	   <span class="c1"># {&#39;x&#39;: 40, &#39;y&#39;: 50}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">func</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">obvious_kwarg</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="ab不包含第b个元素">[a:b]不包含第b个元素
+</h2><p>[a:b]不包含第b个元素，没了</p>
+<p>题目：填空，s是个str，长度&gt;1，获取其前缀，如&quot;123 -&gt; 1  12  123&quot;</p>
+<p>s_arr=[s[ __ ] for i in range( ___ )]</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">s</span><span class="o">=</span><span class="s2">&#34;123&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># :i 表示 0:i，不包含元素[i]，所以若要包括元素[len(s)-1]，i 范围为 1~len(s)，range要产生1~len(s)，则range(1,len(s)+1)</span>
+</span></span><span class="line"><span class="cl"><span class="n">s_arr</span><span class="o">=</span><span class="p">[</span><span class="n">s</span><span class="p">[:</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">s_arr</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="from-collections-import-defaultdict">from collections import defaultdict
+</h2><p>直译 —— 有默认的 值 的字典</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
+</span></span><span class="line"><span class="cl"><span class="n">maybe_nodes</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 访问不存在的键 &#34;A&#34;，会自动创建一个空列表</span>
+</span></span><span class="line"><span class="cl"><span class="n">maybe_nodes</span><span class="p">[</span><span class="s2">&#34;A&#34;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">maybe_nodes</span><span class="p">[</span><span class="s2">&#34;A&#34;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 访问不存在的键 &#34;B&#34;，同样会自动创建一个空列表</span>
+</span></span><span class="line"><span class="cl"><span class="n">maybe_nodes</span><span class="p">[</span><span class="s2">&#34;B&#34;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">maybe_nodes</span><span class="p">)</span> <span class="c1"># defaultdict(&lt;class &#39;list&#39;&gt;, {&#39;A&#39;: [1, 2], &#39;B&#39;: [3]})</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
 </section>
 
 
