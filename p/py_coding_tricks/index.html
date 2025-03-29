@@ -343,6 +343,7 @@
 <ul>
 <li>形参接收到的是对象的引用</li>
 <li>若在函数内修改形参，<strong>会创建新对象</strong>，实参不受影响（类似值传递）</li>
+<li><strong>nonlocal</strong>声明实现访问外部变量？</li>
 </ul>
 </li>
 <li><strong>可变对象</strong>（<strong>列表、字典、集合等</strong>）作为参数时：
@@ -685,6 +686,118 @@
 </span></span><span class="line"><span class="cl"><span class="n">maybe_nodes</span><span class="p">[</span><span class="s2">&#34;B&#34;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">maybe_nodes</span><span class="p">)</span> <span class="c1"># defaultdict(&lt;class &#39;list&#39;&gt;, {&#39;A&#39;: [1, 2], &#39;B&#39;: [3]})</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="extend">.extend
+</h2><p>对比.extend和.append</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">base_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">to_add</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 使用 append</span>
+</span></span><span class="line"><span class="cl"><span class="n">base_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">to_add</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">base_list</span><span class="p">)</span>  <span class="c1"># 输出 [1, 2, 3, [4, 5]] → 整个列表被当作一个元素添加</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 使用 extend</span>
+</span></span><span class="line"><span class="cl"><span class="n">base_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">base_list</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">to_add</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">base_list</span><span class="p">)</span>  <span class="c1"># 输出 [1, 2, 3, 4, 5] → 逐个元素合并</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="pycharm折叠展开">pycharm折叠、展开
+</h2><p>折叠所有代码	 <em>Ctrl  Shift  -</em></p>
+<p>展开所有代码	 <em>Ctrl  Shift  +</em></p>
+<p>折叠光标所在层可折叠代码(truncate)	 <em>Ctrl  Alt  -</em></p>
+<p>展开光标所在层代码(truncate)	<em>Ctrl  Alt  +</em></p>
+<p>折叠光标所在层	 <em>Ctrl  -</em></p>
+<p>开光标所在层	<em>Ctrl  +</em></p>
+<h2 id="提示词工程代码例子">提示词工程代码例子
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="k">async</span> <span class="k">def</span> <span class="nf">_handle_entity_relation_summary</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">entity_or_relation_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">description</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">global_config</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">use_llm_func</span><span class="p">:</span> <span class="n">callable</span> <span class="o">=</span> <span class="n">global_config</span><span class="p">[</span><span class="s2">&#34;llm_model_func&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">llm_max_tokens</span> <span class="o">=</span> <span class="n">global_config</span><span class="p">[</span><span class="s2">&#34;llm_model_max_token_size&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">tiktoken_model_name</span> <span class="o">=</span> <span class="n">global_config</span><span class="p">[</span><span class="s2">&#34;tiktoken_model_name&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">summary_max_tokens</span> <span class="o">=</span> <span class="n">global_config</span><span class="p">[</span><span class="s2">&#34;entity_summary_to_max_tokens&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">language</span> <span class="o">=</span> <span class="n">global_config</span><span class="p">[</span><span class="s2">&#34;addon_params&#34;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;language&#34;</span><span class="p">,</span> <span class="n">PROMPTS</span><span class="p">[</span><span class="s2">&#34;DEFAULT_LANGUAGE&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># description=dsri_1&lt;SEP&gt;dsri_2&lt;SEP&gt;...</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 获取描述的tokens并判断是否要总结</span>
+</span></span><span class="line"><span class="cl">    <span class="n">tokens</span> <span class="o">=</span> <span class="n">encode_string_by_tiktoken</span><span class="p">(</span><span class="n">description</span><span class="p">,</span> <span class="n">model_name</span><span class="o">=</span><span class="n">tiktoken_model_name</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">summary_max_tokens</span><span class="p">:</span>  <span class="c1"># No need for summary</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">description</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 将多个dsri 总结成一个综合的</span>
+</span></span><span class="line"><span class="cl">    <span class="n">prompt_template</span> <span class="o">=</span> <span class="n">PROMPTS</span><span class="p">[</span><span class="s2">&#34;summarize_entity_descriptions&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 保证在llm最大tokens限制下</span>
+</span></span><span class="line"><span class="cl">    <span class="n">use_description</span> <span class="o">=</span> <span class="n">decode_tokens_by_tiktoken</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">tokens</span><span class="p">[:</span><span class="n">llm_max_tokens</span><span class="p">],</span> <span class="n">model_name</span><span class="o">=</span><span class="n">tiktoken_model_name</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># description_list: dsri_1&lt;SEP&gt;dsri_2&lt;SEP&gt; 被&lt;SEP&gt;分割</span>
+</span></span><span class="line"><span class="cl">    <span class="n">context_base</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">entity_name</span><span class="o">=</span><span class="n">entity_or_relation_name</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">description_list</span><span class="o">=</span><span class="n">use_description</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">GRAPH_FIELD_SEP</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="n">language</span><span class="o">=</span><span class="n">language</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">use_prompt</span> <span class="o">=</span> <span class="n">prompt_template</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">context_base</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Trigger summary: </span><span class="si">{</span><span class="n">entity_or_relation_name</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">summary</span> <span class="o">=</span> <span class="k">await</span> <span class="n">use_llm_func</span><span class="p">(</span><span class="n">use_prompt</span><span class="p">,</span> <span class="n">max_tokens</span><span class="o">=</span><span class="n">summary_max_tokens</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">summary</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div>
