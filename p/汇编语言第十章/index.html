@@ -10,7 +10,7 @@
 <meta property='og:description' content="第十章 CALL 和 RET指令 ret、retf ret —— return\tretf —— return far\nret 出栈字单元 放入IP\n相当于 pop IP\nretf 第一次出栈 字单元 放入 IP，第二次出栈 字单元 放入CS，相当于\npop IP\npop CS\n栈里，CS总在IP底下\n">
 <meta property='og:url' content='https://rooobeam.github.io/p/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AC%AC%E5%8D%81%E7%AB%A0/'>
 <meta property='og:site_name' content='rooobeam'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-03-17T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-03-17T00:00:00&#43;00:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-03-31T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-03-31T00:00:00&#43;00:00'/>
 <meta name="twitter:title" content="汇编语言第十章">
 <meta name="twitter:description" content="第十章 CALL 和 RET指令 ret、retf ret —— return\tretf —— return far\nret 出栈字单元 放入IP\n相当于 pop IP\nretf 第一次出栈 字单元 放入 IP，第二次出栈 字单元 放入CS，相当于\npop IP\npop CS\n栈里，CS总在IP底下\n">
     <link rel="shortcut icon" href="/favicon.ico" />
@@ -306,7 +306,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2025-03-17</time>
+                <time class="article-time--published">2025-03-31</time>
             </div>
         
 
@@ -495,7 +495,138 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="mul指令">mul指令
-</h2>
+</h2><h2 id="实验10">实验10
+</h2><h3 id="1显示字符串">1.显示字符串
+</h3><p>我的错误❌：</p>
+<ul>
+<li>外部的dl为3表示第三列，对应字节时要乘二，第6个字符</li>
+<li>jcxz结合jmp使用，不要结合loop使用，loop会改变cx！，先减cx1再判断cx值</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">assume cs:code
+</span></span><span class="line"><span class="cl">data segment
+</span></span><span class="line"><span class="cl">    db &#39;Welcome to masm!&#39;,0
+</span></span><span class="line"><span class="cl">data ends
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">code segment
+</span></span><span class="line"><span class="cl">start:
+</span></span><span class="line"><span class="cl">    mov dh, 8h
+</span></span><span class="line"><span class="cl">    mov dl, 3h
+</span></span><span class="line"><span class="cl">    mov cl, 2h              
+</span></span><span class="line"><span class="cl">    mov ax, data
+</span></span><span class="line"><span class="cl">    mov ds, ax
+</span></span><span class="line"><span class="cl">    mov si, 0
+</span></span><span class="line"><span class="cl">    call show_str
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    mov ax, 4c00h
+</span></span><span class="line"><span class="cl">    int 21h
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">show_str:
+</span></span><span class="line"><span class="cl">;--------------------以上为给定，以下为作答-------------------
+</span></span><span class="line"><span class="cl">    ;===set print sreg===    
+</span></span><span class="line"><span class="cl">    mov ax, 0b800h
+</span></span><span class="line"><span class="cl">    mov es, ax
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    ;===set print reg===
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    ;di=a0h*dh+dl*2
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    ;a0h*dh
+</span></span><span class="line"><span class="cl">    mov al, 0a0h
+</span></span><span class="line"><span class="cl">    mul dh               
+</span></span><span class="line"><span class="cl">    ;+2*dl
+</span></span><span class="line"><span class="cl">    mov dh, 00h
+</span></span><span class="line"><span class="cl">    add ax, dx
+</span></span><span class="line"><span class="cl">    add ax, dx
+</span></span><span class="line"><span class="cl">    mov di, ax
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    ;===print to es:di===
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    ;save cl
+</span></span><span class="line"><span class="cl">    mov bl, cl                
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">s:
+</span></span><span class="line"><span class="cl">    ;check if end
+</span></span><span class="line"><span class="cl">    mov cl, ds:[si]
+</span></span><span class="line"><span class="cl">    mov ch, 0h
+</span></span><span class="line"><span class="cl">    jcxz fin
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    mov es:[di], cl
+</span></span><span class="line"><span class="cl">    mov es:[di+1], bl
+</span></span><span class="line"><span class="cl">    add di, 02h   
+</span></span><span class="line"><span class="cl">    add si, 01h
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    jmp s
+</span></span><span class="line"><span class="cl">fin:
+</span></span><span class="line"><span class="cl">	ret
+</span></span><span class="line"><span class="cl">code ends
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">end start
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
 </section>
 
 

@@ -1522,7 +1522,9 @@
 <li>
 <p>方法里定义的<strong>临时变量</strong>（代码里的 <strong>v</strong> ），对于方法里的函数（哪怕递归了）是<strong>全局</strong>的。</p>
 <p>—— 当<code>dfs</code>被定义为嵌套函数时，它可以访问外部函数<code>isUnivalTree</code>中的变量<code>v</code>（闭包机制）</p>
-<p>—— 如果将<code>dfs</code>改为实例方法（如<code>self.dfs</code>），则需通过实例属性（如<code>self.v</code>）来共享变量</p>
+<p>—— 如果将<code>dfs</code>改为实例方法（如<code>self.dfs</code>），不能访问外部函数的变量v</p>
+<p>—— 还要看是访问的变量类型，不可变类型：可读，要写需nonlocal；</p>
+<p>​						    可变类型：可读可写</p>
 </li>
 <li>
 <p>如果有多个、多重if else，看看能不能用 or  and 代替</p>
@@ -1616,7 +1618,7 @@
 </li>
 <li>
 <p>嵌套函数 对 外部作用域变量的访问 的关键区别：<strong>读取</strong>和<strong>修改</strong>。</p>
-<p>只要函数内部存在对变量 <code>pre_dep</code> 的 <strong>修改</strong>（如 <code>pre_dep = dep</code>），Python 默认将其视为 <strong>局部变量</strong>。</p>
+<p>只要函数内部存在对不可变类型变量 <code>pre_dep</code> 的 <strong>修改</strong>（如 <code>pre_dep = dep</code>），Python 默认将其视为 <strong>局部变量</strong>。</p>
 <p>仅<strong>读取</strong>，则会视为<strong>外部变量</strong>（见 十八 的 v）</p>
 </li>
 </ul>
