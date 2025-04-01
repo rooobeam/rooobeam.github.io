@@ -1,0 +1,1710 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="主要分初始化、插入、提问两部分\n初始化 插入 插入：rag.insert()异步编程调用ainsert()\nainsert内的各步操作\n文章处理 文本块处理 实体关系抽取 更新各存储区 文章处理 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 # ====== 文章处理 ====== # 单个字符串也变成List(str) if isinstance(string_or_strings, str): string_or_strings = [string_or_strings] # {hash(&#34;doc-&#34;+txt_i的字符串):{&#34;content&#34;: txt_i.strip()}}，txt_i是第i个文章 new_docs = { compute_mdhash_id(c.strip(), prefix=&#34;doc-&#34;): {&#34;content&#34;: c.strip()} for c in string_or_strings } &#39;&#39;&#39; n个 hash(&#34;doc-&#34;+txt_i的字符串) 组成的list 传入 self.full_docs.filter_keys self.full_docs.filter_keys 是 JsonKVStorage.filter_keys方法 返回set{str}(以字符串为元素的字典) 作用是：某文章 和历史数据中重复 或 和传入数据中其他文章重复 则排除。 通过比对hash值 &#39;&#39;&#39; _add_doc_keys = await self.full_docs.filter_keys(list(new_docs.keys())) # key在_add_doc_keys里的kv对留下 new_docs = {k: v for k, v in new_docs.items() if k in _add_doc_keys} # 日志登记 if not len(new_docs): logger.warning(&#34;All docs are already in the storage&#34;) return # storage 是 要更新的flag update_storage = True logger.info(f&#34;[New Docs] inserting {len(new_docs)} docs&#34;) 文本块处理 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 # ====== 文本块处理 ====== # 一次ainsert中的多个文章的chunks字典汇总，ainsert只是事件循环中的一个事件 # {&#34;chunk-&#34;+chunk字符串哈希值: dict, 哈希值: dict,...} inserting_chunks = {} # 外循环 第i篇文章，内循环，第i篇文章第j个chunk for doc_key, doc in \\ tqdm_async(new_docs.items(), desc=&#34;Chunking documents&#34;, unit=&#34;doc&#34;): &#39;&#39;&#39; inserting_chunks = { hash(&#34;chunk-&#34;+chunk_i的字符串): {&#34;tokens&#34;: chunk_i的token数, &#34;content&#34;: chunk_i具体内容, &#34;chunk_order_index&#34;: 是该文章的第i个chunk, &#34;full_doc_id&#34;: doc_key}, hash(&#34;chunk-&#34;+chunk_i+1的字符串): {&#34;tokens&#34;: chunk_i+1的token数, &#34;content&#34;: chunk_i+1具体内容, &#34;chunk_order_index&#34;: 是该文章的第i+1个chunk, &#34;full_doc_id&#34;: doc_key}, } chunks = {哈希值: dict, 哈希值: dict,...} &#39;&#39;&#39; chunks = { # dp是 dict[str, Union[int, str]]，即是个字典，然后键为key，值为Union[int,str]即int 或 str # Union[int,str]具体来说，可以是 该chunk的token数，chunk具体内容，是该文章的第i个chunk # **dp表示解包字典（去掉大括号），并要求&#34;full_doc_id&#34;: doc_key满足dict[str, Union[int, str]] # chunking_by_token_size 根据 token 数量切分文本，返回List[dict]吧 compute_mdhash_id(dp[&#34;content&#34;], prefix=&#34;chunk-&#34;): {**dp, &#34;full_doc_id&#34;: doc_key,} for dp in chunking_by_token_size( doc[&#34;content&#34;], overlap_token_size=self.chunk_overlap_token_size, max_token_size=self.chunk_token_size, tiktoken_model=self.tiktoken_model_name, ) } # dict.update(dict)如果已存在相同的键，则对应的值会被覆盖；如果不存在，则添加新的键值对。 # dict1 = {&#39;a&#39;: 1, &#39;b&#39;: 2} # dict2 = {&#39;b&#39;: 3, &#39;c&#39;: 4} # dict1.update(dict2) # print(dict1) # Output: {&#39;a&#39;: 1, &#39;b&#39;: 3, &#39;c&#39;: 4} # 因为用了hash内容包括chunk内容，所以不重复 inserting_chunks.update(chunks) &#39;&#39;&#39; n个 hash(&#34;chunk-&#34;+chunk_i的字符串) 组成的list传入self.full_docs.filter_keys self.full_docs.filter_keys 即 JsonKVStorage.filter_keys 返回set{str}(以字符串为元素的字典)，作用是：某chunk 和历史数据中重复或和传入数据中其他chunk重复则排除。 通过比对hash值 &#39;&#39;&#39; _add_chunk_keys = await self.text_chunks.filter_keys( list(inserting_chunks.keys()) ) # 根据key在_add_doc_keys里对inserting_chunks筛选合格的kv对 inserting_chunks = { k: v for k, v in inserting_chunks.items() if k in _add_chunk_keys } # 日志登记 if not len(inserting_chunks): logger.warning(&#34;All chunks are already in the storage&#34;) return logger.info(f&#34;[New Chunks] inserting {len(inserting_chunks)} chunks&#34;) # 将inserting_chunks(字典)存入json await self.chunks_vdb.upsert(inserting_chunks) 实体关系抽取 分为 外部 和 extract_entities函数内部\n">
+<title>Lightrag1.0.3代码解读</title>
+
+<link rel='canonical' href='https://rooobeam.github.io/p/lightrag1.0.3%E4%BB%A3%E7%A0%81%E8%A7%A3%E8%AF%BB/'>
+
+<link rel="stylesheet" href="/scss/style.min.a396f93d13972177774da34b7aabdd4857291f5ce9113104ceb0746cb724125a.css"><meta property='og:title' content="Lightrag1.0.3代码解读">
+<meta property='og:description' content="主要分初始化、插入、提问两部分\n初始化 插入 插入：rag.insert()异步编程调用ainsert()\nainsert内的各步操作\n文章处理 文本块处理 实体关系抽取 更新各存储区 文章处理 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 # ====== 文章处理 ====== # 单个字符串也变成List(str) if isinstance(string_or_strings, str): string_or_strings = [string_or_strings] # {hash(&#34;doc-&#34;+txt_i的字符串):{&#34;content&#34;: txt_i.strip()}}，txt_i是第i个文章 new_docs = { compute_mdhash_id(c.strip(), prefix=&#34;doc-&#34;): {&#34;content&#34;: c.strip()} for c in string_or_strings } &#39;&#39;&#39; n个 hash(&#34;doc-&#34;+txt_i的字符串) 组成的list 传入 self.full_docs.filter_keys self.full_docs.filter_keys 是 JsonKVStorage.filter_keys方法 返回set{str}(以字符串为元素的字典) 作用是：某文章 和历史数据中重复 或 和传入数据中其他文章重复 则排除。 通过比对hash值 &#39;&#39;&#39; _add_doc_keys = await self.full_docs.filter_keys(list(new_docs.keys())) # key在_add_doc_keys里的kv对留下 new_docs = {k: v for k, v in new_docs.items() if k in _add_doc_keys} # 日志登记 if not len(new_docs): logger.warning(&#34;All docs are already in the storage&#34;) return # storage 是 要更新的flag update_storage = True logger.info(f&#34;[New Docs] inserting {len(new_docs)} docs&#34;) 文本块处理 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 # ====== 文本块处理 ====== # 一次ainsert中的多个文章的chunks字典汇总，ainsert只是事件循环中的一个事件 # {&#34;chunk-&#34;+chunk字符串哈希值: dict, 哈希值: dict,...} inserting_chunks = {} # 外循环 第i篇文章，内循环，第i篇文章第j个chunk for doc_key, doc in \\ tqdm_async(new_docs.items(), desc=&#34;Chunking documents&#34;, unit=&#34;doc&#34;): &#39;&#39;&#39; inserting_chunks = { hash(&#34;chunk-&#34;+chunk_i的字符串): {&#34;tokens&#34;: chunk_i的token数, &#34;content&#34;: chunk_i具体内容, &#34;chunk_order_index&#34;: 是该文章的第i个chunk, &#34;full_doc_id&#34;: doc_key}, hash(&#34;chunk-&#34;+chunk_i+1的字符串): {&#34;tokens&#34;: chunk_i+1的token数, &#34;content&#34;: chunk_i+1具体内容, &#34;chunk_order_index&#34;: 是该文章的第i+1个chunk, &#34;full_doc_id&#34;: doc_key}, } chunks = {哈希值: dict, 哈希值: dict,...} &#39;&#39;&#39; chunks = { # dp是 dict[str, Union[int, str]]，即是个字典，然后键为key，值为Union[int,str]即int 或 str # Union[int,str]具体来说，可以是 该chunk的token数，chunk具体内容，是该文章的第i个chunk # **dp表示解包字典（去掉大括号），并要求&#34;full_doc_id&#34;: doc_key满足dict[str, Union[int, str]] # chunking_by_token_size 根据 token 数量切分文本，返回List[dict]吧 compute_mdhash_id(dp[&#34;content&#34;], prefix=&#34;chunk-&#34;): {**dp, &#34;full_doc_id&#34;: doc_key,} for dp in chunking_by_token_size( doc[&#34;content&#34;], overlap_token_size=self.chunk_overlap_token_size, max_token_size=self.chunk_token_size, tiktoken_model=self.tiktoken_model_name, ) } # dict.update(dict)如果已存在相同的键，则对应的值会被覆盖；如果不存在，则添加新的键值对。 # dict1 = {&#39;a&#39;: 1, &#39;b&#39;: 2} # dict2 = {&#39;b&#39;: 3, &#39;c&#39;: 4} # dict1.update(dict2) # print(dict1) # Output: {&#39;a&#39;: 1, &#39;b&#39;: 3, &#39;c&#39;: 4} # 因为用了hash内容包括chunk内容，所以不重复 inserting_chunks.update(chunks) &#39;&#39;&#39; n个 hash(&#34;chunk-&#34;+chunk_i的字符串) 组成的list传入self.full_docs.filter_keys self.full_docs.filter_keys 即 JsonKVStorage.filter_keys 返回set{str}(以字符串为元素的字典)，作用是：某chunk 和历史数据中重复或和传入数据中其他chunk重复则排除。 通过比对hash值 &#39;&#39;&#39; _add_chunk_keys = await self.text_chunks.filter_keys( list(inserting_chunks.keys()) ) # 根据key在_add_doc_keys里对inserting_chunks筛选合格的kv对 inserting_chunks = { k: v for k, v in inserting_chunks.items() if k in _add_chunk_keys } # 日志登记 if not len(inserting_chunks): logger.warning(&#34;All chunks are already in the storage&#34;) return logger.info(f&#34;[New Chunks] inserting {len(inserting_chunks)} chunks&#34;) # 将inserting_chunks(字典)存入json await self.chunks_vdb.upsert(inserting_chunks) 实体关系抽取 分为 外部 和 extract_entities函数内部\n">
+<meta property='og:url' content='https://rooobeam.github.io/p/lightrag1.0.3%E4%BB%A3%E7%A0%81%E8%A7%A3%E8%AF%BB/'>
+<meta property='og:site_name' content='rooobeam'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-03-20T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-03-20T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="Lightrag1.0.3代码解读">
+<meta name="twitter:description" content="主要分初始化、插入、提问两部分\n初始化 插入 插入：rag.insert()异步编程调用ainsert()\nainsert内的各步操作\n文章处理 文本块处理 实体关系抽取 更新各存储区 文章处理 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 # ====== 文章处理 ====== # 单个字符串也变成List(str) if isinstance(string_or_strings, str): string_or_strings = [string_or_strings] # {hash(&#34;doc-&#34;+txt_i的字符串):{&#34;content&#34;: txt_i.strip()}}，txt_i是第i个文章 new_docs = { compute_mdhash_id(c.strip(), prefix=&#34;doc-&#34;): {&#34;content&#34;: c.strip()} for c in string_or_strings } &#39;&#39;&#39; n个 hash(&#34;doc-&#34;+txt_i的字符串) 组成的list 传入 self.full_docs.filter_keys self.full_docs.filter_keys 是 JsonKVStorage.filter_keys方法 返回set{str}(以字符串为元素的字典) 作用是：某文章 和历史数据中重复 或 和传入数据中其他文章重复 则排除。 通过比对hash值 &#39;&#39;&#39; _add_doc_keys = await self.full_docs.filter_keys(list(new_docs.keys())) # key在_add_doc_keys里的kv对留下 new_docs = {k: v for k, v in new_docs.items() if k in _add_doc_keys} # 日志登记 if not len(new_docs): logger.warning(&#34;All docs are already in the storage&#34;) return # storage 是 要更新的flag update_storage = True logger.info(f&#34;[New Docs] inserting {len(new_docs)} docs&#34;) 文本块处理 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 # ====== 文本块处理 ====== # 一次ainsert中的多个文章的chunks字典汇总，ainsert只是事件循环中的一个事件 # {&#34;chunk-&#34;+chunk字符串哈希值: dict, 哈希值: dict,...} inserting_chunks = {} # 外循环 第i篇文章，内循环，第i篇文章第j个chunk for doc_key, doc in \\ tqdm_async(new_docs.items(), desc=&#34;Chunking documents&#34;, unit=&#34;doc&#34;): &#39;&#39;&#39; inserting_chunks = { hash(&#34;chunk-&#34;+chunk_i的字符串): {&#34;tokens&#34;: chunk_i的token数, &#34;content&#34;: chunk_i具体内容, &#34;chunk_order_index&#34;: 是该文章的第i个chunk, &#34;full_doc_id&#34;: doc_key}, hash(&#34;chunk-&#34;+chunk_i+1的字符串): {&#34;tokens&#34;: chunk_i+1的token数, &#34;content&#34;: chunk_i+1具体内容, &#34;chunk_order_index&#34;: 是该文章的第i+1个chunk, &#34;full_doc_id&#34;: doc_key}, } chunks = {哈希值: dict, 哈希值: dict,...} &#39;&#39;&#39; chunks = { # dp是 dict[str, Union[int, str]]，即是个字典，然后键为key，值为Union[int,str]即int 或 str # Union[int,str]具体来说，可以是 该chunk的token数，chunk具体内容，是该文章的第i个chunk # **dp表示解包字典（去掉大括号），并要求&#34;full_doc_id&#34;: doc_key满足dict[str, Union[int, str]] # chunking_by_token_size 根据 token 数量切分文本，返回List[dict]吧 compute_mdhash_id(dp[&#34;content&#34;], prefix=&#34;chunk-&#34;): {**dp, &#34;full_doc_id&#34;: doc_key,} for dp in chunking_by_token_size( doc[&#34;content&#34;], overlap_token_size=self.chunk_overlap_token_size, max_token_size=self.chunk_token_size, tiktoken_model=self.tiktoken_model_name, ) } # dict.update(dict)如果已存在相同的键，则对应的值会被覆盖；如果不存在，则添加新的键值对。 # dict1 = {&#39;a&#39;: 1, &#39;b&#39;: 2} # dict2 = {&#39;b&#39;: 3, &#39;c&#39;: 4} # dict1.update(dict2) # print(dict1) # Output: {&#39;a&#39;: 1, &#39;b&#39;: 3, &#39;c&#39;: 4} # 因为用了hash内容包括chunk内容，所以不重复 inserting_chunks.update(chunks) &#39;&#39;&#39; n个 hash(&#34;chunk-&#34;+chunk_i的字符串) 组成的list传入self.full_docs.filter_keys self.full_docs.filter_keys 即 JsonKVStorage.filter_keys 返回set{str}(以字符串为元素的字典)，作用是：某chunk 和历史数据中重复或和传入数据中其他chunk重复则排除。 通过比对hash值 &#39;&#39;&#39; _add_chunk_keys = await self.text_chunks.filter_keys( list(inserting_chunks.keys()) ) # 根据key在_add_doc_keys里对inserting_chunks筛选合格的kv对 inserting_chunks = { k: v for k, v in inserting_chunks.items() if k in _add_chunk_keys } # 日志登记 if not len(inserting_chunks): logger.warning(&#34;All chunks are already in the storage&#34;) return logger.info(f&#34;[New Chunks] inserting {len(inserting_chunks)} chunks&#34;) # 将inserting_chunks(字典)存入json await self.chunks_vdb.upsert(inserting_chunks) 实体关系抽取 分为 外部 和 extract_entities函数内部\n">
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_51c49b55d0a39bb4.png" width="300"
+                            height="299" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">😚</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">rooobeam</a></h1>
+            <h2 class="site-description">rooobeam&#39;s blogs</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://space.bilibili.com/3461571462302229'
+                        target="_blank"
+                        title="Bilibili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-brand-bilibili"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z" /><path d="M8 3l2 3" /><path d="M16 3l-2 3" /><path d="M9 13v-2" /><path d="M15 11v2" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://blog.csdn.net/rooobeam?'
+                        target="_blank"
+                        title="CSDN"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-copyright"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M14 9.75a3.016 3.016 0 0 0 -4.163 .173a2.993 2.993 0 0 0 0 4.154a3.016 3.016 0 0 0 4.163 .173" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/rooobeam?'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/_index.zh-cn/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/lightrag1.0.3%E4%BB%A3%E7%A0%81%E8%A7%A3%E8%AF%BB/">Lightrag1.0.3代码解读</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-03-20</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>主要分初始化、插入、提问两部分</p>
+<h2 id="初始化">初始化
+</h2><h2 id="插入">插入
+</h2><p>插入：rag.insert()异步编程调用ainsert()</p>
+<p>ainsert内的各步操作</p>
+<ul>
+<li>文章处理</li>
+<li>文本块处理</li>
+<li>实体关系抽取</li>
+<li>更新各存储区</li>
+</ul>
+<h3 id="文章处理">文章处理
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># ====== 文章处理 ======</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 单个字符串也变成List(str)</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">string_or_strings</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">string_or_strings</span> <span class="o">=</span> <span class="p">[</span><span class="n">string_or_strings</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># {hash(&#34;doc-&#34;+txt_i的字符串):{&#34;content&#34;: txt_i.strip()}}，txt_i是第i个文章</span>
+</span></span><span class="line"><span class="cl"><span class="n">new_docs</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">compute_mdhash_id</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span> <span class="n">prefix</span><span class="o">=</span><span class="s2">&#34;doc-&#34;</span><span class="p">):</span> <span class="p">{</span><span class="s2">&#34;content&#34;</span><span class="p">:</span> <span class="n">c</span><span class="o">.</span><span class="n">strip</span><span class="p">()}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">string_or_strings</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="s1">&#39;&#39;&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">n个 hash(&#34;doc-&#34;+txt_i的字符串) 组成的list 传入 self.full_docs.filter_keys
+</span></span></span><span class="line"><span class="cl"><span class="s1">self.full_docs.filter_keys 是 JsonKVStorage.filter_keys方法
+</span></span></span><span class="line"><span class="cl"><span class="s1">返回set</span><span class="si">{str}</span><span class="s1">(以字符串为元素的字典)
+</span></span></span><span class="line"><span class="cl"><span class="s1">作用是：某文章 和历史数据中重复 或 和传入数据中其他文章重复 则排除。
+</span></span></span><span class="line"><span class="cl"><span class="s1">通过比对hash值
+</span></span></span><span class="line"><span class="cl"><span class="s1">&#39;&#39;&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">_add_doc_keys</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">full_docs</span><span class="o">.</span><span class="n">filter_keys</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">new_docs</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># key在_add_doc_keys里的kv对留下</span>
+</span></span><span class="line"><span class="cl"><span class="n">new_docs</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">new_docs</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">_add_doc_keys</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 日志登记</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">new_docs</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&#34;All docs are already in the storage&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># storage 是 要更新的flag</span>
+</span></span><span class="line"><span class="cl"><span class="n">update_storage</span> <span class="o">=</span> <span class="kc">True</span>
+</span></span><span class="line"><span class="cl"><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;[New Docs] inserting </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">new_docs</span><span class="p">)</span><span class="si">}</span><span class="s2"> docs&#34;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="文本块处理">文本块处理
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># ====== 文本块处理 ======</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 一次ainsert中的多个文章的chunks字典汇总，ainsert只是事件循环中的一个事件</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># {&#34;chunk-&#34;+chunk字符串哈希值: dict, 哈希值: dict,...}</span>
+</span></span><span class="line"><span class="cl"><span class="n">inserting_chunks</span> <span class="o">=</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 外循环 第i篇文章，内循环，第i篇文章第j个chunk</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">doc_key</span><span class="p">,</span> <span class="n">doc</span> <span class="ow">in</span> \
+</span></span><span class="line"><span class="cl"><span class="n">tqdm_async</span><span class="p">(</span><span class="n">new_docs</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">desc</span><span class="o">=</span><span class="s2">&#34;Chunking documents&#34;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s2">&#34;doc&#34;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;&#39;&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">    inserting_chunks =
+</span></span></span><span class="line"><span class="cl"><span class="s1">    {
+</span></span></span><span class="line"><span class="cl"><span class="s1">        hash(&#34;chunk-&#34;+chunk_i的字符串):
+</span></span></span><span class="line"><span class="cl"><span class="s1">                    {&#34;tokens&#34;: chunk_i的token数,
+</span></span></span><span class="line"><span class="cl"><span class="s1">                     &#34;content&#34;: chunk_i具体内容,
+</span></span></span><span class="line"><span class="cl"><span class="s1">                     &#34;chunk_order_index&#34;: 是该文章的第i个chunk,
+</span></span></span><span class="line"><span class="cl"><span class="s1">                     &#34;full_doc_id&#34;: doc_key},
+</span></span></span><span class="line"><span class="cl"><span class="s1">        hash(&#34;chunk-&#34;+chunk_i+1的字符串):
+</span></span></span><span class="line"><span class="cl"><span class="s1">                    {&#34;tokens&#34;: chunk_i+1的token数,
+</span></span></span><span class="line"><span class="cl"><span class="s1">                     &#34;content&#34;: chunk_i+1具体内容,
+</span></span></span><span class="line"><span class="cl"><span class="s1">                     &#34;chunk_order_index&#34;: 是该文章的第i+1个chunk,
+</span></span></span><span class="line"><span class="cl"><span class="s1">                     &#34;full_doc_id&#34;: doc_key},
+</span></span></span><span class="line"><span class="cl"><span class="s1">    }            
+</span></span></span><span class="line"><span class="cl"><span class="s1">    chunks = {哈希值: dict, 哈希值: dict,...}     
+</span></span></span><span class="line"><span class="cl"><span class="s1">    &#39;&#39;&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">chunks</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1"># dp是 dict[str, Union[int, str]]，即是个字典，然后键为key，值为Union[int,str]即int 或 str</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># Union[int,str]具体来说，可以是 该chunk的token数，chunk具体内容，是该文章的第i个chunk</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># **dp表示解包字典（去掉大括号），并要求&#34;full_doc_id&#34;: doc_key满足dict[str, Union[int, str]]</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># chunking_by_token_size 根据 token 数量切分文本，返回List[dict]吧</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">compute_mdhash_id</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="s2">&#34;content&#34;</span><span class="p">],</span> <span class="n">prefix</span><span class="o">=</span><span class="s2">&#34;chunk-&#34;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="p">{</span><span class="o">**</span><span class="n">dp</span><span class="p">,</span> <span class="s2">&#34;full_doc_id&#34;</span><span class="p">:</span> <span class="n">doc_key</span><span class="p">,}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">dp</span> <span class="ow">in</span> <span class="n">chunking_by_token_size</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="n">doc</span><span class="p">[</span><span class="s2">&#34;content&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">            <span class="n">overlap_token_size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">chunk_overlap_token_size</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">max_token_size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">chunk_token_size</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">tiktoken_model</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tiktoken_model_name</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1"># dict.update(dict)如果已存在相同的键，则对应的值会被覆盖；如果不存在，则添加新的键值对。</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># dict1 = {&#39;a&#39;: 1, &#39;b&#39;: 2}</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># dict2 = {&#39;b&#39;: 3, &#39;c&#39;: 4}</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># dict1.update(dict2)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># print(dict1)  # Output: {&#39;a&#39;: 1, &#39;b&#39;: 3, &#39;c&#39;: 4}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1"># 因为用了hash内容包括chunk内容，所以不重复</span>
+</span></span><span class="line"><span class="cl">    <span class="n">inserting_chunks</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">chunks</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="s1">&#39;&#39;&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">n个 hash(&#34;chunk-&#34;+chunk_i的字符串) 组成的list传入self.full_docs.filter_keys
+</span></span></span><span class="line"><span class="cl"><span class="s1">self.full_docs.filter_keys 即 JsonKVStorage.filter_keys
+</span></span></span><span class="line"><span class="cl"><span class="s1">返回set</span><span class="si">{str}</span><span class="s1">(以字符串为元素的字典)，作用是：某chunk 和历史数据中重复或和传入数据中其他chunk重复则排除。
+</span></span></span><span class="line"><span class="cl"><span class="s1">通过比对hash值
+</span></span></span><span class="line"><span class="cl"><span class="s1">&#39;&#39;&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">_add_chunk_keys</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">text_chunks</span><span class="o">.</span><span class="n">filter_keys</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">list</span><span class="p">(</span><span class="n">inserting_chunks</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 根据key在_add_doc_keys里对inserting_chunks筛选合格的kv对</span>
+</span></span><span class="line"><span class="cl"><span class="n">inserting_chunks</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">inserting_chunks</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">_add_chunk_keys</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 日志登记</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">inserting_chunks</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&#34;All chunks are already in the storage&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span>
+</span></span><span class="line"><span class="cl"><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;[New Chunks] inserting </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">inserting_chunks</span><span class="p">)</span><span class="si">}</span><span class="s2"> chunks&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 将inserting_chunks(字典)存入json</span>
+</span></span><span class="line"><span class="cl"><span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">chunks_vdb</span><span class="o">.</span><span class="n">upsert</span><span class="p">(</span><span class="n">inserting_chunks</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="实体关系抽取">实体关系抽取
+</h3><p>分为 <strong>外部</strong> 和 <strong>extract_entities函数内部</strong></p>
+<h4 id="外部">外部
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># ====== 实体抽取 ======</span>
+</span></span><span class="line"><span class="cl"><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&#34;[Entity Extraction]...&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># asdict来自“from dataclasses import asdict“，能构建Lightrag类的属性字典</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># maybe_new_kg为更新过后的knowledge_graph_inst，是NetworkXStorage类的实例</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># maybe_new_kg最重要的属性为 _graph，其为nx.Graph()</span>
+</span></span><span class="line"><span class="cl"><span class="n">maybe_new_kg</span> <span class="o">=</span> <span class="k">await</span> <span class="n">extract_entities</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">inserting_chunks</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">knowledge_graph_inst</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">chunk_entity_relation_graph</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">entity_vdb</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">entities_vdb</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">relationships_vdb</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">relationships_vdb</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">global_config</span><span class="o">=</span><span class="n">asdict</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># operate.py中 if not len(all_entities_data) if not len(all_relationships_data)会return None</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="n">maybe_new_kg</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&#34;No new entities and relationships found&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="bp">self</span><span class="o">.</span><span class="n">chunk_entity_relation_graph</span> <span class="o">=</span> <span class="n">maybe_new_kg</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="extract_entities函数内部">extract_entities函数内部
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span><span class="lnt">165
+</span><span class="lnt">166
+</span><span class="lnt">167
+</span><span class="lnt">168
+</span><span class="lnt">169
+</span><span class="lnt">170
+</span><span class="lnt">171
+</span><span class="lnt">172
+</span><span class="lnt">173
+</span><span class="lnt">174
+</span><span class="lnt">175
+</span><span class="lnt">176
+</span><span class="lnt">177
+</span><span class="lnt">178
+</span><span class="lnt">179
+</span><span class="lnt">180
+</span><span class="lnt">181
+</span><span class="lnt">182
+</span><span class="lnt">183
+</span><span class="lnt">184
+</span><span class="lnt">185
+</span><span class="lnt">186
+</span><span class="lnt">187
+</span><span class="lnt">188
+</span><span class="lnt">189
+</span><span class="lnt">190
+</span><span class="lnt">191
+</span><span class="lnt">192
+</span><span class="lnt">193
+</span><span class="lnt">194
+</span><span class="lnt">195
+</span><span class="lnt">196
+</span><span class="lnt">197
+</span><span class="lnt">198
+</span><span class="lnt">199
+</span><span class="lnt">200
+</span><span class="lnt">201
+</span><span class="lnt">202
+</span><span class="lnt">203
+</span><span class="lnt">204
+</span><span class="lnt">205
+</span><span class="lnt">206
+</span><span class="lnt">207
+</span><span class="lnt">208
+</span><span class="lnt">209
+</span><span class="lnt">210
+</span><span class="lnt">211
+</span><span class="lnt">212
+</span><span class="lnt">213
+</span><span class="lnt">214
+</span><span class="lnt">215
+</span><span class="lnt">216
+</span><span class="lnt">217
+</span><span class="lnt">218
+</span><span class="lnt">219
+</span><span class="lnt">220
+</span><span class="lnt">221
+</span><span class="lnt">222
+</span><span class="lnt">223
+</span><span class="lnt">224
+</span><span class="lnt">225
+</span><span class="lnt">226
+</span><span class="lnt">227
+</span><span class="lnt">228
+</span><span class="lnt">229
+</span><span class="lnt">230
+</span><span class="lnt">231
+</span><span class="lnt">232
+</span><span class="lnt">233
+</span><span class="lnt">234
+</span><span class="lnt">235
+</span><span class="lnt">236
+</span><span class="lnt">237
+</span><span class="lnt">238
+</span><span class="lnt">239
+</span><span class="lnt">240
+</span><span class="lnt">241
+</span><span class="lnt">242
+</span><span class="lnt">243
+</span><span class="lnt">244
+</span><span class="lnt">245
+</span><span class="lnt">246
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="k">async</span> <span class="k">def</span> <span class="nf">extract_entities</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">chunks</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">TextChunkSchema</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">    <span class="n">knowledge_graph_inst</span><span class="p">:</span> <span class="n">BaseGraphStorage</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">entity_vdb</span><span class="p">:</span> <span class="n">BaseVectorStorage</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">relationships_vdb</span><span class="p">:</span> <span class="n">BaseVectorStorage</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">global_config</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">BaseGraphStorage</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;&#39;&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">    global_config[&#34;llm_model_func&#34;]
+</span></span></span><span class="line"><span class="cl"><span class="s1">     -&gt; gpt_4o_mini_complete(prompt, system_prompt=None, history_messages=[], **kwargs)
+</span></span></span><span class="line"><span class="cl"><span class="s1">     -&gt; openai_complete_if_cache(model, prompt, system_prompt=None, history_messages=[],
+</span></span></span><span class="line"><span class="cl"><span class="s1">     base_url=None, api_key=None, **kwargs)  后来的封装了，可以选择模型，不像这里函数名写明了4o_min
+</span></span></span><span class="line"><span class="cl"><span class="s1">    上一行三个参数没有传入和调用实际上
+</span></span></span><span class="line"><span class="cl"><span class="s1">     &#39;&#39;&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">use_llm_func</span><span class="p">:</span> <span class="n">callable</span> <span class="o">=</span> <span class="n">global_config</span><span class="p">[</span><span class="s2">&#34;llm_model_func&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 默认设置为1，貌似和多轮对话有关</span>
+</span></span><span class="line"><span class="cl">    <span class="n">entity_extract_max_gleaning</span> <span class="o">=</span> <span class="n">global_config</span><span class="p">[</span><span class="s2">&#34;entity_extract_max_gleaning&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;&#39;&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">        ordered_chunks =
+</span></span></span><span class="line"><span class="cl"><span class="s1">        [
+</span></span></span><span class="line"><span class="cl"><span class="s1">        (hash(&#34;chunk-&#34;+chunk_i的字符串),
+</span></span></span><span class="line"><span class="cl"><span class="s1">        {&#34;tokens&#34;: chunk_i的token数,
+</span></span></span><span class="line"><span class="cl"><span class="s1">         &#34;content&#34;: chunk_i具体内容,
+</span></span></span><span class="line"><span class="cl"><span class="s1">         &#34;chunk_order_index&#34;: 是该文章的第i个chunk,
+</span></span></span><span class="line"><span class="cl"><span class="s1">         &#34;full_doc_id&#34;: doc_key}),
+</span></span></span><span class="line"><span class="cl"><span class="s1">         (a,b),...
+</span></span></span><span class="line"><span class="cl"><span class="s1">        ]
+</span></span></span><span class="line"><span class="cl"><span class="s1">        即可索引的chunks               
+</span></span></span><span class="line"><span class="cl"><span class="s1">    &#39;&#39;&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ordered_chunks</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">chunks</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;&#39;&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">    add language and example number params to prompt
+</span></span></span><span class="line"><span class="cl"><span class="s1">    additional parameter 包括 语言 和 例子数量
+</span></span></span><span class="line"><span class="cl"><span class="s1">    实例化Lightrag的时候
+</span></span></span><span class="line"><span class="cl"><span class="s1">    可以添加参数addon_params={&#34;example_number&#34;: 1, &#34;language&#34;: &#34;Simplfied Chinese&#34;}
+</span></span></span><span class="line"><span class="cl"><span class="s1">    默认英文（PROMPTS[&#34;DEFAULT_LANGUAGE&#34;]），None
+</span></span></span><span class="line"><span class="cl"><span class="s1">    &#39;&#39;&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">language</span> <span class="o">=</span> <span class="n">global_config</span><span class="p">[</span><span class="s2">&#34;addon_params&#34;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;language&#34;</span><span class="p">,</span> <span class="n">PROMPTS</span><span class="p">[</span><span class="s2">&#34;DEFAULT_LANGUAGE&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">example_number</span> <span class="o">=</span> <span class="n">global_config</span><span class="p">[</span><span class="s2">&#34;addon_params&#34;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&#34;example_number&#34;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># 如果example_number不为None，按设置的个数来，且不超范围，</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 如果为none，设置为 PROMPTS[&#34;entity_extraction_examples&#34;]</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># examples=&#34;example1&#34;+&#34;\n&#34;+&#34;example2&#34;+&#34;\n&#34;+&#34;example3&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">example_number</span> <span class="ow">and</span> <span class="n">example_number</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">PROMPTS</span><span class="p">[</span><span class="s2">&#34;entity_extraction_examples&#34;</span><span class="p">]):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">examples</span> <span class="o">=</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="n">PROMPTS</span><span class="p">[</span><span class="s2">&#34;entity_extraction_examples&#34;</span><span class="p">][:</span> <span class="nb">int</span><span class="p">(</span><span class="n">example_number</span><span class="p">)]</span>
+</span></span><span class="line"><span class="cl">        <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">examples</span> <span class="o">=</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">PROMPTS</span><span class="p">[</span><span class="s2">&#34;entity_extraction_examples&#34;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># tuple_delimiter=&#34;&lt;|&gt;&#34; record_delimiter=&#34;##&#34; completion_delimiter=&#34;&lt;|COMPLETE|&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># entity_types=[&#34;organization&#34;, &#34;person&#34;, &#34;geo&#34;, &#34;event&#34;]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">example_context_base</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">tuple_delimiter</span><span class="o">=</span><span class="n">PROMPTS</span><span class="p">[</span><span class="s2">&#34;DEFAULT_TUPLE_DELIMITER&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="n">record_delimiter</span><span class="o">=</span><span class="n">PROMPTS</span><span class="p">[</span><span class="s2">&#34;DEFAULT_RECORD_DELIMITER&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="n">completion_delimiter</span><span class="o">=</span><span class="n">PROMPTS</span><span class="p">[</span><span class="s2">&#34;DEFAULT_COMPLETION_DELIMITER&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="n">entity_types</span><span class="o">=</span><span class="s2">&#34;,&#34;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">PROMPTS</span><span class="p">[</span><span class="s2">&#34;DEFAULT_ENTITY_TYPES&#34;</span><span class="p">]),</span>
+</span></span><span class="line"><span class="cl">        <span class="n">language</span><span class="o">=</span><span class="n">language</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;&#39;&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">    添加exampel的格式
+</span></span></span><span class="line"><span class="cl"><span class="s1">    
+</span></span></span><span class="line"><span class="cl"><span class="s1">    examples字符串部分内容如下：
+</span></span></span><span class="line"><span class="cl"><span class="s1">    (&#34;实体&#34;</span><span class="si">{tuple_delimiter}</span><span class="s1">&#34;Jordan&#34;</span><span class="si">{tuple_delimiter}</span><span class="s1">&#34;人物&#34;</span><span class="si">{tuple_delimiter}</span><span class="s1">&#34;Jordan 对探索有着共同的承诺，并与 Taylor 就设备进行了重要互动。&#34;)</span><span class="si">{record_delimiter}</span><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">    (&#34;关系&#34;</span><span class="si">{tuple_delimiter}</span><span class="s1">&#34;Jordan&#34;</span><span class="si">{tuple_delimiter}</span><span class="s1">&#34;Cruz&#34;</span><span class="si">{tuple_delimiter}</span><span class="s1">&#34;Jordan 对探索的承诺是对 Cruz 控制与秩序愿景的反抗。&#34;</span><span class="si">{tuple_delimiter}</span><span class="s1">&#34;意识形态冲突, 反抗&#34;</span><span class="si">{tuple_delimiter}</span><span class="s1">5)</span><span class="si">{record_delimiter}</span><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">    (&#34;content_keywords&#34;</span><span class="si">{tuple_delimiter}</span><span class="s1">&#34;power dynamics, ideological conflict, discovery, rebellion&#34;)</span><span class="si">{completion_delimiter}</span><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">    
+</span></span></span><span class="line"><span class="cl"><span class="s1">    examples字符串部分内容说明：
+</span></span></span><span class="line"><span class="cl"><span class="s1">    每行是对chunk的实体抽取、关系抽取或整体内容关键词提取
+</span></span></span><span class="line"><span class="cl"><span class="s1">    开头必为实体、关系或关键词，然后用</span><span class="si">{tuple_delimiter}</span><span class="s1">隔开，每行记录1个关系过实体，然后行末添加</span><span class="si">{record_delimiter}</span><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">    元数据附加：为关系添加分类标签（如“权力动态”“意识形态冲突”）和强度评分（如 Taylor-Jordan 的关系强度为 8）
+</span></span></span><span class="line"><span class="cl"><span class="s1">    
+</span></span></span><span class="line"><span class="cl"><span class="s1">    examples.format(**dict)将类如</span><span class="si">{tuple_delimiter}</span><span class="s1">的内容替换为dict中的值（ tuple_delimiter: 值）
+</span></span></span><span class="line"><span class="cl"><span class="s1">    
+</span></span></span><span class="line"><span class="cl"><span class="s1">    最终examples是 {...} 被替换了的一个字符串
+</span></span></span><span class="line"><span class="cl"><span class="s1">    &#39;&#39;&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">examples</span> <span class="o">=</span> <span class="n">examples</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">example_context_base</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;&#39;&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">    entity_extract_prompt主要包括：
+</span></span></span><span class="line"><span class="cl"><span class="s1">    -Goal- ...
+</span></span></span><span class="line"><span class="cl"><span class="s1">    -Steps- ...
+</span></span></span><span class="line"><span class="cl"><span class="s1">    -Examples- ...
+</span></span></span><span class="line"><span class="cl"><span class="s1">    -Real Data- ...
+</span></span></span><span class="line"><span class="cl"><span class="s1">    &#39;&#39;&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">entity_extract_prompt</span> <span class="o">=</span> <span class="n">PROMPTS</span><span class="p">[</span><span class="s2">&#34;entity_extraction&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">context_base</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">tuple_delimiter</span><span class="o">=</span><span class="n">PROMPTS</span><span class="p">[</span><span class="s2">&#34;DEFAULT_TUPLE_DELIMITER&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="n">record_delimiter</span><span class="o">=</span><span class="n">PROMPTS</span><span class="p">[</span><span class="s2">&#34;DEFAULT_RECORD_DELIMITER&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="n">completion_delimiter</span><span class="o">=</span><span class="n">PROMPTS</span><span class="p">[</span><span class="s2">&#34;DEFAULT_COMPLETION_DELIMITER&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="n">entity_types</span><span class="o">=</span><span class="s2">&#34;,&#34;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">PROMPTS</span><span class="p">[</span><span class="s2">&#34;DEFAULT_ENTITY_TYPES&#34;</span><span class="p">]),</span>
+</span></span><span class="line"><span class="cl">        <span class="n">examples</span><span class="o">=</span><span class="n">examples</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">language</span><span class="o">=</span><span class="n">language</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 让大模型继续按上次的格式继续提取</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># &#34;&#34;&#34;MANY entities were missed in the last extraction.</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># Add them below using the same format:&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">continue_prompt</span> <span class="o">=</span> <span class="n">PROMPTS</span><span class="p">[</span><span class="s2">&#34;entiti_continue_extraction&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># 询问LLM是否遗漏许多 实体 ，回答 是/否</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># &#34;&#34;&#34;It appears some entities may have still been missed.</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># Answer YES | NO if there are still entities that need to be added.&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">if_loop_prompt</span> <span class="o">=</span> <span class="n">PROMPTS</span><span class="p">[</span><span class="s2">&#34;entiti_if_loop_extraction&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">already_processed</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">    <span class="n">already_entities</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">    <span class="n">already_relations</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># return dict(maybe_nodes), dict(maybe_edges)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 即 返回一个 元组，包含两个字典：(nodes_dict, edges_dict)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># nodes_dict = {str: dict...}</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># edges_dict = {(str, str): dict}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">async</span> <span class="k">def</span> <span class="nf">_process_single_content</span><span class="p">(</span><span class="n">chunk_key_dp</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">TextChunkSchema</span><span class="p">]):</span><span class="o">...</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># =====提取出每个chunk的entity和relation=====</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># results = [chunk_1的(nodes_dict, edges_dict), chunk_2的(nodes_dict, edges_dict)...]</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#         = [</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#           ( {str: list[dict]} , {(str, str): list[dict]} ),</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#           ( {str: list[dict]} , {(str, str): list[dict]} ),</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#           ...</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#           ]</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 调用_process_single_content 返回的二元组 即 result</span>
+</span></span><span class="line"><span class="cl">    <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">tqdm_async</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">asyncio</span><span class="o">.</span><span class="n">as_completed</span><span class="p">([</span><span class="n">_process_single_content</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">ordered_chunks</span><span class="p">]),</span>
+</span></span><span class="line"><span class="cl">        <span class="n">total</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">ordered_chunks</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="n">desc</span><span class="o">=</span><span class="s2">&#34;Extracting entities from chunks&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">unit</span><span class="o">=</span><span class="s2">&#34;chunk&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="k">await</span> <span class="n">result</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">maybe_nodes</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">maybe_edges</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># m_nodes = {str: list[dict]}合并成{str: list[dict,dict,...]}，dict的数量大于等于</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># m_edges = {(str, str): list[dict]}合并同理</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 将list[二元tuple] results 处理为结点和边</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 因为results中的各个(nodes, edges)元组是以chunk单位提取的，提取的实体和关系有蛮多重复的</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 所以这里{str: list[dict,dict,...]} 会对应多个dict</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">m_nodes</span><span class="p">,</span> <span class="n">m_edges</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># 不同chunk同样实体的dict放在一个list了</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">m_nodes</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">            <span class="n">maybe_nodes</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># 同理</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">m_edges</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">            <span class="n">maybe_edges</span><span class="p">[</span><span class="nb">tuple</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">k</span><span class="p">))]</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># =====添加实体（结点）到图数据结构=====</span>
+</span></span><span class="line"><span class="cl">    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&#34;Inserting entities into storage...&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">all_entities_data</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># knowledge_graph_inst为NetworkXStorage实例</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># for result in 列表生成式: all_e....append(await result)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 列表生成式=[_merge_upsert.(k, v,...graph_inst...) for k,v in...]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># 不同chunk提取的实体和关系有蛮多重复的，{str: list[dict,dict,...]}会对应多个dict</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># maybe_nodes：所有chunk同样实体的dict放在一个list了，{str: list[dict,dict,...]}</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># result = node_data = dict(</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#     entity_name=entity_name</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#     entity_type=entity_type,</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#     description=description,</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#     source_id=source_id,</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># )</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 这里的一个result是集成该实体在 所有的chunk和过往graph里</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 提取出的dscri、源文章id，出现次数最多的type</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">tqdm_async</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">asyncio</span><span class="o">.</span><span class="n">as_completed</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="p">[</span>
+</span></span><span class="line"><span class="cl">                <span class="n">_merge_nodes_then_upsert</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">knowledge_graph_inst</span><span class="p">,</span> <span class="n">global_config</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">maybe_nodes</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="n">total</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">maybe_nodes</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="n">desc</span><span class="o">=</span><span class="s2">&#34;Inserting entities&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">unit</span><span class="o">=</span><span class="s2">&#34;entity&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">all_entities_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="k">await</span> <span class="n">result</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># =====添加关系（边）到图数据结构=====</span>
+</span></span><span class="line"><span class="cl">    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&#34;Inserting relationships into storage...&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">all_relationships_data</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># all_relationships_data = List[dict]</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># result = edge_data = dict(</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#     src_id=src_id,</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#     tgt_id=tgt_id,</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#     description=description,</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#     keywords=keywords,</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># )</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 多个chunk提取出的dscri用&lt;SEP&gt;连接起来，keywords去重排序后用&lt;SEP&gt;连接</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># k[0]是(node1-&gt;str,node2-&gt;str), k[1]是[dict, dict, ...]每个dict来自不同chunk</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">tqdm_async</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">asyncio</span><span class="o">.</span><span class="n">as_completed</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="p">[</span>
+</span></span><span class="line"><span class="cl">                <span class="n">_merge_edges_then_upsert</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">k</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">k</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">v</span><span class="p">,</span> <span class="n">knowledge_graph_inst</span><span class="p">,</span> <span class="n">global_config</span>
+</span></span><span class="line"><span class="cl">                <span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">maybe_edges</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="n">total</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">maybe_edges</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="n">desc</span><span class="o">=</span><span class="s2">&#34;Inserting relationships&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">unit</span><span class="o">=</span><span class="s2">&#34;relationship&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">all_relationships_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="k">await</span> <span class="n">result</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">all_entities_data</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&#34;Didn&#39;t extract any entities, maybe your LLM is not working&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="kc">None</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">all_relationships_data</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;Didn&#39;t extract any relationships, maybe your LLM is not working&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="kc">None</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># =====存实体向量数据=====</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">entity_vdb</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">data_for_vdb</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">compute_mdhash_id</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="s2">&#34;entity_name&#34;</span><span class="p">],</span> <span class="n">prefix</span><span class="o">=</span><span class="s2">&#34;ent-&#34;</span><span class="p">):</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;content&#34;</span><span class="p">:</span> <span class="n">dp</span><span class="p">[</span><span class="s2">&#34;entity_name&#34;</span><span class="p">]</span> <span class="o">+</span> <span class="n">dp</span><span class="p">[</span><span class="s2">&#34;description&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;entity_name&#34;</span><span class="p">:</span> <span class="n">dp</span><span class="p">[</span><span class="s2">&#34;entity_name&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="n">dp</span> <span class="ow">in</span> <span class="n">all_entities_data</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">await</span> <span class="n">entity_vdb</span><span class="o">.</span><span class="n">upsert</span><span class="p">(</span><span class="n">data_for_vdb</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># =====存关系向量数据=====</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">relationships_vdb</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">data_for_vdb</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">compute_mdhash_id</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="s2">&#34;src_id&#34;</span><span class="p">]</span> <span class="o">+</span> <span class="n">dp</span><span class="p">[</span><span class="s2">&#34;tgt_id&#34;</span><span class="p">],</span> <span class="n">prefix</span><span class="o">=</span><span class="s2">&#34;rel-&#34;</span><span class="p">):</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;src_id&#34;</span><span class="p">:</span> <span class="n">dp</span><span class="p">[</span><span class="s2">&#34;src_id&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;tgt_id&#34;</span><span class="p">:</span> <span class="n">dp</span><span class="p">[</span><span class="s2">&#34;tgt_id&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;content&#34;</span><span class="p">:</span> <span class="n">dp</span><span class="p">[</span><span class="s2">&#34;keywords&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">                <span class="o">+</span> <span class="n">dp</span><span class="p">[</span><span class="s2">&#34;src_id&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">                <span class="o">+</span> <span class="n">dp</span><span class="p">[</span><span class="s2">&#34;tgt_id&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">                <span class="o">+</span> <span class="n">dp</span><span class="p">[</span><span class="s2">&#34;description&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="n">dp</span> <span class="ow">in</span> <span class="n">all_relationships_data</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">await</span> <span class="n">relationships_vdb</span><span class="o">.</span><span class="n">upsert</span><span class="p">(</span><span class="n">data_for_vdb</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">knowledge_graph_inst</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="_process_single_content函数内部">_process_single_content函数内部
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span><span class="lnt">165
+</span><span class="lnt">166
+</span><span class="lnt">167
+</span><span class="lnt">168
+</span><span class="lnt">169
+</span><span class="lnt">170
+</span><span class="lnt">171
+</span><span class="lnt">172
+</span><span class="lnt">173
+</span><span class="lnt">174
+</span><span class="lnt">175
+</span><span class="lnt">176
+</span><span class="lnt">177
+</span><span class="lnt">178
+</span><span class="lnt">179
+</span><span class="lnt">180
+</span><span class="lnt">181
+</span><span class="lnt">182
+</span><span class="lnt">183
+</span><span class="lnt">184
+</span><span class="lnt">185
+</span><span class="lnt">186
+</span><span class="lnt">187
+</span><span class="lnt">188
+</span><span class="lnt">189
+</span><span class="lnt">190
+</span><span class="lnt">191
+</span><span class="lnt">192
+</span><span class="lnt">193
+</span><span class="lnt">194
+</span><span class="lnt">195
+</span><span class="lnt">196
+</span><span class="lnt">197
+</span><span class="lnt">198
+</span><span class="lnt">199
+</span><span class="lnt">200
+</span><span class="lnt">201
+</span><span class="lnt">202
+</span><span class="lnt">203
+</span><span class="lnt">204
+</span><span class="lnt">205
+</span><span class="lnt">206
+</span><span class="lnt">207
+</span><span class="lnt">208
+</span><span class="lnt">209
+</span><span class="lnt">210
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">async</span> <span class="k">def</span> <span class="nf">_process_single_content</span><span class="p">(</span><span class="n">chunk_key_dp</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">TextChunkSchema</span><span class="p">]):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">nonlocal</span> <span class="n">already_processed</span><span class="p">,</span> <span class="n">already_entities</span><span class="p">,</span> <span class="n">already_relations</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># chunk_key = hash(&#39;chunk-&#39;+chunk_i具体内容)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">chunk_key</span> <span class="o">=</span> <span class="n">chunk_key_dp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># chunk_dp 见 lightrag.py中的 chunks变量前的 注释，是个字典</span>
+</span></span><span class="line"><span class="cl">    <span class="n">chunk_dp</span> <span class="o">=</span> <span class="n">chunk_key_dp</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># content即chunk_i具体内容</span>
+</span></span><span class="line"><span class="cl">    <span class="n">content</span> <span class="o">=</span> <span class="n">chunk_dp</span><span class="p">[</span><span class="s2">&#34;content&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    替换初始prompt模板里的{...}
+</span></span></span><span class="line"><span class="cl"><span class="s2">    hint_prompt = entity_extract_prompt.format(**context_base, input_text=content)
+</span></span></span><span class="line"><span class="cl"><span class="s2">    两次.format是因为担心第一次.format后,字典context_base的值中会有</span><span class="si">{input_text}</span><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">    故第一次.format中，用input_text=&#34;</span><span class="si">{input_text}</span><span class="s2">&#34;保留input_text不变，第二次再全部替换
+</span></span></span><span class="line"><span class="cl"><span class="s2">    hint_prompt即终极版prompt
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">hint_prompt</span> <span class="o">=</span> <span class="n">entity_extract_prompt</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="o">**</span><span class="n">context_base</span><span class="p">,</span> <span class="n">input_text</span><span class="o">=</span><span class="s2">&#34;</span><span class="si">{input_text}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">context_base</span><span class="p">,</span> <span class="n">input_text</span><span class="o">=</span><span class="n">content</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># llm抽取实体</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;&#39;&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">    use_llm_func 即 gpt_4o_mini_complete(...) -&gt; str
+</span></span></span><span class="line"><span class="cl"><span class="s1">    use_llm_func: callable = global_config[&#34;llm_model_func&#34;]
+</span></span></span><span class="line"><span class="cl"><span class="s1">    llm_model_func: callable = gpt_4o_mini_complete   --- lightrag.py定义的类属性，global_config
+</span></span></span><span class="line"><span class="cl"><span class="s1">    async def gpt_4o_mini_complete(...)    --- llm.py
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">    gpt_4o_mini_complete 返回：
+</span></span></span><span class="line"><span class="cl"><span class="s1">    return await openai_complete_if_cache(
+</span></span></span><span class="line"><span class="cl"><span class="s1">          &#34;gpt-4o-mini&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s1">          prompt,
+</span></span></span><span class="line"><span class="cl"><span class="s1">          system_prompt=system_prompt,
+</span></span></span><span class="line"><span class="cl"><span class="s1">          history_messages=history_messages,
+</span></span></span><span class="line"><span class="cl"><span class="s1">          **kwargs,
+</span></span></span><span class="line"><span class="cl"><span class="s1">      )
+</span></span></span><span class="line"><span class="cl"><span class="s1">    final_result是str
+</span></span></span><span class="line"><span class="cl"><span class="s1">    &#39;&#39;&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">final_result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">use_llm_func</span><span class="p">(</span><span class="n">hint_prompt</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;&#39;&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">    一个列表
+</span></span></span><span class="line"><span class="cl"><span class="s1">    history = [
+</span></span></span><span class="line"><span class="cl"><span class="s1">            {&#34;role&#34;: &#39;user&#39;, &#34;content&#34;: hint_prompt}
+</span></span></span><span class="line"><span class="cl"><span class="s1">            {&#34;role&#34;: &#39;assistant&#39;, &#34;content&#34;: final_result}
+</span></span></span><span class="line"><span class="cl"><span class="s1">    ]
+</span></span></span><span class="line"><span class="cl"><span class="s1">    &#39;&#39;&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">history</span> <span class="o">=</span> <span class="n">pack_user_ass_to_openai_messages</span><span class="p">(</span><span class="n">hint_prompt</span><span class="p">,</span> <span class="n">final_result</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># &#34;拾穗&#34; 即重复抽取，防止遗漏</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># entity_extract_max_gleaning默认为1</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">now_glean_index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">entity_extract_max_gleaning</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># 直接告诉它遗漏了实体，要继续提取</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># &#34;&#34;&#34;MANY entities were missed in the last extraction.</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># Add them below using the same format:&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">glean_result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">use_llm_func</span><span class="p">(</span><span class="n">continue_prompt</span><span class="p">,</span> <span class="n">history_messages</span><span class="o">=</span><span class="n">history</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;&#39;&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">        [
+</span></span></span><span class="line"><span class="cl"><span class="s1">            {&#34;role&#34;: &#39;user&#39;, &#34;content&#34;: hint_prompt}
+</span></span></span><span class="line"><span class="cl"><span class="s1">            {&#34;role&#34;: &#39;assistant&#39;, &#34;content&#34;: final_result}
+</span></span></span><span class="line"><span class="cl"><span class="s1">            {&#34;role&#34;: &#39;user&#39;, &#34;content&#34;: continue_prompt}
+</span></span></span><span class="line"><span class="cl"><span class="s1">            {&#34;role&#34;: &#39;assistant&#39;, &#34;content&#34;: glean_result}
+</span></span></span><span class="line"><span class="cl"><span class="s1">        ]
+</span></span></span><span class="line"><span class="cl"><span class="s1">        &#39;&#39;&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">history</span> <span class="o">+=</span> <span class="n">pack_user_ass_to_openai_messages</span><span class="p">(</span><span class="n">continue_prompt</span><span class="p">,</span> <span class="n">glean_result</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># str+str 字符串相连</span>
+</span></span><span class="line"><span class="cl">        <span class="n">final_result</span> <span class="o">+=</span> <span class="n">glean_result</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1"># 达到设定的最大次数，跳出</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">now_glean_index</span> <span class="o">==</span> <span class="n">entity_extract_max_gleaning</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">break</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">#未达到，让LLM判断是否需要再次 拾穗</span>
+</span></span><span class="line"><span class="cl">        <span class="n">if_loop_result</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="k">await</span> <span class="n">use_llm_func</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="n">if_loop_prompt</span><span class="p">,</span> <span class="n">history_messages</span><span class="o">=</span><span class="n">history</span>
+</span></span><span class="line"><span class="cl">        <span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">if_loop_result</span> <span class="o">=</span> <span class="n">if_loop_result</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">&#39;&#34;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&#34;&#39;&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># 不需要则break</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">if_loop_result</span> <span class="o">!=</span> <span class="s2">&#34;yes&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">break</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;&#39;&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">    假如说final result
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">    (&#34;实体&#34;</span><span class="si">{tuple_delimiter}</span><span class="s1">&#34;Jordan&#34;</span><span class="si">{tuple_delimiter}</span><span class="s1">&#34;人物&#34;</span><span class="si">{tuple_delimiter}</span><span class="s1">&#34;Jordan 对探索有着共同的承诺，并与 Taylor 就设备进行了重要互动。&#34;)</span><span class="si">{record_delimiter}</span><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">    (&#34;关系&#34;</span><span class="si">{tuple_delimiter}</span><span class="s1">&#34;Jordan&#34;</span><span class="si">{tuple_delimiter}</span><span class="s1">&#34;Cruz&#34;</span><span class="si">{tuple_delimiter}</span><span class="s1">&#34;Jordan 对探索的承诺是对 Cruz 控制与秩序愿景的反抗。&#34;</span><span class="si">{tuple_delimiter}</span><span class="s1">&#34;意识形态冲突, 反抗&#34;</span><span class="si">{tuple_delimiter}</span><span class="s1">5)</span><span class="si">{record_delimiter}</span><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">    (&#34;content_keywords&#34;</span><span class="si">{tuple_delimiter}</span><span class="s1">&#34;power dynamics, ideological conflict, discovery, rebellion&#34;)</span><span class="si">{completion_delimiter}</span><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">    (&#34;实体&#34;</span><span class="si">{tuple_delimiter}</span><span class="s1">&#34;Jordan&#34;</span><span class="si">{tuple_delimiter}</span><span class="s1">&#34;人物&#34;</span><span class="si">{tuple_delimiter}</span><span class="s1">&#34;Jordan 对探索有着共同的承诺，并与 Taylor 就设备进行了重要互动。&#34;)</span><span class="si">{record_delimiter}</span><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">    glean补充(&#34;实体&#34;</span><span class="si">{tuple_delimiter}</span><span class="s1">&#34;J&#34;</span><span class="si">{tuple_delimiter}</span><span class="s1">&#34;人物&#34;</span><span class="si">{tuple_delimiter}</span><span class="s1">&#34;J 对探索有承诺，并与 T互动。&#34;)</span><span class="si">{record_delimiter}</span><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">    (&#34;关系&#34;</span><span class="si">{tuple_delimiter}</span><span class="s1">&#34;Jordan&#34;</span><span class="si">{tuple_delimiter}</span><span class="s1">&#34;Cruz&#34;</span><span class="si">{tuple_delimiter}</span><span class="s1">&#34;Jordan 对探索的承诺是对 Cruz 控制与秩序愿景的反抗。&#34;</span><span class="si">{tuple_delimiter}</span><span class="s1">&#34;意识形态冲突, 反抗&#34;</span><span class="si">{tuple_delimiter}</span><span class="s1">5)</span><span class="si">{record_delimiter}</span><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">    (&#34;content_keywords&#34;</span><span class="si">{tuple_delimiter}</span><span class="s1">&#34;power dynamics, ideological conflict, discovery, rebellion&#34;)</span><span class="si">{completion_delimiter}</span><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">    就会变成
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">    [&#34;(&#34;实体&#34;</span><span class="si">{tuple_delimiter}</span><span class="s1">&#34;Jordan&#34;...&#34;)&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s1">    &#34;(&#34;关系&#34;</span><span class="si">{tuple_delimiter}</span><span class="s1">&#34;Jordan...)&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s1">    (&#34;content_keywords&#34;</span><span class="si">{tuple_delimiter}</span><span class="s1">&#34;power dynamics,...&#34;)&#34;,...]
+</span></span></span><span class="line"><span class="cl"><span class="s1">    &#39;&#39;&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">records</span> <span class="o">=</span> <span class="n">split_string_by_multi_markers</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">final_result</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="n">context_base</span><span class="p">[</span><span class="s2">&#34;record_delimiter&#34;</span><span class="p">],</span> <span class="n">context_base</span><span class="p">[</span><span class="s2">&#34;completion_delimiter&#34;</span><span class="p">]],</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># from collections import defaultdict</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    maybe_nodes =
+</span></span></span><span class="line"><span class="cl"><span class="s2">    {
+</span></span></span><span class="line"><span class="cl"><span class="s2">        实体1_name-&gt;str:
+</span></span></span><span class="line"><span class="cl"><span class="s2">        [dict(
+</span></span></span><span class="line"><span class="cl"><span class="s2">            entity_name=entity_name,
+</span></span></span><span class="line"><span class="cl"><span class="s2">            entity_type=entity_type,
+</span></span></span><span class="line"><span class="cl"><span class="s2">            description=entity_description,
+</span></span></span><span class="line"><span class="cl"><span class="s2">    块id    source_id=entity_source_id, 
+</span></span></span><span class="line"><span class="cl"><span class="s2">        ),...],
+</span></span></span><span class="line"><span class="cl"><span class="s2">        实体2_name-&gt;str:
+</span></span></span><span class="line"><span class="cl"><span class="s2">        [dict(
+</span></span></span><span class="line"><span class="cl"><span class="s2">            entity_name=entity_name,
+</span></span></span><span class="line"><span class="cl"><span class="s2">            entity_type=entity_type,
+</span></span></span><span class="line"><span class="cl"><span class="s2">            description=entity_description,
+</span></span></span><span class="line"><span class="cl"><span class="s2">    块id    source_id=entity_source_id, 
+</span></span></span><span class="line"><span class="cl"><span class="s2">        ),...]
+</span></span></span><span class="line"><span class="cl"><span class="s2">    }
+</span></span></span><span class="line"><span class="cl"><span class="s2">    maybe_edges =
+</span></span></span><span class="line"><span class="cl"><span class="s2">    {   
+</span></span></span><span class="line"><span class="cl"><span class="s2">        (实施实体-&gt;str, 接收实体-&gt;str):
+</span></span></span><span class="line"><span class="cl"><span class="s2">        [dict(
+</span></span></span><span class="line"><span class="cl"><span class="s2">    实施实体         src_id=source,
+</span></span></span><span class="line"><span class="cl"><span class="s2">    接收实体         tgt_id=target,
+</span></span></span><span class="line"><span class="cl"><span class="s2">            weight=weight,
+</span></span></span><span class="line"><span class="cl"><span class="s2">            description=edge_description,
+</span></span></span><span class="line"><span class="cl"><span class="s2">            keywords=edge_keywords,
+</span></span></span><span class="line"><span class="cl"><span class="s2">            source_id=edge_source_id,
+</span></span></span><span class="line"><span class="cl"><span class="s2">        ),...]
+</span></span></span><span class="line"><span class="cl"><span class="s2">    }
+</span></span></span><span class="line"><span class="cl"><span class="s2">    简记为
+</span></span></span><span class="line"><span class="cl"><span class="s2">    maybe_nodes = {str:list[dict]}
+</span></span></span><span class="line"><span class="cl"><span class="s2">    mabybe_edges = {(str,str):list[dict]}
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">maybe_nodes</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">maybe_edges</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">record</span> <span class="ow">in</span> <span class="n">records</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># 获取括号里内容&#34;(&#34;实体&#34;{tuple_delimiter}&#34;Jordan&#34;...&#34;)&#34;-&gt;&#34;&#34;实体&#34;{tuple_delimiter}&#34;Jordan&#34;...&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">record</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&#34;\((.*)\)&#34;</span><span class="p">,</span> <span class="n">record</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">record</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">continue</span>
+</span></span><span class="line"><span class="cl">        <span class="n">record</span> <span class="o">=</span> <span class="n">record</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># record_attributes=List[str,str...]</span>
+</span></span><span class="line"><span class="cl">        <span class="n">record_attributes</span> <span class="o">=</span> <span class="n">split_string_by_multi_markers</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="n">record</span><span class="p">,</span> <span class="p">[</span><span class="n">context_base</span><span class="p">[</span><span class="s2">&#34;tuple_delimiter&#34;</span><span class="p">]]</span>
+</span></span><span class="line"><span class="cl">        <span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">        if_entities=
+</span></span></span><span class="line"><span class="cl"><span class="s2">        dict(
+</span></span></span><span class="line"><span class="cl"><span class="s2">            entity_name=entity_name,
+</span></span></span><span class="line"><span class="cl"><span class="s2">            entity_type=entity_type,
+</span></span></span><span class="line"><span class="cl"><span class="s2">            description=entity_description,
+</span></span></span><span class="line"><span class="cl"><span class="s2">    块id    source_id=entity_source_id, 
+</span></span></span><span class="line"><span class="cl"><span class="s2">        )
+</span></span></span><span class="line"><span class="cl"><span class="s2">        &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">if_entities</span> <span class="o">=</span> <span class="k">await</span> <span class="n">_handle_single_entity_extraction</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="n">record_attributes</span><span class="p">,</span> <span class="n">chunk_key</span>
+</span></span><span class="line"><span class="cl">        <span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1"># maybe_nodes为默认 值 为空列表的 字典</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># {JORDAN:[{e_name:..., e_type:.......}]}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">if_entities</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">maybe_nodes</span><span class="p">[</span><span class="n">if_entities</span><span class="p">[</span><span class="s2">&#34;entity_name&#34;</span><span class="p">]]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">if_entities</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">continue</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">        if_relation=
+</span></span></span><span class="line"><span class="cl"><span class="s2">        dict(
+</span></span></span><span class="line"><span class="cl"><span class="s2">            src_id=source,
+</span></span></span><span class="line"><span class="cl"><span class="s2">            tgt_id=target,
+</span></span></span><span class="line"><span class="cl"><span class="s2">            weight=weight,
+</span></span></span><span class="line"><span class="cl"><span class="s2">            description=edge_description,
+</span></span></span><span class="line"><span class="cl"><span class="s2">            keywords=edge_keywords,
+</span></span></span><span class="line"><span class="cl"><span class="s2">            source_id=edge_source_id,
+</span></span></span><span class="line"><span class="cl"><span class="s2">        )
+</span></span></span><span class="line"><span class="cl"><span class="s2">        单条record处理出relation
+</span></span></span><span class="line"><span class="cl"><span class="s2">        &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">if_relation</span> <span class="o">=</span> <span class="k">await</span> <span class="n">_handle_single_relationship_extraction</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="n">record_attributes</span><span class="p">,</span> <span class="n">chunk_key</span>
+</span></span><span class="line"><span class="cl">        <span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">if_relation</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="c1"># {(JORDAN,JENNY):[{src_id:..., tgt_id:..., }]}</span>
+</span></span><span class="line"><span class="cl">            <span class="n">maybe_edges</span><span class="p">[(</span><span class="n">if_relation</span><span class="p">[</span><span class="s2">&#34;src_id&#34;</span><span class="p">],</span> <span class="n">if_relation</span><span class="p">[</span><span class="s2">&#34;tgt_id&#34;</span><span class="p">])]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                <span class="n">if_relation</span>
+</span></span><span class="line"><span class="cl">            <span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># 下面三个already都是chunk级循环外的</span>
+</span></span><span class="line"><span class="cl">    <span class="n">already_processed</span> <span class="o">+=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 累加每个chunk带来的实体数量和关系数量</span>
+</span></span><span class="line"><span class="cl">    <span class="n">already_entities</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">maybe_nodes</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">already_relations</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">maybe_edges</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># PROMPTS[&#34;process_tickers&#34;] = [&#34;⠋&#34;, &#34;⠙&#34;, &#34;⠹&#34;, &#34;⠸&#34;, &#34;⠼&#34;, &#34;⠴&#34;, &#34;⠦&#34;, &#34;⠧&#34;, &#34;⠇&#34;, &#34;⠏&#34;]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">now_ticks</span> <span class="o">=</span> <span class="n">PROMPTS</span><span class="p">[</span><span class="s2">&#34;process_tickers&#34;</span><span class="p">][</span>
+</span></span><span class="line"><span class="cl">        <span class="n">already_processed</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">PROMPTS</span><span class="p">[</span><span class="s2">&#34;process_tickers&#34;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">    <span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 打印处理了多少个chunks，已经处理了的实体和关系</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="sa">f</span><span class="s2">&#34;</span><span class="si">{</span><span class="n">now_ticks</span><span class="si">}</span><span class="s2"> Processed </span><span class="si">{</span><span class="n">already_processed</span><span class="si">}</span><span class="s2"> chunks, </span><span class="si">{</span><span class="n">already_entities</span><span class="si">}</span><span class="s2"> entities(duplicated), </span><span class="si">{</span><span class="n">already_relations</span><span class="si">}</span><span class="s2"> relations(duplicated)</span><span class="se">\r</span><span class="s2">&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">end</span><span class="o">=</span><span class="s2">&#34;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 由defaultdict转回dict</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">maybe_nodes</span><span class="p">),</span> <span class="nb">dict</span><span class="p">(</span><span class="n">maybe_edges</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="更新各存储区">更新各存储区
+</h3><p>kv_store_doc_status.json</p>
+<p>kv_store_full_docs.json</p>
+<p>kv_store_Ilm_response_cache.json</p>
+<p>kv_store_text_chunks.json</p>
+<p>vdb_chunks.json</p>
+<p>vdb_entities.json</p>
+<p>vdb_relationships.json</p>
+<p>chunk_overlap_token_size</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">chunk_overlap_token_size: int = 100       # 
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2025 rooobeam
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
