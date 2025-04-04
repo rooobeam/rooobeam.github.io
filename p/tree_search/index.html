@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Tree Search 目录结构 - - - - 一、翻转树 二、相同树 三、层序遍历并标序 四、对称树 五、二叉树的最大深度 六、二叉树的最小深度 七、路径总和 八、二叉树层序遍历无标序号 九、岛屿的周长 十、左叶子之和 十一、二叉搜索树的最小绝对差 十二、二叉树层序遍历II 十三、合并二叉树 十四、二叉树的层平均值 十五、找出克隆二叉树中的相同节点 十六、图像渲染 [十七、N 叉树的最大深度](#十七N 叉树的最大深度) 十八、单值二叉树 十九、二叉树的堂兄弟节点 队列的运用：一、二、\n">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Tree Search 目录结构 - - - - 一、翻转树 二、相同树 三、层序遍历并标序 四、对称树 五、二叉树的最大深度 六、二叉树的最小深度 七、路径总和 八、二叉树层序遍历无标序号 九、岛屿的周长 十、左叶子之和 十一、二叉搜索树的最小绝对差 十二、二叉树层序遍历II 十三、合并二叉树 十四、二叉树的层平均值 十五、找出克隆二叉树中的相同节点 十六、图像渲染 [十七、N叉树的最大深度](#十七N 叉树的最大深度) 十八、单值二叉树 十九、二叉树的堂兄弟节点 二十、寻找图中是否存在路径 队列的运用：一、二、\n">
 <title>Tree_search</title>
 
 <link rel='canonical' href='https://rooobeam.github.io/p/tree_search/'>
 
 <link rel="stylesheet" href="/scss/style.min.a396f93d13972177774da34b7aabdd4857291f5ce9113104ceb0746cb724125a.css"><meta property='og:title' content="Tree_search">
-<meta property='og:description' content="Tree Search 目录结构 - - - - 一、翻转树 二、相同树 三、层序遍历并标序 四、对称树 五、二叉树的最大深度 六、二叉树的最小深度 七、路径总和 八、二叉树层序遍历无标序号 九、岛屿的周长 十、左叶子之和 十一、二叉搜索树的最小绝对差 十二、二叉树层序遍历II 十三、合并二叉树 十四、二叉树的层平均值 十五、找出克隆二叉树中的相同节点 十六、图像渲染 [十七、N 叉树的最大深度](#十七N 叉树的最大深度) 十八、单值二叉树 十九、二叉树的堂兄弟节点 队列的运用：一、二、\n">
+<meta property='og:description' content="Tree Search 目录结构 - - - - 一、翻转树 二、相同树 三、层序遍历并标序 四、对称树 五、二叉树的最大深度 六、二叉树的最小深度 七、路径总和 八、二叉树层序遍历无标序号 九、岛屿的周长 十、左叶子之和 十一、二叉搜索树的最小绝对差 十二、二叉树层序遍历II 十三、合并二叉树 十四、二叉树的层平均值 十五、找出克隆二叉树中的相同节点 十六、图像渲染 [十七、N叉树的最大深度](#十七N 叉树的最大深度) 十八、单值二叉树 十九、二叉树的堂兄弟节点 二十、寻找图中是否存在路径 队列的运用：一、二、\n">
 <meta property='og:url' content='https://rooobeam.github.io/p/tree_search/'>
 <meta property='og:site_name' content='rooobeam'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-03-23T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-03-23T00:00:00&#43;00:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-04-04T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-04-04T00:00:00&#43;00:00'/>
 <meta name="twitter:title" content="Tree_search">
-<meta name="twitter:description" content="Tree Search 目录结构 - - - - 一、翻转树 二、相同树 三、层序遍历并标序 四、对称树 五、二叉树的最大深度 六、二叉树的最小深度 七、路径总和 八、二叉树层序遍历无标序号 九、岛屿的周长 十、左叶子之和 十一、二叉搜索树的最小绝对差 十二、二叉树层序遍历II 十三、合并二叉树 十四、二叉树的层平均值 十五、找出克隆二叉树中的相同节点 十六、图像渲染 [十七、N 叉树的最大深度](#十七N 叉树的最大深度) 十八、单值二叉树 十九、二叉树的堂兄弟节点 队列的运用：一、二、\n">
+<meta name="twitter:description" content="Tree Search 目录结构 - - - - 一、翻转树 二、相同树 三、层序遍历并标序 四、对称树 五、二叉树的最大深度 六、二叉树的最小深度 七、路径总和 八、二叉树层序遍历无标序号 九、岛屿的周长 十、左叶子之和 十一、二叉搜索树的最小绝对差 十二、二叉树层序遍历II 十三、合并二叉树 十四、二叉树的层平均值 十五、找出克隆二叉树中的相同节点 十六、图像渲染 [十七、N叉树的最大深度](#十七N 叉树的最大深度) 十八、单值二叉树 十九、二叉树的堂兄弟节点 二十、寻找图中是否存在路径 队列的运用：一、二、\n">
     <link rel="shortcut icon" href="/favicon.ico" />
 
     </head>
@@ -306,7 +306,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2025-03-23</time>
+                <time class="article-time--published">2025-04-04</time>
             </div>
         
 
@@ -359,10 +359,10 @@
           <td><a class="link" href="#%e5%8d%81%e5%85%ad%e5%9b%be%e5%83%8f%e6%b8%b2%e6%9f%93" >十六、图像渲染</a></td>
       </tr>
       <tr>
-          <td>[十七、N 叉树的最大深度](#十七N 叉树的最大深度)</td>
+          <td>[十七、N叉树的最大深度](#十七N 叉树的最大深度)</td>
           <td><a class="link" href="#%e5%8d%81%e5%85%ab%e5%8d%95%e5%80%bc%e4%ba%8c%e5%8f%89%e6%a0%91" >十八、单值二叉树</a></td>
           <td><a class="link" href="#%e5%8d%81%e4%b9%9d%e4%ba%8c%e5%8f%89%e6%a0%91%e7%9a%84%e5%a0%82%e5%85%84%e5%bc%9f%e8%8a%82%e7%82%b9" >十九、二叉树的堂兄弟节点</a></td>
-          <td></td>
+          <td><a class="link" href="#%e4%ba%8c%e5%8d%81%e5%af%bb%e6%89%be%e5%9b%be%e4%b8%ad%e6%98%af%e5%90%a6%e5%ad%98%e5%9c%a8%e8%b7%af%e5%be%84" >二十、寻找图中是否存在路径</a></td>
       </tr>
   </tbody>
 </table></div>
