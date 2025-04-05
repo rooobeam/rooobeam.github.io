@@ -1549,6 +1549,159 @@
 <pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">chunk_overlap_token_size: int = 100       # 
 </span></span></code></pre></td></tr></table>
 </div>
+</div><p>vdb存储，以存实体数据为例</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="c1"># =====存实体向量数据=====</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="n">entity_vdb</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">data_for_vdb</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">compute_mdhash_id</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="s2">&#34;entity_name&#34;</span><span class="p">],</span> <span class="n">prefix</span><span class="o">=</span><span class="s2">&#34;ent-&#34;</span><span class="p">):</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;content&#34;</span><span class="p">:</span> <span class="n">dp</span><span class="p">[</span><span class="s2">&#34;entity_name&#34;</span><span class="p">]</span> <span class="o">+</span> <span class="n">dp</span><span class="p">[</span><span class="s2">&#34;description&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;entity_name&#34;</span><span class="p">:</span> <span class="n">dp</span><span class="p">[</span><span class="s2">&#34;entity_name&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">dp</span> <span class="ow">in</span> <span class="n">all_entities_data</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># data_for_vdb: dict[str, dict]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">await</span> <span class="n">entity_vdb</span><span class="o">.</span><span class="n">upsert</span><span class="p">(</span><span class="n">data_for_vdb</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>entity_vdb 为 NanoVectorDBStorage类（storage.py） 的实例化</p>
+<p>其 .upsert方法如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="k">async</span> <span class="k">def</span> <span class="nf">upsert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]):</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 日志和长度处理</span>
+</span></span><span class="line"><span class="cl">    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Inserting </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="si">}</span><span class="s2"> vectors to </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">namespace</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&#34;You insert an empty data to vector DB&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># k1, v1为dict中的键值对 str:str, 他们被解包出来，最终list_data=List[{str:str}]</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 实体vdb中 list-data中每个字典元素为</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># {</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># &#34;__id__&#34;: hash_id,</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># &#34;content&#34;: dp[&#34;entity_name&#34;] + dp[&#34;description&#34;]</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># &#34;entity_name&#34;: dp[&#34;entity_name&#34;]</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># }</span>
+</span></span><span class="line"><span class="cl">    <span class="n">list_data</span> <span class="o">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;__id__&#34;</span><span class="p">:</span> <span class="n">k</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="o">**</span><span class="p">{</span><span class="n">k1</span><span class="p">:</span> <span class="n">v1</span> <span class="k">for</span> <span class="n">k1</span><span class="p">,</span> <span class="n">v1</span> <span class="ow">in</span> <span class="n">v</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k1</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">meta_fields</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># List[str]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">contents</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span><span class="p">[</span><span class="s2">&#34;content&#34;</span><span class="p">]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">values</span><span class="p">()]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># List[List[32个str]]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">batches</span> <span class="o">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">        <span class="n">contents</span><span class="p">[</span><span class="n">i</span> <span class="p">:</span> <span class="n">i</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_max_batch_size</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">contents</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_max_batch_size</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 每批32个str输入embedding_func处理成np.array(32, dim)的向量数据</span>
+</span></span><span class="line"><span class="cl">    <span class="n">embedding_tasks</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">embedding_func</span><span class="p">(</span><span class="n">batch</span><span class="p">)</span> <span class="k">for</span> <span class="n">batch</span> <span class="ow">in</span> <span class="n">batches</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">embeddings_list</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">tqdm_async</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">asyncio</span><span class="o">.</span><span class="n">as_completed</span><span class="p">(</span><span class="n">embedding_tasks</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="n">total</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">embedding_tasks</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="n">desc</span><span class="o">=</span><span class="s2">&#34;Generating embeddings&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">unit</span><span class="o">=</span><span class="s2">&#34;batch&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">embeddings</span> <span class="o">=</span> <span class="k">await</span> <span class="n">f</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># embeddings_list: List[np.array(32,dim), np.array(32,dim)...]</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># (n,32,dim)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">embeddings_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">embeddings</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 将多个数组沿着指定的轴（默认是第0轴）连接</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># (n,32,dim)-&gt;(n*32,dim) 每行都是一个(实体名+描述)的vector</span>
+</span></span><span class="line"><span class="cl">    <span class="n">embeddings</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">embeddings_list</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># {</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># &#34;__id__&#34;: hash_id,</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># &#34;content&#34;: dp[&#34;entity_name&#34;] + dp[&#34;description&#34;]</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># &#34;entity_name&#34;: dp[&#34;entity_name&#34;]</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># &#34;__vector__&#34;: np.array(dim)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># }</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">list_data</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">d</span><span class="p">[</span><span class="s2">&#34;__vector__&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="n">embeddings</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># from nano_vectordb import NanoVectorDB</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># NanoVectorDB 的 upsert方法，datas关键字传入List[dict]</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 将List[dict]中内容写到.json文件中因为之前的创建，以它内置的方式。</span>
+</span></span><span class="line"><span class="cl">    <span class="n">results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">upsert</span><span class="p">(</span><span class="n">datas</span><span class="o">=</span><span class="n">list_data</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">results</span>
+</span></span></code></pre></td></tr></table>
+</div>
 </div>
 </section>
 
