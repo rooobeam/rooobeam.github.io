@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="主要分初始化、插入、提问两部分\n初始化 插入 插入：rag.insert()异步编程调用ainsert()\nainsert内的各步操作\n文章处理 文本块处理 实体关系抽取 更新各存储区 文章处理 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 # ====== 文章处理 ====== # 单个字符串也变成List(str) if isinstance(string_or_strings, str): string_or_strings = [string_or_strings] # {hash(&#34;doc-&#34;+txt_i的字符串):{&#34;content&#34;: txt_i.strip()}}，txt_i是第i个文章 new_docs = { compute_mdhash_id(c.strip(), prefix=&#34;doc-&#34;): {&#34;content&#34;: c.strip()} for c in string_or_strings } &#39;&#39;&#39; n个 hash(&#34;doc-&#34;+txt_i的字符串) 组成的list 传入 self.full_docs.filter_keys self.full_docs.filter_keys 是 JsonKVStorage.filter_keys方法 返回set{str}(以字符串为元素的字典) 作用是：某文章 和历史数据中重复 或 和传入数据中其他文章重复 则排除。 通过比对hash值 &#39;&#39;&#39; _add_doc_keys = await self.full_docs.filter_keys(list(new_docs.keys())) # key在_add_doc_keys里的kv对留下 new_docs = {k: v for k, v in new_docs.items() if k in _add_doc_keys} # 日志登记 if not len(new_docs): logger.warning(&#34;All docs are already in the storage&#34;) return # storage 是 要更新的flag update_storage = True logger.info(f&#34;[New Docs] inserting {len(new_docs)} docs&#34;) 文本块处理 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 # ====== 文本块处理 ====== # 一次ainsert中的多个文章的chunks字典汇总，ainsert只是事件循环中的一个事件 # {&#34;chunk-&#34;+chunk字符串哈希值: dict, 哈希值: dict,...} inserting_chunks = {} # 外循环 第i篇文章，内循环，第i篇文章第j个chunk for doc_key, doc in \\ tqdm_async(new_docs.items(), desc=&#34;Chunking documents&#34;, unit=&#34;doc&#34;): &#39;&#39;&#39; inserting_chunks = { hash(&#34;chunk-&#34;+chunk_i的字符串): {&#34;tokens&#34;: chunk_i的token数, &#34;content&#34;: chunk_i具体内容, &#34;chunk_order_index&#34;: 是该文章的第i个chunk, &#34;full_doc_id&#34;: doc_key}, hash(&#34;chunk-&#34;+chunk_i+1的字符串): {&#34;tokens&#34;: chunk_i+1的token数, &#34;content&#34;: chunk_i+1具体内容, &#34;chunk_order_index&#34;: 是该文章的第i+1个chunk, &#34;full_doc_id&#34;: doc_key}, } chunks = {哈希值: dict, 哈希值: dict,...} &#39;&#39;&#39; chunks = { # dp是 dict[str, Union[int, str]]，即是个字典，然后键为key，值为Union[int,str]即int 或 str # Union[int,str]具体来说，可以是 该chunk的token数，chunk具体内容，是该文章的第i个chunk # **dp表示解包字典（去掉大括号），并要求&#34;full_doc_id&#34;: doc_key满足dict[str, Union[int, str]] # chunking_by_token_size 根据 token 数量切分文本，返回List[dict]吧 compute_mdhash_id(dp[&#34;content&#34;], prefix=&#34;chunk-&#34;): {**dp, &#34;full_doc_id&#34;: doc_key,} for dp in chunking_by_token_size( doc[&#34;content&#34;], overlap_token_size=self.chunk_overlap_token_size, max_token_size=self.chunk_token_size, tiktoken_model=self.tiktoken_model_name, ) } # dict.update(dict)如果已存在相同的键，则对应的值会被覆盖；如果不存在，则添加新的键值对。 # dict1 = {&#39;a&#39;: 1, &#39;b&#39;: 2} # dict2 = {&#39;b&#39;: 3, &#39;c&#39;: 4} # dict1.update(dict2) # print(dict1) # Output: {&#39;a&#39;: 1, &#39;b&#39;: 3, &#39;c&#39;: 4} # 因为用了hash内容包括chunk内容，所以不重复 inserting_chunks.update(chunks) &#39;&#39;&#39; n个 hash(&#34;chunk-&#34;+chunk_i的字符串) 组成的list传入self.full_docs.filter_keys self.full_docs.filter_keys 即 JsonKVStorage.filter_keys 返回set{str}(以字符串为元素的字典)，作用是：某chunk 和历史数据中重复或和传入数据中其他chunk重复则排除。 通过比对hash值 &#39;&#39;&#39; _add_chunk_keys = await self.text_chunks.filter_keys( list(inserting_chunks.keys()) ) # 根据key在_add_doc_keys里对inserting_chunks筛选合格的kv对 inserting_chunks = { k: v for k, v in inserting_chunks.items() if k in _add_chunk_keys } # 日志登记 if not len(inserting_chunks): logger.warning(&#34;All chunks are already in the storage&#34;) return logger.info(f&#34;[New Chunks] inserting {len(inserting_chunks)} chunks&#34;) # 将inserting_chunks(字典)存入json await self.chunks_vdb.upsert(inserting_chunks) 实体关系抽取 分为 外部 和 extract_entities函数内部\n">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="主要分初始化、插入、提问三部分\n初始化 插入 插入：rag.insert()异步编程调用ainsert()\nainsert内的各步操作\n文章处理 文本块处理 实体关系抽取 更新各存储区 文章处理 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 # ====== 文章处理 ====== # 单个字符串也变成List(str) if isinstance(string_or_strings, str): string_or_strings = [string_or_strings] # {hash(&#34;doc-&#34;+txt_i的字符串):{&#34;content&#34;: txt_i.strip()}}，txt_i是第i个文章 new_docs = { compute_mdhash_id(c.strip(), prefix=&#34;doc-&#34;): {&#34;content&#34;: c.strip()} for c in string_or_strings } &#39;&#39;&#39; n个 hash(&#34;doc-&#34;+txt_i的字符串) 组成的list 传入 self.full_docs.filter_keys self.full_docs.filter_keys 是 JsonKVStorage.filter_keys方法 返回set{str}(以字符串为元素的字典) 作用是：某文章 和历史数据中重复 或 和传入数据中其他文章重复 则排除。 通过比对hash值 &#39;&#39;&#39; _add_doc_keys = await self.full_docs.filter_keys(list(new_docs.keys())) # key在_add_doc_keys里的kv对留下 new_docs = {k: v for k, v in new_docs.items() if k in _add_doc_keys} # 日志登记 if not len(new_docs): logger.warning(&#34;All docs are already in the storage&#34;) return # storage 是 要更新的flag update_storage = True logger.info(f&#34;[New Docs] inserting {len(new_docs)} docs&#34;) 文本块处理 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 # ====== 文本块处理 ====== # 一次ainsert中的多个文章的chunks字典汇总，ainsert只是事件循环中的一个事件 # {&#34;chunk-&#34;+chunk字符串哈希值: dict, 哈希值: dict,...} inserting_chunks = {} # 外循环 第i篇文章，内循环，第i篇文章第j个chunk for doc_key, doc in \\ tqdm_async(new_docs.items(), desc=&#34;Chunking documents&#34;, unit=&#34;doc&#34;): &#39;&#39;&#39; inserting_chunks = { hash(&#34;chunk-&#34;+chunk_i的字符串): {&#34;tokens&#34;: chunk_i的token数, &#34;content&#34;: chunk_i具体内容, &#34;chunk_order_index&#34;: 是该文章的第i个chunk, &#34;full_doc_id&#34;: doc_key}, hash(&#34;chunk-&#34;+chunk_i+1的字符串): {&#34;tokens&#34;: chunk_i+1的token数, &#34;content&#34;: chunk_i+1具体内容, &#34;chunk_order_index&#34;: 是该文章的第i+1个chunk, &#34;full_doc_id&#34;: doc_key}, } chunks = {哈希值: dict, 哈希值: dict,...} &#39;&#39;&#39; chunks = { # dp是 dict[str, Union[int, str]]，即是个字典，然后键为key，值为Union[int,str]即int 或 str # Union[int,str]具体来说，可以是 该chunk的token数，chunk具体内容，是该文章的第i个chunk # **dp表示解包字典（去掉大括号），并要求&#34;full_doc_id&#34;: doc_key满足dict[str, Union[int, str]] # chunking_by_token_size 根据 token 数量切分文本，返回List[dict]吧 compute_mdhash_id(dp[&#34;content&#34;], prefix=&#34;chunk-&#34;): {**dp, &#34;full_doc_id&#34;: doc_key,} for dp in chunking_by_token_size( doc[&#34;content&#34;], overlap_token_size=self.chunk_overlap_token_size, max_token_size=self.chunk_token_size, tiktoken_model=self.tiktoken_model_name, ) } # dict.update(dict)如果已存在相同的键，则对应的值会被覆盖；如果不存在，则添加新的键值对。 # dict1 = {&#39;a&#39;: 1, &#39;b&#39;: 2} # dict2 = {&#39;b&#39;: 3, &#39;c&#39;: 4} # dict1.update(dict2) # print(dict1) # Output: {&#39;a&#39;: 1, &#39;b&#39;: 3, &#39;c&#39;: 4} # 因为用了hash内容包括chunk内容，所以不重复 inserting_chunks.update(chunks) &#39;&#39;&#39; n个 hash(&#34;chunk-&#34;+chunk_i的字符串) 组成的list传入self.full_docs.filter_keys self.full_docs.filter_keys 即 JsonKVStorage.filter_keys 返回set{str}(以字符串为元素的字典)，作用是：某chunk 和历史数据中重复或和传入数据中其他chunk重复则排除。 通过比对hash值 &#39;&#39;&#39; _add_chunk_keys = await self.text_chunks.filter_keys( list(inserting_chunks.keys()) ) # 根据key在_add_doc_keys里对inserting_chunks筛选合格的kv对 inserting_chunks = { k: v for k, v in inserting_chunks.items() if k in _add_chunk_keys } # 日志登记 if not len(inserting_chunks): logger.warning(&#34;All chunks are already in the storage&#34;) return logger.info(f&#34;[New Chunks] inserting {len(inserting_chunks)} chunks&#34;) # 将inserting_chunks(字典)存入json await self.chunks_vdb.upsert(inserting_chunks) 实体关系抽取 分为 外部 和 extract_entities函数内部\n">
 <title>Lightrag1.0.3代码解读</title>
 
 <link rel='canonical' href='https://rooobeam.github.io/p/lightrag1.0.3%E4%BB%A3%E7%A0%81%E8%A7%A3%E8%AF%BB/'>
 
 <link rel="stylesheet" href="/scss/style.min.a396f93d13972177774da34b7aabdd4857291f5ce9113104ceb0746cb724125a.css"><meta property='og:title' content="Lightrag1.0.3代码解读">
-<meta property='og:description' content="主要分初始化、插入、提问两部分\n初始化 插入 插入：rag.insert()异步编程调用ainsert()\nainsert内的各步操作\n文章处理 文本块处理 实体关系抽取 更新各存储区 文章处理 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 # ====== 文章处理 ====== # 单个字符串也变成List(str) if isinstance(string_or_strings, str): string_or_strings = [string_or_strings] # {hash(&#34;doc-&#34;+txt_i的字符串):{&#34;content&#34;: txt_i.strip()}}，txt_i是第i个文章 new_docs = { compute_mdhash_id(c.strip(), prefix=&#34;doc-&#34;): {&#34;content&#34;: c.strip()} for c in string_or_strings } &#39;&#39;&#39; n个 hash(&#34;doc-&#34;+txt_i的字符串) 组成的list 传入 self.full_docs.filter_keys self.full_docs.filter_keys 是 JsonKVStorage.filter_keys方法 返回set{str}(以字符串为元素的字典) 作用是：某文章 和历史数据中重复 或 和传入数据中其他文章重复 则排除。 通过比对hash值 &#39;&#39;&#39; _add_doc_keys = await self.full_docs.filter_keys(list(new_docs.keys())) # key在_add_doc_keys里的kv对留下 new_docs = {k: v for k, v in new_docs.items() if k in _add_doc_keys} # 日志登记 if not len(new_docs): logger.warning(&#34;All docs are already in the storage&#34;) return # storage 是 要更新的flag update_storage = True logger.info(f&#34;[New Docs] inserting {len(new_docs)} docs&#34;) 文本块处理 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 # ====== 文本块处理 ====== # 一次ainsert中的多个文章的chunks字典汇总，ainsert只是事件循环中的一个事件 # {&#34;chunk-&#34;+chunk字符串哈希值: dict, 哈希值: dict,...} inserting_chunks = {} # 外循环 第i篇文章，内循环，第i篇文章第j个chunk for doc_key, doc in \\ tqdm_async(new_docs.items(), desc=&#34;Chunking documents&#34;, unit=&#34;doc&#34;): &#39;&#39;&#39; inserting_chunks = { hash(&#34;chunk-&#34;+chunk_i的字符串): {&#34;tokens&#34;: chunk_i的token数, &#34;content&#34;: chunk_i具体内容, &#34;chunk_order_index&#34;: 是该文章的第i个chunk, &#34;full_doc_id&#34;: doc_key}, hash(&#34;chunk-&#34;+chunk_i+1的字符串): {&#34;tokens&#34;: chunk_i+1的token数, &#34;content&#34;: chunk_i+1具体内容, &#34;chunk_order_index&#34;: 是该文章的第i+1个chunk, &#34;full_doc_id&#34;: doc_key}, } chunks = {哈希值: dict, 哈希值: dict,...} &#39;&#39;&#39; chunks = { # dp是 dict[str, Union[int, str]]，即是个字典，然后键为key，值为Union[int,str]即int 或 str # Union[int,str]具体来说，可以是 该chunk的token数，chunk具体内容，是该文章的第i个chunk # **dp表示解包字典（去掉大括号），并要求&#34;full_doc_id&#34;: doc_key满足dict[str, Union[int, str]] # chunking_by_token_size 根据 token 数量切分文本，返回List[dict]吧 compute_mdhash_id(dp[&#34;content&#34;], prefix=&#34;chunk-&#34;): {**dp, &#34;full_doc_id&#34;: doc_key,} for dp in chunking_by_token_size( doc[&#34;content&#34;], overlap_token_size=self.chunk_overlap_token_size, max_token_size=self.chunk_token_size, tiktoken_model=self.tiktoken_model_name, ) } # dict.update(dict)如果已存在相同的键，则对应的值会被覆盖；如果不存在，则添加新的键值对。 # dict1 = {&#39;a&#39;: 1, &#39;b&#39;: 2} # dict2 = {&#39;b&#39;: 3, &#39;c&#39;: 4} # dict1.update(dict2) # print(dict1) # Output: {&#39;a&#39;: 1, &#39;b&#39;: 3, &#39;c&#39;: 4} # 因为用了hash内容包括chunk内容，所以不重复 inserting_chunks.update(chunks) &#39;&#39;&#39; n个 hash(&#34;chunk-&#34;+chunk_i的字符串) 组成的list传入self.full_docs.filter_keys self.full_docs.filter_keys 即 JsonKVStorage.filter_keys 返回set{str}(以字符串为元素的字典)，作用是：某chunk 和历史数据中重复或和传入数据中其他chunk重复则排除。 通过比对hash值 &#39;&#39;&#39; _add_chunk_keys = await self.text_chunks.filter_keys( list(inserting_chunks.keys()) ) # 根据key在_add_doc_keys里对inserting_chunks筛选合格的kv对 inserting_chunks = { k: v for k, v in inserting_chunks.items() if k in _add_chunk_keys } # 日志登记 if not len(inserting_chunks): logger.warning(&#34;All chunks are already in the storage&#34;) return logger.info(f&#34;[New Chunks] inserting {len(inserting_chunks)} chunks&#34;) # 将inserting_chunks(字典)存入json await self.chunks_vdb.upsert(inserting_chunks) 实体关系抽取 分为 外部 和 extract_entities函数内部\n">
+<meta property='og:description' content="主要分初始化、插入、提问三部分\n初始化 插入 插入：rag.insert()异步编程调用ainsert()\nainsert内的各步操作\n文章处理 文本块处理 实体关系抽取 更新各存储区 文章处理 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 # ====== 文章处理 ====== # 单个字符串也变成List(str) if isinstance(string_or_strings, str): string_or_strings = [string_or_strings] # {hash(&#34;doc-&#34;+txt_i的字符串):{&#34;content&#34;: txt_i.strip()}}，txt_i是第i个文章 new_docs = { compute_mdhash_id(c.strip(), prefix=&#34;doc-&#34;): {&#34;content&#34;: c.strip()} for c in string_or_strings } &#39;&#39;&#39; n个 hash(&#34;doc-&#34;+txt_i的字符串) 组成的list 传入 self.full_docs.filter_keys self.full_docs.filter_keys 是 JsonKVStorage.filter_keys方法 返回set{str}(以字符串为元素的字典) 作用是：某文章 和历史数据中重复 或 和传入数据中其他文章重复 则排除。 通过比对hash值 &#39;&#39;&#39; _add_doc_keys = await self.full_docs.filter_keys(list(new_docs.keys())) # key在_add_doc_keys里的kv对留下 new_docs = {k: v for k, v in new_docs.items() if k in _add_doc_keys} # 日志登记 if not len(new_docs): logger.warning(&#34;All docs are already in the storage&#34;) return # storage 是 要更新的flag update_storage = True logger.info(f&#34;[New Docs] inserting {len(new_docs)} docs&#34;) 文本块处理 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 # ====== 文本块处理 ====== # 一次ainsert中的多个文章的chunks字典汇总，ainsert只是事件循环中的一个事件 # {&#34;chunk-&#34;+chunk字符串哈希值: dict, 哈希值: dict,...} inserting_chunks = {} # 外循环 第i篇文章，内循环，第i篇文章第j个chunk for doc_key, doc in \\ tqdm_async(new_docs.items(), desc=&#34;Chunking documents&#34;, unit=&#34;doc&#34;): &#39;&#39;&#39; inserting_chunks = { hash(&#34;chunk-&#34;+chunk_i的字符串): {&#34;tokens&#34;: chunk_i的token数, &#34;content&#34;: chunk_i具体内容, &#34;chunk_order_index&#34;: 是该文章的第i个chunk, &#34;full_doc_id&#34;: doc_key}, hash(&#34;chunk-&#34;+chunk_i+1的字符串): {&#34;tokens&#34;: chunk_i+1的token数, &#34;content&#34;: chunk_i+1具体内容, &#34;chunk_order_index&#34;: 是该文章的第i+1个chunk, &#34;full_doc_id&#34;: doc_key}, } chunks = {哈希值: dict, 哈希值: dict,...} &#39;&#39;&#39; chunks = { # dp是 dict[str, Union[int, str]]，即是个字典，然后键为key，值为Union[int,str]即int 或 str # Union[int,str]具体来说，可以是 该chunk的token数，chunk具体内容，是该文章的第i个chunk # **dp表示解包字典（去掉大括号），并要求&#34;full_doc_id&#34;: doc_key满足dict[str, Union[int, str]] # chunking_by_token_size 根据 token 数量切分文本，返回List[dict]吧 compute_mdhash_id(dp[&#34;content&#34;], prefix=&#34;chunk-&#34;): {**dp, &#34;full_doc_id&#34;: doc_key,} for dp in chunking_by_token_size( doc[&#34;content&#34;], overlap_token_size=self.chunk_overlap_token_size, max_token_size=self.chunk_token_size, tiktoken_model=self.tiktoken_model_name, ) } # dict.update(dict)如果已存在相同的键，则对应的值会被覆盖；如果不存在，则添加新的键值对。 # dict1 = {&#39;a&#39;: 1, &#39;b&#39;: 2} # dict2 = {&#39;b&#39;: 3, &#39;c&#39;: 4} # dict1.update(dict2) # print(dict1) # Output: {&#39;a&#39;: 1, &#39;b&#39;: 3, &#39;c&#39;: 4} # 因为用了hash内容包括chunk内容，所以不重复 inserting_chunks.update(chunks) &#39;&#39;&#39; n个 hash(&#34;chunk-&#34;+chunk_i的字符串) 组成的list传入self.full_docs.filter_keys self.full_docs.filter_keys 即 JsonKVStorage.filter_keys 返回set{str}(以字符串为元素的字典)，作用是：某chunk 和历史数据中重复或和传入数据中其他chunk重复则排除。 通过比对hash值 &#39;&#39;&#39; _add_chunk_keys = await self.text_chunks.filter_keys( list(inserting_chunks.keys()) ) # 根据key在_add_doc_keys里对inserting_chunks筛选合格的kv对 inserting_chunks = { k: v for k, v in inserting_chunks.items() if k in _add_chunk_keys } # 日志登记 if not len(inserting_chunks): logger.warning(&#34;All chunks are already in the storage&#34;) return logger.info(f&#34;[New Chunks] inserting {len(inserting_chunks)} chunks&#34;) # 将inserting_chunks(字典)存入json await self.chunks_vdb.upsert(inserting_chunks) 实体关系抽取 分为 外部 和 extract_entities函数内部\n">
 <meta property='og:url' content='https://rooobeam.github.io/p/lightrag1.0.3%E4%BB%A3%E7%A0%81%E8%A7%A3%E8%AF%BB/'>
 <meta property='og:site_name' content='rooobeam'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-04-01T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-04-01T00:00:00&#43;00:00'/>
 <meta name="twitter:title" content="Lightrag1.0.3代码解读">
-<meta name="twitter:description" content="主要分初始化、插入、提问两部分\n初始化 插入 插入：rag.insert()异步编程调用ainsert()\nainsert内的各步操作\n文章处理 文本块处理 实体关系抽取 更新各存储区 文章处理 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 # ====== 文章处理 ====== # 单个字符串也变成List(str) if isinstance(string_or_strings, str): string_or_strings = [string_or_strings] # {hash(&#34;doc-&#34;+txt_i的字符串):{&#34;content&#34;: txt_i.strip()}}，txt_i是第i个文章 new_docs = { compute_mdhash_id(c.strip(), prefix=&#34;doc-&#34;): {&#34;content&#34;: c.strip()} for c in string_or_strings } &#39;&#39;&#39; n个 hash(&#34;doc-&#34;+txt_i的字符串) 组成的list 传入 self.full_docs.filter_keys self.full_docs.filter_keys 是 JsonKVStorage.filter_keys方法 返回set{str}(以字符串为元素的字典) 作用是：某文章 和历史数据中重复 或 和传入数据中其他文章重复 则排除。 通过比对hash值 &#39;&#39;&#39; _add_doc_keys = await self.full_docs.filter_keys(list(new_docs.keys())) # key在_add_doc_keys里的kv对留下 new_docs = {k: v for k, v in new_docs.items() if k in _add_doc_keys} # 日志登记 if not len(new_docs): logger.warning(&#34;All docs are already in the storage&#34;) return # storage 是 要更新的flag update_storage = True logger.info(f&#34;[New Docs] inserting {len(new_docs)} docs&#34;) 文本块处理 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 # ====== 文本块处理 ====== # 一次ainsert中的多个文章的chunks字典汇总，ainsert只是事件循环中的一个事件 # {&#34;chunk-&#34;+chunk字符串哈希值: dict, 哈希值: dict,...} inserting_chunks = {} # 外循环 第i篇文章，内循环，第i篇文章第j个chunk for doc_key, doc in \\ tqdm_async(new_docs.items(), desc=&#34;Chunking documents&#34;, unit=&#34;doc&#34;): &#39;&#39;&#39; inserting_chunks = { hash(&#34;chunk-&#34;+chunk_i的字符串): {&#34;tokens&#34;: chunk_i的token数, &#34;content&#34;: chunk_i具体内容, &#34;chunk_order_index&#34;: 是该文章的第i个chunk, &#34;full_doc_id&#34;: doc_key}, hash(&#34;chunk-&#34;+chunk_i+1的字符串): {&#34;tokens&#34;: chunk_i+1的token数, &#34;content&#34;: chunk_i+1具体内容, &#34;chunk_order_index&#34;: 是该文章的第i+1个chunk, &#34;full_doc_id&#34;: doc_key}, } chunks = {哈希值: dict, 哈希值: dict,...} &#39;&#39;&#39; chunks = { # dp是 dict[str, Union[int, str]]，即是个字典，然后键为key，值为Union[int,str]即int 或 str # Union[int,str]具体来说，可以是 该chunk的token数，chunk具体内容，是该文章的第i个chunk # **dp表示解包字典（去掉大括号），并要求&#34;full_doc_id&#34;: doc_key满足dict[str, Union[int, str]] # chunking_by_token_size 根据 token 数量切分文本，返回List[dict]吧 compute_mdhash_id(dp[&#34;content&#34;], prefix=&#34;chunk-&#34;): {**dp, &#34;full_doc_id&#34;: doc_key,} for dp in chunking_by_token_size( doc[&#34;content&#34;], overlap_token_size=self.chunk_overlap_token_size, max_token_size=self.chunk_token_size, tiktoken_model=self.tiktoken_model_name, ) } # dict.update(dict)如果已存在相同的键，则对应的值会被覆盖；如果不存在，则添加新的键值对。 # dict1 = {&#39;a&#39;: 1, &#39;b&#39;: 2} # dict2 = {&#39;b&#39;: 3, &#39;c&#39;: 4} # dict1.update(dict2) # print(dict1) # Output: {&#39;a&#39;: 1, &#39;b&#39;: 3, &#39;c&#39;: 4} # 因为用了hash内容包括chunk内容，所以不重复 inserting_chunks.update(chunks) &#39;&#39;&#39; n个 hash(&#34;chunk-&#34;+chunk_i的字符串) 组成的list传入self.full_docs.filter_keys self.full_docs.filter_keys 即 JsonKVStorage.filter_keys 返回set{str}(以字符串为元素的字典)，作用是：某chunk 和历史数据中重复或和传入数据中其他chunk重复则排除。 通过比对hash值 &#39;&#39;&#39; _add_chunk_keys = await self.text_chunks.filter_keys( list(inserting_chunks.keys()) ) # 根据key在_add_doc_keys里对inserting_chunks筛选合格的kv对 inserting_chunks = { k: v for k, v in inserting_chunks.items() if k in _add_chunk_keys } # 日志登记 if not len(inserting_chunks): logger.warning(&#34;All chunks are already in the storage&#34;) return logger.info(f&#34;[New Chunks] inserting {len(inserting_chunks)} chunks&#34;) # 将inserting_chunks(字典)存入json await self.chunks_vdb.upsert(inserting_chunks) 实体关系抽取 分为 外部 和 extract_entities函数内部\n">
+<meta name="twitter:description" content="主要分初始化、插入、提问三部分\n初始化 插入 插入：rag.insert()异步编程调用ainsert()\nainsert内的各步操作\n文章处理 文本块处理 实体关系抽取 更新各存储区 文章处理 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 # ====== 文章处理 ====== # 单个字符串也变成List(str) if isinstance(string_or_strings, str): string_or_strings = [string_or_strings] # {hash(&#34;doc-&#34;+txt_i的字符串):{&#34;content&#34;: txt_i.strip()}}，txt_i是第i个文章 new_docs = { compute_mdhash_id(c.strip(), prefix=&#34;doc-&#34;): {&#34;content&#34;: c.strip()} for c in string_or_strings } &#39;&#39;&#39; n个 hash(&#34;doc-&#34;+txt_i的字符串) 组成的list 传入 self.full_docs.filter_keys self.full_docs.filter_keys 是 JsonKVStorage.filter_keys方法 返回set{str}(以字符串为元素的字典) 作用是：某文章 和历史数据中重复 或 和传入数据中其他文章重复 则排除。 通过比对hash值 &#39;&#39;&#39; _add_doc_keys = await self.full_docs.filter_keys(list(new_docs.keys())) # key在_add_doc_keys里的kv对留下 new_docs = {k: v for k, v in new_docs.items() if k in _add_doc_keys} # 日志登记 if not len(new_docs): logger.warning(&#34;All docs are already in the storage&#34;) return # storage 是 要更新的flag update_storage = True logger.info(f&#34;[New Docs] inserting {len(new_docs)} docs&#34;) 文本块处理 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 # ====== 文本块处理 ====== # 一次ainsert中的多个文章的chunks字典汇总，ainsert只是事件循环中的一个事件 # {&#34;chunk-&#34;+chunk字符串哈希值: dict, 哈希值: dict,...} inserting_chunks = {} # 外循环 第i篇文章，内循环，第i篇文章第j个chunk for doc_key, doc in \\ tqdm_async(new_docs.items(), desc=&#34;Chunking documents&#34;, unit=&#34;doc&#34;): &#39;&#39;&#39; inserting_chunks = { hash(&#34;chunk-&#34;+chunk_i的字符串): {&#34;tokens&#34;: chunk_i的token数, &#34;content&#34;: chunk_i具体内容, &#34;chunk_order_index&#34;: 是该文章的第i个chunk, &#34;full_doc_id&#34;: doc_key}, hash(&#34;chunk-&#34;+chunk_i+1的字符串): {&#34;tokens&#34;: chunk_i+1的token数, &#34;content&#34;: chunk_i+1具体内容, &#34;chunk_order_index&#34;: 是该文章的第i+1个chunk, &#34;full_doc_id&#34;: doc_key}, } chunks = {哈希值: dict, 哈希值: dict,...} &#39;&#39;&#39; chunks = { # dp是 dict[str, Union[int, str]]，即是个字典，然后键为key，值为Union[int,str]即int 或 str # Union[int,str]具体来说，可以是 该chunk的token数，chunk具体内容，是该文章的第i个chunk # **dp表示解包字典（去掉大括号），并要求&#34;full_doc_id&#34;: doc_key满足dict[str, Union[int, str]] # chunking_by_token_size 根据 token 数量切分文本，返回List[dict]吧 compute_mdhash_id(dp[&#34;content&#34;], prefix=&#34;chunk-&#34;): {**dp, &#34;full_doc_id&#34;: doc_key,} for dp in chunking_by_token_size( doc[&#34;content&#34;], overlap_token_size=self.chunk_overlap_token_size, max_token_size=self.chunk_token_size, tiktoken_model=self.tiktoken_model_name, ) } # dict.update(dict)如果已存在相同的键，则对应的值会被覆盖；如果不存在，则添加新的键值对。 # dict1 = {&#39;a&#39;: 1, &#39;b&#39;: 2} # dict2 = {&#39;b&#39;: 3, &#39;c&#39;: 4} # dict1.update(dict2) # print(dict1) # Output: {&#39;a&#39;: 1, &#39;b&#39;: 3, &#39;c&#39;: 4} # 因为用了hash内容包括chunk内容，所以不重复 inserting_chunks.update(chunks) &#39;&#39;&#39; n个 hash(&#34;chunk-&#34;+chunk_i的字符串) 组成的list传入self.full_docs.filter_keys self.full_docs.filter_keys 即 JsonKVStorage.filter_keys 返回set{str}(以字符串为元素的字典)，作用是：某chunk 和历史数据中重复或和传入数据中其他chunk重复则排除。 通过比对hash值 &#39;&#39;&#39; _add_chunk_keys = await self.text_chunks.filter_keys( list(inserting_chunks.keys()) ) # 根据key在_add_doc_keys里对inserting_chunks筛选合格的kv对 inserting_chunks = { k: v for k, v in inserting_chunks.items() if k in _add_chunk_keys } # 日志登记 if not len(inserting_chunks): logger.warning(&#34;All chunks are already in the storage&#34;) return logger.info(f&#34;[New Chunks] inserting {len(inserting_chunks)} chunks&#34;) # 将inserting_chunks(字典)存入json await self.chunks_vdb.upsert(inserting_chunks) 实体关系抽取 分为 外部 和 extract_entities函数内部\n">
     <link rel="shortcut icon" href="/favicon.ico" />
 
     </head>
@@ -302,7 +302,7 @@
     <section class="article-content">
     
     
-    <p>主要分初始化、插入、提问两部分</p>
+    <p>主要分初始化、插入、提问三部分</p>
 <h2 id="初始化">初始化
 </h2><h2 id="插入">插入
 </h2><p>插入：rag.insert()异步编程调用ainsert()</p>
@@ -310,7 +310,7 @@
 <ul>
 <li>文章处理</li>
 <li>文本块处理</li>
-<li>实体关系抽取</li>
+<li><strong>实体关系抽取</strong></li>
 <li>更新各存储区</li>
 </ul>
 <h3 id="文章处理">文章处理
@@ -1681,6 +1681,431 @@
 </span></span><span class="line"><span class="cl">    <span class="n">results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">upsert</span><span class="p">(</span><span class="n">datas</span><span class="o">=</span><span class="n">list_data</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">results</span>
 </span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="提问query">提问（Query）
+</h2><p>rag.query-&gt;self.aquery</p>
+<p>aquery内 分四种模式，naive 和 local global  hybrid</p>
+<p>naive进入 naive_query   其他三种进入kg_query</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl">    <span class="k">async</span> <span class="k">def</span> <span class="nf">aquery</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">param</span><span class="p">:</span> <span class="n">QueryParam</span> <span class="o">=</span> <span class="n">QueryParam</span><span class="p">()):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">param</span><span class="o">.</span><span class="n">mode</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&#34;local&#34;</span><span class="p">,</span> <span class="s2">&#34;global&#34;</span><span class="p">,</span> <span class="s2">&#34;hybrid&#34;</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">kg_query</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">elif</span> <span class="n">param</span><span class="o">.</span><span class="n">mode</span> <span class="o">==</span> <span class="s2">&#34;naive&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">naive_query</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Unknown mode </span><span class="si">{</span><span class="n">param</span><span class="o">.</span><span class="n">mode</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_query_done</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">response</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="naive朴素">naive（朴素）
+</h3><p>“朴素”query</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="c1"># 一、将提问str转为vector，然后再chunks_vdb中匹配到“cosine_better_than_threshold”的chunk_id</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 前60十个如果能匹配到超过60个低于阈值</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 二、然后根据 chunk_id去 text_chunks_db里找到strs</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 三、最后将strs嵌入prompt输入LLM</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 也就是直接将与问句相似的chunks作为辅助数据让ai回答问题，相似性通过NanoVectorDB提供的向量邻近，本质上还是由embedding决定</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">async</span> <span class="k">def</span> <span class="nf">naive_query</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">query</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">chunks_vdb</span><span class="p">:</span> <span class="n">BaseVectorStorage</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">text_chunks_db</span><span class="p">:</span> <span class="n">BaseKVStorage</span><span class="p">[</span><span class="n">TextChunkSchema</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">    <span class="n">query_param</span><span class="p">:</span> <span class="n">QueryParam</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">global_config</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    query: str
+</span></span></span><span class="line"><span class="cl"><span class="s2">    param=QueryParam(mode=&#34;naive&#34;)
+</span></span></span><span class="line"><span class="cl"><span class="s2">    chunks_vdb: embedding后存入这里，也是字典中包含 chunk的embedding
+</span></span></span><span class="line"><span class="cl"><span class="s2">    text_chunks_db: 原文字符串存入这里，字典结构
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="n">use_model_func</span> <span class="o">=</span> <span class="n">global_config</span><span class="p">[</span><span class="s2">&#34;llm_model_func&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1"># 一、将提问str转为vector，然后再chunks_vdb中匹配到“cosine_better_than_threshold”的chunk_id</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 获取排名前top_k个相关文本块</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># top_k: int = 60</span>
+</span></span><span class="line"><span class="cl">    <span class="n">results</span> <span class="o">=</span> <span class="k">await</span> <span class="n">chunks_vdb</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">top_k</span><span class="o">=</span><span class="n">query_param</span><span class="o">.</span><span class="n">top_k</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">PROMPTS</span><span class="p">[</span><span class="s2">&#34;fail_response&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="n">chunks_ids</span> <span class="o">=</span> <span class="p">[</span><span class="n">r</span><span class="p">[</span><span class="s2">&#34;id&#34;</span><span class="p">]</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1"># 二、然后根据 chunk_id去 text_chunks_db里找到strs</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># chunks: List[str]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">chunks</span> <span class="o">=</span> <span class="k">await</span> <span class="n">text_chunks_db</span><span class="o">.</span><span class="n">get_by_ids</span><span class="p">(</span><span class="n">chunks_ids</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">maybe_trun_chunks</span> <span class="o">=</span> <span class="n">truncate_list_by_token_size</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">chunks</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s2">&#34;content&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="n">max_token_size</span><span class="o">=</span><span class="n">query_param</span><span class="o">.</span><span class="n">max_token_for_text_unit</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Truncate </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">chunks</span><span class="p">)</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">maybe_trun_chunks</span><span class="p">)</span><span class="si">}</span><span class="s2"> chunks&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># section:str = （比如）</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># &#34;机器学习是人工智能的核心...</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># --New Chunk--</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 深度神经网络通过多层非线性变换...</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># --New Chunk--</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># Transformer架构在NLP领域...&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">section</span> <span class="o">=</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">--New Chunk--</span><span class="se">\n</span><span class="s2">&#34;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">c</span><span class="p">[</span><span class="s2">&#34;content&#34;</span><span class="p">]</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">maybe_trun_chunks</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">query_param</span><span class="o">.</span><span class="n">only_need_context</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">section</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">	<span class="c1"># 三、最后将strs嵌入prompt输入LLM</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sys_prompt_temp</span> <span class="o">=</span> <span class="n">PROMPTS</span><span class="p">[</span><span class="s2">&#34;naive_rag_response&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sys_prompt</span> <span class="o">=</span> <span class="n">sys_prompt_temp</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">content_data</span><span class="o">=</span><span class="n">section</span><span class="p">,</span> <span class="n">response_type</span><span class="o">=</span><span class="n">query_param</span><span class="o">.</span><span class="n">response_type</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">query_param</span><span class="o">.</span><span class="n">only_need_prompt</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">sys_prompt</span>
+</span></span><span class="line"><span class="cl">    <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">use_model_func</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">query</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">system_prompt</span><span class="o">=</span><span class="n">sys_prompt</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">response</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys_prompt</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">response</span> <span class="o">=</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="n">response</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">sys_prompt</span><span class="p">)</span> <span class="p">:]</span>
+</span></span><span class="line"><span class="cl">            <span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">sys_prompt</span><span class="p">,</span> <span class="s2">&#34;&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&#34;user&#34;</span><span class="p">,</span> <span class="s2">&#34;&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&#34;model&#34;</span><span class="p">,</span> <span class="s2">&#34;&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="s2">&#34;&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&#34;&lt;system&gt;&#34;</span><span class="p">,</span> <span class="s2">&#34;&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&#34;&lt;/system&gt;&#34;</span><span class="p">,</span> <span class="s2">&#34;&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">response</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="localglobal-and-hybrid">local、global and hybrid
+</h3><p>（局部）（全局）（混合）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">async</span> <span class="k">def</span> <span class="nf">kg_query</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">query</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">knowledge_graph_inst</span><span class="p">:</span> <span class="n">BaseGraphStorage</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">entities_vdb</span><span class="p">:</span> <span class="n">BaseVectorStorage</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">relationships_vdb</span><span class="p">:</span> <span class="n">BaseVectorStorage</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">text_chunks_db</span><span class="p">:</span> <span class="n">BaseKVStorage</span><span class="p">[</span><span class="n">TextChunkSchema</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">    <span class="n">query_param</span><span class="p">:</span> <span class="n">QueryParam</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">global_config</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    query: str
+</span></span></span><span class="line"><span class="cl"><span class="s2">    knowledge_graph_inst: NetworkXStorage
+</span></span></span><span class="line"><span class="cl"><span class="s2">    
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="n">context</span> <span class="o">=</span> <span class="kc">None</span>
+</span></span><span class="line"><span class="cl">    <span class="n">example_number</span> <span class="o">=</span> <span class="n">global_config</span><span class="p">[</span><span class="s2">&#34;addon_params&#34;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&#34;example_number&#34;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 1/2/3 个  examples=多个str连接</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">example_number</span> <span class="ow">and</span> <span class="n">example_number</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">PROMPTS</span><span class="p">[</span><span class="s2">&#34;keywords_extraction_examples&#34;</span><span class="p">]):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">examples</span> <span class="o">=</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="n">PROMPTS</span><span class="p">[</span><span class="s2">&#34;keywords_extraction_examples&#34;</span><span class="p">][:</span> <span class="nb">int</span><span class="p">(</span><span class="n">example_number</span><span class="p">)]</span>
+</span></span><span class="line"><span class="cl">        <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">examples</span> <span class="o">=</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">PROMPTS</span><span class="p">[</span><span class="s2">&#34;keywords_extraction_examples&#34;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">    <span class="n">language</span> <span class="o">=</span> <span class="n">global_config</span><span class="p">[</span><span class="s2">&#34;addon_params&#34;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;language&#34;</span><span class="p">,</span> <span class="n">PROMPTS</span><span class="p">[</span><span class="s2">&#34;DEFAULT_LANGUAGE&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># check mode</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">query_param</span><span class="o">.</span><span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&#34;local&#34;</span><span class="p">,</span> <span class="s2">&#34;global&#34;</span><span class="p">,</span> <span class="s2">&#34;hybrid&#34;</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Unknown mode </span><span class="si">{</span><span class="n">query_param</span><span class="o">.</span><span class="n">mode</span><span class="si">}</span><span class="s2"> in kg_query&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">PROMPTS</span><span class="p">[</span><span class="s2">&#34;fail_response&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># LLM generate keywords</span>
+</span></span><span class="line"><span class="cl">    <span class="n">use_model_func</span> <span class="o">=</span> <span class="n">global_config</span><span class="p">[</span><span class="s2">&#34;llm_model_func&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">kw_prompt_temp</span> <span class="o">=</span> <span class="n">PROMPTS</span><span class="p">[</span><span class="s2">&#34;keywords_extraction&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">kw_prompt</span> <span class="o">=</span> <span class="n">kw_prompt_temp</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">query</span><span class="o">=</span><span class="n">query</span><span class="p">,</span> <span class="n">examples</span><span class="o">=</span><span class="n">examples</span><span class="p">,</span> <span class="n">language</span><span class="o">=</span><span class="n">language</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># Output:</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># {{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#     &#34;high_level_keywords&#34;: [&#34;Education&#34;, &#34;Poverty reduction&#34;, &#34;Socioeconomic development&#34;],</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#     &#34;low_level_keywords&#34;: [&#34;School access&#34;, &#34;Literacy rates&#34;, &#34;Job training&#34;, &#34;Income inequality&#34;]</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># }}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">use_model_func</span><span class="p">(</span><span class="n">kw_prompt</span><span class="p">,</span> <span class="n">keyword_extraction</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&#34;kw_prompt result:&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># json_text = locate_json_string_body_from_string(result) # handled in use_model_func</span>
+</span></span><span class="line"><span class="cl">        <span class="n">keywords_data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># List[str]</span>
+</span></span><span class="line"><span class="cl">        <span class="n">hl_keywords</span> <span class="o">=</span> <span class="n">keywords_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&#34;high_level_keywords&#34;</span><span class="p">,</span> <span class="p">[])</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ll_keywords</span> <span class="o">=</span> <span class="n">keywords_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&#34;low_level_keywords&#34;</span><span class="p">,</span> <span class="p">[])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># Handle parsing error</span>
+</span></span><span class="line"><span class="cl">    <span class="k">except</span> <span class="n">json</span><span class="o">.</span><span class="n">JSONDecodeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;JSON parsing error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">PROMPTS</span><span class="p">[</span><span class="s2">&#34;fail_response&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># Handdle keywords missing</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 如果local，ll_keywords必为&#34;kw1, kw2, ...&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 如果global，hl_keywords必为&#34;kw1, kw2, ...&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 如果hybrid，二者都必为&#34;kw1, kw2, ...&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">hl_keywords</span> <span class="o">==</span> <span class="p">[]</span> <span class="ow">and</span> <span class="n">ll_keywords</span> <span class="o">==</span> <span class="p">[]:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&#34;low_level_keywords and high_level_keywords is empty&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">PROMPTS</span><span class="p">[</span><span class="s2">&#34;fail_response&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">ll_keywords</span> <span class="o">==</span> <span class="p">[]</span> <span class="ow">and</span> <span class="n">query_param</span><span class="o">.</span><span class="n">mode</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&#34;local&#34;</span><span class="p">,</span> <span class="s2">&#34;hybrid&#34;</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&#34;low_level_keywords is empty&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">PROMPTS</span><span class="p">[</span><span class="s2">&#34;fail_response&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ll_keywords</span> <span class="o">=</span> <span class="s2">&#34;, &#34;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ll_keywords</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">hl_keywords</span> <span class="o">==</span> <span class="p">[]</span> <span class="ow">and</span> <span class="n">query_param</span><span class="o">.</span><span class="n">mode</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&#34;global&#34;</span><span class="p">,</span> <span class="s2">&#34;hybrid&#34;</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&#34;high_level_keywords is empty&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">PROMPTS</span><span class="p">[</span><span class="s2">&#34;fail_response&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">hl_keywords</span> <span class="o">=</span> <span class="s2">&#34;, &#34;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">hl_keywords</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># Build context</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># [&#34;kw1, kw2, ...&#34;, &#34;kw1, kw2, ...&#34;]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">keywords</span> <span class="o">=</span> <span class="p">[</span><span class="n">ll_keywords</span><span class="p">,</span> <span class="n">hl_keywords</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># query_param.mode是不一样的，会选择不同模式，返回的context不一样</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 貌似需要关键字对应图中结点，万一同义不同词咋办，学校/院校，就对应不上了</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># context:str =</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    -----Entities-----
+</span></span></span><span class="line"><span class="cl"><span class="s2">    ```csv
+</span></span></span><span class="line"><span class="cl"><span class="s2">    </span><span class="si">{entities_context}</span><span class="s2">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><pre><code>-----Relationships-----
+```csv
+{relations_context}
+```
+-----Sources-----
+```csv
+{text_units_context}
+```
+&quot;&quot;&quot;
+# 包含了实体、关系、相关chunks
+context = await _build_query_context(
+    keywords,
+    knowledge_graph_inst,
+    entities_vdb,
+    relationships_vdb,
+    text_chunks_db,
+    query_param,
+)
+
+if query_param.only_need_context:
+    return context
+if context is None:
+    return PROMPTS[&quot;fail_response&quot;]
+
+sys_prompt_temp = PROMPTS[&quot;rag_response&quot;]
+sys_prompt = sys_prompt_temp.format(
+    context_data=context, response_type=query_param.response_type
+)
+
+if query_param.only_need_prompt:
+    return sys_prompt
+
+response = await use_model_func(
+    query,
+    system_prompt=sys_prompt,
+)
+if len(response) &gt; len(sys_prompt):
+    response = (
+        response.replace(sys_prompt, &quot;&quot;)
+        .replace(&quot;user&quot;, &quot;&quot;)
+        .replace(&quot;model&quot;, &quot;&quot;)
+        .replace(query, &quot;&quot;)
+        .replace(&quot;&lt;system&gt;&quot;, &quot;&quot;)
+        .replace(&quot;&lt;/system&gt;&quot;, &quot;&quot;)
+        .strip()
+    )
+
+return response
+</code></pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"></code></pre></td></tr></table>
 </div>
 </div>
 </section>
