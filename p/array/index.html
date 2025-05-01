@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="一、两数之和 1. 两数之和 - 力扣（LeetCode）\n给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target 的那 两个 整数，并返回它们的数组下标。\n">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Array 目录结构 - - - - 一、两数之和 二、删除有序数组中的重复项 三、搜索插入位置 四、加一 一、两数之和 1. 两数之和 - 力扣（LeetCode）\n给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target 的那 两个 整数，并返回它们的数组下标。\n">
 <title>Array</title>
 
 <link rel='canonical' href='https://rooobeam.github.io/p/array/'>
 
 <link rel="stylesheet" href="/scss/style.min.a396f93d13972177774da34b7aabdd4857291f5ce9113104ceb0746cb724125a.css"><meta property='og:title' content="Array">
-<meta property='og:description' content="一、两数之和 1. 两数之和 - 力扣（LeetCode）\n给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target 的那 两个 整数，并返回它们的数组下标。\n">
+<meta property='og:description' content="Array 目录结构 - - - - 一、两数之和 二、删除有序数组中的重复项 三、搜索插入位置 四、加一 一、两数之和 1. 两数之和 - 力扣（LeetCode）\n给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target 的那 两个 整数，并返回它们的数组下标。\n">
 <meta property='og:url' content='https://rooobeam.github.io/p/array/'>
 <meta property='og:site_name' content='rooobeam'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-04-27T12:01:43&#43;08:00'/><meta property='article:modified_time' content='2025-04-27T12:01:43&#43;08:00'/>
 <meta name="twitter:title" content="Array">
-<meta name="twitter:description" content="一、两数之和 1. 两数之和 - 力扣（LeetCode）\n给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target 的那 两个 整数，并返回它们的数组下标。\n">
+<meta name="twitter:description" content="Array 目录结构 - - - - 一、两数之和 二、删除有序数组中的重复项 三、搜索插入位置 四、加一 一、两数之和 1. 两数之和 - 力扣（LeetCode）\n给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target 的那 两个 整数，并返回它们的数组下标。\n">
     <link rel="shortcut icon" href="/favicon.ico" />
 
     </head>
@@ -322,7 +322,27 @@
     <section class="article-content">
     
     
-    <h2 id="一两数之和">一、两数之和
+    <h1 id="array">Array
+</h1><h2 id="目录结构">目录结构
+</h2><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>-</th>
+          <th>-</th>
+          <th>-</th>
+          <th>-</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><a class="link" href="#%e4%b8%80%e4%b8%a4%e6%95%b0%e4%b9%8b%e5%92%8c" >一、两数之和</a></td>
+          <td><a class="link" href="#%e4%ba%8c%e5%88%a0%e9%99%a4%e6%9c%89%e5%ba%8f%e6%95%b0%e7%bb%84%e4%b8%ad%e7%9a%84%e9%87%8d%e5%a4%8d%e9%a1%b9" >二、删除有序数组中的重复项</a></td>
+          <td><a class="link" href="#%e4%b8%89%e6%90%9c%e7%b4%a2%e6%8f%92%e5%85%a5%e4%bd%8d%e7%bd%ae" >三、搜索插入位置</a></td>
+          <td><a class="link" href="#%e5%9b%9b%e5%8a%a0%e4%b8%80" >四、加一</a></td>
+      </tr>
+  </tbody>
+</table></div>
+<h2 id="一两数之和">一、两数之和
 </h2><p><a class="link" href="https://leetcode.cn/problems/two-sum/description/?envType=problem-list-v2&amp;envId=array"  target="_blank" rel="noopener"
     >1. 两数之和 - 力扣（LeetCode）</a></p>
 <p>给定一个整数数组 <code>nums</code> 和一个整数目标值 <code>target</code>，请你在该数组中找出 <strong>和为目标值</strong> <em><code>target</code></em> 的那 <strong>两个</strong> 整数，并返回它们的数组下标。</p>
@@ -435,9 +455,144 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">p</span><span class="o">+</span><span class="mi">1</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>what I learn:</p>
+</div><p><strong>what I learn:</strong></p>
 <ul>
 <li>快慢指针，数据需要有有序性。</li>
+</ul>
+<h2 id="三搜索插入位置">三、搜索插入位置
+</h2><p><a class="link" href="https://leetcode.cn/problems/search-insert-position/description/?envType=problem-list-v2&amp;envId=array"  target="_blank" rel="noopener"
+    >35. 搜索插入位置 - 力扣（LeetCode）</a></p>
+<p>**（二分法）**记住就好了 T-T</p>
+<p>给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置。</p>
+<p>请必须使用时间复杂度为 <code>O(log n)</code> 的算法。</p>
+<p><strong>示例：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">输入</span><span class="p">:</span> <span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span> <span class="n">target</span> <span class="o">=</span> <span class="mi">5</span>
+</span></span><span class="line"><span class="cl"><span class="n">输出</span><span class="p">:</span> <span class="mi">2</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>代码：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">searchInsert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">target</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># 上下界限设置，target 最大时要放在“第len(nums)个位置”，最小时要放在“第0个位置”</span>
+</span></span><span class="line"><span class="cl">        <span class="n">up</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">low</span><span class="o">=</span><span class="mi">0</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="kc">True</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="c1"># i为 正中（奇）或 偏上（偶）</span>
+</span></span><span class="line"><span class="cl">            <span class="n">i</span><span class="o">=</span><span class="p">(</span><span class="n">low</span><span class="o">+</span><span class="n">up</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span>
+</span></span><span class="line"><span class="cl">            <span class="c1"># 重合即为最终位置</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">low</span><span class="o">==</span><span class="n">up</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="n">low</span>
+</span></span><span class="line"><span class="cl">            <span class="c1"># 因为是向下取整的i，上界下移到i;下界上移到i+1。</span>
+</span></span><span class="line"><span class="cl">            <span class="c1"># 比如low=0,up=5，则：mid=2.5,i=2，小的区域为0~2(i)，大的区域为3(i+1)~5</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">target</span><span class="o">&lt;</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">up</span><span class="o">=</span><span class="n">i</span>
+</span></span><span class="line"><span class="cl">            <span class="k">elif</span> <span class="n">target</span><span class="o">&gt;</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">low</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span>
+</span></span><span class="line"><span class="cl">            <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="n">i</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="四加一">四、加一
+</h2><p><a class="link" href="https://leetcode.cn/problems/plus-one/?envType=problem-list-v2&amp;envId=array"  target="_blank" rel="noopener"
+    >66. 加一 - 力扣（LeetCode）</a></p>
+<p>给定一个由 <strong>整数</strong> 组成的 <strong>非空</strong> 数组所表示的非负整数，在该数的基础上加一。</p>
+<p>最高位数字存放在数组的首位， 数组中每个元素只存储<strong>单个</strong>数字。</p>
+<p>你可以假设除了整数 0 之外，这个整数不会以零开头。</p>
+<p><strong>示例 1：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">输入</span><span class="err">：</span><span class="n">digits</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">输出</span><span class="err">：</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">解释</span><span class="err">：</span><span class="n">输入数组表示数字</span> <span class="mi">123</span><span class="err">。</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>示例 2：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">输入</span><span class="err">：</span><span class="n">digits</span> <span class="o">=</span> <span class="p">[</span><span class="mi">9</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">输出</span><span class="err">：</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">解释</span><span class="err">：</span><span class="n">输入数组表示数字</span> <span class="mi">9</span><span class="err">。</span>
+</span></span><span class="line"><span class="cl"><span class="n">加</span> <span class="mi">1</span> <span class="n">得到了</span> <span class="mi">9</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">=</span> <span class="mi">10</span><span class="err">。</span>
+</span></span><span class="line"><span class="cl"><span class="n">因此</span><span class="err">，</span><span class="n">结果应该是</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="err">。</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>代码：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">plusOne</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">digits</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># 逆序，从低位开始，发现小于9的说明不用进位，加一退出，否则+1是10，当前位为0，进入下一位重复</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">digits</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">digits</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&lt;</span><span class="mi">9</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">digits</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+=</span><span class="mi">1</span>
+</span></span><span class="line"><span class="cl">                <span class="k">break</span>
+</span></span><span class="line"><span class="cl">            <span class="n">digits</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span>
+</span></span><span class="line"><span class="cl">		<span class="c1"># 如果最高位为0，说明进位了，前面插入1</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="ow">not</span> <span class="n">digits</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">digits</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">digits</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>what I learn:</strong></p>
+<ul>
+<li>逆序索引  range(len(digits)-1,-1,-1)     从len(digits)-1开始，步长为-1(递减)，到-1，左闭右开[len(digits)-1, -1)。</li>
 </ul>
 
 </section>
