@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://rooobeam.github.io/p/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AC%AC%E5%8D%81%E7%AB%A0/'>
 
-<link rel="stylesheet" href="/scss/style.min.127d1a8e8a86e1a240d1e8dd494e16975e5d8cb0f97aac7720466052e30382be.css"><meta property='og:title' content="汇编语言第十章">
+<link rel="stylesheet" href="/scss/style.min.a7558000c2456f20ae90904971171af41a2b987eed638982c918c424b3e14d7b.css"><meta property='og:title' content="汇编语言第十章">
 <meta property='og:description' content="第十章 CALL 和 RET指令 ret、retf ret —— return\tretf —— return far\nret 出栈字单元 放入IP\n相当于 pop IP\nretf 第一次出栈 字单元 放入 IP，第二次出栈 字单元 放入CS，相当于\npop IP\npop CS\n栈里，CS总在IP底下\n">
 <meta property='og:url' content='https://rooobeam.github.io/p/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AC%AC%E5%8D%81%E7%AB%A0/'>
 <meta property='og:site_name' content='rooobeam'>
@@ -214,7 +214,52 @@
     </ol>
 </aside>
 
-    
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#retretf">ret、retf</a></li>
+    <li><a href="#call">call</a>
+      <ol>
+        <li><a href="#标号型">标号型</a></li>
+        <li><a href="#寄存器型">寄存器型</a></li>
+        <li><a href="#内存单元型">内存单元型</a></li>
+      </ol>
+    </li>
+    <li><a href="#call和ret实现模块化">call和ret实现模块化</a></li>
+    <li><a href="#mul指令">mul指令</a></li>
+    <li><a href="#实验10">实验10</a>
+      <ol>
+        <li><a href="#1显示字符串">1.显示字符串</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
 
             <main class="main full-width">
     <article class="main-article">

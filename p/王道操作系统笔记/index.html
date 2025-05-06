@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://rooobeam.github.io/p/%E7%8E%8B%E9%81%93%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0/'>
 
-<link rel="stylesheet" href="/scss/style.min.127d1a8e8a86e1a240d1e8dd494e16975e5d8cb0f97aac7720466052e30382be.css"><meta property='og:title' content="王道操作系统笔记">
+<link rel="stylesheet" href="/scss/style.min.a7558000c2456f20ae90904971171af41a2b987eed638982c918c424b3e14d7b.css"><meta property='og:title' content="王道操作系统笔记">
 <meta property='og:description' content="操作系统 1.1_1 操作系统的概念、功能和目标 作为用户和计算机硬件之间的接口\n提供的功能 命令接口 联机命令接口 脱机命令接口 程序接口 GUI（图形用户界面） Windows iOS Android 目标 方便用户使用 1.1_2 操作系统的特征 特征 定义 并发 多个事件交替发生（宏观同时发生、微观交替进行） 并行 多个事件同时发生 共享 两种资源共享方式：\n1. 互斥共享方式（如打印机）\n2. 同时共享方式（如文件） 虚拟 物理实体映射为多个逻辑实体：\n- 空分复用技术（如虚拟内存）\n- 时分复用技术（如CPU分时） 异步 进程执行走走停停，速度不可预知（需并发性支持） 1.1_3 操作系统的发展与分类 发展阶段 手工操作阶段 纸带机（用户独占全机、人机速度矛盾） 批处理阶段 单道批处理系统（外围机→磁带） 多道批处理系统（操作系统出现） 分时操作系统 轮流处理作业 无法处理紧急任务 实时操作系统 硬实时系统（严格时间限制） 软实时系统（允许偶尔犯错） 其他类型 网络操作系统 分布式操作系统 个人计算机操作系统 1.1_4 操作系统的运行机制与体系结构 运行机制 两种指令 特权指令（仅内核态可用） 非特权指令 两种处理器状态 核心态（root权限） 用户态 两种程序 内核程序（运行在核心态） 应用程序 操作系统内核功能 时钟管理 中断处理 原语（原子性操作） 资源管理 进程管理 存储器管理 设备管理 体系结构 类型 特点 大内核 主要功能模块运行在核心态（如Linux） 微内核 仅保留最基本功能（如Windows NT） 1.1_5 中断和异常 中断机制的作用：用户态→核心态的唯一途径 中断分类： 1 2 3 4 5 6 graph LR A[中断] --&gt; B[内中断（异常）] A --&gt; C[外中断] B --&gt; D[陷阱（trap）] B --&gt; E[故障（fault）] B --&gt; F[中止（abort）] 1.1_6 系统调用 概念：应用程序通过系统调用请求OS服务 与库函数的区别： 系统调用 库函数 OS直接提供的接口 可能封装系统调用 需切换到核心态 运行在用户态 2.1_1 进程的定义、组成、组织方式、特征 定义 进程：程序的一次执行过程 组成 PCB（进程存在唯一标志） 程序段 数据段 组织方式 链接方式（队列指针） 索引方式（索引表） 特征 动态性、并发性、独立性、异步性、结构性 2.1_2 进程的状态与转换 进程状态 状态 描述 资源占用情况 运行态 占有CPU并执行指令（单核CPU同一时刻只能有一个进程处于运行态） CPU√，其他资源√ 就绪态 具备运行条件，但无空闲CPU（等待调度） CPU×，其他资源√ 阻塞态 等待某事件（如I/O完成） CPU×，其他资源× 创建态 正在分配PCB、程序段和数据段 - 终止态 资源回收中 - 状态转换 1 2 3 4 5 6 7 8 stateDiagram-v2 [*] --&gt; 创建态 创建态 --&gt; 就绪态 就绪态 --&gt; 运行态 运行态 --&gt; 就绪态: 时间片用完 运行态 --&gt; 阻塞态: 主动等待资源 阻塞态 --&gt; 就绪态: 事件发生 运行态 --&gt; 终止态: 异常终止/完成 2.1_3 进程控制 进程控制 用原语实现进程控制\n">
 <meta property='og:url' content='https://rooobeam.github.io/p/%E7%8E%8B%E9%81%93%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0/'>
 <meta property='og:site_name' content='rooobeam'>
@@ -214,7 +214,103 @@
     </ol>
 </aside>
 
-    
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#11_"><strong>1.1_1 操作系统的概念、功能和目标</strong></a>
+      <ol>
+        <li><a href="#提供的功能">提供的功能</a></li>
+        <li><a href="#目标">目标</a></li>
+      </ol>
+    </li>
+    <li><a href="#11_-1"><strong>1.1_2 操作系统的特征</strong></a></li>
+    <li><a href="#11_-2"><strong>1.1_3 操作系统的发展与分类</strong></a>
+      <ol>
+        <li><a href="#发展阶段">发展阶段</a></li>
+      </ol>
+    </li>
+    <li><a href="#11_-3"><strong>1.1_4 操作系统的运行机制与体系结构</strong></a>
+      <ol>
+        <li><a href="#运行机制">运行机制</a></li>
+        <li><a href="#操作系统内核功能">操作系统内核功能</a></li>
+        <li><a href="#体系结构">体系结构</a></li>
+      </ol>
+    </li>
+    <li><a href="#11_-4"><strong>1.1_5 中断和异常</strong></a></li>
+    <li><a href="#11_-5"><strong>1.1_6 系统调用</strong></a></li>
+    <li><a href="#21_"><strong>2.1_1 进程的定义、组成、组织方式、特征</strong></a>
+      <ol>
+        <li><a href="#定义">定义</a></li>
+        <li><a href="#组成">组成</a></li>
+        <li><a href="#组织方式">组织方式</a></li>
+        <li><a href="#特征">特征</a></li>
+      </ol>
+    </li>
+    <li><a href="#21_2-进程的状态与转换">2.1_2 进程的状态与转换</a>
+      <ol>
+        <li><a href="#进程状态">进程状态</a></li>
+        <li><a href="#状态转换">状态转换</a></li>
+      </ol>
+    </li>
+    <li><a href="#21_3-进程控制">2.1_3 进程控制</a>
+      <ol>
+        <li><a href="#进程控制">进程控制</a></li>
+        <li><a href="#原语操作">原语操作</a></li>
+        <li><a href="#关键原语">关键原语</a></li>
+      </ol>
+    </li>
+    <li><a href="#21_4-进程通信">2.1_4 进程通信</a>
+      <ol>
+        <li><a href="#通信方式对比">通信方式对比</a></li>
+      </ol>
+    </li>
+    <li><a href="#21_5-线程概念与多线程模型">2.1_5 线程概念与多线程模型</a>
+      <ol>
+        <li><a href="#线程-vs-进程">线程 vs 进程</a></li>
+        <li><a href="#线程实现方式">线程实现方式</a></li>
+        <li><a href="#线程实现模型">线程实现模型</a></li>
+      </ol>
+    </li>
+    <li><a href="#22_1-处理机调度的概念与层次">2.2_1 处理机调度的概念与层次</a>
+      <ol>
+        <li><a href="#三级调度对比">三级调度对比</a></li>
+        <li><a href="#挂起状态">挂起状态</a></li>
+      </ol>
+    </li>
+    <li><a href="#22_2-进程调度时机与方式">2.2_2 进程调度时机与方式</a>
+      <ol>
+        <li><a href="#调度触发条件">调度触发条件</a></li>
+        <li><a href="#调度方式">调度方式</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
 
             <main class="main full-width">
     <article class="main-article">
