@@ -7,36 +7,36 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>rooobeam</copyright>
-        <lastBuildDate>Wed, 19 Feb 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://rooobeam.github.io/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 27 Apr 2025 12:01:43 +0800</lastBuildDate><atom:link href="https://rooobeam.github.io/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>基础</title>
+        <link>https://rooobeam.github.io/categories/%E5%9F%BA%E7%A1%80/</link>
+        <pubDate>Sun, 27 Apr 2025 12:01:43 +0800</pubDate>
+        
+        <guid>https://rooobeam.github.io/categories/%E5%9F%BA%E7%A1%80/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>算法</title>
+        <link>https://rooobeam.github.io/categories/%E7%AE%97%E6%B3%95/</link>
+        <pubDate>Sun, 27 Apr 2025 12:01:43 +0800</pubDate>
+        
+        <guid>https://rooobeam.github.io/categories/%E7%AE%97%E6%B3%95/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>编程语言</title>
+        <link>https://rooobeam.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/</link>
+        <pubDate>Sun, 16 Mar 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://rooobeam.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/</guid>
+        <description></description>
+        </item>
+        <item>
         <title>Syntax</title>
         <link>https://rooobeam.github.io/categories/syntax/</link>
         <pubDate>Wed, 19 Feb 2025 00:00:00 +0000</pubDate>
         
         <guid>https://rooobeam.github.io/categories/syntax/</guid>
-        <description></description>
-        </item>
-        <item>
-        <title>Themes</title>
-        <link>https://rooobeam.github.io/categories/themes/</link>
-        <pubDate>Wed, 19 Feb 2025 00:00:00 +0000</pubDate>
-        
-        <guid>https://rooobeam.github.io/categories/themes/</guid>
-        <description></description>
-        </item>
-        <item>
-        <title>Test</title>
-        <link>https://rooobeam.github.io/categories/test/</link>
-        <pubDate>Wed, 09 Sep 2020 00:00:00 +0000</pubDate>
-        
-        <guid>https://rooobeam.github.io/categories/test/</guid>
-        <description>&lt;img src="https://rooobeam.github.io/categories/test/hutomo-abrianto-l2jk-uxb1BY-unsplash.jpg" alt="Featured image of post Test" /&gt;</description>
-        </item>
-        <item>
-        <title>测试</title>
-        <link>https://rooobeam.github.io/categories/%E6%B5%8B%E8%AF%95/</link>
-        <pubDate>Wed, 09 Sep 2020 00:00:00 +0000</pubDate>
-        
-        <guid>https://rooobeam.github.io/categories/%E6%B5%8B%E8%AF%95/</guid>
         <description></description>
         </item>
         

@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://rooobeam.github.io/p/lightrag1.2.6%E4%BB%A3%E7%A0%81%E8%A7%A3%E8%AF%BB/'>
 
-<link rel="stylesheet" href="/scss/style.min.a396f93d13972177774da34b7aabdd4857291f5ce9113104ceb0746cb724125a.css"><meta property='og:title' content="Lightrag1.2.6代码解读">
+<link rel="stylesheet" href="/scss/style.min.127d1a8e8a86e1a240d1e8dd494e16975e5d8cb0f97aac7720466052e30382be.css"><meta property='og:title' content="Lightrag1.2.6代码解读">
 <meta property='og:description' content="项目 目的 极简版 得到 文本块，处理为 实体 和 关系\na. 文本块（chunks） 文本内容：&ldquo;Alice and Bob are collaborating on quantum computing research.&rdquo; 来源id：doc-1 b. 实体（entities） 实体名称 类型 描述 来源 Alice person 量子物理领域的研究员 doc-1 Bob person 数学家 doc-1 Quantum Computing technology 利用量子力学现象进行计算的技术 doc-1 c. 关系（relationships） 关系编号 起点（src_id） 终点（tgt_id） 描述 关键词 权重 来源 1 Alice Bob Alice和Bob是研究伙伴 collaboration, research 1.0 doc-1 2 Alice Quantum Computing Alice从事量子计算研究 research, expertise 1.0 doc-1 3 Bob Quantum Computing Bob研究量子计算的应用 research, application 1.0 doc-1 项目结构 边看边更新\n">
 <meta property='og:url' content='https://rooobeam.github.io/p/lightrag1.2.6%E4%BB%A3%E7%A0%81%E8%A7%A3%E8%AF%BB/'>
 <meta property='og:site_name' content='rooobeam'>
@@ -72,7 +72,7 @@
         
         <div class="site-meta">
             <h1 class="site-name"><a href="/">rooobeam</a></h1>
-            <h2 class="site-description">rooobeam&#39;s blogs</h2>
+            <h2 class="site-description"></h2>
         </div>
     </header><ol class="menu-social">
             
@@ -144,65 +144,6 @@
 
                 
                 <span>Home</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/_index.zh-cn/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <polyline points="5 12 3 12 12 3 21 12 19 12" />
-  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
-  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
-</svg>
-
-
-
-                
-                <span>主页</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/about/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="7" r="4" />
-  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
-</svg>
-
-
-
-                
-                <span>About</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/archives/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <rect x="3" y="4" width="18" height="4" rx="2" />
-  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
-  <line x1="10" y1="12" x2="14" y2="12" />
-</svg>
-
-
-
-                
-                <span>Archives</span>
             </a>
         </li>
         

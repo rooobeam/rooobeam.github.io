@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://rooobeam.github.io/p/networkx.graph%E7%B1%BB/'>
 
-<link rel="stylesheet" href="/scss/style.min.a396f93d13972177774da34b7aabdd4857291f5ce9113104ceb0746cb724125a.css"><meta property='og:title' content="Networkx.Graph类">
+<link rel="stylesheet" href="/scss/style.min.127d1a8e8a86e1a240d1e8dd494e16975e5d8cb0f97aac7720466052e30382be.css"><meta property='og:title' content="Networkx.Graph类">
 <meta property='og:description' content="networkx.Graph 类常见方法和属性 目录 1. 初始化图 2. 添加节点 3. 添加边 4. 删除节点/边 5. 检查存在性 6. 基本属性 7. 节点与边的属性 8. 图的操作 9. 节点邻居与度数 10. 示例代码 1. 初始化图 1 2 import networkx as nx G = nx.Graph() # 创建空的无向图 2. 添加节点 1 2 3 4 5 # 添加单个节点（带属性） G.add_node(1, color=&#39;red&#39;, size=10) # 批量添加节点 节点2、3共用属性 G.add_nodes_from([2, 3], category=&#39;A&#39;) 3. 添加边 1 2 3 4 5 6 7 8 # 添加单条边（带权重） G.add_edge(1, 2, weight=4.7) # 批量添加边 G.add_edges_from([(1, 3), (2, 3)], type=&#39;friendship&#39;) # 批量添加带权重的边 G.add_weighted_edges_from([(1, 2, 0.5), (2, 3, 0.8)]) 4. 删除节点/边 1 2 3 4 5 6 7 # 删除节点 G.remove_node(1) G.remove_nodes_from([2, 3]) # 删除边 G.remove_edge(1, 2) G.remove_edges_from([(1, 2), (2, 3)]) 5. 检查存在性 1 2 G.has_node(1) # 返回布尔值 G.has_edge(1,2) # 返回布尔值 6. 基本属性 1 2 3 4 5 6 7 8 9 10 11 12 13 # 节点和边视图 list(G.nodes) # [1, 2, 3] list(G.edges(data=&#39;weight&#39;)) # 边及属性 # 邻接字典 G.adj[1] # 输出: {2: {&#39;weight&#39;: 0.5}} # 全局属性 G.graph[&#39;name&#39;] = &#39;My Graph&#39; # 统计方法 G.number_of_nodes() # 节点总数 G.number_of_edges() # 边总数 7. 节点与边的属性 1 2 3 4 5 6 7 8 9 10 # 节点属性操作，先要保证 1 结点存在 G.nodes[1][&#39;color&#39;] = &#39;blue&#39; G.nodes.add(2, &#39;color&#39; = &#39;blue&#39;) color = G.nodes[1].get(&#39;color&#39;, &#39;default&#39;) color = G.nodes.get(1, &#39;color&#39;, &#39;default&#39;) # 边属性操作 G.edges[1, 2][&#39;weight&#39;] = 5.0 weight = G.edges[1, 2].get(&#39;weight&#39;, 1.0) 注意点：\n">
 <meta property='og:url' content='https://rooobeam.github.io/p/networkx.graph%E7%B1%BB/'>
 <meta property='og:site_name' content='rooobeam'>
@@ -72,7 +72,7 @@
         
         <div class="site-meta">
             <h1 class="site-name"><a href="/">rooobeam</a></h1>
-            <h2 class="site-description">rooobeam&#39;s blogs</h2>
+            <h2 class="site-description"></h2>
         </div>
     </header><ol class="menu-social">
             
@@ -144,65 +144,6 @@
 
                 
                 <span>Home</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/_index.zh-cn/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <polyline points="5 12 3 12 12 3 21 12 19 12" />
-  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
-  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
-</svg>
-
-
-
-                
-                <span>主页</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/about/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="7" r="4" />
-  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
-</svg>
-
-
-
-                
-                <span>About</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/archives/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <rect x="3" y="4" width="18" height="4" rx="2" />
-  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
-  <line x1="10" y1="12" x2="14" y2="12" />
-</svg>
-
-
-
-                
-                <span>Archives</span>
             </a>
         </li>
         
