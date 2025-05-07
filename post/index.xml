@@ -4695,11 +4695,13 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h3 id=&#34;naive朴素&#34;&gt;naive（朴素）
-&lt;/h3&gt;&lt;p&gt;​	直接将query_vector和chunk_vector匹配&lt;/p&gt;
-&lt;p&gt;​	一、将提问str转为vector，然后再chunks_vdb中匹配到“cosine_better_than_threshold”的前60十个chunk_id（如果能匹配到超过60个低于阈值的）
-二、然后根据 chunk_id去 text_chunks_db里找到strs
-三、最后将strs嵌入prompt输入LLM
-也就是直接将与问句相似的chunks作为辅助数据让ai回答问题，相似性通过NanoVectorDB提供的向量邻近，本质上还是由embedding决定&lt;/p&gt;
+&lt;/h3&gt;&lt;p&gt;直接将query_vector和chunk_vector匹配。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;将提问str转为vector，然后再chunks_vdb中匹配到“cosine_better_than_threshold”的前60十个chunk_id（如果能匹配到超过60个低于阈值的）&lt;/li&gt;
+&lt;li&gt;然后根据 chunk_id去 text_chunks_db里找到strs&lt;/li&gt;
+&lt;li&gt;最后将strs嵌入prompt输入LLM
+也就是直接将与问句相似的chunks作为辅助数据让ai回答问题，相似性通过NanoVectorDB提供的向量邻近，本质上还是由embedding决定&lt;/li&gt;
+&lt;/ol&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1

@@ -1719,11 +1719,13 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="naive朴素">naive（朴素）
-</h3><p>​	直接将query_vector和chunk_vector匹配</p>
-<p>​	一、将提问str转为vector，然后再chunks_vdb中匹配到“cosine_better_than_threshold”的前60十个chunk_id（如果能匹配到超过60个低于阈值的）
-二、然后根据 chunk_id去 text_chunks_db里找到strs
-三、最后将strs嵌入prompt输入LLM
-也就是直接将与问句相似的chunks作为辅助数据让ai回答问题，相似性通过NanoVectorDB提供的向量邻近，本质上还是由embedding决定</p>
+</h3><p>直接将query_vector和chunk_vector匹配。</p>
+<ol>
+<li>将提问str转为vector，然后再chunks_vdb中匹配到“cosine_better_than_threshold”的前60十个chunk_id（如果能匹配到超过60个低于阈值的）</li>
+<li>然后根据 chunk_id去 text_chunks_db里找到strs</li>
+<li>最后将strs嵌入prompt输入LLM
+也就是直接将与问句相似的chunks作为辅助数据让ai回答问题，相似性通过NanoVectorDB提供的向量邻近，本质上还是由embedding决定</li>
+</ol>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
