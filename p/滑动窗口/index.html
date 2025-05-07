@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Array 目录结构 - - - - 一、两数之和 二、删除有序数组中的重复项 三、搜索插入位置 四、加一 一、两数之和 1. 两数之和 - 力扣（LeetCode）\n给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target 的那 两个 整数，并返回它们的数组下标。\n">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="滑动窗口与双指针 灵神题单：分享丨【算法题单】滑动窗口与双指针（定长/不定长/单序列/双序列/三指针/分组循环）- 讨论 - 力扣（LeetCode）\n两数之和 1. 两数之和 - 力扣（LeetCode）\n">
 <title>滑动窗口</title>
 
 <link rel='canonical' href='https://rooobeam.github.io/p/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/'>
 
 <link rel="stylesheet" href="/scss/style.min.a7558000c2456f20ae90904971171af41a2b987eed638982c918c424b3e14d7b.css"><meta property='og:title' content="滑动窗口">
-<meta property='og:description' content="Array 目录结构 - - - - 一、两数之和 二、删除有序数组中的重复项 三、搜索插入位置 四、加一 一、两数之和 1. 两数之和 - 力扣（LeetCode）\n给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target 的那 两个 整数，并返回它们的数组下标。\n">
+<meta property='og:description' content="滑动窗口与双指针 灵神题单：分享丨【算法题单】滑动窗口与双指针（定长/不定长/单序列/双序列/三指针/分组循环）- 讨论 - 力扣（LeetCode）\n两数之和 1. 两数之和 - 力扣（LeetCode）\n">
 <meta property='og:url' content='https://rooobeam.github.io/p/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/'>
 <meta property='og:site_name' content='rooobeam'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-04-27T12:01:43&#43;08:00'/><meta property='article:modified_time' content='2025-04-27T12:01:43&#43;08:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-05-07T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-05-07T00:00:00&#43;00:00'/>
 <meta name="twitter:title" content="滑动窗口">
-<meta name="twitter:description" content="Array 目录结构 - - - - 一、两数之和 二、删除有序数组中的重复项 三、搜索插入位置 四、加一 一、两数之和 1. 两数之和 - 力扣（LeetCode）\n给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target 的那 两个 整数，并返回它们的数组下标。\n">
+<meta name="twitter:description" content="滑动窗口与双指针 灵神题单：分享丨【算法题单】滑动窗口与双指针（定长/不定长/单序列/双序列/三指针/分组循环）- 讨论 - 力扣（LeetCode）\n两数之和 1. 两数之和 - 力扣（LeetCode）\n">
     <link rel="shortcut icon" href="/favicon.ico" />
 
     </head>
@@ -236,11 +236,12 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#目录结构">目录结构</a></li>
-    <li><a href="#一两数之和">一、两数之和</a></li>
-    <li><a href="#二删除有序数组中的重复项">二、删除有序数组中的重复项</a></li>
-    <li><a href="#三搜索插入位置">三、搜索插入位置</a></li>
-    <li><a href="#四加一">四、加一</a></li>
+    <li><a href="#两数之和">两数之和</a></li>
+    <li><a href="#删除有序数组中的重复项">删除有序数组中的重复项</a></li>
+    <li><a href="#搜索插入位置">搜索插入位置</a></li>
+    <li><a href="#加一">加一</a></li>
+    <li><a href="#半径为-k-的子数组平均值">半径为 k 的子数组平均值</a></li>
+    <li><a href="#几乎唯一子数组的最大和">几乎唯一子数组的最大和</a></li>
   </ol>
 </nav>
         </div>
@@ -294,7 +295,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2025-04-27</time>
+                <time class="article-time--published">2025-05-07</time>
             </div>
         
 
@@ -310,32 +311,37 @@
     <section class="article-content">
     
     
-    <h1 id="array">Array
-</h1><h2 id="目录结构">目录结构
-</h2><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>-</th>
-          <th>-</th>
-          <th>-</th>
-          <th>-</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><a class="link" href="#%e4%b8%80%e4%b8%a4%e6%95%b0%e4%b9%8b%e5%92%8c" >一、两数之和</a></td>
-          <td><a class="link" href="#%e4%ba%8c%e5%88%a0%e9%99%a4%e6%9c%89%e5%ba%8f%e6%95%b0%e7%bb%84%e4%b8%ad%e7%9a%84%e9%87%8d%e5%a4%8d%e9%a1%b9" >二、删除有序数组中的重复项</a></td>
-          <td><a class="link" href="#%e4%b8%89%e6%90%9c%e7%b4%a2%e6%8f%92%e5%85%a5%e4%bd%8d%e7%bd%ae" >三、搜索插入位置</a></td>
-          <td><a class="link" href="#%e5%9b%9b%e5%8a%a0%e4%b8%80" >四、加一</a></td>
-      </tr>
-  </tbody>
-</table></div>
-<h2 id="一两数之和">一、两数之和
-</h2><p><a class="link" href="https://leetcode.cn/problems/two-sum/description/?envType=problem-list-v2&amp;envId=array"  target="_blank" rel="noopener"
-    >1. 两数之和 - 力扣（LeetCode）</a></p>
+    <h1 id="滑动窗口与双指针">滑动窗口与双指针
+</h1><p>灵神题单：<a class="link" href="https://leetcode.cn/discuss/post/3578981/ti-dan-hua-dong-chuang-kou-ding-chang-bu-rzz7/"  target="_blank" rel="noopener"
+    >分享丨【算法题单】滑动窗口与双指针（定长/不定长/单序列/双序列/三指针/分组循环）- 讨论 - 力扣（LeetCode）</a></p>
+<h2 id="两数之和">两数之和
+</h2><p><strong><a class="link" href="https://leetcode.cn/problems/two-sum/description/?envType=problem-list-v2&amp;envId=array"  target="_blank" rel="noopener"
+    >1. 两数之和 - 力扣（LeetCode）</a></strong></p>
+<ul>
+<li>
 <p>给定一个整数数组 <code>nums</code> 和一个整数目标值 <code>target</code>，请你在该数组中找出 <strong>和为目标值</strong> <em><code>target</code></em> 的那 <strong>两个</strong> 整数，并返回它们的数组下标。</p>
+</li>
+<li>
 <p>你可以假设每种输入只会对应一个答案，并且你不能使用两次相同的元素。</p>
+</li>
+<li>
 <p>你可以按任意顺序返回答案。</p>
+</li>
+<li>
+<p>示例</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">输入</span><span class="err">：</span><span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> <span class="n">target</span> <span class="o">=</span> <span class="mi">6</span>
+</span></span><span class="line"><span class="cl"><span class="n">输出</span><span class="err">：</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>代码</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -374,21 +380,45 @@
 </span></span><span class="line"><span class="cl">            <span class="n">dic</span><span class="p">[</span><span class="n">e</span><span class="p">]</span><span class="o">=</span><span class="n">i</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><strong>what I learn:</strong></p>
+</div><p><strong>what I learn</strong></p>
 <ul>
 <li>哈希表的查找用in方法可实现，用dict()或set()最好，用空间换时间。</li>
-<li>in 方法时间复杂度O(n)</li>
+<li>集合、字典的 in 方法时间复杂度O(1)，列表和元组的 in 时间复杂度O(n)。</li>
 </ul>
-<h2 id="二删除有序数组中的重复项">二、删除有序数组中的重复项
-</h2><p><a class="link" href="https://leetcode.cn/problems/remove-duplicates-from-sorted-array/description/?envType=problem-list-v2&amp;envId=array"  target="_blank" rel="noopener"
-    >26. 删除有序数组中的重复项 - 力扣（LeetCode）</a></p>
+<h2 id="删除有序数组中的重复项">删除有序数组中的重复项
+</h2><p><strong><a class="link" href="https://leetcode.cn/problems/remove-duplicates-from-sorted-array/description/?envType=problem-list-v2&amp;envId=array"  target="_blank" rel="noopener"
+    >26. 删除有序数组中的重复项 - 力扣（LeetCode）</a></strong></p>
+<ul>
+<li>
 <p>给你一个 <strong>非严格递增排列</strong> 的数组 <code>nums</code> ，请你**<a class="link" href="http://baike.baidu.com/item/%e5%8e%9f%e5%9c%b0%e7%ae%97%e6%b3%95"  target="_blank" rel="noopener"
     > 原地</a>** 删除重复出现的元素，使每个元素 <strong>只出现一次</strong> ，返回删除后数组的新长度。元素的 <strong>相对顺序</strong> 应该保持 <strong>一致</strong> 。然后返回 <code>nums</code> 中唯一元素的个数。</p>
+</li>
+<li>
 <p>考虑 <code>nums</code> 的唯一元素的数量为 <code>k</code> ，你需要做以下事情确保你的题解可以被通过：</p>
 <ul>
-<li>更改数组 <code>nums</code> ，使 <code>nums</code> 的前 <code>k</code> 个元素包含唯一元素，并按照它们最初在 <code>nums</code> 中出现的顺序排列。<code>nums</code> 的其余元素与 <code>nums</code> 的大小不重要。</li>
-<li>返回 <code>k</code> 。</li>
+<li>
+<p>更改数组 <code>nums</code> ，使 <code>nums</code> 的前 <code>k</code> 个元素包含唯一元素，并按照它们最初在 <code>nums</code> 中出现的顺序排列。<code>nums</code> 的其余元素与 <code>nums</code> 的大小不重要。</p>
+</li>
+<li>
+<p>返回 <code>k</code> 。</p>
+</li>
 </ul>
+</li>
+<li>
+<p>示例</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">输入</span><span class="err">：</span><span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">输出</span><span class="err">：</span><span class="mi">5</span><span class="p">,</span> <span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>代码</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -443,17 +473,27 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">p</span><span class="o">+</span><span class="mi">1</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><strong>what I learn:</strong></p>
+</div><p><strong>what I learn</strong></p>
 <ul>
 <li>快慢指针，数据需要有有序性。</li>
 </ul>
-<h2 id="三搜索插入位置">三、搜索插入位置
-</h2><p><a class="link" href="https://leetcode.cn/problems/search-insert-position/description/?envType=problem-list-v2&amp;envId=array"  target="_blank" rel="noopener"
-    >35. 搜索插入位置 - 力扣（LeetCode）</a></p>
+<h2 id="搜索插入位置">搜索插入位置
+</h2><p><strong><a class="link" href="https://leetcode.cn/problems/search-insert-position/description/?envType=problem-list-v2&amp;envId=array"  target="_blank" rel="noopener"
+    >35. 搜索插入位置 - 力扣（LeetCode）</a></strong></p>
+<ul>
+<li>
 <p>**（二分法）**记住就好了 T-T</p>
+</li>
+<li>
 <p>给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置。</p>
+</li>
+<li>
 <p>请必须使用时间复杂度为 <code>O(log n)</code> 的算法。</p>
-<p><strong>示例：</strong></p>
+</li>
+<li>
+<p>示例：</p>
+</li>
+</ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -464,7 +504,7 @@
 </span></span><span class="line"><span class="cl"><span class="n">输出</span><span class="p">:</span> <span class="mi">2</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><strong>代码：</strong></p>
+</div><p><strong>代码</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -511,13 +551,35 @@
 </span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="n">i</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="四加一">四、加一
-</h2><p><a class="link" href="https://leetcode.cn/problems/plus-one/?envType=problem-list-v2&amp;envId=array"  target="_blank" rel="noopener"
-    >66. 加一 - 力扣（LeetCode）</a></p>
+</div><p><strong>what I learn</strong></p>
+<ul>
+<li>二分法框架：
+<ul>
+<li>上下界up=len(nums)  low=0</li>
+<li>取中间(low+up)//2</li>
+<li>终止条件 low==up</li>
+<li>上界降 up=mid</li>
+<li>下界升 low=mid+1</li>
+</ul>
+</li>
+</ul>
+<h2 id="加一">加一
+</h2><p><strong><a class="link" href="https://leetcode.cn/problems/plus-one/?envType=problem-list-v2&amp;envId=array"  target="_blank" rel="noopener"
+    >66. 加一 - 力扣（LeetCode）</a></strong></p>
+<ul>
+<li>
 <p>给定一个由 <strong>整数</strong> 组成的 <strong>非空</strong> 数组所表示的非负整数，在该数的基础上加一。</p>
+</li>
+<li>
 <p>最高位数字存放在数组的首位， 数组中每个元素只存储<strong>单个</strong>数字。</p>
+</li>
+<li>
 <p>你可以假设除了整数 0 之外，这个整数不会以零开头。</p>
-<p><strong>示例 1：</strong></p>
+</li>
+<li>
+<p>示例 1：</p>
+</li>
+</ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -530,7 +592,9 @@
 </span></span><span class="line"><span class="cl"><span class="n">解释</span><span class="err">：</span><span class="n">输入数组表示数字</span> <span class="mi">123</span><span class="err">。</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><strong>示例 2：</strong></p>
+</div><ul>
+<li>示例 2：</li>
+</ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -547,7 +611,7 @@
 </span></span><span class="line"><span class="cl"><span class="n">因此</span><span class="err">，</span><span class="n">结果应该是</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="err">。</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><strong>代码：</strong></p>
+</div><p><strong>代码</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -578,9 +642,186 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">digits</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><strong>what I learn:</strong></p>
+</div><p><strong>what I learn</strong></p>
 <ul>
 <li>逆序索引  range(len(digits)-1,-1,-1)     从len(digits)-1开始，步长为-1(递减)，到-1，左闭右开[len(digits)-1, -1)。</li>
+</ul>
+<h2 id="半径为-k-的子数组平均值">半径为 k 的子数组平均值
+</h2><p><strong><a class="link" href="https://leetcode.cn/problems/k-radius-subarray-averages/description/"  target="_blank" rel="noopener"
+    >2090. 半径为 k 的子数组平均值 - 力扣（LeetCode）</a></strong></p>
+<ul>
+<li>
+<p>给你一个下标从 <strong>0</strong> 开始的数组 <code>nums</code> ，数组中有 <code>n</code> 个整数，另给你一个整数 <code>k</code> 。</p>
+</li>
+<li>
+<p><strong>半径为 k 的子数组平均值</strong> 是指：<code>nums</code> 中一个以下标 <code>i</code> 为 <strong>中心</strong> 且 <strong>半径</strong> 为 <code>k</code> 的子数组中所有元素的平均值，即下标在 <code>i - k</code> 和 <code>i + k</code> 范围（<strong>含</strong> <code>i - k</code> 和 <code>i + k</code>）内所有元素的平均值。如果在下标 <code>i</code> 前或后不足 <code>k</code> 个元素，那么 <strong>半径为 k 的子数组平均值</strong> 是 <code>-1</code> 。</p>
+</li>
+<li>
+<p>构建并返回一个长度为 <code>n</code> 的数组 <code>avgs</code> ，其中 <code>avgs[i]</code> 是以下标 <code>i</code> 为中心的子数组的 <strong>半径为 k 的子数组平均值</strong> 。</p>
+</li>
+<li>
+<p><code>x</code> 个元素的 <strong>平均值</strong> 是 <code>x</code> 个元素相加之和除以 <code>x</code> ，此时使用截断式 <strong>整数除法</strong> ，即需要去掉结果的小数部分。</p>
+</li>
+<li>
+<p>例如，四个元素 <code>2</code>、<code>3</code>、<code>1</code> 和 <code>5</code> 的平均值是 <code>(2 + 3 + 1 + 5) / 4 = 11 / 4 = 2.75</code>，截断后得到 <code>2</code> 。</p>
+</li>
+</ul>
+<img src="https://assets.leetcode.com/uploads/2021/11/07/eg1.png"/>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">输入</span><span class="err">：</span><span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">3</span>
+</span></span><span class="line"><span class="cl"><span class="n">输出</span><span class="err">：</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>代码</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">getAverages</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>        
+</span></span><span class="line"><span class="cl">        <span class="c1"># 我老想着动态得去判断加-1进result列表</span>
+</span></span><span class="line"><span class="cl">        <span class="n">avgs</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">s</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># 维护窗口元素和</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="c1"># 1. 进入窗口</span>
+</span></span><span class="line"><span class="cl">            <span class="n">s</span> <span class="o">+=</span> <span class="n">x</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">k</span> <span class="o">*</span> <span class="mi">2</span><span class="p">:</span>  <span class="c1"># 窗口大小不足 2k+1</span>
+</span></span><span class="line"><span class="cl">                <span class="k">continue</span>
+</span></span><span class="line"><span class="cl">            <span class="c1"># 2. 记录答案</span>
+</span></span><span class="line"><span class="cl">            <span class="n">avgs</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">s</span> <span class="o">//</span> <span class="p">(</span><span class="n">k</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="c1"># 3. 离开窗口</span>
+</span></span><span class="line"><span class="cl">            <span class="n">s</span> <span class="o">-=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="n">k</span> <span class="o">*</span> <span class="mi">2</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">avgs</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 作者-灵神</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>what I learn</strong></p>
+<ul>
+<li>观察问题的本质，不要被方法带着走。
+<ul>
+<li>问题的本质：待到要处理的索引时，得出平均值放入数组。</li>
+<li>方法带偏：想着边遍历边append，开头去append -1，结束了再补充-1。</li>
+<li>解决的关键：初始化nums长度的 -1数组，即 [-1] * len(nums)。</li>
+</ul>
+</li>
+</ul>
+<h2 id="几乎唯一子数组的最大和">几乎唯一子数组的最大和
+</h2><p><strong><a class="link" href="https://leetcode.cn/problems/maximum-sum-of-almost-unique-subarray/"  target="_blank" rel="noopener"
+    >2841. 几乎唯一子数组的最大和 - 力扣（LeetCode）</a></strong></p>
+<ul>
+<li>
+<p>给你一个整数数组 <code>nums</code> 和两个正整数 <code>m</code> 和 <code>k</code> 。</p>
+</li>
+<li>
+<p>请你返回 <code>nums</code> 中长度为 <code>k</code> 的 <strong>几乎唯一</strong> 子数组的 <strong>最大和</strong> ，如果不存在几乎唯一子数组，请你返回 <code>0</code> 。</p>
+</li>
+<li>
+<p>如果 <code>nums</code> 的一个子数组有至少 <code>m</code> 个互不相同的元素，我们称它是 <strong>几乎唯一</strong> 子数组。</p>
+</li>
+<li>
+<p>子数组指的是一个数组中一段连续 <strong>非空</strong> 的元素序列。</p>
+</li>
+<li>
+<p>示例</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">输入</span><span class="err">：</span><span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">],</span> <span class="n">m</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">4</span>
+</span></span><span class="line"><span class="cl"><span class="n">输出</span><span class="err">：</span><span class="mi">18</span>
+</span></span><span class="line"><span class="cl"><span class="n">解释</span><span class="err">：</span><span class="n">总共有</span> <span class="mi">3</span> <span class="n">个长度为</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">4</span> <span class="n">的几乎唯一子数组</span><span class="err">。</span><span class="n">分别为</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="err">，</span><span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="n">和</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span> <span class="err">。</span><span class="n">这些子数组中</span><span class="err">，</span><span class="n">和最大的是</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="err">，</span><span class="n">和为</span> <span class="mi">18</span> <span class="err">。</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>代码</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">maxSum</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">m</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sum_n</span> <span class="o">=</span> <span class="n">max_sum</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">        <span class="n">dif_n</span><span class="o">=</span><span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">element</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="n">dif_n</span><span class="p">[</span><span class="n">element</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">            <span class="n">sum_n</span> <span class="o">+=</span> <span class="n">element</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            <span class="n">left</span> <span class="o">=</span> <span class="n">i</span><span class="o">-</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span>			
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">left</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="k">continue</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">dif_n</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">m</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">max_sum</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">sum_n</span><span class="p">,</span><span class="n">max_sum</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="n">out</span><span class="o">=</span><span class="n">nums</span><span class="p">[</span><span class="n">left</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">            <span class="n">sum_n</span> <span class="o">-=</span> <span class="n">out</span>
+</span></span><span class="line"><span class="cl">            <span class="n">dif_n</span><span class="p">[</span><span class="n">out</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">dif_n</span><span class="p">[</span><span class="n">out</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="k">del</span> <span class="n">dif_n</span><span class="p">[</span><span class="n">out</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">			
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">max_sum</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>what I learn</strong></p>
+<ul>
+<li>sum_n = max_sum = 0</li>
+<li>使用defaultdict
+<ul>
+<li>默认值为0，dif_n=defaultdict(int) 因为int()返回0</li>
+<li>if dif_n[out] == 0:  <strong>del</strong> dif_n[out]  删除其中值为0的键值对</li>
+</ul>
+</li>
+<li>max_sum = max(sum_n,max_sum) 而不用 if 条件判断</li>
+<li>left = i-k+1    &hellip;.   out=nums[left]        使代码更简洁美观</li>
 </ul>
 
 </section>
