@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="reproduce_bm25.sh （.sh4种算法都类似，但passage_only.bm25大不相同）\nexport：将变量提升为 环境变量（全局变量），使得所有子进程（如其他脚本、Python程序等）都能继承这个变量。\n">
+<title>DAPR</title>
+
+<link rel='canonical' href='https://rooobeam.github.io/p/dapr/'>
+
+<link rel="stylesheet" href="/scss/style.min.a7558000c2456f20ae90904971171af41a2b987eed638982c918c424b3e14d7b.css"><meta property='og:title' content="DAPR">
+<meta property='og:description' content="reproduce_bm25.sh （.sh4种算法都类似，但passage_only.bm25大不相同）\nexport：将变量提升为 环境变量（全局变量），使得所有子进程（如其他脚本、Python程序等）都能继承这个变量。\n">
+<meta property='og:url' content='https://rooobeam.github.io/p/dapr/'>
+<meta property='og:site_name' content='rooobeam'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-05-09T16:50:01&#43;08:00'/><meta property='article:modified_time' content='2025-05-09T16:50:01&#43;08:00'/>
+<meta name="twitter:title" content="DAPR">
+<meta name="twitter:description" content="reproduce_bm25.sh （.sh4种算法都类似，但passage_only.bm25大不相同）\nexport：将变量提升为 环境变量（全局变量），使得所有子进程（如其他脚本、Python程序等）都能继承这个变量。\n">
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_51c49b55d0a39bb4.png" width="300"
+                            height="299" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">😚</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">rooobeam</a></h1>
+            <h2 class="site-description"></h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://space.bilibili.com/3461571462302229'
+                        target="_blank"
+                        title="Bilibili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-brand-bilibili"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z" /><path d="M8 3l2 3" /><path d="M16 3l-2 3" /><path d="M9 13v-2" /><path d="M15 11v2" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://blog.csdn.net/rooobeam?'
+                        target="_blank"
+                        title="CSDN"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-copyright"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M14 9.75a3.016 3.016 0 0 0 -4.163 .173a2.993 2.993 0 0 0 0 4.154a3.016 3.016 0 0 0 4.163 .173" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/rooobeam?'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#reproduce_bm25sh">reproduce_bm25.sh</a></li>
+    <li><a href="#dragon_plus-passage_only">dragon_plus (passage_only)</a>
+      <ol>
+        <li><a href="#reproduce_cp">reproduce_cp</a></li>
+        <li><a href="#argsdragon_pluspy">&hellip;args.dragon_plus.py</a></li>
+        <li><a href="#argsbasepy8">&hellip;args.base.py8</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/dapr/">DAPR</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-05-09</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="reproduce_bm25sh">reproduce_bm25.sh
+</h2><p>（.sh4种算法都类似，但passage_only.bm25大不相同）</p>
+<p><strong>export</strong>：将变量提升为 <strong>环境变量（全局变量）</strong>，使得所有子进程（如其他脚本、Python程序等）都能继承这个变量。</p>
+<p><strong>直接设置</strong>：直接赋值定义的变量是 <strong>Shell变量（局部变量）</strong>，仅在当前 Shell 会话中有效，子进程（如其他脚本、程序）无法访问。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># scripts/dgx2/exps/passage_only/bm25.sh</span>
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">NCCL_DEBUG</span><span class="o">=</span><span class="s2">&#34;INFO&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">CUDA_VISIBLE_DEVICES</span><span class="o">=</span><span class="s2">&#34;0&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># datasets=( &#34;ConditionalQA&#34; )</span>
+</span></span><span class="line"><span class="cl"><span class="nv">datasets</span><span class="o">=(</span> <span class="s2">&#34;NaturalQuestions&#34;</span> <span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># datasets=( &#34;ConditionalQA&#34; &#34;MSMARCO&#34; &#34;NaturalQuestions&#34; &#34;Genomics&#34; &#34;MIRACL&#34; )</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>for X in ${datasets[@]}</strong>： 遍历，取出每个元素到X</p>
+<p><strong>$变量替换</strong>：获取变量的值 ${变量名}</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="k">for</span> dataset in <span class="si">${</span><span class="nv">datasets</span><span class="p">[@]</span><span class="si">}</span>
+</span></span><span class="line"><span class="cl"><span class="k">do</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">export</span> <span class="nv">DATA_DIR</span><span class="o">=</span><span class="s2">&#34;data&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">export</span> <span class="nv">DATASET_PATH</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$DATA_DIR</span><span class="s2">/</span><span class="nv">$dataset</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">export</span> <span class="nv">CLI_ARGS</span><span class="o">=</span><span class="s2">&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    --data_dir=</span><span class="nv">$DATASET_PATH</span><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># --data_dir=data/NaturalQuestions</span>
+</span></span><span class="line"><span class="cl">    ...
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>命令替换</strong>：执行命令，并将输出结果作为字符串返回</p>
+<p><strong>$(python -m dapr.exps.passage_only.args.bm25 $CLI_ARGS)</strong>：传入 CLI_ARGS 给dapr.exps.passage_only.args.bm25.py 并执行，捕获输出结果(如print的内容)，py脚本代码如下，传入 &ndash;data_dir=data/NaturalQuestions，即py里有个变量data_dir=&ldquo;data/NaturalQuestions&rdquo;，BM25PassageOnlyArguments里的初始化会生成各种属性，包括output_dir。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">parse_cli</span><span class="p">(</span><span class="n">BM25PassageOnlyArguments</span><span class="p">)</span><span class="o">.</span><span class="n">output_dir</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>  <span class="c1"># For creating the logging path</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>export OUTPUT_DIR=$(&hellip;)：</strong> &hellip; 即 bm25.py 里的输出被bash脚本捕获。</p>
+<p>**mkdir -p $OUTPUT_DIR：**确保OUTPUT_DIR存在</p>
+<p>**export LOG_PATH：**设置日志变量</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">	...
+</span></span><span class="line"><span class="cl">	<span class="nb">export</span> <span class="nv">OUTPUT_DIR</span><span class="o">=</span><span class="k">$(</span>python -m dapr.exps.passage_only.args.bm25 <span class="nv">$CLI_ARGS</span><span class="k">)</span>
+</span></span><span class="line"><span class="cl">	mkdir -p <span class="nv">$OUTPUT_DIR</span>
+</span></span><span class="line"><span class="cl">	<span class="nb">export</span> <span class="nv">LOG_PATH</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/logging.log&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="nb">echo</span> <span class="s2">&#34;Logging file path: </span><span class="nv">$LOG_PATH</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">	...
+</span></span><span class="line"><span class="cl">	
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>**torchrun &hellip; &gt; $LOG_PATH：**PyTorch 的分布式训练启动器，自动设置多进程环境，将命令的 <strong>标准输出（stdout）</strong> 重定向到文件，<strong>错误输出（stderr）仍会打印到终端</strong>。</p>
+<ul>
+<li>&ndash;nproc_per_node=1：使用当前机器的1个GPU</li>
+<li>&ndash;master_port=295001：主进程的通信端口</li>
+<li>-m dapr.exps.passage_only.bm25：执行的脚本文件</li>
+<li>$CLI_ARGS：传入的参数</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">	...
+</span></span><span class="line"><span class="cl">	torchrun --nproc_per_node<span class="o">=</span><span class="m">1</span> --master_port<span class="o">=</span><span class="m">29501</span> -m dapr.exps.passage_only.bm25 <span class="nv">$CLI_ARGS</span> &gt; <span class="nv">$LOG_PATH</span>
+</span></span><span class="line"><span class="cl"><span class="k">done</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="dragon_plus-passage_only">dragon_plus (passage_only)
+</h2><p>​	passage_only下的dragon_plus由以下 <strong>调用</strong> 实现</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">|</span><span class="err">——</span><span class="n">reproduce_cp</span>
+</span></span><span class="line"><span class="cl">		<span class="o">|</span><span class="err">——</span><span class="n">dapr</span><span class="o">.</span><span class="n">exps</span><span class="o">.</span><span class="n">passage_only</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">dragon_plus</span><span class="o">.</span><span class="n">py</span> 
+</span></span><span class="line"><span class="cl">		<span class="o">|</span>				  <span class="o">|</span><span class="err">——</span><span class="n">dapr</span><span class="o">.</span><span class="n">exps</span><span class="o">.</span><span class="n">passage_only</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">py</span>
+</span></span><span class="line"><span class="cl">		<span class="o">|</span>
+</span></span><span class="line"><span class="cl">		<span class="o">|</span><span class="err">——</span><span class="n">dapr</span><span class="o">.</span><span class="n">exps</span><span class="o">.</span><span class="n">passage_only</span><span class="o">.</span><span class="n">dragon_plus_cp</span><span class="o">.</span><span class="n">py</span>
+</span></span><span class="line"><span class="cl">                            <span class="o">|</span><span class="err">——</span><span class="n">dapr</span><span class="o">.</span><span class="n">dataloader</span><span class="o">.</span><span class="n">py</span>
+</span></span><span class="line"><span class="cl">                            <span class="o">|</span><span class="err">——</span><span class="n">dapr</span><span class="o">.</span><span class="n">retrievers</span><span class="o">.</span><span class="n">dense</span><span class="o">.</span><span class="n">py</span>
+</span></span><span class="line"><span class="cl">                            <span class="o">|</span><span class="err">——</span><span class="n">dapr</span><span class="o">.</span><span class="n">dataloader</span><span class="o">.</span><span class="n">py</span>
+</span></span><span class="line"><span class="cl">                            <span class="o">|</span><span class="err">——</span><span class="n">clddp</span><span class="o">.</span><span class="n">dm</span>
+</span></span><span class="line"><span class="cl">                            <span class="o">|</span><span class="err">——</span><span class="n">clddp</span><span class="o">.</span><span class="n">search</span>
+</span></span><span class="line"><span class="cl">                            <span class="o">|</span><span class="err">——</span><span class="n">clddp</span><span class="o">.</span><span class="n">evaluation</span>
+</span></span><span class="line"><span class="cl">                            <span class="o">|</span><span class="err">——</span><span class="n">clddp</span><span class="o">.</span><span class="n">evaluation</span>
+</span></span><span class="line"><span class="cl">                            <span class="o">|</span><span class="err">——</span><span class="n">clddp</span><span class="o">.</span><span class="n">dm</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>​	后文中，以下简称，其他一致。</p>
+<p>​	dapr.exps.passage_only.args.XXX.py 简称为 &hellip;args.XXX.py</p>
+<p>​	dapr.exps.passage_only.YYY.py 简称为 &hellip;passage_only.YYY.py</p>
+<h3 id="reproduce_cp">reproduce_cp
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">|——reproduce_cp		替换原本的.sh，实现模拟命令行传参
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>​	reproduce_cp的功能为，<strong>替换原本的.sh</strong>，实现模拟命令行传参，而不用每次都在pycharm新建 运行/调试配置，大致流程和 <a class="link" href="##reproduce_bm25.sh" >reproduce_bm25.sh</a>一样：</p>
+<ul>
+<li>设置全局/局部变量</li>
+<li>执行 dapr.exps.passage_only.args.dragon_plus，生成args</li>
+<li>再构造一些变量</li>
+<li>执行 dapr.exps.passage_only.dragon_plus_cp</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">os</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">subprocess</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">sys</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="n">project_root</span> <span class="o">=</span> <span class="s2">&#34;/root/autodl-tmp/DAPR&#34;</span>  <span class="c1"># 替换为你的项目路径</span>
+</span></span><span class="line"><span class="cl">    <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&#34;PYTHONPATH&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;</span><span class="si">{</span><span class="n">project_root</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;PYTHONPATH&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 环境变量设置（对子进程生效）</span>
+</span></span><span class="line"><span class="cl">    <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&#34;NCCL_DEBUG&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&#34;INFO&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&#34;CUDA_VISIBLE_DEVICES&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&#34;0&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">datasets</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;ConditionalQA&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">data_dir</span> <span class="o">=</span> <span class="s2">&#34;data&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">dataset</span> <span class="ow">in</span> <span class="n">datasets</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">dataset_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">data_dir</span><span class="p">)</span> <span class="o">/</span> <span class="n">dataset</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cli_args</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;--data_dir=</span><span class="si">{</span><span class="n">dataset_path</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="c1"># 获取输出目录（需传递环境变量）</span>
+</span></span><span class="line"><span class="cl">            <span class="n">output_dir</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                <span class="p">[</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">,</span> <span class="s2">&#34;-m&#34;</span><span class="p">,</span> <span class="s2">&#34;dapr.exps.passage_only.args.dragon_plus&#34;</span><span class="p">,</span> <span class="n">cli_args</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">                <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="n">env</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span>  <span class="c1"># 关键！确保子进程继承环境变量</span>
+</span></span><span class="line"><span class="cl">            <span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="c1"># 创建目录</span>
+</span></span><span class="line"><span class="cl">            <span class="n">output_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">output_dir</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">output_path</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="c1"># 日志路径</span>
+</span></span><span class="line"><span class="cl">            <span class="n">log_path</span> <span class="o">=</span> <span class="n">output_path</span> <span class="o">/</span> <span class="s2">&#34;logging.log&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Logging to: </span><span class="si">{</span><span class="n">log_path</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="c1"># 运行训练（合并 stdout 和 stderr）</span>
+</span></span><span class="line"><span class="cl">            <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                <span class="p">[</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">,</span> <span class="s2">&#34;-m&#34;</span><span class="p">,</span> <span class="s2">&#34;dapr.exps.passage_only.dragon_plus_cp&#34;</span><span class="p">,</span> <span class="n">cli_args</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">                <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="n">env</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span>  <span class="c1"># 关键！确保子进程继承环境变量</span>
+</span></span><span class="line"><span class="cl">            <span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">except</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">CalledProcessError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Error for </span><span class="si">{</span><span class="n">dataset</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">continue</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">main</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="argsdragon_pluspy">&hellip;args.dragon_plus.py
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">|——reproduce_cp		替换原本的.sh，实现模拟命令行传参
+</span></span><span class="line"><span class="cl">		|——...args.dragon_plus.py	定义类 BM25PassageOnlyArguments，输出output_dir
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>定义类 BM25PassageOnlyArguments 继承自 PassageOnlyArguments</p>
+<p>不同点在于获取 parse_cli(BM25PassageOnlyArguments).output_dir 时使用的方法build_output_dir被重写为 os.path.join(&ldquo;exps/passage_only/bm25&rdquo;, self.run_name)</p>
+<p>reproduce_cp执行该文件，进入if __name__ == &ldquo;__main__&quot;，print(&hellip;.output_dir)，执行完reproduce_cp捕获该内容</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">os</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">clddp.utils</span> <span class="kn">import</span> <span class="n">parse_cli</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">dapr.exps.passage_only.args.base</span> <span class="kn">import</span> <span class="n">PassageOnlyArguments</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nd">@dataclass</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">BM25PassageOnlyArguments</span><span class="p">(</span><span class="n">PassageOnlyArguments</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">build_output_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&#34;exps/passage_only/bm25&#34;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">run_name</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">parse_cli</span><span class="p">(</span><span class="n">BM25PassageOnlyArguments</span><span class="p">)</span><span class="o">.</span><span class="n">output_dir</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>  <span class="c1"># For creating the logging path</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="argsbasepy8">&hellip;args.base.py8
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">|——reproduce_cp		替换原本的.sh，实现模拟命令行传参
+</span></span><span class="line"><span class="cl">		|——...args.dragon_plus.py	定义类 BM25PassageOnlyArguments，输出output_dir
+</span></span><span class="line"><span class="cl">		|		|——...args.base.py
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2025 rooobeam
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
