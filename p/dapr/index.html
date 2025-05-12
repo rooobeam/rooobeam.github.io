@@ -242,6 +242,7 @@
         <li><a href="#reproduce_cp">reproduce_cp</a></li>
         <li><a href="#argsdragon_pluspy">&hellip;args.dragon_plus.py</a></li>
         <li><a href="#argsbasepy8">&hellip;args.base.py8</a></li>
+        <li><a href="#autorunnameargumentsmixin">AutoRunNameArgumentsMixIn</a></li>
       </ol>
     </li>
   </ol>
@@ -426,11 +427,13 @@
 </span><span class="lnt">11
 </span><span class="lnt">12
 </span><span class="lnt">13
+</span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">|</span><span class="err">——</span><span class="n">reproduce_cp</span>
 </span></span><span class="line"><span class="cl">		<span class="o">|</span><span class="err">——</span><span class="n">dapr</span><span class="o">.</span><span class="n">exps</span><span class="o">.</span><span class="n">passage_only</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">dragon_plus</span><span class="o">.</span><span class="n">py</span> 
 </span></span><span class="line"><span class="cl">		<span class="o">|</span>				  <span class="o">|</span><span class="err">——</span><span class="n">dapr</span><span class="o">.</span><span class="n">exps</span><span class="o">.</span><span class="n">passage_only</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">py</span>
+</span></span><span class="line"><span class="cl">		<span class="o">|</span>								<span class="o">|</span><span class="err">——</span><span class="n">clddp</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">base</span>
 </span></span><span class="line"><span class="cl">		<span class="o">|</span>
 </span></span><span class="line"><span class="cl">		<span class="o">|</span><span class="err">——</span><span class="n">dapr</span><span class="o">.</span><span class="n">exps</span><span class="o">.</span><span class="n">passage_only</span><span class="o">.</span><span class="n">dragon_plus_cp</span><span class="o">.</span><span class="n">py</span>
 </span></span><span class="line"><span class="cl">                            <span class="o">|</span><span class="err">——</span><span class="n">dapr</span><span class="o">.</span><span class="n">dataloader</span><span class="o">.</span><span class="n">py</span>
@@ -575,7 +578,33 @@
 </span></span><span class="line"><span class="cl">		|——...args.dragon_plus.py	定义类 BM25PassageOnlyArguments，输出output_dir
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>定义类 BM25PassageOnlyArguments 继承自 PassageOnlyArguments</p>
+</div><p>定义类 BM25PassageOnlyArguments 继承自 PassageOnlyArguments，重要属性如下：</p>
+<ul>
+<li>
+<pre><code>run_name: str = XXX （自动生成的实验运行的唯一名称，见PassageOnlyArguments）
+</code></pre>
+</li>
+<li>
+<pre><code>data_dir: str = os.path.join(&quot;exps/passage_only/bm25&quot;, self.run_name)     # 数据集路径
+</code></pre>
+</li>
+<li>
+<pre><code>split: Split = Split.test               # 哪个数据部分（测试集 test 或训练集 train）
+</code></pre>
+</li>
+<li>
+<pre><code>topk: int = 1000                        # 返回最相关的1000个结果
+</code></pre>
+</li>
+<li>
+<pre><code>per_device_eval_batch_size: int = 32    # 每个GPU一次处理32条数据
+</code></pre>
+</li>
+<li>
+<pre><code>fp16: bool = True                       # 用半精度浮点数（节省显存，加快计算）
+</code></pre>
+</li>
+</ul>
 <p>不同点在于获取 parse_cli(BM25PassageOnlyArguments).output_dir 时使用的方法build_output_dir被重写为 os.path.join(&ldquo;exps/passage_only/bm25&rdquo;, self.run_name)</p>
 <p>reproduce_cp执行该文件，进入if __name__ == &ldquo;__main__&quot;，print(&hellip;.output_dir)，执行完reproduce_cp捕获该内容</p>
 <div class="highlight"><div class="chroma">
@@ -627,6 +656,190 @@
 <pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">|——reproduce_cp		替换原本的.sh，实现模拟命令行传参
 </span></span><span class="line"><span class="cl">		|——...args.dragon_plus.py	定义类 BM25PassageOnlyArguments，输出output_dir
 </span></span><span class="line"><span class="cl">		|		|——...args.base.py
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>定义类 PassageOnlyArguments，采用MixIn机制继承两个<strong>混入类</strong>(Mixin)（<em>可插拔组件</em>） ——AutoRunNameArgumentsMixIn, DumpableArgumentsMixIn</p>
+<ul>
+<li>AutoRunNameArgumentsMixIn：自动生成实验运行的唯一名称</li>
+</ul>
+<p>设置了一些属性见代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">clddp.args.base</span> <span class="kn">import</span> <span class="n">AutoRunNameArgumentsMixIn</span><span class="p">,</span> <span class="n">DumpableArgumentsMixIn</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">clddp.dm</span> <span class="kn">import</span> <span class="n">Split</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nd">@dataclass</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">PassageOnlyArguments</span><span class="p">(</span><span class="n">AutoRunNameArgumentsMixIn</span><span class="p">,</span> <span class="n">DumpableArgumentsMixIn</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">data_dir</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>          <span class="c1"># 数据集路径</span>
+</span></span><span class="line"><span class="cl">    <span class="n">split</span><span class="p">:</span> <span class="n">Split</span> <span class="o">=</span> <span class="n">Split</span><span class="o">.</span><span class="n">test</span>               <span class="c1"># 哪个数据部分（测试集 test 或训练集 train）</span>
+</span></span><span class="line"><span class="cl">    <span class="n">topk</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1000</span>                        <span class="c1"># 返回最相关的1000个结果</span>
+</span></span><span class="line"><span class="cl">    <span class="n">per_device_eval_batch_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">32</span>    <span class="c1"># 每个GPU一次处理32条数据</span>
+</span></span><span class="line"><span class="cl">    <span class="n">fp16</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>                       <span class="c1"># 用半精度浮点数（节省显存，加快计算）</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># 继承AutoRunNameArgumentsMixIn, DumpableArgumentsMixIn的初始化</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># 如self.output_dir = self.build_output_dir()    run_name: str = &#34;auto_run_name&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__post_init__</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="autorunnameargumentsmixin">AutoRunNameArgumentsMixIn
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">asdict</span><span class="p">,</span> <span class="n">dataclass</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">json</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">logging</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">os</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Set</span><span class="p">,</span> <span class="n">Type</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nd">@dataclass</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">AutoRunNameArgumentsMixIn</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">run_name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nd">@property</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">escaped_args</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;&#34;&#34;Escaped items for building the run_name.&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">set</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">get_arguments_from</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">type</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;&#34;&#34;Return the classes which the auto_run_name will get the arguments from.&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nd">@property</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">auto_run_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">arguments</span> <span class="o">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">            <span class="n">k</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="n">from_class</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_arguments_from</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">from_class</span><span class="o">.</span><span class="vm">__annotations__</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">escaped_args</span>
+</span></span><span class="line"><span class="cl">        <span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="n">items</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&#34;</span><span class="si">{</span><span class="n">argument</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argument</span><span class="p">)</span><span class="si">}</span><span class="s2">&#34;</span> <span class="k">for</span> <span class="n">argument</span> <span class="ow">in</span> <span class="n">arguments</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># 用/连接每个&#34;属性名_属性值&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="s2">&#34;/&#34;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">run_name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="bp">self</span><span class="o">.</span><span class="n">run_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">auto_run_name</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># 进行父类的__post_init__</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="nb">super</span><span class="p">(),</span> <span class="s2">&#34;__post_init__&#34;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__post_init__</span><span class="p">()</span>  <span class="c1"># Needed as a MixIn</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nd">@dataclass</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">DumpableArgumentsMixIn</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">output_dir</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_dir</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="bp">self</span><span class="o">.</span><span class="n">output_dir</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">build_output_dir</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="nb">super</span><span class="p">(),</span> <span class="s2">&#34;__post_init__&#34;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__post_init__</span><span class="p">()</span>  <span class="c1"># Needed as a MixIn</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nd">@abstractmethod</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">build_output_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">pass</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">dump_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fname</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&#34;arguments.json&#34;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">fargs</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output_dir</span><span class="p">,</span> <span class="n">fname</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fargs</span><span class="p">,</span> <span class="s2">&#34;w&#34;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">asdict</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Dumped arguments to </span><span class="si">{</span><span class="n">fargs</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">a</span><span class="o">=</span><span class="n">AutoRunNameArgumentsMixIn</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">run_name</span><span class="p">)</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div>
