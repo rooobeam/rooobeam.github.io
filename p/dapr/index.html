@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="reproduce_bm25.sh （.sh4种算法都类似，但passage_only.bm25大不相同）\nexport：将变量提升为 环境变量（全局变量），使得所有子进程（如其他脚本、Python程序等）都能继承这个变量。\n">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="论文解读 实验复现代码 reproduce_bm25.sh （.sh4种算法都类似，但passage_only.bm25大不相同）\nexport：将变量提升为 环境变量（全局变量），使得所有子进程（如其他脚本、Python程序等）都能继承这个变量。\n">
 <title>DAPR</title>
 
 <link rel='canonical' href='https://rooobeam.github.io/p/dapr/'>
 
 <link rel="stylesheet" href="/scss/style.min.a7558000c2456f20ae90904971171af41a2b987eed638982c918c424b3e14d7b.css"><meta property='og:title' content="DAPR">
-<meta property='og:description' content="reproduce_bm25.sh （.sh4种算法都类似，但passage_only.bm25大不相同）\nexport：将变量提升为 环境变量（全局变量），使得所有子进程（如其他脚本、Python程序等）都能继承这个变量。\n">
+<meta property='og:description' content="论文解读 实验复现代码 reproduce_bm25.sh （.sh4种算法都类似，但passage_only.bm25大不相同）\nexport：将变量提升为 环境变量（全局变量），使得所有子进程（如其他脚本、Python程序等）都能继承这个变量。\n">
 <meta property='og:url' content='https://rooobeam.github.io/p/dapr/'>
 <meta property='og:site_name' content='rooobeam'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-05-09T16:50:01&#43;08:00'/><meta property='article:modified_time' content='2025-05-09T16:50:01&#43;08:00'/>
 <meta name="twitter:title" content="DAPR">
-<meta name="twitter:description" content="reproduce_bm25.sh （.sh4种算法都类似，但passage_only.bm25大不相同）\nexport：将变量提升为 环境变量（全局变量），使得所有子进程（如其他脚本、Python程序等）都能继承这个变量。\n">
+<meta name="twitter:description" content="论文解读 实验复现代码 reproduce_bm25.sh （.sh4种算法都类似，但passage_only.bm25大不相同）\nexport：将变量提升为 环境变量（全局变量），使得所有子进程（如其他脚本、Python程序等）都能继承这个变量。\n">
     <link rel="shortcut icon" href="/favicon.ico" />
 
     </head>
@@ -239,10 +239,11 @@
     <li><a href="#reproduce_bm25sh">reproduce_bm25.sh</a></li>
     <li><a href="#dragon_plus-passage_only">dragon_plus (passage_only)</a>
       <ol>
-        <li><a href="#reproduce_cp">reproduce_cp</a></li>
+        <li><a href="#reproduce_cppy">reproduce_cp.py</a></li>
         <li><a href="#argsdragon_pluspy">&hellip;args.dragon_plus.py</a></li>
         <li><a href="#argsbasepy8">&hellip;args.base.py8</a></li>
-        <li><a href="#autorunnameargumentsmixin">AutoRunNameArgumentsMixIn</a></li>
+        <li><a href="#clddpargsbase">clddp.args.base</a></li>
+        <li><a href="#passage_onlydragon_plus_cppy">&hellip;passage_only.dragon_plus_cp.py</a></li>
       </ol>
     </li>
   </ol>
@@ -260,6 +261,14 @@
     <header class="article-header">
 
     <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E7%A7%91%E7%A0%94/" >
+                科研
+            </a>
+        
+    </header>
     
 
     <div class="article-title-wrapper">
@@ -302,7 +311,9 @@
     <section class="article-content">
     
     
-    <h2 id="reproduce_bm25sh">reproduce_bm25.sh
+    <h1 id="论文解读">论文解读
+</h1><h1 id="实验复现代码">实验复现代码
+</h1><h2 id="reproduce_bm25sh">reproduce_bm25.sh
 </h2><p>（.sh4种算法都类似，但passage_only.bm25大不相同）</p>
 <p><strong>export</strong>：将变量提升为 <strong>环境变量（全局变量）</strong>，使得所有子进程（如其他脚本、Python程序等）都能继承这个变量。</p>
 <p><strong>直接设置</strong>：直接赋值定义的变量是 <strong>Shell变量（局部变量）</strong>，仅在当前 Shell 会话中有效，子进程（如其他脚本、程序）无法访问。</p>
@@ -411,7 +422,8 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="dragon_plus-passage_only">dragon_plus (passage_only)
-</h2><p>​	passage_only下的dragon_plus由以下 <strong>调用</strong> 实现</p>
+</h2><p>​	passage_only下的dragon_plus，即“仅段落检索使用dragon_plus检索器”，由以下 <strong>调用</strong> 实现。</p>
+<p>​	reproduce_cp相当于main，其中主要执行了&hellip;passage_only.args.dragon_plus.py和&hellip;passage_only.dragon_plus_cp.py，前者用于配置一些参数，参数会传入后者，后者是实现功能和评估。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -430,7 +442,7 @@
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">|</span><span class="err">——</span><span class="n">reproduce_cp</span>
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">|</span><span class="err">——</span><span class="n">reproduce_cp</span><span class="o">.</span><span class="n">py</span>
 </span></span><span class="line"><span class="cl">		<span class="o">|</span><span class="err">——</span><span class="n">dapr</span><span class="o">.</span><span class="n">exps</span><span class="o">.</span><span class="n">passage_only</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">dragon_plus</span><span class="o">.</span><span class="n">py</span> 
 </span></span><span class="line"><span class="cl">		<span class="o">|</span>				  <span class="o">|</span><span class="err">——</span><span class="n">dapr</span><span class="o">.</span><span class="n">exps</span><span class="o">.</span><span class="n">passage_only</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">py</span>
 </span></span><span class="line"><span class="cl">		<span class="o">|</span>								<span class="o">|</span><span class="err">——</span><span class="n">clddp</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">base</span>
@@ -447,18 +459,18 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>​	后文中，以下简称，其他一致。</p>
-<p>​	dapr.exps.passage_only.args.XXX.py 简称为 &hellip;args.XXX.py</p>
-<p>​	dapr.exps.passage_only.YYY.py 简称为 &hellip;passage_only.YYY.py</p>
-<h3 id="reproduce_cp">reproduce_cp
+<p>​	dapr.exps.passage_only.args.dragon_plus.py 简称为 &hellip;args.dragon_plus.py</p>
+<p>​	dapr.exps.passage_only.dragon_plus_cp.py 简称为 &hellip;passage_only.dragon_plus_cp.py</p>
+<h3 id="reproduce_cppy">reproduce_cp.py
 </h3><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">|——reproduce_cp		替换原本的.sh，实现模拟命令行传参
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">|——reproduce_cp.py		替换原本的.sh，实现模拟命令行传参
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>​	reproduce_cp的功能为，<strong>替换原本的.sh</strong>，实现模拟命令行传参，而不用每次都在pycharm新建 运行/调试配置，大致流程和 <a class="link" href="##reproduce_bm25.sh" >reproduce_bm25.sh</a>一样：</p>
+</div><p>​	reproduce_cp.py的功能为，<strong>替换原本的.sh</strong>，实现模拟命令行传参，而不用每次都在pycharm新建 运行/调试配置，大致流程和 <a class="link" href="##reproduce_bm25.sh" >reproduce_bm25.sh</a>一样：</p>
 <ul>
 <li>设置全局/局部变量</li>
 <li>执行 dapr.exps.passage_only.args.dragon_plus，生成args</li>
@@ -574,7 +586,7 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">|——reproduce_cp		替换原本的.sh，实现模拟命令行传参
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">|——reproduce_cp.py		替换原本的.sh，实现模拟命令行传参
 </span></span><span class="line"><span class="cl">		|——...args.dragon_plus.py	定义类 BM25PassageOnlyArguments，输出output_dir
 </span></span></code></pre></td></tr></table>
 </div>
@@ -653,16 +665,13 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">|——reproduce_cp		替换原本的.sh，实现模拟命令行传参
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">|——reproduce_cp.py		替换原本的.sh，实现模拟命令行传参
 </span></span><span class="line"><span class="cl">		|——...args.dragon_plus.py	定义类 BM25PassageOnlyArguments，输出output_dir
-</span></span><span class="line"><span class="cl">		|		|——...args.base.py
+</span></span><span class="line"><span class="cl">		|		|——...args.base.py	定义类 PassageOnlyArguments和一些重要参数
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>定义类 PassageOnlyArguments，采用MixIn机制继承两个<strong>混入类</strong>(Mixin)（<em>可插拔组件</em>） ——AutoRunNameArgumentsMixIn, DumpableArgumentsMixIn</p>
-<ul>
-<li>AutoRunNameArgumentsMixIn：自动生成实验运行的唯一名称</li>
-</ul>
-<p>设置了一些属性见代码</p>
+</div><p>定义类 PassageOnlyArguments，采用MixIn机制继承两个<strong>混入类</strong>(Mixin)（<em>可插拔组件</em>） ——AutoRunNameArgumentsMixIn, DumpableArgumentsMixIn，从clddp.args.base里import，继承前者能自动生成一次运行唯一名词（属性），继承后者获得输出目录和写入输出目录的方法。</p>
+<p>设置了一些属性(见代码)</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -703,8 +712,199 @@
 </span></span><span class="line"><span class="cl">        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__post_init__</span><span class="p">()</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="autorunnameargumentsmixin">AutoRunNameArgumentsMixIn
+</div><h3 id="clddpargsbase">clddp.args.base
+</h3><p>定义两个类</p>
+<ul>
+<li>AutoRunNameArgumentsMixIn：自动生成实验运行的唯一名称</li>
+<li>DumpableArgumentsMixIn：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">|——reproduce_cp.py		替换原本的.sh，实现模拟命令行传参
+</span></span><span class="line"><span class="cl">		|——...args.dragon_plus.py	定义类 BM25PassageOnlyArguments，输出output_dir
+</span></span><span class="line"><span class="cl">		|	|——...args.base.py	定义类 PassageOnlyArguments和一些重要参数
+</span></span><span class="line"><span class="cl">		|				|——clddp.args.base  
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">asdict</span><span class="p">,</span> <span class="n">dataclass</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">json</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">logging</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">os</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Set</span><span class="p">,</span> <span class="n">Type</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nd">@dataclass</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">AutoRunNameArgumentsMixIn</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">run_name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nd">@property</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">escaped_args</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;&#34;&#34;Escaped items for building the run_name.&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">set</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">get_arguments_from</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">type</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;&#34;&#34;Return the classes which the auto_run_name will get the arguments from.&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nd">@property</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">auto_run_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">arguments</span> <span class="o">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">            <span class="n">k</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="n">from_class</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_arguments_from</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">from_class</span><span class="o">.</span><span class="vm">__annotations__</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">escaped_args</span>
+</span></span><span class="line"><span class="cl">        <span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="n">items</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&#34;</span><span class="si">{</span><span class="n">argument</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argument</span><span class="p">)</span><span class="si">}</span><span class="s2">&#34;</span> <span class="k">for</span> <span class="n">argument</span> <span class="ow">in</span> <span class="n">arguments</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># 用/连接每个&#34;属性名_属性值&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="s2">&#34;/&#34;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">run_name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="bp">self</span><span class="o">.</span><span class="n">run_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">auto_run_name</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># 进行父类的__post_init__</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="nb">super</span><span class="p">(),</span> <span class="s2">&#34;__post_init__&#34;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__post_init__</span><span class="p">()</span>  <span class="c1"># Needed as a MixIn</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nd">@dataclass</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">DumpableArgumentsMixIn</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">output_dir</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_dir</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="bp">self</span><span class="o">.</span><span class="n">output_dir</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">build_output_dir</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="nb">super</span><span class="p">(),</span> <span class="s2">&#34;__post_init__&#34;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__post_init__</span><span class="p">()</span>  <span class="c1"># Needed as a MixIn</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nd">@abstractmethod</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">build_output_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">pass</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">dump_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fname</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&#34;arguments.json&#34;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">fargs</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output_dir</span><span class="p">,</span> <span class="n">fname</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fargs</span><span class="p">,</span> <span class="s2">&#34;w&#34;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">asdict</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Dumped arguments to </span><span class="si">{</span><span class="n">fargs</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="passage_onlydragon_plus_cppy">&hellip;passage_only.dragon_plus_cp.py
 </h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">|——reproduce_cp.py		替换原本的.sh，实现模拟命令行传参
+</span></span><span class="line"><span class="cl">		|——...args.dragon_plus.py	定义类 BM25PassageOnlyArguments，输出output_dir
+</span></span><span class="line"><span class="cl">		|	|——...args.base.py	定义类 PassageOnlyArguments和一些重要参数
+</span></span><span class="line"><span class="cl">		|				|——clddp.args.base  定义两个MixIn
+</span></span><span class="line"><span class="cl">		|
+</span></span><span class="line"><span class="cl">		|——...passage_only.dragon_plus_cp.py
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>单步执行涉及模块如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">|</span><span class="err">——</span><span class="o">...</span><span class="n">args</span><span class="o">.</span><span class="n">dragon_plus</span>
+</span></span><span class="line"><span class="cl"><span class="o">|</span><span class="err">——</span><span class="n">dapr</span><span class="o">.</span><span class="n">dataloader</span><span class="o">.</span><span class="n">py</span>
+</span></span><span class="line"><span class="cl"><span class="o">|</span><span class="err">——</span><span class="n">dapr</span><span class="o">.</span><span class="n">retrievers</span><span class="o">.</span><span class="n">dense</span><span class="o">.</span><span class="n">py</span>
+</span></span><span class="line"><span class="cl"><span class="o">|</span><span class="err">——</span><span class="n">dapr</span><span class="o">.</span><span class="n">dataloader</span><span class="o">.</span><span class="n">py</span>
+</span></span><span class="line"><span class="cl"><span class="o">|</span><span class="err">——</span><span class="n">clddp</span><span class="o">.</span><span class="n">dm</span>
+</span></span><span class="line"><span class="cl"><span class="o">|</span><span class="err">——</span><span class="n">clddp</span><span class="o">.</span><span class="n">search</span>
+</span></span><span class="line"><span class="cl"><span class="o">|</span><span class="err">——</span><span class="n">clddp</span><span class="o">.</span><span class="n">evaluation</span>
+</span></span><span class="line"><span class="cl"><span class="o">|</span><span class="err">——</span><span class="n">clddp</span><span class="o">.</span><span class="n">evaluation</span>
+</span></span><span class="line"><span class="cl"><span class="o">|</span><span class="err">——</span><span class="n">clddp</span><span class="o">.</span><span class="n">dm</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -772,77 +972,94 @@
 </span><span class="lnt">64
 </span><span class="lnt">65
 </span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
-</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">asdict</span><span class="p">,</span> <span class="n">dataclass</span>
-</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">json</span>
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">json</span>
 </span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">logging</span>
 </span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">os</span>
-</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Set</span><span class="p">,</span> <span class="n">Type</span>
-</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">clddp.dm</span> <span class="kn">import</span> <span class="n">LabeledQuery</span><span class="p">,</span> <span class="n">RetrievedPassageIDList</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">clddp.utils</span> <span class="kn">import</span> <span class="n">initialize_ddp</span><span class="p">,</span> <span class="n">is_device_zero</span><span class="p">,</span> <span class="n">parse_cli</span><span class="p">,</span> <span class="n">set_logger_format</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">dapr.retrievers.dense</span> <span class="kn">import</span> <span class="n">DRAGONPlus</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">dapr.exps.passage_only.args.dragon_plus</span> <span class="kn">import</span> <span class="n">DRAGONPlusPassageOnlyArguments</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">clddp.search</span> <span class="kn">import</span> <span class="n">search</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">dapr.dataloader</span> <span class="kn">import</span> <span class="n">DAPRDataConfig</span><span class="p">,</span> <span class="n">DAPRDataLoader</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">clddp.evaluation</span> <span class="kn">import</span> <span class="n">RetrievalEvaluator</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">torch</span>
 </span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">is_device_zero</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="kc">True</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="n">set_logger_format</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span> <span class="k">if</span> <span class="n">is_device_zero</span><span class="p">()</span> <span class="k">else</span> <span class="n">logging</span><span class="o">.</span><span class="n">WARNING</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1"># ...args.dragon_plus ===============================</span>
+</span></span><span class="line"><span class="cl">    <span class="n">args</span> <span class="o">=</span> <span class="n">parse_cli</span><span class="p">(</span><span class="n">DRAGONPlusPassageOnlyArguments</span><span class="p">)</span>  <span class="c1"># 加载参数</span>
+</span></span><span class="line"><span class="cl">    <span class="n">args</span><span class="o">.</span><span class="n">dump_arguments</span><span class="p">()</span>	<span class="c1"># 记录参数到arguments.json</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1"># 设置环境变量 ===============================</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="ow">not</span> <span class="n">torch</span><span class="o">.</span><span class="n">distributed</span><span class="o">.</span><span class="n">is_initialized</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">        <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&#34;MASTER_ADDR&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&#34;localhost&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&#34;MASTER_PORT&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&#34;29501&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&#34;WORLD_SIZE&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&#34;1&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&#34;RANK&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&#34;0&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&#34;LOCAL_RANK&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&#34;0&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">torch</span><span class="o">.</span><span class="n">distributed</span><span class="o">.</span><span class="n">init_process_group</span><span class="p">(</span><span class="n">backend</span><span class="o">=</span><span class="s2">&#34;nccl&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">    <span class="c1"># clddp.utils ===============================</span>
+</span></span><span class="line"><span class="cl">    <span class="n">initialize_ddp</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nd">@dataclass</span>
-</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">AutoRunNameArgumentsMixIn</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">    <span class="n">run_name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># dapr.dataloader ===============================</span>
+</span></span><span class="line"><span class="cl">    <span class="n">dataset</span> <span class="o">=</span> <span class="n">DAPRDataLoader</span><span class="p">(</span><span class="n">DAPRDataConfig</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">data_dir</span><span class="p">))</span><span class="o">.</span><span class="n">load_data</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">progress_bar</span><span class="o">=</span><span class="n">is_device_zero</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="nd">@property</span>
-</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">escaped_args</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-</span></span><span class="line"><span class="cl">        <span class="s2">&#34;&#34;&#34;Escaped items for building the run_name.&#34;&#34;&#34;</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">set</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># dapr.retrievers.dense ================================</span>
+</span></span><span class="line"><span class="cl">    <span class="n">retriever</span> <span class="o">=</span> <span class="n">DRAGONPlus</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">get_arguments_from</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">type</span><span class="p">]:</span>
-</span></span><span class="line"><span class="cl">        <span class="s2">&#34;&#34;&#34;Return the classes which the auto_run_name will get the arguments from.&#34;&#34;&#34;</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># dapr.dataloader ===============================</span>
+</span></span><span class="line"><span class="cl">    <span class="n">labeled_queries</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">get_labeled_queries</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">split</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="nd">@property</span>
-</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">auto_run_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">        <span class="n">arguments</span> <span class="o">=</span> <span class="p">[</span>
-</span></span><span class="line"><span class="cl">            <span class="n">k</span>
-</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="n">from_class</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_arguments_from</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">from_class</span><span class="o">.</span><span class="vm">__annotations__</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">escaped_args</span>
-</span></span><span class="line"><span class="cl">        <span class="p">]</span>
-</span></span><span class="line"><span class="cl">        <span class="n">items</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&#34;</span><span class="si">{</span><span class="n">argument</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argument</span><span class="p">)</span><span class="si">}</span><span class="s2">&#34;</span> <span class="k">for</span> <span class="n">argument</span> <span class="ow">in</span> <span class="n">arguments</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">        <span class="c1"># 用/连接每个&#34;属性名_属性值&#34;</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="s2">&#34;/&#34;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># clddp.dm ==================================</span>
+</span></span><span class="line"><span class="cl">    <span class="n">queries</span> <span class="o">=</span> <span class="n">LabeledQuery</span><span class="o">.</span><span class="n">get_unique_queries</span><span class="p">(</span><span class="n">labeled_queries</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">run_name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">            <span class="bp">self</span><span class="o">.</span><span class="n">run_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">auto_run_name</span>
-</span></span><span class="line"><span class="cl">        <span class="c1"># 进行父类的__post_init__</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="nb">super</span><span class="p">(),</span> <span class="s2">&#34;__post_init__&#34;</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">            <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__post_init__</span><span class="p">()</span>  <span class="c1"># Needed as a MixIn</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># clddp.search</span>
+</span></span><span class="line"><span class="cl">    <span class="n">retrieved</span> <span class="o">=</span> <span class="n">search</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">retriever</span><span class="o">=</span><span class="n">retriever</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">collection_iter</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">collection_iter</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">collection_size</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">collection_size</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">queries</span><span class="o">=</span><span class="n">queries</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">topk</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">topk</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">per_device_eval_batch_size</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">per_device_eval_batch_size</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">fp16</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">fp16</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
 </span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># clddp.evaluation</span>
+</span></span><span class="line"><span class="cl">    <span class="n">evaluator</span> <span class="o">=</span> <span class="n">RetrievalEvaluator</span><span class="p">(</span><span class="n">eval_dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">,</span> <span class="n">split</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">split</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">report</span> <span class="o">=</span> <span class="n">evaluator</span><span class="p">(</span><span class="n">retrieved</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nd">@dataclass</span>
-</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">DumpableArgumentsMixIn</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">    <span class="n">output_dir</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_dir</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">            <span class="bp">self</span><span class="o">.</span><span class="n">output_dir</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">build_output_dir</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="nb">super</span><span class="p">(),</span> <span class="s2">&#34;__post_init__&#34;</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">            <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__post_init__</span><span class="p">()</span>  <span class="c1"># Needed as a MixIn</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="nd">@abstractmethod</span>
-</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">build_output_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">        <span class="k">pass</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">dump_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fname</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&#34;arguments.json&#34;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="n">fargs</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output_dir</span><span class="p">,</span> <span class="n">fname</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fargs</span><span class="p">,</span> <span class="s2">&#34;w&#34;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">            <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">asdict</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Dumped arguments to </span><span class="si">{</span><span class="n">fargs</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">freport</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">output_dir</span><span class="p">,</span> <span class="s2">&#34;metrics.json&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">freport</span><span class="p">,</span> <span class="s2">&#34;w&#34;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">report</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Saved evaluation metrics to </span><span class="si">{</span><span class="n">freport</span><span class="si">}</span><span class="s2">.&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">franked</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">output_dir</span><span class="p">,</span> <span class="s2">&#34;ranking_results.txt&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">RetrievedPassageIDList</span><span class="o">.</span><span class="n">dump_trec_csv</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">retrieval_results</span><span class="o">=</span><span class="n">retrieved</span><span class="p">,</span> <span class="n">fpath</span><span class="o">=</span><span class="n">franked</span><span class="p">,</span> <span class="n">system</span><span class="o">=</span><span class="s2">&#34;dragon_plus&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Saved ranking results to </span><span class="si">{</span><span class="n">franked</span><span class="si">}</span><span class="s2">.&#34;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">    <span class="n">a</span><span class="o">=</span><span class="n">AutoRunNameArgumentsMixIn</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">run_name</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">main</span><span class="p">()</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div>
+</div><h1 id="总结">总结
+</h1>
 </section>
 
 
@@ -882,6 +1099,28 @@
     
 
     
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/conditionalqa/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">ConditionalQA</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
 
      
     
