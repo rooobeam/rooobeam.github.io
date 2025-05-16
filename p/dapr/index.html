@@ -1279,6 +1279,50 @@
 </span><span class="lnt">44
 </span><span class="lnt">45
 </span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span><span class="lnt">87
+</span><span class="lnt">88
+</span><span class="lnt">89
+</span><span class="lnt">90
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="nd">@dataclass</span>
@@ -1293,6 +1337,50 @@
 </span></span><span class="line"><span class="cl">    <span class="n">meta_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">MetaDataJson</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="o">...</span>
+</span></span><span class="line"><span class="cl">    <span class="nd">@staticmethod</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">build_corpus_iter_fn</span><span class="p">(</span><span class="n">fpath</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Document</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fpath</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">doc_json</span><span class="p">:</span> <span class="n">DocumentJson</span> <span class="o">=</span> <span class="n">ujson</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">document</span> <span class="o">=</span> <span class="n">Document</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span><span class="n">doc_json</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">document</span><span class="o">.</span><span class="n">set_default_candidates</span><span class="p">()</span>  <span class="c1"># Also for compatibility with the older version</span>
+</span></span><span class="line"><span class="cl">                <span class="k">yield</span> <span class="n">document</span>
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">    <span class="nd">@staticmethod</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">load_labeled_queries</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">fpath</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">total</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">pbar</span><span class="p">:</span> <span class="nb">bool</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">LabeledQuery</span><span class="p">]]:</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># fpath 文件路径 total 问答对个数 pbar对于device 0 是true</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">fpath</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="kc">None</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">labeled_queries</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">LabeledQuery</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fpath</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="o">.</span><span class="n">tqdm</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                <span class="n">f</span><span class="p">,</span> <span class="n">total</span><span class="o">=</span><span class="n">total</span><span class="p">,</span> <span class="n">desc</span><span class="o">=</span><span class="sa">f</span><span class="s2">&#34;Loading from </span><span class="si">{</span><span class="n">fpath</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">,</span> <span class="n">disable</span><span class="o">=</span><span class="ow">not</span> <span class="n">pbar</span>
+</span></span><span class="line"><span class="cl">            <span class="p">):</span>
+</span></span><span class="line"><span class="cl">                <span class="n">lq_json</span><span class="p">:</span> <span class="n">LabeledQueryJson</span> <span class="o">=</span> <span class="n">ujson</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">query_json</span> <span class="o">=</span> <span class="n">lq_json</span><span class="p">[</span><span class="s2">&#34;query&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">                <span class="n">query</span> <span class="o">=</span> <span class="n">Query</span><span class="p">(</span><span class="n">query_id</span><span class="o">=</span><span class="n">query_json</span><span class="p">[</span><span class="s2">&#34;id&#34;</span><span class="p">],</span> <span class="n">text</span><span class="o">=</span><span class="n">query_json</span><span class="p">[</span><span class="s2">&#34;text&#34;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">                <span class="n">judged_chunk_jsons</span> <span class="o">=</span> <span class="n">lq_json</span><span class="p">[</span><span class="s2">&#34;judged_chunks&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">                <span class="n">judged_chunks</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">                <span class="k">for</span> <span class="n">jchk_json</span> <span class="ow">in</span> <span class="n">judged_chunk_jsons</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">document</span> <span class="o">=</span> <span class="n">Document</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span><span class="n">jchk_json</span><span class="p">[</span><span class="s2">&#34;belonging_doc&#34;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">chunk_json</span><span class="p">:</span> <span class="n">ChunkJson</span> <span class="o">=</span> <span class="n">jchk_json</span><span class="p">[</span><span class="s2">&#34;chunk&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">chunk</span> <span class="o">=</span> <span class="n">Chunk</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">chunk_id</span><span class="o">=</span><span class="n">chunk_json</span><span class="p">[</span><span class="s2">&#34;id&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">text</span><span class="o">=</span><span class="n">chunk_json</span><span class="p">[</span><span class="s2">&#34;text&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">doc_summary</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">belonging_doc</span><span class="o">=</span><span class="n">document</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">jchk</span> <span class="o">=</span> <span class="n">JudgedChunk</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">query</span><span class="o">=</span><span class="n">query</span><span class="p">,</span> <span class="n">chunk</span><span class="o">=</span><span class="n">chunk</span><span class="p">,</span> <span class="n">judgement</span><span class="o">=</span><span class="n">jchk_json</span><span class="p">[</span><span class="s2">&#34;judgement&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">judged_chunks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">jchk</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">labeled_query</span> <span class="o">=</span> <span class="n">LabeledQuery</span><span class="p">(</span><span class="n">query</span><span class="o">=</span><span class="n">query</span><span class="p">,</span> <span class="n">judged_chunks</span><span class="o">=</span><span class="n">judged_chunks</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">labeled_queries</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">labeled_query</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">labeled_queries</span>
+</span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="nd">@classmethod</span>
 </span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">from_dump</span><span class="p">(</span>
