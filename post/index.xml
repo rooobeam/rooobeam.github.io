@@ -7,7 +7,31 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>rooobeam</copyright>
-        <lastBuildDate>Tue, 13 May 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://rooobeam.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 18 May 2025 18:51:54 +0800</lastBuildDate><atom:link href="https://rooobeam.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>梯度下降法</title>
+        <link>https://rooobeam.github.io/p/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95/</link>
+        <pubDate>Sun, 18 May 2025 18:51:54 +0800</pubDate>
+        
+        <guid>https://rooobeam.github.io/p/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95/</guid>
+        <description>&lt;p&gt;Loss是最终的，你要让它最小，就要调整它下面的变量。&lt;/p&gt;
+&lt;p&gt;某个变量它变化一定的值会导致loss也变化一定的值，如果是1元也就是一维，没有方向可选，变化率也一定，但是到了多维比如二维就不是了。&lt;/p&gt;
+&lt;p&gt;对&lt;strong&gt;不同变量&lt;/strong&gt;求得的&lt;strong&gt;各种偏导&lt;/strong&gt;是 当前位置下 要使&lt;strong&gt;loss变小最快&lt;/strong&gt;的 方向，方向很好理解，各种偏导值不一样呈现一定比例，最快的话看图，方向变一下走单位距离，z增大的幅度都不是最大（在xyz三维情况下）。&lt;/p&gt;
+&lt;p&gt;所以output和实际值y共同构造了Loss，而且Loss值本身只是反映一下差异，这个值并没有参与反向传播。&lt;/p&gt;
+&lt;p&gt;但是实际值y会，它相当于一个参数，不是变量，要知道计算偏导时，其他变量也会被当作参数，共同作用于某个变量的偏导。&lt;/p&gt;
+&lt;p&gt;比如说求词向量偏导，偏置都不会去影响它（我没记错的话），当前的权重和实际值y会。&lt;/p&gt;
+&lt;p&gt;损失函数得出的值不会参与反向传播，但是函数的形式即 &lt;strong&gt;如何加工&lt;/strong&gt;output和实际值y，会影响实际值y对变量偏导的影响。&lt;/p&gt;
+&lt;p&gt;如1/2*(y^-y)^2，对y^（即output/估计值）求导得出  	y^的偏导 = y^&lt;strong&gt;-y&lt;/strong&gt;，这里可以体现实际值y对y^偏导的影响，即式子中的“&lt;strong&gt;-y&lt;/strong&gt;”。&lt;/p&gt;
+&lt;p&gt;而y^的偏导由链式法则会影响w、b、x的偏导，所以y也以“&lt;strong&gt;-y&lt;/strong&gt;”的方式影响他们。&lt;/p&gt;
+&lt;p&gt;如果是softmax后交叉熵&lt;/p&gt;
+&lt;img src=&#34;https://i-blog.csdnimg.cn/blog_migrate/f88326c972223111a1a0f43429e0b48b.png&#34; style=&#34;zoom:60%;&#34;/&gt;
+&lt;p&gt;参考下文理解&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/zhouaho2010/article/details/102756411&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;小白零基础学习：详解梯度下降算法：完整原理+公式推导+视频讲解_标准梯度下降算法 损函数-CSDN博客&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/CSDN_SUSAN/article/details/90166474&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;导数，偏导数，方向导数，梯度的理解&amp;mdash;微积分数学基础_u对法向量求偏导是什么-CSDN博客&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>滑动窗口</title>
         <link>https://rooobeam.github.io/p/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/</link>
         <pubDate>Tue, 13 May 2025 00:00:00 +0000</pubDate>
