@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="OS os.path.join() os.path.exists() os.listdir() os.path.isdir() ">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="OS os.path.join() os.path.exists() os.listdir() os.path.isdir() open with open(&hellip;) as f\n1 2 3 4 5 # 例子 with open(&#39;_20_data.txt&#39;, &#39;r&#39;) as file: # 读取数据 N\\n1 2 3 n = int(file.readline().strip()) data = list(map(int, file.read().split())) 参数1：文件地址 参数2：读写方式 w从头写 r只读 a追加\n读写方式 是否为 二进制 是否为 可读可写 r 空 空 w b + a 共\t3*2*2=12种\n模式对照表 和 f.seek(n)\n">
 <title>文件读写</title>
 
 <link rel='canonical' href='https://rooobeam.github.io/p/%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99/'>
 
 <link rel="stylesheet" href="/scss/style.min.a7558000c2456f20ae90904971171af41a2b987eed638982c918c424b3e14d7b.css"><meta property='og:title' content="文件读写">
-<meta property='og:description' content="OS os.path.join() os.path.exists() os.listdir() os.path.isdir() ">
+<meta property='og:description' content="OS os.path.join() os.path.exists() os.listdir() os.path.isdir() open with open(&hellip;) as f\n1 2 3 4 5 # 例子 with open(&#39;_20_data.txt&#39;, &#39;r&#39;) as file: # 读取数据 N\\n1 2 3 n = int(file.readline().strip()) data = list(map(int, file.read().split())) 参数1：文件地址 参数2：读写方式 w从头写 r只读 a追加\n读写方式 是否为 二进制 是否为 可读可写 r 空 空 w b + a 共\t3*2*2=12种\n模式对照表 和 f.seek(n)\n">
 <meta property='og:url' content='https://rooobeam.github.io/p/%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99/'>
 <meta property='og:site_name' content='rooobeam'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-05-11T23:17:20&#43;08:00'/><meta property='article:modified_time' content='2025-05-11T23:17:20&#43;08:00'/>
 <meta name="twitter:title" content="文件读写">
-<meta name="twitter:description" content="OS os.path.join() os.path.exists() os.listdir() os.path.isdir() ">
+<meta name="twitter:description" content="OS os.path.join() os.path.exists() os.listdir() os.path.isdir() open with open(&hellip;) as f\n1 2 3 4 5 # 例子 with open(&#39;_20_data.txt&#39;, &#39;r&#39;) as file: # 读取数据 N\\n1 2 3 n = int(file.readline().strip()) data = list(map(int, file.read().split())) 参数1：文件地址 参数2：读写方式 w从头写 r只读 a追加\n读写方式 是否为 二进制 是否为 可读可写 r 空 空 w b + a 共\t3*2*2=12种\n模式对照表 和 f.seek(n)\n">
     <link rel="shortcut icon" href="/favicon.ico" />
 
     </head>
@@ -244,6 +244,12 @@
         <li><a href="#ospathisdir">os.path.isdir()</a></li>
       </ol>
     </li>
+    <li><a href="#open">open</a>
+      <ol>
+        <li><a href="#参数1文件地址">参数1：文件地址</a></li>
+        <li><a href="#参数2读写方式">参数2：读写方式</a></li>
+      </ol>
+    </li>
   </ol>
 </nav>
         </div>
@@ -306,7 +312,204 @@
 </h3><h3 id="ospathexists">os.path.exists()
 </h3><h3 id="oslistdir">os.listdir()
 </h3><h3 id="ospathisdir">os.path.isdir()
-</h3>
+</h3><h2 id="open">open
+</h2><p>with open(&hellip;) as f</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl">  <span class="c1"># 例子</span>
+</span></span><span class="line"><span class="cl">  <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;_20_data.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">      <span class="c1"># 读取数据 N\n1 2 3</span>
+</span></span><span class="line"><span class="cl">      <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">      <span class="n">data</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()))</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="参数1文件地址">参数1：文件地址
+</h3><h3 id="参数2读写方式">参数2：读写方式
+</h3><ul>
+<li>
+<p>w从头写   r只读   a追加</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>读写方式</th>
+          <th>是否为 二进制</th>
+          <th>是否为 可读可写</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>r</td>
+          <td>空</td>
+          <td>空</td>
+      </tr>
+      <tr>
+          <td>w</td>
+          <td>b</td>
+          <td>+</td>
+      </tr>
+      <tr>
+          <td>a</td>
+          <td></td>
+          <td></td>
+      </tr>
+  </tbody>
+</table></div>
+<p>共	3*2*2=12种</p>
+</li>
+<li>
+<p>模式对照表 和 <strong>f.seek(n)</strong></p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>模式</th>
+          <th>描述</th>
+          <th>文件存在</th>
+          <th>文件不存在</th>
+          <th>指针位置</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>r+</td>
+          <td>读写（文件必须存在）</td>
+          <td>不清空，从指针位置“覆盖写”</td>
+          <td>报错</td>
+          <td>开头</td>
+      </tr>
+      <tr>
+          <td>w+</td>
+          <td>写读（清空后读写）</td>
+          <td>必定清空，从指针位置写</td>
+          <td>创建</td>
+          <td>开头</td>
+      </tr>
+      <tr>
+          <td>a+</td>
+          <td>追加读写</td>
+          <td>必定从末尾写</td>
+          <td>创建</td>
+          <td>末尾</td>
+      </tr>
+  </tbody>
+</table></div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 创建文件</span>
+</span></span><span class="line"><span class="cl"><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;test_r+.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;旧内容&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># r+ </span>
+</span></span><span class="line"><span class="cl"><span class="k">try</span><span class="p">:</span>	<span class="c1"># 不存在改文件会报错</span>
+</span></span><span class="line"><span class="cl">    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;test_r+.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r+&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>   <span class="c1"># 输出: 旧内容^   （^指针位置）</span>
+</span></span><span class="line"><span class="cl">        <span class="n">f</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>	      <span class="c1"># ^旧内容	（移动指针位置到开头）</span>
+</span></span><span class="line"><span class="cl">        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;新&#39;</span><span class="p">)</span>     <span class="c1"># 新^内容	（从指针位置覆盖写入）</span>
+</span></span><span class="line"><span class="cl">        <span class="n">f</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>	      <span class="c1"># ^新内容</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>   <span class="c1"># 输出: 新内容</span>
+</span></span><span class="line"><span class="cl"><span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;文件不存在&#34;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 创建文件</span>
+</span></span><span class="line"><span class="cl"><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;test_w+.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;原始内容&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># w+ </span>
+</span></span><span class="line"><span class="cl"><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;test_w+.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w+&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;全新内容&#39;</span><span class="p">)</span>  <span class="c1"># 清空后写入  全新内容^</span>
+</span></span><span class="line"><span class="cl">    <span class="n">f</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>	        <span class="c1"># 移动指针到开头		^全新内容</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>      <span class="c1"># 输出: 全新内容</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 文件不存在时</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">os</span>
+</span></span><span class="line"><span class="cl"><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;new_w+.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w+&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;创建内容&#39;</span><span class="p">)</span>		
+</span></span><span class="line"><span class="cl">    <span class="n">f</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s1">&#39;new_w+.txt&#39;</span><span class="p">))</span>      <span class="c1"># 输出: 创建的文件的绝对路径</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 创建文件</span>
+</span></span><span class="line"><span class="cl"><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;test_a+.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;初始行</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># a+ </span>
+</span></span><span class="line"><span class="cl"><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;test_a+.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;a+&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;追加行</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>   <span class="c1"># 追加行\n^</span>
+</span></span><span class="line"><span class="cl">    <span class="n">f</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>            <span class="c1"># ^初始行\n追加行\n</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>      <span class="c1"># 输出: 初始行\n追加行\n</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># 验证指针特性</span>
+</span></span><span class="line"><span class="cl">    <span class="n">f</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>            <span class="c1"># 初始行\n追^加行\n</span>
+</span></span><span class="line"><span class="cl">    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;中间插入&#39;</span><span class="p">)</span>   <span class="c1"># 仍然追加到文件末尾！</span>
+</span></span><span class="line"><span class="cl">    <span class="n">f</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>      <span class="c1"># 输出: 初始行\n追加行\n中间插入</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+
 </section>
 
 
