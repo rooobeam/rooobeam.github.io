@@ -7,7 +7,19 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>rooobeam</copyright>
-        <lastBuildDate>Fri, 23 May 2025 09:42:02 +0800</lastBuildDate><atom:link href="https://rooobeam.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 25 May 2025 18:48:08 +0800</lastBuildDate><atom:link href="https://rooobeam.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Git</title>
+        <link>https://rooobeam.github.io/p/git/</link>
+        <pubDate>Sun, 25 May 2025 18:48:08 +0800</pubDate>
+        
+        <guid>https://rooobeam.github.io/p/git/</guid>
+        <description>&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.bilibili.com/video/BV1dV411G77N/?spm_id_from=333.337.search-card.all.click&amp;amp;vd_source=3e32a51d0489203920eb4337d8de4c31&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;ssh密钥进行github身份验证，ssh公私密钥使用详解，github密钥配置与使用，git密钥使用详解，git入门教程_哔哩哔哩_bilibili&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/u014361280/article/details/109703556&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Git 常见错误 之 error: src refspec xxx does not match any / error: failed to push some refs to 简单解决方法_error: src refspec master does not match any-CSDN博客&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>Asyncio</title>
         <link>https://rooobeam.github.io/p/asyncio/</link>
         <pubDate>Fri, 23 May 2025 09:42:02 +0800</pubDate>
