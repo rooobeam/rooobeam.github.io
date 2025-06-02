@@ -214,7 +214,39 @@
     </ol>
 </aside>
 
-    
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#云和本地ssh密钥配置">云和本地ssh密钥配置</a></li>
+    <li><a href="#本地文件夹上传到main">本地文件夹上传到main</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
 
             <main class="main full-width">
     <article class="main-article">
@@ -267,7 +299,50 @@
     >ssh密钥进行github身份验证，ssh公私密钥使用详解，github密钥配置与使用，git密钥使用详解，git入门教程_哔哩哔哩_bilibili</a></p>
 <p><a class="link" href="https://blog.csdn.net/u014361280/article/details/109703556"  target="_blank" rel="noopener"
     >Git 常见错误 之 error: src refspec xxx does not match any / error: failed to push some refs to 简单解决方法_error: src refspec master does not match any-CSDN博客</a></p>
-
+<p><a class="link" href="https://zhuanlan.zhihu.com/p/193140870"  target="_blank" rel="noopener"
+    >手把手教你用git上传项目到GitHub（图文并茂，这一篇就够了），相信你一定能成功！！ - 知乎</a></p>
+<p><a class="link" href="https://docs.github.com/zh/repositories/configuring-branches-and-merges-in-your-repository/managing-branches-in-your-repository/changing-the-default-branch"  target="_blank" rel="noopener"
+    >更改默认分支 - GitHub 文档</a></p>
+<h2 id="云和本地ssh密钥配置">云和本地ssh密钥配置
+</h2><p>见第一个链接视频</p>
+<h2 id="本地文件夹上传到main">本地文件夹上传到main
+</h2><ul>
+<li>在项目文件夹右键然后找到git bash点击打开</li>
+<li>输入以下命令：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git init
+</span></span><span class="line"><span class="cl">git add .
+</span></span><span class="line"><span class="cl">git commit -m <span class="s2">&#34;first&#34;</span>
+</span></span><span class="line"><span class="cl">git remote add healthrag git@github.com:rooobeam/HealthRAG.git <span class="c1"># 关联远程仓库 healrag是远程名，本地名会显示在输入上一行末尾蓝色字体。</span>
+</span></span><span class="line"><span class="cl">git push -u healthrag master <span class="c1"># master是本地名，即蓝色字体</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>然后到github上仓库页面，找到右上角setting，进入setting找到Default branch，更改然后可以把旧的删掉，然后添加README.md如果原本没有的话。</p>
+</li>
+<li>
+<p>如果不想用master这一默认本地名，输入以下命令可以改为新名（mmm），但是不要与原本远程仓库已有branch否则要merge。</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git branch -m master mmm
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
 </section>
 
 

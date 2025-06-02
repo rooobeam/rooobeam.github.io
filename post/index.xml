@@ -17,7 +17,50 @@
     &gt;ssh密钥进行github身份验证，ssh公私密钥使用详解，github密钥配置与使用，git密钥使用详解，git入门教程_哔哩哔哩_bilibili&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/u014361280/article/details/109703556&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Git 常见错误 之 error: src refspec xxx does not match any / error: failed to push some refs to 简单解决方法_error: src refspec master does not match any-CSDN博客&lt;/a&gt;&lt;/p&gt;
-</description>
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/193140870&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;手把手教你用git上传项目到GitHub（图文并茂，这一篇就够了），相信你一定能成功！！ - 知乎&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://docs.github.com/zh/repositories/configuring-branches-and-merges-in-your-repository/managing-branches-in-your-repository/changing-the-default-branch&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;更改默认分支 - GitHub 文档&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;云和本地ssh密钥配置&#34;&gt;云和本地ssh密钥配置
+&lt;/h2&gt;&lt;p&gt;见第一个链接视频&lt;/p&gt;
+&lt;h2 id=&#34;本地文件夹上传到main&#34;&gt;本地文件夹上传到main
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;在项目文件夹右键然后找到git bash点击打开&lt;/li&gt;
+&lt;li&gt;输入以下命令：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;git init
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;git add .
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;git commit -m &lt;span class=&#34;s2&#34;&gt;&amp;#34;first&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;git remote add healthrag git@github.com:rooobeam/HealthRAG.git &lt;span class=&#34;c1&#34;&gt;# 关联远程仓库 healrag是远程名，本地名会显示在输入上一行末尾蓝色字体。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;git push -u healthrag master &lt;span class=&#34;c1&#34;&gt;# master是本地名，即蓝色字体&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;然后到github上仓库页面，找到右上角setting，进入setting找到Default branch，更改然后可以把旧的删掉，然后添加README.md如果原本没有的话。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;如果不想用master这一默认本地名，输入以下命令可以改为新名（mmm），但是不要与原本远程仓库已有branch否则要merge。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;git branch -m master mmm
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
         </item>
         <item>
         <title>Asyncio</title>
