@@ -13,10 +13,19 @@
         <pubDate>Fri, 09 May 2025 16:50:01 +0800</pubDate>
         
         <guid>https://rooobeam.github.io/p/dapr/</guid>
-        <description>&lt;h1 id=&#34;论文解读&#34;&gt;论文解读
-&lt;/h1&gt;&lt;h1 id=&#34;实验复现代码&#34;&gt;实验复现代码
-&lt;/h1&gt;&lt;h2 id=&#34;reproduce_bm25sh&#34;&gt;reproduce_bm25.sh
-&lt;/h2&gt;&lt;p&gt;（.sh4种算法都类似，但passage_only.bm25大不相同）&lt;/p&gt;
+        <description>&lt;h2 id=&#34;论文解读&#34;&gt;论文解读
+&lt;/h2&gt;&lt;p&gt;摘要解读：场景是从长文档(long document)中找到相关片段(passage)，对SoTA分析发现错误主要源于错失了文档上下文内容，于是命名任务为DAPR——&lt;strong&gt;文档感知的片段检索&lt;/strong&gt;（Document-Aware Passage Retrieval）。然后为此建立benchmark并进行实验。实验中对SoTA片段落检索器辅之以文档内容：（1）和BM25混合。（2）将文档信息掺和到段落信息里。实验结果：混合检索器法整体好，但是对于“需要文档级上下文信息”的问题完全失败；掺和法反之，整体较差但在上下文困难问题有进步。&lt;/p&gt;
+&lt;p&gt;介绍解读：&lt;/p&gt;
+&lt;p&gt;IR有用。传统BM25通过统计方法。近期方法应用神经网络进行向量化表示实现复杂语义匹配。神经方法受限于“短片段”(short passage 如512tokens)输入。在现实中遇到长文本如学科论文时，超出限制而无法利用完整上下文。近期工作实现长文档encode并实现了文档级检索。然而返回长文档对于用户仍不便于获取有效信息，如在标注维基百科页面中与用户查询相关的段落时，35.8%的查询所对应相关段落平均位于文档第7.6段(标准差12.7)。&lt;/p&gt;
+&lt;p&gt;于是提出DAPR任务，就是在长文档中找到对应片段。举例解释“文档-感知” (Document-awared)，如指代关系会导致Query的关键信息出现在不同片段里，可能导致关键信息所在片段遗漏。为深入了解，测试SoTA片段检索器并分析错误，发现53.5%的错误源于未结合文档上下文解析指代或主题，导致漏检正确答案段落。于是创建一个基准测试，其中包含来自不同领域的5个数据集，这些数据集提供了在关联文档中对相关段落的&lt;strong&gt;标注&lt;/strong&gt;(就是问题有标出相关片段)。&lt;/p&gt;
+&lt;p&gt;实验中对SoTA片段落检索器辅之以文档内容：（1）和BM25混合。（2）将文档信息掺和到段落信息里。实验结果：混合检索器法整体好，但是对于“需要文档级上下文信息”的问题完全失败；掺和法反之，整体较差但在上下文困难问题有进步。这个基准测试对新的检索方法有意义。&lt;/p&gt;
+&lt;p&gt;相关工作（benchmark）：&lt;/p&gt;
+&lt;p&gt;DocQA： 需要模型回答关于输入文档的一个问题，它的问题的相关文档是给定的，而DAPR需要从文档集里找相关信息(doc)。基于给定文档这个假设，DocQA的问题通常是和文档内容关联的，比如“哪个检索系统用于这个baseline”，这个问题在DocQA中因为给定了文档所以有默认关联，而转换到DAPR就不行了，&amp;ldquo;这个baseline&amp;quot;不知道是啥。&lt;/p&gt;
+&lt;p&gt;长文档检索：法1是MaxP，片段最高分作为文档分，法2是FirstP，第一片段得分作为文档分，法2不如法1。有学者比较了不同的“长距离注意力模型”的长文档检索。陈等人（2022年）提出了一种分层神经网络，并证明其优于基于MaxP。但这些工作相比DAPR，都没有研究 “考虑文档内容情况下的片段检索”。&lt;/p&gt;
+&lt;p&gt;混合检索：涉及多检索系统。其中排名混合将排名合并&lt;/p&gt;
+&lt;h2 id=&#34;实验复现代码&#34;&gt;实验复现代码
+&lt;/h2&gt;&lt;h3 id=&#34;reproduce_bm25sh&#34;&gt;reproduce_bm25.sh
+&lt;/h3&gt;&lt;p&gt;（.sh4种算法都类似，但passage_only.bm25大不相同）&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;export&lt;/strong&gt;：将变量提升为 &lt;strong&gt;环境变量（全局变量）&lt;/strong&gt;，使得所有子进程（如其他脚本、Python程序等）都能继承这个变量。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;直接设置&lt;/strong&gt;：直接赋值定义的变量是 &lt;strong&gt;Shell变量（局部变量）&lt;/strong&gt;，仅在当前 Shell 会话中有效，子进程（如其他脚本、程序）无法访问。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -124,7 +133,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h2 id=&#34;dragon_plus-passage_only&#34;&gt;dragon_plus (passage_only)
-&lt;/h2&gt;&lt;p&gt;​	passage_only下的dragon_plus，即“仅段落检索使用dragon_plus检索器”，由以下 &lt;strong&gt;调用&lt;/strong&gt; 实现。&lt;/p&gt;
+&lt;/h2&gt;&lt;p&gt;​	passage_only下的dragon_plus（类似上面的passage_only.bm25），即“仅段落检索使用dragon_plus检索器”，由以下 &lt;strong&gt;调用&lt;/strong&gt; 实现。&lt;/p&gt;
 &lt;p&gt;​	reproduce_cp相当于main，其中主要执行了&amp;hellip;passage_only.args.dragon_plus.py和&amp;hellip;passage_only.dragon_plus_cp.py，前者用于配置一些参数，参数会传入后者，后者是实现功能和评估。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;

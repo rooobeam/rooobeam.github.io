@@ -282,6 +282,18 @@
 
     <div class="article-details">
     
+    <header class="article-category">
+        
+            <a href="/categories/%E5%9F%BA%E7%A1%80/" >
+                基础
+            </a>
+        
+            <a href="/categories/%E7%AE%97%E6%B3%95/" >
+                算法
+            </a>
+        
+    </header>
+    
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
@@ -507,7 +519,7 @@
 </span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">p_n</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">q_n</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">q_n</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">p_n</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">):</span>
 </span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="kc">False</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">p_n</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">p_n</span> <span class="ow">and</span> <span class="n">q_n</span><span class="p">:</span>
 </span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="n">p_n</span><span class="o">.</span><span class="n">val</span><span class="o">!=</span><span class="n">q_n</span><span class="o">.</span><span class="n">val</span><span class="p">:</span>
 </span></span><span class="line"><span class="cl">                    <span class="k">return</span> <span class="kc">False</span>
 </span></span><span class="line"><span class="cl">
@@ -523,10 +535,11 @@
 </h2><p>此题为自定义的，具有通解性质，可暴力解决很多题目。</p>
 <p>给你一个二叉树的根节点 root ，一层一层地打印并标明位置，包括空结点。</p>
 <p>关键是通过上层序号，向左子树走+0，向右子树走+1</p>
-<p>(root,0)
-|	\	
-|	  <br>
-(left,0)  (right,1)</p>
+<p>打印类似：</p>
+<p>(root,0)</p>
+<p>(left,0)  (right,1)</p>
+<p>(left_left,0)  (left_right,1) (none,2) (right_right,3)</p>
+<p>(?,0) (?,1)   (?,2) (?,3)                  (?,6) (?,7)</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -541,50 +554,20 @@
 </span><span class="lnt">10
 </span><span class="lnt">11
 </span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 在 104. 二叉树的最大深度 测试的</span>
 </span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
 </span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">maxDepth</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">TreeNode</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="ow">not</span> <span class="n">root</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">            <span class="nb">print</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">            <span class="k">return</span>
-</span></span><span class="line"><span class="cl">        <span class="c1"># 初始化队列</span>
-</span></span><span class="line"><span class="cl">        <span class="n">q</span> <span class="o">=</span> <span class="p">[(</span><span class="n">root</span><span class="p">,</span> <span class="mi">0</span><span class="p">)]</span>  
-</span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        <span class="k">while</span> <span class="n">q</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">            <span class="c1"># 遍历当前层</span>
-</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">q</span><span class="p">)):</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">                <span class="n">tnode</span><span class="o">=</span><span class="n">q</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># (root,0)  (Treenode,int)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="n">tnode</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
-</span></span><span class="line"><span class="cl">                    <span class="n">q</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">tnode</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">left</span><span class="p">,</span><span class="n">tnode</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">0</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">                    <span class="n">q</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">tnode</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">right</span><span class="p">,</span><span class="n">tnode</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">                
-</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="n">tnode</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
-</span></span><span class="line"><span class="cl">                	<span class="nb">print</span><span class="p">(</span><span class="n">tnode</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">val</span><span class="p">,</span><span class="n">tnode</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">end</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                <span class="k">else</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">                    <span class="nb">print</span><span class="p">(</span><span class="n">tnode</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">tnode</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">end</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>  
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">            <span class="nb">print</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">             
-</span></span><span class="line"><span class="cl">        <span class="k">return</span>   
+</span></span><span class="line"><span class="cl">        <span class="n">que</span><span class="o">=</span><span class="p">[(</span><span class="n">root</span><span class="p">,</span><span class="mi">0</span><span class="p">)]</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span> <span class="n">que</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">que</span><span class="p">)):</span>
+</span></span><span class="line"><span class="cl">                <span class="n">tnode</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="n">que</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;</span><span class="si">{</span><span class="n">tnode</span><span class="o">.</span><span class="n">val</span> <span class="k">if</span> <span class="n">tnode</span> <span class="k">else</span> <span class="kc">None</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">pos</span><span class="si">}</span><span class="se">\t</span><span class="s2">&#34;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="n">tnode</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">que</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">tnode</span><span class="o">.</span><span class="n">left</span><span class="p">,</span><span class="n">pos</span><span class="o">*</span><span class="mi">2</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">que</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">tnode</span><span class="o">.</span><span class="n">right</span><span class="p">,</span><span class="n">pos</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">print</span><span class="p">()</span> 
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="四对称树">四、对称树
@@ -807,7 +790,7 @@
 </div><h2 id="六二叉树的最小深度">六、二叉树的最小深度
 </h2><p>给定一个二叉树，找出其最小深度。</p>
 <p>最小深度是从根节点到最近叶子节点的最短路径上的节点数量。</p>
-<p>**说明：**叶子节点是指没有子节点的节点。</p>
+<p><strong>说明</strong>：叶子节点是指没有子节点的节点。</p>
 <p><a class="link" href="https://leetcode.cn/problems/minimum-depth-of-binary-tree/description/"  target="_blank" rel="noopener"
     >111. 二叉树的最小深度 - 力扣（LeetCode）</a></p>
 <div class="highlight"><div class="chroma">
@@ -888,15 +871,6 @@
 </span><span class="lnt">19
 </span><span class="lnt">20
 </span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># Definition for a binary tree node.</span>
@@ -907,28 +881,19 @@
 </span></span><span class="line"><span class="cl"><span class="c1">#         self.right = right</span>
 </span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
 </span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">hasPathSum</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">TreeNode</span><span class="p">],</span> <span class="n">targetSum</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">        <span class="k">global</span> <span class="n">t_sum</span>
-</span></span><span class="line"><span class="cl">        <span class="n">t_sum</span><span class="o">=</span><span class="n">targetSum</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="ow">not</span> <span class="n">root</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="kc">False</span>
-</span></span><span class="line"><span class="cl">        <span class="c1"># root一定为True了</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">recur</span><span class="p">(</span><span class="n">root</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="ow">not</span> <span class="n">root</span><span class="p">:</span><span class="k">return</span> <span class="kc">False</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">recur</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">root</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">TreeNode</span><span class="p">],</span> <span class="n">pre_sum</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">        <span class="k">global</span> <span class="n">t_sum</span>
-</span></span><span class="line"><span class="cl">        <span class="n">cur_sum</span><span class="o">=</span><span class="n">pre_sum</span><span class="o">+</span><span class="n">root</span><span class="o">.</span><span class="n">val</span>
-</span></span><span class="line"><span class="cl">        <span class="c1"># 俩空子节点</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">left</span> <span class="ow">or</span> <span class="n">root</span><span class="o">.</span><span class="n">right</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">cur_sum</span> <span class="o">==</span> <span class="n">t_sum</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="kc">True</span>
-</span></span><span class="line"><span class="cl">            <span class="k">else</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="kc">False</span>
-</span></span><span class="line"><span class="cl">        <span class="c1"># 俩非空子节点</span>
-</span></span><span class="line"><span class="cl">        <span class="k">elif</span> <span class="n">root</span><span class="o">.</span><span class="n">left</span> <span class="ow">and</span> <span class="n">root</span><span class="o">.</span><span class="n">right</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">recur</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">left</span><span class="p">,</span><span class="n">cur_sum</span><span class="p">)</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">recur</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">right</span><span class="p">,</span><span class="n">cur_sum</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="c1"># 一空一非空</span>
-</span></span><span class="line"><span class="cl">        <span class="k">else</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">recur</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">left</span><span class="p">,</span><span class="n">cur_sum</span><span class="p">)</span> <span class="k">if</span> <span class="n">root</span><span class="o">.</span><span class="n">left</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">recur</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">right</span><span class="p">,</span><span class="n">cur_sum</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">def</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="ow">not</span> <span class="n">node</span><span class="p">:</span><span class="k">return</span> <span class="kc">False</span>
+</span></span><span class="line"><span class="cl">            <span class="n">s</span><span class="o">+=</span><span class="n">node</span><span class="o">.</span><span class="n">val</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="ow">not</span> <span class="n">node</span><span class="o">.</span><span class="n">left</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">node</span><span class="o">.</span><span class="n">right</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="n">s</span><span class="o">==</span><span class="n">target</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">return</span> <span class="kc">True</span>
+</span></span><span class="line"><span class="cl">                <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">return</span> <span class="kc">False</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">dfs</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">left</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span> <span class="ow">or</span> <span class="n">dfs</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">right</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">dfs</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">targetSum</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="八二叉树层序遍历无标序号">八、二叉树层序遍历无标序号
@@ -1099,12 +1064,6 @@
 </span><span class="lnt">19
 </span><span class="lnt">20
 </span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># Definition for a binary tree node.</span>
@@ -1115,25 +1074,19 @@
 </span></span><span class="line"><span class="cl"><span class="c1">#         self.right = right</span>
 </span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
 </span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">sumOfLeftLeaves</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">TreeNode</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="ow">not</span> <span class="n">root</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="mi">0</span>
-</span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        <span class="k">def</span> <span class="nf">recur</span><span class="p">(</span><span class="n">root</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">TreeNode</span><span class="p">],</span> <span class="n">flag</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">            <span class="c1"># 为叶子结点</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">left</span> <span class="ow">or</span> <span class="n">root</span><span class="o">.</span><span class="n">right</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="n">flag</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">                    <span class="k">return</span> <span class="n">root</span><span class="o">.</span><span class="n">val</span>
-</span></span><span class="line"><span class="cl">                <span class="k">else</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">                    <span class="k">return</span> <span class="mi">0</span>
-</span></span><span class="line"><span class="cl">            <span class="c1"># 都非空</span>
-</span></span><span class="line"><span class="cl">            <span class="k">elif</span> <span class="n">root</span><span class="o">.</span><span class="n">left</span> <span class="ow">and</span> <span class="n">root</span><span class="o">.</span><span class="n">right</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="n">recur</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">left</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span><span class="o">+</span><span class="n">recur</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">right</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">            <span class="c1"># 一个非空一个空</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="ow">not</span> <span class="n">root</span><span class="p">:</span> <span class="k">return</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">        <span class="n">l_c</span><span class="o">=</span><span class="n">root</span><span class="o">.</span><span class="n">left</span>
+</span></span><span class="line"><span class="cl">        <span class="n">r_c</span><span class="o">=</span><span class="n">root</span><span class="o">.</span><span class="n">right</span>
+</span></span><span class="line"><span class="cl">        <span class="n">l_cnt</span><span class="o">=</span><span class="n">r_cnt</span><span class="o">=</span><span class="mi">0</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">l_c</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="ow">not</span> <span class="n">l_c</span><span class="o">.</span><span class="n">left</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">l_c</span><span class="o">.</span><span class="n">right</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">l_cnt</span><span class="o">+=</span><span class="n">l_c</span><span class="o">.</span><span class="n">val</span>
 </span></span><span class="line"><span class="cl">            <span class="k">else</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="n">recur</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">left</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span> <span class="k">if</span> <span class="n">root</span><span class="o">.</span><span class="n">left</span> <span class="k">else</span> <span class="n">recur</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">right</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">            
-</span></span><span class="line"><span class="cl">        <span class="c1"># recur函数要在定义后调用</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">recur</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">l_cnt</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">sumOfLeftLeaves</span><span class="p">(</span><span class="n">l_c</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># 右孩子非空且非叶子结点</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">r_c</span> <span class="ow">and</span> <span class="n">r_c</span><span class="o">.</span><span class="n">left</span> <span class="ow">or</span> <span class="n">r_c</span><span class="o">.</span><span class="n">right</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">r_cnt</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">sumOfLeftLeaves</span><span class="p">(</span><span class="n">r_c</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">l_cnt</span><span class="o">+</span><span class="n">r_cnt</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="十一二叉搜索树的最小绝对差">十一、二叉搜索树的最小绝对差
@@ -2719,6 +2672,52 @@
     
 
     
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">滑动窗口</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AC%AC%E5%9B%9B%E7%AB%A0/">
+        
+        
+            <div class="article-image">
+                <img src="/p/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AC%AC%E5%9B%9B%E7%AB%A0/%E4%B8%89%E9%BE%99.ba68d7c6451bcdf18123fcc324ebf860_hu_478b751384d9d06d.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 汇编语言第四章"
+                        
+                        data-hash="md5-umjXxkUbzfGBI/zDJOv4YA==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">汇编语言第四章</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
 
      
     

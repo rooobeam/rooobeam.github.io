@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="论文解读 实验复现代码 reproduce_bm25.sh （.sh4种算法都类似，但passage_only.bm25大不相同）\nexport：将变量提升为 环境变量（全局变量），使得所有子进程（如其他脚本、Python程序等）都能继承这个变量。\n">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="论文解读 摘要解读：场景是从长文档(long document)中找到相关片段(passage)，对SoTA分析发现错误主要源于错失了文档上下文内容，于是命名任务为DAPR——文档感知的片段检索（Document-Aware Passage Retrieval）。然后为此建立benchmark并进行实验。实验中对SoTA片段落检索器辅之以文档内容：（1）和BM25混合。（2）将文档信息掺和到段落信息里。实验结果：混合检索器法整体好，但是对于“需要文档级上下文信息”的问题完全失败；掺和法反之，整体较差但在上下文困难问题有进步。\n">
 <title>DAPR</title>
 
 <link rel='canonical' href='https://rooobeam.github.io/p/dapr/'>
 
 <link rel="stylesheet" href="/scss/style.min.8752ced9c05cc1afc2b768fa4307859949471f33fc92b9579b5e8462b6d6315b.css"><meta property='og:title' content="DAPR">
-<meta property='og:description' content="论文解读 实验复现代码 reproduce_bm25.sh （.sh4种算法都类似，但passage_only.bm25大不相同）\nexport：将变量提升为 环境变量（全局变量），使得所有子进程（如其他脚本、Python程序等）都能继承这个变量。\n">
+<meta property='og:description' content="论文解读 摘要解读：场景是从长文档(long document)中找到相关片段(passage)，对SoTA分析发现错误主要源于错失了文档上下文内容，于是命名任务为DAPR——文档感知的片段检索（Document-Aware Passage Retrieval）。然后为此建立benchmark并进行实验。实验中对SoTA片段落检索器辅之以文档内容：（1）和BM25混合。（2）将文档信息掺和到段落信息里。实验结果：混合检索器法整体好，但是对于“需要文档级上下文信息”的问题完全失败；掺和法反之，整体较差但在上下文困难问题有进步。\n">
 <meta property='og:url' content='https://rooobeam.github.io/p/dapr/'>
 <meta property='og:site_name' content='rooobeam'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-05-09T16:50:01&#43;08:00'/><meta property='article:modified_time' content='2025-05-09T16:50:01&#43;08:00'/>
 <meta name="twitter:title" content="DAPR">
-<meta name="twitter:description" content="论文解读 实验复现代码 reproduce_bm25.sh （.sh4种算法都类似，但passage_only.bm25大不相同）\nexport：将变量提升为 环境变量（全局变量），使得所有子进程（如其他脚本、Python程序等）都能继承这个变量。\n">
+<meta name="twitter:description" content="论文解读 摘要解读：场景是从长文档(long document)中找到相关片段(passage)，对SoTA分析发现错误主要源于错失了文档上下文内容，于是命名任务为DAPR——文档感知的片段检索（Document-Aware Passage Retrieval）。然后为此建立benchmark并进行实验。实验中对SoTA片段落检索器辅之以文档内容：（1）和BM25混合。（2）将文档信息掺和到段落信息里。实验结果：混合检索器法整体好，但是对于“需要文档级上下文信息”的问题完全失败；掺和法反之，整体较差但在上下文困难问题有进步。\n">
     <link rel="shortcut icon" href="/favicon.ico" />
 
     </head>
@@ -236,7 +236,12 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#reproduce_bm25sh">reproduce_bm25.sh</a></li>
+    <li><a href="#论文解读">论文解读</a></li>
+    <li><a href="#实验复现代码">实验复现代码</a>
+      <ol>
+        <li><a href="#reproduce_bm25sh">reproduce_bm25.sh</a></li>
+      </ol>
+    </li>
     <li><a href="#dragon_plus-passage_only">dragon_plus (passage_only)</a>
       <ol>
         <li><a href="#reproduce_cppy">reproduce_cp.py</a></li>
@@ -314,10 +319,19 @@
     <section class="article-content">
     
     
-    <h1 id="论文解读">论文解读
-</h1><h1 id="实验复现代码">实验复现代码
-</h1><h2 id="reproduce_bm25sh">reproduce_bm25.sh
-</h2><p>（.sh4种算法都类似，但passage_only.bm25大不相同）</p>
+    <h2 id="论文解读">论文解读
+</h2><p>摘要解读：场景是从长文档(long document)中找到相关片段(passage)，对SoTA分析发现错误主要源于错失了文档上下文内容，于是命名任务为DAPR——<strong>文档感知的片段检索</strong>（Document-Aware Passage Retrieval）。然后为此建立benchmark并进行实验。实验中对SoTA片段落检索器辅之以文档内容：（1）和BM25混合。（2）将文档信息掺和到段落信息里。实验结果：混合检索器法整体好，但是对于“需要文档级上下文信息”的问题完全失败；掺和法反之，整体较差但在上下文困难问题有进步。</p>
+<p>介绍解读：</p>
+<p>IR有用。传统BM25通过统计方法。近期方法应用神经网络进行向量化表示实现复杂语义匹配。神经方法受限于“短片段”(short passage 如512tokens)输入。在现实中遇到长文本如学科论文时，超出限制而无法利用完整上下文。近期工作实现长文档encode并实现了文档级检索。然而返回长文档对于用户仍不便于获取有效信息，如在标注维基百科页面中与用户查询相关的段落时，35.8%的查询所对应相关段落平均位于文档第7.6段(标准差12.7)。</p>
+<p>于是提出DAPR任务，就是在长文档中找到对应片段。举例解释“文档-感知” (Document-awared)，如指代关系会导致Query的关键信息出现在不同片段里，可能导致关键信息所在片段遗漏。为深入了解，测试SoTA片段检索器并分析错误，发现53.5%的错误源于未结合文档上下文解析指代或主题，导致漏检正确答案段落。于是创建一个基准测试，其中包含来自不同领域的5个数据集，这些数据集提供了在关联文档中对相关段落的<strong>标注</strong>(就是问题有标出相关片段)。</p>
+<p>实验中对SoTA片段落检索器辅之以文档内容：（1）和BM25混合。（2）将文档信息掺和到段落信息里。实验结果：混合检索器法整体好，但是对于“需要文档级上下文信息”的问题完全失败；掺和法反之，整体较差但在上下文困难问题有进步。这个基准测试对新的检索方法有意义。</p>
+<p>相关工作（benchmark）：</p>
+<p>DocQA： 需要模型回答关于输入文档的一个问题，它的问题的相关文档是给定的，而DAPR需要从文档集里找相关信息(doc)。基于给定文档这个假设，DocQA的问题通常是和文档内容关联的，比如“哪个检索系统用于这个baseline”，这个问题在DocQA中因为给定了文档所以有默认关联，而转换到DAPR就不行了，&ldquo;这个baseline&quot;不知道是啥。</p>
+<p>长文档检索：法1是MaxP，片段最高分作为文档分，法2是FirstP，第一片段得分作为文档分，法2不如法1。有学者比较了不同的“长距离注意力模型”的长文档检索。陈等人（2022年）提出了一种分层神经网络，并证明其优于基于MaxP。但这些工作相比DAPR，都没有研究 “考虑文档内容情况下的片段检索”。</p>
+<p>混合检索：涉及多检索系统。其中排名混合将排名合并</p>
+<h2 id="实验复现代码">实验复现代码
+</h2><h3 id="reproduce_bm25sh">reproduce_bm25.sh
+</h3><p>（.sh4种算法都类似，但passage_only.bm25大不相同）</p>
 <p><strong>export</strong>：将变量提升为 <strong>环境变量（全局变量）</strong>，使得所有子进程（如其他脚本、Python程序等）都能继承这个变量。</p>
 <p><strong>直接设置</strong>：直接赋值定义的变量是 <strong>Shell变量（局部变量）</strong>，仅在当前 Shell 会话中有效，子进程（如其他脚本、程序）无法访问。</p>
 <div class="highlight"><div class="chroma">
@@ -425,7 +439,7 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="dragon_plus-passage_only">dragon_plus (passage_only)
-</h2><p>​	passage_only下的dragon_plus，即“仅段落检索使用dragon_plus检索器”，由以下 <strong>调用</strong> 实现。</p>
+</h2><p>​	passage_only下的dragon_plus（类似上面的passage_only.bm25），即“仅段落检索使用dragon_plus检索器”，由以下 <strong>调用</strong> 实现。</p>
 <p>​	reproduce_cp相当于main，其中主要执行了&hellip;passage_only.args.dragon_plus.py和&hellip;passage_only.dragon_plus_cp.py，前者用于配置一些参数，参数会传入后者，后者是实现功能和评估。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">

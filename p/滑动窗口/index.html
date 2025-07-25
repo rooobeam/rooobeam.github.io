@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="滑动窗口与双指针 灵神题单：分享丨【算法题单】滑动窗口与双指针（定长/不定长/单序列/双序列/三指针/分组循环）- 讨论 - 力扣（LeetCode）\n尚未分类 两数之和 1. 两数之和 - 力扣（LeetCode）\n">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="滑动窗口与双指针 灵神题单：分享丨【算法题单】滑动窗口与双指针（定长/不定长/单序列/双序列/三指针/分组循环）- 讨论 - 力扣（LeetCode）\n场景：连续、遍历各情况\n">
 <title>滑动窗口</title>
 
 <link rel='canonical' href='https://rooobeam.github.io/p/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/'>
 
 <link rel="stylesheet" href="/scss/style.min.8752ced9c05cc1afc2b768fa4307859949471f33fc92b9579b5e8462b6d6315b.css"><meta property='og:title' content="滑动窗口">
-<meta property='og:description' content="滑动窗口与双指针 灵神题单：分享丨【算法题单】滑动窗口与双指针（定长/不定长/单序列/双序列/三指针/分组循环）- 讨论 - 力扣（LeetCode）\n尚未分类 两数之和 1. 两数之和 - 力扣（LeetCode）\n">
+<meta property='og:description' content="滑动窗口与双指针 灵神题单：分享丨【算法题单】滑动窗口与双指针（定长/不定长/单序列/双序列/三指针/分组循环）- 讨论 - 力扣（LeetCode）\n场景：连续、遍历各情况\n">
 <meta property='og:url' content='https://rooobeam.github.io/p/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/'>
 <meta property='og:site_name' content='rooobeam'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-05-13T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-05-13T00:00:00&#43;00:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-07-25T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-07-25T00:00:00&#43;00:00'/>
 <meta name="twitter:title" content="滑动窗口">
-<meta name="twitter:description" content="滑动窗口与双指针 灵神题单：分享丨【算法题单】滑动窗口与双指针（定长/不定长/单序列/双序列/三指针/分组循环）- 讨论 - 力扣（LeetCode）\n尚未分类 两数之和 1. 两数之和 - 力扣（LeetCode）\n">
+<meta name="twitter:description" content="滑动窗口与双指针 灵神题单：分享丨【算法题单】滑动窗口与双指针（定长/不定长/单序列/双序列/三指针/分组循环）- 讨论 - 力扣（LeetCode）\n场景：连续、遍历各情况\n">
     <link rel="shortcut icon" href="/favicon.ico" />
 
     </head>
@@ -236,19 +236,30 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#两数之和">两数之和</a></li>
-    <li><a href="#删除有序数组中的重复项">删除有序数组中的重复项</a></li>
-    <li><a href="#搜索插入位置">搜索插入位置</a></li>
-    <li><a href="#加一">加一</a></li>
-  </ol>
-
-  <ol>
-    <li><a href="#半径为-k-的子数组平均值">半径为 k 的子数组平均值</a></li>
-    <li><a href="#几乎唯一子数组的最大和">几乎唯一子数组的最大和</a></li>
-  </ol>
-
-  <ol>
-    <li><a href="#无重复字符的最长子串">无重复字符的最长子串</a></li>
+    <li><a href="#尚未分类">尚未分类</a>
+      <ol>
+        <li><a href="#两数之和">两数之和</a></li>
+        <li><a href="#删除有序数组中的重复项">删除有序数组中的重复项</a></li>
+        <li><a href="#搜索插入位置">搜索插入位置</a></li>
+        <li><a href="#加一">加一</a></li>
+      </ol>
+    </li>
+    <li><a href="#定长滑动窗口">定长滑动窗口</a>
+      <ol>
+        <li><a href="#半径为-k-的子数组平均值">半径为 k 的子数组平均值</a></li>
+        <li><a href="#几乎唯一子数组的最大和">几乎唯一子数组的最大和</a></li>
+        <li><a href="#找到字符串中所有字母异位词">找到字符串中所有字母异位词</a></li>
+        <li><a href="#重新安排会议得到最多空余时间-i">重新安排会议得到最多空余时间 I</a></li>
+        <li><a href="#使二进制字符串字符交替的最少反转次数">使二进制字符串字符交替的最少反转次数</a></li>
+        <li><a href="#串联所有单词的子串次定长滑窗">串联所有单词的子串（次定长滑窗）</a></li>
+      </ol>
+    </li>
+    <li><a href="#不定长滑动窗口">不定长滑动窗口</a>
+      <ol>
+        <li><a href="#无重复字符的最长子串">无重复字符的最长子串</a></li>
+        <li><a href="#将-x-减到-0-的最小操作数">将 x 减到 0 的最小操作数</a></li>
+      </ol>
+    </li>
   </ol>
 </nav>
         </div>
@@ -302,7 +313,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2025-05-13</time>
+                <time class="article-time--published">2025-07-25</time>
             </div>
         
 
@@ -321,9 +332,10 @@
     <h1 id="滑动窗口与双指针">滑动窗口与双指针
 </h1><p>灵神题单：<a class="link" href="https://leetcode.cn/discuss/post/3578981/ti-dan-hua-dong-chuang-kou-ding-chang-bu-rzz7/"  target="_blank" rel="noopener"
     >分享丨【算法题单】滑动窗口与双指针（定长/不定长/单序列/双序列/三指针/分组循环）- 讨论 - 力扣（LeetCode）</a></p>
-<h1 id="尚未分类">尚未分类
-</h1><h2 id="两数之和">两数之和
-</h2><p><strong><a class="link" href="https://leetcode.cn/problems/two-sum/description/?envType=problem-list-v2&amp;envId=array"  target="_blank" rel="noopener"
+<p>场景：连续、遍历各情况</p>
+<h2 id="尚未分类">尚未分类
+</h2><h3 id="两数之和">两数之和
+</h3><p><strong><a class="link" href="https://leetcode.cn/problems/two-sum/description/?envType=problem-list-v2&amp;envId=array"  target="_blank" rel="noopener"
     >1. 两数之和 - 力扣（LeetCode）</a></strong></p>
 <ul>
 <li>
@@ -393,8 +405,8 @@
 <li>哈希表的查找用in方法可实现，用dict()或set()最好，用空间换时间。</li>
 <li>集合、字典的 in 方法时间复杂度O(1)，列表和元组的 in 时间复杂度O(n)。</li>
 </ul>
-<h2 id="删除有序数组中的重复项">删除有序数组中的重复项
-</h2><p><strong><a class="link" href="https://leetcode.cn/problems/remove-duplicates-from-sorted-array/description/?envType=problem-list-v2&amp;envId=array"  target="_blank" rel="noopener"
+<h3 id="删除有序数组中的重复项">删除有序数组中的重复项
+</h3><p><strong><a class="link" href="https://leetcode.cn/problems/remove-duplicates-from-sorted-array/description/?envType=problem-list-v2&amp;envId=array"  target="_blank" rel="noopener"
     >26. 删除有序数组中的重复项 - 力扣（LeetCode）</a></strong></p>
 <ul>
 <li>
@@ -485,8 +497,8 @@
 <ul>
 <li>快慢指针，数据需要有有序性。</li>
 </ul>
-<h2 id="搜索插入位置">搜索插入位置
-</h2><p><strong><a class="link" href="https://leetcode.cn/problems/search-insert-position/description/?envType=problem-list-v2&amp;envId=array"  target="_blank" rel="noopener"
+<h3 id="搜索插入位置">搜索插入位置
+</h3><p><strong><a class="link" href="https://leetcode.cn/problems/search-insert-position/description/?envType=problem-list-v2&amp;envId=array"  target="_blank" rel="noopener"
     >35. 搜索插入位置 - 力扣（LeetCode）</a></strong></p>
 <ul>
 <li>
@@ -571,8 +583,8 @@
 </ul>
 </li>
 </ul>
-<h2 id="加一">加一
-</h2><p><strong><a class="link" href="https://leetcode.cn/problems/plus-one/?envType=problem-list-v2&amp;envId=array"  target="_blank" rel="noopener"
+<h3 id="加一">加一
+</h3><p><strong><a class="link" href="https://leetcode.cn/problems/plus-one/?envType=problem-list-v2&amp;envId=array"  target="_blank" rel="noopener"
     >66. 加一 - 力扣（LeetCode）</a></strong></p>
 <ul>
 <li>
@@ -654,9 +666,9 @@
 <ul>
 <li>逆序索引  range(len(digits)-1,-1,-1)     从len(digits)-1开始，步长为-1(递减)，到-1，左闭右开[len(digits)-1, -1)。</li>
 </ul>
-<h1 id="定长滑动窗口">定长滑动窗口
-</h1><h2 id="半径为-k-的子数组平均值">半径为 k 的子数组平均值
-</h2><p><strong><a class="link" href="https://leetcode.cn/problems/k-radius-subarray-averages/description/"  target="_blank" rel="noopener"
+<h2 id="定长滑动窗口">定长滑动窗口
+</h2><h3 id="半径为-k-的子数组平均值">半径为 k 的子数组平均值
+</h3><p><strong><a class="link" href="https://leetcode.cn/problems/k-radius-subarray-averages/description/"  target="_blank" rel="noopener"
     >2090. 半径为 k 的子数组平均值 - 力扣（LeetCode）</a></strong></p>
 <ul>
 <li>
@@ -735,8 +747,8 @@
 </ul>
 </li>
 </ul>
-<h2 id="几乎唯一子数组的最大和">几乎唯一子数组的最大和
-</h2><p><strong><a class="link" href="https://leetcode.cn/problems/maximum-sum-of-almost-unique-subarray/"  target="_blank" rel="noopener"
+<h3 id="几乎唯一子数组的最大和">几乎唯一子数组的最大和
+</h3><p><strong><a class="link" href="https://leetcode.cn/problems/maximum-sum-of-almost-unique-subarray/"  target="_blank" rel="noopener"
     >2841. 几乎唯一子数组的最大和 - 力扣（LeetCode）</a></strong></p>
 <ul>
 <li>
@@ -825,16 +837,86 @@
 <li>sum_n = max_sum = 0</li>
 <li>使用defaultdict
 <ul>
-<li>默认值为0，dif_n=defaultdict(int) 因为int()返回0</li>
+<li>默认值为0，dif_n=defaultdict(int) 因为int()返回0（不如Counter）</li>
 <li>if dif_n[out] == 0:  <strong>del</strong> dif_n[out]  删除其中值为0的键值对</li>
 </ul>
 </li>
 <li>max_sum = max(sum_n,max_sum) 而不用 if 条件判断</li>
 <li>left = i-k+1    &hellip;.   out=nums[left]        使代码更简洁美观</li>
 </ul>
-<h1 id="不定长滑动窗口">不定长滑动窗口
-</h1><h2 id="无重复字符的最长子串">无重复字符的最长子串
-</h2><p><strong><a class="link" href="https://leetcode.cn/problems/longest-substring-without-repeating-characters/"  target="_blank" rel="noopener"
+<h3 id="找到字符串中所有字母异位词">找到字符串中所有字母异位词
+</h3><p><a class="link" href="https://leetcode.cn/problems/find-all-anagrams-in-a-string/description/"  target="_blank" rel="noopener"
+    >438. 找到字符串中所有字母异位词 - 力扣（LeetCode）</a></p>
+<p><strong>what I learn</strong></p>
+<ul>
+<li>Counter</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 示例 1：统计字母频次</span>
+</span></span><span class="line"><span class="cl"><span class="n">cnt_p</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="s2">&#34;aabbc&#34;</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">cnt_p</span><span class="p">)</span>  <span class="c1"># 输出：Counter({&#39;a&#39;: 2, &#39;b&#39;: 2, &#39;c&#39;: 1})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 示例 2：访问不存在的键</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">cnt_p</span><span class="p">[</span><span class="s2">&#34;d&#34;</span><span class="p">])</span>  <span class="c1"># 输出：0（不会报错！）</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 改变值，类似字典</span>
+</span></span><span class="line"><span class="cl"><span class="n">cnt_p</span><span class="p">[</span><span class="s2">&#34;a&#34;</span><span class="p">]</span><span class="o">+=</span><span class="mi">1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 比较和集合操作</span>
+</span></span><span class="line"><span class="cl"><span class="n">cnt_1</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="s2">&#34;bcd&#34;</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl"><span class="n">cnt_2</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="s2">&#34;abc&#34;</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">cnt_1</span><span class="o">==</span><span class="n">cnt2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">cnt_1</span><span class="o">-</span><span class="n">cnt_2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">cnt_1</span><span class="o">+</span><span class="n">cnt_2</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="重新安排会议得到最多空余时间-i">重新安排会议得到最多空余时间 I
+</h3><p><a class="link" href="https://leetcode.cn/problems/reschedule-meetings-for-maximum-free-time-i/"  target="_blank" rel="noopener"
+    >3439. 重新安排会议得到最多空余时间 I - 力扣（LeetCode）</a></p>
+<ul>
+<li>理解题目意思，转化问题（so called 建模）为某种方法解决，此题很明显，弄出所有时间差gap，然后求最大连续子数组即可。</li>
+<li>注意一些变量的值需要变化，比如这题中的“可以移动k个”，转化为k+1个连续子数组</li>
+<li>注意全面性，比如gap还包括“startTime-第一个会议开始时刻” “endTime-最后一个会议结束时刻”。</li>
+</ul>
+<h3 id="使二进制字符串字符交替的最少反转次数">使二进制字符串字符交替的最少反转次数
+</h3><p><a class="link" href="https://leetcode.cn/problems/minimum-number-of-flips-to-make-the-binary-string-alternating/"  target="_blank" rel="noopener"
+    >1888. 使二进制字符串字符交替的最少反转次数 - 力扣（LeetCode）</a></p>
+<ul>
+<li>枚举法（s + s 上的滑动窗口），不要想当然得觉得 想出的算法能适应所有情况，当测试不通过时，大胆暴力，这里也就是 生成所有第一种操作而成的字符串，然后滑动遍历所有情况。</li>
+<li>ans=min(cnt, k - cnt, ans)，在当前情况下的两种可能和全局最小 中 取最小。</li>
+</ul>
+<h3 id="串联所有单词的子串次定长滑窗">串联所有单词的子串（次定长滑窗）
+</h3><p><a class="link" href="https://leetcode.cn/problems/substring-with-concatenation-of-all-words/description/"  target="_blank" rel="noopener"
+    >30. 串联所有单词的子串 - 力扣（LeetCode）</a></p>
+<ul>
+<li>&ldquo;barfoothefoobarman&rdquo;，单个“词”长度3，本因3个3个检查，于是为遍历所有情况，起始位置需为0/1，对从0/1位置开始的字符串分别滑窗。</li>
+</ul>
+<h2 id="不定长滑动窗口">不定长滑动窗口
+</h2><h3 id="无重复字符的最长子串">无重复字符的最长子串
+</h3><p><strong><a class="link" href="https://leetcode.cn/problems/longest-substring-without-repeating-characters/"  target="_blank" rel="noopener"
     >3. 无重复字符的最长子串 - 力扣（LeetCode）</a></strong></p>
 <p>​	给定一个字符串 <code>s</code> ，请你找出其中不含有重复字符的 <strong>最长 子串</strong> 的长度。</p>
 <p><strong>示例</strong></p>
@@ -883,7 +965,14 @@
 </div>
 </div><p><strong>思想</strong></p>
 <ul>
-<li>基础模板：右指针“+1移动”，左指针满足一定条件 移动或停止移动，即代码中的while(&hellip;)。</li>
+<li>基础模板：左指针while调整，右指针“+1移动”，cnt为int或defaultdict(int)记录信息。</li>
+</ul>
+<h3 id="将-x-减到-0-的最小操作数">将 x 减到 0 的最小操作数
+</h3><p><a class="link" href="https://leetcode.cn/problems/minimum-operations-to-reduce-x-to-zero/description/"  target="_blank" rel="noopener"
+    >1658. 将 x 减到 0 的最小操作数 - 力扣（LeetCode）</a></p>
+<ul>
+<li>逆向思维</li>
+<li>特殊情况分析</li>
 </ul>
 
 </section>
@@ -930,6 +1019,19 @@
     <h2 class="section-title">Related content</h2>
     <div class="related-content">
         <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/tree_search/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Tree_search</h2>
+        </div>
+    </a>
+</article>
+
             
                 
 <article class="has-image">

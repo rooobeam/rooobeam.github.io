@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="用法理解 从0到1，手把手教你如何使用哈工大NLP工具——PyLTP-腾讯云开发者社区-腾讯云\n在线演示 语言技术平台（ Language Technology Plantform | LTP ）\n代码实现 语言技术平台（ Language Technology Plantform | LTP ）\n">
-<title>Ltp</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="摘要 RAG于QA是有效的。然而分块处理没有得到足够重视。这篇文章证明了分块的关键作用。并提出了LGMGC，一个新的分块框架，将长文档分成上下文关联、“自包含”的尺寸不一的块。实验结果在两个基准测试上进行，证明了提高检索并超过现存分块方法当应用于一个RAG流程时。\n">
+<title>LGMGC解读</title>
 
-<link rel='canonical' href='https://rooobeam.github.io/p/ltp/'>
+<link rel='canonical' href='https://rooobeam.github.io/p/lgmgc%E8%A7%A3%E8%AF%BB/'>
 
-<link rel="stylesheet" href="/scss/style.min.8752ced9c05cc1afc2b768fa4307859949471f33fc92b9579b5e8462b6d6315b.css"><meta property='og:title' content="Ltp">
-<meta property='og:description' content="用法理解 从0到1，手把手教你如何使用哈工大NLP工具——PyLTP-腾讯云开发者社区-腾讯云\n在线演示 语言技术平台（ Language Technology Plantform | LTP ）\n代码实现 语言技术平台（ Language Technology Plantform | LTP ）\n">
-<meta property='og:url' content='https://rooobeam.github.io/p/ltp/'>
+<link rel="stylesheet" href="/scss/style.min.8752ced9c05cc1afc2b768fa4307859949471f33fc92b9579b5e8462b6d6315b.css"><meta property='og:title' content="LGMGC解读">
+<meta property='og:description' content="摘要 RAG于QA是有效的。然而分块处理没有得到足够重视。这篇文章证明了分块的关键作用。并提出了LGMGC，一个新的分块框架，将长文档分成上下文关联、“自包含”的尺寸不一的块。实验结果在两个基准测试上进行，证明了提高检索并超过现存分块方法当应用于一个RAG流程时。\n">
+<meta property='og:url' content='https://rooobeam.github.io/p/lgmgc%E8%A7%A3%E8%AF%BB/'>
 <meta property='og:site_name' content='rooobeam'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-06-03T20:27:49&#43;08:00'/><meta property='article:modified_time' content='2025-06-03T20:27:49&#43;08:00'/>
-<meta name="twitter:title" content="Ltp">
-<meta name="twitter:description" content="用法理解 从0到1，手把手教你如何使用哈工大NLP工具——PyLTP-腾讯云开发者社区-腾讯云\n在线演示 语言技术平台（ Language Technology Plantform | LTP ）\n代码实现 语言技术平台（ Language Technology Plantform | LTP ）\n">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-07-23T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-07-23T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="LGMGC解读">
+<meta name="twitter:description" content="摘要 RAG于QA是有效的。然而分块处理没有得到足够重视。这篇文章证明了分块的关键作用。并提出了LGMGC，一个新的分块框架，将长文档分成上下文关联、“自包含”的尺寸不一的块。实验结果在两个基准测试上进行，证明了提高检索并超过现存分块方法当应用于一个RAG流程时。\n">
     <link rel="shortcut icon" href="/favicon.ico" />
 
     </head>
@@ -236,9 +236,17 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#用法理解">用法理解</a></li>
-    <li><a href="#在线演示">在线演示</a></li>
-    <li><a href="#代码实现">代码实现</a></li>
+    <li><a href="#摘要">摘要</a></li>
+    <li><a href="#介绍">介绍</a></li>
+    <li><a href="#相关工作">相关工作</a></li>
+    <li><a href="#方法">方法</a>
+      <ol>
+        <li><a href="#logits指导的分块器logits-guided-chunker">logits指导的分块器（Logits-Guided Chunker）</a></li>
+        <li><a href="#多粒度分块器multi-granular-chunker">多粒度分块器（Multi-Granular Chunker）</a></li>
+        <li><a href="#logits指导的多粒度分块器lgmgc">logits指导的多粒度分块器（LGMGC）</a></li>
+      </ol>
+    </li>
+    <li><a href="#实验设置">实验设置</a></li>
   </ol>
 </nav>
         </div>
@@ -258,7 +266,7 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/ltp/">Ltp</a>
+            <a href="/p/lgmgc%E8%A7%A3%E8%AF%BB/">LGMGC解读</a>
         </h2>
     
         
@@ -280,7 +288,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2025-06-03</time>
+                <time class="article-time--published">2025-07-23</time>
             </div>
         
 
@@ -296,17 +304,61 @@
     <section class="article-content">
     
     
-    <h2 id="用法理解">用法理解
-</h2><p><a class="link" href="https://cloud.tencent.com/developer/article/1460318"  target="_blank" rel="noopener"
-    >从0到1，手把手教你如何使用哈工大NLP工具——PyLTP-腾讯云开发者社区-腾讯云</a></p>
-<h2 id="在线演示">在线演示
-</h2><p><a class="link" href="https://ltp.ai/demo.html"  target="_blank" rel="noopener"
-    >语言技术平台（ Language Technology Plantform | LTP ）</a></p>
-<h2 id="代码实现">代码实现
-</h2><p><a class="link" href="https://ltp.ai/docs/quickstart.html"  target="_blank" rel="noopener"
-    >语言技术平台（ Language Technology Plantform | LTP ）</a></p>
-<p>本地下载模型到&quot;./ltp_models/small&quot;，下载内容：<a class="link" href="https://hf-mirror.com/LTP/small/tree/main"  target="_blank" rel="noopener"
-    >LTP/small at main</a></p>
+    <h2 id="摘要">摘要
+</h2><p>RAG于QA是有效的。然而分块处理没有得到足够重视。这篇文章证明了分块的关键作用。并提出了LGMGC，一个新的分块框架，将长文档分成上下文关联、“自包含”的尺寸不一的块。实验结果在两个基准测试上进行，证明了提高检索并超过现存分块方法当应用于一个RAG流程时。</p>
+<h2 id="介绍">介绍
+</h2><p>开放领域QA，已经可见RAG是有作用的。模型利用LLM和retrieval system来增强答案生成。在经典RAG流程，文档被分为独立块，然后对query家安所相关chunk，然后二者以提提供给LLM。后续研究者集中在检索和生成/整合，很少集中于合理的分块。检索精度 受 信息粒度（granularity） 和 语义（semantics）影响。此外，上下文信息的缺失和过度不相干信息在同一个chunk会影响LLM从中准确提取关键信息。</p>
+<p>为此，提出LGMGC框架。它整合两个分块模型（一个是LG chunker，一个是MG chunker）于一个统一框架。过程始于 分为 语义和上下文关联的单元，通过利用从小规模LLM得到的 “logits information”。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">1. Logits 是什么？
+</span></span><span class="line"><span class="cl">定义：Logits 是语言模型（LLM）输出的原始预测分数（未经过 Softmax 归一化的数值），表示模型对每个可能token的“置信度”。
+</span></span><span class="line"><span class="cl">示例： 当模型处理句子 &#34;Paris is the capital of [MASK].&#34; 时，[MASK] 位置的 logits 可能是：
+</span></span><span class="line"><span class="cl">France: 8.2
+</span></span><span class="line"><span class="cl">Germany: 2.1
+</span></span><span class="line"><span class="cl">city: 1.5 较高的 logits 值（如 8.2）表示模型更倾向于选择 France。
+</span></span><span class="line"><span class="cl">2. 如何用于文档分割？
+</span></span><span class="line"><span class="cl">文本遍历： 将文档输入小规模 LLM（如 DistilBERT），逐位置（如逐词/逐句）计算 logits。
+</span></span><span class="line"><span class="cl">检测语义突变点：
+</span></span><span class="line"><span class="cl">计算相邻文本单元的 logits 相似度（如余弦距离）。
+</span></span><span class="line"><span class="cl">若某位置的 logits 与前一单元差异显著（超过阈值），判定为语义边界。 ► 例如：从“科技”话题突然转向“政治”，logits 分布会剧烈变化。
+</span></span><span class="line"><span class="cl">分割文档： 在边界处切分文档，生成语义连贯的块（如话题一致的段落组）。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>随后这些块视为父块，进一步被MG chunker分为尺寸不同的子块，当MG chunker响应不同类别的query时。我们的结果证明我们好。</p>
+<h2 id="相关工作">相关工作
+</h2><p>递归分块（<strong>Recursive Chunking</strong>）使用一个分层分割器运用于单元基于一个预定义的结构。尽管它简单，他分的块内部缺少上下文关联。为解决这个问题，Small2-Big采取 检索小chunk然后扩展为大块来为LLM提供额外上下文。语义分块（<strong>Semantic Chunking</strong>）通过计算passage间的embedding距离来识别断点，以保证分的块有意义和内容“自相关”。但是，分处合理的块仍是挑战性任务。</p>
+<p>近期研究同样利用LLM提取有效的块。一种方法用LLM将doc转为“<strong>命题们</strong>”超过了传统的passage级或句子级分块技术。命题是一种表示表示，封装了不同的事实。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">原文：“巴黎是法国首都，也是欧洲人口最密集的城市之一。”
+</span></span><span class="line"><span class="cl">→ 命题1：“巴黎是法国首都。”
+</span></span><span class="line"><span class="cl">→ 命题2：“巴黎是欧洲人口最密集的城市之一。”
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>LumberChunker</strong>通过迭代式向大语言模型（LLM）输入文本段落，自主识别最优分割点。一种方法方法通过提取LLM处理文档时产生的<strong>隐层状态向量</strong>作为文档表征，直接在模型内部实现相关性匹配与段落定位，从而跳过了显式的文档分块步骤。这些LLM驱动测率说明LLM的潜力，然而增加成本和时间。相比而言，我们的基于LLM的方法只用从一个单向传递得到logits信息，使得分块计算高效。</p>
+<h2 id="方法">方法
+</h2><h3 id="logits指导的分块器logits-guided-chunker">logits指导的分块器（Logits-Guided Chunker）
+</h3><p>假定LLM有足够上下文理解，这里提出方法 识别 完全语义独立的单元之间的 边界。LLM能在已有一段序列后得到接下来的tokens的概率分布。因此，我们能得到[EOS] (End of Sequence)发生的概率（在每句后），假定有个prompt指导LLM持续写内容。直观而言，[EOS]标记的较高概率表明大型语言模型倾向于在该位置终止文本生成，这预示着前文已达到语义完整性。实践中，输入doc鲜卑转为 一连串的块，块由递归分块切分的 固定大小θ个词（递归它不考虑上下文）。我们然后计算块内每个句子后的[EOS]概率，然后选择最高概率那个作为 断点。<strong>公式如下</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -314,121 +366,101 @@
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">ltp</span> <span class="kn">import</span> <span class="n">LTP</span>
-</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">os</span>
-</span></span><span class="line"><span class="cl"><span class="n">MODEL_DIR</span> <span class="o">=</span> <span class="s2">&#34;./ltp_models/small&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">MODEL_DIR</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">ltp</span> <span class="o">=</span> <span class="n">LTP</span><span class="p">(</span><span class="n">MODEL_DIR</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">result</span> <span class="o">=</span> <span class="n">ltp</span><span class="o">.</span><span class="n">pipeline</span><span class="p">([</span><span class="s2">&#34;他叫汤姆去拿外衣。&#34;</span><span class="p">],</span> <span class="n">tasks</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;cws&#34;</span><span class="p">,</span><span class="s2">&#34;dep&#34;</span><span class="p">])</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">dep</span><span class="p">)</span>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">b[EOS] = argmaxᵢ p([EOS] | ρ ⊕ s₁ ⊕ · · · ⊕ sᵢ)
+</span></span><span class="line"><span class="cl">（其中：
+</span></span><span class="line"><span class="cl">⊕ 表示文本拼接
+</span></span><span class="line"><span class="cl">ρ 为续写指令提示
+</span></span><span class="line"><span class="cl">argmaxᵢ 表示取使概率最大化的索引位置 i ）
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>云计算背景</p>
+</div><p>第一个块中，断点之前的作为一个独立块，断点之后的和第二个块进行连接，再进行分割，直到输入分割器的长度<strong>小于阈值</strong>。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">两种情况：
+</span></span><span class="line"><span class="cl">1 最后一个块和倒数第二个块断点后连接后的 文本 长度不够。
+</span></span><span class="line"><span class="cl">2 最后一个块和倒数第二个块断点后的 文本打断点后，剩余内容长度不够。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>值得以提的是，尽管这样产生的块长度不一，但最大长度受到限制。</p>
+<h3 id="多粒度分块器multi-granular-chunker">多粒度分块器（Multi-Granular Chunker）
+</h3><p>文献指出，将用于检索和生成的文本块解耦（分解）有益。该方法用较小的块检索然后将 小块所在大块提供给LLM。基于这个概念，我们引入多粒度分块器将文本切分成子块（child chunks）在不同的粒度上。起初doc用递归分块法分为父块(<em>θ</em> words)。每个父块然后再递归地再分块为两种子块，<em>θ/2</em> words和<em>θ/4</em> words，同时是保证句子不会因分块断开。计算相似度时，父块的相似度：父块、所有两种子块得分的最大值。将得分前k个的父块输给LLM。</p>
+<h3 id="logits指导的多粒度分块器lgmgc">logits指导的多粒度分块器（LGMGC）
+</h3><p>多粒度分块器得到的输出作为父块输入给多粒度分块器，检索时参考多粒度分块器检索的检索方法。具体来说，第一个logits chunker得到的父块长为<em>θ_1</em> words，然后&hellip;，第二个 父块长为<em>θ_2</em> words。</p>
+<h2 id="实验设置">实验设置
+</h2><p>为评估Logits引导的多粒度分块器（Logits-Guided Multi-Granular Chunker）的影响，我们通过检索和下游问答任务测试其性能。
+<strong>数据集与指标</strong></p>
 <ul>
-<li>五大特征</li>
-<li>资源池化&hellip;按需&hellip;</li>
-<li>云服务应用的四种部署模型：公有 私有 社区 混合</li>
-<li>三种服务模式：SAS PAS IAS</li>
-<li>大数据三V特征</li>
-<li>云数据面临的威胁：数据泄露、损坏、冗余</li>
+<li><strong>检索评估</strong>：
+采用GutenQA基准数据集，该数据集包含源自叙事书籍的&quot;大海捞针&quot;（needle in a haystack）类问答对。因每个问题的证据仅由1-2个句子组成，证据不会分散在不同分块中。遵循其评估方案，我们使用DCG@k和Recall@k作为指标。</li>
+<li><strong>数据重标注</strong>：
+观察到部分证据未直接出现在原始文本中（可能源于LLM合成生成），这种差异会降低匹配率并削弱检索块与查询相关性的评估价值。我们为每个证据计算其与各分块的ROUGE分数，并选择最高分分块作为查询关联块。</li>
+<li><strong>端到端RAG评估</strong>：
+采用LongBench的三个单文档QA数据集：
+▶ NarrativeQA：叙事文本问答
+▶ QasperQA：科研论文问答
+▶ MultifieldQA：多领域事实问答
+这些任务旨在信息抽取，无需复杂推理。按标准，使用F1值作为评估指标：
+$$\text{Precision} = \frac{|\text{BOW}(pred) \cap \text{BOW}(gt)|}{|\text{BOW}(pred)|},\quad
+  \text{Recall} = \frac{|\text{BOW}(pred) \cap \text{BOW}(gt)|}{|\text{BOW}(gt)|},\quad
+  \text{F1} = \frac{2 \cdot \text{P} \cdot \text{R}}{\text{P} + \text{R}}$$
+其中：</li>
+<li>$\text{BOW}(A)$ 表示预测答案($pred$)或真实答案($gt$)的词袋集合</li>
+<li>$\cap$ 运算对共有词取其最小词频</li>
 </ul>
-<p>门限安全去重</p>
+<p><strong>基线方法</strong>
+评估对比以下主流方法：</p>
+<ol>
+<li><strong>通用分块器</strong></li>
+</ol>
 <ul>
-<li>云存储的优势</li>
-<li>数据去重策略分类哪几种，文件级块级，优缺点</li>
-<li>攻击者 两大特征重要：客户端去重特性，目标端去重特性</li>
-<li>攻击者 如何判断去重是否发生：观察流量判断去重是否发生，伪装成用户遍历所有版本</li>
-<li>随机阈值方案：为什么要分配随机阈值，为什么是随机阈值，假如设置一个全局阈值会有什么问题</li>
+<li>Recursive Chunker：递归分块</li>
+<li>Semantic Chunker：语义分块</li>
 </ul>
-<p>随机冗余块方案</p>
+<ol start="2">
+<li><strong>段落检索专用</strong></li>
+</ol>
 <ul>
-<li>数据去重中LRI攻击带来的挑战是？CE或MAIR的局限性是？</li>
-<li>现有解决LRI的模型 通用模型</li>
-<li>RRCS的基本思路是？</li>
-<li>RRCS包括三个关键功能模块是什么，分别有什么作用：范围生成、边界设置，安全无关消除</li>
-<li>一般情况下的LRI攻击，有附加块的LRI攻击，分别给出隐私泄露的概率，以课上讲的为准，课件有误。</li>
+<li>Para Chunker：段落级分块</li>
+<li>LumberChunker：LLM迭代分块</li>
 </ul>
-<p>请求合并方案</p>
+<ol start="3">
+<li><strong>消融对照</strong></li>
+</ol>
 <ul>
-<li>流量混淆的局限性：无法确定敏感块具体位置，无法抵抗附加块攻击</li>
-<li>描述请求合并方案的系统模型和威胁模型：系统-有那几个参与方，怎么交互，上传前切块，计算哈希&hellip;。威胁-只有一个敏感块，其他都公开块，存在什么安全威胁</li>
-<li>分析请求合并方案在有附加块下的安全性，分多种情况，情况课件上。</li>
+<li>MG Chunker：多粒度分块器（无Logits引导）</li>
+<li>LG Chunker：Logits引导分块器（无多粒度）
+▶ 注：LG Chunker与LGMGC使用8位量化Llama3-8b
+▶ 所有方法在θ={200, 300, 500}词的分块尺寸下测试超参数敏感性</li>
 </ul>
-<p>宙斯+IARE</p>
+<p><strong>实现细节</strong></p>
 <ul>
-<li>
-<p>区分 存在性隐私、弱存在性隐私、不存在性隐私保护</p>
-</li>
-<li>
-<p>ZOUS方案三大优点是？</p>
-</li>
-<li>
-<p>ZOUS包含的三种技术是什么：？、sor混合、脏块列表</p>
-</li>
-<li>
-<p>ZOUS在单次去重检查 多次去重检查 的 安全性分析，要求给出概率分析，对应到三种隐私保护</p>
-</li>
-<li>
-<p>RARE相对ZOUS的改进在哪里</p>
-</li>
+<li><strong>架构</strong>：
+采用独立检索器与合成器，不同分块策略接入统一框架</li>
+<li><strong>检索器</strong>：
+▶ 稠密检索器：BGE-Large（段落检索） + E5-Large（下游QA）</li>
+<li><strong>合成器</strong>：
+▶ LLama3-8b-Instruct（4位量化）
+▶ LLama3-70b-Instruct（fp16）</li>
+<li><strong>控制变量</strong>：</li>
 </ul>
-<p>编码客户端去重</p>
+<ol>
+<li>生成答案采用贪心搜索降低随机性</li>
+<li>为公平比较不同分块尺寸：</li>
+</ol>
 <ul>
-<li>跨用户的客户端数据去重面临的问题是什么？云端透露一些数据的存在性状态确保去重发生以及节省带宽，另一方面，又希望数据信息存在性隐私得到保护。</li>
-<li>CIDER的返回值区间为什么要这样设置，能否更改返回值区间</li>
-<li>每次都要求上传100个会有什么问题</li>
-<li>返回值不是连续递增的话会怎么样 8 9 10没命中，要求上传11 12，提到过的上传的问题</li>
-<li>断层问题</li>
-<li>理解各种情况，理解CIDER响应表为什么这样设计</li>
-<li>CIDER的安全性分析：攻击者不同，不同响应值的分析</li>
+<li>合成器输入上下文长度上限=1500词</li>
+<li>Top k分块顺序拼接直至达上限</li>
 </ul>
-<p>广义去重</p>
-<ul>
-<li>就是把这个分为..，分为基和偏移量，对基开展跨用户，会偏移量开展云端去重</li>
-<li>为什么这样能抵抗侧信道攻击</li>
-<li>对基的提取有什么样的要求：对基泛化，要用较大的概率提取相同的基，然后&hellip;，从相似数据提取相同基</li>
-<li>挂昂以去除安全性分析：证明对于 单一模板的 第最小上文件，对于重复模板文件（数据库文件）</li>
-</ul>
-<p>异或策略</p>
-<ul>
-<li>异或策略的威胁模型是？用M_r表示随机生成的，调皮M_r和M？的比例可以，怎么去调配来窃取存在性隐私</li>
-<li>异或策略增强方案核心策略，基础方案中P大于1的时候才会有块需要被抑或两次，增强方案，无论攻击者，..推测块的隐私</li>
-<li>增强方案里 设置pmin pmax，防止攻击者观察异或两次的块的数量窃取隐私</li>
-</ul>
-<p>DCE技术（唯一对应密文）</p>
-<ul>
-<li>DCE方案的主要优势？在减少云端存储前提下减少侧信道攻击</li>
-<li>k匿名的概念，只有当k个用户都拥有..才聚合，几个大C，才能解出c</li>
-<li><strong>掌握基础方案 增强方案 各个组件和功能</strong>，看看课件上的两个例子，两个方案怎么做的，回头看懂每个形式化的表述</li>
-<li>基础方案缺点是，增强方案的改进是？</li>
-</ul>
-<p>完整性审计PDP</p>
-<p>解决云数据 损坏或篡改的发现</p>
-<p>损坏、篡改原因有哪些？课件上有，第三方攻击，云保障声誉</p>
-<p>数据完整性审计的目标是？公开验证/审计 什么意思：允许第三方协助、不限次数、数据动态更新操作：课件为准</p>
-<p>pdp为代表的完整性审计流程是怎样的，分块、标签</p>
-<p>PDP是基于RSA签名构造的完整性审计方法</p>
-<p>RSA加解密算法流程、签名原理</p>
-<p>PDP流程和详细推导，如何验证签名的</p>
-<p>云端数据损坏率为t的情况下，一次挑战C个块，就可以以不小于P的概率发现，如何推导的，从实际t推导，当时那个259的计算。（计算器）</p>
-<p>基础方案优缺点分析，最后一次课 课件上讲的两个基础方案支持隐私保护的三方</p>
-<p>支持公开审计的三方审计模型的基本原理，要求明确每一方的任务是什么</p>
-<p>怎么去支持无限次挑战防止重放攻击</p>
-<p>要知道支持批量审计的，推导不用</p>
-<p>隐私泄露的问题在哪里，如何防止隐私泄露的？</p>
-<p>这个方法完整的推导过程，双线性等式是如何推导的</p>
-<p>这个方法存在什么样的安全性问题。</p>
-<p>备注：</p>
-<p>基本所有知识点涵盖了，选择填空以PPT原始表述为准，知识点位置、概念、原理搞懂，机制怎么工作的、安全性、另外形式上的几个定义 几个密钥生成 有几个算法。</p>
-<p>判断 对错难</p>
-<p>主观题多写，计算题，写文字步骤，然后列计算的式子。</p>
-<p>大题，会有一点细节的地方</p>
+<ol start="3">
+<li>无检索基线：因算力限制截断文档至3500词/</li>
+</ol>
 
 </section>
 
