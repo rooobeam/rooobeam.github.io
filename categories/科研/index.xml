@@ -7,7 +7,48 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>rooobeam</copyright>
-        <lastBuildDate>Wed, 23 Jul 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://rooobeam.github.io/categories/%E7%A7%91%E7%A0%94/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 12 Aug 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://rooobeam.github.io/categories/%E7%A7%91%E7%A0%94/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>LumberChunker解读</title>
+        <link>https://rooobeam.github.io/p/lumberchunker%E8%A7%A3%E8%AF%BB/</link>
+        <pubDate>Tue, 12 Aug 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://rooobeam.github.io/p/lumberchunker%E8%A7%A3%E8%AF%BB/</guid>
+        <description>&lt;h2 id=&#34;摘要&#34;&gt;摘要
+&lt;/h2&gt;&lt;p&gt;现代 NLP任务依赖稠密检索方法来获取上下文信息。动机：通过大小变化的chunk让内容语义独立性得以实现从而提高检索。LumberChunker，一个利用LLM动态分割文档的方法，说白了用prompt让LLM发现一组有序passages的分割点 当内容转移话题时。为了评估我们的方法，我们提出GutenQA，一个benchmark，大海捞针型记叙文问题。实验证明，LumberChnuker不仅比 强大基线们 在DCG@20上 多7.37%，而且把它结合到RAGpipeline里时，能强于其他分块方法和强大LLMs。&lt;/p&gt;
+&lt;h2 id=&#34;介绍&#34;&gt;介绍
+&lt;/h2&gt;&lt;p&gt;LLMs 为解决大量任务提供思路，翻译、总结摘要和Q&amp;amp;A等。然而当缺少关键信息时会导致幻觉。会带来危害。&lt;/p&gt;
+&lt;p&gt;Q&amp;amp;A领域，信息准确至关重要。RAG是个解决方案于抑制幻觉，通过让模型生成依赖于给定文本。&lt;/p&gt;
+&lt;p&gt;一个在RAG流程中容易忽略的点是文本内容如何分割成文本块，它能严重影响检索质量。现实应用趋于简化这步，设置分割粒度为句子、段落或原子命题。&lt;/p&gt;
+&lt;p&gt;我们提出LumberChunker，一个基于 “文本块越独立检索效果越好”的原则 的新的文本分块方法。独立性通过动态大小得以最好地实现。假定语言模型能够胜任文本分析工作，我们利用他们的能力来识别分割点（segementation points）。具体地，我们反复指导一个语言模型接收一系列连续的段落并确定出现主题转变的段落。该方法保障块内上下文上连贯但与相邻的块相互独立，从而提高检索。&lt;/p&gt;
+&lt;p&gt;我们提出一个新基准 GutenQA，包含100 个公开领域记叙文书籍（从Project Gutenberg提取的）。我们创造了3000个高质量问答对。最终我们融入RAG进行下游QA任务测试准确率。&lt;/p&gt;
+&lt;h2 id=&#34;背景&#34;&gt;背景
+&lt;/h2&gt;&lt;p&gt;检索细粒度在文本分块又关键作用，因为差分块策略导致内容不完整或过多不相干信息降低检索模型表现。&lt;/p&gt;
+&lt;p&gt;除了经典细粒度 句子或段落，还有其他高级方法。recursive character splitting基于层级分割符如段落分隔符、新行、空格和单个字符。缺少上下文理解。为解决这个问题，基于语义的分块方法(semantic-based splitting)使用embedding 来聚合语义相似的文本片段。通过识别文本间embedding距离的重大变化。&lt;/p&gt;
+&lt;p&gt;最近的研究提出新的检索粒度术语 命题（propositions），最小化语义单元，每个命题以清晰、self-sufficient 自然语言方式 传达 独立事实。虽然该理念再 基于事实的 信息上很合理，但在记叙文不大行，因为上下文持续性有重要作用。&lt;/p&gt;
+&lt;p&gt;检索粒度常常取文档级，但也可引入问题本身来调整。学者提出HyDE，通过LLM把问题转为一个可能的答案文档（或许利用它的长度来选择细粒度？）&lt;/p&gt;
+&lt;h2 id=&#34;方法&#34;&gt;方法
+&lt;/h2&gt;&lt;h3 id=&#34;lumberchunker&#34;&gt;LumberChunker
+&lt;/h3&gt;&lt;p&gt;我们提出LumberChunker，它利用LLM动态分块。我们的方法基于 “动态分块更好地捕捉语义独立性 从而提高检索” 的原则。动态细粒度保证 文本块 有完整独立idea，增强&amp;hellip;。&lt;/p&gt;
+&lt;p&gt;一个基于 “文本块越独立检索效果越好”的原则 的新的文本分块方法。独立性通过动态大小得以最好地实现。假定语言模型能够胜任文本分析工作，我们利用他们的能力来识别分割点（segementation points）。通过向LLM输入一组序列段落，自主确定最合适的分段点。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://github.com/joaodsmarques/LumberChunker/raw/main/LumberChunker_pipeline.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;GitHub Logo&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;图1展示了LumberChunker的整体流程。首先将原docs按 段 分割，每个段通过 递增编号 唯一标识。
+每个 段 依次被拼接成 一个名为Gi的 段组，直到其总token数超过预设阈值θ。该阈值是基于实证研究经验（详见5.1节）设定的。我们的目标是 1 将θ值设置足够大，以防分割掉相关的内容；2 设置足够小，以免过多上下文压垮模型，影响推理准确性。这些Gi 段组 输给LLM（Gemini 1.0-Pro），通过prompt提示模型识别出Gi中与前序上下文存在显著偏离的具体段落，从而分块。文档会以循环方式持续被分割成新块，&lt;strong&gt;每个新Gi片段组的起始点均取自前次迭代中确定的段落位置&lt;/strong&gt;（也就是前一个Gi-1分割点后半段文本和Gi拼接形成真正的新Gi）。
+使用的提示见附录B。&lt;/p&gt;
+&lt;h3 id=&#34;gutenqa&#34;&gt;GutenQA
+&lt;/h3&gt;&lt;p&gt;跳过&lt;/p&gt;
+&lt;h2 id=&#34;实验&#34;&gt;实验
+&lt;/h2&gt;</description>
+        </item>
+        <item>
         <title>LGMGC解读</title>
         <link>https://rooobeam.github.io/p/lgmgc%E8%A7%A3%E8%AF%BB/</link>
         <pubDate>Wed, 23 Jul 2025 00:00:00 +0000</pubDate>
@@ -173,36 +214,22 @@ $$\text{Precision} = \frac{|\text{BOW}(pred) \cap \text{BOW}(gt)|}{|\text{BOW}(p
 </description>
         </item>
         <item>
-        <title>斯坦福重设RAG新基线之DOS_RAG</title>
-        <link>https://rooobeam.github.io/p/%E6%96%AF%E5%9D%A6%E7%A6%8F%E9%87%8D%E8%AE%BErag%E6%96%B0%E5%9F%BA%E7%BA%BF%E4%B9%8Bdos_rag/</link>
-        <pubDate>Mon, 21 Jul 2025 18:04:13 +0800</pubDate>
-        
-        <guid>https://rooobeam.github.io/p/%E6%96%AF%E5%9D%A6%E7%A6%8F%E9%87%8D%E8%AE%BErag%E6%96%B0%E5%9F%BA%E7%BA%BF%E4%B9%8Bdos_rag/</guid>
-        <description>&lt;h3 id=&#34;23-baselines&#34;&gt;2.3 Baselines
-&lt;/h3&gt;&lt;h4 id=&#34;vanilla-rag&#34;&gt;Vanilla RAG
-&lt;/h4&gt;&lt;p&gt;分块100tokens，边界处保留完整句子，也就是说100+tokens，用Snowflake Arctic-embed-m 1.5   embdding 文本块和query，查询时计算 cosine similarity，排序，取排名靠前的块，直到到达最大输入tokens，最后按降序方式和query给LLM。&lt;/p&gt;
-&lt;h4 id=&#34;full-document-baseline&#34;&gt;Full-Document Baseline
-&lt;/h4&gt;&lt;p&gt;仅在 QuALITY 上测试（其doc都在最大input范围内），保证无keyinf丢失。&lt;/p&gt;
-&lt;h4 id=&#34;dos-rag&#34;&gt;DOS RAG
-&lt;/h4&gt;&lt;p&gt;与Vanilla RAG不同之处在于，最后按原文档集里出现的顺序和query提交给LLM。&lt;/p&gt;
-</description>
-        </item>
-        <item>
         <title>DAPR</title>
         <link>https://rooobeam.github.io/p/dapr/</link>
-        <pubDate>Fri, 09 May 2025 16:50:01 +0800</pubDate>
+        <pubDate>Tue, 22 Jul 2025 16:50:01 +0800</pubDate>
         
         <guid>https://rooobeam.github.io/p/dapr/</guid>
         <description>&lt;h2 id=&#34;论文解读&#34;&gt;论文解读
-&lt;/h2&gt;&lt;p&gt;摘要解读：场景是从长文档(long document)中找到相关片段(passage)，对SoTA分析发现错误主要源于错失了文档上下文内容，于是命名任务为DAPR——&lt;strong&gt;文档感知的片段检索&lt;/strong&gt;（Document-Aware Passage Retrieval）。然后为此建立benchmark并进行实验。实验中对SoTA片段落检索器辅之以文档内容：（1）和BM25混合。（2）将文档信息掺和到段落信息里。实验结果：混合检索器法整体好，但是对于“需要文档级上下文信息”的问题完全失败；掺和法反之，整体较差但在上下文困难问题有进步。&lt;/p&gt;
-&lt;p&gt;介绍解读：&lt;/p&gt;
-&lt;p&gt;IR有用。传统BM25通过统计方法。近期方法应用神经网络进行向量化表示实现复杂语义匹配。神经方法受限于“短片段”(short passage 如512tokens)输入。在现实中遇到长文本如学科论文时，超出限制而无法利用完整上下文。近期工作实现长文档encode并实现了文档级检索。然而返回长文档对于用户仍不便于获取有效信息，如在标注维基百科页面中与用户查询相关的段落时，35.8%的查询所对应相关段落平均位于文档第7.6段(标准差12.7)。&lt;/p&gt;
+&lt;/h2&gt;&lt;h3 id=&#34;摘要&#34;&gt;摘要
+&lt;/h3&gt;&lt;p&gt;场景是从长文档(long document)中找到相关片段(passage)，对SoTA分析发现错误主要源于错失了文档上下文内容，于是命名任务为DAPR——&lt;strong&gt;文档感知的片段检索&lt;/strong&gt;（Document-Aware Passage Retrieval）。然后为此建立benchmark并进行实验。实验中对SoTA片段落检索器辅之以文档内容：（1）和BM25混合。（2）将文档信息掺和到段落信息里。实验结果：混合检索器法整体好，但是对于“需要文档级上下文信息”的问题完全失败；掺和法反之，整体较差但在上下文困难问题有进步。&lt;/p&gt;
+&lt;h3 id=&#34;介绍&#34;&gt;介绍
+&lt;/h3&gt;&lt;p&gt;IR有用。传统BM25通过统计方法。近期方法应用神经网络进行向量化表示实现复杂语义匹配。神经方法受限于“短片段”(short passage 如512tokens)输入。在现实中遇到长文本如学科论文时，超出限制而无法利用完整上下文。近期工作实现长文档encode并实现了文档级检索。然而返回长文档对于用户仍不便于获取有效信息，如在标注维基百科页面中与用户查询相关的段落时，35.8%的查询所对应相关段落平均位于文档第7.6段(标准差12.7)。&lt;/p&gt;
 &lt;p&gt;于是提出DAPR任务，就是在长文档中找到对应片段。举例解释“文档-感知” (Document-awared)，如指代关系会导致Query的关键信息出现在不同片段里，可能导致关键信息所在片段遗漏。为深入了解，测试SoTA片段检索器并分析错误，发现53.5%的错误源于未结合文档上下文解析指代或主题，导致漏检正确答案段落。于是创建一个基准测试，其中包含来自不同领域的5个数据集，这些数据集提供了在关联文档中对相关段落的&lt;strong&gt;标注&lt;/strong&gt;(就是问题有标出相关片段)。&lt;/p&gt;
 &lt;p&gt;实验中对SoTA片段落检索器辅之以文档内容：（1）和BM25混合。（2）将文档信息掺和到段落信息里。实验结果：混合检索器法整体好，但是对于“需要文档级上下文信息”的问题完全失败；掺和法反之，整体较差但在上下文困难问题有进步。这个基准测试对新的检索方法有意义。&lt;/p&gt;
-&lt;p&gt;相关工作（benchmark）：&lt;/p&gt;
-&lt;p&gt;DocQA： 需要模型回答关于输入文档的一个问题，它的问题的相关文档是给定的，而DAPR需要从文档集里找相关信息(doc)。基于给定文档这个假设，DocQA的问题通常是和文档内容关联的，比如“哪个检索系统用于这个baseline”，这个问题在DocQA中因为给定了文档所以有默认关联，而转换到DAPR就不行了，&amp;ldquo;这个baseline&amp;quot;不知道是啥。&lt;/p&gt;
-&lt;p&gt;长文档检索：法1是MaxP，片段最高分作为文档分，法2是FirstP，第一片段得分作为文档分，法2不如法1。有学者比较了不同的“长距离注意力模型”的长文档检索。陈等人（2022年）提出了一种分层神经网络，并证明其优于基于MaxP。但这些工作相比DAPR，都没有研究 “考虑文档内容情况下的片段检索”。&lt;/p&gt;
-&lt;p&gt;混合检索：涉及多检索系统。其中排名混合将排名合并&lt;/p&gt;
+&lt;h2 id=&#34;相关工作&#34;&gt;相关工作
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;DocQA&lt;/strong&gt;： 需要模型回答关于输入文档的一个问题，它的问题的相关文档是给定的，而DAPR需要从文档集里找相关信息(doc)。基于给定文档这个假设，DocQA的问题通常是和文档内容关联的，比如“哪个检索系统用于这个baseline”，这个问题在DocQA中因为给定了文档所以有默认关联，而转换到DAPR就不行了，&amp;ldquo;这个baseline&amp;quot;不知道是啥。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;长文档检索&lt;/strong&gt;：法1是MaxP，片段最高分作为文档分，法2是FirstP，第一片段得分作为文档分，法2不如法1。有学者比较了不同的“长距离注意力模型”的长文档检索。陈等人（2022年）提出了一种分层神经网络，并证明其优于基于MaxP。但这些工作相比DAPR，都没有研究 “考虑文档内容情况下的片段检索”。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;混合检索&lt;/strong&gt;：涉及多检索系统。其中排名混合将排名合并&lt;/p&gt;
 &lt;h2 id=&#34;实验复现代码&#34;&gt;实验复现代码
 &lt;/h2&gt;&lt;h3 id=&#34;reproduce_bm25sh&#34;&gt;reproduce_bm25.sh
 &lt;/h3&gt;&lt;p&gt;（.sh4种算法都类似，但passage_only.bm25大不相同）&lt;/p&gt;
@@ -1307,6 +1334,21 @@ $$\text{Precision} = \frac{|\text{BOW}(pred) \cap \text{BOW}(gt)|}{|\text{BOW}(p
 &lt;/div&gt;
 &lt;/div&gt;&lt;h1 id=&#34;总结&#34;&gt;总结
 &lt;/h1&gt;&lt;p&gt;屎一样的代码&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>斯坦福重设RAG新基线之DOS_RAG</title>
+        <link>https://rooobeam.github.io/p/%E6%96%AF%E5%9D%A6%E7%A6%8F%E9%87%8D%E8%AE%BErag%E6%96%B0%E5%9F%BA%E7%BA%BF%E4%B9%8Bdos_rag/</link>
+        <pubDate>Mon, 21 Jul 2025 18:04:13 +0800</pubDate>
+        
+        <guid>https://rooobeam.github.io/p/%E6%96%AF%E5%9D%A6%E7%A6%8F%E9%87%8D%E8%AE%BErag%E6%96%B0%E5%9F%BA%E7%BA%BF%E4%B9%8Bdos_rag/</guid>
+        <description>&lt;h3 id=&#34;baselines&#34;&gt;Baselines
+&lt;/h3&gt;&lt;h4 id=&#34;vanilla-rag&#34;&gt;Vanilla RAG
+&lt;/h4&gt;&lt;p&gt;分块100tokens，边界处保留完整句子，也就是说100+tokens，用Snowflake Arctic-embed-m 1.5   embdding 文本块和query，查询时计算 cosine similarity，排序，取排名靠前的块，直到到达最大输入tokens，最后按降序方式和query给LLM。&lt;/p&gt;
+&lt;h4 id=&#34;full-document-baseline&#34;&gt;Full-Document Baseline
+&lt;/h4&gt;&lt;p&gt;仅在 QuALITY 上测试（其doc都在最大input范围内），保证无keyinf丢失。&lt;/p&gt;
+&lt;h4 id=&#34;dos-rag&#34;&gt;DOS RAG
+&lt;/h4&gt;&lt;p&gt;与Vanilla RAG不同之处在于，最后按原文档集里出现的顺序和query提交给LLM。&lt;/p&gt;
 </description>
         </item>
         <item>

@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Baselines Vanilla RAG 分块100tokens，边界处保留完整句子，也就是说100+tokens，用Snowflake Arctic-embed-m 1.5 embdding 文本块和query，查询时计算 cosine similarity，排序，取排名靠前的块，直到到达最大输入tokens，最后按降序方式和query给LLM。\n">
-<title>斯坦福重设RAG新基线之DOS_RAG</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="位运算 灵神题单：分享丨【算法题单】位运算（基础/性质/拆位/试填/恒等式/思维） - 讨论 - 力扣（LeetCode）\n场景：\n2 的幂 231. 2 的幂 - 力扣（LeetCode）\n">
+<title>位运算</title>
 
-<link rel='canonical' href='https://rooobeam.github.io/p/%E6%96%AF%E5%9D%A6%E7%A6%8F%E9%87%8D%E8%AE%BErag%E6%96%B0%E5%9F%BA%E7%BA%BF%E4%B9%8Bdos_rag/'>
+<link rel='canonical' href='https://rooobeam.github.io/p/%E4%BD%8D%E8%BF%90%E7%AE%97/'>
 
-<link rel="stylesheet" href="/scss/style.min.8752ced9c05cc1afc2b768fa4307859949471f33fc92b9579b5e8462b6d6315b.css"><meta property='og:title' content="斯坦福重设RAG新基线之DOS_RAG">
-<meta property='og:description' content="Baselines Vanilla RAG 分块100tokens，边界处保留完整句子，也就是说100+tokens，用Snowflake Arctic-embed-m 1.5 embdding 文本块和query，查询时计算 cosine similarity，排序，取排名靠前的块，直到到达最大输入tokens，最后按降序方式和query给LLM。\n">
-<meta property='og:url' content='https://rooobeam.github.io/p/%E6%96%AF%E5%9D%A6%E7%A6%8F%E9%87%8D%E8%AE%BErag%E6%96%B0%E5%9F%BA%E7%BA%BF%E4%B9%8Bdos_rag/'>
+<link rel="stylesheet" href="/scss/style.min.8752ced9c05cc1afc2b768fa4307859949471f33fc92b9579b5e8462b6d6315b.css"><meta property='og:title' content="位运算">
+<meta property='og:description' content="位运算 灵神题单：分享丨【算法题单】位运算（基础/性质/拆位/试填/恒等式/思维） - 讨论 - 力扣（LeetCode）\n场景：\n2 的幂 231. 2 的幂 - 力扣（LeetCode）\n">
+<meta property='og:url' content='https://rooobeam.github.io/p/%E4%BD%8D%E8%BF%90%E7%AE%97/'>
 <meta property='og:site_name' content='rooobeam'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-07-21T18:04:13&#43;08:00'/><meta property='article:modified_time' content='2025-07-21T18:04:13&#43;08:00'/>
-<meta name="twitter:title" content="斯坦福重设RAG新基线之DOS_RAG">
-<meta name="twitter:description" content="Baselines Vanilla RAG 分块100tokens，边界处保留完整句子，也就是说100+tokens，用Snowflake Arctic-embed-m 1.5 embdding 文本块和query，查询时计算 cosine similarity，排序，取排名靠前的块，直到到达最大输入tokens，最后按降序方式和query给LLM。\n">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-08-15T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-08-15T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="位运算">
+<meta name="twitter:description" content="位运算 灵神题单：分享丨【算法题单】位运算（基础/性质/拆位/试填/恒等式/思维） - 讨论 - 力扣（LeetCode）\n场景：\n2 的幂 231. 2 的幂 - 力扣（LeetCode）\n">
     <link rel="shortcut icon" href="/favicon.ico" />
 
     </head>
@@ -238,7 +238,8 @@
   <ol>
     <li>
       <ol>
-        <li><a href="#baselines">Baselines</a></li>
+        <li><a href="#2-的幂">2 的幂</a></li>
+        <li><a href="#4的幂">4的幂</a></li>
       </ol>
     </li>
   </ol>
@@ -259,8 +260,8 @@
     
     <header class="article-category">
         
-            <a href="/categories/%E7%A7%91%E7%A0%94/" >
-                科研
+            <a href="/categories/%E7%AE%97%E6%B3%95/" >
+                算法
             </a>
         
     </header>
@@ -268,7 +269,7 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/%E6%96%AF%E5%9D%A6%E7%A6%8F%E9%87%8D%E8%AE%BErag%E6%96%B0%E5%9F%BA%E7%BA%BF%E4%B9%8Bdos_rag/">斯坦福重设RAG新基线之DOS_RAG</a>
+            <a href="/p/%E4%BD%8D%E8%BF%90%E7%AE%97/">位运算</a>
         </h2>
     
         
@@ -290,7 +291,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2025-07-21</time>
+                <time class="article-time--published">2025-08-15</time>
             </div>
         
 
@@ -306,13 +307,63 @@
     <section class="article-content">
     
     
-    <h3 id="baselines">Baselines
-</h3><h4 id="vanilla-rag">Vanilla RAG
-</h4><p>分块100tokens，边界处保留完整句子，也就是说100+tokens，用Snowflake Arctic-embed-m 1.5   embdding 文本块和query，查询时计算 cosine similarity，排序，取排名靠前的块，直到到达最大输入tokens，最后按降序方式和query给LLM。</p>
-<h4 id="full-document-baseline">Full-Document Baseline
-</h4><p>仅在 QuALITY 上测试（其doc都在最大input范围内），保证无keyinf丢失。</p>
-<h4 id="dos-rag">DOS RAG
-</h4><p>与Vanilla RAG不同之处在于，最后按原文档集里出现的顺序和query提交给LLM。</p>
+    <h1 id="位运算">位运算
+</h1><p>灵神题单：<a class="link" href="https://leetcode.cn/discuss/post/3580371/fen-xiang-gun-ti-dan-wei-yun-suan-ji-chu-nth4/"  target="_blank" rel="noopener"
+    >分享丨【算法题单】位运算（基础/性质/拆位/试填/恒等式/思维） - 讨论 - 力扣（LeetCode）</a></p>
+<p>场景：</p>
+<h3 id="2-的幂">2 的幂
+</h3><p><a class="link" href="https://leetcode.cn/problems/power-of-two/description/"  target="_blank" rel="noopener"
+    >231. 2 的幂 - 力扣（LeetCode）</a></p>
+<ul>
+<li>2的幂 <strong>n</strong> 的二进制特点：10 100 1000 -&gt; 最高位为1，其他位为0，2的幂减一 <strong>(<em>n</em>−1)</strong>  ：1 11 111，<strong><em>n</em>&amp;(<em>n</em>−1)</strong> 一定是 0</li>
+<li>反之，如果 n 不是 2 的幂，那么 n 的二进制至少有两个 1，则把 n 减一后最高位必为 1，所以 n&amp;(n−1) 必不为 0，例如：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="mi">9</span>   <span class="o">=</span> <span class="mi">1001</span>
+</span></span><span class="line"><span class="cl"><span class="mi">9</span><span class="err">−</span><span class="mi">1</span> <span class="o">=</span> <span class="mi">1000</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="4的幂">4的幂
+</h3><ul>
+<li>发现4^x = 2^2x，也就是如果是4的幂则必然是2的幂，前面知道如何判断 是否为2的幂，也就是要继续加条件限制即可。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="mi">4</span><span class="n">的幂的二进制</span><span class="err">：</span>
+</span></span><span class="line"><span class="cl"><span class="mi">1</span>
+</span></span><span class="line"><span class="cl"><span class="mi">100</span>
+</span></span><span class="line"><span class="cl"><span class="mi">10000</span>
+</span></span><span class="line"><span class="cl"><span class="err">⋮</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="mi">2</span><span class="n">的幂但不是4的幂的二进制</span><span class="err">：</span>
+</span></span><span class="line"><span class="cl"><span class="mi">10</span>
+</span></span><span class="line"><span class="cl"><span class="mi">1000</span>
+</span></span><span class="line"><span class="cl"><span class="mi">100000</span>
+</span></span><span class="line"><span class="cl"><span class="err">⋮</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>直观特点：True 的情况为 位数为奇数，False 的情况为 位数为偶数。如何尝试用与或非体现这个区别？&hellip;0101010&hellip;.与即可。</li>
+<li>tips：把二进制数前面也补0带入思考： 100-&gt;  &hellip;00100。</li>
+</ul>
 
 </section>
 
@@ -361,12 +412,12 @@
             
                 
 <article class="">
-    <a href="/p/lumberchunker%E8%A7%A3%E8%AF%BB/">
+    <a href="/p/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E4%B8%8E%E5%8F%8C%E6%8C%87%E9%92%88/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">LumberChunker解读</h2>
+            <h2 class="article-title">滑动窗口与双指针</h2>
         </div>
     </a>
 </article>
@@ -374,38 +425,12 @@
             
                 
 <article class="">
-    <a href="/p/lgmgc%E8%A7%A3%E8%AF%BB/">
+    <a href="/p/tree_search/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">LGMGC解读</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="">
-    <a href="/p/dapr/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">DAPR</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="">
-    <a href="/p/conditionalqa/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">ConditionalQA</h2>
+            <h2 class="article-title">Tree_search</h2>
         </div>
     </a>
 </article>

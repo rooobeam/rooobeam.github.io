@@ -8,11 +8,11 @@
         <language>en</language>
         <copyright>rooobeam</copyright>
         <lastBuildDate>Fri, 25 Jul 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://rooobeam.github.io/categories/%E5%9F%BA%E7%A1%80/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>滑动窗口</title>
-        <link>https://rooobeam.github.io/p/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/</link>
+        <title>滑动窗口与双指针</title>
+        <link>https://rooobeam.github.io/p/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E4%B8%8E%E5%8F%8C%E6%8C%87%E9%92%88/</link>
         <pubDate>Fri, 25 Jul 2025 00:00:00 +0000</pubDate>
         
-        <guid>https://rooobeam.github.io/p/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/</guid>
+        <guid>https://rooobeam.github.io/p/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E4%B8%8E%E5%8F%8C%E6%8C%87%E9%92%88/</guid>
         <description>&lt;h1 id=&#34;滑动窗口与双指针&#34;&gt;滑动窗口与双指针
 &lt;/h1&gt;&lt;p&gt;灵神题单：&lt;a class=&#34;link&#34; href=&#34;https://leetcode.cn/discuss/post/3578981/ti-dan-hua-dong-chuang-kou-ding-chang-bu-rzz7/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;分享丨【算法题单】滑动窗口与双指针（定长/不定长/单序列/双序列/三指针/分组循环）- 讨论 - 力扣（LeetCode）&lt;/a&gt;&lt;/p&gt;
@@ -351,7 +351,12 @@
 &lt;li&gt;逆序索引  range(len(digits)-1,-1,-1)     从len(digits)-1开始，步长为-1(递减)，到-1，左闭右开[len(digits)-1, -1)。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;定长滑动窗口&#34;&gt;定长滑动窗口
-&lt;/h2&gt;&lt;h3 id=&#34;半径为-k-的子数组平均值&#34;&gt;半径为 k 的子数组平均值
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;共性在于“一进一出”&lt;/li&gt;
+&lt;li&gt;记录变化计算、设置、边界值处理&lt;/li&gt;
+&lt;li&gt;逆向、排序、分组等特殊处理&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;半径为-k-的子数组平均值&#34;&gt;半径为 k 的子数组平均值
 &lt;/h3&gt;&lt;p&gt;&lt;strong&gt;&lt;a class=&#34;link&#34; href=&#34;https://leetcode.cn/problems/k-radius-subarray-averages/description/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;2090. 半径为 k 的子数组平均值 - 力扣（LeetCode）&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
@@ -592,6 +597,13 @@
 &lt;li&gt;枚举法（s + s 上的滑动窗口），不要想当然得觉得 想出的算法能适应所有情况，当测试不通过时，大胆暴力，这里也就是 生成所有第一种操作而成的字符串，然后滑动遍历所有情况。&lt;/li&gt;
 &lt;li&gt;ans=min(cnt, k - cnt, ans)，在当前情况下的两种可能和全局最小 中 取最小。&lt;/li&gt;
 &lt;/ul&gt;
+&lt;h3 id=&#34;查找给定哈希值的子串&#34;&gt;查找给定哈希值的子串
+&lt;/h3&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://leetcode.cn/problems/find-substring-with-given-hash-value/description/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;2156. 查找给定哈希值的子串 - 力扣（LeetCode）&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;第一个字母的 &lt;em&gt;p&lt;/em&gt; 的幂次是最小的，这和通常字符串哈希中的定义是&lt;strong&gt;相反&lt;/strong&gt;的。所以在计算哈希值时，要&lt;strong&gt;倒序遍历&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;关键在于，此题正序遍历时，要在mod m下除以p，除法需要逆元，逆元不一定存在；逆序遍历时为乘p，无需逆元。&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h3 id=&#34;串联所有单词的子串次定长滑窗&#34;&gt;串联所有单词的子串（次定长滑窗）
 &lt;/h3&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://leetcode.cn/problems/substring-with-concatenation-of-all-words/description/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;30. 串联所有单词的子串 - 力扣（LeetCode）&lt;/a&gt;&lt;/p&gt;
@@ -599,64 +611,83 @@
 &lt;li&gt;&amp;ldquo;barfoothefoobarman&amp;rdquo;，单个“词”长度3，本因3个3个检查，于是为遍历所有情况，起始位置需为0/1，对从0/1位置开始的字符串分别滑窗。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;不定长滑动窗口&#34;&gt;不定长滑动窗口
-&lt;/h2&gt;&lt;h3 id=&#34;无重复字符的最长子串&#34;&gt;无重复字符的最长子串
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;求最大最长（越短越合法或恰好合法）：内循环while使窗变小，一旦合法则无法继续循环，则此时为合法下的最长。&lt;/li&gt;
+&lt;li&gt;求最小最短（越长越合法或恰好合法）：内循环while使窗变小，预计算一步若不合法则无法继续循环，此时为合法下的最短。&lt;/li&gt;
+&lt;li&gt;求子数组&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;无重复字符的最长子串最长最大&#34;&gt;无重复字符的最长子串（最长最大）
 &lt;/h3&gt;&lt;p&gt;&lt;strong&gt;&lt;a class=&#34;link&#34; href=&#34;https://leetcode.cn/problems/longest-substring-without-repeating-characters/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;3. 无重复字符的最长子串 - 力扣（LeetCode）&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;​	给定一个字符串 &lt;code&gt;s&lt;/code&gt; ，请你找出其中不含有重复字符的 &lt;strong&gt;最长 子串&lt;/strong&gt; 的长度。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;示例&lt;/strong&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;输入: s = &amp;#34;abcabcbb&amp;#34;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;输出: 3 
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;解释: 因为无重复字符的最长子串是 &amp;#34;abc&amp;#34;，所以其长度为 3。
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;strong&gt;代码&lt;/strong&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-py&#34; data-lang=&#34;py&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;Solution&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;lengthOfLongestSubstring&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;bp&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;s&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;str&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;int&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;ans&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;left&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;cnt&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;defaultdict&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;int&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;# 维护从下标 left 到下标 right 的字符及其出现次数&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;right&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;c&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;enumerate&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;s&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;n&#34;&gt;cnt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;k&#34;&gt;while&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;cnt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;# 窗口内有重复字母&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                &lt;span class=&#34;n&#34;&gt;cnt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;s&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;left&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;# 移除窗口左端点字母&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                &lt;span class=&#34;n&#34;&gt;left&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;# 缩小窗口&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;n&#34;&gt;ans&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;max&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ans&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;right&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;left&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;# 更新窗口长度最大值&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ans&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; &lt;span class=&#34;n&#34;&gt;作者&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;：&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;灵神&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;strong&gt;思想&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;基础模板：左指针while调整，右指针“+1移动”，cnt为int或defaultdict(int)记录信息。&lt;/li&gt;
+&lt;li&gt;基础模板：左指针while调整，右指针“+1移动”，cnt为int或defaultdict(int)记录信息，ans = max(ans, right-left+1)。&lt;/li&gt;
+&lt;li&gt;循环内呈现：right(进入的元素)处理，while循环调整左指针和记录变量，外围答案值是否需要改变。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;找到最长的半重复子字符串&#34;&gt;找到最长的半重复子字符串
+&lt;/h3&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://leetcode.cn/problems/find-the-longest-semi-repetitive-substring/solutions/2304713/shuang-zhi-zhen-hua-chuang-pythonjavacgo-nurf/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;2730. 找到最长的半重复子字符串 - 力扣（LeetCode）&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;稍作调整使用模板：ans的初始化(默认)值设置；记录变量的如何设置和如何变化&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;最高频元素的频数&#34;&gt;最高频元素的频数
+&lt;/h3&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://leetcode.cn/problems/frequency-of-the-most-frequent-element/description/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;1838. 最高频元素的频数 - 力扣（LeetCode）&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;洞悉“滑窗”特性，主要在于它的只增性质。&lt;/li&gt;
+&lt;li&gt;先用在框架下暴力方法分析如何解出，再优化时间复杂度。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;将-x-减到-0-的最小操作数&#34;&gt;将 x 减到 0 的最小操作数
 &lt;/h3&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://leetcode.cn/problems/minimum-operations-to-reduce-x-to-zero/description/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;1658. 将 x 减到 0 的最小操作数 - 力扣（LeetCode）&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;逆向思维+滑动窗口&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;逆向思维&lt;/li&gt;
 &lt;li&gt;特殊情况分析&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;数组的最大美丽值&#34;&gt;数组的最大美丽值
+&lt;/h3&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://leetcode.cn/problems/maximum-beauty-of-an-array-after-applying-operation/description/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;2779. 数组的最大美丽值 - 力扣（LeetCode）&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;排序+滑动窗口&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;审题，发现排序并不影响子序列的选择；排序后分析left的移动条件即可轻易解出。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;毯子覆盖的最多白色砖块数&#34;&gt;毯子覆盖的最多白色砖块数
+&lt;/h3&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://leetcode.cn/problems/maximum-white-tiles-covered-by-a-carpet/description/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;2271. 毯子覆盖的最多白色砖块数 - 力扣（LeetCode）&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;排序+滑动窗口+特殊滑动单位&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;模拟发现，毯子右端在白瓷内时，覆盖面积非递减，毯子右端在非白瓷内时，覆盖面积非递增。&lt;/li&gt;
+&lt;li&gt;相当于每次毯子右端在白瓷右端时，计算覆盖面积看是否大于ans，于是滑动单位为一个个白瓷（一个个区间）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;长度最小的子数组最短最小&#34;&gt;长度最小的子数组（最短最小）
+&lt;/h3&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://leetcode.cn/problems/minimum-size-subarray-sum/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;209. 长度最小的子数组 - 力扣（LeetCode）&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;while total-nums[left] &amp;gt;= target:    （&amp;ldquo;预计算一步&amp;rdquo;，即下一步不满足，现在是最短）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;相向双指针&#34;&gt;相向双指针
+&lt;/h2&gt;&lt;h3 id=&#34;两数之和-ii---输入有序数组&#34;&gt;两数之和 II - 输入有序数组
+&lt;/h3&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://leetcode.cn/problems/two-sum-ii-input-array-is-sorted/description/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;167. 两数之和 II - 输入有序数组 - 力扣（LeetCode）&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;关键在于利用“有序”进行排除，移动的指针 便是 排除“都小”或“都大”的数。&lt;/li&gt;
+&lt;li&gt;最终找到恰好&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://pic.leetcode-cn.com/9ebb3ff74f0706c3c350b7fb91fea343e54750eb5b6ae6a4a3493421a019922a.gif&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;搜索空间的减小过程（动图）&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;统计和小于目标的下标对数目&#34;&gt;统计和小于目标的下标对数目
+&lt;/h3&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://leetcode.cn/problems/count-pairs-whose-sum-is-less-than-target/description/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;2824. 统计和小于目标的下标对数目 - 力扣（LeetCode）&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;对大于/小于的统计，都是right-left，条件不同罢了，对称性：固定左指针，右指针往左，和都小；固定右指针，左指针往右，和都大。&lt;/li&gt;
 &lt;/ul&gt;
 </description>
         </item>
