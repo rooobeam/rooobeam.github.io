@@ -7,7 +7,32 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>rooobeam</copyright>
-        <lastBuildDate>Fri, 15 Aug 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://rooobeam.github.io/categories/%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 29 Aug 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://rooobeam.github.io/categories/%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>链表、二叉树与回溯</title>
+        <link>https://rooobeam.github.io/p/%E9%93%BE%E8%A1%A8%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%8E%E5%9B%9E%E6%BA%AF/</link>
+        <pubDate>Fri, 29 Aug 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://rooobeam.github.io/p/%E9%93%BE%E8%A1%A8%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%8E%E5%9B%9E%E6%BA%AF/</guid>
+        <description>&lt;h1 id=&#34;链表二叉树与回溯&#34;&gt;链表、二叉树与回溯
+&lt;/h1&gt;&lt;p&gt;灵神题单：&lt;a class=&#34;link&#34; href=&#34;https://leetcode.cn/discuss/post/3142882/fen-xiang-gun-ti-dan-lian-biao-er-cha-sh-6srp/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;分享丨【算法题单】链表、二叉树与回溯（前后指针/快慢指针/DFS/BFS/直径/LCA/一般树） - 讨论 - 力扣（LeetCode）&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;场景：链表，二叉树&lt;/p&gt;
+&lt;h2 id=&#34;链表&#34;&gt;链表
+&lt;/h2&gt;&lt;h3 id=&#34;回文链表&#34;&gt;回文链表
+&lt;/h3&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://leetcode.cn/problems/palindrome-linked-list/description/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;234. 回文链表 - 力扣（LeetCode）&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;找中间结点模板、反转链表模板&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;旋转链表&#34;&gt;旋转链表
+&lt;/h3&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://leetcode.cn/problems/rotate-list/description/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;61. 旋转链表 - 力扣（LeetCode）&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;特殊情况、临界情况分析&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>位运算</title>
         <link>https://rooobeam.github.io/p/%E4%BD%8D%E8%BF%90%E7%AE%97/</link>
         <pubDate>Fri, 15 Aug 2025 00:00:00 +0000</pubDate>
