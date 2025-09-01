@@ -1,0 +1,1529 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="第二章 寄存器 ✅\n8086cpu有14个寄存器：AX BX CX DS SI DI SP BP IP CS SS DS ES PSW。\n8086cpu寄存器都是16位的。\nABCD-X通常用来存放一般性数据，被成为通用寄存器。\n">
+<title>王爽 汇编语言</title>
+
+<link rel='canonical' href='https://rooobeam.github.io/p/%E7%8E%8B%E7%88%BD-%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/'>
+
+<link rel="stylesheet" href="/scss/style.min.8752ced9c05cc1afc2b768fa4307859949471f33fc92b9579b5e8462b6d6315b.css"><meta property='og:title' content="王爽 汇编语言">
+<meta property='og:description' content="第二章 寄存器 ✅\n8086cpu有14个寄存器：AX BX CX DS SI DI SP BP IP CS SS DS ES PSW。\n8086cpu寄存器都是16位的。\nABCD-X通常用来存放一般性数据，被成为通用寄存器。\n">
+<meta property='og:url' content='https://rooobeam.github.io/p/%E7%8E%8B%E7%88%BD-%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/'>
+<meta property='og:site_name' content='rooobeam'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-02-19T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-02-19T00:00:00&#43;00:00'/><meta property='og:image' content='https://rooobeam.github.io/p/%E7%8E%8B%E7%88%BD-%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/vglcjtiwyh9bnm0o.webp' />
+<meta name="twitter:title" content="王爽 汇编语言">
+<meta name="twitter:description" content="第二章 寄存器 ✅\n8086cpu有14个寄存器：AX BX CX DS SI DI SP BP IP CS SS DS ES PSW。\n8086cpu寄存器都是16位的。\nABCD-X通常用来存放一般性数据，被成为通用寄存器。\n"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://rooobeam.github.io/p/%E7%8E%8B%E7%88%BD-%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/vglcjtiwyh9bnm0o.webp' />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_51c49b55d0a39bb4.png" width="300"
+                            height="299" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">😚</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">rooobeam</a></h1>
+            <h2 class="site-description"></h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://space.bilibili.com/3461571462302229'
+                        target="_blank"
+                        title="Bilibili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-brand-bilibili"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z" /><path d="M8 3l2 3" /><path d="M16 3l-2 3" /><path d="M9 13v-2" /><path d="M15 11v2" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://blog.csdn.net/rooobeam?'
+                        target="_blank"
+                        title="CSDN"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-copyright"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M14 9.75a3.016 3.016 0 0 0 -4.163 .173a2.993 2.993 0 0 0 0 4.154a3.016 3.016 0 0 0 4.163 .173" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/rooobeam?'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#第二章">第二章</a>
+      <ol>
+        <li><a href="#寄存器">寄存器</a></li>
+      </ol>
+    </li>
+    <li><a href="#第三章">第三章</a>
+      <ol>
+        <li><a href="#寄存器内存访问">寄存器（内存访问）</a></li>
+      </ol>
+    </li>
+    <li><a href="#第四章">第四章</a>
+      <ol>
+        <li><a href="#第一个程序">第一个程序</a></li>
+      </ol>
+    </li>
+    <li><a href="#第五六章">第五、六章</a>
+      <ol>
+        <li><a href="#内存单元--loop-和--idata">☝内存单元 、&quot;()&quot;、 loop 和  idata</a></li>
+        <li><a href="#实验四-程序">☝实验四 程序</a></li>
+        <li><a href="#实验五倒二题">☝实验五倒二题</a></li>
+        <li><a href="#实验五最后一题">☝实验五最后一题</a></li>
+      </ol>
+    </li>
+    <li><a href="#第七八章">第七、八章</a></li>
+    <li><a href="#第九章转移指令原理">第九章（转移指令原理）</a>
+      <ol>
+        <li><a href="#offset">offset</a></li>
+        <li><a href="#jmp">jmp</a></li>
+        <li><a href="#实验8">实验8</a></li>
+        <li><a href="#实验9">实验9</a></li>
+      </ol>
+    </li>
+    <li><a href="#第十章-call-和-ret指令">第十章 CALL 和 RET指令</a>
+      <ol>
+        <li><a href="#retretf">ret、retf</a></li>
+        <li><a href="#call">call</a></li>
+        <li><a href="#call和ret实现模块化">call和ret实现模块化</a></li>
+        <li><a href="#mul指令">mul指令</a></li>
+        <li><a href="#实验10">实验10</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/%E7%8E%8B%E7%88%BD-%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/">
+                <img src="/p/%E7%8E%8B%E7%88%BD-%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/vglcjtiwyh9bnm0o_hu_4a8b4a0da011bc5.webp"
+                        srcset="/p/%E7%8E%8B%E7%88%BD-%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/vglcjtiwyh9bnm0o_hu_4a8b4a0da011bc5.webp 800w, /p/%E7%8E%8B%E7%88%BD-%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/vglcjtiwyh9bnm0o_hu_1594c7d072cbcfbc.webp 1600w"
+                        width="800" 
+                        height="450" 
+                        loading="lazy"
+                        alt="Featured image of post 王爽 汇编语言" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E7%8E%8B%E7%88%BD-%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/">王爽 汇编语言</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-02-19</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="第二章">第二章
+</h2><h3 id="寄存器">寄存器
+</h3><p>✅</p>
+<ul>
+<li>
+<p>8086cpu有14个寄存器：AX BX CX DS SI DI SP BP IP CS SS DS ES PSW。</p>
+</li>
+<li>
+<p>8086cpu寄存器都是16位的。</p>
+</li>
+<li>
+<p>ABCD-X通常用来存放一般性数据，被成为通用寄存器。</p>
+</li>
+<li>
+<p>寄存器?X可被分为?H和?L，如AX分为AH AL，即分为AHigh ALow，前者是高八位，后者是第八位。</p>
+</li>
+<li>
+<p>所谓高位和数字的高位联想，都是左边是高位。</p>
+</li>
+</ul>
+<p>✅</p>
+<ul>
+<li>
+<p>几条汇编指令：mov add，用法一样。add ax,18H; add ax,8H。</p>
+</li>
+<li>
+<p>数字默认16进制。</p>
+</li>
+<li>
+<p>mov ax,bx; mov ax,7。</p>
+</li>
+<li>
+<p>两个操作对象位数一致，第一个位置要是变量，如mov ah,bl; mov bh, AA。</p>
+</li>
+</ul>
+<p>✅</p>
+<ul>
+<li>
+<p>物理地址即内存在统一的逻辑存储器中的地址。</p>
+</li>
+<li>
+<p>内存地址空间:cpu将系统中各类存储器看作一个逻辑存储器。</p>
+</li>
+<li>
+<p>物理地址=段地址*16+偏移地址，通常写作  段地址:偏移地址，如cpu指令读取开始地址CS:IP。</p>
+</li>
+<li>
+<p>由于十六进制，故其实即 “段地址0+偏移地址”，由一个地址加法器合成。</p>
+</li>
+<li>
+<p>段的概念：段地址固定，偏移地址连续的内存空间。故其最大范围0000~FFFF。实践发现，0-1会自动变成FFFF，FFFF+1变成0000。</p>
+</li>
+</ul>
+<p>✅</p>
+<ul>
+<li>
+<p>8086有四个段寄存器：CS DS SS ES。</p>
+</li>
+<li>
+<p>CS和IP：CS叫代码 段寄存器，IP 叫指令指针寄存器，CS存段地址IP存偏移量。</p>
+</li>
+<li>
+<p>cpu将从CS:IP单元开始读取一条指令并执行。</p>
+</li>
+<li>
+<p>取指执行过程：从CS:IP读取指令，该指令进入指令缓冲器；IP=IP+该指令长度，从而指向下一指令首单元；执行指令；从CS:IP读取指令&hellip;&hellip;.</p>
+</li>
+<li>
+<p>修改CS IP命令——jmp
+jmp 段地址:偏移地址	段地址修改CS 偏移地址修改IP
+jmp “四位数” 	仅修改IP
+jmp 某合法寄存器	仅修改IP，IP=某合法寄存器的值</p>
+</li>
+</ul>
+<h2 id="第三章">第三章
+</h2><h3 id="寄存器内存访问">寄存器（内存访问）
+</h3><p>✅</p>
+<ul>
+<li>(⊙﹏⊙)</li>
+</ul>
+<h2 id="第四章">第四章
+</h2><h3 id="第一个程序">第一个程序
+</h3><p>✅</p>
+<ul>
+<li>源程序写出到执行简要过程，后文有实例：
+<ol>
+<li>编写源程序 —— 写一个文本文件 —— 使用edit、笔记本等。</li>
+<li>编译连接 —— 用汇编语言编译程序对文本文件编译产生目标文件；再用连接程序对目标文件进行连接，生成可执行文件。</li>
+<li>在操作系统中执行文件。</li>
+</ol>
+</li>
+</ul>
+<p>✅</p>
+<ul>
+<li>源程序简单结构</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">assume 寄存器:某segment段, 寄存器:某segment段, 寄存器:某segment段
+</span></span><span class="line"><span class="cl">XXX segment 
+</span></span><span class="line"><span class="cl">	:
+</span></span><span class="line"><span class="cl">	:
+</span></span><span class="line"><span class="cl">	:
+</span></span><span class="line"><span class="cl">XXX ends
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">YYY segment
+</span></span><span class="line"><span class="cl">	:
+</span></span><span class="line"><span class="cl">	mov ax,4c00H
+</span></span><span class="line"><span class="cl">	int 21H
+</span></span><span class="line"><span class="cl">YYY ends
+</span></span><span class="line"><span class="cl">end
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>伪指令：提供给编译器的，编译器根据伪指令进行编译工作。上面代码中assume，XXX segment……XXX ends 和 end。</li>
+<li>标号，如segment段的名称 上面代码中的XXX、YYY，一个标号指代一个地址。</li>
+<li>程序返回：将CPU的控制权还给 使他得以运行的程序（shell)。代码中的 mov ax,4C00H   \n  int 21H 。</li>
+</ul>
+<p>✅</p>
+<ul>
+<li>
+<p>实例</p>
+<ul>
+<li>
+<p>编写源程序
+svg</p>
+<p>​	桌面右键新建txt命名123，记事本里写好源程序。</p>
+</li>
+<li>
+<p>编译
+svg</p>
+<ol>
+<li>win+R  输入command打开命令提示符，输入“<strong>cd masm</strong>”（masm.exe所在目录），输入“masm”启动masm.exe。</li>
+<li>提示我们输入源文件名，<strong>txt文件放在了c:\asm，且不是asm文件，输入c:\asm\123.txt</strong>。（注意此处的斜杠是和\n\t一样的）</li>
+<li>询问生成obj文件名，我们选择默认，<strong>回车</strong>即可。</li>
+<li>提示输入列表文件名，该文件为编译为目标文件的中间结果，我们不生成，<strong>回车</strong>即可。</li>
+<li>提示输入交叉引用文件名，也是中间结果，不生成，<strong>回车</strong>即可。</li>
+<li>无错误则masm.exe所在目录下生成123.obj</li>
+</ol>
+</li>
+<li>
+<p>连接
+svg</p>
+<ol>
+<li>进入DOS方式(win+R 输command)，进入c:/masm (Overlay Linker3.60，link.exe所在目录),输入link启动link.exe。</li>
+<li>提示输入目标文件名，[.OBJ]提示默认扩展名为obj，正合我意，输入123即可。</li>
+<li>提示生成的exe文件名，默认名就行，回车即可。</li>
+<li>提示输入映像文件名，提示输入库文件名，我们都回车即可。</li>
+<li>无error则当前目录下生成123.exe。</li>
+</ol>
+</li>
+<li>
+<p>执行，命令行输入文件名就行了，masm.exe 或 masm          123.exe 或 123 。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>debug跟踪程序的运行过程：debug 可以将程序载入内存，设置CS:IP指向程序的入口，但debug不放弃cpu的控制权</p>
+<ul>
+<li>具体方法：debug 123.exe
+svg</li>
+<li>运用第二章的debug的使用方法
+<ul>
+<li>R命令查看、改变寄存器内容</li>
+<li>D查看内存中内容</li>
+<li>E改写内存内容</li>
+<li>U将内存中机器指令(01&hellip;)翻译以为汇编命令(mov&hellip;)</li>
+<li>T执行一条机器指令</li>
+<li>A以汇编指令格式往内存写入机器指令</li>
+<li>P正常结束程序。</li>
+</ul>
+</li>
+<li>实操如下图：
+svg</li>
+</ul>
+</li>
+</ul>
+<p>✅</p>
+<ul>
+<li>exe执行过程与shell
+<ul>
+<li>DOS中，123.exe若要运行，要有一个正在运行的程序p2将其载入内存，123.exe运行完后即将cpu控制权交还程序p2。
+p2即command.com，被成为命令解释器，即DOS系统的shell。输入cd、dir、type等都由command执行。</li>
+<li>提示符&quot;c:\masm“后输入123.exe，此时command.com运行。
+输入123.3exe后，command根据文件名找到该可执行文件，将程序载入内存，设置CS:IP指向程序入口，随后执行程序。
+执行完回到command。</li>
+<li>dos中.exe的加载过程（上面第二步——载入内存）
+找到SA:0000空闲内存区——&gt;前256即偏移地址0-255创程序段前缀(PSP)，DOS要用它和.exe通信——&gt;后面装入程序，即从SA+10H:0000——&gt;CS:IP=SA+10H:0000
+加载.svg</li>
+</ul>
+</li>
+</ul>
+<p>✅</p>
+<ul>
+<li>习题
+习题.svg</li>
+</ul>
+<h2 id="第五六章">第五、六章
+</h2><h3 id="内存单元--loop-和--idata">☝内存单元 、&quot;()&quot;、 loop 和  idata
+</h3><ul>
+<li>
+<p>[bx]</p>
+<ol>
+<li>
+<p>类似[0]，[bx]表示 ds:bx上的字节单元或字单元的内存内容，bx内的4位作为偏移地址</p>
+</li>
+<li>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>[0]</th>
+          <th>[bx]</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>mov ax, [0] 将地址为ds:0 的内存字单元存入ax</td>
+          <td>mov ax, [bx] 将地址为ds:bx的内存单元存入ax</td>
+      </tr>
+      <tr>
+          <td>mov al, [0]  将地址为ds:0 的内存半字单元存入al</td>
+          <td>mov al, [bx] 将地址为ds:bx的内存半字单元存入al</td>
+      </tr>
+  </tbody>
+</table></div>
+<ol start="3">
+<li>实例</li>
+</ol>
+</li>
+</ol>
+</li>
+</ul>
+<p>问题5.1.svg</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">忘了要写啥了
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>“()&quot;，机组中“(地址)”——描述某地址上的内容</p>
+<p>()中的元素有三种类型： 寄存器名，段寄存器名 和 五位十六进制的物理地址</p>
+<p>如 (ax)、(al)、(ds)、(20000H)、**((ds)*16+(bx))**注意里面的ds、bx都有括号</p>
+<p>ax=10000H，则(ax)=(10000H)即地址10000H上的字节单元或字单元</p>
+</li>
+<li>
+<p>loop 类似“goto”</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">assume</span> <span class="n">cs</span><span class="p">:</span><span class="n">code</span>
+</span></span><span class="line"><span class="cl"><span class="n">code</span> <span class="n">segment</span>
+</span></span><span class="line"><span class="cl">	<span class="n">cx</span><span class="o">=</span><span class="mi">8</span>
+</span></span><span class="line"><span class="cl"><span class="n">s</span><span class="p">:</span>	<span class="n">ax</span><span class="o">=</span><span class="mi">0</span>
+</span></span><span class="line"><span class="cl">	<span class="n">loop</span> <span class="n">s</span>
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	<span class="n">mov</span> <span class="n">ax</span><span class="p">,</span><span class="mi">4</span><span class="n">c00h</span>
+</span></span><span class="line"><span class="cl">	<span class="nb">int</span> <span class="mi">21</span>
+</span></span><span class="line"><span class="cl"><span class="n">code</span> <span class="n">ends</span>
+</span></span><span class="line"><span class="cl"><span class="n">end</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>​	首先(cx)=(cx)-1，然后判断(cx)是否等于0，如果等于0则执行下一指令，如果不等于0则跳转到s处执行。</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th style="text-align: center">loop 可能情境</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center">cx初始化8，循环8次后继续执行</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">cx为人为初始化，然后为0，(cx)=(cx)-1变成大数(如65535)</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">cx设置指令在循环体内，死循环</td>
+      </tr>
+  </tbody>
+</table></div>
+<ul>
+<li>
+<p>idata</p>
+<p>约定符号好idata表示常量，mov ax,[idata]代表mov ax,[1]、mov ax,[2]等。</p>
+<p>又如 mov ds,idata  都是非法指令</p>
+</li>
+</ul>
+<h3 id="实验四-程序">☝实验四 程序
+</h3><p>编程，向内存0:200<del>0:23F依次传送数据0</del>63(3FH)，程序中只能使用9条指令，9条指令中包括‘mov ax,4c00h’和‘int 21h’。</p>
+<p>在常见的x86汇编语言（如MASM、NASM）中，分号 <code>;</code> 是标准的<strong>行注释符号</strong>。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">assume cs:codesg
+</span></span><span class="line"><span class="cl">codesg segment
+</span></span><span class="line"><span class="cl">    mov ax,020H		
+</span></span><span class="line"><span class="cl">    mov ds,ax		; 初始化ds，不能直接将数字传入段寄存器
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    mov bx,0H		; 初始化bx因为从0
+</span></span><span class="line"><span class="cl">    mov cx,40H		; cx=40H即循环64次存入数据0~63
+</span></span><span class="line"><span class="cl">s:				    ; 标记loop跳转位置
+</span></span><span class="line"><span class="cl">    mov [bx],bl		; 内存0:200~0:23F是40H个字节数据,要存入字节数据，bl存入cs:bx的字节单元，因为要对应bl的大小是1字节
+</span></span><span class="line"><span class="cl">    inc bx			; 把bx+=1  移动偏移地址
+</span></span><span class="line"><span class="cl">    loop s			; 减小cx, 检查判断是否跳转
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    mov ax,4c00H	
+</span></span><span class="line"><span class="cl">    int 21H			; 结束
+</span></span><span class="line"><span class="cl">codesg ends
+</span></span><span class="line"><span class="cl">end
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="实验五倒二题">☝实验五倒二题
+</h3><p>编写code段中的代码，将a段和b段中的数据依次相加，将结果保存到c段中。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">assume cs:code
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">a segment
+</span></span><span class="line"><span class="cl">    db 1,2,3,4,5,6,7,8  ; a 原始数据
+</span></span><span class="line"><span class="cl">a ends
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">b segment
+</span></span><span class="line"><span class="cl">    db 1,2,3,4,5,6,7,8  ; b 原始数据
+</span></span><span class="line"><span class="cl">b ends
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">c segment
+</span></span><span class="line"><span class="cl">    db 0,0,0,0,0,0,0,0  ; c 结果存储区
+</span></span><span class="line"><span class="cl">c ends
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">code segment
+</span></span><span class="line"><span class="cl">start: 	
+</span></span><span class="line"><span class="cl">	mov bx,0	; 初始化偏移，从0开始
+</span></span><span class="line"><span class="cl">	mov cx,8	; 设置好循环次数
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">s:	
+</span></span><span class="line"><span class="cl">	mov dx,a	
+</span></span><span class="line"><span class="cl">	mov ds,dx	; ds=a
+</span></span><span class="line"><span class="cl">	mov al,[bx]	; al=a[bx]
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	mov dx,b	
+</span></span><span class="line"><span class="cl">	mov ds,dx	; ds=b
+</span></span><span class="line"><span class="cl">	add al,[bx]	; al=
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	mov dx,c	
+</span></span><span class="line"><span class="cl">	mov ds,dx	; ds=c
+</span></span><span class="line"><span class="cl">	mov [bx],al	; c[bx]=al=a[bx]+b[bx]
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	inc bx		;bx++
+</span></span><span class="line"><span class="cl">	loop s		;跳转
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    mov ax,4c00h	
+</span></span><span class="line"><span class="cl">    int 21h		; 程序退出
+</span></span><span class="line"><span class="cl">code ends
+</span></span><span class="line"><span class="cl">end start	# 指明程序的开始结尾，start处设置cs=start
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol>
+<li>创建txt，将上述代码写入，保存。</li>
+<li>win+R进入DOS，输入&quot;cd masm5&quot;，再输入&quot;masm&quot;启动。</li>
+<li>源文件输入  &ldquo;file_name.txt&rdquo; 然后四个回车</li>
+<li>没有error后，输入&quot;link&quot;，obj文件输入file_name，然后回车回车回车</li>
+<li>输入&quot;debug file_name.exe&quot;，进入对该exe的debug模式</li>
+<li>输入&quot;u&quot;查看当前能看到的指令，看不到&quot;mov ax,4c00H&quot;就输入t执行一条指令，输入个三四个再输入&quot;u&quot;查看，总之看到结束指令的偏移地址bx</li>
+<li>输入&quot;g bx&quot;，直接执行到bx处</li>
+<li>输入&quot;r&quot;，查看DS，因为它是c段的首地址，因为最后一次设置DS就是用的c</li>
+<li>实验中ds=0c25，输入“d 0c25:0&quot;便能查看c处的值是不是2 4 6 8&hellip;，或者输入&quot;d 0c23:0&quot;能对比a、b、c段的内容。</li>
+</ol>
+<ul>
+<li>db、dw：定义数据，db即define bytes，dw即define words，</li>
+</ul>
+<h3 id="实验五最后一题">☝实验五最后一题
+</h3><p>编写code段代码，用push指令将a段中的前8个字型数据，逆序存储到b段。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">assume cs:code
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">a segment           ; 数据段a
+</span></span><span class="line"><span class="cl">  dw 1,2,3,4,5,6,7,8,0ah,0bh,0ch,0dh,0fh,0ffh  
+</span></span><span class="line"><span class="cl">a ends
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">b segment           ; 数据段b
+</span></span><span class="line"><span class="cl">  dw 0,0,0,0,0,0,0,0                  
+</span></span><span class="line"><span class="cl">b ends
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">code segment
+</span></span><span class="line"><span class="cl">start:
+</span></span><span class="line"><span class="cl">  mov ax, a       ; 赋值ds为a段的段地址
+</span></span><span class="line"><span class="cl">  mov ds, ax      
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  mov ax, b      ; 赋值堆栈段ss为b段的段地址
+</span></span><span class="line"><span class="cl">  mov ss, ax     
+</span></span><span class="line"><span class="cl">  mov sp,10h	;偏移到堆栈最后的字型数据后，8个字，16个字节，0c24:0~0c24:0f，ss:sp指向0c24:10，即前者加一。
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  mov bx, 0       ; 初始化偏移量
+</span></span><span class="line"><span class="cl">  mov cx, 8       ; 循环次数
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">s:                
+</span></span><span class="line"><span class="cl">  push [bx]       ; 将a段第i个字型数据存入b段倒数第i个字单元内
+</span></span><span class="line"><span class="cl">  add bx, 2h      ; 按字 (word) 处理数据，故+2
+</span></span><span class="line"><span class="cl">  loop s
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  mov ax, 4c00h   ; 退出程序
+</span></span><span class="line"><span class="cl">  int 21h
+</span></span><span class="line"><span class="cl">code ends
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">end start
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>读代码代码后思考：各种段是如何安排的，怎么让CPU会把dode段当作代码段</p>
+<ul>
+<li>
+<p>❌</p>
+<p>code data stack等段名如何设置只是为了方便阅读，不能起到修改cs ds ss的作用</p>
+<p>assume cs:code,ds:data,ss:stack  也不能</p>
+</li>
+<li>
+<p>✅</p>
+<p>程序末尾end start可以设置程序入口CS:IP</p>
+</li>
+<li>
+<p>✅</p>
+<p>mov ax,stack</p>
+<p>mov ss,ax</p>
+<p>mov sp,20h</p>
+<p>设置堆栈段，stacK是你设置的作为堆栈段的段名，可以是a、c what ever you want  符合一定命名规范即可。</p>
+</li>
+<li>
+<p>✅</p>
+<p>mov ax,data</p>
+<p>mov ds,ax</p>
+<p>设置数据段</p>
+</li>
+<li>
+<p>每个段势必占据N行，即：</p>
+<p>前一个段最后一个字节单元为所在行被前一个段占有，当前段从下一行开始，每行16字节。</p>
+<p>前一个段最后一个字节单元 a:b，则当前段的第一个字节单元为a+[b/10h]+1:0，[ ]取整数，10h十六个字节</p>
+<p>a:b=2:34h	a+[34h/10h]+1:0=2+3+1:0=6:0</p>
+</li>
+</ul>
+<h2 id="第七八章">第七、八章
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">assume cs:codesg
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">data segment
+</span></span><span class="line"><span class="cl">        db &#39;1975&#39;,&#39;1976&#39;,&#39;1977&#39;,&#39;1978&#39;,&#39;1979&#39;,&#39;1980&#39;,&#39;1981&#39;,&#39;1982&#39;,&#39;1983&#39;
+</span></span><span class="line"><span class="cl">        db &#39;1984&#39;,&#39;1985&#39;,&#39;1986&#39;,&#39;1987&#39;,&#39;1988&#39;,&#39;1989&#39;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        dd 16,22,345,4567,6475,4567,12345,34526,65734,465436,234234
+</span></span><span class="line"><span class="cl">        dd 123345,463654,867887,1567689
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        dw 4,13,76,89,99,345,567,789,890,1234,5467
+</span></span><span class="line"><span class="cl">        dw 6789,12345,14357,16776
+</span></span><span class="line"><span class="cl">data ends
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">table segment
+</span></span><span class="line"><span class="cl">        db 15 dup (&#39;year summ ne ?? &#39;)
+</span></span><span class="line"><span class="cl">table ends
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">codesg segment
+</span></span><span class="line"><span class="cl">start:
+</span></span><span class="line"><span class="cl">		;set sreg (segment register)
+</span></span><span class="line"><span class="cl">        mov ax,data
+</span></span><span class="line"><span class="cl">        mov ds,ax
+</span></span><span class="line"><span class="cl">        mov ax,table
+</span></span><span class="line"><span class="cl">        mov es,ax
+</span></span><span class="line"><span class="cl">        ;set reg (register)
+</span></span><span class="line"><span class="cl">        mov bx,0           ;bx add 4 bytes
+</span></span><span class="line"><span class="cl">        mov si,0           ;si add 2 bytes
+</span></span><span class="line"><span class="cl">        mov bp,0           ;bp add 16 bytes
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        mov cx,0fh
+</span></span><span class="line"><span class="cl">s:
+</span></span><span class="line"><span class="cl">        ;year
+</span></span><span class="line"><span class="cl">        mov ax,[bx]         ;30th row
+</span></span><span class="line"><span class="cl">        mov es:[bp+0],ax
+</span></span><span class="line"><span class="cl">        mov ax,2[bx]
+</span></span><span class="line"><span class="cl">        mov es:[bp+2],ax
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        ;sum of money
+</span></span><span class="line"><span class="cl">        mov ax,60[bx]       ;low -&gt; ax
+</span></span><span class="line"><span class="cl">        mov es:[bp+5],ax
+</span></span><span class="line"><span class="cl">        mov dx,62[bx]       ;high -&gt; dx
+</span></span><span class="line"><span class="cl">        mov es:[bp+7],dx
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        ;n of employee
+</span></span><span class="line"><span class="cl">        mov di,120[si]
+</span></span><span class="line"><span class="cl">        mov es:[bp+10],di
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	    ;?? —— average money
+</span></span><span class="line"><span class="cl">        div di
+</span></span><span class="line"><span class="cl">        mov es:[bp+13],ax
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        add bx,4h
+</span></span><span class="line"><span class="cl">        add bp,10h
+</span></span><span class="line"><span class="cl">        add si,2h
+</span></span><span class="line"><span class="cl">        loop s
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        mov ax,4c00h
+</span></span><span class="line"><span class="cl">        int 21h
+</span></span><span class="line"><span class="cl">codesg ends
+</span></span><span class="line"><span class="cl">end start
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="第九章转移指令原理">第九章（转移指令原理）
+</h2><h3 id="offset">offset
+</h3><p>获得标号的偏移地址</p>
+<p>大小为一个字</p>
+<p>性质相当于表示IP的idata</p>
+<h3 id="jmp">jmp
+</h3><h4 id="标号">标号
+</h4><ul>
+<li>jmp short s	短转移</li>
+<li>jmp near s	近转移</li>
+<li>jmp far s	远转移</li>
+</ul>
+<h4 id="寄存器idata">寄存器/idata
+</h4><p>jmp reg/一字idata</p>
+<p>jmp sreg:reg/一字idata:一字idata</p>
+<h4 id="内存单元">内存单元
+</h4><p>jmp word ptr 内存地址</p>
+<p>jmp dword ptr 内存地址</p>
+<h4 id="jcxz">jcxz
+</h4><p>jump if (cx) == zero</p>
+<p>等价于if((cx)==0) jmp short 标号	短转移</p>
+<h4 id="loop">loop
+</h4><p>短转移类型</p>
+<p>(cx)&ndash;</p>
+<p>if((cx)!=0)jmp short 标号</p>
+<h3 id="实验8">实验8
+</h3><h3 id="实验9">实验9
+</h3><h2 id="第十章-call-和-ret指令">第十章 CALL 和 RET指令
+</h2><h3 id="retretf">ret、retf
+</h3><ul>
+<li>
+<p>ret —— return	retf —— return far</p>
+</li>
+<li>
+<p>ret 出栈字单元 放入IP</p>
+<p>相当于 <code>pop IP</code></p>
+</li>
+<li>
+<p>retf 第一次出栈 字单元 放入 IP，第二次出栈 字单元 放入CS，相当于</p>
+<p><code>pop IP</code></p>
+<p><code>pop CS</code></p>
+</li>
+<li>
+<p>栈里，CS总在IP底下</p>
+<p>|	|
+|  IP   |
+|  CS |
+|&mdash;&mdash;-|</p>
+<p>结合上地址来说，CS总在IP的右边（高地址），因为sp压栈会从高到低走。</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th>IP</th>
+          <th>CS</th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table></div>
+<p>​											     ↑
+​											    sp</p>
+</li>
+<li>
+<p>出栈、压栈总是一个字单元</p>
+</li>
+<li>
+<p>实现从1000:0000处开始执行指令，谁知道1000:0000处有啥。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">assume cs:code
+</span></span><span class="line"><span class="cl">stack segment
+</span></span><span class="line"><span class="cl">	db 16 dup (0)
+</span></span><span class="line"><span class="cl">stack ends
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">code segment
+</span></span><span class="line"><span class="cl">start:	
+</span></span><span class="line"><span class="cl">	mov ax, stack
+</span></span><span class="line"><span class="cl">	mov ss, ax
+</span></span><span class="line"><span class="cl">	mov sp, 16
+</span></span><span class="line"><span class="cl">	mov ax, 1000h
+</span></span><span class="line"><span class="cl">	push ax
+</span></span><span class="line"><span class="cl">	mov ax, 00h
+</span></span><span class="line"><span class="cl">	push ax
+</span></span><span class="line"><span class="cl">	retf
+</span></span><span class="line"><span class="cl">code ends
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h3 id="call">call
+</h3><h4 id="标号型">标号型
+</h4><ul>
+<li>
+<p><strong>call s</strong>     (s是标号)（位移转移），将当前<strong>IP压入栈</strong>，然后<strong>近转移到s</strong>，相当于</p>
+<p><code>push IP</code></p>
+<p><code>jmp near ptr s(标号)</code></p>
+</li>
+<li>
+<p>1000:<strong>3</strong>处指令为<code>call s</code>，s处内容为<code>s:pop ax</code></p>
+<p>执行完这两条指令后，ax数值为 <strong>3</strong></p>
+</li>
+<li>
+<p><strong>call far ptr s</strong>（标号），先将<strong>CS压入栈</strong>，再将<strong>IP压栈</strong>，然后<strong>远转移到s</strong>，相当于</p>
+<p><code>push CS</code></p>
+<p><code>push IP</code></p>
+<p><code>jmp far ptr s(标号)</code></p>
+</li>
+</ul>
+<h4 id="寄存器型">寄存器型
+</h4><p>call 16位reg，压栈IP，IP=(reg)</p>
+<p><code>push IP</code></p>
+<p><code>jmp 16位reg</code></p>
+<h4 id="内存单元型">内存单元型
+</h4><ul>
+<li>
+<p>call word ptr 内存单元地址，地址取出内容大小为字单元，仅压栈IP，相当于</p>
+<p><code>push IP</code></p>
+<p><code>jmp word ptr 如es:[bx]</code></p>
+</li>
+<li>
+<p>call dword ptr 内存单元地址，地址取出内容大小为双字，先压栈CS再压栈IP，相当于</p>
+<p><code>push CS</code></p>
+<p><code>push IP</code></p>
+<p><code>jmp dword ptr 如es:[bx]</code></p>
+</li>
+</ul>
+<h3 id="call和ret实现模块化">call和ret实现模块化
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">assume cs:code
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">stack segment
+</span></span><span class="line"><span class="cl">	db 8 dup (0)
+</span></span><span class="line"><span class="cl">	db 8 dup (0)
+</span></span><span class="line"><span class="cl">stack ends
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">code segment
+</span></span><span class="line"><span class="cl">start:
+</span></span><span class="line"><span class="cl">	mov ax, stack 
+</span></span><span class="line"><span class="cl">	mov ss, ax
+</span></span><span class="line"><span class="cl">	mov sp, 16
+</span></span><span class="line"><span class="cl">	mov ax, 1000h
+</span></span><span class="line"><span class="cl">	call s
+</span></span><span class="line"><span class="cl">	mov ax, 4c00h
+</span></span><span class="line"><span class="cl">	int 21h
+</span></span><span class="line"><span class="cl">s:
+</span></span><span class="line"><span class="cl">	add ax,ax
+</span></span><span class="line"><span class="cl">	ret
+</span></span><span class="line"><span class="cl">code ends
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">end start
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="mul指令">mul指令
+</h3><h3 id="实验10">实验10
+</h3><h4 id="1显示字符串">1.显示字符串
+</h4><p>我的错误❌：</p>
+<ul>
+<li>外部的dl为3表示第三列，对应字节时要乘二，第6个字符</li>
+<li>jcxz结合jmp使用，不要结合loop使用，loop会改变cx！，先减cx1再判断cx值</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">assume cs:code
+</span></span><span class="line"><span class="cl">data segment
+</span></span><span class="line"><span class="cl">    db &#39;Welcome to masm!&#39;,0
+</span></span><span class="line"><span class="cl">data ends
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">code segment
+</span></span><span class="line"><span class="cl">start:
+</span></span><span class="line"><span class="cl">    mov dh, 8h
+</span></span><span class="line"><span class="cl">    mov dl, 3h
+</span></span><span class="line"><span class="cl">    mov cl, 2h              
+</span></span><span class="line"><span class="cl">    mov ax, data
+</span></span><span class="line"><span class="cl">    mov ds, ax
+</span></span><span class="line"><span class="cl">    mov si, 0
+</span></span><span class="line"><span class="cl">    call show_str
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    mov ax, 4c00h
+</span></span><span class="line"><span class="cl">    int 21h
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">show_str:
+</span></span><span class="line"><span class="cl">;--------------------以上为给定，以下为作答-------------------
+</span></span><span class="line"><span class="cl">    ;===set print sreg===    
+</span></span><span class="line"><span class="cl">    mov ax, 0b800h
+</span></span><span class="line"><span class="cl">    mov es, ax
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    ;===set print reg===
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    ;di=a0h*dh+dl*2
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    ;a0h*dh
+</span></span><span class="line"><span class="cl">    mov al, 0a0h
+</span></span><span class="line"><span class="cl">    mul dh               
+</span></span><span class="line"><span class="cl">    ;+2*dl
+</span></span><span class="line"><span class="cl">    mov dh, 00h
+</span></span><span class="line"><span class="cl">    add ax, dx
+</span></span><span class="line"><span class="cl">    add ax, dx
+</span></span><span class="line"><span class="cl">    mov di, ax
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    ;===print to es:di===
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    ;save cl
+</span></span><span class="line"><span class="cl">    mov bl, cl                
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">s:
+</span></span><span class="line"><span class="cl">    ;check if end
+</span></span><span class="line"><span class="cl">    mov cl, ds:[si]
+</span></span><span class="line"><span class="cl">    mov ch, 0h
+</span></span><span class="line"><span class="cl">    jcxz fin
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    mov es:[di], cl
+</span></span><span class="line"><span class="cl">    mov es:[di+1], bl
+</span></span><span class="line"><span class="cl">    add di, 02h   
+</span></span><span class="line"><span class="cl">    add si, 01h
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    jmp s
+</span></span><span class="line"><span class="cl">fin:
+</span></span><span class="line"><span class="cl">	ret
+</span></span><span class="line"><span class="cl">code ends
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">end start
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2025 rooobeam
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

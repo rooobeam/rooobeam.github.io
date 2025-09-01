@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="转移指令原理 offset 获得标号的偏移地址\n大小为一个字\n性质相当于表示IP的idata\njmp 标号 jmp short s\t短转移 jmp near s\t近转移 jmp far s\t远转移 寄存器/idata jmp reg/一字idata\njmp sreg:reg/一字idata:一字idata\n">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="第九章（转移指令原理） offset 获得标号的偏移地址\n大小为一个字\n性质相当于表示IP的idata\njmp 标号 jmp short s\t短转移 jmp near s\t近转移 jmp far s\t远转移 寄存器/idata jmp reg/一字idata\njmp sreg:reg/一字idata:一字idata\n">
 <title>汇编语言第九章</title>
 
 <link rel='canonical' href='https://rooobeam.github.io/p/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B9%9D%E7%AB%A0/'>
 
 <link rel="stylesheet" href="/scss/style.min.8752ced9c05cc1afc2b768fa4307859949471f33fc92b9579b5e8462b6d6315b.css"><meta property='og:title' content="汇编语言第九章">
-<meta property='og:description' content="转移指令原理 offset 获得标号的偏移地址\n大小为一个字\n性质相当于表示IP的idata\njmp 标号 jmp short s\t短转移 jmp near s\t近转移 jmp far s\t远转移 寄存器/idata jmp reg/一字idata\njmp sreg:reg/一字idata:一字idata\n">
+<meta property='og:description' content="第九章（转移指令原理） offset 获得标号的偏移地址\n大小为一个字\n性质相当于表示IP的idata\njmp 标号 jmp short s\t短转移 jmp near s\t近转移 jmp far s\t远转移 寄存器/idata jmp reg/一字idata\njmp sreg:reg/一字idata:一字idata\n">
 <meta property='og:url' content='https://rooobeam.github.io/p/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B9%9D%E7%AB%A0/'>
 <meta property='og:site_name' content='rooobeam'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-03-12T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-03-12T00:00:00&#43;00:00'/>
 <meta name="twitter:title" content="汇编语言第九章">
-<meta name="twitter:description" content="转移指令原理 offset 获得标号的偏移地址\n大小为一个字\n性质相当于表示IP的idata\njmp 标号 jmp short s\t短转移 jmp near s\t近转移 jmp far s\t远转移 寄存器/idata jmp reg/一字idata\njmp sreg:reg/一字idata:一字idata\n">
+<meta name="twitter:description" content="第九章（转移指令原理） offset 获得标号的偏移地址\n大小为一个字\n性质相当于表示IP的idata\njmp 标号 jmp short s\t短转移 jmp near s\t近转移 jmp far s\t远转移 寄存器/idata jmp reg/一字idata\njmp sreg:reg/一字idata:一字idata\n">
     <link rel="shortcut icon" href="/favicon.ico" />
 
     </head>
@@ -236,18 +236,14 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#offset">offset</a></li>
-    <li><a href="#jmp">jmp</a>
+    <li><a href="#第九章转移指令原理">第九章（转移指令原理）</a>
       <ol>
-        <li><a href="#标号">标号</a></li>
-        <li><a href="#寄存器idata">寄存器/idata</a></li>
-        <li><a href="#内存单元">内存单元</a></li>
+        <li><a href="#offset">offset</a></li>
+        <li><a href="#jmp">jmp</a></li>
+        <li><a href="#实验8">实验8</a></li>
+        <li><a href="#实验9">实验9</a></li>
       </ol>
     </li>
-    <li><a href="#jcxz">jcxz</a></li>
-    <li><a href="#loop">loop</a></li>
-    <li><a href="#实验8">实验8</a></li>
-    <li><a href="#实验9">实验9</a></li>
   </ol>
 </nav>
         </div>
@@ -305,34 +301,34 @@
     <section class="article-content">
     
     
-    <h1 id="转移指令原理">转移指令原理
-</h1><h2 id="offset">offset
-</h2><p>获得标号的偏移地址</p>
+    <h2 id="第九章转移指令原理">第九章（转移指令原理）
+</h2><h3 id="offset">offset
+</h3><p>获得标号的偏移地址</p>
 <p>大小为一个字</p>
 <p>性质相当于表示IP的idata</p>
-<h2 id="jmp">jmp
-</h2><h3 id="标号">标号
-</h3><ul>
+<h3 id="jmp">jmp
+</h3><h4 id="标号">标号
+</h4><ul>
 <li>jmp short s	短转移</li>
 <li>jmp near s	近转移</li>
 <li>jmp far s	远转移</li>
 </ul>
-<h3 id="寄存器idata">寄存器/idata
-</h3><p>jmp reg/一字idata</p>
+<h4 id="寄存器idata">寄存器/idata
+</h4><p>jmp reg/一字idata</p>
 <p>jmp sreg:reg/一字idata:一字idata</p>
-<h3 id="内存单元">内存单元
-</h3><p>jmp word ptr 内存地址</p>
+<h4 id="内存单元">内存单元
+</h4><p>jmp word ptr 内存地址</p>
 <p>jmp dword ptr 内存地址</p>
-<h2 id="jcxz">jcxz
-</h2><p>jump if (cx) == zero</p>
+<h4 id="jcxz">jcxz
+</h4><p>jump if (cx) == zero</p>
 <p>等价于if((cx)==0) jmp short 标号	短转移</p>
-<h2 id="loop">loop
-</h2><p>短转移类型</p>
+<h4 id="loop">loop
+</h4><p>短转移类型</p>
 <p>(cx)&ndash;</p>
 <p>if((cx)!=0)jmp short 标号</p>
-<h2 id="实验8">实验8
-</h2><h2 id="实验9">实验9
-</h2>
+<h3 id="实验8">实验8
+</h3><h3 id="实验9">实验9
+</h3>
 </section>
 
 
