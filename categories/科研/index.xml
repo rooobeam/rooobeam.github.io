@@ -1351,68 +1351,6 @@ $$\text{Precision} = \frac{|\text{BOW}(pred) \cap \text{BOW}(gt)|}{|\text{BOW}(p
 &lt;/h4&gt;&lt;p&gt;与Vanilla RAG不同之处在于，最后按原文档集里出现的顺序和query提交给LLM。&lt;/p&gt;
 </description>
         </item>
-        <item>
-        <title>ConditionalQA</title>
-        <link>https://rooobeam.github.io/p/conditionalqa/</link>
-        <pubDate>Wed, 07 May 2025 21:58:30 +0800</pubDate>
-        
-        <guid>https://rooobeam.github.io/p/conditionalqa/</guid>
-        <description>&lt;h1 id=&#34;conditionalqa解读&#34;&gt;ConditionalQA解读
-&lt;/h1&gt;&lt;h2 id=&#34;数据的结构&#34;&gt;数据的结构
-&lt;/h2&gt;&lt;table&gt;
-  &lt;thead&gt;
-      &lt;tr&gt;
-          &lt;th&gt;文件类型&lt;/th&gt;
-          &lt;th&gt;问答数据中的角色&lt;/th&gt;
-          &lt;th&gt;数据结构&lt;/th&gt;
-          &lt;th&gt;解释&lt;/th&gt;
-      &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-      &lt;tr&gt;
-          &lt;td&gt;corpus.jsonl&lt;/td&gt;
-          &lt;td&gt;知识源库（静态）&lt;/td&gt;
-          &lt;td&gt;{&amp;ldquo;id&amp;rdquo;:&amp;ldquo;X&amp;rdquo;,&amp;ldquo;title&amp;rdquo;:&amp;ldquo;XXX&amp;rdquo;, &amp;ldquo;chunks&amp;rdquo;:[{&amp;ldquo;id&amp;rdquo;:&amp;ldquo;X-X&amp;rdquo;,&amp;ldquo;text&amp;rdquo;:&amp;ldquo;XXX&amp;rdquo;},{&amp;ldquo;id&amp;rdquo;:&amp;ldquo;X-X&amp;rdquo;,&amp;ldquo;text&amp;rdquo;:&amp;ldquo;XXX},{&amp;ldquo;id&amp;rdquo;:&amp;ldquo;X-X,&amp;ldquo;text&amp;rdquo;:&amp;ldquo;XXX&amp;rdquo;}&amp;hellip;&amp;hellip;}&lt;/td&gt;
-          &lt;td&gt;每篇文章一个字典，三个键值对，&amp;ldquo;id&amp;rdquo;:str, &amp;ldquo;title&amp;rdquo;:str, &amp;ldquo;chunks&amp;rdquo;:list&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td&gt;train.jsonl&lt;/td&gt;
-          &lt;td&gt;训练样本集（动态）&lt;/td&gt;
-          &lt;td&gt;{&amp;ldquo;qid&amp;rdquo;: &amp;ldquo;Q456&amp;rdquo;, &amp;ldquo;question&amp;rdquo;: &amp;ldquo;苹果创始人是谁?&amp;rdquo;, &amp;ldquo;answer_doc&amp;rdquo;: &amp;ldquo;D123&amp;rdquo;, &amp;ldquo;answer_pos&amp;rdquo;: [0,5]}&lt;/td&gt;
-          &lt;td&gt;&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td&gt;dev.jsonl&lt;/td&gt;
-          &lt;td&gt;超参数调优集（动态）&lt;/td&gt;
-          &lt;td&gt;同train结构，用于验证集&lt;/td&gt;
-          &lt;td&gt;&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td&gt;test.jsonl&lt;/td&gt;
-          &lt;td&gt;最终评估集（静态）&lt;/td&gt;
-          &lt;td&gt;同train结构，但数据仅在最终测试使用&lt;/td&gt;
-          &lt;td&gt;&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td&gt;meta_data.json&lt;/td&gt;
-          &lt;td&gt;数据说明书（静态）&lt;/td&gt;
-          &lt;td&gt;{&amp;ldquo;dataset&amp;rdquo;: &amp;ldquo;NQ&amp;rdquo;, &amp;ldquo;version&amp;rdquo;: 1.1, &amp;ldquo;avg_question_length&amp;rdquo;: 9.7}&lt;/td&gt;
-          &lt;td&gt;&lt;/td&gt;
-      &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;&lt;img src=&#34;C:%5cUsers%5c86147%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20250507234800674.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image-20250507234800674&#34;
-	
-	
-&gt;&lt;/p&gt;
-</description>
-        </item>
         
     </channel>
 </rss>
