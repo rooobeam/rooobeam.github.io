@@ -256,6 +256,7 @@
     <li><a href="#提示词工程代码例子">提示词工程代码例子</a></li>
     <li><a href="#pycharm一直显示正在关闭项目">pycharm一直显示正在关闭项目</a></li>
     <li><a href="#生成当前环境配置的txt">生成当前环境配置的txt</a></li>
+    <li><a href="#cache">@cache</a></li>
   </ol>
 </nav>
         </div>
@@ -911,6 +912,30 @@
 </span></span><span class="line"><span class="cl">                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\n</span><span class="s2">完整环境报告已保存到 environment_report.txt&#34;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="cache">@cache
+</h2><p><a class="link" href="https://leetcode.cn/problems/combination-sum-iv/solutions/2706336/ben-zhi-shi-pa-lou-ti-cong-ji-yi-hua-sou-y52j/"  target="_blank" rel="noopener"
+    >377. 组合总和 Ⅳ - 力扣（LeetCode）</a></p>
+<p><strong>problem</strong>: 试图在类方法 <code>combinationSum4</code> 前加@cache，报错。</p>
+<p><strong>explanation</strong>：<code>@cache</code> 试图将 <code>combinationSum4</code> 的所有参数 <code>(self, nums, target)</code> 打包成一个元组 <code>(self_object, [1,2,3], 4)</code> 来作为缓存字典的key，但是list不可哈希。</p>
+<p><strong>solution</strong>：将 <code>@cache</code> 应用在参数简单且可哈希的递归辅助函数上。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">combinationSum4</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">target</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nd">@cache</span>  <span class="c1"># &lt;--- 装饰的是 dfs</span>
+</span></span><span class="line"><span class="cl">        <span class="k">def</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">i</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span> <span class="c1"># dfs 的参数 i 是一个整数</span>
+</span></span><span class="line"><span class="cl">            <span class="c1"># ...</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">dfs</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div>
