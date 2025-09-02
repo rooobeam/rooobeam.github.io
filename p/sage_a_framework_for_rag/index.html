@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="第九章（转移指令原理） offset 获得标号的偏移地址\n大小为一个字\n性质相当于表示IP的idata\njmp 标号 jmp short s\t短转移 jmp near s\t近转移 jmp far s\t远转移 寄存器/idata jmp reg/一字idata\njmp sreg:reg/一字idata:一字idata\n">
-<title>汇编语言第九章</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="摘要 RAG在特定corpus QA任务上有 成熟应用，然而 大量反例 仍存在。它们不仅仅是LLMs的局限性导致，相反，它们主要由检索不准确信息导致，检索不准的原因是 1 现在RAG技术分块不考虑语义。2 丢失必要信息 和 过多噪声 之间的权衡。\n">
+<title>SAGE_A_Framework_for_RAG</title>
 
-<link rel='canonical' href='https://rooobeam.github.io/p/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B9%9D%E7%AB%A0/'>
+<link rel='canonical' href='https://rooobeam.github.io/p/sage_a_framework_for_rag/'>
 
-<link rel="stylesheet" href="/scss/style.min.8752ced9c05cc1afc2b768fa4307859949471f33fc92b9579b5e8462b6d6315b.css"><meta property='og:title' content="汇编语言第九章">
-<meta property='og:description' content="第九章（转移指令原理） offset 获得标号的偏移地址\n大小为一个字\n性质相当于表示IP的idata\njmp 标号 jmp short s\t短转移 jmp near s\t近转移 jmp far s\t远转移 寄存器/idata jmp reg/一字idata\njmp sreg:reg/一字idata:一字idata\n">
-<meta property='og:url' content='https://rooobeam.github.io/p/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B9%9D%E7%AB%A0/'>
+<link rel="stylesheet" href="/scss/style.min.8752ced9c05cc1afc2b768fa4307859949471f33fc92b9579b5e8462b6d6315b.css"><meta property='og:title' content="SAGE_A_Framework_for_RAG">
+<meta property='og:description' content="摘要 RAG在特定corpus QA任务上有 成熟应用，然而 大量反例 仍存在。它们不仅仅是LLMs的局限性导致，相反，它们主要由检索不准确信息导致，检索不准的原因是 1 现在RAG技术分块不考虑语义。2 丢失必要信息 和 过多噪声 之间的权衡。\n">
+<meta property='og:url' content='https://rooobeam.github.io/p/sage_a_framework_for_rag/'>
 <meta property='og:site_name' content='rooobeam'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-03-12T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-03-12T00:00:00&#43;00:00'/>
-<meta name="twitter:title" content="汇编语言第九章">
-<meta name="twitter:description" content="第九章（转移指令原理） offset 获得标号的偏移地址\n大小为一个字\n性质相当于表示IP的idata\njmp 标号 jmp short s\t短转移 jmp near s\t近转移 jmp far s\t远转移 寄存器/idata jmp reg/一字idata\njmp sreg:reg/一字idata:一字idata\n">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-09-01T22:43:23&#43;08:00'/><meta property='article:modified_time' content='2025-09-01T22:43:23&#43;08:00'/>
+<meta name="twitter:title" content="SAGE_A_Framework_for_RAG">
+<meta name="twitter:description" content="摘要 RAG在特定corpus QA任务上有 成熟应用，然而 大量反例 仍存在。它们不仅仅是LLMs的局限性导致，相反，它们主要由检索不准确信息导致，检索不准的原因是 1 现在RAG技术分块不考虑语义。2 丢失必要信息 和 过多噪声 之间的权衡。\n">
     <link rel="shortcut icon" href="/favicon.ico" />
 
     </head>
@@ -236,12 +236,11 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#第九章转移指令原理">第九章（转移指令原理）</a>
+    <li><a href="#摘要">摘要</a></li>
+    <li><a href="#intruduction">INTRUDUCTION</a></li>
+    <li><a href="#preliminaries预备知识">PRELIMINARIES(预备知识)</a>
       <ol>
-        <li><a href="#offset">offset</a></li>
-        <li><a href="#jmp">jmp</a></li>
-        <li><a href="#实验8">实验8</a></li>
-        <li><a href="#实验9">实验9</a></li>
+        <li><a href="#retrieval-augmented-generation">retrieval-augmented generation</a></li>
       </ol>
     </li>
   </ol>
@@ -263,7 +262,7 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%AC%AC%E4%B9%9D%E7%AB%A0/">汇编语言第九章</a>
+            <a href="/p/sage_a_framework_for_rag/">SAGE_A_Framework_for_RAG</a>
         </h2>
     
         
@@ -285,7 +284,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2025-03-12</time>
+                <time class="article-time--published">2025-09-01</time>
             </div>
         
 
@@ -301,34 +300,37 @@
     <section class="article-content">
     
     
-    <h2 id="第九章转移指令原理">第九章（转移指令原理）
-</h2><h3 id="offset">offset
-</h3><p>获得标号的偏移地址</p>
-<p>大小为一个字</p>
-<p>性质相当于表示IP的idata</p>
-<h3 id="jmp">jmp
-</h3><h4 id="标号">标号
-</h4><ul>
-<li>jmp short s	短转移</li>
-<li>jmp near s	近转移</li>
-<li>jmp far s	远转移</li>
+    <h2 id="摘要">摘要
+</h2><p>RAG在特定corpus QA任务上有 成熟应用，然而 大量反例 仍存在。它们不仅仅是LLMs的局限性导致，相反，它们主要由检索不准确信息导致，检索不准的原因是 1 现在RAG技术分块不考虑语义。2 丢失必要信息 和 过多噪声 之间的权衡。</p>
+<p>本文提出一个RAG框架 SAGE。1 解决分块问题上，提出训练一个语义分块模型，能将corpus分成语义完整块。2 设计 一个chunk挑选算法，根据相似度的下降速度（delta）动态选择块。3 为进一步确保精度，提出让LLMs评估检索的块是excessive or lacking. 实验证明很牛逼。</p>
+<h2 id="intruduction">INTRUDUCTION
+</h2><p><strong>bg of problem &ndash; RAG</strong>: enhance a generation model&rsquo;s ability answer questions. With the rise of LLMs, RAG demonstrated proficiency in QA.</p>
+<p><strong>Limitions overview</strong>:</p>
+<p><strong>L1</strong>:</p>
+<p><strong>challenge of addressing L1</strong>:</p>
+<p><strong>L2</strong>:</p>
+<p><strong>challenge of addressing L2</strong>:</p>
+<p><strong>approach overview</strong>:</p>
+<p><strong>contributions</strong>:</p>
+<h2 id="preliminaries预备知识">PRELIMINARIES(预备知识)
+</h2><h3 id="retrieval-augmented-generation">retrieval-augmented generation
+</h3><p>RAG system phases:</p>
+<ul>
+<li>vector DB construction: <strong>corpus</strong> is devided into <strong>chunks</strong>. Convert chunks into vector representations (embedding chunks). Stored these vectors.</li>
+<li>Convert the received <strong>question</strong> into vector. (embedding question). Caculate similarity with chunks in vector DB and then identifying the top N chunks which serve as the <strong>context</strong> for an LLM.</li>
+<li>The given question and context fixed into a prompt template forming a complete prompt. Feed the prompt to an LLM. It generates a response as the final answer.</li>
 </ul>
-<h4 id="寄存器idata">寄存器/idata
-</h4><p>jmp reg/一字idata</p>
-<p>jmp sreg:reg/一字idata:一字idata</p>
-<h4 id="内存单元">内存单元
-</h4><p>jmp word ptr 内存地址</p>
-<p>jmp dword ptr 内存地址</p>
-<h4 id="jcxz">jcxz
-</h4><p>jump if (cx) == zero</p>
-<p>等价于if((cx)==0) jmp short 标号	短转移</p>
-<h4 id="loop">loop
-</h4><p>短转移类型</p>
-<p>(cx)&ndash;</p>
-<p>if((cx)!=0)jmp short 标号</p>
-<h3 id="实验8">实验8
-</h3><h3 id="实验9">实验9
-</h3>
+<p>Cost of LLM inference:</p>
+<p>​	The matrix is the money required to obtain ansers from an LLM. Typically, RAG use LLM provided by LLM providers. The charges based on the volume of input and output tokens. OpenAI’s  GPT-4 charge a lot.</p>
+$$
+Cost =  I_t \cdot c_i + O_t \cdot c_o
+$$<p>​	I &ndash; input tokens    O &ndash; output tokens    c_i &ndash; cost per input token    o_i &ndash; cost per output token</p>
+<p>Cost efficeincy Metric in RAG:</p>
+$$
+f_{\text{cost-efficiency}} = \frac{Acc}{Cost}
+$$<pre><code>Acc -- metrics used to eval the quality of an answer, e.g. F1-Score, BELU-1, Accuracy; Cost -- money calcuated by the preceding equation.
+</code></pre>
+
 </section>
 
 
