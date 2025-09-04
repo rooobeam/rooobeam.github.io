@@ -23,6 +23,80 @@
 &lt;li&gt;递归+记忆化搜索&lt;/li&gt;
 &lt;li&gt;自底向上递推&lt;/li&gt;
 &lt;/ul&gt;
+&lt;h3 id=&#34;组合总和-&#34;&gt;组合总和 Ⅳ
+&lt;/h3&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://leetcode.cn/problems/combination-sum-iv/description/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;377. 组合总和 Ⅳ - 力扣（LeetCode）&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;理解递推的初始化&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;问：这个代码和完全背包（例如 518. 零钱兑换 II）的代码很像，二者区别在哪？&lt;/p&gt;
+&lt;p&gt;答：本题计算的是排列，完全背包计算的是组合。比如 1,2 和 2,1 这两个排列，在本题是有区别的，是两种方案；但在完全背包中这两个排列没有区别，只算一种方案。从代码上看，计算排列（本题）需要外层循环枚举体积，内层循环枚举物品；计算组合（完全背包）需要外层循环枚举物品，内层循环枚举体积。(作者：灵茶山艾府)&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;统计构造好字符串的方案数&#34;&gt;统计构造好字符串的方案数
+&lt;/h3&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://leetcode.cn/problems/count-ways-to-build-good-strings/description/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;2466. 统计构造好字符串的方案数 - 力扣（LeetCode）&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;数字大时，提前取，加快速度并减小空间。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-py&#34; data-lang=&#34;py&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 提前取模，不然结果会是天文数字，没有那么多空间存得下来&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;dfs&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;zero&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;dfs&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;one&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;MOD&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# or&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;fun&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;zero&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;fun&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;one&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;%&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;MOD&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;匿名函数，减少冗余代码和加速&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-py&#34; data-lang=&#34;py&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;fun&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;lambda&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;y&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;y&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;y&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;统计打字方案数&#34;&gt;统计打字方案数
+&lt;/h3&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://leetcode.cn/problems/count-number-of-texts/description/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;2266. 统计打字方案数 - 力扣（LeetCode）&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;预处理操作666&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;标准库 itertools 的 groupby&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-py&#34; data-lang=&#34;py&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ch&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;s&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;groupby&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;pressedKeys&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ch&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;join&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;s&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# pressedKeys = &amp;#34;22233&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 标准输出&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 2 222&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 3 33&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
 </description>
         </item>
         <item>
@@ -44,23 +118,61 @@
 &lt;p&gt;&lt;strong&gt;approach overview&lt;/strong&gt;:&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;contributions&lt;/strong&gt;:&lt;/p&gt;
 &lt;h2 id=&#34;preliminaries预备知识&#34;&gt;PRELIMINARIES(预备知识)
-&lt;/h2&gt;&lt;h3 id=&#34;retrieval-augmented-generation&#34;&gt;retrieval-augmented generation
-&lt;/h3&gt;&lt;p&gt;RAG system phases:&lt;/p&gt;
-&lt;ul&gt;
+&lt;/h2&gt;&lt;h3 id=&#34;rag-system-phases&#34;&gt;RAG system phases:
+&lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;vector DB construction: &lt;strong&gt;corpus&lt;/strong&gt; is devided into &lt;strong&gt;chunks&lt;/strong&gt;. Convert chunks into vector representations (embedding chunks). Stored these vectors.&lt;/li&gt;
 &lt;li&gt;Convert the received &lt;strong&gt;question&lt;/strong&gt; into vector. (embedding question). Caculate similarity with chunks in vector DB and then identifying the top N chunks which serve as the &lt;strong&gt;context&lt;/strong&gt; for an LLM.&lt;/li&gt;
 &lt;li&gt;The given question and context fixed into a prompt template forming a complete prompt. Feed the prompt to an LLM. It generates a response as the final answer.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Cost of LLM inference:&lt;/p&gt;
-&lt;p&gt;​	The matrix is the money required to obtain ansers from an LLM. Typically, RAG use LLM provided by LLM providers. The charges based on the volume of input and output tokens. OpenAI’s  GPT-4 charge a lot.&lt;/p&gt;
+&lt;h3 id=&#34;cost-of-llm-inference&#34;&gt;Cost of LLM inference:
+&lt;/h3&gt;&lt;p&gt;​	The matrix is the money required to obtain ansers from an LLM. Typically, RAG use LLM provided by LLM providers. The charges based on the volume of input and output tokens. OpenAI’s  GPT-4 charge a lot.&lt;/p&gt;
 $$
 Cost =  I_t \cdot c_i + O_t \cdot c_o
-$$&lt;p&gt;​	I &amp;ndash; input tokens    O &amp;ndash; output tokens    c_i &amp;ndash; cost per input token    o_i &amp;ndash; cost per output token&lt;/p&gt;
-&lt;p&gt;Cost efficeincy Metric in RAG:&lt;/p&gt;
-$$
+$$&lt;p&gt;​	&lt;strong&gt;I&lt;/strong&gt;: input tokens; &lt;strong&gt;O&lt;/strong&gt;: output tokens; &lt;strong&gt;c_i&lt;/strong&gt;: cost per input token; &lt;strong&gt;o_i&lt;/strong&gt;: cost per output token&lt;/p&gt;
+&lt;h3 id=&#34;cost-efficeincy-metric-in-rag&#34;&gt;Cost efficeincy Metric in RAG:
+&lt;/h3&gt;$$
 f_{\text{cost-efficiency}} = \frac{Acc}{Cost}
-$$&lt;pre&gt;&lt;code&gt;Acc -- metrics used to eval the quality of an answer, e.g. F1-Score, BELU-1, Accuracy; Cost -- money calcuated by the preceding equation.
-&lt;/code&gt;&lt;/pre&gt;
+$$&lt;p&gt;​	&lt;strong&gt;Acc&lt;/strong&gt;: metrics used to eval the quality of an answer（ e.g. F1-Score, BELU-1, Accuracy）; &lt;strong&gt;Cost&lt;/strong&gt; : money calcuated by the preceding equation.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://picx.zhimg.com/v2-4036d908c7d176b0f2aaa13378e3d2e3_1440w.jpg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;img&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;(用网图链接有水印-.-)&lt;/p&gt;
+&lt;h2 id=&#34;overview&#34;&gt;OVERVIEW
+&lt;/h2&gt;&lt;h3 id=&#34;a-vector-database-building&#34;&gt;(A) Vector Database Building:
+&lt;/h3&gt;&lt;p&gt;A given corpus is split into paragraphs  with &amp;lsquo;\n&amp;rsquo; initially (isn&amp;rsquo;t shown in the figure).&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&amp;ldquo;1 - 2&amp;rdquo;: All those paragraphs are then &lt;strong&gt;segmented&lt;/strong&gt; by a pretrained model into short but semantically complete chunks as T.&lt;/li&gt;
+&lt;li&gt;“3 - 4”: &lt;strong&gt;Embed&lt;/strong&gt; chunks T into vectors.&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;5&amp;rdquo;: &lt;strong&gt;Store&lt;/strong&gt; vetors in a vector DB.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;b-retrieval&#34;&gt;(B) Retrieval:
+&lt;/h3&gt;&lt;p&gt;A specific question is given.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&amp;ldquo;1 - 2&amp;rdquo;: The given question is &lt;strong&gt;embedding&lt;/strong&gt; into a vector.&lt;/li&gt;
+&lt;li&gt;“3 - 4”: Query the vector DB for topN chunk vectors that most align with question&amp;rsquo;s vector, thereby &lt;strong&gt;retrieving&lt;/strong&gt; the topN chunks.&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;5 - 6&amp;rdquo;: Use a reranking model to &lt;strong&gt;rerank&lt;/strong&gt; these N chunks into a new order (scored N chunks).&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;7 - 8&amp;rdquo;: Select the top-ranking K chunks that come before the point where &lt;strong&gt;a significant dip in scores&lt;/strong&gt; is ovserved&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;c-generation-based-on-llm&#34;&gt;(C) Generation based on LLM:
+&lt;/h3&gt;&lt;p&gt;Given the specific question and topK chunks from &amp;ldquo;(B) Retrieval&amp;rdquo;.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&amp;ldquo;1&amp;rdquo;: Craft a &lt;strong&gt;prompt&lt;/strong&gt; incorporating the question and the topK chunks. This process is tailed to the question&amp;rsquo;s type.&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;2 - 3&amp;rdquo;: Feed the prompt into an &lt;strong&gt;LLM&lt;/strong&gt; to procure the response.&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;4 - 5&amp;rdquo;: Organize three things (question, topK chunks, answer from &amp;ldquo;2 - 3&amp;rdquo;) into a feedback prompt and then submitting it to an LLM. Generating a response of &lt;strong&gt;the score of the answer and an assessmen(new K) of the chunks&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;If the score is enough, execute &amp;ldquo;6 - 7&amp;rdquo;. Else, execute right-side &amp;ldquo;6&amp;rdquo; to adjust the parameter topK.&lt;/li&gt;
+&lt;li&gt;If the loop has been executed three times, execute &amp;ldquo;6 - 7&amp;rdquo; only.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;semantic-segmentation&#34;&gt;SEMANTIC SEGMENTATION
+&lt;/h2&gt;&lt;h3 id=&#34;high-level-idea&#34;&gt;High-level Idea
+&lt;/h3&gt;&lt;p&gt;corpus segmentation is crucial. Ineffective segmentation results in semantically incomplete chunks leading to irrelevant retrieval (demonstrated in 8. INSIGHTS OF RAG TASKS).&lt;/p&gt;
+&lt;p&gt;Two methods predominantly employed: &amp;ldquo;fixed-size&amp;rdquo; and &amp;ldquo;fixed-size with sentence complete&amp;rdquo;&lt;/p&gt;
 </description>
         </item>
         <item>

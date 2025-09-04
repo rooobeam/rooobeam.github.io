@@ -240,7 +240,21 @@
     <li><a href="#intruduction">INTRUDUCTION</a></li>
     <li><a href="#preliminaries预备知识">PRELIMINARIES(预备知识)</a>
       <ol>
-        <li><a href="#retrieval-augmented-generation">retrieval-augmented generation</a></li>
+        <li><a href="#rag-system-phases">RAG system phases:</a></li>
+        <li><a href="#cost-of-llm-inference">Cost of LLM inference:</a></li>
+        <li><a href="#cost-efficeincy-metric-in-rag">Cost efficeincy Metric in RAG:</a></li>
+      </ol>
+    </li>
+    <li><a href="#overview">OVERVIEW</a>
+      <ol>
+        <li><a href="#a-vector-database-building">(A) Vector Database Building:</a></li>
+        <li><a href="#b-retrieval">(B) Retrieval:</a></li>
+        <li><a href="#c-generation-based-on-llm">(C) Generation based on LLM:</a></li>
+      </ol>
+    </li>
+    <li><a href="#semantic-segmentation">SEMANTIC SEGMENTATION</a>
+      <ol>
+        <li><a href="#high-level-idea">High-level Idea</a></li>
       </ol>
     </li>
   </ol>
@@ -313,23 +327,61 @@
 <p><strong>approach overview</strong>:</p>
 <p><strong>contributions</strong>:</p>
 <h2 id="preliminaries预备知识">PRELIMINARIES(预备知识)
-</h2><h3 id="retrieval-augmented-generation">retrieval-augmented generation
-</h3><p>RAG system phases:</p>
-<ul>
+</h2><h3 id="rag-system-phases">RAG system phases:
+</h3><ul>
 <li>vector DB construction: <strong>corpus</strong> is devided into <strong>chunks</strong>. Convert chunks into vector representations (embedding chunks). Stored these vectors.</li>
 <li>Convert the received <strong>question</strong> into vector. (embedding question). Caculate similarity with chunks in vector DB and then identifying the top N chunks which serve as the <strong>context</strong> for an LLM.</li>
 <li>The given question and context fixed into a prompt template forming a complete prompt. Feed the prompt to an LLM. It generates a response as the final answer.</li>
 </ul>
-<p>Cost of LLM inference:</p>
-<p>​	The matrix is the money required to obtain ansers from an LLM. Typically, RAG use LLM provided by LLM providers. The charges based on the volume of input and output tokens. OpenAI’s  GPT-4 charge a lot.</p>
+<h3 id="cost-of-llm-inference">Cost of LLM inference:
+</h3><p>​	The matrix is the money required to obtain ansers from an LLM. Typically, RAG use LLM provided by LLM providers. The charges based on the volume of input and output tokens. OpenAI’s  GPT-4 charge a lot.</p>
 $$
 Cost =  I_t \cdot c_i + O_t \cdot c_o
-$$<p>​	I &ndash; input tokens    O &ndash; output tokens    c_i &ndash; cost per input token    o_i &ndash; cost per output token</p>
-<p>Cost efficeincy Metric in RAG:</p>
-$$
+$$<p>​	<strong>I</strong>: input tokens; <strong>O</strong>: output tokens; <strong>c_i</strong>: cost per input token; <strong>o_i</strong>: cost per output token</p>
+<h3 id="cost-efficeincy-metric-in-rag">Cost efficeincy Metric in RAG:
+</h3>$$
 f_{\text{cost-efficiency}} = \frac{Acc}{Cost}
-$$<pre><code>Acc -- metrics used to eval the quality of an answer, e.g. F1-Score, BELU-1, Accuracy; Cost -- money calcuated by the preceding equation.
-</code></pre>
+$$<p>​	<strong>Acc</strong>: metrics used to eval the quality of an answer（ e.g. F1-Score, BELU-1, Accuracy）; <strong>Cost</strong> : money calcuated by the preceding equation.</p>
+<p><img src="https://picx.zhimg.com/v2-4036d908c7d176b0f2aaa13378e3d2e3_1440w.jpg"
+	
+	
+	
+	loading="lazy"
+	
+		alt="img"
+	
+	
+></p>
+<p>(用网图链接有水印-.-)</p>
+<h2 id="overview">OVERVIEW
+</h2><h3 id="a-vector-database-building">(A) Vector Database Building:
+</h3><p>A given corpus is split into paragraphs  with &lsquo;\n&rsquo; initially (isn&rsquo;t shown in the figure).</p>
+<ul>
+<li>&ldquo;1 - 2&rdquo;: All those paragraphs are then <strong>segmented</strong> by a pretrained model into short but semantically complete chunks as T.</li>
+<li>“3 - 4”: <strong>Embed</strong> chunks T into vectors.</li>
+<li>&ldquo;5&rdquo;: <strong>Store</strong> vetors in a vector DB.</li>
+</ul>
+<h3 id="b-retrieval">(B) Retrieval:
+</h3><p>A specific question is given.</p>
+<ul>
+<li>&ldquo;1 - 2&rdquo;: The given question is <strong>embedding</strong> into a vector.</li>
+<li>“3 - 4”: Query the vector DB for topN chunk vectors that most align with question&rsquo;s vector, thereby <strong>retrieving</strong> the topN chunks.</li>
+<li>&ldquo;5 - 6&rdquo;: Use a reranking model to <strong>rerank</strong> these N chunks into a new order (scored N chunks).</li>
+<li>&ldquo;7 - 8&rdquo;: Select the top-ranking K chunks that come before the point where <strong>a significant dip in scores</strong> is ovserved</li>
+</ul>
+<h3 id="c-generation-based-on-llm">(C) Generation based on LLM:
+</h3><p>Given the specific question and topK chunks from &ldquo;(B) Retrieval&rdquo;.</p>
+<ul>
+<li>&ldquo;1&rdquo;: Craft a <strong>prompt</strong> incorporating the question and the topK chunks. This process is tailed to the question&rsquo;s type.</li>
+<li>&ldquo;2 - 3&rdquo;: Feed the prompt into an <strong>LLM</strong> to procure the response.</li>
+<li>&ldquo;4 - 5&rdquo;: Organize three things (question, topK chunks, answer from &ldquo;2 - 3&rdquo;) into a feedback prompt and then submitting it to an LLM. Generating a response of <strong>the score of the answer and an assessmen(new K) of the chunks</strong>.</li>
+<li>If the score is enough, execute &ldquo;6 - 7&rdquo;. Else, execute right-side &ldquo;6&rdquo; to adjust the parameter topK.</li>
+<li>If the loop has been executed three times, execute &ldquo;6 - 7&rdquo; only.</li>
+</ul>
+<h2 id="semantic-segmentation">SEMANTIC SEGMENTATION
+</h2><h3 id="high-level-idea">High-level Idea
+</h3><p>corpus segmentation is crucial. Ineffective segmentation results in semantically incomplete chunks leading to irrelevant retrieval (demonstrated in 8. INSIGHTS OF RAG TASKS).</p>
+<p>Two methods predominantly employed: &ldquo;fixed-size&rdquo; and &ldquo;fixed-size with sentence complete&rdquo;</p>
 
 </section>
 
