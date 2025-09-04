@@ -247,7 +247,7 @@
     </li>
     <li><a href="#overview">OVERVIEW</a>
       <ol>
-        <li><a href="#a-vector-database-building">(A) Vector Database Building:</a></li>
+        <li><a href="#a-vector-database-building-w">(A) Vector Database Building: W</a></li>
         <li><a href="#b-retrieval">(B) Retrieval:</a></li>
         <li><a href="#c-generation-based-on-llm">(C) Generation based on LLM:</a></li>
       </ol>
@@ -255,6 +255,10 @@
     <li><a href="#semantic-segmentation">SEMANTIC SEGMENTATION</a>
       <ol>
         <li><a href="#high-level-idea">High-level Idea</a></li>
+        <li><a href="#model-construction">Model Construction</a></li>
+        <li><a href="#model-training">Model Training</a></li>
+        <li><a href="#model-inference">Model Inference</a></li>
+        <li><a href="#corpus-segmentation">Corpus Segmentation</a></li>
       </ol>
     </li>
   </ol>
@@ -342,19 +346,19 @@ $$<p>​	<strong>I</strong>: input tokens; <strong>O</strong>: output tokens; <s
 </h3>$$
 f_{\text{cost-efficiency}} = \frac{Acc}{Cost}
 $$<p>​	<strong>Acc</strong>: metrics used to eval the quality of an answer（ e.g. F1-Score, BELU-1, Accuracy）; <strong>Cost</strong> : money calcuated by the preceding equation.</p>
-<p><img src="https://picx.zhimg.com/v2-4036d908c7d176b0f2aaa13378e3d2e3_1440w.jpg"
+<p><img src="https://i-blog.csdnimg.cn/direct/9a8e28436fb944d4890b84e554a37e15.png"
 	
 	
 	
 	loading="lazy"
 	
-		alt="img"
+		alt="图片"
 	
 	
 ></p>
 <p>(用网图链接有水印-.-)</p>
 <h2 id="overview">OVERVIEW
-</h2><h3 id="a-vector-database-building">(A) Vector Database Building:
+</h2><h3 id="a-vector-database-building-w">(A) Vector Database Building: W
 </h3><p>A given corpus is split into paragraphs  with &lsquo;\n&rsquo; initially (isn&rsquo;t shown in the figure).</p>
 <ul>
 <li>&ldquo;1 - 2&rdquo;: All those paragraphs are then <strong>segmented</strong> by a pretrained model into short but semantically complete chunks as T.</li>
@@ -381,7 +385,49 @@ $$<p>​	<strong>Acc</strong>: metrics used to eval the quality of an answer（ 
 <h2 id="semantic-segmentation">SEMANTIC SEGMENTATION
 </h2><h3 id="high-level-idea">High-level Idea
 </h3><p>corpus segmentation is crucial. Ineffective segmentation results in semantically incomplete chunks leading to irrelevant retrieval (demonstrated in 8. INSIGHTS OF RAG TASKS).</p>
-<p>Two methods predominantly employed: &ldquo;fixed-size&rdquo; and &ldquo;fixed-size with sentence complete&rdquo;</p>
+<p>Two methods predominantly employed: &ldquo;fixed-size&rdquo; and &ldquo;fixed-size with sentence complete&rdquo;.</p>
+<ul>
+<li>&ldquo;fixed-size&rdquo; leads to incomplete sentence in chunks undermining coherence of chunks.</li>
+<li>&ldquo;fixed-size with sentence complete&rdquo; breaks continous sentences seperated into different chunks distorting the meaning of a chunk (e.g. unclear references).</li>
+<li>Increasing the fixed length can mitigate the issue of chunks having incomplete meanings while causing each chunk to contain an excessive amount of information which ruins the similarity caculation and brings more noise to LLM.</li>
+<li>While employing a LLM for segmentation is a conceivable approach, it proves to be costly (demonestrated in 7. EXPERIMENT) and slow.</li>
+</ul>
+<p>We propose to develop a lightweight and effective segmentation model that ensure that each chunk is complete.</p>
+<h3 id="model-construction">Model Construction
+</h3><p>Segmentation model incorporates an embedding model and a Multi-layer Perceptron([pərˈseptrɑn]) (MLP) model.</p>
+<ul>
+<li>An Embedding model utilizing AnglE method, embeds two sentences into two vectors x1 and x2.</li>
+<li>Feature augmentation receives x1 and x2 and then subtracct and mutiply them yielding x1-x2 and x1*x2.</li>
+<li>A MLP model takes x1, x2, x1-x2 and  x1*x2 to  produce a score which determines wether to split or not.</li>
+<li>The decision to make x1-x2 or x1*x2 are based on the observation that embedding still reflect semantic difference （cite Sentence-bert).</li>
+</ul>
+<h3 id="model-training">Model Training
+</h3><p><img src="https://i-blog.csdnimg.cn/direct/f9dad4d0e41f473894138efda69fa01e.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="图片"
+	
+	
+></p>
+<ul>
+<li>First, gather a substantial amount of semantically segmented training data. Recommend Wikipedia dataset where passages have been semantically segmented into paragraphs.</li>
+<li>Construct triplet training data &lt;s1, s2, label&gt;: If s1 and s2 are consecutive([kən&rsquo;sekjətɪv]) within the same paragraph, label = 1 representing they should be grouped into the same chunk. Otherwise, label = 0 suggesting a break.</li>
+<li>The procedure are detailed in the figure above. Keep fedding triplets to learn the parameters of the embedding model and MLP model utilizing SDG.</li>
+</ul>
+<h3 id="model-inference">Model Inference
+</h3><ul>
+<li>Each two sentences are put into the segmentation model to gain a score. If &lt; threshold (e.g., 0.5), then a split occur. Conversly, they retained within the same chunk.</li>
+<li>Segmentation Model runs in parallel processing corpus swiftly. （&ldquo;For instance, gathering all pairs of sentences within a corpus and organize them into multiple batches, each with a size of 512.&rdquo;  batches是不是下面的粗粒度chunks？）</li>
+</ul>
+<h3 id="corpus-segmentation">Corpus Segmentation
+</h3><ul>
+<li>Give a corpus, segment it into coarse-grained([ˌkɔːrsˈɡreɪnd])  chunks with length of approximately <em>l</em> (I call it as &ldquo;large-fixed-size with sentence complete&rdquo;).</li>
+<li>Subsequently, segmentation model evaluates each pair of adjacent sentences in these coarse-grained chunks.</li>
+<li>So the boarder of coarse-grained chunks is ingored but is OK because each is large enough.</li>
+</ul>
 
 </section>
 
