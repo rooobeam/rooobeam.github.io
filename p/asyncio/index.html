@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://rooobeam.github.io/p/asyncio/'>
 
-<link rel="stylesheet" href="/scss/style.min.8752ced9c05cc1afc2b768fa4307859949471f33fc92b9579b5e8462b6d6315b.css"><meta property='og:title' content="Asyncio">
+<link rel="stylesheet" href="/scss/style.min.a7558000c2456f20ae90904971171af41a2b987eed638982c918c424b3e14d7b.css"><meta property='og:title' content="Asyncio">
 <meta property='og:description' content="python asyncio 如何获取当前的协程 id 编号 - SegmentFault 思否\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 import asyncio import contextvars # 申明Context变量 request_id = contextvars.ContextVar(&#39;Id of request&#39;) async def main(): # 设置并发数 max_concurrent = 5 semaphore = asyncio.Semaphore(max_concurrent) # 内部函数，不显式传参 async def get(): # Get Value print(f&#39;Request ID (Inner): {request_id.get()}&#39;) # 协程 async def limited_task_lq(task_id: int): async with semaphore: request_id.set(task_id) await get() print(f&#39;Request ID (Outer): {request_id.get()}&#39;) await asyncio.gather( *[limited_task_lq(task_id=i % max_concurrent) for i in range(15)]) if __name__ == &#34;__main__&#34;: asyncio.run(main()) ">
 <meta property='og:url' content='https://rooobeam.github.io/p/asyncio/'>
 <meta property='og:site_name' content='rooobeam'>

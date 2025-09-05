@@ -7,7 +7,15 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>rooobeam</copyright>
-        <lastBuildDate>Fri, 29 Aug 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://rooobeam.github.io/categories/%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 05 Sep 2025 10:53:13 +0800</lastBuildDate><atom:link href="https://rooobeam.github.io/categories/%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Introduction_to_Multi Armed_Bandits</title>
+        <link>https://rooobeam.github.io/p/introduction_to_multi-armed_bandits/</link>
+        <pubDate>Fri, 05 Sep 2025 10:53:13 +0800</pubDate>
+        
+        <guid>https://rooobeam.github.io/p/introduction_to_multi-armed_bandits/</guid>
+        <description></description>
+        </item>
+        <item>
         <title>链表、二叉树与回溯</title>
         <link>https://rooobeam.github.io/p/%E9%93%BE%E8%A1%A8%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%8E%E5%9B%9E%E6%BA%AF/</link>
         <pubDate>Fri, 29 Aug 2025 00:00:00 +0000</pubDate>
