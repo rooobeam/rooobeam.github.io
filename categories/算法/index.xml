@@ -13,7 +13,15 @@
         <pubDate>Fri, 05 Sep 2025 10:53:13 +0800</pubDate>
         
         <guid>https://rooobeam.github.io/p/introduction_to_multi-armed_bandits/</guid>
-        <description></description>
+        <description>&lt;h2 id=&#34;abstract&#34;&gt;Abstract
+&lt;/h2&gt;&lt;p&gt;Multi-armed bandits, a simple but powerful framework for algorithms that &lt;strong&gt;make decisions over time under uncertainty&lt;/strong&gt;.  Each chapter tackles a particular line of work conclude with exercises.&lt;/p&gt;
+&lt;p&gt;Chapter 1-4: The first four chapters are on &lt;strong&gt;IID rewards&lt;/strong&gt;, from the basic model to impossibility results to Bayesian[ˈbeɪziən] priorss to Lipschitz[/ˈlɪpʃɪts/] rewards.&lt;/p&gt;
+&lt;p&gt;Chapter 5-7: The next three chapters cover &lt;strong&gt;adversarial rewards&lt;/strong&gt;, from the full-feeback version to adversarial bandits to extensions with linear rewards and combinatorially structured actions.&lt;/p&gt;
+&lt;p&gt;Chapter 8: Chapter 8 is on &lt;strong&gt;contextual bandits&lt;/strong&gt;, a middle ground between IID and adversarial bandits in which the change in reward distributions is completely explained by &lt;strong&gt;observable contexts&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Chapter 9-11: The last three chapters cover &lt;strong&gt;connections to economic&lt;/strong&gt;, from learning in repeated games to bandits with supply/budget constraints to exploration in the presence of incentives.&lt;/p&gt;
+&lt;p&gt;The appendix provides sufficient background on &lt;strong&gt;concentration and KL-divergence&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;（The chapters on “bandits with similarity information”, “bandits with knapsacks” and “bandits and agents” can also be consumed as standalone surveys on the respective topics.)&lt;/p&gt;
+</description>
         </item>
         <item>
         <title>链表、二叉树与回溯</title>
