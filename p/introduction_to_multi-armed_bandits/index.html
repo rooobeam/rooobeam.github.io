@@ -214,7 +214,39 @@
     </ol>
 </aside>
 
-    
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#abstract">Abstract</a></li>
+    <li><a href="#introduction-scope-and-motivation研究范围和动机">Introduction: Scope and Motivation(研究范围和动机)</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
 
             <main class="main full-width">
     <article class="main-article">
@@ -283,7 +315,116 @@
 <p>Chapter 9-11: The last three chapters cover <strong>connections to economic</strong>, from learning in repeated games to bandits with supply/budget constraints to exploration in the presence of incentives.</p>
 <p>The appendix provides sufficient background on <strong>concentration and KL-divergence</strong>.</p>
 <p>（The chapters on “bandits with similarity information”, “bandits with knapsacks” and “bandits and agents” can also be consumed as standalone surveys on the respective topics.)</p>
-
+<p>序言Preface</p>
+<ul>
+<li>
+<p>Multi-armed bandits is a multi-disciplinary research area (cs, operations research运筹学, economics and statistics).</p>
+</li>
+<li>
+<p>We chose not to dwell on the deep connections to online convex optimization.</p>
+</li>
+<li>
+<p>We do not venture into reinforcement learning and subject of several textbooks(something deeper maybe).</p>
+</li>
+<li>
+<p>A course based on this book would be complementary to graduate-level courses on online convex optimization and reinforcement learning.</p>
+</li>
+<li>
+<p>We do not discuss Markovian models of multi-armed bandits.</p>
+</li>
+</ul>
+<h2 id="introduction-scope-and-motivation研究范围和动机">Introduction: Scope and Motivation(研究范围和动机)
+</h2><p>Outline some of the problems under multi-armed bandits.</p>
+<p>Start with three running example, concrete albeit[ɔːlˈbiːɪt] very stytlized[ˈstaɪlaɪzd] (很具体，只是风格被简化了)。</p>
+<ul>
+<li>
+<p><strong>News website</strong>. When a new user arrives, a website site picks an article header to show, observes whether the user <strong>clicks on this header</strong>. The site’s goal is maximize the total number of clicks.</p>
+</li>
+<li>
+<p><strong>Dynamic pricing.</strong> A store is <strong>selling a digital good</strong>, <em>e.g.,</em> an app or a song. When a new customer arrives, the store chooses a price offered to this customer. The customer buys (or not) and leaves forever. The store’s goal is to maximize the total profit.</p>
+</li>
+<li>
+<p><strong>Investment.</strong> Each morning, you choose <strong>one stock to invest into</strong>, and invest $1. In the end of the day, you observe the change in value for each stock. The goal is to maximize the total wealth.</p>
+</li>
+</ul>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>Example</th>
+          <th>Action</th>
+          <th>Reward</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>News website</td>
+          <td>an article to display</td>
+          <td>1 if clicked, 0 otherwise</td>
+      </tr>
+      <tr>
+          <td>Dynamic pricing</td>
+          <td>a price to offer</td>
+          <td>p if sale, 0 otherwise</td>
+      </tr>
+      <tr>
+          <td>Investment</td>
+          <td>a stock to invest into</td>
+          <td>change in value during the day</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>在基础模型中，一个算法（赌徒）每轮观测到被选的arm(展示的header)带来的reward，但没有其他arms的reward可观测。We have a <strong>tradeoff</strong> between exploration and <em>exploitation</em>: 基于可获得信息做出最佳近期决策. 算法只想习得最佳动作(arm), 不花费太多时间在探索(exploration)上</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">class Solution:
+</span></span><span class="line"><span class="cl">    def daysBetweenDates(self, date1: str, date2: str) -&gt; int:
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        month_days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]  # 平年的 12 个月的天数
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        d1, d2 = min(date1, date2), max(date1, date2)  # d1 为较小的日期，d2 为较大的日期
+</span></span><span class="line"><span class="cl">        year1, month1, day1 = (int(i) for i in d1.split(&#39;-&#39;))
+</span></span><span class="line"><span class="cl">        year2, month2, day2 = (int(i) for i in d2.split(&#39;-&#39;))
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        def is_leap(year):
+</span></span><span class="line"><span class="cl">            # 判断是否为闰年
+</span></span><span class="line"><span class="cl">            return year % 4 == 0 and (year % 100 != 0 or year % 400 == 0)
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        def days_between_two_years(year1, year2):
+</span></span><span class="line"><span class="cl">            # 两个年份之间的间隔天数
+</span></span><span class="line"><span class="cl">            return sum(366 if is_leap(year) else 365 for year in range(year1, year2))
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        def days_from_year_start(year, month, day):
+</span></span><span class="line"><span class="cl">            # 从当年的1月1号到当天的天数，对于闰年且过了2月的情况，要额外补偿1天
+</span></span><span class="line"><span class="cl">            return sum(month_days[:(month-1)]) + day + (1 if is_leap(year) and month &gt; 2 else 0)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        return  days_between_two_years(year1, year2) + days_from_year_start(year2, month2, day2) - days_from_year_start(year1, month1, day1)
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
 </section>
 
 

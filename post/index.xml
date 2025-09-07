@@ -21,7 +21,116 @@
 &lt;p&gt;Chapter 9-11: The last three chapters cover &lt;strong&gt;connections to economic&lt;/strong&gt;, from learning in repeated games to bandits with supply/budget constraints to exploration in the presence of incentives.&lt;/p&gt;
 &lt;p&gt;The appendix provides sufficient background on &lt;strong&gt;concentration and KL-divergence&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;（The chapters on “bandits with similarity information”, “bandits with knapsacks” and “bandits and agents” can also be consumed as standalone surveys on the respective topics.)&lt;/p&gt;
-</description>
+&lt;p&gt;序言Preface&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Multi-armed bandits is a multi-disciplinary research area (cs, operations research运筹学, economics and statistics).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;We chose not to dwell on the deep connections to online convex optimization.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;We do not venture into reinforcement learning and subject of several textbooks(something deeper maybe).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;A course based on this book would be complementary to graduate-level courses on online convex optimization and reinforcement learning.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;We do not discuss Markovian models of multi-armed bandits.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;introduction-scope-and-motivation研究范围和动机&#34;&gt;Introduction: Scope and Motivation(研究范围和动机)
+&lt;/h2&gt;&lt;p&gt;Outline some of the problems under multi-armed bandits.&lt;/p&gt;
+&lt;p&gt;Start with three running example, concrete albeit[ɔːlˈbiːɪt] very stytlized[ˈstaɪlaɪzd] (很具体，只是风格被简化了)。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;News website&lt;/strong&gt;. When a new user arrives, a website site picks an article header to show, observes whether the user &lt;strong&gt;clicks on this header&lt;/strong&gt;. The site’s goal is maximize the total number of clicks.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Dynamic pricing.&lt;/strong&gt; A store is &lt;strong&gt;selling a digital good&lt;/strong&gt;, &lt;em&gt;e.g.,&lt;/em&gt; an app or a song. When a new customer arrives, the store chooses a price offered to this customer. The customer buys (or not) and leaves forever. The store’s goal is to maximize the total profit.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Investment.&lt;/strong&gt; Each morning, you choose &lt;strong&gt;one stock to invest into&lt;/strong&gt;, and invest $1. In the end of the day, you observe the change in value for each stock. The goal is to maximize the total wealth.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;Example&lt;/th&gt;
+          &lt;th&gt;Action&lt;/th&gt;
+          &lt;th&gt;Reward&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;News website&lt;/td&gt;
+          &lt;td&gt;an article to display&lt;/td&gt;
+          &lt;td&gt;1 if clicked, 0 otherwise&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Dynamic pricing&lt;/td&gt;
+          &lt;td&gt;a price to offer&lt;/td&gt;
+          &lt;td&gt;p if sale, 0 otherwise&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Investment&lt;/td&gt;
+          &lt;td&gt;a stock to invest into&lt;/td&gt;
+          &lt;td&gt;change in value during the day&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;在基础模型中，一个算法（赌徒）每轮观测到被选的arm(展示的header)带来的reward，但没有其他arms的reward可观测。We have a &lt;strong&gt;tradeoff&lt;/strong&gt; between exploration and &lt;em&gt;exploitation&lt;/em&gt;: 基于可获得信息做出最佳近期决策. 算法只想习得最佳动作(arm), 不花费太多时间在探索(exploration)上&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;class Solution:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    def daysBetweenDates(self, date1: str, date2: str) -&amp;gt; int:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        month_days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]  # 平年的 12 个月的天数
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        d1, d2 = min(date1, date2), max(date1, date2)  # d1 为较小的日期，d2 为较大的日期
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        year1, month1, day1 = (int(i) for i in d1.split(&amp;#39;-&amp;#39;))
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        year2, month2, day2 = (int(i) for i in d2.split(&amp;#39;-&amp;#39;))
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        def is_leap(year):
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            # 判断是否为闰年
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            return year % 4 == 0 and (year % 100 != 0 or year % 400 == 0)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        def days_between_two_years(year1, year2):
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            # 两个年份之间的间隔天数
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            return sum(366 if is_leap(year) else 365 for year in range(year1, year2))
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        def days_from_year_start(year, month, day):
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            # 从当年的1月1号到当天的天数，对于闰年且过了2月的情况，要额外补偿1天
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            return sum(month_days[:(month-1)]) + day + (1 if is_leap(year) and month &amp;gt; 2 else 0)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        return  days_between_two_years(year1, year2) + days_from_year_start(year2, month2, day2) - days_from_year_start(year1, month1, day1)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
         </item>
         <item>
         <title>动态规划</title>
