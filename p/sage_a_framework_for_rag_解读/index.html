@@ -2,16 +2,16 @@
 <html lang="en" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="摘要 RAG在特定corpus QA任务上有 成熟应用，然而 大量反例 仍存在。它们不仅仅是LLMs的局限性导致，相反，它们主要由检索不准确信息导致，检索不准的原因是 1 现在RAG技术分块不考虑语义。2 丢失必要信息 和 过多噪声 之间的权衡。\n">
-<title>SAGE_A_Framework_for_RAG</title>
+<title>SAGE_A_Framework_for_RAG_解读</title>
 
-<link rel='canonical' href='https://rooobeam.github.io/p/sage_a_framework_for_rag/'>
+<link rel='canonical' href='https://rooobeam.github.io/p/sage_a_framework_for_rag_%E8%A7%A3%E8%AF%BB/'>
 
-<link rel="stylesheet" href="/scss/style.min.a7558000c2456f20ae90904971171af41a2b987eed638982c918c424b3e14d7b.css"><meta property='og:title' content="SAGE_A_Framework_for_RAG">
+<link rel="stylesheet" href="/scss/style.min.a7558000c2456f20ae90904971171af41a2b987eed638982c918c424b3e14d7b.css"><meta property='og:title' content="SAGE_A_Framework_for_RAG_解读">
 <meta property='og:description' content="摘要 RAG在特定corpus QA任务上有 成熟应用，然而 大量反例 仍存在。它们不仅仅是LLMs的局限性导致，相反，它们主要由检索不准确信息导致，检索不准的原因是 1 现在RAG技术分块不考虑语义。2 丢失必要信息 和 过多噪声 之间的权衡。\n">
-<meta property='og:url' content='https://rooobeam.github.io/p/sage_a_framework_for_rag/'>
+<meta property='og:url' content='https://rooobeam.github.io/p/sage_a_framework_for_rag_%E8%A7%A3%E8%AF%BB/'>
 <meta property='og:site_name' content='rooobeam'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-09-01T22:43:23&#43;08:00'/><meta property='article:modified_time' content='2025-09-01T22:43:23&#43;08:00'/>
-<meta name="twitter:title" content="SAGE_A_Framework_for_RAG">
+<meta name="twitter:title" content="SAGE_A_Framework_for_RAG_解读">
 <meta name="twitter:description" content="摘要 RAG在特定corpus QA任务上有 成熟应用，然而 大量反例 仍存在。它们不仅仅是LLMs的局限性导致，相反，它们主要由检索不准确信息导致，检索不准的原因是 1 现在RAG技术分块不考虑语义。2 丢失必要信息 和 过多噪声 之间的权衡。\n">
     <link rel="shortcut icon" href="/favicon.ico" />
 
@@ -259,6 +259,13 @@
         <li><a href="#model-training">Model Training</a></li>
         <li><a href="#model-inference">Model Inference</a></li>
         <li><a href="#corpus-segmentation">Corpus Segmentation</a></li>
+        <li><a href="#high-level-idea-1">High-level Idea</a></li>
+        <li><a href="#gradient-based-selection">Gradient based Selection</a></li>
+      </ol>
+    </li>
+    <li><a href="#llm-self-feedback">LLM SELF-FEEDBACK</a>
+      <ol>
+        <li><a href="#feedback-loop">Feedback Loop</a></li>
       </ol>
     </li>
   </ol>
@@ -280,7 +287,7 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/sage_a_framework_for_rag/">SAGE_A_Framework_for_RAG</a>
+            <a href="/p/sage_a_framework_for_rag_%E8%A7%A3%E8%AF%BB/">SAGE_A_Framework_for_RAG_解读</a>
         </h2>
     
         
@@ -426,9 +433,61 @@ $$<p>​	<strong>Acc</strong>: metrics used to eval the quality of an answer（ 
 </h3><ul>
 <li>Give a corpus, segment it into coarse-grained([ˌkɔːrsˈɡreɪnd])  chunks with length of approximately <em>l</em> (I call it as &ldquo;large-fixed-size with sentence complete&rdquo;).</li>
 <li>Subsequently, segmentation model evaluates each pair of adjacent sentences in these coarse-grained chunks.</li>
-<li>So the boarder of coarse-grained chunks is ingored but is OK because each is large enough.</li>
+<li>（So the boarder of coarse-grained chunks is ingored? I think that&rsquo;s fine because each chunk is large enough.）</li>
 </ul>
-
+<p>GRADIENT-BASED CHUNK SELECTION</p>
+<p><img src="https://pic2.zhimg.com/v2-37521c9bc74bccdfe33684444ec10c9f_1440w.jpg"
+	
+	
+	
+	loading="lazy"
+	
+		alt="img"
+	
+	
+></p>
+<h3 id="high-level-idea-1">High-level Idea
+</h3><ul>
+<li>Advanced RAG system typically leverage a reranking model to assess first-stage retrieval result (<strong>N</strong> chunks) with a given question. Subsequently, with the relevance scores assigned by the reranking model, top <strong>K</strong> chunks are selected as context for QA.</li>
+<li>The idea of using a large K to avoid missing key chunks will lead to an overload of irrelevant chunks, which may confuse LLMs (illustrated in EXPERIMENTS).</li>
+<li>Figure above shows two general cases, in which if chunks preceding a sharp decline on score are selected can easily get the correct answer (demonstrated in EXPERIMENTS).</li>
+</ul>
+<h3 id="gradient-based-selection">Gradient based Selection
+</h3><ul>
+<li>
+<p>With top K reranked chunks <strong>C_s</strong> and their corresponding scores <strong>S</strong>, preset minimum number <strong>min_k</strong> and threshold of gradient <strong>g</strong>.</p>
+</li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="c1"># chks S min_k g</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">chks</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">min_k</span><span class="p">,</span> <span class="n">g</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">add_chks</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">min_k</span><span class="p">,</span> <span class="n">K</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">S</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">S</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="n">g</span><span class="p">:</span> <span class="c1"># didn&#39;t drop too much</span>
+</span></span><span class="line"><span class="cl">            <span class="n">add_chks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">chks</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">break</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">add_chks</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>(论文里的伪代码有错误：“score = C[k − 1];” 对不上 原文： “if the score of a chunk exceeds 1/g times the score of its predecessor”)</p>
+</li>
+</ul>
+<h2 id="llm-self-feedback">LLM SELF-FEEDBACK
+</h2><h3 id="feedback-loop">Feedback Loop
+</h3>
 </section>
 
 

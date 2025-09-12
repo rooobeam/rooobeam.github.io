@@ -225,11 +225,11 @@
 </description>
         </item>
         <item>
-        <title>SAGE_A_Framework_for_RAG</title>
-        <link>https://rooobeam.github.io/p/sage_a_framework_for_rag/</link>
+        <title>SAGE_A_Framework_for_RAG_解读</title>
+        <link>https://rooobeam.github.io/p/sage_a_framework_for_rag_%E8%A7%A3%E8%AF%BB/</link>
         <pubDate>Mon, 01 Sep 2025 22:43:23 +0800</pubDate>
         
-        <guid>https://rooobeam.github.io/p/sage_a_framework_for_rag/</guid>
+        <guid>https://rooobeam.github.io/p/sage_a_framework_for_rag_%E8%A7%A3%E8%AF%BB/</guid>
         <description>&lt;h2 id=&#34;摘要&#34;&gt;摘要
 &lt;/h2&gt;&lt;p&gt;RAG在特定corpus QA任务上有 成熟应用，然而 大量反例 仍存在。它们不仅仅是LLMs的局限性导致，相反，它们主要由检索不准确信息导致，检索不准的原因是 1 现在RAG技术分块不考虑语义。2 丢失必要信息 和 过多噪声 之间的权衡。&lt;/p&gt;
 &lt;p&gt;本文提出一个RAG框架 SAGE。1 解决分块问题上，提出训练一个语义分块模型，能将corpus分成语义完整块。2 设计 一个chunk挑选算法，根据相似度的下降速度（delta）动态选择块。3 为进一步确保精度，提出让LLMs评估检索的块是excessive or lacking. 实验证明很牛逼。&lt;/p&gt;
@@ -338,9 +338,61 @@ $$&lt;p&gt;​	&lt;strong&gt;Acc&lt;/strong&gt;: metrics used to eval the qualit
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;Give a corpus, segment it into coarse-grained([ˌkɔːrsˈɡreɪnd])  chunks with length of approximately &lt;em&gt;l&lt;/em&gt; (I call it as &amp;ldquo;large-fixed-size with sentence complete&amp;rdquo;).&lt;/li&gt;
 &lt;li&gt;Subsequently, segmentation model evaluates each pair of adjacent sentences in these coarse-grained chunks.&lt;/li&gt;
-&lt;li&gt;So the boarder of coarse-grained chunks is ingored but is OK because each is large enough.&lt;/li&gt;
+&lt;li&gt;（So the boarder of coarse-grained chunks is ingored? I think that&amp;rsquo;s fine because each chunk is large enough.）&lt;/li&gt;
 &lt;/ul&gt;
-</description>
+&lt;p&gt;GRADIENT-BASED CHUNK SELECTION&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://pic2.zhimg.com/v2-37521c9bc74bccdfe33684444ec10c9f_1440w.jpg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;img&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;high-level-idea-1&#34;&gt;High-level Idea
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;Advanced RAG system typically leverage a reranking model to assess first-stage retrieval result (&lt;strong&gt;N&lt;/strong&gt; chunks) with a given question. Subsequently, with the relevance scores assigned by the reranking model, top &lt;strong&gt;K&lt;/strong&gt; chunks are selected as context for QA.&lt;/li&gt;
+&lt;li&gt;The idea of using a large K to avoid missing key chunks will lead to an overload of irrelevant chunks, which may confuse LLMs (illustrated in EXPERIMENTS).&lt;/li&gt;
+&lt;li&gt;Figure above shows two general cases, in which if chunks preceding a sharp decline on score are selected can easily get the correct answer (demonstrated in EXPERIMENTS).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;gradient-based-selection&#34;&gt;Gradient based Selection
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;With top K reranked chunks &lt;strong&gt;C_s&lt;/strong&gt; and their corresponding scores &lt;strong&gt;S&lt;/strong&gt;, preset minimum number &lt;strong&gt;min_k&lt;/strong&gt; and threshold of gradient &lt;strong&gt;g&lt;/strong&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;9
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-py&#34; data-lang=&#34;py&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# chks S min_k g&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;func&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;chks&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;S&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;min_k&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;g&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;add_chks&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;range&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;min_k&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;K&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;S&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;S&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;g&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# didn&amp;#39;t drop too much&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;n&#34;&gt;add_chks&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;append&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;chks&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;])&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;else&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;k&#34;&gt;break&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;add_chks&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;(论文里的伪代码有错误：“score = C[k − 1];” 对不上 原文： “if the score of a chunk exceeds 1/g times the score of its predecessor”)&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;llm-self-feedback&#34;&gt;LLM SELF-FEEDBACK
+&lt;/h2&gt;&lt;h3 id=&#34;feedback-loop&#34;&gt;Feedback Loop
+&lt;/h3&gt;</description>
         </item>
         <item>
         <title>王爽 汇编语言</title>
