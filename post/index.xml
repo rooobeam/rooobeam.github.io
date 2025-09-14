@@ -392,7 +392,8 @@ $$&lt;p&gt;​	&lt;strong&gt;Acc&lt;/strong&gt;: metrics used to eval the qualit
 &lt;/ul&gt;
 &lt;h2 id=&#34;llm-self-feedback&#34;&gt;LLM SELF-FEEDBACK
 &lt;/h2&gt;&lt;h3 id=&#34;feedback-loop&#34;&gt;Feedback Loop
-&lt;/h3&gt;</description>
+&lt;/h3&gt;&lt;p&gt;Before feeding context and question to LLM for final answer, we need to assess the quality of context firstly.&lt;/p&gt;
+</description>
         </item>
         <item>
         <title>王爽 汇编语言</title>
