@@ -392,7 +392,16 @@ $$&lt;p&gt;​	&lt;strong&gt;Acc&lt;/strong&gt;: metrics used to eval the qualit
 &lt;/ul&gt;
 &lt;h2 id=&#34;llm-self-feedback&#34;&gt;LLM SELF-FEEDBACK
 &lt;/h2&gt;&lt;h3 id=&#34;feedback-loop&#34;&gt;Feedback Loop
-&lt;/h3&gt;&lt;p&gt;Before feeding context and question to LLM for final answer, we need to assess the quality of context firstly.&lt;/p&gt;
+&lt;/h3&gt;&lt;p&gt;After feeding context and question to LLM for final answer, we need to assess the suitability of context and quality of current answer before presented to user finally. By prompt engineer, LLM&amp;rsquo;s assessment consist of a evaluation score (1-10) and a context adjustment flag (-1/1).&lt;/p&gt;
+&lt;p&gt;Upon receiving score and flag, if the score is higher than a preset threshold e.g. 9, the current answer is qualified for user, else adjust the parameter min_k in chunks selection: -1 implies reducing min_k by one, 1 implies increasing min_k by one.&lt;/p&gt;
+&lt;h2 id=&#34;experiments&#34;&gt;EXPERIMENTS
+&lt;/h2&gt;&lt;h3 id=&#34;experimental-setup&#34;&gt;Experimental Setup
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;Large language models&lt;/strong&gt;: GPT3.5 turbo, GPT4, GPT4-o-mini, UnifiedQA-3B.&lt;/p&gt;
+&lt;p&gt;Datasets:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;QuALITY: This dataset comprises multiple-choice questions based on articles around 5,000 tokens each, featuring a challenging portion, QuALITYHARD, with questions most annotators got wrong under time constraints.&lt;/li&gt;
+&lt;li&gt;QASPER:&lt;/li&gt;
+&lt;/ul&gt;
 </description>
         </item>
         <item>

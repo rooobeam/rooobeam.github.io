@@ -268,6 +268,11 @@
         <li><a href="#feedback-loop">Feedback Loop</a></li>
       </ol>
     </li>
+    <li><a href="#experiments">EXPERIMENTS</a>
+      <ol>
+        <li><a href="#experimental-setup">Experimental Setup</a></li>
+      </ol>
+    </li>
   </ol>
 </nav>
         </div>
@@ -487,7 +492,16 @@ $$<p>​	<strong>Acc</strong>: metrics used to eval the quality of an answer（ 
 </ul>
 <h2 id="llm-self-feedback">LLM SELF-FEEDBACK
 </h2><h3 id="feedback-loop">Feedback Loop
-</h3><p>Before feeding context and question to LLM for final answer, we need to assess the quality of context firstly.</p>
+</h3><p>After feeding context and question to LLM for final answer, we need to assess the suitability of context and quality of current answer before presented to user finally. By prompt engineer, LLM&rsquo;s assessment consist of a evaluation score (1-10) and a context adjustment flag (-1/1).</p>
+<p>Upon receiving score and flag, if the score is higher than a preset threshold e.g. 9, the current answer is qualified for user, else adjust the parameter min_k in chunks selection: -1 implies reducing min_k by one, 1 implies increasing min_k by one.</p>
+<h2 id="experiments">EXPERIMENTS
+</h2><h3 id="experimental-setup">Experimental Setup
+</h3><p><strong>Large language models</strong>: GPT3.5 turbo, GPT4, GPT4-o-mini, UnifiedQA-3B.</p>
+<p>Datasets:</p>
+<ul>
+<li>QuALITY: This dataset comprises multiple-choice questions based on articles around 5,000 tokens each, featuring a challenging portion, QuALITYHARD, with questions most annotators got wrong under time constraints.</li>
+<li>QASPER:</li>
+</ul>
 
 </section>
 
