@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="前言：对于所有代码，能够看到前面的中文就能写出相关代码。\nbasic conception pandas: panel data\ndb: database\ncrud: create, read, update, delete\ncore class: Series, DataFrame\n导入\n1 import pandas as pd Series 通过list创建\n1 s1 = pd.Series([89,97,94],index=[&#34;张三&#34;,&#34;李四&#34;,&#34;王五&#34;]) 通过字典创建\n1 s2 = pd.Series({&#34;张三&#34;:89, &#34;李四&#34;:97, &#34;王五&#34;:94}) DataFrame 通过list创建\n">
 <title>Pandas_note</title>
 
 <link rel='canonical' href='https://rooobeam.github.io/p/pandas_note/'>
 
 <link rel="stylesheet" href="/scss/style.min.a7558000c2456f20ae90904971171af41a2b987eed638982c918c424b3e14d7b.css"><meta property='og:title' content="Pandas_note">
-<meta property='og:description' content="">
+<meta property='og:description' content="前言：对于所有代码，能够看到前面的中文就能写出相关代码。\nbasic conception pandas: panel data\ndb: database\ncrud: create, read, update, delete\ncore class: Series, DataFrame\n导入\n1 import pandas as pd Series 通过list创建\n1 s1 = pd.Series([89,97,94],index=[&#34;张三&#34;,&#34;李四&#34;,&#34;王五&#34;]) 通过字典创建\n1 s2 = pd.Series({&#34;张三&#34;:89, &#34;李四&#34;:97, &#34;王五&#34;:94}) DataFrame 通过list创建\n">
 <meta property='og:url' content='https://rooobeam.github.io/p/pandas_note/'>
 <meta property='og:site_name' content='rooobeam'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-09-21T19:38:56&#43;08:00'/><meta property='article:modified_time' content='2025-09-21T19:38:56&#43;08:00'/>
 <meta name="twitter:title" content="Pandas_note">
-<meta name="twitter:description" content="">
+<meta name="twitter:description" content="前言：对于所有代码，能够看到前面的中文就能写出相关代码。\nbasic conception pandas: panel data\ndb: database\ncrud: create, read, update, delete\ncore class: Series, DataFrame\n导入\n1 import pandas as pd Series 通过list创建\n1 s1 = pd.Series([89,97,94],index=[&#34;张三&#34;,&#34;李四&#34;,&#34;王五&#34;]) 通过字典创建\n1 s2 = pd.Series({&#34;张三&#34;:89, &#34;李四&#34;:97, &#34;王五&#34;:94}) DataFrame 通过list创建\n">
     <link rel="shortcut icon" href="/favicon.ico" />
 
     </head>
@@ -214,7 +214,41 @@
     </ol>
 </aside>
 
-    
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#basic-conception">basic conception</a></li>
+    <li><a href="#series">Series</a></li>
+    <li><a href="#dataframe">DataFrame</a></li>
+    <li><a href="#csvexcel读写">csv&amp;excel读写</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
 
             <main class="main full-width">
     <article class="main-article">
@@ -263,7 +297,121 @@
     <section class="article-content">
     
     
-    
+    <p>前言：对于所有代码，能够看到前面的中文就能写出相关代码。</p>
+<h2 id="basic-conception">basic conception
+</h2><ul>
+<li>
+<p>pandas: panel data</p>
+</li>
+<li>
+<p>db: database</p>
+</li>
+<li>
+<p>crud: create, read, update, delete</p>
+</li>
+<li>
+<p>core class: Series, DataFrame</p>
+</li>
+<li>
+<p>导入</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h2 id="series">Series
+</h2><p>通过list创建</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">s1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">89</span><span class="p">,</span><span class="mi">97</span><span class="p">,</span><span class="mi">94</span><span class="p">],</span><span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">&#34;张三&#34;</span><span class="p">,</span><span class="s2">&#34;李四&#34;</span><span class="p">,</span><span class="s2">&#34;王五&#34;</span><span class="p">])</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>通过字典创建</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">s2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">({</span><span class="s2">&#34;张三&#34;</span><span class="p">:</span><span class="mi">89</span><span class="p">,</span> <span class="s2">&#34;李四&#34;</span><span class="p">:</span><span class="mi">97</span><span class="p">,</span> <span class="s2">&#34;王五&#34;</span><span class="p">:</span><span class="mi">94</span><span class="p">})</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="dataframe">DataFrame
+</h2><p>通过list创建</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">content</span> <span class="o">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="s2">&#34;小李&#34;</span><span class="p">,</span><span class="mf">3.38</span><span class="p">,</span><span class="s2">&#34;良&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="s2">&#34;小明&#34;</span><span class="p">,</span><span class="mf">6.38</span><span class="p">,</span><span class="s2">&#34;优&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="s2">&#34;小红&#34;</span><span class="p">,</span><span class="mf">5.38</span><span class="p">,</span><span class="s2">&#34;良&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="s2">&#34;小张&#34;</span><span class="p">,</span><span class="mf">1.38</span><span class="p">,</span><span class="s2">&#34;差&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl"><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">head</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;序号&#34;</span><span class="p">,</span><span class="s2">&#34;姓名&#34;</span><span class="p">,</span><span class="s2">&#34;分数&#34;</span><span class="p">,</span><span class="s2">&#34;评级&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">df1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="n">head</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>通过字典创建</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">dic</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;序号&#34;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;姓名&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;小李&#34;</span><span class="p">,</span> <span class="s2">&#34;小明&#34;</span><span class="p">,</span> <span class="s2">&#34;小红&#34;</span><span class="p">,</span> <span class="s2">&#34;小张&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;分数&#34;</span><span class="p">:</span> <span class="p">[</span><span class="mf">3.38</span><span class="p">,</span> <span class="mf">6.38</span><span class="p">,</span> <span class="mf">5.38</span><span class="p">,</span> <span class="mf">1.38</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;评级&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;良&#34;</span><span class="p">,</span> <span class="s2">&#34;优&#34;</span><span class="p">,</span> <span class="s2">&#34;良&#34;</span><span class="p">,</span> <span class="s2">&#34;差&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">dic</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="csvexcel读写">csv&amp;excel读写
+</h2><p>csv读写</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&#34;./train.csv&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&#34;./train_cp.csv&#34;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>excel读写</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s2">&#34;./train.excel&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="s2">&#34;./train_cp.excel&#34;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
 </section>
 
 
