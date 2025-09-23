@@ -41,7 +41,9 @@
 &lt;/div&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;series&#34;&gt;Series
-&lt;/h2&gt;&lt;p&gt;通过list创建&lt;/p&gt;
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;通过list创建&lt;/li&gt;
+&lt;/ul&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -50,7 +52,9 @@
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-py&#34; data-lang=&#34;py&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;s1&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;pd&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Series&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;([&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;89&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;97&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;94&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;index&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;张三&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;李四&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;王五&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;])&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;通过字典创建&lt;/p&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;通过字典创建&lt;/li&gt;
+&lt;/ul&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -60,7 +64,9 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h2 id=&#34;dataframe&#34;&gt;DataFrame
-&lt;/h2&gt;&lt;p&gt;通过list创建&lt;/p&gt;
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;通过list创建&lt;/li&gt;
+&lt;/ul&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -83,7 +89,9 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;df1&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;pd&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;DataFrame&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;content&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;column&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;head&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;通过字典创建&lt;/p&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;通过字典创建&lt;/li&gt;
+&lt;/ul&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -105,7 +113,9 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h2 id=&#34;csvexcel读写&#34;&gt;csv&amp;amp;excel读写
-&lt;/h2&gt;&lt;p&gt;csv读写&lt;/p&gt;
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;csv读写&lt;/li&gt;
+&lt;/ul&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -116,7 +126,9 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;df&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;to_csv&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;./train_cp.csv&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;excel读写&lt;/p&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;excel读写&lt;/li&gt;
+&lt;/ul&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -127,7 +139,540 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;df&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;to_excel&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;./train_cp.excel&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description>
+&lt;/div&gt;&lt;h2 id=&#34;drop删除&#34;&gt;drop删除
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;已知创建df：&lt;/p&gt;
+&lt;p&gt;dic = {
+&amp;ldquo;序号&amp;rdquo;: [1, 2, 3, 4],
+&amp;ldquo;姓名&amp;rdquo;: [&amp;ldquo;小李&amp;rdquo;, &amp;ldquo;小明&amp;rdquo;, &amp;ldquo;小红&amp;rdquo;, &amp;ldquo;小张&amp;rdquo;],
+&amp;ldquo;分数&amp;rdquo;: [3.38, 6.38, 5.38, 1.38],
+&amp;ldquo;评级&amp;rdquo;: [&amp;ldquo;良&amp;rdquo;, &amp;ldquo;优&amp;rdquo;, &amp;ldquo;良&amp;rdquo;, &amp;ldquo;差&amp;rdquo;],
+}
+df = pd.DataFrame(dic)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;对象.drop&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-py&#34; data-lang=&#34;py&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# axis=1表明维度为列 inplace=True表明修改原变量&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;df&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;drop&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;评级&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;axis&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;inplace&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;True&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 默认axis = 0表明维度为行 默认inplace=False表明不修改原变量而生成一个新变量&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;df1&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;df&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;drop&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;df&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;drop&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;([&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;])&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# 删掉 1，2，3行，因为前面没有设置index参数所以默认为int从0开始，具体看 下一个二级标题的开始部分&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;对象.dropna()&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-py&#34; data-lang=&#34;py&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;df&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;dp&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;DataFrame&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;({&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;A&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;7&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;8&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;9&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;B&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;7&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;None&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;})&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#    A   B&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 0  7   7&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 1  8   None&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 2  9   5&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;df&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;dropna&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;inplace&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;True&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;df&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#    A   B&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 0  7   7&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 2  9   5&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;对象.drop_duplicates  (注意s: duplicate&lt;strong&gt;s&lt;/strong&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-py&#34; data-lang=&#34;py&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;df&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;dp&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;DataFrame&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;({&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;A&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;7&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;7&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;7&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;B&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;12&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;13&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;C&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;7&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;7&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;12&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;})&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#    A   B   C&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 0  7   12  7&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 1  7   13  7&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 2  7   5   12&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# subset 参数&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;df&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;drop_duplicates&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;subset&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;A&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;C&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;])&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# subset:第一个参数 等价于df.drop_duplicates([&amp;#34;A&amp;#34;,&amp;#34;C&amp;#34;])&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#    A   B   C&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 0  7   5   12&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;df&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;drop_duplicates&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;subset&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;A&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;])&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# df.drop_duplicates([&amp;#34;A&amp;#34;])&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#    A   B   C&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# keep 参数&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;df&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;drop_duplicates&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;subset&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;A&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;keep&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;first&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# 默认为first&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#    A   B   C&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 0  7   12  7&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;df&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;drop_duplicates&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;subset&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;A&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;keep&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;last&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#    A   B   C&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 0  7   5   12&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;df&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;drop_duplicates&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;subset&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;A&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;keep&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;False&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#    A   B   C&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;对象.del&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-py&#34; data-lang=&#34;py&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;df&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;dp&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;DataFrame&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;({&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;A&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;B&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;6&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;})&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 只能删除某列&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;del&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;df&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;A&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;df&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#    B&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 0  4&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 1  5&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 2  6&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;删选保留逆向删除&#34;&gt;删选/保留/逆向删除
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-py&#34; data-lang=&#34;py&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 创建设定了index的DataFrame&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;data&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;s1&#34;&gt;&amp;#39;name&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;A&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;B&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;C&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;s1&#34;&gt;&amp;#39;age&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;25&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;30&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;35&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;s1&#34;&gt;&amp;#39;score&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;88&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;92&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;90&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;df&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;pd&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;DataFrame&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;data&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;index&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;r1&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;r2&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;r3&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;])&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# 注意此处设定了index；以往默认0开始，如果你从k开始则可以拼接&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#        name   age    score&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# r1        A    25     88.0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# r2        B    30     92.0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# r3        C    35     90.0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;布尔索引：保留符合条件的条目（行，元组）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-py&#34; data-lang=&#34;py&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 保留大于等于30岁的，直接中括号干上去&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;df_older&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;df&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;df&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;age&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;=&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;30&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#       name   age   score&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# r2       B    30    92.0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# r3       C    35    90.0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;选择特定列&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-py&#34; data-lang=&#34;py&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 保留名字和成绩&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;df_name_score&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;df&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[[&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;name&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;score&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#        name     score&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# r2        B      92.0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# r3        C      90.0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;定位赋值修改&#34;&gt;定位赋值修改
+&lt;/h2&gt;&lt;p&gt;这是修改数据的最常用、最规范的方法。我们通过一个例子来彻底讲清楚。&lt;/p&gt;
+&lt;h3 id=&#34;创建一个示例&#34;&gt;创建一个示例
+&lt;/h3&gt;&lt;p&gt;注意我特意把行索引设置得比较复杂，包含字符串和整数，这样能更好地展示 &lt;code&gt;loc&lt;/code&gt; 和 &lt;code&gt;iloc&lt;/code&gt; 的区别。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;pandas&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;as&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;pd&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;data&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;s1&#34;&gt;&amp;#39;score&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;88&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;92&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;95&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;74&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;s1&#34;&gt;&amp;#39;age&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;25&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;30&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;35&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;22&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;s1&#34;&gt;&amp;#39;city&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;NY&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;LA&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;SF&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;TX&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 创建一个包含字符串和整数的复杂索引&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;df&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;pd&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;DataFrame&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;data&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;index&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;Alice&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;Bob&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;100&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;David&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;])&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;原始 DataFrame:&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;df&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;h3 id=&#34;使用-iloc-基于整数位置&#34;&gt;使用 &lt;code&gt;.iloc&lt;/code&gt; (基于整数位置)
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;原始 DataFrame:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;       score  age city
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Alice     88   25   NY
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Bob       92   30   LA
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;100       95   35   SF  &amp;lt;-- 注意这里的行索引名是整数 100
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;David     74   22   TX
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;code&gt;iloc&lt;/code&gt; 只认位置，不认名字。行号从上到下是 0, 1, 2, 3&amp;hellip; 列号从左到右是 0, 1, 2&amp;hellip;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;1. 修改单个单元格 &lt;code&gt;df.iloc[行号, 列号]&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 修改第 0 行、第 0 列（Alice的score）的值为 90&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;df&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;iloc&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;90&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#        score  age city&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# Alice     90   25   NY  &amp;lt;-- Changed&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# Bob       92   30   LA&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 100       95   35   SF&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# David     74   22   TX&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;2. 修改一整行 &lt;code&gt;df.iloc[行号]&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 修改第 1 行为100, 31, &amp;#39;Seoul&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;df&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;iloc&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;100&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;31&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;Seoul&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#        score  age   city&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# Alice     90   25     NY&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# Bob      100   31  Seoul  &amp;lt;-- Changed&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 100       95   35     SF&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#  David     74   22     TX&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;3. 修改一整列 &lt;code&gt;df.iloc[:, 列号]&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;:&lt;/code&gt; 代表“所有”。&lt;code&gt;[:, 列号]&lt;/code&gt; 的意思就是“所有行，但只选指定的列”。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 修改第 2 列（city列）的所有值为 &amp;#39;Unknown&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;df&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;iloc&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[:,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;Unknown&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#        score  age     city&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# Alice     90   25  Unknown  &amp;lt;-- Changed&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# Bob      100   31  Unknown  &amp;lt;-- Changed&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 100       95   35  Unknown  &amp;lt;-- Changed&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# David     74   22  Unknown  &amp;lt;-- Changed&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;4. 修改一个切片（子区域） &lt;code&gt;df.iloc[行号范围, 列号范围]&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;切片范围是**“左闭右开”**的，和普通 Python 列表一样。例如 &lt;code&gt;0:2&lt;/code&gt; 表示第0行和第1行，&lt;strong&gt;不包括&lt;/strong&gt;第2行。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 修改第 0, 1 行 和 第 0, 1 列组成的区域，所有值设为 -1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;df&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;iloc&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#        score  age     city&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# Alice     -1   -1  Unknown&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# Bob       -1   -1  Unknown&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 100       95   35  Unknown&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# David     74   22  Unknown&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;h3 id=&#34;使用-loc-基于标签名称&#34;&gt;使用 &lt;code&gt;.loc&lt;/code&gt; (基于标签名称)
+&lt;/h3&gt;&lt;p&gt;&lt;code&gt;loc&lt;/code&gt; 只认&lt;strong&gt;行索引名&lt;/strong&gt;和&lt;strong&gt;列名&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;原始 DataFrame:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;       score  age city
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Alice     88   25   NY
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Bob       92   30   LA
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;100       95   35   SF  &amp;lt;-- 注意这里的行索引名是整数 100
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;David     74   22   TX
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;1. 修改单个单元格 &lt;code&gt;df.loc[行索引名, 列名]&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 修改行索引为 &amp;#39;Alice&amp;#39;、列名为 &amp;#39;score&amp;#39; 的值为 89&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;df&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;loc&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;Alice&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;score&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;89&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#        score  age city&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# Alice     89   25   NY  &amp;lt;-- Changed&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# Bob       92   30   LA&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 100       95   35   SF&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# David     74   22   TX&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;2. 修改一整行 &lt;code&gt;df.loc[行索引名]&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 修改行索引为 &amp;#39;Bob&amp;#39; 的数据&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;df&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;loc&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;Bob&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;99&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;33&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;Paris&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# 要对应好列个数和列类型&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#        score  age   city&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# Alice     89   25     NY&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# Bob       99   33  Paris  &amp;lt;-- Changed&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 100       95   35     SF&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# David     74   22     TX&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;3. 修改一整列 &lt;code&gt;df.loc[:, 列名]&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 修改列名为 &amp;#39;age&amp;#39; 的所有值为 0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;df&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;loc&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[:,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;age&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# 对应好列类型&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#        score  age   city&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# Alice     89    0  Paris&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# Bob       99    0  Paris&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 100       95    0     SF&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# David     74    0     TX&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;4. 修改一个切片 &lt;code&gt;df.loc[行范围, 列范围]&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;‼️ 重要区别&lt;/strong&gt;：&lt;code&gt;loc&lt;/code&gt; 的切片是**“左右都闭合”**的！&lt;code&gt;&#39;Alice&#39;:&#39;Bob&#39;&lt;/code&gt; 表示从 &amp;lsquo;Alice&amp;rsquo; 到 &amp;lsquo;Bob&amp;rsquo;，&lt;strong&gt;包括&lt;/strong&gt; &amp;lsquo;Alice&amp;rsquo; 和 &amp;lsquo;Bob&amp;rsquo;。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 修改从 &amp;#39;Alice&amp;#39; 到 &amp;#39;Bob&amp;#39; 的行，&amp;#39;score&amp;#39; 到 &amp;#39;age&amp;#39; 的列，值设为 -1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;df&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;loc&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;Alice&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;Bob&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;score&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;age&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#        score  age   city&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# Alice     -1   -1     NY&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# Bob       -1   -1  Paris&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 100       95   35     SF&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# David     74   22     TX&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;h3 id=&#34;-陷阱与总结&#34;&gt;‼️ 陷阱与总结
+&lt;/h3&gt;&lt;p&gt;看我们的例子，行索引有一个整数 &lt;code&gt;100&lt;/code&gt;。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;df.loc[100]&lt;/code&gt; 会找到&lt;strong&gt;行索引名&lt;/strong&gt;为 &lt;code&gt;100&lt;/code&gt; 的那一行 (第三行)。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;df.iloc[2]&lt;/code&gt; 会找到&lt;strong&gt;物理位置&lt;/strong&gt;在第3位的那一行（行号为2），也就是索引名为 &lt;code&gt;100&lt;/code&gt; 的那一行。在这个例子里，结果碰巧一样。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;df.iloc[100]&lt;/code&gt; &lt;strong&gt;会报错！&lt;/strong&gt; 因为 DataFrame 只有4行，没有第101个位置（行号100）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;特性&lt;/th&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;&lt;code&gt;.loc&lt;/code&gt; (Location)&lt;/th&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;&lt;code&gt;.iloc&lt;/code&gt; (Integer Location)&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;定位方式&lt;/strong&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;基于标签 (Label-based)&lt;/strong&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;基于整数位置 (Integer-based)&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;输入类型&lt;/strong&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;行/列的&lt;strong&gt;名字&lt;/strong&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;行/列的&lt;strong&gt;数字序号&lt;/strong&gt; (从0开始)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;切片行为&lt;/strong&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;包含&lt;/strong&gt;结束点 (Inclusive)&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;不包含&lt;/strong&gt;结束点 (Exclusive)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;主要用途&lt;/strong&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;当你的索引有实际意义时（如姓名、日期）&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;当你需要按位置选取，或索引混乱/无意义时&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;最佳实践&lt;/strong&gt;：为了避免混淆，尽量保持代码意图清晰。如果你想按位置操作，就用 &lt;code&gt;.iloc&lt;/code&gt;；如果你想按名称操作，就用 &lt;code&gt;.loc&lt;/code&gt;。&lt;/p&gt;
+</description>
         </item>
         <item>
         <title>Introduction_to_Multi Armed_Bandits</title>

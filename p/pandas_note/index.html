@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="前言：对于所有代码，能够看到前面的中文就能写出相关代码。\nbasic conception pandas: panel data\ndb: database\ncrud: create, read, update, delete\ncore class: Series, DataFrame\n导入\n1 import pandas as pd Series 通过list创建\n1 s1 = pd.Series([89,97,94],index=[&#34;张三&#34;,&#34;李四&#34;,&#34;王五&#34;]) 通过字典创建\n1 s2 = pd.Series({&#34;张三&#34;:89, &#34;李四&#34;:97, &#34;王五&#34;:94}) DataFrame 通过list创建\n">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="前言：对于所有代码，能够看到前面的中文就能写出相关代码。\nbasic conception pandas: panel data\ndb: database\ncrud: create, read, update, delete\ncore class: Series, DataFrame\n导入\n1 import pandas as pd Series 通过list创建 1 s1 = pd.Series([89,97,94],index=[&#34;张三&#34;,&#34;李四&#34;,&#34;王五&#34;]) 通过字典创建 1 s2 = pd.Series({&#34;张三&#34;:89, &#34;李四&#34;:97, &#34;王五&#34;:94}) DataFrame 通过list创建 1 2 3 4 5 6 7 8 content = [ [1,&#34;小李&#34;,3.38,&#34;良&#34;], [2,&#34;小明&#34;,6.38,&#34;优&#34;], [3,&#34;小红&#34;,5.38,&#34;良&#34;], [4,&#34;小张&#34;,1.38,&#34;差&#34;], ] head = [&#34;序号&#34;,&#34;姓名&#34;,&#34;分数&#34;,&#34;评级&#34;] df1 = pd.DataFrame(content, column=head) 通过字典创建 1 2 3 4 5 6 7 dic = { &#34;序号&#34;: [1, 2, 3, 4], &#34;姓名&#34;: [&#34;小李&#34;, &#34;小明&#34;, &#34;小红&#34;, &#34;小张&#34;], &#34;分数&#34;: [3.38, 6.38, 5.38, 1.38], &#34;评级&#34;: [&#34;良&#34;, &#34;优&#34;, &#34;良&#34;, &#34;差&#34;], } df2 = pd.DataFrame(dic) csv&amp;excel读写 csv读写 1 2 df = pd.read_csv(&#34;./train.csv&#34;) df.to_csv(&#34;./train_cp.csv&#34;) excel读写 1 2 df = pd.read_excel(&#34;./train.excel&#34;) df.to_excel(&#34;./train_cp.excel&#34;) drop删除 已知创建df：\n">
 <title>Pandas_note</title>
 
 <link rel='canonical' href='https://rooobeam.github.io/p/pandas_note/'>
 
 <link rel="stylesheet" href="/scss/style.min.a7558000c2456f20ae90904971171af41a2b987eed638982c918c424b3e14d7b.css"><meta property='og:title' content="Pandas_note">
-<meta property='og:description' content="前言：对于所有代码，能够看到前面的中文就能写出相关代码。\nbasic conception pandas: panel data\ndb: database\ncrud: create, read, update, delete\ncore class: Series, DataFrame\n导入\n1 import pandas as pd Series 通过list创建\n1 s1 = pd.Series([89,97,94],index=[&#34;张三&#34;,&#34;李四&#34;,&#34;王五&#34;]) 通过字典创建\n1 s2 = pd.Series({&#34;张三&#34;:89, &#34;李四&#34;:97, &#34;王五&#34;:94}) DataFrame 通过list创建\n">
+<meta property='og:description' content="前言：对于所有代码，能够看到前面的中文就能写出相关代码。\nbasic conception pandas: panel data\ndb: database\ncrud: create, read, update, delete\ncore class: Series, DataFrame\n导入\n1 import pandas as pd Series 通过list创建 1 s1 = pd.Series([89,97,94],index=[&#34;张三&#34;,&#34;李四&#34;,&#34;王五&#34;]) 通过字典创建 1 s2 = pd.Series({&#34;张三&#34;:89, &#34;李四&#34;:97, &#34;王五&#34;:94}) DataFrame 通过list创建 1 2 3 4 5 6 7 8 content = [ [1,&#34;小李&#34;,3.38,&#34;良&#34;], [2,&#34;小明&#34;,6.38,&#34;优&#34;], [3,&#34;小红&#34;,5.38,&#34;良&#34;], [4,&#34;小张&#34;,1.38,&#34;差&#34;], ] head = [&#34;序号&#34;,&#34;姓名&#34;,&#34;分数&#34;,&#34;评级&#34;] df1 = pd.DataFrame(content, column=head) 通过字典创建 1 2 3 4 5 6 7 dic = { &#34;序号&#34;: [1, 2, 3, 4], &#34;姓名&#34;: [&#34;小李&#34;, &#34;小明&#34;, &#34;小红&#34;, &#34;小张&#34;], &#34;分数&#34;: [3.38, 6.38, 5.38, 1.38], &#34;评级&#34;: [&#34;良&#34;, &#34;优&#34;, &#34;良&#34;, &#34;差&#34;], } df2 = pd.DataFrame(dic) csv&amp;excel读写 csv读写 1 2 df = pd.read_csv(&#34;./train.csv&#34;) df.to_csv(&#34;./train_cp.csv&#34;) excel读写 1 2 df = pd.read_excel(&#34;./train.excel&#34;) df.to_excel(&#34;./train_cp.excel&#34;) drop删除 已知创建df：\n">
 <meta property='og:url' content='https://rooobeam.github.io/p/pandas_note/'>
 <meta property='og:site_name' content='rooobeam'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-09-21T19:38:56&#43;08:00'/><meta property='article:modified_time' content='2025-09-21T19:38:56&#43;08:00'/>
 <meta name="twitter:title" content="Pandas_note">
-<meta name="twitter:description" content="前言：对于所有代码，能够看到前面的中文就能写出相关代码。\nbasic conception pandas: panel data\ndb: database\ncrud: create, read, update, delete\ncore class: Series, DataFrame\n导入\n1 import pandas as pd Series 通过list创建\n1 s1 = pd.Series([89,97,94],index=[&#34;张三&#34;,&#34;李四&#34;,&#34;王五&#34;]) 通过字典创建\n1 s2 = pd.Series({&#34;张三&#34;:89, &#34;李四&#34;:97, &#34;王五&#34;:94}) DataFrame 通过list创建\n">
+<meta name="twitter:description" content="前言：对于所有代码，能够看到前面的中文就能写出相关代码。\nbasic conception pandas: panel data\ndb: database\ncrud: create, read, update, delete\ncore class: Series, DataFrame\n导入\n1 import pandas as pd Series 通过list创建 1 s1 = pd.Series([89,97,94],index=[&#34;张三&#34;,&#34;李四&#34;,&#34;王五&#34;]) 通过字典创建 1 s2 = pd.Series({&#34;张三&#34;:89, &#34;李四&#34;:97, &#34;王五&#34;:94}) DataFrame 通过list创建 1 2 3 4 5 6 7 8 content = [ [1,&#34;小李&#34;,3.38,&#34;良&#34;], [2,&#34;小明&#34;,6.38,&#34;优&#34;], [3,&#34;小红&#34;,5.38,&#34;良&#34;], [4,&#34;小张&#34;,1.38,&#34;差&#34;], ] head = [&#34;序号&#34;,&#34;姓名&#34;,&#34;分数&#34;,&#34;评级&#34;] df1 = pd.DataFrame(content, column=head) 通过字典创建 1 2 3 4 5 6 7 dic = { &#34;序号&#34;: [1, 2, 3, 4], &#34;姓名&#34;: [&#34;小李&#34;, &#34;小明&#34;, &#34;小红&#34;, &#34;小张&#34;], &#34;分数&#34;: [3.38, 6.38, 5.38, 1.38], &#34;评级&#34;: [&#34;良&#34;, &#34;优&#34;, &#34;良&#34;, &#34;差&#34;], } df2 = pd.DataFrame(dic) csv&amp;excel读写 csv读写 1 2 df = pd.read_csv(&#34;./train.csv&#34;) df.to_csv(&#34;./train_cp.csv&#34;) excel读写 1 2 df = pd.read_excel(&#34;./train.excel&#34;) df.to_excel(&#34;./train_cp.excel&#34;) drop删除 已知创建df：\n">
     <link rel="shortcut icon" href="/favicon.ico" />
 
     </head>
@@ -240,6 +240,16 @@
     <li><a href="#series">Series</a></li>
     <li><a href="#dataframe">DataFrame</a></li>
     <li><a href="#csvexcel读写">csv&amp;excel读写</a></li>
+    <li><a href="#drop删除">drop删除</a></li>
+    <li><a href="#删选保留逆向删除">删选/保留/逆向删除</a></li>
+    <li><a href="#定位赋值修改">定位赋值修改</a>
+      <ol>
+        <li><a href="#创建一个示例">创建一个示例</a></li>
+        <li><a href="#使用-iloc-基于整数位置">使用 <code>.iloc</code> (基于整数位置)</a></li>
+        <li><a href="#使用-loc-基于标签名称">使用 <code>.loc</code> (基于标签名称)</a></li>
+        <li><a href="#-陷阱与总结">‼️ 陷阱与总结</a></li>
+      </ol>
+    </li>
   </ol>
 </nav>
         </div>
@@ -325,7 +335,9 @@
 </div></li>
 </ul>
 <h2 id="series">Series
-</h2><p>通过list创建</p>
+</h2><ul>
+<li>通过list创建</li>
+</ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -334,7 +346,9 @@
 <pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">s1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">89</span><span class="p">,</span><span class="mi">97</span><span class="p">,</span><span class="mi">94</span><span class="p">],</span><span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">&#34;张三&#34;</span><span class="p">,</span><span class="s2">&#34;李四&#34;</span><span class="p">,</span><span class="s2">&#34;王五&#34;</span><span class="p">])</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>通过字典创建</p>
+</div><ul>
+<li>通过字典创建</li>
+</ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -344,7 +358,9 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="dataframe">DataFrame
-</h2><p>通过list创建</p>
+</h2><ul>
+<li>通过list创建</li>
+</ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -367,7 +383,9 @@
 </span></span><span class="line"><span class="cl"><span class="n">df1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="n">head</span><span class="p">)</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>通过字典创建</p>
+</div><ul>
+<li>通过字典创建</li>
+</ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -389,7 +407,9 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="csvexcel读写">csv&amp;excel读写
-</h2><p>csv读写</p>
+</h2><ul>
+<li>csv读写</li>
+</ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -400,7 +420,9 @@
 </span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&#34;./train_cp.csv&#34;</span><span class="p">)</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>excel读写</p>
+</div><ul>
+<li>excel读写</li>
+</ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -411,7 +433,540 @@
 </span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="s2">&#34;./train_cp.excel&#34;</span><span class="p">)</span>
 </span></span></code></pre></td></tr></table>
 </div>
+</div><h2 id="drop删除">drop删除
+</h2><ul>
+<li>
+<p>已知创建df：</p>
+<p>dic = {
+&ldquo;序号&rdquo;: [1, 2, 3, 4],
+&ldquo;姓名&rdquo;: [&ldquo;小李&rdquo;, &ldquo;小明&rdquo;, &ldquo;小红&rdquo;, &ldquo;小张&rdquo;],
+&ldquo;分数&rdquo;: [3.38, 6.38, 5.38, 1.38],
+&ldquo;评级&rdquo;: [&ldquo;良&rdquo;, &ldquo;优&rdquo;, &ldquo;良&rdquo;, &ldquo;差&rdquo;],
+}
+df = pd.DataFrame(dic)</p>
+</li>
+<li>
+<p>对象.drop</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="c1"># axis=1表明维度为列 inplace=True表明修改原变量</span>
+</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&#34;评级&#34;</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 默认axis = 0表明维度为行 默认inplace=False表明不修改原变量而生成一个新变量</span>
+</span></span><span class="line"><span class="cl"><span class="n">df1</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span> <span class="c1"># 删掉 1，2，3行，因为前面没有设置index参数所以默认为int从0开始，具体看 下一个二级标题的开始部分</span>
+</span></span></code></pre></td></tr></table>
 </div>
+</div><ul>
+<li>对象.dropna()</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">df</span> <span class="o">=</span> <span class="n">dp</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;A&#34;</span><span class="p">:[</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;B&#34;</span><span class="p">:[</span><span class="mi">7</span><span class="p">,</span><span class="kc">None</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#    A   B</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 0  7   7</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 1  8   None</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 2  9   5</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#    A   B</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 0  7   7</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 2  9   5</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>对象.drop_duplicates  (注意s: duplicate<strong>s</strong>)</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">df</span> <span class="o">=</span> <span class="n">dp</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;A&#34;</span><span class="p">:[</span><span class="mi">7</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">7</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;B&#34;</span><span class="p">:[</span><span class="mi">12</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;C&#34;</span><span class="p">:[</span><span class="mi">7</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">12</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#    A   B   C</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 0  7   12  7</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 1  7   13  7</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 2  7   5   12</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># subset 参数</span>
+</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&#34;A&#34;</span><span class="p">,</span><span class="s2">&#34;C&#34;</span><span class="p">])</span> <span class="c1"># subset:第一个参数 等价于df.drop_duplicates([&#34;A&#34;,&#34;C&#34;])</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#    A   B   C</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 0  7   5   12</span>
+</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&#34;A&#34;</span><span class="p">])</span> <span class="c1"># df.drop_duplicates([&#34;A&#34;])</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#    A   B   C</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># keep 参数</span>
+</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&#34;A&#34;</span><span class="p">],</span><span class="n">keep</span><span class="o">=</span><span class="s2">&#34;first&#34;</span><span class="p">)</span> <span class="c1"># 默认为first</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#    A   B   C</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 0  7   12  7</span>
+</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&#34;A&#34;</span><span class="p">],</span><span class="n">keep</span><span class="o">=</span><span class="s2">&#34;last&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#    A   B   C</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 0  7   5   12</span>
+</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">subset</span><span class="p">[</span><span class="s2">&#34;A&#34;</span><span class="p">],</span><span class="n">keep</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#    A   B   C</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>对象.del</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">df</span> <span class="o">=</span> <span class="n">dp</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;A&#34;</span><span class="p">:[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;B&#34;</span><span class="p">:[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 只能删除某列</span>
+</span></span><span class="line"><span class="cl"><span class="k">del</span> <span class="n">df</span><span class="p">[</span><span class="s2">&#34;A&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#    B</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 0  4</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 1  5</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 2  6</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="删选保留逆向删除">删选/保留/逆向删除
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="c1"># 创建设定了index的DataFrame</span>
+</span></span><span class="line"><span class="cl"><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">25</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">35</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;score&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">88</span><span class="p">,</span> <span class="mi">92</span><span class="p">,</span> <span class="mi">90</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;r1&#39;</span><span class="p">,</span> <span class="s1">&#39;r2&#39;</span><span class="p">,</span> <span class="s1">&#39;r3&#39;</span><span class="p">])</span> <span class="c1"># 注意此处设定了index；以往默认0开始，如果你从k开始则可以拼接</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#        name   age    score</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># r1        A    25     88.0</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># r2        B    30     92.0</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># r3        C    35     90.0</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>布尔索引：保留符合条件的条目（行，元组）</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="c1"># 保留大于等于30岁的，直接中括号干上去</span>
+</span></span><span class="line"><span class="cl"><span class="n">df_older</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="n">age</span><span class="p">]</span><span class="o">&gt;=</span><span class="mi">30</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#       name   age   score</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># r2       B    30    92.0</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># r3       C    35    90.0</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>选择特定列</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="c1"># 保留名字和成绩</span>
+</span></span><span class="line"><span class="cl"><span class="n">df_name_score</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s2">&#34;name&#34;</span><span class="p">,</span><span class="s2">&#34;score&#34;</span><span class="p">]]</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#        name     score</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># r2        B      92.0</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># r3        C      90.0</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="定位赋值修改">定位赋值修改
+</h2><p>这是修改数据的最常用、最规范的方法。我们通过一个例子来彻底讲清楚。</p>
+<h3 id="创建一个示例">创建一个示例
+</h3><p>注意我特意把行索引设置得比较复杂，包含字符串和整数，这样能更好地展示 <code>loc</code> 和 <code>iloc</code> 的区别。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;score&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">88</span><span class="p">,</span> <span class="mi">92</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">74</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">25</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">22</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;city&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;NY&#39;</span><span class="p">,</span> <span class="s1">&#39;LA&#39;</span><span class="p">,</span> <span class="s1">&#39;SF&#39;</span><span class="p">,</span> <span class="s1">&#39;TX&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 创建一个包含字符串和整数的复杂索引</span>
+</span></span><span class="line"><span class="cl"><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Alice&#39;</span><span class="p">,</span> <span class="s1">&#39;Bob&#39;</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="s1">&#39;David&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;原始 DataFrame:&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h3 id="使用-iloc-基于整数位置">使用 <code>.iloc</code> (基于整数位置)
+</h3><p><strong>原始 DataFrame:</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">       score  age city
+</span></span><span class="line"><span class="cl">Alice     88   25   NY
+</span></span><span class="line"><span class="cl">Bob       92   30   LA
+</span></span><span class="line"><span class="cl">100       95   35   SF  &lt;-- 注意这里的行索引名是整数 100
+</span></span><span class="line"><span class="cl">David     74   22   TX
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>iloc</code> 只认位置，不认名字。行号从上到下是 0, 1, 2, 3&hellip; 列号从左到右是 0, 1, 2&hellip;</p>
+<p><strong>1. 修改单个单元格 <code>df.iloc[行号, 列号]</code></strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 修改第 0 行、第 0 列（Alice的score）的值为 90</span>
+</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">90</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#        score  age city</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Alice     90   25   NY  &lt;-- Changed</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Bob       92   30   LA</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 100       95   35   SF</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># David     74   22   TX</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>2. 修改一整行 <code>df.iloc[行号]</code></strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 修改第 1 行为100, 31, &#39;Seoul&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="s1">&#39;Seoul&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#        score  age   city</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Alice     90   25     NY</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Bob      100   31  Seoul  &lt;-- Changed</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 100       95   35     SF</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#  David     74   22     TX</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>3. 修改一整列 <code>df.iloc[:, 列号]</code></strong></p>
+<p><code>:</code> 代表“所有”。<code>[:, 列号]</code> 的意思就是“所有行，但只选指定的列”。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 修改第 2 列（city列）的所有值为 &#39;Unknown&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Unknown&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#        score  age     city</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Alice     90   25  Unknown  &lt;-- Changed</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Bob      100   31  Unknown  &lt;-- Changed</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 100       95   35  Unknown  &lt;-- Changed</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># David     74   22  Unknown  &lt;-- Changed</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>4. 修改一个切片（子区域） <code>df.iloc[行号范围, 列号范围]</code></strong></p>
+<p>切片范围是**“左闭右开”**的，和普通 Python 列表一样。例如 <code>0:2</code> 表示第0行和第1行，<strong>不包括</strong>第2行。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 修改第 0, 1 行 和 第 0, 1 列组成的区域，所有值设为 -1</span>
+</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#        score  age     city</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Alice     -1   -1  Unknown</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Bob       -1   -1  Unknown</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 100       95   35  Unknown</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># David     74   22  Unknown</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h3 id="使用-loc-基于标签名称">使用 <code>.loc</code> (基于标签名称)
+</h3><p><code>loc</code> 只认<strong>行索引名</strong>和<strong>列名</strong>。</p>
+<p><strong>原始 DataFrame:</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">       score  age city
+</span></span><span class="line"><span class="cl">Alice     88   25   NY
+</span></span><span class="line"><span class="cl">Bob       92   30   LA
+</span></span><span class="line"><span class="cl">100       95   35   SF  &lt;-- 注意这里的行索引名是整数 100
+</span></span><span class="line"><span class="cl">David     74   22   TX
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>1. 修改单个单元格 <code>df.loc[行索引名, 列名]</code></strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 修改行索引为 &#39;Alice&#39;、列名为 &#39;score&#39; 的值为 89</span>
+</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;Alice&#39;</span><span class="p">,</span> <span class="s1">&#39;score&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">89</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#        score  age city</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Alice     89   25   NY  &lt;-- Changed</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Bob       92   30   LA</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 100       95   35   SF</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># David     74   22   TX</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>2. 修改一整行 <code>df.loc[行索引名]</code></strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 修改行索引为 &#39;Bob&#39; 的数据</span>
+</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;Bob&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">99</span><span class="p">,</span> <span class="mi">33</span><span class="p">,</span> <span class="s1">&#39;Paris&#39;</span><span class="p">]</span> <span class="c1"># 要对应好列个数和列类型</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#        score  age   city</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Alice     89   25     NY</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Bob       99   33  Paris  &lt;-- Changed</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 100       95   35     SF</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># David     74   22     TX</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>3. 修改一整列 <code>df.loc[:, 列名]</code></strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 修改列名为 &#39;age&#39; 的所有值为 0</span>
+</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s1">&#39;age&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># 对应好列类型</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#        score  age   city</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Alice     89    0  Paris</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Bob       99    0  Paris</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 100       95    0     SF</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># David     74    0     TX</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>4. 修改一个切片 <code>df.loc[行范围, 列范围]</code></strong></p>
+<p><strong>‼️ 重要区别</strong>：<code>loc</code> 的切片是**“左右都闭合”**的！<code>'Alice':'Bob'</code> 表示从 &lsquo;Alice&rsquo; 到 &lsquo;Bob&rsquo;，<strong>包括</strong> &lsquo;Alice&rsquo; 和 &lsquo;Bob&rsquo;。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 修改从 &#39;Alice&#39; 到 &#39;Bob&#39; 的行，&#39;score&#39; 到 &#39;age&#39; 的列，值设为 -1</span>
+</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;Alice&#39;</span><span class="p">:</span><span class="s1">&#39;Bob&#39;</span><span class="p">,</span> <span class="s1">&#39;score&#39;</span><span class="p">:</span><span class="s1">&#39;age&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#        score  age   city</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Alice     -1   -1     NY</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Bob       -1   -1  Paris</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 100       95   35     SF</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># David     74   22     TX</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h3 id="-陷阱与总结">‼️ 陷阱与总结
+</h3><p>看我们的例子，行索引有一个整数 <code>100</code>。</p>
+<ul>
+<li><code>df.loc[100]</code> 会找到<strong>行索引名</strong>为 <code>100</code> 的那一行 (第三行)。</li>
+<li><code>df.iloc[2]</code> 会找到<strong>物理位置</strong>在第3位的那一行（行号为2），也就是索引名为 <code>100</code> 的那一行。在这个例子里，结果碰巧一样。</li>
+<li><code>df.iloc[100]</code> <strong>会报错！</strong> 因为 DataFrame 只有4行，没有第101个位置（行号100）。</li>
+</ul>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th style="text-align: left">特性</th>
+          <th style="text-align: left"><code>.loc</code> (Location)</th>
+          <th style="text-align: left"><code>.iloc</code> (Integer Location)</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left"><strong>定位方式</strong></td>
+          <td style="text-align: left"><strong>基于标签 (Label-based)</strong></td>
+          <td style="text-align: left"><strong>基于整数位置 (Integer-based)</strong></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>输入类型</strong></td>
+          <td style="text-align: left">行/列的<strong>名字</strong></td>
+          <td style="text-align: left">行/列的<strong>数字序号</strong> (从0开始)</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>切片行为</strong></td>
+          <td style="text-align: left"><strong>包含</strong>结束点 (Inclusive)</td>
+          <td style="text-align: left"><strong>不包含</strong>结束点 (Exclusive)</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>主要用途</strong></td>
+          <td style="text-align: left">当你的索引有实际意义时（如姓名、日期）</td>
+          <td style="text-align: left">当你需要按位置选取，或索引混乱/无意义时</td>
+      </tr>
+  </tbody>
+</table></div>
+<p><strong>最佳实践</strong>：为了避免混淆，尽量保持代码意图清晰。如果你想按位置操作，就用 <code>.iloc</code>；如果你想按名称操作，就用 <code>.loc</code>。</p>
+
 </section>
 
 
