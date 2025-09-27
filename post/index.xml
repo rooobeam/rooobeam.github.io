@@ -1007,8 +1007,8 @@ $$&lt;p&gt;​	&lt;strong&gt;Acc&lt;/strong&gt;: metrics used to eval the qualit
 &lt;li&gt;Subsequently, segmentation model evaluates each pair of adjacent sentences in these coarse-grained chunks.&lt;/li&gt;
 &lt;li&gt;（So the boarder of coarse-grained chunks is ingored? I think that&amp;rsquo;s fine because each chunk is large enough.）&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;GRADIENT-BASED CHUNK SELECTION&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://pic2.zhimg.com/v2-37521c9bc74bccdfe33684444ec10c9f_1440w.jpg&#34;
+&lt;h2 id=&#34;gradient-based-chunk-selection&#34;&gt;GRADIENT-BASED CHUNK SELECTION
+&lt;/h2&gt;&lt;p&gt;&lt;img src=&#34;https://pic2.zhimg.com/v2-37521c9bc74bccdfe33684444ec10c9f_1440w.jpg&#34;
 	
 	
 	
