@@ -7,7 +7,547 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>rooobeam</copyright>
-        <lastBuildDate>Sun, 21 Sep 2025 19:38:56 +0800</lastBuildDate><atom:link href="https://rooobeam.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 01 Oct 2025 11:15:12 +0800</lastBuildDate><atom:link href="https://rooobeam.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>CS329P_实用机器学习</title>
+        <link>https://rooobeam.github.io/p/cs329p_%E5%AE%9E%E7%94%A8%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</link>
+        <pubDate>Wed, 01 Oct 2025 11:15:12 +0800</pubDate>
+        
+        <guid>https://rooobeam.github.io/p/cs329p_%E5%AE%9E%E7%94%A8%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</guid>
+        <description>&lt;h2 id=&#34;11-course-introduction&#34;&gt;1.1 Course Introduction
+&lt;/h2&gt;&lt;h3 id=&#34;机器学习的流程&#34;&gt;机器学习的流程
+&lt;/h3&gt;&lt;img src=&#34;ML_workflow.png?&#34; alt=&#34;ML_workflow&#34; style=&#34;zoom:40%;&#34; /&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;问题定制&lt;/strong&gt;：将实际问题转化为机器学习问题，选择对公司利润增长最有利的业务问题。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;数据收集与处理&lt;/strong&gt;：收集相关数据并进行处理，现实中高质量数据稀缺，需大量清洗、标注工作，同时要注意数据隐私问题。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;模型训练&lt;/strong&gt;：选择合适模型训练，先用简单模型测试数据，如线性回归模型，若效果好可直接部署，否则再尝试复杂模型。当模型复杂度不断增加，训练成本高昂，对数据需求也更多。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;模型部署&lt;/strong&gt;：将训练好的模型部署到线上，要考虑模型大小、实时性等因素，如大模型需做蒸馏处理变小变快后上线。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;模型监控与迭代&lt;/strong&gt;：持续监控模型性能，包括预测精度、延迟等，新数据产生后重新回到&lt;strong&gt;模型训练&lt;/strong&gt;和&lt;strong&gt;模型部署&lt;/strong&gt;，完成迭代。要注意数据分布变化和算法公平性问题，避免模型在不同用户群体或场景下出现偏差。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;challenges-and--techniques&#34;&gt;Challenges and  Techniques
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Formulate problem&lt;/strong&gt;. focus on the most  impactful industrial problems  (be a domain expert).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Data&lt;/strong&gt;. &lt;strong&gt;challenges:&lt;/strong&gt; high-quality data is scarce, privacy issues; &lt;strong&gt;tech&lt;/strong&gt;: Collect/ preprocess data、 Covariate/ concepts/ label  shifts、Data beyond IID&amp;hellip;&amp;hellip;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;协变量漂移 (Covariate Shift): 输入特征 (X) 的分布变了，但特征和标签之间的关系 (P(y|X)) 没变。例子: 你用一个地区夏天的用电数据训练了一个预测模型。到了冬天，人们的生活习惯（特征X）变了（比如开暖气而不是空调），虽然用电量和气温、时间的关系规律（P(y|X)）可能没变，但由于输入数据的分布完全不同，模型的预测会很不准。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;概念漂移 (Concept Drift): 特征和标签之间的关系 (P(y|X)) 本身发生了变化。也就是“概念”本身变了。例子: 一个垃圾邮件过滤模型。一开始，“免费”、“中奖”等词汇是垃圾邮件的强特征。但后来垃圾邮件发送者学聪明了，开始使用更隐蔽的词汇。这时，“什么是垃圾邮件”这个概念本身就发生了漂移，旧模型就失效了。经济形势变化导致的用户购买偏好改变也是一个典型例子。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;标签漂移 (Label Shift): 标签 (y) 的分布变了，但 P(X|y) 没变。例子: 医院用历史数据训练了一个疾病诊断模型，历史数据中某种疾病的患病率是1%。突然这种疾病爆发，新病人中患病率变成了10%。病人的症状（特征X）和疾病（标签y）之间的关系没变，但是不同标签的比例变了，这也会影响模型的表现。）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;不独立同分布的数据 (data beyond IID(Independent and Identically Distributed)): 不独立 (Not Independent): 时间序列数据、社交网络数据(你朋友的点赞行为会影响你的行为)、空间数据(一个地区的房价会受到邻近地区房价的影响)。不同分布 (Not Identically Distributed): 上面提到的各种&lt;strong&gt;数据漂移&lt;/strong&gt;就是最典型的例子, 去年和今年的用户数据就不是来自同一个分布。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Train models&lt;/strong&gt;. &lt;strong&gt;challenges:&lt;/strong&gt; ML models are more and more  complex, data-hungry, expensive; &lt;strong&gt;tech&lt;/strong&gt;: Model validation/ combinations/ tuning、  Transfer learning、 Multi-modality&amp;hellip;&amp;hellip;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;模型验证(Model Validation): 最常见的方法是交叉验证 (Cross-Validation)。比如，将数据分成5份，轮流用其中4份训练模型，剩下1份测试模型，重复5次，最后取平均性能作为模型的最终评估结果。比把数据分成训练集和测试集测试一次要可靠得多。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;模型组合(Model Combinations): 常见的方法有 Bagging（如随机森林）、Boosting（如XGBoost, LightGBM）和 Stacking（将多个模型的输出作为新的输入，再训练一个最终模型）。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;调优(Tuning ): 常见的方法包括网格搜索 (Grid Search)、随机搜索 (Random Search) 或更高级的贝叶斯优化 (Bayesian Optimization)。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;迁移学习(Transfer learning): 找到一个已经在海量数据集上训练好的模型。例如，一个在数百万张互联网图片上训练过的图像识别模型（如ResNet, VGG），将这个模型的绝大部分结构和权重拿过来，只替换或微调最后几层，用我们自己少量的数据（比如，一个只有几百张图片的猫狗分类任务）进行再次训练。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;多模态(Multi-modality)：让一个模型能够同时理解和处理来自多种不同类型的数据（图像、文本、声音、视频、表格数据等），并从中融合信息做出决策，如商品推荐中， 一个先进的电商推荐系统可能会结合商品的图片、用户的文字评论以及商品的价格和类别（表格数据）来决定是否向你推荐它。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Deploy models&lt;/strong&gt;: &lt;strong&gt;challenges:&lt;/strong&gt; Heavy computation is not  suitable for real-time inference, GPU for inference is costy. &lt;strong&gt;tech&lt;/strong&gt;: Model  deployment、 Distillation.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Monitor&lt;/strong&gt;: data distributions shifts, fairness, Explainability.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;机器学习中的人员&#34;&gt;机器学习中的人员
+&lt;/h3&gt;&lt;img src=&#34;ML_roles.png?&#34; alt=&#34;ML_roles&#34; style=&#34;zoom:35%;&#34; /&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;领域专家&lt;/strong&gt;：了解商业和产品，明确重要数据及部署机器学习模型的合适位置，确保机器学习用在关键处。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;软件开发工程师（SDE）&lt;/strong&gt;：开发和维护大量代码与组件，管理模型训练资源，确保模型训练、部署及维护的高效稳定。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;数据科学家&lt;/strong&gt;：全栈工程师，负责数据挖掘、模型训练与上线等全流程工作，行业人才稀缺，软件工程师和领域专家可成长为数据科学家。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;机器学习专家&lt;/strong&gt;：针对公司重要产品，对模型进行定制化，根据产品特点调整模型，以适应特定应用场景。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;成长路线&lt;/strong&gt;：SDE+Domain_experts -&amp;gt; Data scientists -&amp;gt; ML experts&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;summary&#34;&gt;Summary
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;ML has become a staple of modern business.&lt;/li&gt;
+&lt;li&gt;A ML workflow includes: formulating the problem, preparing data, training and deploying ML models, monitoring.&lt;/li&gt;
+&lt;li&gt;This course will teach technologies a data scientist needs in each ML workflow stage.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;(**staple **: 支柱性产品/服务；不可或缺的事物。Smartphones have become a &lt;strong&gt;staple&lt;/strong&gt; of daily life.)&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;12-data-acquisition&#34;&gt;1.2 Data Acquisition
+&lt;/h2&gt;&lt;h3 id=&#34;核心流程先找数据找不到再造数据&#34;&gt;核心流程：先找数据，找不到再造数据
+&lt;/h3&gt;&lt;img src=&#34;data_acquisiton_flow.png?&#34; alt=&#34;data_acquisiton_workflow&#34; style=&#34;zoom:50%;&#34; /&gt;
+&lt;p&gt;业务问题转换成机器学习问题后，首先要问的就是：&lt;strong&gt;数据够不够？&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;情况一 (运气好):&lt;/strong&gt; 你有足够的数据。 (后续课程会讲如何处理)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;情况二 (常见):&lt;/strong&gt; 数据不足。这时你有两个选择：
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;寻找外部数据源 (Discover / Integrate Data):&lt;/strong&gt; 能不能找到其他可用的数据集？如果可以，就需要去发现并整合它们。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;生成数据 (Generate Data):&lt;/strong&gt; 如果找不到，但你大致知道数据应该是什么样的，那就可以尝试自己生成数据。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;本节课主要围绕这两个核心方法展开：&lt;strong&gt;数据发现与整合&lt;/strong&gt; 和 &lt;strong&gt;数据生成&lt;/strong&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;part-1-数据发现与整合-discover--integrate-data&#34;&gt;Part 1: 数据发现与整合 (Discover &amp;amp; Integrate Data)
+&lt;/h3&gt;&lt;h4 id=&#34;1-发现可用数据-discover-data&#34;&gt;1. 发现可用数据 (Discover Data)
+&lt;/h4&gt;&lt;p&gt;这里的核心是区分“数据集 (Dataset)”和“数据 (Data)”。&lt;strong&gt;数据集&lt;/strong&gt;通常是别人已经为你清洗整理好、可以直接用于机器学习的；而&lt;strong&gt;数据&lt;/strong&gt;则是原始的、需要大量处理的。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;为研究新算法寻找数据集 (For Research):&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;目标：&lt;/strong&gt; 检验新算法的普适性和鲁棒性。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;策略：&lt;/strong&gt; 需要寻找多个、不同类型的基准数据集 (Benchmark Datasets)。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;举例：&lt;/strong&gt; 假设我要开发一个新的&lt;strong&gt;超参数调优算法&lt;/strong&gt;。我会找10-20个中小型数据集，它们应该涵盖不同领域（如图像、文本）、不同特点（如类别特别多、噪音特别大），这样才能全面评估我的算法在各种场景下的表现；如果我要训练一个&lt;strong&gt;大型深度神经网络&lt;/strong&gt;，我需要的是一个像ImageNet那样的超大规模数据集，才能发挥出大模型的潜力。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;为产品应用收集数据 (For Application):&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;目标：&lt;/strong&gt; 解决一个具体的业务问题。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;策略：&lt;/strong&gt; 几乎不可能有现成的数据集，必须亲自去收集原始数据。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;举例：&lt;/strong&gt; 做&lt;strong&gt;无人驾驶&lt;/strong&gt;。我们会在车上装满各种传感器（摄像头、激光雷达），然后雇人去开。需要在不同的天气、时间、路况（车流量）下尽可能多地采集数据，确保数据能够覆盖未来可能遇到的各种驾驶场景。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-那些知名的机器学习数据集是怎么来的&#34;&gt;2. 那些知名的机器学习数据集是怎么来的？
+&lt;/h4&gt;&lt;p&gt;这些数据集的来源主要分为两大类：&lt;strong&gt;网络爬取&lt;/strong&gt; 和 &lt;strong&gt;人工采集&lt;/strong&gt;。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;MNIST:&lt;/strong&gt; &lt;strong&gt;(人工采集)&lt;/strong&gt; 最经典的入门数据集之一，由美国人口普查局的员工手写的数字构成，是几十年前收集的。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ImageNet:&lt;/strong&gt; &lt;strong&gt;(网络爬取)&lt;/strong&gt; 引领深度学习浪潮的关键数据集。它的数据来自各大图片搜索引擎（Google、百度等）。方法就是搜索关键词（比如“猫”），把返回的图片全部爬下来，再通过大量人工标注，把其中的噪音（比如卡通猫、狮子等）去掉。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;AudioSet / Kinetics:&lt;/strong&gt; &lt;strong&gt;(网络爬取)&lt;/strong&gt; 都来自YouTube。AudioSet是声音片段用于声音分类；Kinetics是视频片段，用于人类行为分类。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;KITTI:&lt;/strong&gt; &lt;strong&gt;(人工采集)&lt;/strong&gt; 无人驾驶领域的标杆数据集，通过在真实道路上行驶的车辆，记录下摄像头、激光雷达等各种传感器的数据。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Amazon Review:&lt;/strong&gt; &lt;strong&gt;(网络爬取)&lt;/strong&gt; 爬取亚马逊网站上的所有用户商品评论，用于情感分析等任务。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;SQuAD:&lt;/strong&gt; &lt;strong&gt;(网络爬取/处理)&lt;/strong&gt; 从维基百科（Wikipedia）中提取“问题-答案”对，比如从文章中找到“某人生于哪一年？”并抽取出答案。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;LibriSpeech:&lt;/strong&gt; &lt;strong&gt;(网络爬取/处理)&lt;/strong&gt; 一个包含1000小时有声读物的语音数据集，用于语音识别和语音合成。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;3-去哪里寻找数据集&#34;&gt;3. 去哪里寻找数据集？
+&lt;/h4&gt;&lt;p&gt;十年前找数据集还很困难，但现在资源非常丰富。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Papers with Code:&lt;/strong&gt; 学术研究首选。它不仅整理了论文中常用的数据集，还附带了各种算法在该数据集上的表现排名（Leaderboard），非常适合进行算法效果对比。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Kaggle Datasets:&lt;/strong&gt; 一个机器学习竞赛平台，除了竞赛数据，还有大量用户（通常是数据科学家）上传的各种数据集。因为是用户上传，质量参差不齐，需要自己甄别。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Google Dataset Search:&lt;/strong&gt; 一个专门为数据集打造的搜索引擎，可以帮你搜索全网的数据集资源。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;各种工具包自带数据集 (Toolkits):&lt;/strong&gt; 很多流行的开源库都内置了一些经典数据集，方便学习和测试。例如 &lt;strong&gt;&lt;code&gt;TensorFlow Datasets&lt;/code&gt;&lt;/strong&gt; 和 &lt;strong&gt;&lt;code&gt;Hugging Face&lt;/code&gt;&lt;/strong&gt; (&lt;strong&gt;专注于海量文本数据集&lt;/strong&gt;)。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;机器学习竞赛 (Competitions):&lt;/strong&gt; 很多会议或公司会举办竞赛。这些数据集通常质量很高、场景新颖，并且紧贴业界前沿问题（比如公司拿出部分真实业务数据来寻求更好的解决方案）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;云平台开放数据 (Open Data on AWS):&lt;/strong&gt; 包含上百个超大规模的原始数据集。例如，美国气象卫星每小时产生的几个T的原始数据，或者把整个互联网爬下来的Common Crawl数据集（几百个T）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;公司内部的数据湖 (Data Lake):&lt;/strong&gt; 如果你在公司工作，内部通常会有一个“数据湖”，汇集了所有产品线的数据。你需要去里面发掘，并可能需要向其他团队申请权限，同时必须注意数据隐私和合规问题。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;4-三类数据集对比&#34;&gt;4. 三类数据集对比
+&lt;/h4&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;类型&lt;/th&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;优点 (Pros)&lt;/th&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;缺点 (Cons)&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;学术数据集&lt;/strong&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;① &lt;strong&gt;干净&lt;/strong&gt;，经过了大量预处理。&lt;br&gt;② &lt;strong&gt;难度适中&lt;/strong&gt;，太难没人做，太简单体现不出算法差异。&lt;br&gt;③ &lt;strong&gt;开箱即用&lt;/strong&gt;，适合快速验证算法。&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;① &lt;strong&gt;选择有限&lt;/strong&gt;，来来回回就那些。&lt;br&gt;② &lt;strong&gt;过于简化&lt;/strong&gt;，与真实工业界场景差距巨大。&lt;br&gt;③ &lt;strong&gt;不适合直接用于产品&lt;/strong&gt;。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;竞赛数据集&lt;/strong&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;① &lt;strong&gt;更接近真实应用&lt;/strong&gt;，通常源于一个真实的业务问题。&lt;br&gt;② 场景比较新颖。&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;① &lt;strong&gt;仍然经过了简化和处理&lt;/strong&gt;，隐藏了真实数据中最棘手的部分。&lt;br&gt;② &lt;strong&gt;主题局限&lt;/strong&gt;，大多集中在无人车、电商等热门领域。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;原始数据&lt;/strong&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;① &lt;strong&gt;灵活性极高&lt;/strong&gt;，能满足任何定制化的产品需求。&lt;br&gt;② 能真正解决你的业务问题。&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;① &lt;strong&gt;处理极其耗时耗力&lt;/strong&gt;，这正是数据科学家&lt;strong&gt;60%-70%&lt;strong&gt;时间花的地方。&lt;br&gt;② 需要庞大的工程支持（数据流、存储等）。&lt;br&gt;③ 涉及复杂的&lt;/strong&gt;法律和隐私问题&lt;/strong&gt;。&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h4 id=&#34;5-数据整合-data-integration&#34;&gt;5. 数据整合 (Data Integration)
+&lt;/h4&gt;&lt;p&gt;在工业界，数据通常分散存储在不同的地方（数据库表）。数据整合就是把这些来自多源的数据融合成一个连贯、信息丰富的数据集（要求对&lt;strong&gt;SQL&lt;/strong&gt;有所掌握）。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;举例：&lt;/strong&gt; 一个房产公司的数据可能存在三张表里：
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;房屋信息表 (House Info):&lt;/strong&gt; 面积、位置等，信息相对稳定，不常变动。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;销售记录表 (Sales):&lt;/strong&gt; 上市时间、成交价等，交易频繁，更新很快。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;经纪人信息表 (Agents):&lt;/strong&gt; 经纪人ID、姓名等，也相对稳定。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;方法：&lt;/strong&gt; 使用 &lt;code&gt;JOIN&lt;/code&gt; 操作，通过一个共同的 &lt;strong&gt;键 (Key)&lt;/strong&gt;（比如 &lt;code&gt;房屋ID&lt;/code&gt;）将这些表连接起来，形成一个包含所有信息的宽表。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;需要解决的关键问题：&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;识别正确的Key&lt;/strong&gt;：用哪个ID来连接？&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;处理缺失行 (Missing Rows)&lt;/strong&gt;：一个房子在A表有记录但在B表没有怎么办？（使用 &lt;code&gt;INNER JOIN&lt;/code&gt; 还是 &lt;code&gt;LEFT JOIN&lt;/code&gt; 取决于你的需求）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;处理重复列 (Redundant Columns)&lt;/strong&gt;：不同表可能有相同的字段名。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;解决数值冲突 (Value Conflicts)&lt;/strong&gt;：两个表都记录了房价，但数值不同。可能是单位不一致（&lt;code&gt;$1000&lt;/code&gt; vs &lt;code&gt;1k&lt;/code&gt;），也可能是数据录入错误。你需要定义规则来解决这些冲突。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;part-2-数据生成-generate-data&#34;&gt;Part 2: 数据生成 (Generate Data)
+&lt;/h3&gt;&lt;p&gt;当你&lt;strong&gt;找不到也收集不到足够的数据&lt;/strong&gt;时，可以考虑自己“创造”数据。&lt;/p&gt;
+&lt;h4 id=&#34;1-生成合成数据-synthetic-data&#34;&gt;1. 生成合成数据 (Synthetic Data)
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;使用GANs (生成对抗网络):&lt;/strong&gt; 可以生成高度逼真的数据。
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;例子1：&lt;/strong&gt; &lt;a class=&#34;link&#34; href=&#34;https://thispersondoesnotexist.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;ThisPersonDoesNotExist.com&lt;/a&gt; 网站上的人脸，全是由GAN生成的，可以用来扩充人脸识别数据集。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;例子2 (Amazon):&lt;/strong&gt; 为了给家具（如一盏灯）制作商品展示图，不用真实去装修一个房间然后拍照，而是用算法&lt;strong&gt;生成&lt;/strong&gt;一个逼真的客厅场景，再把灯无缝地“P”进去。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;使用模拟器 (Simulation):&lt;/strong&gt; 在虚拟环境中模拟真实世界，生成数据，这在自动驾驶等领域非常常用。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-数据增强-data-augmentation&#34;&gt;2. 数据增强 (Data Augmentation)
+&lt;/h4&gt;&lt;p&gt;这是最常用、最简单有效的方法，即对现有数据做一些微小的改动，生成“新”数据。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;图像增强 (Image Augmentation):&lt;/strong&gt; 对一张图片进行旋转、裁剪、拉伸、增加噪点、改变颜色等操作，一张图可以变成很多张。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;文本增强 (Text Augmentation) - 回译 (Back-Translation):&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;这是一个非常聪明的技巧。比如你有一句话：“I have no time.”&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;步骤1：&lt;/strong&gt; 把它翻译成另一种语言，比如法语。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;步骤2：&lt;/strong&gt; 再把法语翻译回英语，可能会变成：“I do not have time.”&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;结果：&lt;/strong&gt; 句子的核心语义没变，但语法和用词发生了变化，你就免费获得了一个新的训练样本。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;总结-summary&#34;&gt;总结 (Summary)
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;找到正确的数据是极具挑战性的。&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;工业界的&lt;strong&gt;原始数据&lt;/strong&gt;和学术界的&lt;strong&gt;干净数据集&lt;/strong&gt;是两种完全不同的东西，不要想当然地认为在学术数据集上表现好的算法在真实业务中也会同样出色。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;数据整合&lt;/strong&gt;是在工业界处理多源数据的必备技能。&lt;/li&gt;
+&lt;li&gt;当数据量不足时，&lt;strong&gt;数据增强&lt;/strong&gt;是一个非常普遍且有效的实践。&lt;/li&gt;
+&lt;li&gt;随着生成模型（GANs、3D模型）越来越强大，&lt;strong&gt;人工合成数据&lt;/strong&gt;正变得越来越流行，它提供了一种成本更低、更可控的数据获取方式。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;好的，作为一名数据方向的学生，我们来整理一份专注于技术和实践的课堂笔记。这份笔记会跳过宽泛的背景，直接聚焦于&lt;strong&gt;如何做 (How-to)&lt;/strong&gt; 和 &lt;strong&gt;需要注意的关键点 (Key Points)&lt;/strong&gt;。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;13-web-scraping&#34;&gt;1.3 Web Scraping
+&lt;/h2&gt;&lt;h3 id=&#34;核心目标与技术分野&#34;&gt;核心目标与技术分野
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;Web Scraping (数据抓取)&lt;/strong&gt; 和 &lt;strong&gt;Web Crawling (网络爬虫)&lt;/strong&gt; 有本质区别：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Crawling (爬虫):&lt;/strong&gt; 目标是索引整个互联网，像搜索引擎一样把整个&lt;strong&gt;网页&lt;/strong&gt;都下载下来。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Scraping (抓取):&lt;/strong&gt; 作为数据从业者的核心任务，我们更关心从&lt;strong&gt;特定网站&lt;/strong&gt;的页面中，提取出我们感兴趣的&lt;strong&gt;结构化数据&lt;/strong&gt;（如价格、地址、评分），并最终整理成一张干净的表 (Table)。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;从网站抓取的数据通常&lt;strong&gt;噪音多、标签弱&lt;/strong&gt;，但优点是&lt;strong&gt;规模大&lt;/strong&gt;，是许多著名数据集（如ImageNet）的来源。&lt;/p&gt;
+&lt;h3 id=&#34;核心技术反-反爬虫策略&#34;&gt;核心技术：反-反爬虫策略
+&lt;/h3&gt;&lt;p&gt;核心策略:&lt;strong&gt;尽可能模拟一个真实的人类用户&lt;/strong&gt;。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;使用Headless Browser (无头浏览器)&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;问题:&lt;/strong&gt; 直接使用&lt;code&gt;curl&lt;/code&gt;等简单工具请求网页，HTTP头信息会暴露你是机器人，很容易被服务器拒绝。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;解决方案:&lt;/strong&gt; 使用&lt;strong&gt;无头浏览器&lt;/strong&gt;，它本质上是一个没有图形界面(GUI)的真实浏览器（如Chrome），通过代码来自动化操作它，网站服务器很难分辨出这是机器行为还是真人操作。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;工具栈:&lt;/strong&gt; Python中的 &lt;code&gt;Selenium&lt;/code&gt; 库：驱动一个真实的浏览器内核，帮你打开网页、渲染JS、并获取最终的HTML内容。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;使用IP地址池&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;问题:&lt;/strong&gt; 同一个IP在短时间内进行大量访问，是机器人最明显的特征，会被网站迅速封禁。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;解决方案:&lt;/strong&gt; 使用大量的IP地址轮换访问。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;IP来源:&lt;/strong&gt; 公有云是获取大量IP最便捷、成本最低的方式。例如，AWS拥有全球IPv4地址的1.75%，你每启动一台新的云主机，几乎都能获得一个新的IP。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;实战案例抓取-zillow-房产数据&#34;&gt;实战案例：抓取 Zillow 房产数据
+&lt;/h3&gt;&lt;p&gt;我们以抓取美国房产网站 Zillow 上斯坦福附近已售房屋的数据为例。（对HTML基础有要求）&lt;/p&gt;
+&lt;h4 id=&#34;step-1-分析url结构定位目标页面&#34;&gt;Step 1: 分析URL结构，定位目标页面
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;列表页URL:&lt;/strong&gt; &lt;code&gt;https://www.zillow.com/stanford-ca/sold/&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;规律:&lt;/strong&gt; URL结构清晰，城市(&lt;code&gt;stanford-ca&lt;/code&gt;)和页码(&lt;code&gt;2-p/&lt;/code&gt;)是可变参数。通过修改这些参数，我们可以遍历所有城市的房产列表页。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;step-2-抓取列表页提取详情页id&#34;&gt;Step 2: 抓取列表页，提取详情页ID
+&lt;/h4&gt;&lt;p&gt;在列表页，我们需要拿到每个房子的独立ID，才能访问其详情页。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;工具:&lt;/strong&gt; 使用 &lt;code&gt;BeautifulSoup&lt;/code&gt; 这个Python库来解析抓取到的HTML。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;方法:&lt;/strong&gt;
+&lt;ol&gt;
+&lt;li&gt;用浏览器自带的“开发者工具 (Inspect)”定位到包含房屋链接的HTML元素，发现它们通常是&lt;code&gt;&amp;lt;a&amp;gt;&lt;/code&gt;标签，且有一个特定的 &lt;code&gt;class&lt;/code&gt;，例如 &lt;code&gt;list-card-link&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;编写代码，筛选出所有符合条件的&lt;code&gt;&amp;lt;a&amp;gt;&lt;/code&gt;标签，并从其&lt;code&gt;href&lt;/code&gt;属性中提取出房子的唯一ID。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 使用BeautifulSoup解析HTML，找到所有房屋的链接&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;page&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;BeautifulSoup&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;open&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;html_path&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;r&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;links&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;href&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;page&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;find_all&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;a&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;list-card-link&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 从链接中解析出每个房子的唯一ID（需要自行观察构造）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;ids&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;l&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;split&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;/&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)[&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;split&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;_&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;l&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;links&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;step-3-构造详情页url抓取详细信息&#34;&gt;Step 3: 构造详情页URL，抓取详细信息
+&lt;/h4&gt;&lt;p&gt;有了ID后，我们就可以&lt;strong&gt;拼接&lt;/strong&gt;出每个房子的详情页URL，例如：&lt;code&gt;https://www.zillow.com/homedetails/19506780_zpid/&lt;/code&gt;，然后抓取这些页面的HTML。&lt;/p&gt;
+&lt;h4 id=&#34;step-4-从详情页html中提取结构化数据&#34;&gt;Step 4: 从详情页HTML中提取结构化数据
+&lt;/h4&gt;&lt;p&gt;这是最繁琐但也是最核心的一步。我们需要从杂乱的HTML中，精确找到我们想要的数据字段。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;方法:&lt;/strong&gt; 同样使用“开发者工具(Inspect)”，鼠标悬停在你想要的数据上（比如成交价），查看它在HTML中的位置、标签和&lt;code&gt;class&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;老师的例子 (提取成交价和日期):&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;发现这两个信息都包含在一个&lt;code&gt;class&lt;/code&gt;为&lt;code&gt;ds-home-details-chip&lt;/code&gt;的&lt;code&gt;&amp;lt;div&amp;gt;&lt;/code&gt;容器内的&lt;code&gt;&amp;lt;span&amp;gt;&lt;/code&gt;标签里。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;观察发现文本特征&lt;/strong&gt;分别是 &amp;ldquo;Sold:&amp;rdquo; 和 &amp;ldquo;Sold on&amp;rdquo;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 找到包含关键信息的父容器&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;sold_items&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;text&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;page&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;find&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;s1&#34;&gt;&amp;#39;div&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;ds-home-details-chip&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;find&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;p&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;find_all&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;span&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 遍历并根据文本特征提取数据&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;item&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;sold_items&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;Sold:&amp;#39;&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;item&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;result&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;Sold Price&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;item&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;split&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39; &amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;Sold on&amp;#39;&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;item&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;result&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;Sold On&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;item&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;split&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39; &amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)[&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;通过重复这个“&lt;strong&gt;Inspect -&amp;gt; 定位 -&amp;gt; 提取&lt;/strong&gt;”的过程，我们就可以将整个网页非结构化的信息，转换为一张包含价格、日期、卧室数、面积等字段的结构化数据表。&lt;/p&gt;
+&lt;h3 id=&#34;抓取图片数据&#34;&gt;抓取图片数据
+&lt;/h3&gt;&lt;p&gt;图片数据对于多模态模型非常重要。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;方法:&lt;/strong&gt; 图片的URL通常也有规律可循。通过检查网页源码，我们可以使用&lt;strong&gt;正则表达式 (Regular Expression)&lt;/strong&gt; 批量匹配出所有图片的URL。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;老师的例子:&lt;/strong&gt; Zillow的图片URL有固定模式，可以通过正则表达式匹配出图片ID，再套用模板拼接出高清大图的URL。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 定义匹配图片ID的正则表达式模式&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;p&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;sa&#34;&gt;r&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;https://photos.zillowstatic.com/fp/([\d\w\-\_]+).jpg&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 找到所有匹配的ID&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;ids&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;split&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;-&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;re&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;findall&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;p&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;html&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 拼接成高清图的URL&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;urls&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;sa&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;https://photos.zillowstatic.com/fp/&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;id&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;-uncropped_scaled_within_1536_1152.jpg&amp;#39;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;id&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ids&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;成本与性能分析&#34;&gt;成本与性能分析
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;硬件选择:&lt;/strong&gt; AWS EC2 &lt;code&gt;t3.small&lt;/code&gt; 实例 (2GB内存, 2 vCPU)。关键在于&lt;strong&gt;内存&lt;/strong&gt;，因为浏览器本身非常耗内存，CPU和带宽通常不是瓶颈。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;成本优化:&lt;/strong&gt; 使用&lt;strong&gt;竞价实例 (Spot Instance)&lt;/strong&gt; 可以显著降低成本。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;性能估算:&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;速度:&lt;/strong&gt; 单页抓取约&lt;strong&gt;3秒&lt;/strong&gt;。这个速度比较合理，过于频繁的请求会被视为攻击。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;规模:&lt;/strong&gt; 使用100台实例，抓取100万个房产页面大约需要8.3小时，硬件成本仅为$16.6。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;额外成本:&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;图片抓取:&lt;/strong&gt; 抓取成本与图片数量成正比 (抓2000万张图 ≈ 抓2000万个网页)，约$300。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;数据存储:&lt;/strong&gt; 这是&lt;strong&gt;持续性的大头开销&lt;/strong&gt;。在云上存储几个T的图片，每月可能需要数百美元。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;成本优化:&lt;/strong&gt; 将图片分辨率降低，或将数据下载到本地硬盘存储，成本会低得多。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;法律与道德红线-practitioners-dos--donts&#34;&gt;法律与道德红线 (Practitioner&amp;rsquo;s Do&amp;rsquo;s &amp;amp; Don&amp;rsquo;ts)
+&lt;/h3&gt;&lt;p&gt;网页抓取本身不违法，但操作时必须遵守规则，避免法律风险。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;【禁止】抓取&lt;strong&gt;需要登录&lt;/strong&gt;才能访问的私有数据。&lt;/li&gt;
+&lt;li&gt;【禁止】抓取涉及&lt;strong&gt;个人隐私&lt;/strong&gt;的敏感信息（如健康、医疗档案）。&lt;/li&gt;
+&lt;li&gt;【禁止】抓取有明确&lt;strong&gt;版权&lt;/strong&gt;的内容（如音乐、付费视频）。
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;注：很多数据集（如Kinetics）只提供视频ID列表，让你自己去下载，就是为了规避版权问题。&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;【必须】遵守&lt;strong&gt;网站的&lt;code&gt;robots.txt&lt;/code&gt;协议和服务条款&lt;/strong&gt; (Terms of Service)。 如果对方明确禁止抓取，就应该遵守。&lt;/li&gt;
+&lt;li&gt;【建议】如果你计划将抓取的数据用于&lt;strong&gt;商业盈利&lt;/strong&gt;，务必咨询律师。 特别是，避免直接抓取竞争对手的网站，这是非常敏感的行为。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;好的，作为一名数据方向的学生，我们来整理一份专注于技术和实践的课堂笔记。这份笔记将围绕PPT的核心框架，并融入老师讲解中那些非常宝贵的实践经验和细节。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;14-data-labeling-数据标注&#34;&gt;1.4 Data Labeling (数据标注)
+&lt;/h2&gt;&lt;h3 id=&#34;核心问题有了数据但无标注或标注较少&#34;&gt;核心问题：有了数据但无标注或标注较少。
+&lt;/h3&gt;&lt;img src=&#34;data_labelling_flow.png?&#34; alt=&#34;data_acquisiton_workflow&#34; style=&#34;zoom:33%;&#34; /&gt;
+&lt;p&gt;当我们获取到原始数据后，下一步就是获取标签。根据**“是否有初始标签”&lt;strong&gt;和&lt;/strong&gt;“是否有预算”**，我们可以选择不同的技术路径。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;场景一：有少量标签，没预算 → 半监督学习 (Semi-Supervised Learning)&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;场景二：没标签，有预算 → 众包 (Crowdsourcing)&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;场景三：没标签，没预算 → 弱监督 (Weak Supervision)&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;1-半监督学习-semi-supervised-learning&#34;&gt;1. 半监督学习 (Semi-Supervised Learning)
+&lt;/h3&gt;&lt;h4 id=&#34;适用场景&#34;&gt;适用场景
+&lt;/h4&gt;&lt;p&gt;有一小部分高质量的标注数据（比如来自用户的明确反馈），以及海量的未标注数据（比如大部分用户的浏览行为）。目标是利用这些海量的未标注数据，来提升模型性能。&lt;/p&gt;
+&lt;h4 id=&#34;核心思想&#34;&gt;核心思想
+&lt;/h4&gt;&lt;p&gt;SSL依赖于几个关键假设，让我们能从无标签数据中推断信息：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;连续性假设 (Continuity):&lt;/strong&gt; 特征相似的样本，其标签也可能相同。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;聚类假设 (Cluster):&lt;/strong&gt; 数据天然地倾向于形成簇，同一个簇内的样本有相同的标签。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;流形假设 (Manifold):&lt;/strong&gt; 高维数据实际上分布在一个低维的内在结构上，这让我们可以通过降维等方式发现其本质。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;关键技术自训练-self-training&#34;&gt;关键技术：自训练 (Self-training)
+&lt;/h4&gt;&lt;p&gt;自训练是SSL中最简单且常用的一种方法，其工作流程是一个迭代增强的循环：&lt;/p&gt;
+&lt;img src=&#34;self_training.png?&#34; alt=&#34;data_acquisiton_workflow&#34; style=&#34;zoom:33%;&#34; /&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;训练 (Train):&lt;/strong&gt; 使用现有的少量已标注数据，训练一个初始模型。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;预测 (Predict):&lt;/strong&gt; 用这个模型去预测所有未标注数据的标签。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;筛选与合并 (Filter &amp;amp; Merge):&lt;/strong&gt; 挑选出模型&lt;strong&gt;预测置信度非常高&lt;/strong&gt;的样本，将这些“伪标签 (Pseudo-labels)”数据加入到原始的标注数据集中。
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;举例：&lt;/strong&gt; 在一个三分类任务中，如果模型预测一个样本属于A类的概率是98%，而B和C类各1%，这就是高置信度。如果预测结果是A、B、C类的概率都在33%左右，这就是低置信度，我们会暂时丢弃这个样本的伪标签。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;重复:&lt;/strong&gt; 用合并后的、更大的数据集重新训练模型，然后回到第2步，不断循环。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;实践要点:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;模型选择：&lt;/strong&gt; 因为自训练是一个离线的数据处理过程，我们不关心模型的推理速度和大小。因此，可以尽情使用&lt;strong&gt;计算成本高昂但性能强大&lt;/strong&gt;的模型，比如大型深度神经网络或模型集成(Ensemble/Bagging)，以获得尽可能准确的伪标签。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2-众包-crowdsourcing&#34;&gt;2. 众包 (Crowdsourcing)
+&lt;/h3&gt;&lt;h4 id=&#34;适用场景-1&#34;&gt;适用场景
+&lt;/h4&gt;&lt;p&gt;没有初始标签，但有预算时，直接找人来标是最直接的方法。著名的ImageNet数据集就是通过Amazon Mechanical Turk (AMT)平台，花费数年和数百万美元标注完成的。&lt;/p&gt;
+&lt;h4 id=&#34;成本估算-基于aws-sagemaker&#34;&gt;成本估算 (基于AWS SageMaker)
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;图像/文本分类： ~$0.012 / 每个标签&lt;/li&gt;
+&lt;li&gt;画边界框 (Bounding Box)： ~$0.024 / 每个框&lt;/li&gt;
+&lt;li&gt;语义分割 (Semantic Segmentation)： ~$0.84 / 每张图 (成本高，因为需要对每个像素进行分类)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;注意：&lt;/strong&gt; 标注100万张需要做语义分割的图片，成本至少是84万美元，这还不算为了保证质量进行的重复标注。&lt;/p&gt;
+&lt;h4 id=&#34;众包实践中的三大挑战与对策&#34;&gt;众包实践中的三大挑战与对策
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;挑战一：用户交互与任务设计 (User Interaction)&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;问题:&lt;/strong&gt; 众包平台上的标注员背景各异，可能没有专业知识。复杂的任务会劝退大量标注员，且质量难以保证。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;对策：&lt;/strong&gt; &lt;strong&gt;将复杂任务拆解为极简的原子任务。&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;举例 (MIT Place365数据集):&lt;/strong&gt; 365个场景分类的数据集：设计了365个独立的、极其简单的“&lt;strong&gt;是/否&lt;/strong&gt;”判断题，例如：“这张图里有悬崖吗？(Y/N)”。标注员只需要按一下键盘，任务难度和认知负荷都降到了最低。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;挑战二：成本控制 (Cost)&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;问题:&lt;/strong&gt; 标注成本 = 任务单价 × 任务数量，把所有数据都发去标注，成本极高。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;对策：&lt;/strong&gt; 使用&lt;strong&gt;主动学习 (Active Learning)&lt;/strong&gt;，让模型帮助我们筛选出&lt;strong&gt;最值得&lt;/strong&gt;人工标注的数据。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;核心思想:&lt;/strong&gt; 与自训练恰好相反。&lt;strong&gt;自训练&lt;/strong&gt;是模型自动标注&lt;strong&gt;最简单、最自信&lt;/strong&gt;的样本；而&lt;strong&gt;主动学习&lt;/strong&gt;是模型挑出自己&lt;strong&gt;最困惑、最不确定&lt;/strong&gt;的样本，然后把这些“硬骨头”交给人类专家来解决。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;常见策略 (Uncertainty Sampling):&lt;/strong&gt; 训练一个初始模型，然后找出那些模型预测概率分布最接近均匀分布（即最像随机猜测）的样本，优先发送给标注员。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;组合拳：主动学习 + 自训练&lt;/strong&gt;&lt;/p&gt;
+&lt;img src=&#34;selft-raining_active-learning.png&#34; style=&#34;zoom:33%;&#34; /&gt;
+&lt;p&gt;这是工业界非常常见的最佳实践：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;用初始标签训练模型。&lt;/li&gt;
+&lt;li&gt;模型对未标注数据进行预测。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;最自信的&lt;/strong&gt;预测结果，直接成为伪标签，加入训练集。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;最不自信的&lt;/strong&gt;预测结果，发送给众包平台进行人工标注，标完后加入训练集。&lt;/li&gt;
+&lt;li&gt;不断迭代，高效地扩充高质量标注数据集。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;挑战三：质量控制 (Quality Control)&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;问题:&lt;/strong&gt; 标注员会犯错，可能是无意的（手滑、没理解），也可能是故意的（为了刷单）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;对策：&lt;/strong&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;多数投票 (Majority Voting):&lt;/strong&gt; 最简单但最昂贵的方法。将同一个任务发给3个或5个不同的人，以多数人的选择为最终标签。这会让你的成本翻3-5倍。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;智能、动态的质量控制:&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;动态任务分配:&lt;/strong&gt; 比如说先发给两个人，如果这两个人都同意这是一个正类样本则结束；或者对于一个样本，我的模型有自己的预测但不那么确信，发给一个人标注看是否一致。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;筛选标注员:&lt;/strong&gt; 在任务中混入一些我们已经知道正确答案的“金丝雀”样本（Honeypots）。如果某个标注员在这些样本上频繁出错，就可以判定其质量低下，将其剔除。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;3-弱监督-weak-supervision&#34;&gt;3. 弱监督 (Weak Supervision)
+&lt;/h3&gt;&lt;h4 id=&#34;适用场景-2&#34;&gt;适用场景
+&lt;/h4&gt;&lt;p&gt;最极限但也很常见的情况：&lt;strong&gt;没钱，也没初始标签&lt;/strong&gt;。这时，我们需要发挥自己的领域知识来创造标签。&lt;/p&gt;
+&lt;h4 id=&#34;核心思想数据编程-data-programming&#34;&gt;核心思想：数据编程 (Data Programming)
+&lt;/h4&gt;&lt;p&gt;我们不再逐一手动标注样本，而是编写一系列启发式&lt;strong&gt;规则&lt;/strong&gt; (Heuristics)，也称为&lt;strong&gt;标注函数 (Labeling Functions)&lt;/strong&gt;，来为数据批量生成&lt;strong&gt;有噪音的、弱的&lt;/strong&gt;标签。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Domain specific heuristics to assign labels; Keyword search, pattern matching, third-party models.&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;举例 (判断YouTube评论是否为垃圾评论):&lt;/strong&gt;
+我们可以根据经验编写几个简单的Python函数：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 规则1: 基于关键词。包含&amp;#34;check out&amp;#34;的评论很可能是广告。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;check_out&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;SPAM&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;check out&amp;#34;&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;lower&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ABSTAIN&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 规则2: 基于第三方模型。用情感分析模型判断，情绪特别积极的可能是正常评论。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# (甚至是多个第三方模型投票)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;sentiment&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;HAM&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;sentiment_polarity&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;0.9&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ABSTAIN&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 规则3: 基于数据模式。正常评论通常很短，广告需要更多文字。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;short_comment&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;HAM&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;len&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;split&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;5&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ABSTAIN&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;工作流程:&lt;/strong&gt; 我们会编写几十甚至上百个这样的规则。这些规则之间可能会有冲突和重叠。弱监督框架（如Snorkel）的核心就是通过一个生成模型，来学习这些规则的准确性和相关性，并最终为每个数据点给出一个统一的、概率性的标签。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;（假设想判断“微博是否含垃圾广告”。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;LF1&lt;/strong&gt;：含“加微信” → 1&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;LF2&lt;/strong&gt;：含“http” → 1&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;LF3&lt;/strong&gt;：用户粉丝 &amp;gt; 1w → 0（大 V 认为不是广告）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;LF4&lt;/strong&gt;：外部黑名单 API → 1&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;对某条微博，LF1、LF4 投 1，LF2、LF3 投 0。
+GM 发现：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;LF4 准确率 90 %，LF1 只有 60 %，LF3 80 %，LF2 55 %。
+→ 综合后 P(Y=1)=0.83，&lt;strong&gt;软标签 0.83&lt;/strong&gt; 送给下游模型做损失。）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;规则来源:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;关键词搜索、正则表达式匹配&lt;/li&gt;
+&lt;li&gt;数据库中的结构化信息&lt;/li&gt;
+&lt;li&gt;调用第三方模型或API (如各大云厂商提供的AI服务)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这种方法将手动标注的体力活，转换为了编写和迭代标注函数的脑力活，极大地提升了标注效率。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>Pandas_note</title>
         <link>https://rooobeam.github.io/p/pandas_note/</link>
         <pubDate>Sun, 21 Sep 2025 19:38:56 +0800</pubDate>
