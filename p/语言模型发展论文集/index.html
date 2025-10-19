@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Lorem Ipsum Dolor Si Amet">
-<title>Placeholder Text</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="2003 A Neural Probabilistic Language Model 统计语言建模目的是学习语言中单词序列的联合概率函数。由于维度灾难：测试集的单词序列可能出现训练集中从未出现的单词序列。传统n-gram词袋模型成功实现 泛化能力 通过马尔可夫链。文章提出学习词语的 分布式表示 ，该模型会同时学习：（1）每个词的分布式表示（2）一个以这些表示为基础的词序列概率函数。\n">
+<title>语言模型发展论文集</title>
 
-<link rel='canonical' href='https://rooobeam.github.io/p/placeholder-text/'>
+<link rel='canonical' href='https://rooobeam.github.io/p/%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E5%8F%91%E5%B1%95%E8%AE%BA%E6%96%87%E9%9B%86/'>
 
-<link rel="stylesheet" href="/scss/style.min.4f77a518c8e8877dfe55e8d90f7ed3f84e82d7a31cd88e8d1dcf983db94f54bc.css"><meta property='og:title' content="Placeholder Text">
-<meta property='og:description' content="Lorem Ipsum Dolor Si Amet">
-<meta property='og:url' content='https://rooobeam.github.io/p/placeholder-text/'>
+<link rel="stylesheet" href="/scss/style.min.4f77a518c8e8877dfe55e8d90f7ed3f84e82d7a31cd88e8d1dcf983db94f54bc.css"><meta property='og:title' content="语言模型发展论文集">
+<meta property='og:description' content="2003 A Neural Probabilistic Language Model 统计语言建模目的是学习语言中单词序列的联合概率函数。由于维度灾难：测试集的单词序列可能出现训练集中从未出现的单词序列。传统n-gram词袋模型成功实现 泛化能力 通过马尔可夫链。文章提出学习词语的 分布式表示 ，该模型会同时学习：（1）每个词的分布式表示（2）一个以这些表示为基础的词序列概率函数。\n">
+<meta property='og:url' content='https://rooobeam.github.io/p/%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E5%8F%91%E5%B1%95%E8%AE%BA%E6%96%87%E9%9B%86/'>
 <meta property='og:site_name' content='rooobeam'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='markdown' /><meta property='article:tag' content='text' /><meta property='article:tag' content='tag with whitespaces' /><meta property='article:published_time' content='2025-01-17T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-01-17T00:00:00&#43;00:00'/><meta property='og:image' content='https://rooobeam.github.io/p/placeholder-text/matt-le-SJSpo9hQf7s-unsplash.jpg' />
-<meta name="twitter:title" content="Placeholder Text">
-<meta name="twitter:description" content="Lorem Ipsum Dolor Si Amet"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='https://rooobeam.github.io/p/placeholder-text/matt-le-SJSpo9hQf7s-unsplash.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-10-18T22:12:20&#43;08:00'/><meta property='article:modified_time' content='2025-10-18T22:12:20&#43;08:00'/>
+<meta name="twitter:title" content="语言模型发展论文集">
+<meta name="twitter:description" content="2003 A Neural Probabilistic Language Model 统计语言建模目的是学习语言中单词序列的联合概率函数。由于维度灾难：测试集的单词序列可能出现训练集中从未出现的单词序列。传统n-gram词袋模型成功实现 泛化能力 通过马尔可夫链。文章提出学习词语的 分布式表示 ，该模型会同时学习：（1）每个词的分布式表示（2）一个以这些表示为基础的词序列概率函数。\n">
     <link rel="shortcut icon" href="/favicon.ico" />
 
     </head>
@@ -237,7 +236,15 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#mane-refeci-capiebant-unda-mulcebat">Mane refeci capiebant unda mulcebat</a></li>
+    <li><a href="#2003-a-neural-probabilistic-language-model">2003 A Neural Probabilistic Language Model</a>
+      <ol>
+        <li><a href="#任务-我们要训练一个语言模型当前遇到的训练句子是-a-cat-sat-on-a-mat">任务: 我们要训练一个语言模型。当前遇到的训练句子是 &ldquo;a cat sat on a mat&rdquo;。</a></li>
+        <li><a href="#目标-根据上下文-预测下一个词">目标: 根据上下文 预测下一个词。</a></li>
+        <li><a href="#模型简化设定从底到顶">模型简化设定（从底到顶）：</a></li>
+        <li><a href="#正向传播底部流向顶部">正向传播（底部流向顶部）：</a></li>
+        <li><a href="#反向传播">反向传播</a></li>
+      </ol>
+    </li>
   </ol>
 </nav>
         </div>
@@ -249,33 +256,17 @@
 
 
             <main class="main full-width">
-    <article class="has-image main-article">
+    <article class="main-article">
     <header class="article-header">
-        <div class="article-image">
-            <a href="/p/placeholder-text/">
-                <img src="/p/placeholder-text/matt-le-SJSpo9hQf7s-unsplash_hu_35cb8ebf5fe9ea03.jpg"
-                        srcset="/p/placeholder-text/matt-le-SJSpo9hQf7s-unsplash_hu_35cb8ebf5fe9ea03.jpg 800w, /p/placeholder-text/matt-le-SJSpo9hQf7s-unsplash_hu_82f8de9742c8486f.jpg 1600w"
-                        width="800" 
-                        height="533" 
-                        loading="lazy"
-                        alt="Featured image of post Placeholder Text" />
-                
-            </a>
-        </div>
-    
 
     <div class="article-details">
     
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/placeholder-text/">Placeholder Text</a>
+            <a href="/p/%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E5%8F%91%E5%B1%95%E8%AE%BA%E6%96%87%E9%9B%86/">语言模型发展论文集</a>
         </h2>
     
-        
-        <h3 class="article-subtitle">
-            Lorem Ipsum Dolor Si Amet
-        </h3>
         
     </div>
 
@@ -295,7 +286,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2025-01-17</time>
+                <time class="article-time--published">2025-10-18</time>
             </div>
         
 
@@ -311,45 +302,125 @@
     <section class="article-content">
     
     
-    <p>Lorem est tota propiore conpellat pectoribus de pectora summo.</p>
-<p>Redit teque digerit hominumque toris verebor lumina non cervice subde tollit usus habet Arctonque, furores quas nec ferunt. Quoque montibus nunc caluere tempus inhospita parcite confusaque translucet patri vestro qui optatis lumine cognoscere flos nubis! Fronde ipsamque patulos Dryopen deorum.</p>
-<ol>
-<li>Exierant elisi ambit vivere dedere</li>
-<li>Duce pollice</li>
-<li>Eris modo</li>
-<li>Spargitque ferrea quos palude</li>
-</ol>
-<p>Rursus nulli murmur; hastile inridet ut ab gravi sententia! Nomine potitus silentia flumen, sustinet placuit petis in dilapsa erat sunt. Atria tractus malis.</p>
-<ol>
-<li>Comas hunc haec pietate fetum procerum dixit</li>
-<li>Post torum vates letum Tiresia</li>
-<li>Flumen querellas</li>
-<li>Arcanaque montibus omnes</li>
-<li>Quidem et</li>
-</ol>
-<h1 id="vagus-elidunt">Vagus elidunt
-</h1><p><svg class="canon" xmlns="http://www.w3.org/2000/svg" overflow="visible" viewBox="0 0 496 373" height="373" width="496"><g fill="none"><path stroke="#000" stroke-width=".75" d="M.599 372.348L495.263 1.206M.312.633l494.95 370.853M.312 372.633L247.643.92M248.502.92l246.76 370.566M330.828 123.869V1.134M330.396 1.134L165.104 124.515"></path><path stroke="#ED1C24" stroke-width=".75" d="M275.73 41.616h166.224v249.05H275.73zM54.478 41.616h166.225v249.052H54.478z"></path><path stroke="#000" stroke-width=".75" d="M.479.375h495v372h-495zM247.979.875v372"></path><ellipse cx="498.729" cy="177.625" rx=".75" ry="1.25"></ellipse><ellipse cx="247.229" cy="377.375" rx=".75" ry="1.25"></ellipse></g></svg></p>
-<p><a class="link" href="https://en.wikipedia.org/wiki/Canons_of_page_construction#Van_de_Graaf_canon"  target="_blank" rel="noopener"
-    >The Van de Graaf Canon</a></p>
-<h2 id="mane-refeci-capiebant-unda-mulcebat">Mane refeci capiebant unda mulcebat
-</h2><p>Victa caducifer, malo vulnere contra dicere aurato, ludit regale, voca! Retorsit colit est profanae esse virescere furit nec; iaculi matertera et visa est, viribus. Divesque creatis, tecta novat collumque vulnus est, parvas. <strong>Faces illo pepulere</strong> tempus adest. Tendit flamma, ab opes virum sustinet, sidus sequendo urbis.</p>
-<p>Iubar proles corpore raptos vero auctor imperium; sed et huic: manus caeli Lelegas tu lux. Verbis obstitit intus oblectamina fixis linguisque ausus sperare Echionides cornuaque tenent clausit possit. Omnia putatur. Praeteritae refert ausus; ferebant e primus lora nutat, vici quae mea ipse. Et iter nil spectatae vulnus haerentia iuste et exercebat, sui et.</p>
-<p>Eurytus Hector, materna ipsumque ut Politen, nec, nate, ignari, vernum cohaesit sequitur. Vel <strong>mitis temploque</strong> vocatus, inque alis, <em>oculos nomen</em> non silvis corpore coniunx ne displicet illa. Crescunt non unus, vidit visa quantum inmiti flumina mortis facto sic: undique a alios vincula sunt iactata abdita! Suspenderat ego fuit tendit: luna, ante urbem Propoetides <strong>parte</strong>.</p>
+    <h2 id="2003-a-neural-probabilistic-language-model">2003 A Neural Probabilistic Language Model
+</h2><p>统计语言建模目的是学习语言中单词序列的联合概率函数。由于维度灾难：测试集的单词序列可能出现训练集中从未出现的单词序列。传统n-gram词袋模型成功实现 泛化能力 通过马尔可夫链。文章提出学习词语的 分布式表示 ，该模型会同时学习：（1）每个词的<strong>分布式表示</strong>（2）一个以这些表示为基础的词<strong>序列概率函数</strong>。</p>
+<img src="2003.png" alt="ML_workflow" style="zoom:50%;" />
+<h3 id="任务-我们要训练一个语言模型当前遇到的训练句子是-a-cat-sat-on-a-mat">任务: 我们要训练一个语言模型。当前遇到的训练句子是 &ldquo;a cat sat on a mat&rdquo;。
+</h3><h3 id="目标-根据上下文-预测下一个词">目标: 根据上下文 预测下一个词。
+</h3><h3 id="模型简化设定从底到顶">模型简化设定（从底到顶）：
+</h3><ul>
+<li><strong>上下文长度 (n-1)</strong>: 只看前面 <strong>2</strong> 个词（主观），也就是最底下绿色方块只有俩，w_t-2, w_t-1。</li>
+<li><strong>词向量维度 (m)</strong>: 把每个词表示成一个 <strong>3</strong> 维的向量（主观），从绿色方块变成3个红色点。</li>
+<li><strong>隐藏层大小 (h)</strong>: 我们的隐藏层有 <strong>2</strong> 个神经元（主观），到中间红点这里会乘以一个矩阵，矩阵的规模和2个神经元有关。</li>
+<li><strong>词汇表 (V)</strong>: 我们的整个语言只有 6 个词(客观)：<code>{a, cat, mat, on, sat, the}</code>。它们的索引分别是 <code>{0, 1, 2, 3, 4, 5}</code>，也就是最顶上。</li>
+</ul>
+<h3 id="正向传播底部流向顶部">正向传播（底部流向顶部）：
+</h3><ul>
+<li>
+<p><strong>输入与查表</strong>：从最底绿点到倒二红点，w是词，绿块是w的索引, 倒二行红点是w的词向量 C(w)。</p>
+<p>训练句子 &ldquo;a cat sat on a mat&rdquo; 截取出(a, cat, sat), (cat, sat, on)&hellip;, 第一条为(a, cat, sat)。</p>
+<p>输入: 上下文是 &ldquo;a cat&rdquo;。它们的索引分别是 <code>0</code> 和 <code>1</code>。</p>
+<p>查表 (C): 我们有一个 <code>6x3</code> 的词向量矩阵 <code>C</code> (6个词，每个3维)，它刚被随机初始化：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th style="text-align: left">词 (索引)</th>
+          <th style="text-align: left">词向量 <code>C(word)</code></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left"><strong>a (0)</strong></td>
+          <td style="text-align: left"><code>[0.1, 0.2, 0.3]</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">cat (1)</td>
+          <td style="text-align: left"><code>[0.4, 0.5, 0.6]</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">mat (2)</td>
+          <td style="text-align: left"><code>[0.7, 0.8, 0.9]</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">on (3)</td>
+          <td style="text-align: left"><code>[1.0, 1.1, 1.2]</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">sat (4)</td>
+          <td style="text-align: left"><code>[1.3, 1.4, 1.5]</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">the (5)</td>
+          <td style="text-align: left"><code>[1.6, 1.7, 1.8]</code></td>
+      </tr>
+  </tbody>
+</table></div>
+<p>我们从这个表里查出输入词的向量：</p>
+<ul>
+<li><code>C(a)</code> = <code>[0.1, 0.2, 0.3]</code> C(w_t-2)</li>
+<li><code>C(cat )</code> = <code>[0.4, 0.5, 0.6]</code> C(w_t-1)</li>
+</ul>
+</li>
+<li>
+<p><strong>拼接输入向量</strong></p>
+<p>把上一步得到的两个词向量拼接成一个大向量 <code>x</code>，形成 tanh 下的长红点。<br>
+<code>x = [ C(sat), C(on) ] = [1.3, 1.4, 1.5, 1.0, 1.1, 1.2] </code><br>
+这个 <code>x</code> 的维度是 <code>(n-1) * m = 2 * 3 = 6</code>（看了前两个词，每个词向量长度为3）。</p>
+</li>
+<li>
+<p><strong>计算隐藏层</strong> (tanh)</p>
+<p>现在信息流向了中间的 <code>tanh</code> 隐藏层。计算公式是 <code>tanh(d + Hx)</code>。</p>
+<ul>
+<li><code>x</code>: 就是我们上一步得到的 <code>[1.3, 1.4, 1.5, 1.0, 1.1, 1.2]</code>。</li>
+<li><code>H</code>: 是一个权重矩阵，它的维度是 <code>h x (n-1)m</code> = <code>2 x 6</code>，6 对应于大向量<code>x</code>长度为6，2是人为设置的，即神经元个数（复杂的矩阵能解决复杂的问题）。</li>
+<li><code>d</code>: 是隐藏层的偏置向量。它的维度是 <code>h = 2</code>，对应神经元个数。</li>
+</ul>
+<p>初始时刻， <code>H</code> 和 <code>d</code> 也被随机初始化了：<br>
+<code>H = [[0.1, 0.2, 0.3, 0.4, 0.5, 0.6], [0.7, 0.8, 0.9, 1.0, 1.1, 1.2]]d = [0.1, 0.2]</code></p>
+<p>现在计算 <code>d + Hx</code>: <br>
+<code>Hx = [[...]*[0.3], [...]*[0.4], ...]</code> (矩阵乘法) = <code>[4.81, 11.23] </code><br>
+<code>d + Hx = [0.1, 0.2] + [4.81, 11.23] = [4.91, 11.43]</code></p>
+<p>然后应用 <code>tanh</code> 函数，得到隐藏层的输出 <code>h_out</code>: <code>h_out = tanh([4.91, 11.43]) ≈ [0.999, 1.0]</code></p>
+</li>
+<li>
+<p><strong>计算输出层</strong></p>
+<p>现在信息将形成最顶层的红点，即一个6维向量，表示所<strong>有词的出现概率</strong>。计算公式是</p>
+<p>​                        <code>y = b + Wx + U * h_out</code> = <code>b + Wx + U * tanh(d + Hx)</code>。</p>
+<ul>
+<li><code>b</code>: 输出层的偏置，维度是 <code>|V| = 6</code> （因为词的个数是6）。</li>
+<li><code>W</code>: 从输入层到输出层的直连权重，维度是 <code>|V| x (n-1)m</code> = <code>6 x 6</code>，（W虽然乘的是x，但其实相当于W可选，可设置为0）。</li>
+<li><code>U</code>: 从隐藏层到输出层的权重，维度是 <code>|V| x h</code> = <code>6 x 2</code>。</li>
+<li>（PS：说白了 Wx 是 输入-输出，U * h_out 是 输入-隐藏-输出，这里加和作为一个&quot;并行融合&quot;）</li>
+</ul>
+<p>假设它们也被随机初始化了：<br>
+<code>U * h_out</code>: <code>6x2</code> 矩阵乘以 <code>2x1</code> 向量 <code>[0.999, 1.0]</code>，得到一个 <code>6x1</code> 的向量。<br>
+<code>W * x</code>: <code>6x6</code> 矩阵乘以 <code>6x1</code> 向量 <code>[0.3, ..., 0.2]</code>，得到一个 <code>6x1</code> 的向量。</p>
+<p>最后把这三者加起来，我们得到一个 <code>6x1</code> 的向量 <code>y</code>，它代表了词汇表中<strong>每个词的“原始分数”（logits）</strong>：<br>
+<code>y = [score_a, score_cat, score_mat, score_on, score_sat, score_the] </code><br>
+假设算出来 <code>y = [0.5, 0.2, 0.9, -1.2, 0.1, 0.8]</code></p>
+</li>
+<li>
+<p><strong>Softmax</strong></p>
+<p><code>Softmax</code> 函数把这些原始分数转换成和为1的概率分布。<br>
+<code>P(word) = e^(score_word) / ∑ e^(all_scores)</code></p>
+<p><code>P(&quot;a&quot;) = e^0.5 / (e^0.5 + e^0.2 + ... + e^0.8) ≈ 0.17</code><br>
+<code>P(&quot;cat&quot;) ≈ 0.12 </code><br>
+<code>P(&quot;mat&quot;) ≈ 0.25 </code><br>
+&hellip; 等等，所有概率加起来等于1。</p>
+</li>
+<li>
+<p><strong>正向传播完成！</strong></p>
+</li>
+</ul>
+<h3 id="反向传播">反向传播
+</h3><p>我们的模型预测“mat”的概率最高，但正确答案是“sat”。现根据这个<strong>错误</strong>，从图的<strong>顶部反向传播</strong>回去，微调参数 (可能的参数：<code>C</code>, <code>H</code>, <code>d</code>, <code>U</code>, <code>b</code>, <code>W</code>)。</p>
+<p>自己找个简单例子推反向传播，不展示了，损失函数计算损失，然后偏导为原理，优化器优化deta&hellip;. 注意的是，<strong>最后会调整 C 从而实现词向量的训练</strong>。</p>
+
 </section>
 
 
     <footer class="article-footer">
     
-    <section class="article-tags">
-        
-            <a href="/tags/markdown/">Markdown</a>
-        
-            <a href="/tags/text/">Text</a>
-        
-            <a href="/tags/tag-with-whitespaces/">Tag With Whitespaces</a>
-        
-    </section>
-
 
     </footer>
 

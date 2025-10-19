@@ -7,7 +7,128 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>rooobeam</copyright>
-        <lastBuildDate>Wed, 01 Oct 2025 11:15:12 +0800</lastBuildDate><atom:link href="https://rooobeam.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 18 Oct 2025 22:12:20 +0800</lastBuildDate><atom:link href="https://rooobeam.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>语言模型发展论文集</title>
+        <link>https://rooobeam.github.io/p/%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E5%8F%91%E5%B1%95%E8%AE%BA%E6%96%87%E9%9B%86/</link>
+        <pubDate>Sat, 18 Oct 2025 22:12:20 +0800</pubDate>
+        
+        <guid>https://rooobeam.github.io/p/%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E5%8F%91%E5%B1%95%E8%AE%BA%E6%96%87%E9%9B%86/</guid>
+        <description>&lt;h2 id=&#34;2003-a-neural-probabilistic-language-model&#34;&gt;2003 A Neural Probabilistic Language Model
+&lt;/h2&gt;&lt;p&gt;统计语言建模目的是学习语言中单词序列的联合概率函数。由于维度灾难：测试集的单词序列可能出现训练集中从未出现的单词序列。传统n-gram词袋模型成功实现 泛化能力 通过马尔可夫链。文章提出学习词语的 分布式表示 ，该模型会同时学习：（1）每个词的&lt;strong&gt;分布式表示&lt;/strong&gt;（2）一个以这些表示为基础的词&lt;strong&gt;序列概率函数&lt;/strong&gt;。&lt;/p&gt;
+&lt;img src=&#34;2003.png&#34; alt=&#34;ML_workflow&#34; style=&#34;zoom:50%;&#34; /&gt;
+&lt;h3 id=&#34;任务-我们要训练一个语言模型当前遇到的训练句子是-a-cat-sat-on-a-mat&#34;&gt;任务: 我们要训练一个语言模型。当前遇到的训练句子是 &amp;ldquo;a cat sat on a mat&amp;rdquo;。
+&lt;/h3&gt;&lt;h3 id=&#34;目标-根据上下文-预测下一个词&#34;&gt;目标: 根据上下文 预测下一个词。
+&lt;/h3&gt;&lt;h3 id=&#34;模型简化设定从底到顶&#34;&gt;模型简化设定（从底到顶）：
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;上下文长度 (n-1)&lt;/strong&gt;: 只看前面 &lt;strong&gt;2&lt;/strong&gt; 个词（主观），也就是最底下绿色方块只有俩，w_t-2, w_t-1。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;词向量维度 (m)&lt;/strong&gt;: 把每个词表示成一个 &lt;strong&gt;3&lt;/strong&gt; 维的向量（主观），从绿色方块变成3个红色点。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;隐藏层大小 (h)&lt;/strong&gt;: 我们的隐藏层有 &lt;strong&gt;2&lt;/strong&gt; 个神经元（主观），到中间红点这里会乘以一个矩阵，矩阵的规模和2个神经元有关。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;词汇表 (V)&lt;/strong&gt;: 我们的整个语言只有 6 个词(客观)：&lt;code&gt;{a, cat, mat, on, sat, the}&lt;/code&gt;。它们的索引分别是 &lt;code&gt;{0, 1, 2, 3, 4, 5}&lt;/code&gt;，也就是最顶上。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;正向传播底部流向顶部&#34;&gt;正向传播（底部流向顶部）：
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;输入与查表&lt;/strong&gt;：从最底绿点到倒二红点，w是词，绿块是w的索引, 倒二行红点是w的词向量 C(w)。&lt;/p&gt;
+&lt;p&gt;训练句子 &amp;ldquo;a cat sat on a mat&amp;rdquo; 截取出(a, cat, sat), (cat, sat, on)&amp;hellip;, 第一条为(a, cat, sat)。&lt;/p&gt;
+&lt;p&gt;输入: 上下文是 &amp;ldquo;a cat&amp;rdquo;。它们的索引分别是 &lt;code&gt;0&lt;/code&gt; 和 &lt;code&gt;1&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;查表 (C): 我们有一个 &lt;code&gt;6x3&lt;/code&gt; 的词向量矩阵 &lt;code&gt;C&lt;/code&gt; (6个词，每个3维)，它刚被随机初始化：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;词 (索引)&lt;/th&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;词向量 &lt;code&gt;C(word)&lt;/code&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;a (0)&lt;/strong&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;[0.1, 0.2, 0.3]&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;cat (1)&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;[0.4, 0.5, 0.6]&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;mat (2)&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;[0.7, 0.8, 0.9]&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;on (3)&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;[1.0, 1.1, 1.2]&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;sat (4)&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;[1.3, 1.4, 1.5]&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;the (5)&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;[1.6, 1.7, 1.8]&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;我们从这个表里查出输入词的向量：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;C(a)&lt;/code&gt; = &lt;code&gt;[0.1, 0.2, 0.3]&lt;/code&gt; C(w_t-2)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;C(cat )&lt;/code&gt; = &lt;code&gt;[0.4, 0.5, 0.6]&lt;/code&gt; C(w_t-1)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;拼接输入向量&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;把上一步得到的两个词向量拼接成一个大向量 &lt;code&gt;x&lt;/code&gt;，形成 tanh 下的长红点。&lt;br&gt;
+&lt;code&gt;x = [ C(sat), C(on) ] = [1.3, 1.4, 1.5, 1.0, 1.1, 1.2] &lt;/code&gt;&lt;br&gt;
+这个 &lt;code&gt;x&lt;/code&gt; 的维度是 &lt;code&gt;(n-1) * m = 2 * 3 = 6&lt;/code&gt;（看了前两个词，每个词向量长度为3）。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;计算隐藏层&lt;/strong&gt; (tanh)&lt;/p&gt;
+&lt;p&gt;现在信息流向了中间的 &lt;code&gt;tanh&lt;/code&gt; 隐藏层。计算公式是 &lt;code&gt;tanh(d + Hx)&lt;/code&gt;。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;x&lt;/code&gt;: 就是我们上一步得到的 &lt;code&gt;[1.3, 1.4, 1.5, 1.0, 1.1, 1.2]&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;H&lt;/code&gt;: 是一个权重矩阵，它的维度是 &lt;code&gt;h x (n-1)m&lt;/code&gt; = &lt;code&gt;2 x 6&lt;/code&gt;，6 对应于大向量&lt;code&gt;x&lt;/code&gt;长度为6，2是人为设置的，即神经元个数（复杂的矩阵能解决复杂的问题）。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;d&lt;/code&gt;: 是隐藏层的偏置向量。它的维度是 &lt;code&gt;h = 2&lt;/code&gt;，对应神经元个数。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;初始时刻， &lt;code&gt;H&lt;/code&gt; 和 &lt;code&gt;d&lt;/code&gt; 也被随机初始化了：&lt;br&gt;
+&lt;code&gt;H = [[0.1, 0.2, 0.3, 0.4, 0.5, 0.6], [0.7, 0.8, 0.9, 1.0, 1.1, 1.2]]d = [0.1, 0.2]&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;现在计算 &lt;code&gt;d + Hx&lt;/code&gt;: &lt;br&gt;
+&lt;code&gt;Hx = [[...]*[0.3], [...]*[0.4], ...]&lt;/code&gt; (矩阵乘法) = &lt;code&gt;[4.81, 11.23] &lt;/code&gt;&lt;br&gt;
+&lt;code&gt;d + Hx = [0.1, 0.2] + [4.81, 11.23] = [4.91, 11.43]&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;然后应用 &lt;code&gt;tanh&lt;/code&gt; 函数，得到隐藏层的输出 &lt;code&gt;h_out&lt;/code&gt;: &lt;code&gt;h_out = tanh([4.91, 11.43]) ≈ [0.999, 1.0]&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;计算输出层&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;现在信息将形成最顶层的红点，即一个6维向量，表示所&lt;strong&gt;有词的出现概率&lt;/strong&gt;。计算公式是&lt;/p&gt;
+&lt;p&gt;​                        &lt;code&gt;y = b + Wx + U * h_out&lt;/code&gt; = &lt;code&gt;b + Wx + U * tanh(d + Hx)&lt;/code&gt;。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;b&lt;/code&gt;: 输出层的偏置，维度是 &lt;code&gt;|V| = 6&lt;/code&gt; （因为词的个数是6）。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;W&lt;/code&gt;: 从输入层到输出层的直连权重，维度是 &lt;code&gt;|V| x (n-1)m&lt;/code&gt; = &lt;code&gt;6 x 6&lt;/code&gt;，（W虽然乘的是x，但其实相当于W可选，可设置为0）。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;U&lt;/code&gt;: 从隐藏层到输出层的权重，维度是 &lt;code&gt;|V| x h&lt;/code&gt; = &lt;code&gt;6 x 2&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;（PS：说白了 Wx 是 输入-输出，U * h_out 是 输入-隐藏-输出，这里加和作为一个&amp;quot;并行融合&amp;quot;）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;假设它们也被随机初始化了：&lt;br&gt;
+&lt;code&gt;U * h_out&lt;/code&gt;: &lt;code&gt;6x2&lt;/code&gt; 矩阵乘以 &lt;code&gt;2x1&lt;/code&gt; 向量 &lt;code&gt;[0.999, 1.0]&lt;/code&gt;，得到一个 &lt;code&gt;6x1&lt;/code&gt; 的向量。&lt;br&gt;
+&lt;code&gt;W * x&lt;/code&gt;: &lt;code&gt;6x6&lt;/code&gt; 矩阵乘以 &lt;code&gt;6x1&lt;/code&gt; 向量 &lt;code&gt;[0.3, ..., 0.2]&lt;/code&gt;，得到一个 &lt;code&gt;6x1&lt;/code&gt; 的向量。&lt;/p&gt;
+&lt;p&gt;最后把这三者加起来，我们得到一个 &lt;code&gt;6x1&lt;/code&gt; 的向量 &lt;code&gt;y&lt;/code&gt;，它代表了词汇表中&lt;strong&gt;每个词的“原始分数”（logits）&lt;/strong&gt;：&lt;br&gt;
+&lt;code&gt;y = [score_a, score_cat, score_mat, score_on, score_sat, score_the] &lt;/code&gt;&lt;br&gt;
+假设算出来 &lt;code&gt;y = [0.5, 0.2, 0.9, -1.2, 0.1, 0.8]&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Softmax&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Softmax&lt;/code&gt; 函数把这些原始分数转换成和为1的概率分布。&lt;br&gt;
+&lt;code&gt;P(word) = e^(score_word) / ∑ e^(all_scores)&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;P(&amp;quot;a&amp;quot;) = e^0.5 / (e^0.5 + e^0.2 + ... + e^0.8) ≈ 0.17&lt;/code&gt;&lt;br&gt;
+&lt;code&gt;P(&amp;quot;cat&amp;quot;) ≈ 0.12 &lt;/code&gt;&lt;br&gt;
+&lt;code&gt;P(&amp;quot;mat&amp;quot;) ≈ 0.25 &lt;/code&gt;&lt;br&gt;
+&amp;hellip; 等等，所有概率加起来等于1。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;正向传播完成！&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;反向传播&#34;&gt;反向传播
+&lt;/h3&gt;&lt;p&gt;我们的模型预测“mat”的概率最高，但正确答案是“sat”。现根据这个&lt;strong&gt;错误&lt;/strong&gt;，从图的&lt;strong&gt;顶部反向传播&lt;/strong&gt;回去，微调参数 (可能的参数：&lt;code&gt;C&lt;/code&gt;, &lt;code&gt;H&lt;/code&gt;, &lt;code&gt;d&lt;/code&gt;, &lt;code&gt;U&lt;/code&gt;, &lt;code&gt;b&lt;/code&gt;, &lt;code&gt;W&lt;/code&gt;)。&lt;/p&gt;
+&lt;p&gt;自己找个简单例子推反向传播，不展示了，损失函数计算损失，然后偏导为原理，优化器优化deta&amp;hellip;. 注意的是，&lt;strong&gt;最后会调整 C 从而实现词向量的训练&lt;/strong&gt;。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>CS329P_实用机器学习</title>
         <link>https://rooobeam.github.io/p/cs329p_%E5%AE%9E%E7%94%A8%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</link>
         <pubDate>Wed, 01 Oct 2025 11:15:12 +0800</pubDate>
@@ -10664,7 +10785,8 @@ return response
 &lt;li&gt;边操作会自动添加不存在的节点&lt;/li&gt;
 &lt;li&gt;节点支持任意可哈希对象（如元组、字符串）&lt;/li&gt;
 &lt;li&gt;批量操作比逐条操作更高效&lt;/li&gt;
-&lt;/ul&gt;&lt;/blockquote&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
 </description>
         </item>
         <item>
@@ -16165,11 +16287,13 @@ tips:    \n\t已记住，所以\是转义，所以/是目录的&lt;/p&gt;
 &lt;h4 id=&#34;blockquote-without-attribution&#34;&gt;Blockquote without attribution
 &lt;/h4&gt;&lt;blockquote&gt;
 &lt;p&gt;Tiam, ad mint andaepu dandae nostion secatur sequo quae.
-&lt;strong&gt;Note&lt;/strong&gt; that you can use &lt;em&gt;Markdown syntax&lt;/em&gt; within a blockquote.&lt;/p&gt;&lt;/blockquote&gt;
+&lt;strong&gt;Note&lt;/strong&gt; that you can use &lt;em&gt;Markdown syntax&lt;/em&gt; within a blockquote.&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h4 id=&#34;blockquote-with-attribution&#34;&gt;Blockquote with attribution
 &lt;/h4&gt;&lt;blockquote&gt;
 &lt;p&gt;Don&amp;rsquo;t communicate by sharing memory, share memory by communicating.&lt;br&gt;
-— &lt;cite&gt;Rob Pike&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/cite&gt;&lt;/p&gt;&lt;/blockquote&gt;
+— &lt;cite&gt;Rob Pike&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/cite&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h2 id=&#34;tables&#34;&gt;Tables
 &lt;/h2&gt;&lt;p&gt;Tables aren&amp;rsquo;t part of the core Markdown spec, but Hugo supports supports them out-of-the-box.&lt;/p&gt;
 &lt;table&gt;
