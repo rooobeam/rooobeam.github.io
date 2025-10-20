@@ -304,7 +304,7 @@
     
     <h2 id="2003-a-neural-probabilistic-language-model">2003 A Neural Probabilistic Language Model
 </h2><p>统计语言建模目的是学习语言中单词序列的联合概率函数。由于维度灾难：测试集的单词序列可能出现训练集中从未出现的单词序列。传统n-gram词袋模型成功实现 泛化能力 通过马尔可夫链。文章提出学习词语的 分布式表示 ，该模型会同时学习：（1）每个词的<strong>分布式表示</strong>（2）一个以这些表示为基础的词<strong>序列概率函数</strong>。</p>
-<img src="2003.png" alt="ML_workflow" style="zoom:50%;" />
+<img src="2003.png" alt="2003" style="zoom:50%;" />
 <h3 id="任务-我们要训练一个语言模型当前遇到的训练句子是-a-cat-sat-on-a-mat">任务: 我们要训练一个语言模型。当前遇到的训练句子是 &ldquo;a cat sat on a mat&rdquo;。
 </h3><h3 id="目标-根据上下文-预测下一个词">目标: 根据上下文 预测下一个词。
 </h3><h3 id="模型简化设定从底到顶">模型简化设定（从底到顶）：
@@ -312,7 +312,7 @@
 <li><strong>上下文长度 (n-1)</strong>: 只看前面 <strong>2</strong> 个词（主观），也就是最底下绿色方块只有俩，w_t-2, w_t-1。</li>
 <li><strong>词向量维度 (m)</strong>: 把每个词表示成一个 <strong>3</strong> 维的向量（主观），从绿色方块变成3个红色点。</li>
 <li><strong>隐藏层大小 (h)</strong>: 我们的隐藏层有 <strong>2</strong> 个神经元（主观），到中间红点这里会乘以一个矩阵，矩阵的规模和2个神经元有关。</li>
-<li><strong>词汇表 (V)</strong>: 我们的整个语言只有 6 个词(客观)：<code>{a, cat, mat, on, sat, the}</code>。它们的索引分别是 <code>{0, 1, 2, 3, 4, 5}</code>，也就是最顶上。</li>
+<li><strong>词汇表 (V)</strong>: 我们的整个语言只有 6 个词(客观)：<code>{a, cat, mat, on, sat, the}</code>。它们的索引分别是 <code>{0, 1, 2, 3, 4, 5}</code>。</li>
 </ul>
 <h3 id="正向传播底部流向顶部">正向传播（底部流向顶部）：
 </h3><ul>
