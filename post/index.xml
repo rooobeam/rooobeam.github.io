@@ -13,20 +13,24 @@
         <pubDate>Sat, 18 Oct 2025 22:12:20 +0800</pubDate>
         
         <guid>https://rooobeam.github.io/p/%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E5%8F%91%E5%B1%95%E8%AE%BA%E6%96%87%E9%9B%86/</guid>
-        <description>&lt;h2 id=&#34;2003-a-neural-probabilistic-language-model&#34;&gt;2003 A Neural Probabilistic Language Model
-&lt;/h2&gt;&lt;p&gt;统计语言建模目的是学习语言中单词序列的联合概率函数。由于维度灾难：测试集的单词序列可能出现训练集中从未出现的单词序列。传统n-gram词袋模型成功实现 泛化能力 通过马尔可夫链。文章提出学习词语的 分布式表示 ，该模型会同时学习：（1）每个词的&lt;strong&gt;分布式表示&lt;/strong&gt;（2）一个以这些表示为基础的词&lt;strong&gt;序列概率函数&lt;/strong&gt;。&lt;/p&gt;
+        <description>&lt;h2 id=&#34;nnlm&#34;&gt;NNLM
+&lt;/h2&gt;&lt;p&gt;2003 《A Neural Probabilistic Language Model》&lt;/p&gt;
+&lt;p&gt;统计语言建模目的是学习 &lt;strong&gt;单词序列的联合概率函数&lt;/strong&gt;（叫大模型解释）。由于维度灾难：测试集的单词序列可能出现训练集中从未出现的单词序列。传统n-gram词袋模型成功实现 泛化能力 通过马尔可夫链。文章提出学习词语的 分布式表示 ，该模型会同时学习：（1）每个词的&lt;strong&gt;分布式表示&lt;/strong&gt;（2）一个以这些表示为基础的词&lt;strong&gt;序列概率函数&lt;/strong&gt;。&lt;/p&gt;
 &lt;img src=&#34;2003.png&#34; alt=&#34;2003&#34; style=&#34;zoom:50%;&#34; /&gt;
-&lt;h3 id=&#34;任务-我们要训练一个语言模型当前遇到的训练句子是-a-cat-sat-on-a-mat&#34;&gt;任务: 我们要训练一个语言模型。当前遇到的训练句子是 &amp;ldquo;a cat sat on a mat&amp;rdquo;。
-&lt;/h3&gt;&lt;h3 id=&#34;目标-根据上下文-预测下一个词&#34;&gt;目标: 根据上下文 预测下一个词。
-&lt;/h3&gt;&lt;h3 id=&#34;模型简化设定从底到顶&#34;&gt;模型简化设定（从底到顶）：
-&lt;/h3&gt;&lt;ul&gt;
+&lt;h3 id=&#34;任务与目标&#34;&gt;任务与目标
+&lt;/h3&gt;&lt;p&gt;训练一个语言模型，根据上下文 预测下一个词。&lt;/p&gt;
+&lt;h3 id=&#34;模型简化设定&#34;&gt;模型简化设定
+&lt;/h3&gt;&lt;p&gt;从图中底到顶：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;当前遇到的训练句子是 &amp;ldquo;a cat sat on a mat&amp;rdquo;&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;上下文长度 (n-1)&lt;/strong&gt;: 只看前面 &lt;strong&gt;2&lt;/strong&gt; 个词（主观），也就是最底下绿色方块只有俩，w_t-2, w_t-1。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;词向量维度 (m)&lt;/strong&gt;: 把每个词表示成一个 &lt;strong&gt;3&lt;/strong&gt; 维的向量（主观），从绿色方块变成3个红色点。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;隐藏层大小 (h)&lt;/strong&gt;: 我们的隐藏层有 &lt;strong&gt;2&lt;/strong&gt; 个神经元（主观），到中间红点这里会乘以一个矩阵，矩阵的规模和2个神经元有关。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;词汇表 (V)&lt;/strong&gt;: 我们的整个语言只有 6 个词(客观)：&lt;code&gt;{a, cat, mat, on, sat, the}&lt;/code&gt;。它们的索引分别是 &lt;code&gt;{0, 1, 2, 3, 4, 5}&lt;/code&gt;。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;正向传播底部流向顶部&#34;&gt;正向传播（底部流向顶部）：
-&lt;/h3&gt;&lt;ul&gt;
+&lt;h3 id=&#34;正向传播&#34;&gt;正向传播
+&lt;/h3&gt;&lt;p&gt;从图中底部流向顶部：&lt;/p&gt;
+&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;输入与查表&lt;/strong&gt;：从最底绿点到倒二红点，w是词，绿块是w的索引, 倒二行红点是w的词向量 C(w)。&lt;/p&gt;
 &lt;p&gt;训练句子 &amp;ldquo;a cat sat on a mat&amp;rdquo; 截取出(a, cat, sat), (cat, sat, on)&amp;hellip;, 第一条为(a, cat, sat)。&lt;/p&gt;
@@ -87,9 +91,10 @@
 &lt;li&gt;&lt;code&gt;d&lt;/code&gt;: 是隐藏层的偏置向量。它的维度是 &lt;code&gt;h = 2&lt;/code&gt;，对应神经元个数。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;初始时刻， &lt;code&gt;H&lt;/code&gt; 和 &lt;code&gt;d&lt;/code&gt; 也被随机初始化了：&lt;br&gt;
-&lt;code&gt;H = [[0.1, 0.2, 0.3, 0.4, 0.5, 0.6], [0.7, 0.8, 0.9, 1.0, 1.1, 1.2]]d = [0.1, 0.2]&lt;/code&gt;&lt;/p&gt;
+&lt;code&gt;H = [[0.1, 0.2, 0.3, 0.4, 0.5, 0.6], [0.7, 0.8, 0.9, 1.0, 1.1, 1.2]]&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;d = [0.1, 0.2]&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;现在计算 &lt;code&gt;d + Hx&lt;/code&gt;: &lt;br&gt;
-&lt;code&gt;Hx = [[...]*[0.3], [...]*[0.4], ...]&lt;/code&gt; (矩阵乘法) = &lt;code&gt;[4.81, 11.23] &lt;/code&gt;&lt;br&gt;
+&lt;code&gt;H x^T = [[0.1, 0.2, 0.3, 0.4, 0.5, 0.6]·[1.3, 1.4, 1.5, 1.0, 1.1, 1.2]^T, [0.7, 0.8, 0.9, 1.0, 1.1, 1.2]·[1.3, 1.4, 1.5, 1.0, 1.1, 1.2]^T]&lt;/code&gt; (矩阵乘法) = &lt;code&gt;[4.81, 11.23] &lt;/code&gt;&lt;br&gt;
 &lt;code&gt;d + Hx = [0.1, 0.2] + [4.81, 11.23] = [4.91, 11.43]&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;然后应用 &lt;code&gt;tanh&lt;/code&gt; 函数，得到隐藏层的输出 &lt;code&gt;h_out&lt;/code&gt;: &lt;code&gt;h_out = tanh([4.91, 11.43]) ≈ [0.999, 1.0]&lt;/code&gt;&lt;/p&gt;
 &lt;/li&gt;
@@ -126,6 +131,187 @@
 &lt;h3 id=&#34;反向传播&#34;&gt;反向传播
 &lt;/h3&gt;&lt;p&gt;我们的模型预测“mat”的概率最高，但正确答案是“sat”。现根据这个&lt;strong&gt;错误&lt;/strong&gt;，从图的&lt;strong&gt;顶部反向传播&lt;/strong&gt;回去，微调参数 (可能的参数：&lt;code&gt;C&lt;/code&gt;, &lt;code&gt;H&lt;/code&gt;, &lt;code&gt;d&lt;/code&gt;, &lt;code&gt;U&lt;/code&gt;, &lt;code&gt;b&lt;/code&gt;, &lt;code&gt;W&lt;/code&gt;)。&lt;/p&gt;
 &lt;p&gt;自己找个简单例子推反向传播，不展示了，损失函数计算损失，然后偏导为原理，优化器优化deta&amp;hellip;. 注意的是，&lt;strong&gt;最后会调整 C 从而实现词向量的训练&lt;/strong&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;cbow与skip-gram&#34;&gt;CBOW与Skip-gram
+&lt;/h2&gt;&lt;p&gt;《Efficient Estimation of Word Representations in Vector Space》&lt;/p&gt;
+&lt;h3 id=&#34;链接与要点&#34;&gt;链接与要点
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;必看链接&lt;/strong&gt;: &lt;a class=&#34;link&#34; href=&#34;https://www.bilibili.com/video/BV1uF4m1P7HS/?share_source=copy_web&amp;amp;vd_source=33a3d9253f3eaae8520547ba343f9930&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;深入浅出：用中学数学理解 CBOW与Skip-gram&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;要点: 多层softmax、CBOW、Skip-gram&lt;/p&gt;
+&lt;h3 id=&#34;nnlm计算复杂度&#34;&gt;NNLM计算复杂度
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;模型结构&lt;/strong&gt;: 输入层 -&amp;gt; 投影层 (查找词向量) -&amp;gt; 非线性隐藏层  -&amp;gt; 输出层 (Softmax)。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;计算复杂度&lt;/strong&gt;: &lt;code&gt;Q = N × D + N × D × H + H × V&lt;/code&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;N × D&lt;/code&gt;: 词向量查找。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;N × D × H&lt;/code&gt;&lt;/strong&gt;: 从投影层到&lt;strong&gt;隐藏层&lt;/strong&gt;的矩阵乘法。&lt;code&gt;N × D&lt;/code&gt;是词向量拼接后的向量长度，而每个神经元里都有1个 &lt;code&gt;N × D&lt;/code&gt; 长度的向量与之相乘变为一个值，共有&lt;code&gt;H&lt;/code&gt;个神经元，所以是&lt;code&gt;H&lt;/code&gt;次&lt;code&gt;(1, N×D)·(N×D, 1)&lt;/code&gt;，即&lt;code&gt;(1, N×D)·(N×D, H)&lt;/code&gt;，两个数值的乘法次数就有&lt;code&gt;N × D × H&lt;/code&gt;次。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;H × V&lt;/code&gt;&lt;/strong&gt;: 从隐藏层到&lt;strong&gt;输出层&lt;/strong&gt;的矩阵乘法。&lt;code&gt;V&lt;/code&gt;是词汇表大小，也是输出层的神经元个数，&lt;code&gt;(1, H)·(H, V)&lt;/code&gt;得到&lt;code&gt;V&lt;/code&gt;个值。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;分层softmax的nnlm&#34;&gt;分层Softmax的NNLM
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;对原始NNLM的输出层的优化。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;模型结构&lt;/strong&gt;: 输入层 -&amp;gt; 投影层 -&amp;gt; 非线性隐藏层  -&amp;gt; 输出层 (&lt;strong&gt;分层Softmax&lt;/strong&gt;)。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;计算复杂度&lt;/strong&gt;: &lt;code&gt;Q = N × D + N × D × H + H × log₂(V)&lt;/code&gt;，**`H × log₂(V)为输出层的计算量被指数级优化。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;分层Softmax&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;传统Softmax&lt;/strong&gt;：一个巨大的、&lt;code&gt;H × V&lt;/code&gt; 大小的权重矩阵，&lt;code&gt;H&lt;/code&gt;维向量跟表里的每一列（共V列）都做一次内积运算，完成 &lt;code&gt;H × V&lt;/code&gt; 的计算。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;分层Softmax&lt;/strong&gt;：建立了一棵**“二叉导航树”**。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;**树的叶子节点 **：词汇表中的 V 个单词，每个单词都作为一个叶子节点。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;树的内部节点&lt;/strong&gt;：这些是路径上的“岔路口”，总共有 V-1 个。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;关键点&lt;/strong&gt;：我们不再为V个单词存储&lt;code&gt;H&lt;/code&gt;维向量，而是为 **V-1 个内部节点（岔路口）**各自分配一个&lt;code&gt;H&lt;/code&gt;维的辅助向量。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;正向传播：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;回顾任务，已知前N个词，预测第N+1个词，构造的训练数据中知道第N+1个词是哪个词，假设为&amp;quot;cat&amp;quot;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在我们的二叉树中，从根节点到 &amp;ldquo;cat&amp;rdquo; 有一条唯一的路径，比如这条路径是 [左, 右, 左]，这个&lt;strong&gt;路径的长度大约是 &lt;code&gt;log₂(V)&lt;/code&gt;&lt;/strong&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;隐藏层输出的向量 &lt;code&gt;h&lt;/code&gt; (维度为 H)，从根节点出发。第一个岔路口向左，计算“向左走”的概率，默认神经元输出的是向左的概率，&lt;code&gt;score₁ = h · v&#39;_1&lt;/code&gt; ，于是&lt;code&gt;P(向左 | Node 1) = σ(score₁)&lt;/code&gt;；第二个岔路口 (Node 2) &lt;code&gt;score₂ = h · v&#39;_2&lt;/code&gt;，&lt;code&gt;P(向右 | Node 2) = 1 - σ(score₂)&lt;/code&gt;； &lt;code&gt;score₃ = h · v&#39;_3&lt;/code&gt;， &lt;code&gt;P(向左 | Node 3) = σ(score₃)&lt;/code&gt;；计算最终概率&lt;code&gt;P(&amp;quot;cat&amp;quot;) = P(向左|Node 1) × P(向右|Node 2) × P(向左|Node 3)&lt;/code&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;叶子节点有&lt;code&gt;V&lt;/code&gt;个，也就是词汇总数，&lt;code&gt;2^n = V&lt;/code&gt;，所以&lt;strong&gt;路径&lt;/strong&gt;的平均长度约为 &lt;code&gt;log₂(V)&lt;/code&gt;；在路径上的&lt;strong&gt;每一个节点上的计算量&lt;/strong&gt;为向量 &lt;code&gt;h&lt;/code&gt; 和节点向量 &lt;code&gt;v&#39;_j&lt;/code&gt; 的点积 ，两个 H 维向量的点积，需要 H 次乘法 和 &lt;code&gt;H-1&lt;/code&gt; 次加法。所以计算复杂度是 &lt;code&gt;O(H)&lt;/code&gt;。&lt;strong&gt;总计算量 = (路径上的节点数) × (每个节点的计算量)&lt;/strong&gt; ≈ log₂(V) × H。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;反向传播只调整路径上的节点，概率精度要求极高的任务上可能会略逊于标准Softmax。（我的经验主义想法：每次反向传播调整的节点变少，在数据量不够多的情况下效果没那么好，但是速度快了许多而且是自训练所以，牛掰。）&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;cbow&#34;&gt;CBOW
+&lt;/h3&gt;&lt;p&gt;连续词袋模型，革命性简化。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;模型结构&lt;/strong&gt;: 输入层 -&amp;gt; 投影层 (&lt;strong&gt;查找并平均化上下文词向量&lt;/strong&gt;) -&amp;gt; 输出层 (分层Softmax)。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;计算复杂度&lt;/strong&gt;: &lt;code&gt;Q = N × D + D × log₂(V)&lt;/code&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;N × D&lt;/code&gt;: 将上下文词向量求平均的操作。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;D × log₂(V)&lt;/code&gt;: 直接用平均后的向量（维度为D）去通过分层Softmax做预测。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;关键变化&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;移除隐藏层&lt;/strong&gt;：&lt;code&gt;H × D&lt;/code&gt; 的计算瓶颈消失&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;输入变为平均向量&lt;/strong&gt;: 输入的维度从 &lt;code&gt;(N-1)×D&lt;/code&gt; 降维到 &lt;code&gt;D&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;skip-gram&#34;&gt;Skip-gram
+&lt;/h3&gt;&lt;p&gt;这是 Word2Vec 的第二个模型，思路与 CBOW 相反。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;模型结构&lt;/strong&gt;: 输入层 (单个词) -&amp;gt; 投影层 -&amp;gt; 输出层 (&lt;strong&gt;分层Softmax&lt;/strong&gt;)。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;核心任务&lt;/strong&gt;: 根据一个&lt;strong&gt;中心词&lt;/strong&gt;，来预测它周围的&lt;strong&gt;上下文词&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;计算复杂度&lt;/strong&gt;: &lt;code&gt;Q = C × (D + D × log₂(V))&lt;/code&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;D&lt;/code&gt;: 输入词向量查找。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;D × log₂(V)&lt;/code&gt;: 预测&lt;strong&gt;一个&lt;/strong&gt;上下文单词的计算量。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;C&lt;/code&gt;: 平均每个中心词需要预测的上下文单词数量，其大小跟刚才N类似&lt;/li&gt;
+&lt;li&gt;对于一个中心词，需要进行 &lt;code&gt;C&lt;/code&gt; 次独立的正向、反向传播。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;特性&lt;/th&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;**CBOW **&lt;/th&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;&lt;strong&gt;Skip-gram&lt;/strong&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;反向传播更新对象&lt;/strong&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;上下文词向量&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;中心词向量&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;更新特点&lt;/strong&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;一次更新，梯度被&lt;strong&gt;均摊&lt;/strong&gt;，&lt;code&gt;梯度 = “∂L/∂h  除以 上下文词数”&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;梯度&lt;strong&gt;完整作用&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;训练速度&lt;/strong&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;较快&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;较慢&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;总结&#34;&gt;总结
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;模型&lt;/th&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;隐藏层&lt;/th&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;输出层&lt;/th&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;任务&lt;/th&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;复杂度概览&lt;/th&gt;
+          &lt;th&gt;计算复杂度&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;NNLM&lt;/strong&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;**有 **&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;标准Softmax&lt;/strong&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;预测下一个词&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;非常高&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;N × D + N × D × H + H × V&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;NNLM + HS&lt;/strong&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;有&lt;/strong&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;分层Softmax&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;预测下一个词&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;高&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;N × D + N × D × H + H × log₂(V)&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;CBOW&lt;/strong&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;无&lt;/strong&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;分层Softmax&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;上下文 -&amp;gt; 中心词&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;非常低&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;N × D + D × log₂(V)&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;Skip-gram&lt;/strong&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;无&lt;/strong&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;分层Softmax&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;中心词 -&amp;gt; 上下文&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;低&lt;/strong&gt; (比CBOW略高)&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;C × (D + D × log₂(V))&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;核心演进路径&lt;/strong&gt;:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;优化输出层&lt;/strong&gt;: 用 &lt;strong&gt;分层Softmax&lt;/strong&gt; 替换标准 Softmax。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;优化隐藏层&lt;/strong&gt;: 直接&lt;strong&gt;移除隐藏层&lt;/strong&gt;，对于学习词向量这个目标而言，复杂的非线性组合可能是“杀鸡用牛刀”。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;改变任务&lt;/strong&gt;: 放弃构建精确语言模型，设计出更简单、更专注的“伪任务”，其唯一目的就是训练出高质量的词向量。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;思想：当数据量足够大时，模型的简单性带来的训练效率优势，往往能胜过复杂模型带来的精度优势。一个在万亿级语料上训练的简单模型 (CBOW)，其产出的词向量质量，远超一个只能在十亿级语料上训练的复杂模型 (NNLM)&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
 </description>
         </item>
         <item>
@@ -138,8 +324,8 @@
 &lt;/h2&gt;&lt;h3 id=&#34;机器学习的流程&#34;&gt;机器学习的流程
 &lt;/h3&gt;&lt;img src=&#34;ML_workflow.png?&#34; alt=&#34;ML_workflow&#34; style=&#34;zoom:40%;&#34; /&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;问题定制&lt;/strong&gt;：将实际问题转化为机器学习问题，选择对公司利润增长最有利的业务问题。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;数据收集与处理&lt;/strong&gt;：收集相关数据并进行处理，现实中高质量数据稀缺，需大量清洗、标注工作，同时要注意数据隐私问题。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;问题定制&lt;/strong&gt;：将实际问题转化为机器学习问题。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;数据收集与处理&lt;/strong&gt;：收集相关数据并进行处理——高质量数据稀缺，清洗、标注工作，数据隐私问题。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;模型训练&lt;/strong&gt;：选择合适模型训练，先用简单模型测试数据，如线性回归模型，若效果好可直接部署，否则再尝试复杂模型。当模型复杂度不断增加，训练成本高昂，对数据需求也更多。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;模型部署&lt;/strong&gt;：将训练好的模型部署到线上，要考虑模型大小、实时性等因素，如大模型需做蒸馏处理变小变快后上线。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;模型监控与迭代&lt;/strong&gt;：持续监控模型性能，包括预测精度、延迟等，新数据产生后重新回到&lt;strong&gt;模型训练&lt;/strong&gt;和&lt;strong&gt;模型部署&lt;/strong&gt;，完成迭代。要注意数据分布变化和算法公平性问题，避免模型在不同用户群体或场景下出现偏差。&lt;/li&gt;
@@ -151,6 +337,8 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;Data&lt;/strong&gt;. &lt;strong&gt;challenges:&lt;/strong&gt; high-quality data is scarce, privacy issues; &lt;strong&gt;tech&lt;/strong&gt;: Collect/ preprocess data、 Covariate/ concepts/ label  shifts、Data beyond IID&amp;hellip;&amp;hellip;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;协变量漂移 (Covariate Shift): 输入特征 (X) 的分布变了，但特征和标签之间的关系 (P(y|X)) 没变。例子: 你用一个地区夏天的用电数据训练了一个预测模型。到了冬天，人们的生活习惯（特征X）变了（比如开暖气而不是空调），虽然用电量和气温、时间的关系规律（P(y|X)）可能没变，但由于输入数据的分布完全不同，模型的预测会很不准。&lt;/p&gt;
@@ -165,7 +353,7 @@
 &lt;p&gt;不独立同分布的数据 (data beyond IID(Independent and Identically Distributed)): 不独立 (Not Independent): 时间序列数据、社交网络数据(你朋友的点赞行为会影响你的行为)、空间数据(一个地区的房价会受到邻近地区房价的影响)。不同分布 (Not Identically Distributed): 上面提到的各种&lt;strong&gt;数据漂移&lt;/strong&gt;就是最典型的例子, 去年和今年的用户数据就不是来自同一个分布。&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;/li&gt;
+&lt;ol start=&#34;3&#34;&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;Train models&lt;/strong&gt;. &lt;strong&gt;challenges:&lt;/strong&gt; ML models are more and more  complex, data-hungry, expensive; &lt;strong&gt;tech&lt;/strong&gt;: Model validation/ combinations/ tuning、  Transfer learning、 Multi-modality&amp;hellip;&amp;hellip;&lt;/p&gt;
 &lt;ul&gt;
@@ -202,30 +390,22 @@
 &lt;li&gt;&lt;strong&gt;机器学习专家&lt;/strong&gt;：针对公司重要产品，对模型进行定制化，根据产品特点调整模型，以适应特定应用场景。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;成长路线&lt;/strong&gt;：SDE+Domain_experts -&amp;gt; Data scientists -&amp;gt; ML experts&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;summary&#34;&gt;Summary
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;ML has become a staple of modern business.&lt;/li&gt;
-&lt;li&gt;A ML workflow includes: formulating the problem, preparing data, training and deploying ML models, monitoring.&lt;/li&gt;
-&lt;li&gt;This course will teach technologies a data scientist needs in each ML workflow stage.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;(**staple **: 支柱性产品/服务；不可或缺的事物。Smartphones have become a &lt;strong&gt;staple&lt;/strong&gt; of daily life.)&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;12-data-acquisition&#34;&gt;1.2 Data Acquisition
 &lt;/h2&gt;&lt;h3 id=&#34;核心流程先找数据找不到再造数据&#34;&gt;核心流程：先找数据，找不到再造数据
 &lt;/h3&gt;&lt;img src=&#34;data_acquisiton_flow.png?&#34; alt=&#34;data_acquisiton_workflow&#34; style=&#34;zoom:50%;&#34; /&gt;
-&lt;p&gt;业务问题转换成机器学习问题后，首先要问的就是：&lt;strong&gt;数据够不够？&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;业务问题转换成机器学习问题-&amp;gt;数据够不够&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;情况一 (运气好):&lt;/strong&gt; 你有足够的数据。 (后续课程会讲如何处理)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;情况二 (常见):&lt;/strong&gt; 数据不足。这时你有两个选择：
+&lt;li&gt;&lt;strong&gt;情况一:&lt;/strong&gt; 有足够的数据。 (后续课程会讲)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;情况二:&lt;/strong&gt; 数据不足。这时你有两个选择：
 &lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;寻找外部数据源 (Discover / Integrate Data):&lt;/strong&gt; 能不能找到其他可用的数据集？如果可以，就需要去发现并整合它们。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;生成数据 (Generate Data):&lt;/strong&gt; 如果找不到，但你大致知道数据应该是什么样的，那就可以尝试自己生成数据。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;寻找外部数据源 :&lt;/strong&gt; 找到其他可用的数据集并整合。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;生成数据:&lt;/strong&gt; 大致知道数据应该是什么样的，尝试生成数据。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;本节课主要围绕这两个核心方法展开：&lt;strong&gt;数据发现与整合&lt;/strong&gt; 和 &lt;strong&gt;数据生成&lt;/strong&gt;。&lt;/p&gt;
-&lt;h3 id=&#34;part-1-数据发现与整合-discover--integrate-data&#34;&gt;Part 1: 数据发现与整合 (Discover &amp;amp; Integrate Data)
-&lt;/h3&gt;&lt;h4 id=&#34;1-发现可用数据-discover-data&#34;&gt;1. 发现可用数据 (Discover Data)
+&lt;h3 id=&#34;part-1-数据发现与整合&#34;&gt;Part 1: 数据发现与整合
+&lt;/h3&gt;&lt;h4 id=&#34;1-数据集和数据&#34;&gt;1. 数据集和数据
 &lt;/h4&gt;&lt;p&gt;这里的核心是区分“数据集 (Dataset)”和“数据 (Data)”。&lt;strong&gt;数据集&lt;/strong&gt;通常是别人已经为你清洗整理好、可以直接用于机器学习的；而&lt;strong&gt;数据&lt;/strong&gt;则是原始的、需要大量处理的。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -245,27 +425,25 @@
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h4 id=&#34;2-那些知名的机器学习数据集是怎么来的&#34;&gt;2. 那些知名的机器学习数据集是怎么来的？
+&lt;h4 id=&#34;2-知名的机器学习数据集的产生&#34;&gt;2. 知名的机器学习数据集的产生
 &lt;/h4&gt;&lt;p&gt;这些数据集的来源主要分为两大类：&lt;strong&gt;网络爬取&lt;/strong&gt; 和 &lt;strong&gt;人工采集&lt;/strong&gt;。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;MNIST:&lt;/strong&gt; &lt;strong&gt;(人工采集)&lt;/strong&gt; 最经典的入门数据集之一，由美国人口普查局的员工手写的数字构成，是几十年前收集的。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;ImageNet:&lt;/strong&gt; &lt;strong&gt;(网络爬取)&lt;/strong&gt; 引领深度学习浪潮的关键数据集。它的数据来自各大图片搜索引擎（Google、百度等）。方法就是搜索关键词（比如“猫”），把返回的图片全部爬下来，再通过大量人工标注，把其中的噪音（比如卡通猫、狮子等）去掉。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;AudioSet / Kinetics:&lt;/strong&gt; &lt;strong&gt;(网络爬取)&lt;/strong&gt; 都来自YouTube。AudioSet是声音片段用于声音分类；Kinetics是视频片段，用于人类行为分类。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;KITTI:&lt;/strong&gt; &lt;strong&gt;(人工采集)&lt;/strong&gt; 无人驾驶领域的标杆数据集，通过在真实道路上行驶的车辆，记录下摄像头、激光雷达等各种传感器的数据。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Amazon Review:&lt;/strong&gt; &lt;strong&gt;(网络爬取)&lt;/strong&gt; 爬取亚马逊网站上的所有用户商品评论，用于情感分析等任务。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;SQuAD:&lt;/strong&gt; &lt;strong&gt;(网络爬取/处理)&lt;/strong&gt; 从维基百科（Wikipedia）中提取“问题-答案”对，比如从文章中找到“某人生于哪一年？”并抽取出答案。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;LibriSpeech:&lt;/strong&gt; &lt;strong&gt;(网络爬取/处理)&lt;/strong&gt; 一个包含1000小时有声读物的语音数据集，用于语音识别和语音合成。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h4 id=&#34;3-去哪里寻找数据集&#34;&gt;3. 去哪里寻找数据集？
-&lt;/h4&gt;&lt;p&gt;十年前找数据集还很困难，但现在资源非常丰富。&lt;/p&gt;
-&lt;ul&gt;
+&lt;h4 id=&#34;3-数据集来源&#34;&gt;3. 数据集来源
+&lt;/h4&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;Papers with Code:&lt;/strong&gt; 学术研究首选。它不仅整理了论文中常用的数据集，还附带了各种算法在该数据集上的表现排名（Leaderboard），非常适合进行算法效果对比。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Kaggle Datasets:&lt;/strong&gt; 一个机器学习竞赛平台，除了竞赛数据，还有大量用户（通常是数据科学家）上传的各种数据集。因为是用户上传，质量参差不齐，需要自己甄别。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Google Dataset Search:&lt;/strong&gt; 一个专门为数据集打造的搜索引擎，可以帮你搜索全网的数据集资源。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Google Dataset Search:&lt;/strong&gt; 一个专门为数据集打造的搜索引擎，可搜索全网的数据集资源。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;各种工具包自带数据集 (Toolkits):&lt;/strong&gt; 很多流行的开源库都内置了一些经典数据集，方便学习和测试。例如 &lt;strong&gt;&lt;code&gt;TensorFlow Datasets&lt;/code&gt;&lt;/strong&gt; 和 &lt;strong&gt;&lt;code&gt;Hugging Face&lt;/code&gt;&lt;/strong&gt; (&lt;strong&gt;专注于海量文本数据集&lt;/strong&gt;)。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;机器学习竞赛 (Competitions):&lt;/strong&gt; 很多会议或公司会举办竞赛。这些数据集通常质量很高、场景新颖，并且紧贴业界前沿问题（比如公司拿出部分真实业务数据来寻求更好的解决方案）。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;云平台开放数据 (Open Data on AWS):&lt;/strong&gt; 包含上百个超大规模的原始数据集。例如，美国气象卫星每小时产生的几个T的原始数据，或者把整个互联网爬下来的Common Crawl数据集（几百个T）。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;公司内部的数据湖 (Data Lake):&lt;/strong&gt; 如果你在公司工作，内部通常会有一个“数据湖”，汇集了所有产品线的数据。你需要去里面发掘，并可能需要向其他团队申请权限，同时必须注意数据隐私和合规问题。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;机器学习竞赛 (Competitions):&lt;/strong&gt; 会议或公司会举办竞赛。这些数据集通常质量很高、场景新颖，并且紧贴业界前沿问题（比如公司拿出部分真实业务数据来寻求更好的解决方案）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;云平台开放数据 (Open Data on AWS):&lt;/strong&gt; 包含上百个超大规模的原始数据集。例如，美国气象卫星每小时产生的几个T的原始数据，或把整个互联网爬下来的Common Crawl数据集。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;公司内部的数据湖 (Data Lake):&lt;/strong&gt; 如果你在公司工作，内部通常会有一个“数据湖”，汇集了所有产品线的数据。可能需要向其他团队申请权限，同时必须注意数据隐私和合规问题。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;4-三类数据集对比&#34;&gt;4. 三类数据集对比
 &lt;/h4&gt;&lt;table&gt;
@@ -280,12 +458,12 @@
       &lt;tr&gt;
           &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;学术数据集&lt;/strong&gt;&lt;/td&gt;
           &lt;td style=&#34;text-align: left&#34;&gt;① &lt;strong&gt;干净&lt;/strong&gt;，经过了大量预处理。&lt;br&gt;② &lt;strong&gt;难度适中&lt;/strong&gt;，太难没人做，太简单体现不出算法差异。&lt;br&gt;③ &lt;strong&gt;开箱即用&lt;/strong&gt;，适合快速验证算法。&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;① &lt;strong&gt;选择有限&lt;/strong&gt;，来来回回就那些。&lt;br&gt;② &lt;strong&gt;过于简化&lt;/strong&gt;，与真实工业界场景差距巨大。&lt;br&gt;③ &lt;strong&gt;不适合直接用于产品&lt;/strong&gt;。&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;① &lt;strong&gt;选择有限&lt;/strong&gt;，来来回回就那些。&lt;br&gt;② &lt;strong&gt;过于简化&lt;/strong&gt;，与真实工业界差距巨大。&lt;br&gt;③ &lt;strong&gt;不适合直接用于产品&lt;/strong&gt;。&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
           &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;竞赛数据集&lt;/strong&gt;&lt;/td&gt;
           &lt;td style=&#34;text-align: left&#34;&gt;① &lt;strong&gt;更接近真实应用&lt;/strong&gt;，通常源于一个真实的业务问题。&lt;br&gt;② 场景比较新颖。&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;① &lt;strong&gt;仍然经过了简化和处理&lt;/strong&gt;，隐藏了真实数据中最棘手的部分。&lt;br&gt;② &lt;strong&gt;主题局限&lt;/strong&gt;，大多集中在无人车、电商等热门领域。&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;① &lt;strong&gt;仍然经过了简化和处理&lt;/strong&gt;，隐藏了真实数据中最棘手的部分。&lt;br&gt;② &lt;strong&gt;主题局限&lt;/strong&gt;，集中在电商等热门领域。&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
           &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;原始数据&lt;/strong&gt;&lt;/td&gt;
@@ -294,7 +472,7 @@
       &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h4 id=&#34;5-数据整合-data-integration&#34;&gt;5. 数据整合 (Data Integration)
+&lt;h4 id=&#34;5-数据整合&#34;&gt;5. 数据整合
 &lt;/h4&gt;&lt;p&gt;在工业界，数据通常分散存储在不同的地方（数据库表）。数据整合就是把这些来自多源的数据融合成一个连贯、信息丰富的数据集（要求对&lt;strong&gt;SQL&lt;/strong&gt;有所掌握）。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;举例：&lt;/strong&gt; 一个房产公司的数据可能存在三张表里：
@@ -314,9 +492,9 @@
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;part-2-数据生成-generate-data&#34;&gt;Part 2: 数据生成 (Generate Data)
+&lt;h3 id=&#34;part-2-数据生成&#34;&gt;Part 2: 数据生成
 &lt;/h3&gt;&lt;p&gt;当你&lt;strong&gt;找不到也收集不到足够的数据&lt;/strong&gt;时，可以考虑自己“创造”数据。&lt;/p&gt;
-&lt;h4 id=&#34;1-生成合成数据-synthetic-data&#34;&gt;1. 生成合成数据 (Synthetic Data)
+&lt;h4 id=&#34;1-生成合成数据&#34;&gt;1. 生成合成数据
 &lt;/h4&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;使用GANs (生成对抗网络):&lt;/strong&gt; 可以生成高度逼真的数据。
 &lt;ul&gt;
@@ -327,7 +505,7 @@
 &lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;使用模拟器 (Simulation):&lt;/strong&gt; 在虚拟环境中模拟真实世界，生成数据，这在自动驾驶等领域非常常用。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h4 id=&#34;2-数据增强-data-augmentation&#34;&gt;2. 数据增强 (Data Augmentation)
+&lt;h4 id=&#34;2-数据增强&#34;&gt;2. 数据增强
 &lt;/h4&gt;&lt;p&gt;这是最常用、最简单有效的方法，即对现有数据做一些微小的改动，生成“新”数据。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;图像增强 (Image Augmentation):&lt;/strong&gt; 对一张图片进行旋转、裁剪、拉伸、增加噪点、改变颜色等操作，一张图可以变成很多张。&lt;/li&gt;
@@ -340,62 +518,33 @@
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;总结-summary&#34;&gt;总结 (Summary)
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;找到正确的数据是极具挑战性的。&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;工业界的&lt;strong&gt;原始数据&lt;/strong&gt;和学术界的&lt;strong&gt;干净数据集&lt;/strong&gt;是两种完全不同的东西，不要想当然地认为在学术数据集上表现好的算法在真实业务中也会同样出色。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;数据整合&lt;/strong&gt;是在工业界处理多源数据的必备技能。&lt;/li&gt;
-&lt;li&gt;当数据量不足时，&lt;strong&gt;数据增强&lt;/strong&gt;是一个非常普遍且有效的实践。&lt;/li&gt;
-&lt;li&gt;随着生成模型（GANs、3D模型）越来越强大，&lt;strong&gt;人工合成数据&lt;/strong&gt;正变得越来越流行，它提供了一种成本更低、更可控的数据获取方式。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;好的，作为一名数据方向的学生，我们来整理一份专注于技术和实践的课堂笔记。这份笔记会跳过宽泛的背景，直接聚焦于&lt;strong&gt;如何做 (How-to)&lt;/strong&gt; 和 &lt;strong&gt;需要注意的关键点 (Key Points)&lt;/strong&gt;。&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;13-web-scraping&#34;&gt;1.3 Web Scraping
-&lt;/h2&gt;&lt;h3 id=&#34;核心目标与技术分野&#34;&gt;核心目标与技术分野
+&lt;/h2&gt;&lt;h3 id=&#34;概念&#34;&gt;概念
 &lt;/h3&gt;&lt;p&gt;&lt;strong&gt;Web Scraping (数据抓取)&lt;/strong&gt; 和 &lt;strong&gt;Web Crawling (网络爬虫)&lt;/strong&gt; 有本质区别：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;Crawling (爬虫):&lt;/strong&gt; 目标是索引整个互联网，像搜索引擎一样把整个&lt;strong&gt;网页&lt;/strong&gt;都下载下来。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Scraping (抓取):&lt;/strong&gt; 作为数据从业者的核心任务，我们更关心从&lt;strong&gt;特定网站&lt;/strong&gt;的页面中，提取出我们感兴趣的&lt;strong&gt;结构化数据&lt;/strong&gt;（如价格、地址、评分），并最终整理成一张干净的表 (Table)。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;从网站抓取的数据通常&lt;strong&gt;噪音多、标签弱&lt;/strong&gt;，但优点是&lt;strong&gt;规模大&lt;/strong&gt;，是许多著名数据集（如ImageNet）的来源。&lt;/p&gt;
-&lt;h3 id=&#34;核心技术反-反爬虫策略&#34;&gt;核心技术：反-反爬虫策略
-&lt;/h3&gt;&lt;p&gt;核心策略:&lt;strong&gt;尽可能模拟一个真实的人类用户&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;核心策略:&lt;strong&gt;尽可能模拟一个真实的人类用户&lt;/strong&gt;。&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;使用Headless Browser (无头浏览器)&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;问题:&lt;/strong&gt; 直接使用&lt;code&gt;curl&lt;/code&gt;等简单工具请求网页，HTTP头信息会暴露你是机器人，很容易被服务器拒绝。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;解决方案:&lt;/strong&gt; 使用&lt;strong&gt;无头浏览器&lt;/strong&gt;，它本质上是一个没有图形界面(GUI)的真实浏览器（如Chrome），通过代码来自动化操作它，网站服务器很难分辨出这是机器行为还是真人操作。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;工具栈:&lt;/strong&gt; Python中的 &lt;code&gt;Selenium&lt;/code&gt; 库：驱动一个真实的浏览器内核，帮你打开网页、渲染JS、并获取最终的HTML内容。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;使用IP地址池&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;问题:&lt;/strong&gt; 同一个IP在短时间内进行大量访问，是机器人最明显的特征，会被网站迅速封禁。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;解决方案:&lt;/strong&gt; 使用大量的IP地址轮换访问。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;IP来源:&lt;/strong&gt; 公有云是获取大量IP最便捷、成本最低的方式。例如，AWS拥有全球IPv4地址的1.75%，你每启动一台新的云主机，几乎都能获得一个新的IP。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;模拟浏览器&lt;/strong&gt;：用requests，设置header；&lt;a class=&#34;link&#34; href=&#34;https://github.com/wistbean/learn_python3_spider&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;从0到1学习python爬虫&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;使用IP地址池&lt;/strong&gt;：同一个IP在短时间内进行大量访问，是机器人最明显的特征，会被网站迅速封禁 —— 使用大量的IP地址轮换访问。&lt;strong&gt;IP来源:&lt;/strong&gt; 公有云是获取大量IP最便捷、成本最低的方式。例如，AWS拥有全球IPv4地址的1.75%，你每启动一台新的云主机，几乎都能获得一个新的IP。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3 id=&#34;实战案例抓取-zillow-房产数据&#34;&gt;实战案例：抓取 Zillow 房产数据
 &lt;/h3&gt;&lt;p&gt;我们以抓取美国房产网站 Zillow 上斯坦福附近已售房屋的数据为例。（对HTML基础有要求）&lt;/p&gt;
-&lt;h4 id=&#34;step-1-分析url结构定位目标页面&#34;&gt;Step 1: 分析URL结构，定位目标页面
+&lt;h4 id=&#34;1-目标页&#34;&gt;1 目标页
 &lt;/h4&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;列表页URL:&lt;/strong&gt; &lt;code&gt;https://www.zillow.com/stanford-ca/sold/&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;规律:&lt;/strong&gt; URL结构清晰，城市(&lt;code&gt;stanford-ca&lt;/code&gt;)和页码(&lt;code&gt;2-p/&lt;/code&gt;)是可变参数。通过修改这些参数，我们可以遍历所有城市的房产列表页。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h4 id=&#34;step-2-抓取列表页提取详情页id&#34;&gt;Step 2: 抓取列表页，提取详情页ID
+&lt;h4 id=&#34;2-详情页&#34;&gt;2 详情页
 &lt;/h4&gt;&lt;p&gt;在列表页，我们需要拿到每个房子的独立ID，才能访问其详情页。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;工具:&lt;/strong&gt; 使用 &lt;code&gt;BeautifulSoup&lt;/code&gt; 这个Python库来解析抓取到的HTML。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;方法:&lt;/strong&gt;
 &lt;ol&gt;
-&lt;li&gt;用浏览器自带的“开发者工具 (Inspect)”定位到包含房屋链接的HTML元素，发现它们通常是&lt;code&gt;&amp;lt;a&amp;gt;&lt;/code&gt;标签，且有一个特定的 &lt;code&gt;class&lt;/code&gt;，例如 &lt;code&gt;list-card-link&lt;/code&gt;。&lt;/li&gt;
-&lt;li&gt;编写代码，筛选出所有符合条件的&lt;code&gt;&amp;lt;a&amp;gt;&lt;/code&gt;标签，并从其&lt;code&gt;href&lt;/code&gt;属性中提取出房子的唯一ID。&lt;/li&gt;
+&lt;li&gt;用浏览器自带的开发者工具 (F12)定位到包含房屋链接的HTML元素，发现它们通常是&lt;code&gt;&amp;lt;a&amp;gt;&lt;/code&gt;标签，且有一个特定的 &lt;code&gt;class&lt;/code&gt;，例如 &lt;code&gt;list-card-link&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;BeautifulSoup&lt;/code&gt; 解析HTML，筛选出所有符合条件的&lt;code&gt;&amp;lt;a&amp;gt;&lt;/code&gt;标签，并从其&lt;code&gt;href&lt;/code&gt;属性中提取出房子的唯一ID。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -414,13 +563,13 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;ids&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;l&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;split&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;/&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)[&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;split&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;_&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;l&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;links&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h4 id=&#34;step-3-构造详情页url抓取详细信息&#34;&gt;Step 3: 构造详情页URL，抓取详细信息
-&lt;/h4&gt;&lt;p&gt;有了ID后，我们就可以&lt;strong&gt;拼接&lt;/strong&gt;出每个房子的详情页URL，例如：&lt;code&gt;https://www.zillow.com/homedetails/19506780_zpid/&lt;/code&gt;，然后抓取这些页面的HTML。&lt;/p&gt;
-&lt;h4 id=&#34;step-4-从详情页html中提取结构化数据&#34;&gt;Step 4: 从详情页HTML中提取结构化数据
-&lt;/h4&gt;&lt;p&gt;这是最繁琐但也是最核心的一步。我们需要从杂乱的HTML中，精确找到我们想要的数据字段。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;方法:&lt;/strong&gt; 同样使用“开发者工具(Inspect)”，鼠标悬停在你想要的数据上（比如成交价），查看它在HTML中的位置、标签和&lt;code&gt;class&lt;/code&gt;。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;老师的例子 (提取成交价和日期):&lt;/strong&gt;
+&lt;/div&gt;&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;有了ID后，我们就可以&lt;strong&gt;拼接&lt;/strong&gt;出每个房子的详情页URL，例如：&lt;code&gt;https://www.zillow.com/homedetails/19506780_zpid/&lt;/code&gt;，然后抓取这些页面的HTML。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;3-提取结构化数据&#34;&gt;3 提取结构化数据
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;方法:&lt;/strong&gt; 用浏览器自带的开发者工具 (F12)，鼠标悬停在你想要的数据上（比如成交价），查看它在HTML中的位置、标签和&lt;code&gt;class&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;例子 (提取成交价和日期):&lt;/strong&gt;
 &lt;ul&gt;
 &lt;li&gt;发现这两个信息都包含在一个&lt;code&gt;class&lt;/code&gt;为&lt;code&gt;ds-home-details-chip&lt;/code&gt;的&lt;code&gt;&amp;lt;div&amp;gt;&lt;/code&gt;容器内的&lt;code&gt;&amp;lt;span&amp;gt;&lt;/code&gt;标签里。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;观察发现文本特征&lt;/strong&gt;分别是 &amp;ldquo;Sold:&amp;rdquo; 和 &amp;ldquo;Sold on&amp;rdquo;。&lt;/li&gt;
@@ -481,7 +630,7 @@
 &lt;/div&gt;&lt;h3 id=&#34;成本与性能分析&#34;&gt;成本与性能分析
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;硬件选择:&lt;/strong&gt; AWS EC2 &lt;code&gt;t3.small&lt;/code&gt; 实例 (2GB内存, 2 vCPU)。关键在于&lt;strong&gt;内存&lt;/strong&gt;，因为浏览器本身非常耗内存，CPU和带宽通常不是瓶颈。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;成本优化:&lt;/strong&gt; 使用&lt;strong&gt;竞价实例 (Spot Instance)&lt;/strong&gt; 可以显著降低成本。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;成本优化:&lt;/strong&gt; 使用**竞价实例 ** 可降低成本。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;性能估算:&lt;/strong&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;速度:&lt;/strong&gt; 单页抓取约&lt;strong&gt;3秒&lt;/strong&gt;。这个速度比较合理，过于频繁的请求会被视为攻击。&lt;/li&gt;
@@ -496,9 +645,8 @@
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;法律与道德红线-practitioners-dos--donts&#34;&gt;法律与道德红线 (Practitioner&amp;rsquo;s Do&amp;rsquo;s &amp;amp; Don&amp;rsquo;ts)
-&lt;/h3&gt;&lt;p&gt;网页抓取本身不违法，但操作时必须遵守规则，避免法律风险。&lt;/p&gt;
-&lt;ul&gt;
+&lt;h3 id=&#34;法律与道德红线&#34;&gt;法律与道德红线
+&lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;【禁止】抓取&lt;strong&gt;需要登录&lt;/strong&gt;才能访问的私有数据。&lt;/li&gt;
 &lt;li&gt;【禁止】抓取涉及&lt;strong&gt;个人隐私&lt;/strong&gt;的敏感信息（如健康、医疗档案）。&lt;/li&gt;
 &lt;li&gt;【禁止】抓取有明确&lt;strong&gt;版权&lt;/strong&gt;的内容（如音乐、付费视频）。
@@ -507,14 +655,13 @@
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;【必须】遵守&lt;strong&gt;网站的&lt;code&gt;robots.txt&lt;/code&gt;协议和服务条款&lt;/strong&gt; (Terms of Service)。 如果对方明确禁止抓取，就应该遵守。&lt;/li&gt;
-&lt;li&gt;【建议】如果你计划将抓取的数据用于&lt;strong&gt;商业盈利&lt;/strong&gt;，务必咨询律师。 特别是，避免直接抓取竞争对手的网站，这是非常敏感的行为。&lt;/li&gt;
+&lt;li&gt;【建议】如果你计划将抓取的数据用于&lt;strong&gt;商业盈利&lt;/strong&gt;，务必咨询律师。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;好的，作为一名数据方向的学生，我们来整理一份专注于技术和实践的课堂笔记。这份笔记将围绕PPT的核心框架，并融入老师讲解中那些非常宝贵的实践经验和细节。&lt;/p&gt;
 &lt;hr&gt;
-&lt;h2 id=&#34;14-data-labeling-数据标注&#34;&gt;1.4 Data Labeling (数据标注)
+&lt;h2 id=&#34;14-data-labeling&#34;&gt;1.4 Data Labeling
 &lt;/h2&gt;&lt;h3 id=&#34;核心问题有了数据但无标注或标注较少&#34;&gt;核心问题：有了数据但无标注或标注较少。
 &lt;/h3&gt;&lt;img src=&#34;data_labelling_flow.png?&#34; alt=&#34;data_acquisiton_workflow&#34; style=&#34;zoom:33%;&#34; /&gt;
-&lt;p&gt;当我们获取到原始数据后，下一步就是获取标签。根据**“是否有初始标签”&lt;strong&gt;和&lt;/strong&gt;“是否有预算”**，我们可以选择不同的技术路径。&lt;/p&gt;
+&lt;p&gt;获取到原始数据后，下一步是获取标签。根据**“是否有初始标签”&lt;strong&gt;和&lt;/strong&gt;“是否有预算”**，我们可以选择不同的技术路径。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;场景一：有少量标签，没预算 → 半监督学习 (Semi-Supervised Learning)&lt;/strong&gt;&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;场景二：没标签，有预算 → 众包 (Crowdsourcing)&lt;/strong&gt;&lt;/li&gt;
@@ -530,7 +677,7 @@
 &lt;li&gt;&lt;strong&gt;聚类假设 (Cluster):&lt;/strong&gt; 数据天然地倾向于形成簇，同一个簇内的样本有相同的标签。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;流形假设 (Manifold):&lt;/strong&gt; 高维数据实际上分布在一个低维的内在结构上，这让我们可以通过降维等方式发现其本质。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h4 id=&#34;关键技术自训练-self-training&#34;&gt;关键技术：自训练 (Self-training)
+&lt;h4 id=&#34;关键技术-自训练&#34;&gt;关键技术 自训练
 &lt;/h4&gt;&lt;p&gt;自训练是SSL中最简单且常用的一种方法，其工作流程是一个迭代增强的循环：&lt;/p&gt;
 &lt;img src=&#34;self_training.png?&#34; alt=&#34;data_acquisiton_workflow&#34; style=&#34;zoom:33%;&#34; /&gt;
 &lt;ol&gt;
@@ -543,14 +690,11 @@
 &lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;重复:&lt;/strong&gt; 用合并后的、更大的数据集重新训练模型，然后回到第2步，不断循环。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;strong&gt;实践要点:&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;模型选择：&lt;/strong&gt; 因为自训练是一个离线的数据处理过程，我们不关心模型的推理速度和大小。因此，可以尽情使用&lt;strong&gt;计算成本高昂但性能强大&lt;/strong&gt;的模型，比如大型深度神经网络或模型集成(Ensemble/Bagging)，以获得尽可能准确的伪标签。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;2-众包-crowdsourcing&#34;&gt;2. 众包 (Crowdsourcing)
+&lt;p&gt;&lt;strong&gt;实践要点: &lt;strong&gt;使用&lt;/strong&gt;计算成本高昂但性能强大&lt;/strong&gt;的模型，如大型深度神经网络或模型集成(Ensemble/Bagging)，以获得尽可能准确的伪标签。&lt;/p&gt;
+&lt;h3 id=&#34;2-众包&#34;&gt;2. 众包
 &lt;/h3&gt;&lt;h4 id=&#34;适用场景-1&#34;&gt;适用场景
-&lt;/h4&gt;&lt;p&gt;没有初始标签，但有预算时，直接找人来标是最直接的方法。著名的ImageNet数据集就是通过Amazon Mechanical Turk (AMT)平台，花费数年和数百万美元标注完成的。&lt;/p&gt;
-&lt;h4 id=&#34;成本估算-基于aws-sagemaker&#34;&gt;成本估算 (基于AWS SageMaker)
+&lt;/h4&gt;&lt;p&gt;没有初始标签，但有预算。（ImageNet数据集就是通过Amazon Mechanical Turk (AMT)平台，花费数年和数百万美元标注完成的）&lt;/p&gt;
+&lt;h4 id=&#34;成本估算&#34;&gt;成本估算
 &lt;/h4&gt;&lt;ul&gt;
 &lt;li&gt;图像/文本分类： ~$0.012 / 每个标签&lt;/li&gt;
 &lt;li&gt;画边界框 (Bounding Box)： ~$0.024 / 每个框&lt;/li&gt;
@@ -558,13 +702,13 @@
 &lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;注意：&lt;/strong&gt; 标注100万张需要做语义分割的图片，成本至少是84万美元，这还不算为了保证质量进行的重复标注。&lt;/p&gt;
 &lt;h4 id=&#34;众包实践中的三大挑战与对策&#34;&gt;众包实践中的三大挑战与对策
-&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;挑战一：用户交互与任务设计 (User Interaction)&lt;/strong&gt;&lt;/p&gt;
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;挑战一：用户交互与任务设计&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;问题:&lt;/strong&gt; 众包平台上的标注员背景各异，可能没有专业知识。复杂的任务会劝退大量标注员，且质量难以保证。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;问题:&lt;/strong&gt; 众包平台上的标注员没有专业知识。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;对策：&lt;/strong&gt; &lt;strong&gt;将复杂任务拆解为极简的原子任务。&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;举例 (MIT Place365数据集):&lt;/strong&gt; 365个场景分类的数据集：设计了365个独立的、极其简单的“&lt;strong&gt;是/否&lt;/strong&gt;”判断题，例如：“这张图里有悬崖吗？(Y/N)”。标注员只需要按一下键盘，任务难度和认知负荷都降到了最低。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;举例 (MIT Place365数据集):&lt;/strong&gt; 365个场景分类的数据集：设计了365个独立的、极其简单的“&lt;strong&gt;是/否&lt;/strong&gt;”判断题，例如：“这张图里有悬崖吗？(Y/N)”，标注员只需要按一下键盘，任务难度降到最低。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;挑战二：成本控制 (Cost)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;挑战二：成本控制&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;问题:&lt;/strong&gt; 标注成本 = 任务单价 × 任务数量，把所有数据都发去标注，成本极高。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;对策：&lt;/strong&gt; 使用&lt;strong&gt;主动学习 (Active Learning)&lt;/strong&gt;，让模型帮助我们筛选出&lt;strong&gt;最值得&lt;/strong&gt;人工标注的数据。&lt;/li&gt;
@@ -573,7 +717,7 @@
 &lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;组合拳：主动学习 + 自训练&lt;/strong&gt;&lt;/p&gt;
 &lt;img src=&#34;selft-raining_active-learning.png&#34; style=&#34;zoom:33%;&#34; /&gt;
-&lt;p&gt;这是工业界非常常见的最佳实践：&lt;/p&gt;
+&lt;p&gt;工业界非常常见的最佳实践：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;用初始标签训练模型。&lt;/li&gt;
 &lt;li&gt;模型对未标注数据进行预测。&lt;/li&gt;
@@ -581,27 +725,26 @@
 &lt;li&gt;&lt;strong&gt;最不自信的&lt;/strong&gt;预测结果，发送给众包平台进行人工标注，标完后加入训练集。&lt;/li&gt;
 &lt;li&gt;不断迭代，高效地扩充高质量标注数据集。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;strong&gt;挑战三：质量控制 (Quality Control)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;挑战三：质量控制&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;问题:&lt;/strong&gt; 标注员会犯错，可能是无意的（手滑、没理解），也可能是故意的（为了刷单）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;问题:&lt;/strong&gt; 标注员会犯错。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;对策：&lt;/strong&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;strong&gt;多数投票 (Majority Voting):&lt;/strong&gt; 最简单但最昂贵的方法。将同一个任务发给3个或5个不同的人，以多数人的选择为最终标签。这会让你的成本翻3-5倍。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;智能、动态的质量控制:&lt;/strong&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;动态任务分配:&lt;/strong&gt; 比如说先发给两个人，如果这两个人都同意这是一个正类样本则结束；或者对于一个样本，我的模型有自己的预测但不那么确信，发给一个人标注看是否一致。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;筛选标注员:&lt;/strong&gt; 在任务中混入一些我们已经知道正确答案的“金丝雀”样本（Honeypots）。如果某个标注员在这些样本上频繁出错，就可以判定其质量低下，将其剔除。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;动态任务分配:&lt;/strong&gt; （人+人）发给两个人，如果这两个人都同意这是一个正类样本则结束；（模型+人）模型有自己的预测但不那么确信，发给一个人标注看是否一致。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;筛选标注员:&lt;/strong&gt; 在任务中混入一些我们已经知道正确答案的样本。如果某个标注员在这些样本上频繁出错，就可以判定其质量低下，将其剔除。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;3-弱监督-weak-supervision&#34;&gt;3. 弱监督 (Weak Supervision)
+&lt;h3 id=&#34;3-弱监督&#34;&gt;3. 弱监督
 &lt;/h3&gt;&lt;h4 id=&#34;适用场景-2&#34;&gt;适用场景
 &lt;/h4&gt;&lt;p&gt;最极限但也很常见的情况：&lt;strong&gt;没钱，也没初始标签&lt;/strong&gt;。这时，我们需要发挥自己的领域知识来创造标签。&lt;/p&gt;
-&lt;h4 id=&#34;核心思想数据编程-data-programming&#34;&gt;核心思想：数据编程 (Data Programming)
-&lt;/h4&gt;&lt;p&gt;我们不再逐一手动标注样本，而是编写一系列启发式&lt;strong&gt;规则&lt;/strong&gt; (Heuristics)，也称为&lt;strong&gt;标注函数 (Labeling Functions)&lt;/strong&gt;，来为数据批量生成&lt;strong&gt;有噪音的、弱的&lt;/strong&gt;标签。&lt;/p&gt;
+&lt;h4 id=&#34;核心思想数据编程&#34;&gt;核心思想：数据编程
+&lt;/h4&gt;&lt;p&gt;我们不再逐一手动标注样本，而是编写一系列启发式&lt;strong&gt;规则&lt;/strong&gt; ，也称为&lt;strong&gt;标注函数&lt;/strong&gt;，来为数据批量生成&lt;strong&gt;有噪音的、弱的&lt;/strong&gt;标签。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Domain specific heuristics to assign labels; Keyword search, pattern matching, third-party models.&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -666,6 +809,36 @@ GM 发现：&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;这种方法将手动标注的体力活，转换为了编写和迭代标注函数的脑力活，极大地提升了标注效率。&lt;/p&gt;
+&lt;h2 id=&#34;21-探索性数据分析&#34;&gt;2.1 探索性数据分析
+&lt;/h2&gt;&lt;p&gt;例子：https://github.com/rooobeam/figure-skating/blob/master/data_exploration.ipynb&lt;/p&gt;
+&lt;h2 id=&#34;22-24-数据清理数据变换特征工程&#34;&gt;2.2-2.4 数据清理、数据变换、特征工程
+&lt;/h2&gt;&lt;p&gt;例子：&lt;a class=&#34;link&#34; href=&#34;https://github.com/rooobeam/figure-skating&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;rooobeam/figure-skating&lt;/a&gt; 中的data_collection.py processs_data.py&lt;/p&gt;
+&lt;h2 id=&#34;25-data-summary&#34;&gt;2.5 Data Summary
+&lt;/h2&gt;&lt;p&gt;图解：一树一循环&lt;/p&gt;
+&lt;p&gt;树：数据是否充足-&amp;gt;改良 标准/数据/模型。&lt;/p&gt;
+&lt;p&gt;循环：模型训练与部署-新数据加入-数据标注-数据预处理-模型训练与部署-新数据加入&amp;hellip;&lt;/p&gt;
+&lt;img src=&#34;.\data_summary.png&#34; alt=&#34;data_summary&#34; style=&#34;zoom:40%;&#34; /&gt;
+&lt;p&gt;挑战：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;数据量与标注质量的权衡&lt;/li&gt;
+&lt;li&gt;数据质量要点：详见 1.1 的 Challenges and  Techniques&lt;/li&gt;
+&lt;li&gt;大数据管理&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;.\data_challenge.png&#34; alt=&#34;屏幕截图 2025-11-17 110154&#34; style=&#34;zoom:30%;&#34; /&gt;
+&lt;h2 id=&#34;31-机器学习概览&#34;&gt;3.1 机器学习概览
+&lt;/h2&gt;&lt;img src=&#34;.\ML_overview.png&#34; alt=&#34;ML_overview&#34; style=&#34;zoom:40%;&#34; /&gt;
+&lt;p&gt;机器学习算法分四大类：监督/半监督/无监督/强化&lt;/p&gt;
+&lt;p&gt;重点关注监督学习：分四板块—— 模型 损失函数 目标函数（如最小化损失）优化函数（如学习参数）&lt;/p&gt;
+&lt;p&gt;监督学习的模型可分为四大类：决策树，线性方法，核方法，神经网络&lt;/p&gt;
+&lt;h2 id=&#34;32-决策树&#34;&gt;3.2 决策树
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;了解熵、基尼系数&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.bilibili.com/video/BV1T7411b7DG/?share_source=copy_web&amp;amp;vd_source=33a3d9253f3eaae8520547ba343f9930&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;【数据挖掘】决策树零基础入门教程，手把手教你学决策树！&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.bilibili.com/video/BV1Cq4y1S7k1/?share_source=copy_web&amp;amp;vd_source=33a3d9253f3eaae8520547ba343f9930&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;【决策树算法1】ID3算法 数据挖掘 期末考试 计算题 详细步骤讲解&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
 </description>
         </item>
         <item>
