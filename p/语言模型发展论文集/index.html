@@ -254,6 +254,15 @@
         <li><a href="#总结">总结</a></li>
       </ol>
     </li>
+    <li><a href="#glove">GloVe</a>
+      <ol>
+        <li><a href="#链接与要点-1">链接与要点</a></li>
+        <li><a href="#glove模型组件">GloVe模型组件</a></li>
+        <li><a href="#glove训练过程">GloVe训练过程</a></li>
+        <li><a href="#哲学思想">哲学思想</a></li>
+      </ol>
+    </li>
+    <li><a href="#seq2seq">Seq2Seq</a></li>
   </ol>
 </nav>
         </div>
@@ -434,7 +443,7 @@
 <h3 id="链接与要点">链接与要点
 </h3><p><strong>必看链接</strong>: <a class="link" href="https://www.bilibili.com/video/BV1uF4m1P7HS/?share_source=copy_web&amp;vd_source=33a3d9253f3eaae8520547ba343f9930"  target="_blank" rel="noopener"
     >深入浅出：用中学数学理解 CBOW与Skip-gram</a></p>
-<p>要点: 多层softmax、CBOW、Skip-gram</p>
+<p><strong>要点</strong>: 在理解NNLM的基础上，理解 多层softmax、CBOW、Skip-gram</p>
 <h3 id="nnlm计算复杂度">NNLM计算复杂度
 </h3><ul>
 <li><strong>模型结构</strong>: 输入层 -&gt; 投影层 (查找词向量) -&gt; 非线性隐藏层  -&gt; 输出层 (Softmax)。</li>
@@ -610,7 +619,236 @@
 <li><strong>改变任务</strong>: 放弃构建精确语言模型，设计出更简单、更专注的“伪任务”，其唯一目的就是训练出高质量的词向量。</li>
 <li><strong>思想：当数据量足够大时，模型的简单性带来的训练效率优势，往往能胜过复杂模型带来的精度优势。一个在万亿级语料上训练的简单模型 (CBOW)，其产出的词向量质量，远超一个只能在十亿级语料上训练的复杂模型 (NNLM)</strong></li>
 </ol>
-
+<h2 id="glove">GloVe
+</h2><h3 id="链接与要点-1">链接与要点
+</h3><p>链接（拓展）：<a class="link" href="https://www.bilibili.com/video/BV1Fr4y1w7mE?spm_id_from=333.788.videopod.episodes&amp;vd_source=3e32a51d0489203920eb4337d8de4c31&amp;p=2"  target="_blank" rel="noopener"
+    >单词向量空间_哔哩哔哩_bilibili</a></p>
+<p>要点：在理解bag-of-word的基础上，先知道模型是如何设计的，再深究 怎么得到模型的、为什么这样有道理。</p>
+<p>PS：原论文是完整的思路，从启发点开始一步步推导；我的话让gemini一句一句翻译论文并解析看的，没看懂也硬着头皮继续看，然后柳暗花明。</p>
+<h3 id="glove模型组件">GloVe模型组件
+</h3><p>GloVe模型的核心是一个<strong>加权最小二乘回归模型</strong>。它的目标是最小化一个<strong>代价函数 (Cost Function)</strong> <code>J</code>。（先记下来：权重f()，词向量w，偏置b，共现次数X_ij）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">J = Σ f(X_ij) * (w_iᵀ * ~w_j + b_i + ~b_j - log(X_ij))²
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol>
+<li>
+<p><strong>输入数据 - 共现矩阵 <code>X</code></strong>:</p>
+<ul>
+<li>这是模型训练前需要<strong>提前准备好</strong>的唯一数据。</li>
+<li><code>X_ij</code> 代表在整个语料库中，单词 <code>j</code> 出现在单词 <code>i</code> 上下文窗口中的次数。</li>
+<li><strong>举例</strong>：
+<ul>
+<li>
+<p>语料库(Corpus):&ldquo;I like deep learning.&quot;，&ldquo;I like NLP.&quot;，&ldquo;I enjoy learning.&rdquo;</p>
+</li>
+<li>
+<p><strong>词汇表</strong>: { I, like, deep, learning, NLP, enjoy }</p>
+</li>
+<li>
+<p><strong>上下文窗口大小</strong>: 1</p>
+</li>
+<li>
+<p>共现矩阵如下：</p>
+</li>
+</ul>
+</li>
+</ul>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th style="text-align: left"><code>X</code></th>
+          <th style="text-align: center">I</th>
+          <th style="text-align: center">like</th>
+          <th style="text-align: center">deep</th>
+          <th style="text-align: center">learning</th>
+          <th style="text-align: center">NLP</th>
+          <th style="text-align: center">enjoy</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left"><strong>I</strong></td>
+          <td style="text-align: center">0</td>
+          <td style="text-align: center">2</td>
+          <td style="text-align: center">0</td>
+          <td style="text-align: center">0</td>
+          <td style="text-align: center">0</td>
+          <td style="text-align: center">1</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>like</strong></td>
+          <td style="text-align: center">2</td>
+          <td style="text-align: center">0</td>
+          <td style="text-align: center">1</td>
+          <td style="text-align: center">0</td>
+          <td style="text-align: center">1</td>
+          <td style="text-align: center">0</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>deep</strong></td>
+          <td style="text-align: center">0</td>
+          <td style="text-align: center">1</td>
+          <td style="text-align: center">0</td>
+          <td style="text-align: center">1</td>
+          <td style="text-align: center">0</td>
+          <td style="text-align: center">0</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>learning</strong></td>
+          <td style="text-align: center">0</td>
+          <td style="text-align: center">0</td>
+          <td style="text-align: center">1</td>
+          <td style="text-align: center">0</td>
+          <td style="text-align: center">0</td>
+          <td style="text-align: center">1</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>NLP</strong></td>
+          <td style="text-align: center">0</td>
+          <td style="text-align: center">1</td>
+          <td style="text-align: center">0</td>
+          <td style="text-align: center">0</td>
+          <td style="text-align: center">0</td>
+          <td style="text-align: center">0</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>enjoy</strong></td>
+          <td style="text-align: center">1</td>
+          <td style="text-align: center">0</td>
+          <td style="text-align: center">0</td>
+          <td style="text-align: center">1</td>
+          <td style="text-align: center">0</td>
+          <td style="text-align: center">0</td>
+      </tr>
+  </tbody>
+</table></div>
+</li>
+<li>
+<p><strong>待学习的参数</strong>:</p>
+<ul>
+<li><code>w_i</code>: 目标词 <code>i</code> 的<strong>中心词向量</strong>。</li>
+<li><code>~w_j</code>: 上下文词 <code>j</code> 的<strong>上下文词向量</strong>。</li>
+<li><code>b_i</code> 和 <code>~b_j</code>: 分别是中心词和上下文词的<strong>偏置项</strong>，用于捕捉词本身的一些独立于上下文的特性（比如词频）。</li>
+<li><strong>最终我们需要的词向量就是 <code>w</code> 或者 <code>w</code> 和 <code>~w</code> 的和/平均值。</strong></li>
+</ul>
+</li>
+<li>
+<p><strong>核心方程</strong>:</p>
+<ul>
+<li><code>w_iᵀ * ~w_j + b_i + ~b_j</code>：这是模型的<strong>预测部分</strong>。它用两个向量的点积和两个偏置项，来预测词 <code>i</code> 和 <code>j</code> 之间的关联度。</li>
+<li><code>log(X_ij)</code>：这是模型的<strong>目标部分</strong>。它代表了我们希望预测值逼近的“真实”关联度，直接来源于全局的共现统计。</li>
+</ul>
+</li>
+<li>
+<p><strong>权重函数 <code>f(X_ij)</code></strong>:</p>
+<ul>
+<li>
+<p>它是一个权重函数，根据共现次数<code>X_ij</code>的大小来决定某个词对在训练中的重要性，它会影响 损失的大小 从而影响 一次反向传播 对参数的 调整程度：</p>
+<ul>
+<li><strong><code>f(0) = 0</code></strong>: 对于从未共现的词对（<code>X_ij=0</code>），权重为0，完全不参与训练，极大降低计算复杂度。</li>
+<li><strong>非递减</strong>: 共现次数越多的词对，权重越大（但不是无限大），因为它们包含更可靠的信息。</li>
+<li><strong>设置上限</strong>: 对于共现次数极高的词对（如 &ldquo;the&rdquo;, &ldquo;is&rdquo;），权重被限制在一个上限（比如1），防止这些高频停用词主导整个训练过程。</li>
+</ul>
+</li>
+<li>
+<p>文章给出分段函数如下图，<code>x_max</code> 取100，<code>α</code> 取 3/4，满足上面的三个条件 f(0)=0, 非递减, 设置上限。</p>
+</li>
+</ul>
+<img src=".\glove_weight_func.png" alt="glove_weight_func" style="zoom:38%;" />
+</li>
+</ol>
+<h3 id="glove训练过程">GloVe训练过程
+</h3><p><strong>第1步：构建共现矩阵</strong></p>
+<ol>
+<li>
+<p><strong>确定词汇表</strong>：扫描整个语料库，统计词频，筛选出最高频的N个单词作为词汇表。</p>
+</li>
+<li>
+<p><strong>确定上下文窗口</strong>：设定一个窗口大小，比如左右各5个词。</p>
+</li>
+<li>
+<p><strong>统计共现次数</strong>: 遍历整个语料库，对于词汇表中的每一个词 <code>i</code>，查看其上下文窗口中出现了哪些词 <code>j</code>，并累加到 <code>X_ij</code> 上。</p>
+</li>
+</ol>
+<p><strong>第2步：权重和初始化参数</strong></p>
+<ol>
+<li>为词汇表中的每个词，随机初始化它的中心词向量 <code>w</code>、上下文词向量 <code>~w</code>、以及偏置项 <code>b</code> 和 <code>~b</code>。这些通常都是一些很小的随机数。</li>
+<li>根据权重函数和共现矩阵得到<code>f(X_ij)</code>。</li>
+</ol>
+<p><strong>第3步：迭代优化</strong></p>
+<ol>
+<li><strong>核心目标</strong>：通过调整 <code>w</code>, <code>~w</code>, <code>b</code>, <code>~b</code> 这些参数，来让代价函数 <code>J = Σ f(X_ij) * (w_iᵀ * ~w_j + b_i + ~b_j - log(X_ij))²</code> 的值变得尽可能小，<strong>人话就是</strong>：<strong>加权后的 【行词向量和列词向量的内积 + 偏置】 接近 【相应行列共现矩阵中的值】，达到整体误差最小的地步</strong>。</li>
+<li><strong>优化算法</strong>：通常使用随机梯度下降 (SGD) 的变种，如 <strong>AdaGrad</strong> 算法。</li>
+<li>具体流程:
+<ul>
+<li>从共现矩阵 <code>X</code> 中随机抽取一个非零的词对 <code>(i, j)</code> 及其共现次数 <code>X_ij</code>。</li>
+<li>计算这对词的预测误差: <code>error = (w_iᵀ * ~w_j + b_i + ~b_j) - log(X_ij)</code>。</li>
+<li>根据 <code>X_ij</code> 计算权重: <code>weight = f(X_ij)</code>。</li>
+<li>计算这个样本的<strong>加权损失</strong>: <code>loss = weight * error²</code>。</li>
+<li>根据这个损失，计算它对涉及到的参数 (<code>w_i</code>, <code>~w_j</code>, <code>b_i</code>, <code>~b_j</code>) 的<strong>梯度</strong>（即每个参数应该调整的方向）。</li>
+<li>沿着梯度的反方向，<strong>微小地更新</strong>这些参数，使得下次计算这对词时，误差会变小一点。</li>
+</ul>
+</li>
+<li><strong>重复</strong>: 不断重复第3步，遍历所有非零的词对，进行多轮（epochs）训练，直到代价函数 <code>J</code> 的值收敛（不再显著下降）。</li>
+</ol>
+<p><strong>第4步：获得最终词向量</strong></p>
+<ol>
+<li>训练结束后，我们就得到两套词向量矩阵 <code>W</code> (所有 <code>w</code> 的集合) 和 <code>~W</code> (所有 <code>~w</code> 的集合)。</li>
+<li>最终的词向量通常是这两套向量的<strong>和</strong>或<strong>平均值</strong>，即 <code>W_final = W + ~W</code>。这样做可以融合两方面的信息，使得到的词向量更加鲁棒。</li>
+</ol>
+<h3 id="哲学思想">哲学思想
+</h3><ul>
+<li>
+<p>原论文提到的共现率比例体现哪里？<code>J = Σ f(X_ij) * (w_iᵀ * ~w_j + b_i + ~b_j - log(X_ij))²</code>这个式子只涉及i j，压根没有k！</p>
+<p>答曰：要区分“<strong>模型的思想起点</strong>”和“<strong>最终的数学形式</strong>”。比率是 GloVe 模型的<strong>设计哲学和推导工具</strong>，而不是它在训练时直接优化的目标。（ps：具体的问大模型去吧）</p>
+</li>
+<li>
+<p>那glove和LSA有什么关系？没有是什么矩阵分解啊？</p>
+<p>答曰：<code>J = Σ f(X_ij) * (w_iᵀ * ~w_j + b_i + ~b_j - log(X_ij))²</code> 这个公式看起来是一个回归问题，而不是我们通常见到的矩阵分解形式，比如 <code>X ≈ W * Hᵀ</code>。</p>
+<p><strong>但它本质上就是一种“加权的矩阵分解”</strong>。</p>
+<ol>
+<li>
+<p><strong>简化问题</strong>：</p>
+<ul>
+<li>暂时忽略权重 <code>f(X_ij)</code> 和偏置项 <code>b_i</code>, <code>~b_j</code>。</li>
+<li>那么损失函数就变成了 <code>J = Σ (w_iᵀ * ~w_j - log(X_ij))²</code>。</li>
+</ul>
+</li>
+<li>
+<p><strong>理解<code>w_iᵀ \* ~w_j</code>的矩阵形式</strong>：</p>
+<ul>
+<li><code>w_i</code> 是词向量矩阵 <code>W</code> 的第 <code>i</code> 行。</li>
+<li><code>~w_j</code> 是词向量矩阵 <code>~W</code> 的第 <code>j</code> 行。</li>
+<li>那么 <code>w_iᵀ * ~w_j</code> 就是矩阵乘积 <code>W * ~Wᵀ</code> 之后得到的那个大矩阵中，处在第 <code>i</code> 行、第 <code>j</code> 列的那个元素。</li>
+</ul>
+</li>
+<li>
+<p><strong>重新表述损失函数</strong>：</p>
+<ul>
+<li>
+<p>我们上面简化的损失函数 <code>J = Σ (w_iᵀ * ~w_j - log(X_ij))²</code>，其实就是在说：</p>
+<blockquote>
+<p>“找到两个低维矩阵 <code>W</code> 和 <code>~W</code>，使得它们的乘积 <code>W * ~Wᵀ</code> 尽可能地接近目标矩阵 <code>log(X)</code>。”</p>
+</blockquote>
+</li>
+<li>
+<p>用矩阵的范数来表示，这就是在最小化 <code>|| W * ~Wᵀ - log(X) ||_F²</code> (弗罗贝尼乌斯范数的平方)。</p>
+</li>
+<li>
+<p>PS：6666666666666666666</p>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="seq2seq">Seq2Seq
+</h2>
 </section>
 
 

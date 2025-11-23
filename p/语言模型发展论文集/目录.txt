@@ -16,7 +16,7 @@
 
 2.  **GloVe - 《GloVe: Global Vectors for Word Representation》 (Pennington et al., 2014)**
     *   **为什么重要**: 与 Word2Vec 依赖局部上下文窗口不同，GloVe 巧妙地结合了全局矩阵分解（如 LSA）和局部上下文窗口（如 Word2Vec）的优点，提出了一种新的词向量学习方法。
-    *   **核心贡献**: 提供了一种兼顾全局统计信息和局部上下文信息的词嵌入方法。
+        *   **核心贡献**: 提供了一种兼顾全局统计信息和局部上下文信息的词嵌入方法。
 
 3.  **Seq2Seq - 《Sequence to Sequence Learning with Neural Networks》 (Sutskever et al., 2014)**
     *   **为什么重要**: 这篇论文提出了经典的 **编码器-解码器（Encoder-Decoder）** 架构，使用两个 RNN（通常是 LSTM）来处理变长的输入序列和输出序列。这个框架成为了机器翻译、对话系统等任务的标配，是后续 Transformer 架构的重要前身。
