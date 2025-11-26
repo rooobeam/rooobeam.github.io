@@ -262,7 +262,17 @@
         <li><a href="#哲学思想">哲学思想</a></li>
       </ol>
     </li>
-    <li><a href="#seq2seq">Seq2Seq</a></li>
+    <li><a href="#seq2seq">Seq2seq</a>
+      <ol>
+        <li><a href="#前置知识链接与要点">前置知识、链接与要点</a></li>
+        <li><a href="#mlp">MLP</a></li>
+        <li><a href="#传统rnn">传统RNN</a></li>
+        <li><a href="#lstm">LSTM</a></li>
+        <li><a href="#deep-lstms">deep LSTMs</a></li>
+        <li><a href="#encoder-decoderseq2seq">encoder-decoder(Seq2seq)</a></li>
+      </ol>
+    </li>
+    <li><a href="#后续内容不再公开爱咋咋">后续内容不再公开，爱咋咋</a></li>
   </ol>
 </nav>
         </div>
@@ -627,15 +637,8 @@
 <p>PS：原论文是完整的思路，从启发点开始一步步推导；我的话让gemini一句一句翻译论文并解析看的，没看懂也硬着头皮继续看，然后柳暗花明。</p>
 <h3 id="glove模型组件">GloVe模型组件
 </h3><p>GloVe模型的核心是一个<strong>加权最小二乘回归模型</strong>。它的目标是最小化一个<strong>代价函数 (Cost Function)</strong> <code>J</code>。（先记下来：权重f()，词向量w，偏置b，共现次数X_ij）</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">J = Σ f(X_ij) * (w_iᵀ * ~w_j + b_i + ~b_j - log(X_ij))²
-</span></span></code></pre></td></tr></table>
-</div>
-</div><ol>
+<p>$J = Σ f(X_{ij}) * (w_iᵀ * ~w_j + b_i + ~b_j - log(X_{ij}))²$</p>
+<ol>
 <li>
 <p><strong>输入数据 - 共现矩阵 <code>X</code></strong>:</p>
 <ul>
@@ -731,32 +734,32 @@
 <li>
 <p><strong>待学习的参数</strong>:</p>
 <ul>
-<li><code>w_i</code>: 目标词 <code>i</code> 的<strong>中心词向量</strong>。</li>
-<li><code>~w_j</code>: 上下文词 <code>j</code> 的<strong>上下文词向量</strong>。</li>
-<li><code>b_i</code> 和 <code>~b_j</code>: 分别是中心词和上下文词的<strong>偏置项</strong>，用于捕捉词本身的一些独立于上下文的特性（比如词频）。</li>
+<li>$w_i$: 目标词 <code>i</code> 的<strong>中心词向量</strong>。</li>
+<li>$~w_j$: 上下文词 <code>j</code> 的<strong>上下文词向量</strong>。</li>
+<li>$b_i$ 和 $~b_j$: 分别是中心词和上下文词的<strong>偏置项</strong>，用于捕捉词本身的一些独立于上下文的特性（比如词频）。</li>
 <li><strong>最终我们需要的词向量就是 <code>w</code> 或者 <code>w</code> 和 <code>~w</code> 的和/平均值。</strong></li>
 </ul>
 </li>
 <li>
 <p><strong>核心方程</strong>:</p>
 <ul>
-<li><code>w_iᵀ * ~w_j + b_i + ~b_j</code>：这是模型的<strong>预测部分</strong>。它用两个向量的点积和两个偏置项，来预测词 <code>i</code> 和 <code>j</code> 之间的关联度。</li>
-<li><code>log(X_ij)</code>：这是模型的<strong>目标部分</strong>。它代表了我们希望预测值逼近的“真实”关联度，直接来源于全局的共现统计。</li>
+<li>$w_iᵀ * ~w_j + b_i + ~b_j$：这是模型的<strong>预测部分</strong>。它用两个向量的点积和两个偏置项，来预测词 <code>i</code> 和 <code>j</code> 之间的关联度。</li>
+<li>$log(X_{ij})$：这是模型的<strong>目标部分</strong>。它代表了我们希望预测值逼近的“真实”关联度，直接来源于全局的共现统计。</li>
 </ul>
 </li>
 <li>
-<p><strong>权重函数 <code>f(X_ij)</code></strong>:</p>
+<p><strong>权重函数 $f(X_{ij})$</strong>:</p>
 <ul>
 <li>
 <p>它是一个权重函数，根据共现次数<code>X_ij</code>的大小来决定某个词对在训练中的重要性，它会影响 损失的大小 从而影响 一次反向传播 对参数的 调整程度：</p>
 <ul>
-<li><strong><code>f(0) = 0</code></strong>: 对于从未共现的词对（<code>X_ij=0</code>），权重为0，完全不参与训练，极大降低计算复杂度。</li>
+<li><strong><code>f(0) = 0</code></strong>: 对于从未共现的词对（$X_{ij}=0$），权重为0，完全不参与训练，极大降低计算复杂度。</li>
 <li><strong>非递减</strong>: 共现次数越多的词对，权重越大（但不是无限大），因为它们包含更可靠的信息。</li>
 <li><strong>设置上限</strong>: 对于共现次数极高的词对（如 &ldquo;the&rdquo;, &ldquo;is&rdquo;），权重被限制在一个上限（比如1），防止这些高频停用词主导整个训练过程。</li>
 </ul>
 </li>
 <li>
-<p>文章给出分段函数如下图，<code>x_max</code> 取100，<code>α</code> 取 3/4，满足上面的三个条件 f(0)=0, 非递减, 设置上限。</p>
+<p>文章给出分段函数如下图，$x_{max}$ 取100，<code>α</code> 取 3/4，满足上面的三个条件 f(0)=0, 非递减, 设置上限。</p>
 </li>
 </ul>
 <img src=".\glove_weight_func.png" alt="glove_weight_func" style="zoom:38%;" />
@@ -782,15 +785,15 @@
 </ol>
 <p><strong>第3步：迭代优化</strong></p>
 <ol>
-<li><strong>核心目标</strong>：通过调整 <code>w</code>, <code>~w</code>, <code>b</code>, <code>~b</code> 这些参数，来让代价函数 <code>J = Σ f(X_ij) * (w_iᵀ * ~w_j + b_i + ~b_j - log(X_ij))²</code> 的值变得尽可能小，<strong>人话就是</strong>：<strong>加权后的 【行词向量和列词向量的内积 + 偏置】 接近 【相应行列共现矩阵中的值】，达到整体误差最小的地步</strong>。</li>
+<li><strong>核心目标</strong>：通过调整 <code>w</code>, <code>~w</code>, <code>b</code>, <code>~b</code> 这些参数，来让代价函数 $J = Σ f(X_{ij}) * (w_iᵀ * ~w_j + b_i + ~b_j - log(X_{ij}))²$ 的值变得尽可能小，<strong>人话就是</strong>：<strong>加权后的 【行词向量和列词向量的内积 + 偏置】 接近 【相应行列共现矩阵中的值】，达到整体误差最小的地步</strong>。</li>
 <li><strong>优化算法</strong>：通常使用随机梯度下降 (SGD) 的变种，如 <strong>AdaGrad</strong> 算法。</li>
 <li>具体流程:
 <ul>
-<li>从共现矩阵 <code>X</code> 中随机抽取一个非零的词对 <code>(i, j)</code> 及其共现次数 <code>X_ij</code>。</li>
-<li>计算这对词的预测误差: <code>error = (w_iᵀ * ~w_j + b_i + ~b_j) - log(X_ij)</code>。</li>
-<li>根据 <code>X_ij</code> 计算权重: <code>weight = f(X_ij)</code>。</li>
+<li>从共现矩阵 <code>X</code> 中随机抽取一个非零的词对 <code>(i, j)</code> 及其共现次数 $X_{ij}$。</li>
+<li>计算这对词的预测误差: $error = (w_iᵀ * ~w_j + b_i + ~b_j) - log(X_{ij})$。</li>
+<li>根据 $X_{ij}$ 计算权重: $weight = f(X_{ij})$。</li>
 <li>计算这个样本的<strong>加权损失</strong>: <code>loss = weight * error²</code>。</li>
-<li>根据这个损失，计算它对涉及到的参数 (<code>w_i</code>, <code>~w_j</code>, <code>b_i</code>, <code>~b_j</code>) 的<strong>梯度</strong>（即每个参数应该调整的方向）。</li>
+<li>根据这个损失，计算它对涉及到的参数 ($w_i, ~w_j, b_i, ~b_j$) 的<strong>梯度</strong>（即每个参数应该调整的方向）。</li>
 <li>沿着梯度的反方向，<strong>微小地更新</strong>这些参数，使得下次计算这对词时，误差会变小一点。</li>
 </ul>
 </li>
@@ -799,39 +802,49 @@
 <p><strong>第4步：获得最终词向量</strong></p>
 <ol>
 <li>训练结束后，我们就得到两套词向量矩阵 <code>W</code> (所有 <code>w</code> 的集合) 和 <code>~W</code> (所有 <code>~w</code> 的集合)。</li>
-<li>最终的词向量通常是这两套向量的<strong>和</strong>或<strong>平均值</strong>，即 <code>W_final = W + ~W</code>。这样做可以融合两方面的信息，使得到的词向量更加鲁棒。</li>
+<li>最终的词向量通常是这两套向量的<strong>和</strong>或<strong>平均值</strong>，即 $W_{final} = W + ~W$。这样做可以融合两方面的信息，使得到的词向量更加鲁棒。</li>
 </ol>
 <h3 id="哲学思想">哲学思想
 </h3><ul>
 <li>
-<p>原论文提到的共现率比例体现哪里？<code>J = Σ f(X_ij) * (w_iᵀ * ~w_j + b_i + ~b_j - log(X_ij))²</code>这个式子只涉及i j，压根没有k！</p>
+<p>原论文提到的共现率比例体现哪里？$J = Σ f(X_{ij}) * (w_iᵀ * ~w_j + b_i + ~b_j - log(X_{ij}))²$这个式子只涉及i j，压根没有k！</p>
 <p>答曰：要区分“<strong>模型的思想起点</strong>”和“<strong>最终的数学形式</strong>”。比率是 GloVe 模型的<strong>设计哲学和推导工具</strong>，而不是它在训练时直接优化的目标。（ps：具体的问大模型去吧）</p>
 </li>
 <li>
 <p>那glove和LSA有什么关系？没有是什么矩阵分解啊？</p>
-<p>答曰：<code>J = Σ f(X_ij) * (w_iᵀ * ~w_j + b_i + ~b_j - log(X_ij))²</code> 这个公式看起来是一个回归问题，而不是我们通常见到的矩阵分解形式，比如 <code>X ≈ W * Hᵀ</code>。</p>
-<p><strong>但它本质上就是一种“加权的矩阵分解”</strong>。</p>
+<p>答曰：<code>J = Σ f(X_ij) * (w_iᵀ * ~w_j + b_i + ~b_j - log(X_ij))²</code> 这个公式看起来不是常见的矩阵分解形式，如 <code>X ≈ W * Hᵀ</code>，<strong>但它本质上是一种“加权的矩阵分解”</strong>。</p>
 <ol>
 <li>
 <p><strong>简化问题</strong>：</p>
 <ul>
-<li>暂时忽略权重 <code>f(X_ij)</code> 和偏置项 <code>b_i</code>, <code>~b_j</code>。</li>
-<li>那么损失函数就变成了 <code>J = Σ (w_iᵀ * ~w_j - log(X_ij))²</code>。</li>
+<li>暂时忽略权重 $f(X_{ij})$ 和偏置项 $b_i$, $~b_j$。</li>
 </ul>
 </li>
-<li>
-<p><strong>理解<code>w_iᵀ \* ~w_j</code>的矩阵形式</strong>：</p>
+</ol>
 <ul>
-<li><code>w_i</code> 是词向量矩阵 <code>W</code> 的第 <code>i</code> 行。</li>
-<li><code>~w_j</code> 是词向量矩阵 <code>~W</code> 的第 <code>j</code> 行。</li>
-<li>那么 <code>w_iᵀ * ~w_j</code> 就是矩阵乘积 <code>W * ~Wᵀ</code> 之后得到的那个大矩阵中，处在第 <code>i</code> 行、第 <code>j</code> 列的那个元素。</li>
+<li>那么损失函数就变成了 $J = Σ (w_iᵀ * ~w_j - log(X_{ij}))²$。</li>
+</ul>
+<ol start="2">
+<li>
+<p><strong>理解$w_iᵀ * ~w_j$的矩阵形式</strong>：</p>
+<ul>
+<li>$w_i$ 是词向量矩阵 $W$ 的第 <code>i</code> 行。</li>
 </ul>
 </li>
+</ol>
+<ul>
+<li>$~w_j$ 是词向量矩阵 $~W$ 的第 <code>j</code> 行。
+<ul>
+<li>那么 $w_iᵀ * ~w_j$ 就是矩阵乘积 $W * ~Wᵀ$ 之后得到的那个大矩阵中，处在第 <code>i</code> 行、第 <code>j</code> 列的那个元素。</li>
+</ul>
+</li>
+</ul>
+<ol start="3">
 <li>
 <p><strong>重新表述损失函数</strong>：</p>
 <ul>
 <li>
-<p>我们上面简化的损失函数 <code>J = Σ (w_iᵀ * ~w_j - log(X_ij))²</code>，其实就是在说：</p>
+<p>我们上面简化的损失函数 $J = Σ (w_iᵀ * ~w_j - log(X_{ij}))²$，其实就是在说：</p>
 <blockquote>
 <p>“找到两个低维矩阵 <code>W</code> 和 <code>~W</code>，使得它们的乘积 <code>W * ~Wᵀ</code> 尽可能地接近目标矩阵 <code>log(X)</code>。”</p>
 </blockquote>
@@ -839,15 +852,95 @@
 <li>
 <p>用矩阵的范数来表示，这就是在最小化 <code>|| W * ~Wᵀ - log(X) ||_F²</code> (弗罗贝尼乌斯范数的平方)。</p>
 </li>
-<li>
-<p>PS：6666666666666666666</p>
-</li>
 </ul>
 </li>
 </ol>
 </li>
+<li>
+<p>PS：6666666666666666666</p>
+</li>
 </ul>
-<h2 id="seq2seq">Seq2Seq
+<h2 id="seq2seq">Seq2seq
+</h2><h3 id="前置知识链接与要点">前置知识、链接与要点
+</h3><p>前置知识 由高到低：deep LSTMs -&gt; LSTM -&gt; 传统RNN -&gt; MLP，MLP是零基础可以直接学的。</p>
+<p><strong>必看链接</strong>：<a class="link" href="https://www.bilibili.com/video/BV1e5411K7oW/?share_source=copy_web&amp;vd_source=33a3d9253f3eaae8520547ba343f9930"  target="_blank" rel="noopener"
+    >RNN大白话讲解</a>、<a class="link" href="https://www.bilibili.com/video/BV1qM4y1M7Nv/?share_source=copy_web&amp;vd_source=33a3d9253f3eaae8520547ba343f9930"  target="_blank" rel="noopener"
+    >LSTM大白话讲解 </a>、<a class="link" href="https://www.bilibili.com/video/BV16g411L7FG/?share_source=copy_web&amp;vd_source=33a3d9253f3eaae8520547ba343f9930"  target="_blank" rel="noopener"
+    >序列到序列学习【动手学深度学习v2】</a></p>
+<p>要点：</p>
+<ul>
+<li>理解RNN里的“时间步上的展开”</li>
+<li>理解LSTM通过<strong>细胞状态C</strong>进行“遗忘和更新”</li>
+<li>理解<strong>encoder-decoder</strong>架构</li>
+<li>其他注意点：多层LSTM，encoder-decoder架构在训练和实际预测时的不同、让大模型进行矩阵计算过程模拟，反向传播涉及矩阵微积分（我投降，我用维度分析法），梯度爆炸（我再投降，你能拿我咋滴）</li>
+</ul>
+<p><strong>下文遵循 &ldquo;MLP(究极粗糙版) -&gt; MLP(滑窗版) -&gt; 传统RNN  -&gt; LSTM -&gt; deep LSTMs -&gt;encoder-decoder&rdquo; 的顺序</strong></p>
+<h3 id="mlp">MLP
+</h3><p>场景设定为：对于一个序列/向量 比如 a cat sat on a ___ 这里要预测个词</p>
+<p>对于<strong>MLP(究极粗糙版)</strong>，需要将a cat sat on a转成5个词嵌入 5*(1, 300)，然后拼接形成(1, 1500)，然后经过隐藏层 (1, 1500) × (1500, 128) = (1, 128)，最后输出层 (1, 128) × (128, 10000) ，这里假定10000个词，然后softmax看哪个词。</p>
+<p>这里问题在于， 这里定长了，于是有<strong>MLP(滑窗版)</strong>，假设窗口长度为3。若训练数据为“a cat sat on a mat”  则滑窗出 a cat sat (on)、cat sat on (a)、sat on a (mat) 来训练。预测时，只能利用最后三个词“sat on a”去预测 mat。</p>
+<p>公式：$â = tanh(W_{ax} × x+b_{a})$	$ŷ = softmax(W_{ya} × â + b_y)$</p>
+<h3 id="传统rnn">传统RNN
+</h3><p>先看 <a class="link" href="https://www.bilibili.com/video/BV1e5411K7oW/?share_source=copy_web&amp;vd_source=33a3d9253f3eaae8520547ba343f9930"  target="_blank" rel="noopener"
+    >RNN大白话讲解</a></p>
+<p>场景依旧 “a cat sat on a ___”，传统RNN初始参数有：词嵌入表（冻结）（1e4, 300），隐藏层权重（428, 128），隐藏层偏置 (1, 128)，输出层权重（128, 1e4），输出层偏置 (1, 1e4)，其中 1e4 为“假设词汇表共个1e4个词”，128 是隐藏层神经元个数，300是词向量维度。</p>
+<p>先将 a 转成词嵌入 (1, 300)，与上个隐藏层结果（h_0设定为全0 (1, 128)）拼接得到 (1, 428)，经过隐藏层 (1, 428) × (428, 128) = (1, 128)  = h1；cat转为词嵌入 (1, 300)，与上个隐藏层结果得到 (1, 428)，经过隐藏层 (1, 428) × (428, 128) = (1, 128)  = h2 ；sat、on、a 类似；经过 a 后有 h5 = (1, 128)，经过输出层 (128, 1e4)，然后softmax后知道是哪个词。</p>
+<p>训练时，h1<del>h5都会经过输出层得出L1</del>L5（语言建模） 或者 只在最后一个时间步产生一个输出和损失（情感分类），前者 总损失 通过<strong>求和</strong> $L = L_1 + L_2 + L_3$ (或取平均)，后者 总梯度(如对矩阵W_hh)通过<strong>传递</strong>: $∂L/∂W_{hh} = (∂L/∂W_{hh})<em>{t=1} + (∂L/∂W</em>{hh})<em>{t=2} + (∂L/∂W</em>{hh})_{t=3}$</p>
+<p>公式：	$h_{i} = tanh(W_{hx} × (x_i+h_{i-1})+b_{h})$</p>
+<p>​		  $ŷ_i = softmax(W_{yh} × h_i + b_{y})$</p>
+<h3 id="lstm">LSTM
+</h3><p>一句话就是，LSTM平时多传个变量“细胞状态$C_t$”然后多弄几个参数矩阵相应地处理它。</p>
+<p>理解传统RNN后看 <a class="link" href="https://www.bilibili.com/video/BV1qM4y1M7Nv/?share_source=copy_web&amp;vd_source=33a3d9253f3eaae8520547ba343f9930"  target="_blank" rel="noopener"
+    >LSTM大白话讲解  </a> 就能理解，不理解就再看RNN</p>
+<p>公式记忆 ：一个 隐状态 ，一个 细胞状态，细胞遗忘 <code>× σ</code>，细胞更新 <code>+ (σ × tanh)</code>，新隐状态生成 $h_t = tanh(C_t) × σ$</p>
+<p>视频里的公式讲解图如下</p>
+<img src=".\lstm_equations.png" alt="lstm_equations" style="zoom:38%;" />
+<h3 id="deep-lstms">deep LSTMs
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">                               o_t ---&gt; ...   (最终输出)
+</span></span><span class="line"><span class="cl">                                ^
+</span></span><span class="line"><span class="cl">                                |
+</span></span><span class="line"><span class="cl">      h3_t-1 ---&gt; h3_t ---&gt; h3_t+1  (第3层 - 最高层抽象)
+</span></span><span class="line"><span class="cl">         ^         ^          ^
+</span></span><span class="line"><span class="cl">         |         |          |
+</span></span><span class="line"><span class="cl">      h2_t-1 ---&gt; h2_t ---&gt; h2_t+1  (第2层 - 中间层抽象)
+</span></span><span class="line"><span class="cl">         ^         ^          ^
+</span></span><span class="line"><span class="cl">         |         |          |
+</span></span><span class="line"><span class="cl">      h1_t-1 ---&gt; h1_t ---&gt; h1_t+1  (第1层 - 底层特征)
+</span></span><span class="line"><span class="cl">         ^         ^          ^
+</span></span><span class="line"><span class="cl">         |         |          |
+</span></span><span class="line"><span class="cl">        x_t-1     x_t        x_t+1      (原始输入序列)
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>假设维度大小 —— 词向量(1,300) 隐藏状态(1,128)，则第一层的某个权重矩阵大小为(300+128, 128)，其他层(128+128, 128)。</p>
+<h3 id="encoder-decoderseq2seq">encoder-decoder(Seq2seq)
+</h3><p>先看 <a class="link" href="https://www.bilibili.com/video/BV16g411L7FG/?share_source=copy_web&amp;vd_source=33a3d9253f3eaae8520547ba343f9930"  target="_blank" rel="noopener"
+    >序列到序列学习【动手学深度学习v2】</a></p>
+<img src=".\seq2seq.png" alt="seq2seq" style="zoom:40%;" />
+<ul>
+<li>蓝色部分为encoder即一个LSTM，白色部分为decoder也是一个LSTM。</li>
+<li>encoder的隐状态作为decoder的$h_0$，（预测时）给decoder一个“开始记号”为$<bos>$，第一个时间步里输出的词作为第二个时间步输入词，如果输出的词为$<eos>$，则结束</li>
+<li>图中hello world .如果反着输入会有更好效果 —— “这点上我觉得是，解码器它（除t=1）后面的RNN层输入的词是 t-1 输出的词，而hello 最后进入，t=1 当然更容易是hello 相关，这样t=2也更正确，后续亦如此”</li>
+<li>Seq2seq论文中使用4层深度的 deep LSTMs，也就是$h4_t$作为输出</li>
+<li>训练时，在decoder这里会保证每个时间步输入的都是对的词，以调整参数</li>
+</ul>
+<h2 id="后续内容不再公开爱咋咋">后续内容不再公开，爱咋咋
 </h2>
 </section>
 
