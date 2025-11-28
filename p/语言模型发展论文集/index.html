@@ -485,11 +485,11 @@
 <p><strong>传统Softmax</strong>：一个巨大的、<code>H × V</code> 大小的权重矩阵，<code>H</code>维向量跟表里的每一列（共V列）都做一次内积运算，完成 <code>H × V</code> 的计算。</p>
 </li>
 <li>
-<p><strong>分层Softmax</strong>：建立了一棵**“二叉导航树”**。</p>
+<p><strong>分层Softmax</strong>：建立了一棵<strong>二叉导航树</strong>。</p>
 <ul>
-<li>**树的叶子节点 **：词汇表中的 V 个单词，每个单词都作为一个叶子节点。</li>
+<li><strong>树的叶子节点</strong>：词汇表中的 V 个单词，每个单词都作为一个叶子节点。</li>
 <li><strong>树的内部节点</strong>：这些是路径上的“岔路口”，总共有 V-1 个。</li>
-<li><strong>关键点</strong>：我们不再为V个单词存储<code>H</code>维向量，而是为 **V-1 个内部节点（岔路口）**各自分配一个<code>H</code>维的辅助向量。</li>
+<li><strong>关键点</strong>：我们不再为V个单词存储<code>H</code>维向量，而是为 <strong>V-1个内部节点</strong>各自分配一个<code>H</code>维的辅助向量。</li>
 </ul>
 </li>
 </ul>
@@ -574,7 +574,6 @@
       </tr>
   </tbody>
 </table></div>
-<hr>
 <h3 id="总结">总结
 </h3><div class="table-wrapper"><table>
   <thead>
@@ -885,8 +884,8 @@
     >RNN大白话讲解</a></p>
 <p>场景依旧 “a cat sat on a ___”，传统RNN初始参数有：词嵌入表（冻结）（1e4, 300），隐藏层权重（428, 128），隐藏层偏置 (1, 128)，输出层权重（128, 1e4），输出层偏置 (1, 1e4)，其中 1e4 为“假设词汇表共个1e4个词”，128 是隐藏层神经元个数，300是词向量维度。</p>
 <p>先将 a 转成词嵌入 (1, 300)，与上个隐藏层结果（h_0设定为全0 (1, 128)）拼接得到 (1, 428)，经过隐藏层 (1, 428) × (428, 128) = (1, 128)  = h1；cat转为词嵌入 (1, 300)，与上个隐藏层结果得到 (1, 428)，经过隐藏层 (1, 428) × (428, 128) = (1, 128)  = h2 ；sat、on、a 类似；经过 a 后有 h5 = (1, 128)，经过输出层 (128, 1e4)，然后softmax后知道是哪个词。</p>
-<p>训练时，h1<del>h5都会经过输出层得出L1</del>L5（语言建模） 或者 只在最后一个时间步产生一个输出和损失（情感分类），前者 总损失 通过<strong>求和</strong> $L = L_1 + L_2 + L_3$ (或取平均)，后者 总梯度(如对矩阵W_hh)通过<strong>传递</strong>: $∂L/∂W_{hh} = (∂L/∂W_{hh})<em>{t=1} + (∂L/∂W</em>{hh})<em>{t=2} + (∂L/∂W</em>{hh})_{t=3}$</p>
-<p>公式：	$h_{i} = tanh(W_{hx} × (x_i+h_{i-1})+b_{h})$</p>
+<p>训练时，h1~h5都会经过输出层得出L1~L5（语言建模） 或者 只在最后一个时间步产生一个输出和损失（情感分类），前者 总损失 通过<strong>求和</strong> $L = L_1 + L_2 + L_3$ (或取平均)，后者 总梯度(如对矩阵W_hh)通过<strong>传递</strong>:</p>
+$$∂L/∂W_{hh} = (∂L/∂W_{hh})_{t=1} + (∂L/∂W_{hh})_{t=2} + (∂L/∂W_{hh})_{t=3}$$<p>公式：	$h_{i} = tanh(W_{hx} × (x_i+h_{i-1})+b_{h})$</p>
 <p>​		  $ŷ_i = softmax(W_{yh} × h_i + b_{y})$</p>
 <h3 id="lstm">LSTM
 </h3><p>一句话就是，LSTM平时多传个变量“细胞状态$C_t$”然后多弄几个参数矩阵相应地处理它。</p>
@@ -935,7 +934,7 @@
 <img src=".\seq2seq.png" alt="seq2seq" style="zoom:40%;" />
 <ul>
 <li>蓝色部分为encoder即一个LSTM，白色部分为decoder也是一个LSTM。</li>
-<li>encoder的隐状态作为decoder的$h_0$，（预测时）给decoder一个“开始记号”为$<bos>$，第一个时间步里输出的词作为第二个时间步输入词，如果输出的词为$<eos>$，则结束</li>
+<li>encoder的隐状态作为decoder的$h_0$，（预测时）给decoder一个“开始记号”为&lt;bos&gt;$，第一个时间步里输出的词作为第二个时间步输入词，如果输出的词为&lt;eos&gt;，则结束</li>
 <li>图中hello world .如果反着输入会有更好效果 —— “这点上我觉得是，解码器它（除t=1）后面的RNN层输入的词是 t-1 输出的词，而hello 最后进入，t=1 当然更容易是hello 相关，这样t=2也更正确，后续亦如此”</li>
 <li>Seq2seq论文中使用4层深度的 deep LSTMs，也就是$h4_t$作为输出</li>
 <li>训练时，在decoder这里会保证每个时间步输入的都是对的词，以调整参数</li>

@@ -168,11 +168,11 @@
 &lt;p&gt;&lt;strong&gt;传统Softmax&lt;/strong&gt;：一个巨大的、&lt;code&gt;H × V&lt;/code&gt; 大小的权重矩阵，&lt;code&gt;H&lt;/code&gt;维向量跟表里的每一列（共V列）都做一次内积运算，完成 &lt;code&gt;H × V&lt;/code&gt; 的计算。&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;strong&gt;分层Softmax&lt;/strong&gt;：建立了一棵**“二叉导航树”**。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;分层Softmax&lt;/strong&gt;：建立了一棵&lt;strong&gt;二叉导航树&lt;/strong&gt;。&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;**树的叶子节点 **：词汇表中的 V 个单词，每个单词都作为一个叶子节点。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;树的叶子节点&lt;/strong&gt;：词汇表中的 V 个单词，每个单词都作为一个叶子节点。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;树的内部节点&lt;/strong&gt;：这些是路径上的“岔路口”，总共有 V-1 个。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;关键点&lt;/strong&gt;：我们不再为V个单词存储&lt;code&gt;H&lt;/code&gt;维向量，而是为 **V-1 个内部节点（岔路口）**各自分配一个&lt;code&gt;H&lt;/code&gt;维的辅助向量。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;关键点&lt;/strong&gt;：我们不再为V个单词存储&lt;code&gt;H&lt;/code&gt;维向量，而是为 &lt;strong&gt;V-1个内部节点&lt;/strong&gt;各自分配一个&lt;code&gt;H&lt;/code&gt;维的辅助向量。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -257,7 +257,6 @@
       &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;hr&gt;
 &lt;h3 id=&#34;总结&#34;&gt;总结
 &lt;/h3&gt;&lt;table&gt;
   &lt;thead&gt;
@@ -568,8 +567,8 @@
     &gt;RNN大白话讲解&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;场景依旧 “a cat sat on a ___”，传统RNN初始参数有：词嵌入表（冻结）（1e4, 300），隐藏层权重（428, 128），隐藏层偏置 (1, 128)，输出层权重（128, 1e4），输出层偏置 (1, 1e4)，其中 1e4 为“假设词汇表共个1e4个词”，128 是隐藏层神经元个数，300是词向量维度。&lt;/p&gt;
 &lt;p&gt;先将 a 转成词嵌入 (1, 300)，与上个隐藏层结果（h_0设定为全0 (1, 128)）拼接得到 (1, 428)，经过隐藏层 (1, 428) × (428, 128) = (1, 128)  = h1；cat转为词嵌入 (1, 300)，与上个隐藏层结果得到 (1, 428)，经过隐藏层 (1, 428) × (428, 128) = (1, 128)  = h2 ；sat、on、a 类似；经过 a 后有 h5 = (1, 128)，经过输出层 (128, 1e4)，然后softmax后知道是哪个词。&lt;/p&gt;
-&lt;p&gt;训练时，h1&lt;del&gt;h5都会经过输出层得出L1&lt;/del&gt;L5（语言建模） 或者 只在最后一个时间步产生一个输出和损失（情感分类），前者 总损失 通过&lt;strong&gt;求和&lt;/strong&gt; $L = L_1 + L_2 + L_3$ (或取平均)，后者 总梯度(如对矩阵W_hh)通过&lt;strong&gt;传递&lt;/strong&gt;: $∂L/∂W_{hh} = (∂L/∂W_{hh})&lt;em&gt;{t=1} + (∂L/∂W&lt;/em&gt;{hh})&lt;em&gt;{t=2} + (∂L/∂W&lt;/em&gt;{hh})_{t=3}$&lt;/p&gt;
-&lt;p&gt;公式：	$h_{i} = tanh(W_{hx} × (x_i+h_{i-1})+b_{h})$&lt;/p&gt;
+&lt;p&gt;训练时，h1~h5都会经过输出层得出L1~L5（语言建模） 或者 只在最后一个时间步产生一个输出和损失（情感分类），前者 总损失 通过&lt;strong&gt;求和&lt;/strong&gt; $L = L_1 + L_2 + L_3$ (或取平均)，后者 总梯度(如对矩阵W_hh)通过&lt;strong&gt;传递&lt;/strong&gt;:&lt;/p&gt;
+$$∂L/∂W_{hh} = (∂L/∂W_{hh})_{t=1} + (∂L/∂W_{hh})_{t=2} + (∂L/∂W_{hh})_{t=3}$$&lt;p&gt;公式：	$h_{i} = tanh(W_{hx} × (x_i+h_{i-1})+b_{h})$&lt;/p&gt;
 &lt;p&gt;​		  $ŷ_i = softmax(W_{yh} × h_i + b_{y})$&lt;/p&gt;
 &lt;h3 id=&#34;lstm&#34;&gt;LSTM
 &lt;/h3&gt;&lt;p&gt;一句话就是，LSTM平时多传个变量“细胞状态$C_t$”然后多弄几个参数矩阵相应地处理它。&lt;/p&gt;
@@ -618,7 +617,7 @@
 &lt;img src=&#34;.\seq2seq.png&#34; alt=&#34;seq2seq&#34; style=&#34;zoom:40%;&#34; /&gt;
 &lt;ul&gt;
 &lt;li&gt;蓝色部分为encoder即一个LSTM，白色部分为decoder也是一个LSTM。&lt;/li&gt;
-&lt;li&gt;encoder的隐状态作为decoder的$h_0$，（预测时）给decoder一个“开始记号”为$&lt;bos&gt;$，第一个时间步里输出的词作为第二个时间步输入词，如果输出的词为$&lt;eos&gt;$，则结束&lt;/li&gt;
+&lt;li&gt;encoder的隐状态作为decoder的$h_0$，（预测时）给decoder一个“开始记号”为&amp;lt;bos&amp;gt;$，第一个时间步里输出的词作为第二个时间步输入词，如果输出的词为&amp;lt;eos&amp;gt;，则结束&lt;/li&gt;
 &lt;li&gt;图中hello world .如果反着输入会有更好效果 —— “这点上我觉得是，解码器它（除t=1）后面的RNN层输入的词是 t-1 输出的词，而hello 最后进入，t=1 当然更容易是hello 相关，这样t=2也更正确，后续亦如此”&lt;/li&gt;
 &lt;li&gt;Seq2seq论文中使用4层深度的 deep LSTMs，也就是$h4_t$作为输出&lt;/li&gt;
 &lt;li&gt;训练时，在decoder这里会保证每个时间步输入的都是对的词，以调整参数&lt;/li&gt;

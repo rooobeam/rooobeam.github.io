@@ -436,7 +436,7 @@ Bahdanau /bɑːdˈɑːnaʊ/ ，“吧嗒脑”注意力，  加法注意力
 
 **链接：**[使用注意力机制的seq2seq](https://www.bilibili.com/video/BV1v44y1C7Tg/?share_source=copy_web&vd_source=33a3d9253f3eaae8520547ba343f9930)
 
-**要点：双向RNN，论文中的注解、$g(y_{i-1}, s_i, c)$ 的 c 的固定传入、$g(y_{i-1}, s_i, c_i)$ 的 $c_i$ 的产生与作用、e 的计算之加法注意力机制**
+**要点：**双向RNN，论文中的注解、$g(y_{i-1}, s_i, c)$ 的 c 的固定传入、$g(y_{i-1}, s_i, c_i)$ 的 $c_i$ 的产生与作用、**加性注意力机制 **$W\tanh(W_q×s + W_k × h)$ (对应于论文中$e_{ij}$的计算)
 
 提示词积累：   
 ```
@@ -488,7 +488,13 @@ Bahdanau /bɑːdˈɑːnaʊ/ ，“吧嗒脑”注意力，  加法注意力
 
 **1. 计算 e**
 
-**维度详解:**
+原始公式(**加性注意力**)：
+
+$$
+e_{ij} = v_a^\top \tanh(W_a s_{i-1} + U_a h_j)
+$$
+
+向量化形式：
 $$
 \underset{(1 \times 10)}{\mathbf{e}_i} = \underset{(1 \times 64)}{v_a^\top} \tanh \left( \underset{(64 \times 128)}{W_a} \underset{(128 \times 1)}{s_{i-1}} + \underset{(64 \times 256)}{U_a} \underset{(256 \times 10)}{\mathbf{H}} \right)
 $$
@@ -566,3 +572,427 @@ $$
 L \xrightarrow{\text{梯度}} p(y_1) \xrightarrow{\text{梯度}} s_1 \xrightarrow{\text{梯度}} c_1 \xrightarrow{\text{梯度}} \alpha_1 \xrightarrow{\text{梯度}} e_1 \xrightarrow{\text{梯度}} \text{对齐模型 a 的参数}
 $$
 
+## Seft-attention
+
+### 链接、要点与思考
+
+**链接**：[深入浅出：用中学数学理解Transformer模型（必看）](https://www.bilibili.com/video/BV15w4m1R7E8/?share_source=copy_web&vd_source=33a3d9253f3eaae8520547ba343f9930)、[李宏毅 | 自注意力机制和Transformer详细解析（必看）](https://www.bilibili.com/video/BV1r8nMz4EAj/?share_source=copy_web&vd_source=33a3d9253f3eaae8520547ba343f9930)、[李沐自注意力](https://www.bilibili.com/video/BV19o4y1m7mo/?share_source=copy_web&vd_source=33a3d9253f3eaae8520547ba343f9930)
+
+**要点**：自注意力机制思想、点积注意力公式、transformer架构、因果mask实现并行
+
+思考与拓展：理解完全部组件再回过头，encoder就是将**原始输入序列进行一个上下文关联化**，它的输出类似RNN原序列里的各个隐藏层状态(h_1...h_n)，训练时decoder则通过因果mask，使得**每个正确答案token都受到上文关联化**，然后每个token的loss能并行获取到，预测时则串行地从仅输入\<s\>开始，每次都从最后一个token去获取下一个词，直到遇到\</s\>。**拓展**源自李宏毅视频，比如 **guided attention** 比如 **beam tree** 比如 **训练和预测时加入噪音** 比如 **用blue score计算损失时无法求偏导用RL硬刚** 比如 scheduled sampling类似训练时加入噪音（模拟预测时预测到错误）增强鲁棒性
+
+### 引入
+
+没有上下文信息的labeling，这样两个saw必然输出相同词性
+
+<img src=".\normal_fc_labeling.png" alt="normal_fc_labeling" style="zoom:25%;" />
+
+给个窗口，拼接窗口内向量作为输入，提供上下文信息
+
+没有考虑全文，无法变长，参数量大
+
+<img src="D:\办公程序\github_blog\hugo_extended_withdeploy_0.141.0_windows-amd64\rublog\content\post\语言模型发展论文集\window_fc_labeling.png" alt="window_fc_labeling" style="zoom:25%;" />
+
+自注意机制后的向量有上下文信息，由参数矩阵分配，可变长且全局。
+
+<img src=".\self_atten_labeling.png" alt="self_atten_labeling" style="zoom:25%;" />
+
+可多层“self-attention + FC”
+
+<img src=".\more_self_attent_labeling.png" alt="more_self_attent_labeling" style="zoom:30%;" />
+
+### 自注意机制模块
+
+衡量两个词之间的“相关度”——点积（外积）
+
+绿色方框词向量分别为 $I_1$ $I_2$，此处可以得出词向量的“相关度”，具体来说： **$I_1$  的每个值 和 $I_2$ 的 相关度向量 concat 形成 矩阵（外积）** ，公式如下，$d_k$ 是 k 的维度（ $I_1$  $I_2$ q k 维度一样大），过除以 $\sqrt{d_k}$，可以将**点积的方差**稳定在 1 左右，使其大小不受向量维度 $d_k$ 的影响。     
+
+​                                                    $$ \alpha = \frac{(I_1 W^q)(I_2 W^k)^T}{\sqrt{d_k}}$$
+
+<img src=".\dot_product.png" alt="dot_product" style="zoom:25%;" />
+
+假设输入序列为 $A = [a^1, a^2, ..., a^n]$，输出序列为 $B = [b^1, b^2, ..., b^n]$。
+
+1.  **生成Query, Key, Value**: 对于每个输入向量 $a^i$：
+    $$ q^i = W^q a^i $$                  $$Q = A W^q$$
+    $$ k^i = W^k a^i$$                 $$K = A W^k$$
+    $$ v^i = W^v a^i$$                 $$V = A W^v$$
+
+2. **计算注意力权重**: 计算第 $j$ 个输出 $b^j$ 时，需要用它的查询 $q^j$ 和所有的键 $k^i$ 计算相关性得分，然后通过Softmax进行归一化。
+
+   **$A'$用我的话说：A的长度个 “描述相关性”的 向量，第 i 个向量描述 $b^i$ 如何由 $V$ 加权得来**
+
+   $$ \alpha'_{j,i} = \text{softmax}(\frac{(q^j)^T k^i}{\sqrt{d_k}})$$                  $$A' = \text{softmax}(\frac{QK^T}{\sqrt{d_k}})$$
+
+3. **计算输出向量**: 将权重 $\alpha'_{j,i}$ 与对应的 $v^i$ 加权求和，得到输出 $b^j$。
+   $$ b^j = \sum_{i=1}^{n} \alpha'_{j,i} v^i $$                       $$ B = A'V $$
+
+<img src=".\self_attent_a2b.png" alt="self_attent_a2b" style="zoom:25%;" />
+
+<img src=".\self_atten.png" alt="self_atten" style="zoom:25%;" />
+
+### 位置编码
+
+这里是一个位置编码例子（来自）发现2j和2j+1的区别是sin和cos，也就是说：对第 i 个向量进行编码 第0，1维变化是 "+b" (sin(wx+b)里)，即平移；第0，2维变化是 "w+1"，即伸缩。
+
+维度稍微大点，如300，就几乎能确保 同向量里 位置编码 不重复（把这个几个sin cos 用傅里叶变换 可以变成一个新的 sin，所以是有周期性的）。 
+
+这个编码的好处是，有个“相对性”变换，直接不停地对前一个位置乘矩阵就行。
+$$
+\begin{bmatrix}
+\cos(\delta\omega_j) & \sin(\delta\omega_j) \\
+-\sin(\delta\omega_j) & \cos(\delta\omega_j)
+\end{bmatrix}
+\begin{bmatrix}
+p_{i,2j} \\
+p_{i,2j+1}
+\end{bmatrix}
+=
+\begin{bmatrix}
+p_{i+\delta,2j} \\
+p_{i+\delta,2j+1}
+\end{bmatrix}
+$$
+<img src=".\position_coding.png" alt="position_coding" style="zoom:25%;" />
+
+### transformer-encoder
+
+拆解并量化 Transformer 的每一个步骤，将设定一些具体的维度值，这些值与原始论文《Attention Is All You Need》中的设定类似。
+
+#### 设定参数
+
+*   输入序列长度 (Sequence Length): $T = 4$。例如，输入一句话 "I am a robot"。
+
+*   词嵌入维度 (Embedding Dimension): $d_{\text{model}} = 512$。这是模型中大部分向量的维度。
+
+*   注意力头数 (Number of Heads): $h = 8$。
+
+*   每个头的维度 (Dimension per Head): $d_k = d_v = d_{\text{model}} / h = 512 / 8 = 64$。
+
+*   前馈网络中间层维度 (Feed Forward Inner Dimension): $d_{\text{ff}} = 2048$。
+*   （关于头的维度：让他们关注不同的“子空间”（subspace），我们不给每个“头”完整的512维信息，而是把这个信息“切分”成8份。每一份是64维（`512 / 8 = 64`）。这样，每个“头”就只能在自己被分配到的64维信息空间里去学习和计算注意力。）
+
+#### 嵌入层和位置编码 
+
+Embedding & Positional Encoding，假设我们有一个长度为 4 的输入序列。
+
+1.  **Input Embedding**: 首先，我们将每个词（token）通过一个嵌入层（本质上是一个查找表）转换成一个向量。
+    *   **输入**: 4 个词的 ID。
+    *   **输出**: 一个矩阵 $X_{\text{emb}}$， $X_{\text{emb}} \in \mathbb{R}^{4 \times 512}$ (即 $T \times d_{\text{model}}$)，代表了每个词的语义嵌入。
+
+2.  **Positional Encoding**: 我们生成一个与 $X_{\text{emb}}$ 相同维度的位置编码矩阵 $P$，然后和词嵌入逐元素相加，得到进入 Encoder Block 的最终输入矩阵 $X$。
+    *   **维度**: $P \in \mathbb{R}^{4 \times 512}$。
+        *   $$ X_{\text{emb}} + P = X \in \mathbb{R}^{4 \times 512}$$
+
+
+#### Multi-Head Attention 模块
+
+   这是 Encoder 的第一个核心子层。它的输入是矩阵 $X$。    
+$$
+   X \xrightarrow{} Q,K,V \xrightarrow{\text{split}}  Q',K',V'  \xrightarrow{·} \text{Head}_{\text{out}} \xrightarrow{\text{concat}} Z \xrightarrow{\text{$W^O$}} \text{MHA}_{\text{out}}
+$$
+
+**3.1 生成 Q, K, V 矩阵**
+
+通过将输入 $X$ 与三个不同的权重矩阵 $W^Q, W^K, W^V$ 相乘来实现，也就是完整的K Q V。
+
+*   **输入**: $X \in \mathbb{R}^{4 \times 512}$
+*   **权重矩阵**:
+    *   $W^Q \in \mathbb{R}^{512 \times 512}$
+    *   $W^K \in \mathbb{R}^{512 \times 512}$
+    *   $W^V \in \mathbb{R}^{512 \times 512}$
+    *(注意: $W^Q$, $W^K$, $W^V$ 的维度都是 $d_{\text{model}} \times d_{\text{model}}$)*
+
+*   **矩阵运算**:
+    $$ Q = X W^Q \quad (4, 512) \times (512, 512) \rightarrow (4, 512) $$
+    $$ K = X W^K \quad (4, 512) \times (512, 512) \rightarrow (4, 512) $$
+    $$ V = X W^V \quad (4, 512) \times (512, 512) \rightarrow (4, 512) $$
+*   **输出**: $Q, K, V \in \mathbb{R}^{4 \times 512}$。
+
+**3.2 拆分成多个头**
+
+接下来，我们将 $Q, K, V$ 矩阵在最后一个维度（512）上拆分成 8 个头，每个头的维度是 64。
+
+*   **操作**: Reshape 和 Transpose。将 $(4, 512)$ 变为 $(4, 8, 64)$，然后交换头和序列长度的维度，方便后续计算。     
+    
+    $Q \rightarrow Q_{\text{split}} \in \mathbb{R}^{8 \times 4 \times 64}$ (即 $h \times T \times d_k$)     
+    
+    $K \rightarrow K_{\text{split}} \in \mathbb{R}^{8 \times 4 \times 64}$      
+    
+    $V \rightarrow V_{\text{split}} \in \mathbb{R}^{8 \times 4 \times 64}$      
+
+**3.3 计算缩放点积注意力 (Scaled Dot-Product Attention)**
+
+这一步 **每个头独立进行** 的，以其中一个头为例，其输入 $Q', K', V'$ 的维度都是 $(4, 64)$。
+
+1.  计算得分 (Scores):
+    $$ \text{Scores} = Q' (K')^T \quad (4, 64) \times (64, 4) \rightarrow (4, 4) $$
+    这个 $(4,4)$ 的矩阵表示序列中每个词对其他所有词（包括自己）的注意力原始得分。
+
+2.  缩放 (Scale):
+    $$ \text{Scores}_{\text{scaled}} = \frac{\text{Scores}}{\sqrt{d_k}} = \frac{\text{Scores}}{\sqrt{64}} = \frac{\text{Scores}}{8} $$
+    逐元素除法，仍为 $(4,4)$。
+
+3.  Softmax: 对得分矩阵的每一行应用 Softmax，得到注意力权重矩阵 $A'$。
+    $$ A' = \text{softmax}(\text{Scores}_{\text{scaled}}) \in \mathbb{R}^{4 \times 4} $$
+    $A'$ 的每一行元素相加为 1。
+
+4.  加权求和: 将权重矩阵 $A'$ 与 $V'$ 相乘。
+    $$ \text{Head}_{\text{out}} = A' V' \quad (4, 4) \times (4, 64) \rightarrow (4, 64) $$
+    $\text{Head}_{\text{out}}$ 就是这个头计算出的结果。
+
+**3.4 合并多头结果**
+
+Concat 和 Reshape。
+
+*   将 8 个 $(4, 64)$ 的矩阵在最后一个维度上拼接，得到一个拼接后的 $(4, 512)$ 的矩阵$Z$
+*   $$(8, 4, 64) \rightarrow (4, 512) = Z \in \mathbb{R}^{4 \times 512}$$
+
+**3.5 最终线性变换**
+
+将拼接后的矩阵 $Z$ 通过最后一个权重矩阵 $W^O$ 进行线性变换，得到多头注意力的最终输出。
+
+*   权重矩阵: $W^O \in \mathbb{R}^{512 \times 512}$
+*   矩阵运算:$$ \text{MHA}_{\text{out}} = Z W^O \quad (4, 512) \times (512, 512) \rightarrow (4, 512)\quad \text{MHA}_{\text{out}} \in \mathbb{R}^{4 \times 512} $$
+
+#### Add & Norm  - Part 1
+
+残差连接与层归一化，这一层连接在 Multi-Head Attention 之后。
+
+**4.1 Add (残差连接)**
+
+将 Multi-Head Attention 层的输入 $X$ 与其输出 $\text{MHA}_{\text{out}}$ 逐元素相加。
+
+$$ \text{Add}_{\text{out}} = X + \text{MHA}_{\text{out}} $$
+*   维度: $(4, 512) + (4, 512) \rightarrow (4, 512)$。
+*   作用: 缓解信息丢失。
+
+**4.2 Norm (Layer Normalization)**
+
+在**特征维度**上进行归一化，相当于一个词向量内部进行归一化。
+
+*   输入: $\text{Add}_{\text{out}} \in \mathbb{R}^{4 \times 512}$。
+*   操作: LN 会独立地对矩阵中的 **每一行** (每个词向量) 进行操作。我们以第一行向量 $v_1 \in \mathbb{R}^{512}$ 为例：
+    1.  Mean: 计算向量 $v_1$ 中所有 512 个元素的均值 $\mu_1$。
+        $$ \mu_1 = \frac{1}{512} \sum_{k=1}^{512} v_{1,k} $$
+    2.  Variance: 计算向量 $v_1$ 中所有 512 个元素的方差 $\sigma_1^2$。
+        $$ \sigma_1^2 = \frac{1}{512} \sum_{k=1}^{512} (v_{1,k} - \mu_1)^2 $$
+    3.  归一化 (Normalize): 对 $v_1$ 的每个元素进行归一化。$\epsilon$ 是一个很小的数（如 $10^{-5}$），防止分母为零。
+        $$ \hat{v}_{1,k} = \frac{v_{1,k} - \mu_1}{\sqrt{\sigma_1^2 + \epsilon}} $$
+    4.  缩放与平移 (Scale and Shift): 将归一化后的向量乘以可学习的缩放参数 $\gamma$ (gamma) 并加上平移参数 $\beta$ (beta)。这两个参数的维度也是 $512$，**它们在模型训练过程中学习**，让网络可以恢复或调整归一化后的特征表示。
+        $$ \text{LN}(v_1)_k = \gamma_k \hat{v}_{1,k} + \beta_k $$
+    
+*   LN 对输入的 $(4, 512)$ 矩阵的 **每一行** 都执行上述步骤，最终输出一个维度同样为 $(4, 512)$ 的矩阵，我们称之为 $\text{LN}_1$。
+
+#### Feed Forward Network 子层
+
+这是 Encoder 的第二个核心子层，它是一个简单的两层全连接网络，被称为 **Position-wise Feed-Forward Network**，你可以把它想象成对 $(4, 512)$ 矩阵的每一行向量（512维）都应用了同一个 `512 -> 2048 -> 512` 的双层 MLP。
+
+*   **输入**: $\text{LN}_1 \in \mathbb{R}^{4 \times 512}$。
+*   **结构**:
+    1.  第一个线性层（扩展维度）
+    2.  ReLU 激活函数
+    3.  第二个线性层（缩减维度）
+*   **权重矩阵**:
+    *   $W_1 \in \mathbb{R}^{512 \times 2048}$ (即 $d_{\text{model}} \times d_{\text{ff}}$)
+    *   $b_1 \in \mathbb{R}^{2048}$ (偏置)
+    *   $W_2 \in \mathbb{R}^{2048 \times 512}$ (即 $d_{\text{ff}} \times d_{\text{model}}$)
+    *   $b_2 \in \mathbb{R}^{512}$ (偏置)
+*   **矩阵运算**:
+    $$ \text{FFN}_{\text{out}} = \text{ReLU}(\text{LN}_1  W_1 + b_1) W_2 + b_2 $$
+    我们分解来看：
+    1.  $\text{Layer}_1 = \text{LN}_1 W_1 + b_1$    $(4, 512) \times (512, 2048) \rightarrow (4, 2048)$。
+    2.  $\text{Layer}_1 = \text{ReLU}(\text{Layer}_1)$    仍为 $(4, 2048)$。
+    3.  $\text{Layer}_2 = \text{Layer}_1 W_2 + b_2$    $(4, 2048) \times (2048, 512) \rightarrow (4, 512)$。
+*   **输出**: $\text{FFN}_{\text{out}} \in \mathbb{R}^{4 \times 512}$。
+
+#### Add & Norm - Part 2
+
+与 Part 1 完全相同，只是输入不同。
+
+1.  **Add**: 将 Feed Forward 层的输入 $\text{LN}_1$ 与其输出 $\text{FFN}_{\text{out}}$ 相加。
+    $$ \text{Add}_ {\text{out}} = \text{LN}_1 + \text{FFN}_{\text{out}} $$	 $(4, 512) + (4, 512) \rightarrow (4, 512)$
+    
+1.  **Norm**: 对 $\text{Add}_ {\text{out}}$ 的每一行进行层归一化。
+    $$ \text{EncoderBlock}_{\text{out}} = \text{LayerNorm}(\text{Add}_ {\text{out}}) $$	 $(4, 512)$
+    
+
+这个 $\text{EncoderBlock}_{\text{out}}$ 就是一个 Encoder Block 的最终输出。它可以作为下一个 Encoder Block 的输入，重复上述所有步骤 N 次。
+
+### transformer-decoder （预测）
+
+#### 场景设定
+
+一些继续使用之前 Encoder 的设定：
+
+*   词嵌入维度: $d_{\text{model}} = 512$
+*   注意力头数: $h = 8$
+*   每个头的维度: $d_k = d_v = 64$
+*   词汇表大小 (Vocabulary Size): $V_{\text{size}} = 30000$ (用于最后的 Linear+Softmax)
+
+假设 Encoder 已经运行完毕，输出了一个矩阵 $E_{\text{out}} \in \mathbb{R}^{4 \times 512}$ (对应 "I am a robot" 的 4 个词)。
+
+现在我们开始 Decoder 的预测过程，目标是生成 "我 是 一 个 机器人"，时间步 **t=3** (假设已经生成了 "我 是")
+
+*   **Decoder 输入**: `<s>` "我" "是"，序列长度为 3。
+*   **矩阵维度**: $Y \in \mathbb{R}^{3 \times 512}$ (经过 Embedding 和 Positional Encoding)。
+
+#### 1. Masked Multi-Head Attention
+
+* **输入**: $Y \in \mathbb{R}^{3 \times 512}$。
+
+*   **Q, K, V 生成**:
+    $$ Q_d = Y W^Q_d \quad (3, 512) \times (512, 512) \rightarrow (3, 512) $$
+    $$ K_d = Y W^K_d \quad (3, 512) \times (512, 512) \rightarrow (3, 512) $$
+    $$ V_d = Y W^V_d \quad (3, 512) \times (512, 512) \rightarrow (3, 512) $$
+    
+*   **多头注意力计算** (以单头为例，输入 $Q'_d, K'_d, V'_d \in \mathbb{R}^{3 \times 64}$):
+    
+    1. Scores: $Q'_d (K'_d)^T \rightarrow (3, 64) \times (64, 3) = (3, 3)$
+    
+    2. **Masking** & Softmax: 将得分矩阵的上三角部分（不含对角线）设为 $-\infty$。    
+    
+       *   注意力得分矩阵 ($3 \times 3$):
+           $$ \text{Scores} = \begin{bmatrix} s_{11} & s_{12} & s_{13} \\ s_{21} & s_{22} & s_{23} \\ s_{31} & s_{32} & s_{33} \end{bmatrix} $$
+       *   应用掩码后:
+           $$ \text{Scores}_{\text{masked}} = \begin{bmatrix} s_{11} & -\infty & -\infty \\ s_{21} & s_{22} & -\infty \\ s_{31} & s_{32} & s_{33} \end{bmatrix} $$
+       *   经过 Softmax 函数后:
+           $$ A'_d=\text{Softmax}(\text{Scores}_{\text{masked}}) \rightarrow \begin{bmatrix} \alpha_{11} & 0 & 0 \\ \alpha_{21} & \alpha_{22} & 0 \\ \alpha_{31} & \alpha_{32} & \alpha_{33} \end{bmatrix} $$
+    
+       ​       $ A'_d \in \mathbb{R}^{3 \times 3} $
+    
+    3. 加权: $A'_d V'_d \rightarrow (3, 3) \times (3, 64) = (3, 64)$。
+    
+*   **合并与输出**: 经过拼接和最终线性变换，得到 $\text{MaskedMHA}_{\text{out}} \in \mathbb{R}^{3 \times 512}$。
+
+#### 2. Add & Norm - Part 1
+
+*   **Add**: $\text{Add}_1 = Y + \text{MaskedMHA}_{\text{out}} \in \mathbb{R}^{3 \times 512}$
+*   **Norm**: $\text{LN}_1 = \text{LayerNorm}(\text{Add}_1) \in \mathbb{R}^{3 \times 512}$
+
+#### 3. Multi-Head Attention 
+
+Encoder-Decoder Attention，这是关键的交互步骤，一句话就是：根据 掩码自注意后的输入序列信息 动态汲取encoder输出的全局信息。
+
+* **Query (Q)**: **来自 Decoder** 上一层的输出 $\text{LN}_1$。
+
+* **Key (K) 和 Value (V)**: **来自 Encoder** 的最终输出 $E_{\text{out}}$。
+
+*   **矩阵运算**:
+    $$ Q_{ed} = \text{LN}_1 W^Q_{ed} \quad (3, 512) \times (512, 512) \rightarrow (3, 512) $$
+    $$ K_{ed} = E_{\text{out}} W^K_{ed} \quad (4, 512) \times (512, 512) \rightarrow (4, 512) $$
+    $$ V_{ed} = E_{\text{out}} W^V_{ed} \quad (4, 512) \times (512, 512) \rightarrow (4, 512) $$
+    
+*   **多头注意力计算** (以单头为例):
+    *   $Q'_{ed} \in \mathbb{R}^{3 \times 64}$    $K'_{ed} \in \mathbb{R}^{4 \times 64}$    $V'_{ed} \in \mathbb{R}^{4 \times 64}$
+    1.  **Scores**: $Q'_{ed} (K'_{ed})^T \rightarrow (3, 64) \times (64, 4) = (3, 4)$
+        *   这个 $(3,4)$ 的矩阵代表 Decoder 当前的 3 个词分别对 Encoder 的 4 个输入词的关注度。
+    2.  **Softmax**: 得到权重矩阵 $A'_{ed} \in \mathbb{R}^{3 \times 4}$。
+    3.  **加权**: $A'_{ed} V'_{ed} \rightarrow (3, 4) \times (4, 64) = (3, 64)$。
+    
+*   **合并与输出**: $\text{EncDecMHA}_{\text{out}} \in \mathbb{R}^{3 \times 512}$。
+
+#### 4. Add & Norm - Part 2
+
+*   **Add**: $\text{Add}_2 = \text{LN}_1 + \text{EncDecMHA}_{\text{out}} \in \mathbb{R}^{3 \times 512}$
+*   **Norm**: $\text{LN}_2 = \text{LayerNorm}(\text{Add}_2) \in \mathbb{R}^{3 \times 512}$
+
+#### 5. Feed Forward Network
+
+*   **输入**: $\text{LN}_2 \in \mathbb{R}^{3 \times 512}$
+*   **运算**: 与 Encoder 中的 FFN 完全一样。
+    $$ \text{FFN}_{\text{out}} = \text{ReLU}(\text{LN}_2 W_1 + b_1) W_2 + b_2 $$
+    *   **维度变化**: $(3, 512) \rightarrow (3, 2048) \rightarrow (3, 512)$
+*   **输出**: $\text{FFN}_{\text{out}} \in \mathbb{R}^{3 \times 512}$
+
+#### 6. Add & Norm - Part 3
+
+*   **Add**: $\text{Add}_3 = \text{LN}_2 + \text{FFN}_{\text{out}} \in \mathbb{R}^{3 \times 512}$
+*   **Norm**: $\text{DecoderBlock}_{\text{out}} = \text{LayerNorm}(\text{Add}_3) \in \mathbb{R}^{3 \times 512}$
+
+这个 $\text{DecoderBlock}_{\text{out}}$ 会作为下一个 Decoder Block 的输入，**重复上述 1 - 6 过程 N 次**。
+
+#### 7. Final Linear & Softmax
+
+在经过 N 个 Decoder Block 后，我们得到最终的输出矩阵 $D_{\text{final}} \in \mathbb{R}^{3 \times 512}$。因为我们只关心下一个词的预测，所以我们只取这个矩阵的**最后一行**向量 $d_{\text{last}} \in \mathbb{R}^{1 \times 512}$ (对应输入 "是" 的位置)。
+
+1.  **Linear**: 将这个 512 维的向量通过一个线性层，映射到词汇表大小的维度。
+    *   **权重**: $W_{\text{final}} \in \mathbb{R}^{512 \times 30000}$
+    *   **运算**: $ \text{Logits} = d_{\text{last}} W_{\text{final}} \quad (1, 512) \times (512, 30000) \rightarrow (1, 30000) $
+2.  **Softmax**: 将 Logits 转换成概率分布。
+    $$ \text{Probabilities} = \text{softmax}(\text{Logits}) \in \mathbb{R}^{1 \times 30000} $$
+
+模型会从这个概率分布中选择概率最高的词（比如 "一"）作为下一个词的输出，然后进入 **时间步 t=4** 的循环。
+
+### transformer-decoder （训练）
+
+**训练中所有预测是在一次前向传播和一次反向传播中并行完成的，而不是 6 次独立的传播。**
+
+*   **训练时**: **并行**处理，一次前向+一次反向，完成整个序列的学习。
+*   **预测时**: **串行**处理，一次生成一个词，循环多次。
+
+#### 1 准备数据
+
+*   **Decoder 输入矩阵 (6x512)**: 将 `<s>`, `我`, `是`, `一`, `个`, `机器人` 这 6 个 token 的词向量堆叠成一个矩阵（一次性完成）。
+    $$
+    Y = \begin{bmatrix}
+    \text{emb}(<s>) \\
+    \text{emb}(我) \\
+    \text{emb}(是) \\
+    \text{emb}(一) \\
+    \text{emb}(个) \\
+    \text{emb}(机器人)
+    \end{bmatrix}
+    $$
+*   **目标标签 (Labels)**: 对应每个输入位置，我们期望模型预测出的下一个词。
+    *   输入 `<s>` -> 期望输出 `我`
+    *   输入 `我` -> 期望输出 `是`
+    *   ...
+    *   输入 `机器人` -> 期望输出 `</s>` (结束符)
+
+#### 2 一次前向传播
+
+1.  **输入**: 整个 `Y` 矩阵 (6x512) 被一次性送入 Decoder。
+2.  **Masked Multi-Head Attention**: 在注意力计算中，我们使用一个 6x6 的 **因果掩码 (Causal Mask)**。
+    $$
+    \text{Mask} = \begin{bmatrix}
+    1 & 0 & 0 & 0 & 0 & 0 \\
+    1 & 1 & 0 & 0 & 0 & 0 \\
+    1 & 1 & 1 & 0 & 0 & 0 \\
+    1 & 1 & 1 & 1 & 0 & 0 \\
+    1 & 1 & 1 & 1 & 1 & 0 \\
+    1 & 1 & 1 & 1 & 1 & 1
+    \end{bmatrix}
+    $$
+    (这里的 0 代表 $-\infty$，1 代表原始分数)
+
+3.  **并行计算**: 这个掩码是关键！它确保了：
+    *   在计算**第 1 行** (`<s>`) 的输出时，它只能看到自己。
+    *   在计算**第 2 行** (`我`) 的输出时，它只能看到 `<s>` 和 `我`。
+    *   在计算**第 6 行** (`机器人`) 的输出时，它可以看到所有 6 个输入。
+
+    所有的这些计算都是通过矩阵乘法 **同时发生** 的。GPU 极其擅长这种大规模的并行计算。
+
+4.  **输出**: Decoder 输出一个最终的矩阵 **`Z` (6x512)**。这个矩阵的每一行，都包含了在遵守“因果”规则下，对下一个词的预测信息。
+    
+    *   `Z[0]` 是基于 `<s>` 的预测。
+    *   `Z[1]` 是基于 `<s> 我` 的预测。
+    *   ...
+    *   `Z[5]` 是基于 `<s> 我 是 一 个 机器人` 的预测。
+
+#### 3 一次损失计算
+
+1.  我们将输出矩阵 `Z` (6x512) 通过最后的线性层和 Softmax，得到一个概率分布矩阵 **`Probs` (6 x vocab_size)**。
+2.  我们**一次性**比较这个 `Probs` 矩阵和我们的目标标签：
+    *   比较 `Probs[0]` 和 标签 `我` 的概率。
+    *   比较 `Probs[1]` 和 标签 `是` 的概率。
+    *   ...
+    *   比较 `Probs[5]` 和 标签 `</s>` 的概率。
+3.  我们将这 6 个位置的损失（通常是交叉熵损失）相加或求平均，得到一个 **最终的、单一的损失值**。
+
+#### 4 一次反向传播
+
+我们根据这个**单一的损失值**，进行**一次**反向传播，计算所有模型参数（$W^Q, W^K, W^V$ 等）的梯度，并更新它们。
+
+## GPT-1
