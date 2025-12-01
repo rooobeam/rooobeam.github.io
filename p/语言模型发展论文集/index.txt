@@ -686,11 +686,11 @@ Embedding & Positional Encoding，假设我们有一个长度为 4 的输入序�
         *   $$ X_{\text{emb}} + P = X \in \mathbb{R}^{4 \times 512}$$
 
 
-#### Multi-Head Attention 模块
+#### 1. MHA
 
-   这是 Encoder 的第一个核心子层。它的输入是矩阵 $X$。    
+   标准的 Multi-Head Attention (MHA)是 Encoder 的第一个核心子层。它的输入是矩阵 $X$。    
 $$
-   X \xrightarrow{} Q,K,V \xrightarrow{\text{split}}  Q',K',V'  \xrightarrow{·} \text{Head}_{\text{out}} \xrightarrow{\text{concat}} Z \xrightarrow{\text{$W^O$}} \text{MHA}_{\text{out}}
+X \xrightarrow{} Q,K,V \xrightarrow{\text{split}}  Q',K',V'  \xrightarrow{·} \text{Head}_{\text{out}} \xrightarrow{\text{concat}} Z \xrightarrow{\text{$W^O$}} \text{MHA}_{\text{out}}
 $$
 
 **3.1 生成 Q, K, V 矩阵**
@@ -756,7 +756,7 @@ Concat 和 Reshape。
 *   权重矩阵: $W^O \in \mathbb{R}^{512 \times 512}$
 *   矩阵运算:$$ \text{MHA}_{\text{out}} = Z W^O \quad (4, 512) \times (512, 512) \rightarrow (4, 512)\quad \text{MHA}_{\text{out}} \in \mathbb{R}^{4 \times 512} $$
 
-#### Add & Norm  - Part 1
+#### 2. Add & Norm  - 1
 
 残差连接与层归一化，这一层连接在 Multi-Head Attention 之后。
 
@@ -785,7 +785,7 @@ $$ \text{Add}_{\text{out}} = X + \text{MHA}_{\text{out}} $$
     
 *   LN 对输入的 $(4, 512)$ 矩阵的 **每一行** 都执行上述步骤，最终输出一个维度同样为 $(4, 512)$ 的矩阵，我们称之为 $\text{LN}_1$。
 
-#### Feed Forward Network 子层
+#### 3. FFN
 
 这是 Encoder 的第二个核心子层，它是一个简单的两层全连接网络，被称为 **Position-wise Feed-Forward Network**，你可以把它想象成对 $(4, 512)$ 矩阵的每一行向量（512维）都应用了同一个 `512 -> 2048 -> 512` 的双层 MLP。
 
@@ -807,7 +807,7 @@ $$ \text{Add}_{\text{out}} = X + \text{MHA}_{\text{out}} $$
     3.  $\text{Layer}_2 = \text{Layer}_1 W_2 + b_2$    $(4, 2048) \times (2048, 512) \rightarrow (4, 512)$。
 *   **输出**: $\text{FFN}_{\text{out}} \in \mathbb{R}^{4 \times 512}$。
 
-#### Add & Norm - Part 2
+#### 4. Add & Norm - 2
 
 与 Part 1 完全相同，只是输入不同。
 
@@ -838,7 +838,7 @@ $$ \text{Add}_{\text{out}} = X + \text{MHA}_{\text{out}} $$
 *   **Decoder 输入**: `<s>` "我" "是"，序列长度为 3。
 *   **矩阵维度**: $Y \in \mathbb{R}^{3 \times 512}$ (经过 Embedding 和 Positional Encoding)。
 
-#### 1. Masked Multi-Head Attention
+#### 1. Masked MHA
 
 * **输入**: $Y \in \mathbb{R}^{3 \times 512}$。
 
@@ -866,14 +866,14 @@ $$ \text{Add}_{\text{out}} = X + \text{MHA}_{\text{out}} $$
     
 *   **合并与输出**: 经过拼接和最终线性变换，得到 $\text{MaskedMHA}_{\text{out}} \in \mathbb{R}^{3 \times 512}$。
 
-#### 2. Add & Norm - Part 1
+#### 2. Add & Norm - 1
 
 *   **Add**: $\text{Add}_1 = Y + \text{MaskedMHA}_{\text{out}} \in \mathbb{R}^{3 \times 512}$
 *   **Norm**: $\text{LN}_1 = \text{LayerNorm}(\text{Add}_1) \in \mathbb{R}^{3 \times 512}$
 
-#### 3. Multi-Head Attention 
+#### 3. MHA
 
-Encoder-Decoder Attention，这是关键的交互步骤，一句话就是：根据 掩码自注意后的输入序列信息 动态汲取encoder输出的全局信息。
+Encoder-Decoder Attention (cross attention)，这是关键的交互步骤，一句话就是：根据 掩码自注意后的输入序列信息 动态汲取encoder输出的全局信息。
 
 * **Query (Q)**: **来自 Decoder** 上一层的输出 $\text{LN}_1$。
 
@@ -893,12 +893,12 @@ Encoder-Decoder Attention，这是关键的交互步骤，一句话就是：根�
     
 *   **合并与输出**: $\text{EncDecMHA}_{\text{out}} \in \mathbb{R}^{3 \times 512}$。
 
-#### 4. Add & Norm - Part 2
+#### 4. Add & Norm - 2
 
 *   **Add**: $\text{Add}_2 = \text{LN}_1 + \text{EncDecMHA}_{\text{out}} \in \mathbb{R}^{3 \times 512}$
 *   **Norm**: $\text{LN}_2 = \text{LayerNorm}(\text{Add}_2) \in \mathbb{R}^{3 \times 512}$
 
-#### 5. Feed Forward Network
+#### 5. FFN
 
 *   **输入**: $\text{LN}_2 \in \mathbb{R}^{3 \times 512}$
 *   **运算**: 与 Encoder 中的 FFN 完全一样。
@@ -906,16 +906,16 @@ Encoder-Decoder Attention，这是关键的交互步骤，一句话就是：根�
     *   **维度变化**: $(3, 512) \rightarrow (3, 2048) \rightarrow (3, 512)$
 *   **输出**: $\text{FFN}_{\text{out}} \in \mathbb{R}^{3 \times 512}$
 
-#### 6. Add & Norm - Part 3
+#### 6. Add & Norm - 3
 
 *   **Add**: $\text{Add}_3 = \text{LN}_2 + \text{FFN}_{\text{out}} \in \mathbb{R}^{3 \times 512}$
 *   **Norm**: $\text{DecoderBlock}_{\text{out}} = \text{LayerNorm}(\text{Add}_3) \in \mathbb{R}^{3 \times 512}$
 
 这个 $\text{DecoderBlock}_{\text{out}}$ 会作为下一个 Decoder Block 的输入，**重复上述 1 - 6 过程 N 次**。
 
-#### 7. Final Linear & Softmax
+#### 7. final layer
 
-在经过 N 个 Decoder Block 后，我们得到最终的输出矩阵 $D_{\text{final}} \in \mathbb{R}^{3 \times 512}$。因为我们只关心下一个词的预测，所以我们只取这个矩阵的**最后一行**向量 $d_{\text{last}} \in \mathbb{R}^{1 \times 512}$ (对应输入 "是" 的位置)。
+Final Linear & Softmax，在经过 N 个 Decoder Block 后，我们得到最终的输出矩阵 $D_{\text{final}} \in \mathbb{R}^{3 \times 512}$。因为我们只关心下一个词的预测，所以我们只取这个矩阵的**最后一行**向量 $d_{\text{last}} \in \mathbb{R}^{1 \times 512}$ (对应输入 "是" 的位置)。
 
 1.  **Linear**: 将这个 512 维的向量通过一个线性层，映射到词汇表大小的维度。
     *   **权重**: $W_{\text{final}} \in \mathbb{R}^{512 \times 30000}$
@@ -932,7 +932,7 @@ Encoder-Decoder Attention，这是关键的交互步骤，一句话就是：根�
 *   **训练时**: **并行**处理，一次前向+一次反向，完成整个序列的学习。
 *   **预测时**: **串行**处理，一次生成一个词，循环多次。
 
-#### 1 准备数据
+#### 1. 准备数据
 
 *   **Decoder 输入矩阵 (6x512)**: 将 `<s>`, `我`, `是`, `一`, `个`, `机器人` 这 6 个 token 的词向量堆叠成一个矩阵（一次性完成）。
     $$
@@ -951,7 +951,7 @@ Encoder-Decoder Attention，这是关键的交互步骤，一句话就是：根�
     *   ...
     *   输入 `机器人` -> 期望输出 `</s>` (结束符)
 
-#### 2 一次前向传播
+#### 2. 一次前向传播
 
 1.  **输入**: 整个 `Y` 矩阵 (6x512) 被一次性送入 Decoder。
 2.  **Masked Multi-Head Attention**: 在注意力计算中，我们使用一个 6x6 的 **因果掩码 (Causal Mask)**。
@@ -981,7 +981,7 @@ Encoder-Decoder Attention，这是关键的交互步骤，一句话就是：根�
     *   ...
     *   `Z[5]` 是基于 `<s> 我 是 一 个 机器人` 的预测。
 
-#### 3 一次损失计算
+#### 3. 一次损失计算
 
 1.  我们将输出矩阵 `Z` (6x512) 通过最后的线性层和 Softmax，得到一个概率分布矩阵 **`Probs` (6 x vocab_size)**。
 2.  我们**一次性**比较这个 `Probs` 矩阵和我们的目标标签：
@@ -991,8 +991,55 @@ Encoder-Decoder Attention，这是关键的交互步骤，一句话就是：根�
     *   比较 `Probs[5]` 和 标签 `</s>` 的概率。
 3.  我们将这 6 个位置的损失（通常是交叉熵损失）相加或求平均，得到一个 **最终的、单一的损失值**。
 
-#### 4 一次反向传播
+#### 4. 一次反向传播
 
 我们根据这个**单一的损失值**，进行**一次**反向传播，计算所有模型参数（$W^Q, W^K, W^V$ 等）的梯度，并更新它们。
 
 ## GPT-1
+
+### 链接与要点
+
+链接：[深入浅出：用中学数学理解BERT与GPT模型，下集](https://www.bilibili.com/video/BV1dp421U7pC/?share_source=copy_web&vd_source=33a3d9253f3eaae8520547ba343f9930)
+
+要点：decoder-only架构，预训练与微调范式
+
+### decoder-only
+
+**预训练**任务就是transformer中的“预测下一个词”，也是利用因果掩码实现并行计算，最终实现模型参数的训练，整体架构和张量变化如下：
+$$
+(5,1) \xrightarrow{UW_e+W_P} (5,512) \xrightarrow{\text{n * transformer block}}  (5,512)  \xrightarrow{W^T_e} (5,1e4) \xrightarrow{\text{softmax}} (5,1e4)
+$$
+<img src="./decoder-only.png" alt="decoder-only" style="zoom:45%;" />
+
+- 论文里嵌入层和输出层都用$W_e$（Weight Tying）。    
+
+  从直觉上，输入端 $W_e$ 的作用是 “将一个词映射到其语义向量空间”。输出端$W_e^T$ 的作用是 “将一个语义向量映射回词表，两个操作本质上是互逆的。    
+  作用是减少参数量、提升模型性能和收敛速度
+
+- 当反向传播发生时：
+
+  输出层 $W_e^T$ 的第一部分梯度为 $grad_{out}$       
+
+  Embedding 层$W_e$ 的第二部分梯度为 $grad_{in}$    
+
+  $W_e$ 的总梯度是 $grad = grad_{out} + grad_{in}$    
+
+  $W_{new} = W_{old} - lr * grad$
+
+- 参数整体可以分为两类 $W_e$ 和 其他参数。$W_e$ 即词嵌入矩阵，而其他参数是更像是模型参数。
+
+### 微调
+
+判别式微调 (Discriminative Fine-Tuning)：将预训练好的模型拿过来，针对具体下游任务（如情感分类、文本蕴含等），用少量有标签的数据进行二次训练。这通常只是在模型顶部加一个简单的线性层，并对整个模型进行微小的参数调整。**将模型学到的通用能力，快速、高效地适配到特定任务上。**
+
+
+
+
+
+
+
+
+
+
+
+<img src=".\pre_ln.png" alt="pre_ln" style="zoom:33%;" />
