@@ -168,7 +168,7 @@ title = '语言模型发展论文集'
 
 ### CBOW 
 
-连续词袋模型，革命性简化。
+连续词袋模型，革命性简化，但数据量上增大实现更好效果。
 
 *   **模型结构**: 输入层 -> 投影层 (**查找并平均化上下文词向量**) -> 输出层 (分层Softmax)。
 *   **计算复杂度**: `Q = N × D + D × log₂(V)`
@@ -1001,7 +1001,7 @@ Final Linear & Softmax，在经过 N 个 Decoder Block 后，我们得到最终�
 
 链接：[深入浅出：用中学数学理解BERT与GPT模型，下集](https://www.bilibili.com/video/BV1dp421U7pC/?share_source=copy_web&vd_source=33a3d9253f3eaae8520547ba343f9930)
 
-要点：decoder-only架构，预训练与微调范式
+要点：decoder-only架构，预训练与微调范式，同时进行两个任务
 
 ### decoder-only
 
@@ -1030,16 +1030,52 @@ $$
 
 ### 微调
 
-判别式微调 (Discriminative Fine-Tuning)：将预训练好的模型拿过来，针对具体下游任务（如情感分类、文本蕴含等），用少量有标签的数据进行二次训练。这通常只是在模型顶部加一个简单的线性层，并对整个模型进行微小的参数调整。**将模型学到的通用能力，快速、高效地适配到特定任务上。**
+判别式微调 (Discriminative Fine-Tuning)：将预训练好的模型拿过来，针对具体下游任务（如情感分类、文本蕴含等），用少量有标签的数据进行二次训练。这**通常只是在模型顶部加一个简单的线性层，并对整个模型进行微小的参数调整**。
+
+### 同时进行两个任务
+
+关键在于 反向传播。 下面这样 加和 形式，从L2回流的“梯度倍率”为1，从L1回流的“梯度倍率”为 $λ$，
+
+```py
+# 总损失
+total_loss = loss_L2 + λ * loss_L1
+
+# 反向传播
+total_loss.backward()
+```
 
 
 
+## BERT
 
+### 链接与要点
 
+链接：[深入浅出：用中学数学理解BERT与GPT模型，上集](https://www.bilibili.com/video/BV1tm411R7Gu?spm_id_from=333.788.recommend_more_video.1&trackid=web_related_0.router-related-2206146-5nk2d.1764863189500.994&vd_source=3e32a51d0489203920eb4337d8de4c31)
 
+要点：训练任务与模型结构
 
+### 预训练
 
+核心内容如图所示，
 
+![bert_pretrain.png](.\bert_pretrain.png)
 
+其他注意点如下：
+
+- mask的比例为15%
+
+- 对于矩阵（一个 $7 \times 10,000$ 的矩阵）计算交叉熵损失的方式：**通常是取平均**。   
+
+  计算过程其实是逐行进行，最后取平均。
+
+  $$ \text{Final Loss} = \frac{\text{Loss}_1 + \text{Loss}_2 + \dots + \text{Loss}_7}{7} $$
+
+- 考虑 batch size 此时输入维度 `(32, 7, 10000)`，仍然是平均：
+
+  1.  先把这 $32 \times 7 = 224$ 个位置的预测全部拉平。
+  2.  对这 224 个位置分别计算交叉熵。
+  3.  最后把这 224 个损失值加起来除以 224，得到最终的一个 Loss 数值。
+
+- 在后来的模型中，encoder块 或者 decoder块 采用这种方式：
 
 <img src=".\pre_ln.png" alt="pre_ln" style="zoom:33%;" />
