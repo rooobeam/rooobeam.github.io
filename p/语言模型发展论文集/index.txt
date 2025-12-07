@@ -1108,3 +1108,8 @@ total_loss.backward()
 语言模型容量：参数量、训练数据量、训练时长（训练量）
 
 ## GPT3
+
+如何处理Common Crawl数据
+- 用筛选了的Reddit(点赞>3)作为正例训练二分类器，然后对Common Crawl筛高质量
+- 去重用LSH技术
+- 再加以前的高质量数据集
