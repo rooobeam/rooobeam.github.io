@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="1.1 Course Introduction 机器学习的流程 问题定制：将实际问题转化为机器学习问题。 数据收集与处理：收集相关数据并进行处理——高质量数据稀缺，清洗、标注工作，数据隐私问题。 模型训练：选择合适模型训练，先用简单模型测试数据，如线性回归模型，若效果好可直接部署，否则再尝试复杂模型。当模型复杂度不断增加，训练成本高昂，对数据需求也更多。 模型部署：将训练好的模型部署到线上，要考虑模型大小、实时性等因素，如大模型需做蒸馏处理变小变快后上线。 模型监控与迭代：持续监控模型性能，包括预测精度、延迟等，新数据产生后重新回到模型训练和模型部署，完成迭代。要注意数据分布变化和算法公平性问题，避免模型在不同用户群体或场景下出现偏差。 Challenges and Techniques Formulate problem. focus on the most impactful industrial problems (be a domain expert).\n">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="前言 老师课上呈现的内容只是引言，自己课后实践和研究才是主体。\n1.X 的内容属于是工程性知识，也是 完成整个项目的 框架。（理解）\n2.X 主要涉及数据的方案，配套一个数据抓取到预测的完整小项目。（实践+理解）\n">
 <title>CS329P_实用机器学习</title>
 
 <link rel='canonical' href='https://rooobeam.github.io/p/cs329p_%E5%AE%9E%E7%94%A8%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/'>
 
 <link rel="stylesheet" href="/scss/style.min.4f77a518c8e8877dfe55e8d90f7ed3f84e82d7a31cd88e8d1dcf983db94f54bc.css"><meta property='og:title' content="CS329P_实用机器学习">
-<meta property='og:description' content="1.1 Course Introduction 机器学习的流程 问题定制：将实际问题转化为机器学习问题。 数据收集与处理：收集相关数据并进行处理——高质量数据稀缺，清洗、标注工作，数据隐私问题。 模型训练：选择合适模型训练，先用简单模型测试数据，如线性回归模型，若效果好可直接部署，否则再尝试复杂模型。当模型复杂度不断增加，训练成本高昂，对数据需求也更多。 模型部署：将训练好的模型部署到线上，要考虑模型大小、实时性等因素，如大模型需做蒸馏处理变小变快后上线。 模型监控与迭代：持续监控模型性能，包括预测精度、延迟等，新数据产生后重新回到模型训练和模型部署，完成迭代。要注意数据分布变化和算法公平性问题，避免模型在不同用户群体或场景下出现偏差。 Challenges and Techniques Formulate problem. focus on the most impactful industrial problems (be a domain expert).\n">
+<meta property='og:description' content="前言 老师课上呈现的内容只是引言，自己课后实践和研究才是主体。\n1.X 的内容属于是工程性知识，也是 完成整个项目的 框架。（理解）\n2.X 主要涉及数据的方案，配套一个数据抓取到预测的完整小项目。（实践+理解）\n">
 <meta property='og:url' content='https://rooobeam.github.io/p/cs329p_%E5%AE%9E%E7%94%A8%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/'>
 <meta property='og:site_name' content='rooobeam'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-10-01T11:15:12&#43;08:00'/><meta property='article:modified_time' content='2025-10-01T11:15:12&#43;08:00'/>
 <meta name="twitter:title" content="CS329P_实用机器学习">
-<meta name="twitter:description" content="1.1 Course Introduction 机器学习的流程 问题定制：将实际问题转化为机器学习问题。 数据收集与处理：收集相关数据并进行处理——高质量数据稀缺，清洗、标注工作，数据隐私问题。 模型训练：选择合适模型训练，先用简单模型测试数据，如线性回归模型，若效果好可直接部署，否则再尝试复杂模型。当模型复杂度不断增加，训练成本高昂，对数据需求也更多。 模型部署：将训练好的模型部署到线上，要考虑模型大小、实时性等因素，如大模型需做蒸馏处理变小变快后上线。 模型监控与迭代：持续监控模型性能，包括预测精度、延迟等，新数据产生后重新回到模型训练和模型部署，完成迭代。要注意数据分布变化和算法公平性问题，避免模型在不同用户群体或场景下出现偏差。 Challenges and Techniques Formulate problem. focus on the most impactful industrial problems (be a domain expert).\n">
+<meta name="twitter:description" content="前言 老师课上呈现的内容只是引言，自己课后实践和研究才是主体。\n1.X 的内容属于是工程性知识，也是 完成整个项目的 框架。（理解）\n2.X 主要涉及数据的方案，配套一个数据抓取到预测的完整小项目。（实践+理解）\n">
     <link rel="shortcut icon" href="/favicon.ico" />
 
     </head>
@@ -236,6 +236,7 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
+    <li><a href="#前言">前言</a></li>
     <li><a href="#11-course-introduction">1.1 Course Introduction</a>
       <ol>
         <li><a href="#机器学习的流程">机器学习的流程</a></li>
@@ -245,9 +246,8 @@
     </li>
     <li><a href="#12-data-acquisition">1.2 Data Acquisition</a>
       <ol>
-        <li><a href="#核心流程先找数据找不到再造数据">核心流程：先找数据，找不到再造数据</a></li>
-        <li><a href="#part-1-数据发现与整合">Part 1: 数据发现与整合</a></li>
-        <li><a href="#part-2-数据生成">Part 2: 数据生成</a></li>
+        <li><a href="#数据发现与整合">数据发现与整合</a></li>
+        <li><a href="#数据生成">数据生成</a></li>
       </ol>
     </li>
     <li><a href="#13-web-scraping">1.3 Web Scraping</a>
@@ -261,8 +261,7 @@
     </li>
     <li><a href="#14-data-labeling">1.4 Data Labeling</a>
       <ol>
-        <li><a href="#核心问题有了数据但无标注或标注较少">核心问题：有了数据但无标注或标注较少。</a></li>
-        <li><a href="#1-半监督学习-semi-supervised-learning">1. 半监督学习 (Semi-Supervised Learning)</a></li>
+        <li><a href="#1-半监督学习">1. 半监督学习</a></li>
         <li><a href="#2-众包">2. 众包</a></li>
         <li><a href="#3-弱监督">3. 弱监督</a></li>
       </ol>
@@ -271,7 +270,19 @@
     <li><a href="#22-24-数据清理数据变换特征工程">2.2-2.4 数据清理、数据变换、特征工程</a></li>
     <li><a href="#25-data-summary">2.5 Data Summary</a></li>
     <li><a href="#31-机器学习概览">3.1 机器学习概览</a></li>
-    <li><a href="#32-决策树">3.2 决策树</a></li>
+    <li><a href="#32-决策树">3.2 决策树</a>
+      <ol>
+        <li><a href="#决策树基础">决策树基础</a></li>
+        <li><a href="#随机森林">随机森林</a></li>
+      </ol>
+    </li>
+    <li><a href="#33-线性模型">3.3 线性模型</a>
+      <ol>
+        <li><a href="#线性回归">线性回归</a></li>
+        <li><a href="#线性分类">线性分类</a></li>
+      </ol>
+    </li>
+    <li><a href="#34-随机梯度下降">3.4 随机梯度下降</a></li>
   </ol>
 </nav>
         </div>
@@ -329,7 +340,12 @@
     <section class="article-content">
     
     
-    <h2 id="11-course-introduction">1.1 Course Introduction
+    <h2 id="前言">前言
+</h2><p><strong>老师课上呈现的内容只是引言，自己课后实践和研究才是主体。</strong></p>
+<p>1.X 的内容属于是工程性知识，也是 完成整个项目的 框架。（理解）</p>
+<p>2.X 主要涉及数据的方案，配套一个数据抓取到预测的完整小项目。（实践+理解）</p>
+<p>3.X 主要关于模型的理论，理解和掌握pytorch相关和小项目代码。（理解+记忆）</p>
+<h2 id="11-course-introduction">1.1 Course Introduction
 </h2><h3 id="机器学习的流程">机器学习的流程
 </h3><img src="ML_workflow.png?" alt="ML_workflow" style="zoom:40%;" />
 <ul>
@@ -401,8 +417,8 @@
 </ul>
 <hr>
 <h2 id="12-data-acquisition">1.2 Data Acquisition
-</h2><h3 id="核心流程先找数据找不到再造数据">核心流程：先找数据，找不到再造数据
-</h3><img src="data_acquisiton_flow.png?" alt="data_acquisiton_workflow" style="zoom:50%;" />
+</h2><p>核心流程：先找数据，找不到再造数据</p>
+<img src="data_acquisiton_flow.png?" alt="data_acquisiton_workflow" style="zoom:30%;" />
 <p>业务问题转换成机器学习问题-&gt;数据够不够</p>
 <ul>
 <li><strong>情况一:</strong> 有足够的数据。 (后续课程会讲)</li>
@@ -413,8 +429,8 @@
 </ol>
 </li>
 </ul>
-<h3 id="part-1-数据发现与整合">Part 1: 数据发现与整合
-</h3><h4 id="1-数据集和数据">1. 数据集和数据
+<h3 id="数据发现与整合">数据发现与整合
+</h3><h4 id="概念区分">概念区分
 </h4><p>这里的核心是区分“数据集 (Dataset)”和“数据 (Data)”。<strong>数据集</strong>通常是别人已经为你清洗整理好、可以直接用于机器学习的；而<strong>数据</strong>则是原始的、需要大量处理的。</p>
 <ul>
 <li>
@@ -434,7 +450,7 @@
 </ul>
 </li>
 </ul>
-<h4 id="2-知名的机器学习数据集的产生">2. 知名的机器学习数据集的产生
+<h4 id="知名数据集">知名数据集
 </h4><p>这些数据集的来源主要分为两大类：<strong>网络爬取</strong> 和 <strong>人工采集</strong>。</p>
 <ul>
 <li><strong>MNIST:</strong> <strong>(人工采集)</strong> 最经典的入门数据集之一，由美国人口普查局的员工手写的数字构成，是几十年前收集的。</li>
@@ -444,7 +460,7 @@
 <li><strong>SQuAD:</strong> <strong>(网络爬取/处理)</strong> 从维基百科（Wikipedia）中提取“问题-答案”对，比如从文章中找到“某人生于哪一年？”并抽取出答案。</li>
 <li><strong>LibriSpeech:</strong> <strong>(网络爬取/处理)</strong> 一个包含1000小时有声读物的语音数据集，用于语音识别和语音合成。</li>
 </ul>
-<h4 id="3-数据集来源">3. 数据集来源
+<h4 id="数据集来源">数据集来源
 </h4><ul>
 <li><strong>Papers with Code:</strong> 学术研究首选。它不仅整理了论文中常用的数据集，还附带了各种算法在该数据集上的表现排名（Leaderboard），非常适合进行算法效果对比。</li>
 <li><strong>Kaggle Datasets:</strong> 一个机器学习竞赛平台，除了竞赛数据，还有大量用户（通常是数据科学家）上传的各种数据集。因为是用户上传，质量参差不齐，需要自己甄别。</li>
@@ -454,7 +470,7 @@
 <li><strong>云平台开放数据 (Open Data on AWS):</strong> 包含上百个超大规模的原始数据集。例如，美国气象卫星每小时产生的几个T的原始数据，或把整个互联网爬下来的Common Crawl数据集。</li>
 <li><strong>公司内部的数据湖 (Data Lake):</strong> 如果你在公司工作，内部通常会有一个“数据湖”，汇集了所有产品线的数据。可能需要向其他团队申请权限，同时必须注意数据隐私和合规问题。</li>
 </ul>
-<h4 id="4-三类数据集对比">4. 三类数据集对比
+<h4 id="主要类型对比">主要类型对比
 </h4><div class="table-wrapper"><table>
   <thead>
       <tr>
@@ -481,7 +497,7 @@
       </tr>
   </tbody>
 </table></div>
-<h4 id="5-数据整合">5. 数据整合
+<h4 id="数据整合">数据整合
 </h4><p>在工业界，数据通常分散存储在不同的地方（数据库表）。数据整合就是把这些来自多源的数据融合成一个连贯、信息丰富的数据集（要求对<strong>SQL</strong>有所掌握）。</p>
 <ul>
 <li><strong>举例：</strong> 一个房产公司的数据可能存在三张表里：
@@ -501,9 +517,9 @@
 </ul>
 </li>
 </ul>
-<h3 id="part-2-数据生成">Part 2: 数据生成
-</h3><p>当你<strong>找不到也收集不到足够的数据</strong>时，可以考虑自己“创造”数据。</p>
-<h4 id="1-生成合成数据">1. 生成合成数据
+<h3 id="数据生成">数据生成
+</h3><p><strong>找不到也收集不到足够的数据</strong>时，可以自己“创造”数据。</p>
+<h4 id="生成合成数据">生成合成数据
 </h4><ul>
 <li><strong>使用GANs (生成对抗网络):</strong> 可以生成高度逼真的数据。
 <ul>
@@ -514,9 +530,8 @@
 </li>
 <li><strong>使用模拟器 (Simulation):</strong> 在虚拟环境中模拟真实世界，生成数据，这在自动驾驶等领域非常常用。</li>
 </ul>
-<h4 id="2-数据增强">2. 数据增强
-</h4><p>这是最常用、最简单有效的方法，即对现有数据做一些微小的改动，生成“新”数据。</p>
-<ul>
+<h4 id="数据增强">数据增强
+</h4><ul>
 <li><strong>图像增强 (Image Augmentation):</strong> 对一张图片进行旋转、裁剪、拉伸、增加噪点、改变颜色等操作，一张图可以变成很多张。</li>
 <li><strong>文本增强 (Text Augmentation) - 回译 (Back-Translation):</strong>
 <ul>
@@ -527,7 +542,6 @@
 </ul>
 </li>
 </ul>
-<hr>
 <h2 id="13-web-scraping">1.3 Web Scraping
 </h2><h3 id="概念">概念
 </h3><p><strong>Web Scraping (数据抓取)</strong> 和 <strong>Web Crawling (网络爬虫)</strong> 有本质区别：</p>
@@ -543,13 +557,13 @@
 </ol>
 <h3 id="实战案例抓取-zillow-房产数据">实战案例：抓取 Zillow 房产数据
 </h3><p>我们以抓取美国房产网站 Zillow 上斯坦福附近已售房屋的数据为例。（对HTML基础有要求）</p>
-<h4 id="1-目标页">1 目标页
-</h4><ul>
+<p><strong>目标页</strong></p>
+<ul>
 <li><strong>列表页URL:</strong> <code>https://www.zillow.com/stanford-ca/sold/</code></li>
 <li><strong>规律:</strong> URL结构清晰，城市(<code>stanford-ca</code>)和页码(<code>2-p/</code>)是可变参数。通过修改这些参数，我们可以遍历所有城市的房产列表页。</li>
 </ul>
-<h4 id="2-详情页">2 详情页
-</h4><p>在列表页，我们需要拿到每个房子的独立ID，才能访问其详情页。</p>
+<p><strong>详情页</strong></p>
+<p>在列表页，我们需要拿到每个房子的独立ID，才能访问其详情页。</p>
 <ol>
 <li>用浏览器自带的开发者工具 (F12)定位到包含房屋链接的HTML元素，发现它们通常是<code>&lt;a&gt;</code>标签，且有一个特定的 <code>class</code>，例如 <code>list-card-link</code>。</li>
 <li><code>BeautifulSoup</code> 解析HTML，筛选出所有符合条件的<code>&lt;a&gt;</code>标签，并从其<code>href</code>属性中提取出房子的唯一ID。</li>
@@ -575,9 +589,9 @@
 </div><ol start="3">
 <li>有了ID后，我们就可以<strong>拼接</strong>出每个房子的详情页URL，例如：<code>https://www.zillow.com/homedetails/19506780_zpid/</code>，然后抓取这些页面的HTML。</li>
 </ol>
-<h4 id="3-提取结构化数据">3 提取结构化数据
-</h4><ul>
-<li><strong>方法:</strong> 用浏览器自带的开发者工具 (F12)，鼠标悬停在你想要的数据上（比如成交价），查看它在HTML中的位置、标签和<code>class</code>。</li>
+<p><strong>提取结构化数据</strong></p>
+<ul>
+<li><strong>方法:</strong> 用浏览器自带的开发者工具 (<strong>F12</strong>)，鼠标悬停在你想要的数据上（比如成交价），查看它在HTML中的位置、标签和<code>class</code>。</li>
 <li><strong>例子 (提取成交价和日期):</strong>
 <ul>
 <li>发现这两个信息都包含在一个<code>class</code>为<code>ds-home-details-chip</code>的<code>&lt;div&gt;</code>容器内的<code>&lt;span&gt;</code>标签里。</li>
@@ -666,29 +680,19 @@
 <li>【必须】遵守<strong>网站的<code>robots.txt</code>协议和服务条款</strong> (Terms of Service)。 如果对方明确禁止抓取，就应该遵守。</li>
 <li>【建议】如果你计划将抓取的数据用于<strong>商业盈利</strong>，务必咨询律师。</li>
 </ul>
-<hr>
 <h2 id="14-data-labeling">1.4 Data Labeling
-</h2><h3 id="核心问题有了数据但无标注或标注较少">核心问题：有了数据但无标注或标注较少。
-</h3><img src="data_labelling_flow.png?" alt="data_acquisiton_workflow" style="zoom:33%;" />
+</h2><p>核心问题：有了数据但无标注或标注较少。</p>
+<img src="data_labelling_flow.png?" alt="data_acquisiton_workflow" style="zoom:33%;" />
 <p>获取到原始数据后，下一步是获取标签。根据**“是否有初始标签”<strong>和</strong>“是否有预算”**，我们可以选择不同的技术路径。</p>
 <ul>
 <li><strong>场景一：有少量标签，没预算 → 半监督学习 (Semi-Supervised Learning)</strong></li>
 <li><strong>场景二：没标签，有预算 → 众包 (Crowdsourcing)</strong></li>
 <li><strong>场景三：没标签，没预算 → 弱监督 (Weak Supervision)</strong></li>
 </ul>
-<h3 id="1-半监督学习-semi-supervised-learning">1. 半监督学习 (Semi-Supervised Learning)
-</h3><h4 id="适用场景">适用场景
-</h4><p>有一小部分高质量的标注数据（比如来自用户的明确反馈），以及海量的未标注数据（比如大部分用户的浏览行为）。目标是利用这些海量的未标注数据，来提升模型性能。</p>
-<h4 id="核心思想">核心思想
-</h4><p>SSL依赖于几个关键假设，让我们能从无标签数据中推断信息：</p>
-<ul>
-<li><strong>连续性假设 (Continuity):</strong> 特征相似的样本，其标签也可能相同。</li>
-<li><strong>聚类假设 (Cluster):</strong> 数据天然地倾向于形成簇，同一个簇内的样本有相同的标签。</li>
-<li><strong>流形假设 (Manifold):</strong> 高维数据实际上分布在一个低维的内在结构上，这让我们可以通过降维等方式发现其本质。</li>
-</ul>
-<h4 id="关键技术-自训练">关键技术 自训练
-</h4><p>自训练是SSL中最简单且常用的一种方法，其工作流程是一个迭代增强的循环：</p>
-<img src="self_training.png?" alt="data_acquisiton_workflow" style="zoom:33%;" />
+<h3 id="1-半监督学习">1. 半监督学习
+</h3><p><strong>适用场景</strong>：有一小部分高质量的标注数据（比如来自用户的明确反馈），以及海量的未标注数据（比如大部分用户的浏览行为）。目标是利用这些海量的未标注数据，来提升模型性能。</p>
+<p>（核心思想：SSL依赖于几个关键假设，让我们能从无标签数据中推断信息。连续性假设 (Continuity): 特征相似的样本，其标签也可能相同。聚类假设 (Cluster): 数据天然地倾向于形成簇，同一个簇内的样本有相同的标签。流形假设 (Manifold): 高维数据实际上分布在一个低维的内在结构上，这让我们可以通过降维等方式发现其本质。）</p>
+<p><strong>关键技术自训练</strong>：自训练是SSL中最简单且常用的一种方法，其工作流程是一个迭代增强的循环。</p>
 <ol>
 <li><strong>训练 (Train):</strong> 使用现有的少量已标注数据，训练一个初始模型。</li>
 <li><strong>预测 (Predict):</strong> 用这个模型去预测所有未标注数据的标签。</li>
@@ -699,19 +703,13 @@
 </li>
 <li><strong>重复:</strong> 用合并后的、更大的数据集重新训练模型，然后回到第2步，不断循环。</li>
 </ol>
+<img src="self_training.png?" alt="data_acquisiton_workflow" style="zoom:33%;" />
 <p><strong>实践要点: <strong>使用</strong>计算成本高昂但性能强大</strong>的模型，如大型深度神经网络或模型集成(Ensemble/Bagging)，以获得尽可能准确的伪标签。</p>
 <h3 id="2-众包">2. 众包
-</h3><h4 id="适用场景-1">适用场景
-</h4><p>没有初始标签，但有预算。（ImageNet数据集就是通过Amazon Mechanical Turk (AMT)平台，花费数年和数百万美元标注完成的）</p>
-<h4 id="成本估算">成本估算
-</h4><ul>
-<li>图像/文本分类： ~$0.012 / 每个标签</li>
-<li>画边界框 (Bounding Box)： ~$0.024 / 每个框</li>
-<li>语义分割 (Semantic Segmentation)： ~$0.84 / 每张图 (成本高，因为需要对每个像素进行分类)</li>
-</ul>
-<p><strong>注意：</strong> 标注100万张需要做语义分割的图片，成本至少是84万美元，这还不算为了保证质量进行的重复标注。</p>
-<h4 id="众包实践中的三大挑战与对策">众包实践中的三大挑战与对策
-</h4><p><strong>挑战一：用户交互与任务设计</strong></p>
+</h3><p><strong>适用场景</strong>：没有初始标签，但有预算。（如ImageNet数据集就是通过Amazon Mechanical Turk (AMT)平台，花费数年和数百万美元标注完成的）</p>
+<p><strong>成本估算</strong>：图像/文本分类： ~$0.012 / 每个标签；画边界框 (Bounding Box)： ~$0.024 / 每个框；语义分割 (Semantic Segmentation)： ~$0.84 / 每张图 (成本高，因为需要对每个像素进行分类)；标注100万张需要做语义分割的图片，成本至少是84万美元，这还不算为了保证质量进行的重复标注。</p>
+<p><strong>实践挑战</strong>：</p>
+<p><strong>挑战一：用户交互与任务设计</strong></p>
 <ul>
 <li><strong>问题:</strong> 众包平台上的标注员没有专业知识。</li>
 <li><strong>对策：</strong> <strong>将复杂任务拆解为极简的原子任务。</strong></li>
@@ -724,9 +722,9 @@
 <li><strong>核心思想:</strong> 与自训练恰好相反。<strong>自训练</strong>是模型自动标注<strong>最简单、最自信</strong>的样本；而<strong>主动学习</strong>是模型挑出自己<strong>最困惑、最不确定</strong>的样本，然后把这些“硬骨头”交给人类专家来解决。</li>
 <li><strong>常见策略 (Uncertainty Sampling):</strong> 训练一个初始模型，然后找出那些模型预测概率分布最接近均匀分布（即最像随机猜测）的样本，优先发送给标注员。</li>
 </ul>
-<p><strong>组合拳：主动学习 + 自训练</strong></p>
+<p><strong>最佳实践</strong></p>
 <img src="selft-raining_active-learning.png" style="zoom:33%;" />
-<p>工业界非常常见的最佳实践：</p>
+<p>工业界非常常见的最佳实践：<strong>组合拳：主动学习 + 自训练</strong></p>
 <ol>
 <li>用初始标签训练模型。</li>
 <li>模型对未标注数据进行预测。</li>
@@ -750,11 +748,8 @@
 </li>
 </ul>
 <h3 id="3-弱监督">3. 弱监督
-</h3><h4 id="适用场景-2">适用场景
-</h4><p>最极限但也很常见的情况：<strong>没钱，也没初始标签</strong>。这时，我们需要发挥自己的领域知识来创造标签。</p>
-<h4 id="核心思想数据编程">核心思想：数据编程
-</h4><p>我们不再逐一手动标注样本，而是编写一系列启发式<strong>规则</strong> ，也称为<strong>标注函数</strong>，来为数据批量生成<strong>有噪音的、弱的</strong>标签。</p>
-<p><strong>Domain specific heuristics to assign labels; Keyword search, pattern matching, third-party models.</strong></p>
+</h3><p><strong>适用场景</strong>：最极限但也很常见的情况：<strong>没钱，也没初始标签</strong>。这时，我们需要发挥自己的领域知识来创造标签。</p>
+<p><strong>核心思想：数据编程</strong> —— 我们不再逐一手动标注样本，而是编写一系列启发式<strong>规则</strong> ，也称为<strong>标注函数</strong>，来为数据批量生成<strong>有噪音的、弱的</strong>标签。（<strong>Domain specific heuristics to assign labels; Keyword search, pattern matching, third-party models.</strong>）</p>
 <ul>
 <li>
 <p><strong>举例 (判断YouTube评论是否为垃圾评论):</strong>
@@ -823,6 +818,8 @@ GM 发现：</p>
 <h2 id="22-24-数据清理数据变换特征工程">2.2-2.4 数据清理、数据变换、特征工程
 </h2><p>例子：<a class="link" href="https://github.com/rooobeam/figure-skating"  target="_blank" rel="noopener"
     >rooobeam/figure-skating</a> 中的data_collection.py processs_data.py</p>
+<p><strong>PS：真正实践 <a class="link" href="https://github.com/rooobeam/figure-skating"  target="_blank" rel="noopener"
+    >rooobeam/figure-skating</a> 就够了其实</strong></p>
 <h2 id="25-data-summary">2.5 Data Summary
 </h2><p>图解：一树一循环</p>
 <p>树：数据是否充足-&gt;改良 标准/数据/模型。</p>
@@ -838,17 +835,126 @@ GM 发现：</p>
 <h2 id="31-机器学习概览">3.1 机器学习概览
 </h2><img src=".\ML_overview.png" alt="ML_overview" style="zoom:40%;" />
 <p>机器学习算法分四大类：监督/半监督/无监督/强化</p>
-<p>重点关注监督学习：分四板块—— 模型 损失函数 目标函数（如最小化损失）优化函数（如学习参数）</p>
+<p>重点关注监督学习：分四板块—— 模型 损失 目标(如最小化损失)  优化函数(如学习参数)</p>
 <p>监督学习的模型可分为四大类：决策树，线性方法，核方法，神经网络</p>
+<p>课程学习：监督学习 - 模型 - 决策树，线性方法，神经网络</p>
 <h2 id="32-决策树">3.2 决策树
-</h2><ol>
-<li>了解熵、基尼系数</li>
+</h2><h3 id="决策树基础">决策树基础
+</h3><p>三个字，<strong>看视频</strong></p>
+<ol>
+<li>了解熵、基尼系数意义和计算，事后便知增益率。</li>
 <li><a class="link" href="https://www.bilibili.com/video/BV1T7411b7DG/?share_source=copy_web&amp;vd_source=33a3d9253f3eaae8520547ba343f9930"  target="_blank" rel="noopener"
     >【数据挖掘】决策树零基础入门教程，手把手教你学决策树！</a></li>
 <li><a class="link" href="https://www.bilibili.com/video/BV1Cq4y1S7k1/?share_source=copy_web&amp;vd_source=33a3d9253f3eaae8520547ba343f9930"  target="_blank" rel="noopener"
     >【决策树算法1】ID3算法 数据挖掘 期末考试 计算题 详细步骤讲解</a></li>
 </ol>
-
+<h3 id="随机森林">随机森林
+</h3><p>通过多棵树提高健壮性</p>
+<ul>
+<li>并行训练处 每棵 相互独立的 树</li>
+<li>分类 - 服从多数；回归 - 取平均</li>
+</ul>
+<p>随机性来源</p>
+<ul>
+<li>对样本随机替换采样 —— bagging；E.g. [1,2,3,4,5]  → [1,2,2,3,4]，总样本数相同，每次采样遵循某种分布如正态分布</li>
+<li>每次节点分裂随机选择一个特征子集</li>
+</ul>
+<p>Boosting方法在后面集成学习那里再提</p>
+<h2 id="33-线性模型">3.3 线性模型
+</h2><p><strong>场景设定：</strong></p>
+<ul>
+<li><strong>批量大小 (Batch Size, $N$):</strong> <code>32</code> (一次处理32条数据)</li>
+<li><strong>输入特征维度 (Input Features, $d_{in}$):</strong> <code>10</code> (比如：身高、体重、年龄&hellip;共10个特征)</li>
+<li><strong>输入矩阵 $X$:</strong> 维度为 <code>(32, 10)</code></li>
+</ul>
+<h3 id="线性回归">线性回归
+</h3><p>预测一个连续的数值（例如：预测房价）。
+<strong>输出维度 ($d_{out}$):</strong> <code>1</code></p>
+<p><strong>计算预测值 (Prediction):</strong></p>
+<p><strong>公式:</strong>
+</p>
+$$
+\underset{(32 \times 1)}{\hat{Y}} = \underset{(32 \times 10)}{X} \times \underset{(10 \times 1)}{W} + \underset{(1 \times 1)}{b}
+$$<p><strong>注解:</strong></p>
+<ul>
+<li>$X$ 是输入数据矩阵。</li>
+<li>$W$ 是权重矩阵 (Weights)。因为它要将10个特征映射为1个输出值，所以维度是 <code>(10, 1)</code>。</li>
+<li>$b$ 是偏置 (Bias)。虽然它是 <code>(1, 1)</code> 的标量，但在加法运算中会触发<strong>广播 (Broadcasting)</strong> 机制，自动扩展为 <code>(32, 1)</code>，加到每一条数据的预测结果上。</li>
+<li>$\hat{Y}$ 是最终的预测结果，每一行对应一个样本的预测值。</li>
+</ul>
+<p>**目标和损失：**Minimize MSE loss   $\frac{1}{m} |\hat{y} - y|^2$</p>
+<h3 id="线性分类">线性分类
+</h3><p>这里我们以<strong>多分类 (Multi-class Classification)</strong> 为例。
+<strong>目标：</strong> 预测属于每个类别的概率。
+<strong>类别数量 ($K$):</strong> <code>3</code> (假设分3类：A, B, C)
+<strong>输出维度 ($d_{out}$):</strong> <code>3</code></p>
+<p><strong>步骤一：计算对数几率 (Logits/Scores):</strong></p>
+<p><strong>公式</strong>:
+</p>
+$$
+\underset{(32 \times 3)}{Z} = \underset{(32 \times 10)}{X} \times \underset{(10 \times 3)}{W} + \underset{(1 \times 3)}{b}
+$$<p><strong>注解:</strong></p>
+<ul>
+<li>这里的 $W$ 维度变成了 <code>(10, 3)</code>。因为我们需要为每一个输入样本生成 3 个不同的分数（对应 3 个类别）。<strong>可以理解为我们在并行地做 3 个不同的线性回归。</strong></li>
+<li>$b$ 维度是 <code>(1, 3)</code>，分别对应 3 个类别的偏置，同样会被广播加到这就 32 个样本上。</li>
+<li>$Z$ 称为 Logits，它还不是概率，只是原始的打分，范围可以是负无穷到正无穷。</li>
+</ul>
+<p><strong>步骤二：计算概率 (Probabilities):</strong></p>
+<p><strong>公式:</strong>
+</p>
+$$
+\underset{(32 \times 3)}{\hat{Y}} = \text{Softmax} \left( \underset{(32 \times 3)}{Z} \right)
+$$<p><strong>注解:</strong></p>
+<ul>
+<li>Softmax 函数通常沿着矩阵的<strong>最后一个维度</strong>（即行的方向）进行操作。</li>
+<li>对于 $Z$ 中的每一行（代表一个样本的3个分类得分），Softmax会将它们转化为概率分布（和为1）。</li>
+<li>最终输出 $\hat{Y}$ 维度保持不变，每一行如 <code>[0.1, 0.8, 0.1]</code>，表示该样本属于第二类的概率最大。</li>
+</ul>
+<p><strong>目标和损失：</strong></p>
+<p>交叉熵损失（Cross-Entropy Loss）
+</p>
+$$
+\mathcal{L}(y, \hat{y}) = - \sum_{k=1}^K y_k \log \hat{y}_k
+$$<p>
+由于 \( y \) 是 one-hot，只有真实类别那一项为 1，其余为 0，所以通常简写为：</p>
+$$
+\mathcal{L}(y, \hat{y}) = - \log \hat{y}_{\text{true}}
+$$<p>
+对于 \( m \) 个样本：
+</p>
+$$
+\mathcal{L} = -\frac{1}{m} \sum_{i=1}^m y_{i} \log \hat{y}_{i\_true}
+$$<h2 id="34-随机梯度下降">3.4 随机梯度下降
+</h2><p>stochastic gradient descent (SGD)</p>
+<img src=".\mini-batch_SDG.png" alt="mini-batch_SDG" style="zoom:30%;" />
+<p><strong>主要关心pytorch计算图思想</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="c1"># `features` shape is (n, p), `labels` shape is (n, 1) </span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">data_iter</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">labels</span><span class="p">):</span> 
+</span></span><span class="line"><span class="cl">    <span class="n">num_examples</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">features</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl">    <span class="n">indices</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">num_examples</span><span class="p">))</span> 
+</span></span><span class="line"><span class="cl">    <span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span>  <span class="c1"># read examples at random </span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">num_examples</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">):</span> 
+</span></span><span class="line"><span class="cl">    	<span class="n">batch_indices</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span> 
+</span></span><span class="line"><span class="cl">    		<span class="n">indices</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="nb">min</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="n">batch_size</span><span class="p">,</span> <span class="n">num_examples</span><span class="p">)])</span> 
+</span></span><span class="line"><span class="cl">    	<span class="k">yield</span> <span class="n">features</span><span class="p">[</span><span class="n">batch_indices</span><span class="p">],</span> <span class="n">labels</span><span class="p">[</span><span class="n">batch_indices</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
 </section>
 
 
