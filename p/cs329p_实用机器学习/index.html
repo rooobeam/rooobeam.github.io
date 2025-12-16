@@ -282,7 +282,13 @@
         <li><a href="#线性分类">线性分类</a></li>
       </ol>
     </li>
-    <li><a href="#34-随机梯度下降">3.4 随机梯度下降</a></li>
+    <li><a href="#34-随机梯度下降">3.4 随机梯度下降</a>
+      <ol>
+        <li><a href="#算法描述">算法描述</a></li>
+        <li><a href="#计算图">计算图</a></li>
+      </ol>
+    </li>
+    <li><a href="#35-多层感知机">3.5 多层感知机</a></li>
   </ol>
 </nav>
         </div>
@@ -926,8 +932,13 @@ $$
 \mathcal{L} = -\frac{1}{m} \sum_{i=1}^m y_{i} \log \hat{y}_{i\_true}
 $$<h2 id="34-随机梯度下降">3.4 随机梯度下降
 </h2><p>stochastic gradient descent (SGD)</p>
+<h3 id="算法描述">算法描述
+</h3><p>最主要是在于参数更新，为什么要 “ - 学习率 * 梯度”？</p>
+<p>y = f(x)，x是参数，y是最后要优化的损失函数，这里损失即“误差的大小”，故而目标是 最小化损失。**直接从数值角度思考，梯度为负数，斜率小于0，x越大y越小，所以要 “- 梯度” 来更新；梯度为正数时还是 “- 梯度” 来更新。**综上要减梯度来更新，从而实现最小化 y。当涉及多个参数时，<strong>偏导会将问题简化为多个 y-x关系</strong>。</p>
+<p>如果是要 最大化损失函数，加负号得到新的损失函数，然后继续最小化损失。</p>
 <img src=".\mini-batch_SDG.png" alt="mini-batch_SDG" style="zoom:30%;" />
-<p><strong>主要关心pytorch计算图思想</strong></p>
+<h3 id="计算图">计算图
+</h3><p>Pytorch_note 文章有更多内容</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -940,21 +951,146 @@ $$<h2 id="34-随机梯度下降">3.4 随机梯度下降
 </span><span class="lnt"> 8
 </span><span class="lnt"> 9
 </span><span class="lnt">10
+</span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="c1"># `features` shape is (n, p), `labels` shape is (n, 1) </span>
-</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">data_iter</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">labels</span><span class="p">):</span> 
-</span></span><span class="line"><span class="cl">    <span class="n">num_examples</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">features</span><span class="p">)</span> 
-</span></span><span class="line"><span class="cl">    <span class="n">indices</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">num_examples</span><span class="p">))</span> 
-</span></span><span class="line"><span class="cl">    <span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span>  <span class="c1"># read examples at random </span>
-</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">num_examples</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">):</span> 
-</span></span><span class="line"><span class="cl">    	<span class="n">batch_indices</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span> 
-</span></span><span class="line"><span class="cl">    		<span class="n">indices</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="nb">min</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="n">batch_size</span><span class="p">,</span> <span class="n">num_examples</span><span class="p">)])</span> 
-</span></span><span class="line"><span class="cl">    	<span class="k">yield</span> <span class="n">features</span><span class="p">[</span><span class="n">batch_indices</span><span class="p">],</span> <span class="n">labels</span><span class="p">[</span><span class="n">batch_indices</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">        
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">w</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">requires_grad</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># requires_grad=True</span>
+</span></span><span class="line"><span class="cl"><span class="n">b</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">requires_grad</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_epochs</span><span class="p">):</span> 
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">data_iter</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">labels</span><span class="p">):</span> 
+</span></span><span class="line"><span class="cl">        <span class="n">y_hat</span> <span class="o">=</span> <span class="n">X</span> <span class="o">@</span> <span class="n">w</span> <span class="o">+</span> <span class="n">b</span> 
+</span></span><span class="line"><span class="cl">        <span class="n">loss</span> <span class="o">=</span> <span class="p">((</span><span class="n">y_hat</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> 
+</span></span><span class="line"><span class="cl">        <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span> 
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="p">[</span><span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">]:</span> 
+</span></span><span class="line"><span class="cl">            <span class="n">param</span> <span class="o">-=</span> <span class="n">learning_rate</span> <span class="o">*</span> <span class="n">param</span><span class="o">.</span><span class="n">grad</span>  
+</span></span><span class="line"><span class="cl">            <span class="n">param</span><span class="o">.</span><span class="n">grad</span><span class="o">.</span><span class="n">zero_</span><span class="p">()</span>  <span class="c1"># param.grad.zero_()   optimizer.grad.zero_()</span>
 </span></span></code></pre></td></tr></table>
 </div>
+</div><p>下图展示了代码中，损失函数 <code>loss</code> 如何计算出的，反向传播 <code>loss.backward()</code> 会沿着与箭头相反的方向计算梯度。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">graph TD
+</span></span><span class="line"><span class="cl">    subgraph &#34;输入 (Inputs)&#34;
+</span></span><span class="line"><span class="cl">        X[(&#34;X (features)&#34;)]
+</span></span><span class="line"><span class="cl">        y[(&#34;y (labels)&#34;)]
+</span></span><span class="line"><span class="cl">    end
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    subgraph &#34;模型参数 (Parameters)&#34;
+</span></span><span class="line"><span class="cl">        direction LR
+</span></span><span class="line"><span class="cl">        w[(&#34;w (weights)&#34;)]
+</span></span><span class="line"><span class="cl">        b[(&#34;b (bias)&#34;)]
+</span></span><span class="line"><span class="cl">    end
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    subgraph &#34;计算过程 (Forward Pass)&#34;
+</span></span><span class="line"><span class="cl">        direction TB
+</span></span><span class="line"><span class="cl">        MatMul[&#34;X @ w&#34;] -- Z --&gt; Add[&#34;Z + b&#34;]
+</span></span><span class="line"><span class="cl">        Add -- &#34;y_hat&#34; --&gt; SquaredError[&#34;(y_hat - y)² / 2&#34;]
+</span></span><span class="line"><span class="cl">        SquaredError -- &#34;loss&#34; --&gt; Mean[&#34;mean()&#34;]
+</span></span><span class="line"><span class="cl">    end
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    subgraph &#34;梯度计算 (Backward Pass)&#34;
+</span></span><span class="line"><span class="cl">        direction RL
+</span></span><span class="line"><span class="cl">        grad_w[&#34;∇w (w.grad)&#34;]
+</span></span><span class="line"><span class="cl">        grad_b[&#34;∇b (b.grad)&#34;]
+</span></span><span class="line"><span class="cl">    end
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    %% 连接
+</span></span><span class="line"><span class="cl">    w --&gt; MatMul
+</span></span><span class="line"><span class="cl">    X --&gt; MatMul
+</span></span><span class="line"><span class="cl">    b --&gt; Add
+</span></span><span class="line"><span class="cl">    y --&gt; SquaredError
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    %% 反向传播路径 (conceptual)
+</span></span><span class="line"><span class="cl">    Mean -- &#34;loss.backward() 开始计算&#34; --&gt; grad_w
+</span></span><span class="line"><span class="cl">    Mean -- &#34; &#34; --&gt; grad_b
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    %% Style
+</span></span><span class="line"><span class="cl">    classDef params fill:#123,stroke:#333,stroke-width:2px;
+</span></span><span class="line"><span class="cl">    classDef inputs fill:#345F,stroke:#333,stroke-width:2px;
+</span></span><span class="line"><span class="cl">    classDef grad fill:#D456F,stroke:#333,stroke-width:2px;
+</span></span><span class="line"><span class="cl">    class w,b params;
+</span></span><span class="line"><span class="cl">    class X,y inputs;
+</span></span><span class="line"><span class="cl">    class grad_w,grad_b grad;
+</span></span></code></pre></td></tr></table>
 </div>
+</div><p><strong>图解说明</strong></p>
+<ol>
+<li>
+<p><strong>蓝色方框 (模型参数)</strong>:</p>
+<ul>
+<li><code>w</code> (权重) 和 <code>b</code> (偏置) 是我们需要学习的参数。它们都设置了 <code>requires_grad=True</code>，所以 PyTorch 会追踪它们，即y_hat、Z、loss会被“标记”。</li>
+</ul>
+</li>
+<li>
+<p><strong>绿色方框 (输入)</strong>:</p>
+<ul>
+<li><code>X</code> (特征) 和 <code>y</code> (真实标签) 是从 <code>data_iter</code> 中获取的每个批次的数据。</li>
+</ul>
+</li>
+<li>
+<p><strong>白色方框 (计算过程)</strong>:</p>
+<ul>
+<li><code>X @ w</code>: <code>X</code> 和 <code>w</code>进行矩阵乘法。</li>
+<li><code>+ b</code>: 将上一步的结果与偏置 <code>b</code> 相加，得到预测值 <code>y_hat</code>。</li>
+<li><code>(y_hat - y)² / 2</code>: 计算预测值 <code>y_hat</code> 和真实值 <code>y</code> 之间的平方误差。</li>
+<li><code>mean()</code>: 计算一个批次中所有样本误差的平均值，得到最终的 <code>loss</code>。</li>
+</ul>
+</li>
+<li>
+<p><strong>灰色方框 (梯度)</strong>:</p>
+<ul>
+<li>当 <code>loss.backward()</code> 被调用时，PyTorch 会沿着计算图反向传播，自动计算 <code>loss</code> 相对于 <code>w</code> 和 <code>b</code> 的梯度，并将它们存储在 <code>w.grad</code> 和 <code>b.grad</code> 中。</li>
+</ul>
+</li>
+</ol>
+<h2 id="35-多层感知机">3.5 多层感知机
+</h2><p>这里</p>
+
 </section>
 
 

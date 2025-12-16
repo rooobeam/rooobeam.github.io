@@ -1005,6 +1005,28 @@ Final Linear & Softmax，在经过 N 个 Decoder Block 后，我们得到最终�
 
 ### decoder-only
 
+**1. 预测时的输入：不再是单纯的 `<s\>`，而是“Prompt”**
+
+*   **没有 Encoder** 来专门“读”输入。在推理开始时，您输入的 Task Description 和 Prompt（例如 `"翻译：apple ->"`）会被一次性喂给模型。模型**并不区分**哪部分是您给的指令，哪部分是它要生成的，所以，Prompt 本身就扮演了“历史记录”的角色，替代了经典 Decoder 那个光秃秃的 `<s\>`。
+
+**2. 训练原理：为什么 Prompt + 后文能预测出正确答案？**
+
+*   **训练时：**模型在海量文本中见过无数这种结构：`问题：xxxxx？ 答案：yyyyy。`模型学到的是：当上下文呈现出“问题+问号”的模式时，接下来的概率分布应该倾向于“答案”的模式。
+*   **推理时：**当你给出一个 Prompt：`Translate: hello ->`，这个 Prompt 强行构建了一个**特定的上下文环境**。模型计算 $P(\text{next\_token} | \text{"Translate: hello ->"})$。由于它在训练数据里见过成千上万次类似的 `->` 后面跟着法语单词的模式，它会发现生成“bonjour”的概率最高。
+*   **本质上，Prompt 就是在“诱导”模型进入某种特定的补全模式。** 你给它的上文越像某种任务的开头，它接下来的“续写”就越像在执行这个任务。
+
+**3. 上下文长度 (Context Window)：截断会很奇怪吗？**
+
+- **上下文包含什么？** $ \text{当前上下文} = \text{输入 Prompt} + \text{模型已经生成的所有内容} $
+
+- **长度如何控制？** GPT 模型有一个硬性的**最大上下文长度限制**（Max Context Length），例如 GPT-3 是 2048 个 tokens。**这是由注意力矩阵的大小决定的（硬件显存限制）**。
+
+- **满了怎么办？（截断策略）** 如果在对话或生成过程中，`Input + Output` 的总长度超过了 2048，通常采取**滑动窗口 (Sliding Window)** 策略：**扔掉最早的：** 我们会把最旧的输入（Prompt 的最开头，或者最早的几轮对话）砍掉；**保留最新的：** 确保剩下的内容 + 新生成的词 $\le$ 2048。
+
+- **截断不良后果**：Decoder-only 模型的硬伤之一 —— “长短期记忆丢失”。假设给了一个很长的指令：“你是一个严谨的翻译家，不要使用俚语...（中间省略2000字的文章）...请翻译最后这句。”， 如果文章太长，导致最开头的“你是一个严谨的翻译家...”被截断挤出了窗口，模型就忘了你的人设要求。
+
+### 预训练
+
 **预训练**任务就是transformer中的“预测下一个词”，也是利用因果掩码实现并行计算，最终实现模型参数的训练，整体架构和张量变化如下：
 $$
 (5,1) \xrightarrow{UW_e+W_P} (5,512) \xrightarrow{\text{n * transformer block}}  (5,512)  \xrightarrow{W^T_e} (5,1e4) \xrightarrow{\text{softmax}} (5,1e4)
@@ -1109,7 +1131,7 @@ total_loss.backward()
 
 链接：[GPT，GPT-2，GPT-3 论文精读](https://www.bilibili.com/video/BV1AF411b7xQ/?share_source=copy_web&vd_source=33a3d9253f3eaae8520547ba343f9930) (PS: 一个多小时我全看了)
 
-要点：In-Context Learning，规模效应
+要点：zero-shot，规模效应
 
 （概念 语言模型容量：参数量、训练数据量、训练时长（训练量））
 
@@ -1121,7 +1143,7 @@ total_loss.backward()
 - 当你给模型一个 Prompt（比如 `TL;DR:`），你实际上是在 唤醒 模型在海量数据中见过的某种特定上下文模式，引导它完成任务。
 - 数据来源于Reddit网站(点赞>3)数据。
 
-### 模型架构变化
+### 模型架构
 
 | 模型架构       | GPT-1            | GPT-2                                                  | 作用                                   |
 | -------------- | ---------------- | ------------------------------------------------------ | -------------------------------------- |
@@ -1133,10 +1155,44 @@ total_loss.backward()
 
 ## GPT3
 
-如何处理Common Crawl数据
-- 用筛选了的Reddit(点赞>3)作为正例训练二分类器，然后对Common Crawl筛高质量
-- 去重用LSH技术
-- 再加以前的高质量数据集
+### 要点与链接
+
+链接：[GPT，GPT-2，GPT-3 论文精读](https://www.bilibili.com/video/BV1AF411b7xQ/?share_source=copy_web&vd_source=33a3d9253f3eaae8520547ba343f9930) (PS: 一个多小时我全看了)
+
+要点：In-context Learning，规模效应
+
+### 过往缺点
+
+- 子任务上需要对大量数据进行标注
+- 预训练任务数据与微调任务数据有大量重合，在预训练上过拟合后，微调任务上的高分并不能体现预训练模型有良好范化性。
+
+### few-shot
+
+few-shot有效来源于 In-context Learning —— 训练时每个“段落”就像一个上下文学习，他们都是相关的，比如下图中 “加法怎么做”、“错别字改正”、“英语翻译为法语”，从而获得了多种“情景再现能力”，给少量的样本相当于给定情景。
+
+<img src=".\in-context_learning.png" alt="in-context_learning" style="zoom:33%;" />
+
+下图可见：   
+zero-shot —— task description + prompt   
+one-shot —— task description + 1\*example + prompt   
+few-shot —— task description + n\*example + prompt 
+
+<img src="C:\Users\86147\Pictures\Screenshots\屏幕截图 2025-12-15 110424.png" alt="屏幕截图 2025-12-15 110424" style="zoom:40%;" />
+
+### 模型架构
+
+| 特性           | GPT-1   | GPT-2 (最大版) | GPT-3 (Davinci)              | 变化意义                         |
+| :------------- | :------ | :------------- | :--------------------------- | :------------------------------- |
+| $n_{params}$   | 1.17 亿 | 15 亿          | **1,750 亿**                 | 100倍的提升，规模效应            |
+| $n_{layers}$   | 12      | 48             | **96**                       | 模型更深，推理能力更强。         |
+| $d_{model}$    | 768     | 1600           | **12,288**                   | 每层记忆容量和特征表达能力提升。 |
+| $d_{head}$     | 12      | 25             | **96**                       | 能够并行关注的信息维度更多。     |
+| **上下文长度** | 512     | 1024           | **2048**                     | 读入更长内容，理解更长逻辑。     |
+| **架构核心**   | Post-LN | **Pre-LN**     | **Pre-LN** + **Sparse Attn** | 继承  Pre-LN 保证训练稳定。      |
+
+（数据获取 —— 如何处理Common Crawl数据：筛选了的Reddit(点赞>3)作为正例训练二分类器，然后对Common Crawl筛高质量；去重用LSH技术；再加以前的高质量数据集。）
+
+
 
 ## InstructGPT
 
