@@ -849,22 +849,22 @@ $$ \text{Add}_{\text{out}} = X + \text{MHA}_{\text{out}} $$
     
 *   **多头注意力计算** (以单头为例，输入 $Q'_d, K'_d, V'_d \in \mathbb{R}^{3 \times 64}$):
     
-    1. Scores: $Q'_d (K'_d)^T \rightarrow (3, 64) \times (64, 3) = (3, 3)$
+    1. Scores: $Q'_d (K'_d)^T \rightarrow (3, 64) \times (64, 3) = (3, 3)$   
+       $$ \text{Scores} = \begin{bmatrix} s_{11} & s_{12} & s_{13} \\ s_{21} & s_{22} & s_{23} \\ s_{31} & s_{32} & s_{33} \end{bmatrix} $$
     
     2. **Masking** & Softmax: 将得分矩阵的上三角部分（不含对角线）设为 $-\infty$。    
-    
-       *   注意力得分矩阵 ($3 \times 3$):
-           $$ \text{Scores} = \begin{bmatrix} s_{11} & s_{12} & s_{13} \\ s_{21} & s_{22} & s_{23} \\ s_{31} & s_{32} & s_{33} \end{bmatrix} $$
-       *   应用掩码后:
-           $$ \text{Scores}_{\text{masked}} = \begin{bmatrix} s_{11} & -\infty & -\infty \\ s_{21} & s_{22} & -\infty \\ s_{31} & s_{32} & s_{33} \end{bmatrix} $$
-       *   经过 Softmax 函数后:
-           $$ A'_d=\text{Softmax}(\text{Scores}_{\text{masked}}) \rightarrow \begin{bmatrix} \alpha_{11} & 0 & 0 \\ \alpha_{21} & \alpha_{22} & 0 \\ \alpha_{31} & \alpha_{32} & \alpha_{33} \end{bmatrix} $$
+       $$ \text{Scores}_{\text{masked}} = \begin{bmatrix} s_{11} & -\infty & -\infty \\ s_{21} & s_{22} & -\infty \\ s_{31} & s_{32} & s_{33} \end{bmatrix} $$    
+       $$ A'_d=\text{Softmax}(\text{Scores}_{\text{masked}}) \rightarrow \begin{bmatrix} \alpha_{11} & 0 & 0 \\ \alpha_{21} & \alpha_{22} & 0 \\ \alpha_{31} & \alpha_{32} & \alpha_{33} \end{bmatrix} $$   
     
        ​       $ A'_d \in \mathbb{R}^{3 \times 3} $
     
-    3. 加权: $A'_d V'_d \rightarrow (3, 3) \times (3, 64) = (3, 64)$。
+    3. 加权: $\text{Head}_{\text{out}} =A'_d V'_d \rightarrow (3, 3) \times (3, 64) = (3, 64)$。
     
-*   **合并与输出**: 经过拼接和最终线性变换，得到 $\text{MaskedMHA}_{\text{out}} \in \mathbb{R}^{3 \times 512}$。
+* **合并与输出**: 经过拼接和最终线性变换，得到 $\text{MaskedMHA}_{\text{out}} \in \mathbb{R}^{3 \times 512}$。   
+  $$
+  \text{MaskedMHA}_{\text{out}} = concat(\text{Head}_{\text{out}}^i) W^O
+  $$
+  
 
 #### 2. Add & Norm - 1
 
@@ -927,10 +927,10 @@ Final Linear & Softmax，在经过 N 个 Decoder Block 后，我们得到最终�
 
 ### transformer-decoder （训练）
 
-**训练中所有预测是在一次前向传播和一次反向传播中并行完成的，而不是 6 次独立的传播。**
+训练中所有预测是在一次前向传播和一次反向传播中b的，而不是 6 次独立的传播。
 
-*   **训练时**: **并行**处理，一次前向+一次反向，完成整个序列的学习。
-*   **预测时**: **串行**处理，一次生成一个词，循环多次。
+*   训练时: 并行处理，一次前向+一次反向，完成整个序列的学习。
+*   预测时: 串行处理，一次生成一个词，循环多次。
 
 #### 1. 准备数据
 
@@ -995,7 +995,7 @@ Final Linear & Softmax，在经过 N 个 Decoder Block 后，我们得到最终�
 
 我们根据这个**单一的损失值**，进行**一次**反向传播，计算所有模型参数（$W^Q, W^K, W^V$ 等）的梯度，并更新它们。
 
-## GPT-1
+## GPT1
 
 ### 链接与要点
 
@@ -1005,25 +1005,96 @@ Final Linear & Softmax，在经过 N 个 Decoder Block 后，我们得到最终�
 
 ### decoder-only
 
-**1. 预测时的输入：不再是单纯的 `<s\>`，而是“Prompt”**
+1. **阶段一：Prefill (预填充)**   
+   **场景**: 输入 Prompt (3个 Token)，生成初始 KV-Cache，并预测第 4 个 Token。   
+   **逻辑**: 计算全部 3 个 Token 的 K, V 存入缓存；**仅取**第 3 个 Token (最后一个) 的 Q 参与注意力计算。
 
-*   **没有 Encoder** 来专门“读”输入。在推理开始时，您输入的 Task Description 和 Prompt（例如 `"翻译：apple ->"`）会被一次性喂给模型。模型**并不区分**哪部分是您给的指令，哪部分是它要生成的，所以，Prompt 本身就扮演了“历史记录”的角色，替代了经典 Decoder 那个光秃秃的 `<s\>`。
+   *   **输入**: $X_{\text{prompt}}$ 包含 3 个 Token。
 
-**2. 训练原理：为什么 Prompt + 后文能预测出正确答案？**
+   * **K, V 生成 (全量)**:
+     $$
+     \begin{aligned}
+     \underset{(3, 64)}{K_{\text{pre}}} &= \underset{(3, 512)}{X_{\text{prompt}}} \times \underset{(512, 64)}{W^K} \\
+     \underset{(3, 64)}{V_{\text{pre}}} &= \underset{(3, 512)}{X_{\text{prompt}}} \times \underset{(512, 64)}{W^V}
+     \end{aligned}
+     $$
+     *注：此时 $K_{\text{pre}}, V_{\text{pre}}$ 被完整存入 KV-Cache。*
 
-*   **训练时：**模型在海量文本中见过无数这种结构：`问题：xxxxx？ 答案：yyyyy。`模型学到的是：当上下文呈现出“问题+问号”的模式时，接下来的概率分布应该倾向于“答案”的模式。
-*   **推理时：**当你给出一个 Prompt：`Translate: hello ->`，这个 Prompt 强行构建了一个**特定的上下文环境**。模型计算 $P(\text{next\_token} | \text{"Translate: hello ->"})$。由于它在训练数据里见过成千上万次类似的 `->` 后面跟着法语单词的模式，它会发现生成“bonjour”的概率最高。
-*   **本质上，Prompt 就是在“诱导”模型进入某种特定的补全模式。** 你给它的上文越像某种任务的开头，它接下来的“续写”就越像在执行这个任务。
+   * **Q 生成 (仅末位)**:
+     $$
+     \underset{(1, 64)}{Q_{\text{last}}} = \underset{(1, 512)}{X_{\text{prompt}}[-1:]} \times \underset{(512, 64)}{W^Q}
+     $$
 
-**3. 上下文长度 (Context Window)：截断会很奇怪吗？**
+   * **注意力计算 (Last Token 对全局)**:
 
-- **上下文包含什么？** $ \text{当前上下文} = \text{输入 Prompt} + \text{模型已经生成的所有内容} $
+     1. **Scores**:
+        $$
+        \underset{(1, 3)}{\text{Scores}} = \underset{(1, 64)}{Q_{\text{last}}} \times \underset{(64, 3)}{(K_{\text{pre}})^T}
+        $$
 
-- **长度如何控制？** GPT 模型有一个硬性的**最大上下文长度限制**（Max Context Length），例如 GPT-3 是 2048 个 tokens。**这是由注意力矩阵的大小决定的（硬件显存限制）**。
+     2. **Softmax & Weighted Sum**:
+        $$
+        \underset{(1, 64)}{\text{Out}} = \underset{(1, 3)}{\text{Softmax}(\text{Scores})} \times \underset{(3, 64)}{V_{\text{pre}}}
+        $$
 
-- **满了怎么办？（截断策略）** 如果在对话或生成过程中，`Input + Output` 的总长度超过了 2048，通常采取**滑动窗口 (Sliding Window)** 策略：**扔掉最早的：** 我们会把最旧的输入（Prompt 的最开头，或者最早的几轮对话）砍掉；**保留最新的：** 确保剩下的内容 + 新生成的词 $\le$ 2048。
+   *   **输出**: 经过线性层映射，预测出第 4 个 Token (设为 $x_4$)。
 
-- **截断不良后果**：Decoder-only 模型的硬伤之一 —— “长短期记忆丢失”。假设给了一个很长的指令：“你是一个严谨的翻译家，不要使用俚语...（中间省略2000字的文章）...请翻译最后这句。”， 如果文章太长，导致最开头的“你是一个严谨的翻译家...”被截断挤出了窗口，模型就忘了你的人设要求。
+2. **阶段二：Decoding (解码/生成)**   
+   **场景**: 输入刚生成的第 4 个 Token $x_4$，利用 Cache 预测第 5 个 Token。   
+   **逻辑**: 仅计算 $x_4$ 的 Q, K, V；更新 Cache；Q 关注全局 Cache。
+
+   *   **输入**: $x_4$ 为新生成的单 Token。
+
+   * **Q, K, V 生成 (单步)**:
+     $$
+     \begin{aligned}
+     \underset{(1, 64)}{q_{\text{new}}} &= \underset{(1, 512)}{x_4} \times \underset{(512, 64)}{W^Q} \\
+     \underset{(1, 64)}{k_{\text{new}}} &= \underset{(1, 512)}{x_4} \times \underset{(512, 64)}{W^K} \\
+     \underset{(1, 64)}{v_{\text{new}}} &= \underset{(1, 512)}{x_4} \times \underset{(512, 64)}{W^V}
+     \end{aligned}
+     $$
+
+   * **KV-Cache 更新**:
+     $$
+     \begin{aligned}
+     \underset{(4, 64)}{K_{\text{cache}}} &= \text{concat}(\underset{(3, 64)}{K_{\text{pre}}}, \underset{(1, 64)}{k_{\text{new}}}) \\
+     \underset{(4, 64)}{V_{\text{cache}}} &= \text{concat}(\underset{(3, 64)}{V_{\text{pre}}}, \underset{(1, 64)}{v_{\text{new}}})
+     \end{aligned}
+     $$
+
+   * **注意力计算** (当前 Token 对历史全局):
+
+     1. **Scores**:
+        $$
+        \underset{(1, 4)}{\text{Scores}} = \underset{(1, 64)}{q_{\text{new}}} \times \underset{(64, 4)}{(K_{\text{cache}})^T}
+        $$
+
+     2. **Softmax & Weighted Sum**:
+        $$
+        \underset{(1, 64)}{\text{Out}} = \underset{(1, 4)}{\text{Softmax}(\text{Scores})} \times \underset{(4, 64)}{V_{\text{cache}}}
+        $$
+
+   * **循环**: $q_{\text{new}}$ 使用完毕即丢弃，Cache 继续增长。   
+
+     
+
+3. **关键点**   
+
+   - **预测时的输入：不再是单纯的 `<s\>`，而是“Prompt”？**   
+     在推理开始时，输入的 Task Description 和 Prompt（例如 `"翻译：apple ->"`）会被一次性喂给模型。模型**并不区分**哪部分是您给的指令，哪部分是它要生成的，所以，Prompt 本身就扮演了“历史记录”的角色，替代了经典 Decoder 那个光秃秃的 `<s\>`。
+
+   - **训练原理：为什么 Prompt + 后文能预测出正确答案？**   
+     **训练时**模型在海量文本中见过无数这种结构：`问题：xxx？ 答案：yyy。`模型学到的是：当上下文呈现出“问题+问号”模式时，接下来的概率分布应倾向于“答案”的模式。   
+     **推理时：**当你给出一个 Prompt：`Translate: hello ->`，这个 Prompt 强行构建了一个特定的上下文环境。模型计算 $P(\text{next\_token} | \text{"Translate: hello ->"})$。由于它在训练数据里见过成千上万次类似的 `->` 后面跟着法语单词的模式，它会发现生成“bonjour”的概率最高。   
+     **本质上**，Prompt 就是在“诱导”模型进入某种特定的补全模式。 你给它的上文越像某种任务的开头，它接下来的“续写”就越像在执行这个任务。
+
+   - 上下文长度 (Context Window)：截断会很奇怪吗？   
+     **上下文包含什么？** $ \text{当前上下文} = \text{输入 Prompt} + \text{模型已经生成的所有内容} $   
+     **长度如何控制？** GPT 模型有一个硬性的最大上下文长度限制（Max Context Length），例如 GPT-3 是 2048 个 tokens。**这是由注意力矩阵的大小决定的（硬件显存限制）**。   
+     **满了怎么办？**（截断策略） 如果在对话或生成过程中，`Input + Output` 的总长度超过了 2048，通常采取滑动窗口策略：**扔掉最早**的： 我们会把最旧的输入（Prompt 的最开头，或者最早的几轮对话）砍掉；**保留最新**的： 确保剩下的内容 + 新生成的词 $\le$ 2048。   
+     **截断不良后果**：Decoder-only 模型的硬伤之一 —— “长短期记忆丢失”。假设给了一个很长的指令：“你是一个严谨的翻译家，不要使用俚语...（中间省略2000字的文章）...请翻译最后这句。”， 如果文章太长，导致最开头的“你是一个严谨的翻译家...”被截断挤出了窗口，模型就忘了你的人设要求。     
+
+     
 
 ### 预训练
 
@@ -1051,6 +1122,8 @@ $$
 - 参数整体可以分为两类 $W_e$ 和 其他参数。$W_e$ 即词嵌入矩阵，而其他参数是更像是模型参数。
 
 ### 微调
+
+SFT supervised fine-tuning
 
 具体详见 [BERT与GPT解密脑图 ](https://www.figma.com/board/hTnJDk3dm0JDAMKekdKQzZ/BERT与GPT解密：塑造大语言模型的巨擘?node-id=0-1&p=f&t=2B42VtCRdYRPhwL1-0) 右下角。
 
@@ -1192,8 +1265,6 @@ few-shot —— task description + n\*example + prompt
 
 （数据获取 —— 如何处理Common Crawl数据：筛选了的Reddit(点赞>3)作为正例训练二分类器，然后对Common Crawl筛高质量；去重用LSH技术；再加以前的高质量数据集。）
 
-
-
 ## InstructGPT
 
 《Training language models to follow instructions with human feedback》
@@ -1207,3 +1278,26 @@ few-shot —— task description + n\*example + prompt
 ### RM
 
 ### PPO
+
+
+
+## 其它
+
+### KV-cache
+
+### BPE
+
+GPT-2 的 Byte-level BPE 机制 —— “规则限制的 字节级 词典构造器”。将**文本处理的单位为 UTF-8 的字节**，初始词表直接由 256 个可能的 8 位字节值构成，算法统计语料库中字节组的共现频率，将高频字节组作为独立的 Token，从而构建词表。
+
+- 例如，英文字母 "A" 在输入层直接对应单字节 `[0x41]`（十进制 65），这是 BPE 词表中最原子的构成单位，不需要任何额外的字符映射表。
+
+- 例如，中文汉字 "中" 的 UTF-8 编码为三个字节 `[0xE4, 0xB8, 0xAD]`，在训练初期它们是分散的，但由于这三个字节在中文语料中极高频地连续出现，BPE 会将这三个字节合并，分配一个独立的 Token ID（如 Token_20013）来代表汉字 "中"。
+
+- 例如，Emoji 表情 "😊" 由四个字节 `[0xF0, 0x9F, 0x98, 0x8A]` 组成，如果该组合在训练语料中频繁出现，算法会将这四个字节“打包”成一个唯一的 Token ID；如果遇到某个极低频的生僻字，BPE 词表中没有对应的合并项，模型则直接接收其原始的字节序列组合（如三个或四个独立的字节 Token）。
+
+
+GPT-2 在 BPE 合并过程中引入了基于正则表达式的预分词约束，严格界定字符类别，强制要求字节对的合并操作只能在同一类别（如字母、数字、标点、空白）内部进行，禁止跨类别的粘连。
+
+- 例如，对于输入字符串 "dog."，即使在语料中 "dog" 后面紧接句号的情况非常多，预分词规则也会强制在 "g" 和 "." 之间切分，迫使 BPE 将其解析为 `["dog", "."]` 两个独立的 Token，防止生成 "dog." 这种低复用率的冗余 Token。
+
+- 例如，处理字符串 "Word123" 时，规则会阻止字母 "d" 与数字 "1" 发生合并，确保最终生成的 Token 序列清晰地分为字母部分的 "Word" 和数字部分的 "123"。
