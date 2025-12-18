@@ -1018,7 +1018,7 @@ Final Linear & Softmax，在经过 N 个 Decoder Block 后，我们得到最终�
      \underset{(3, 64)}{V_{\text{pre}}} &= \underset{(3, 512)}{X_{\text{prompt}}} \times \underset{(512, 64)}{W^V}
      \end{aligned}
      $$
-     *注：此时 $K_{\text{pre}}, V_{\text{pre}}$ 被完整存入 KV-Cache。*
+     *注：此时 $K_{\text{pre}}, V_{\text{pre}}$ 被完整存入 KV-Cache。* [跳转到 KV-Cache](###kv-cache)
 
    * **Q 生成 (仅末位)**:
      $$
@@ -1081,14 +1081,17 @@ Final Linear & Softmax，在经过 N 个 Decoder Block 后，我们得到最终�
 3. **关键点**   
 
    - **预测时的输入：不再是单纯的 `<s\>`，而是“Prompt”？**   
+
      在推理开始时，输入的 Task Description 和 Prompt（例如 `"翻译：apple ->"`）会被一次性喂给模型。模型**并不区分**哪部分是您给的指令，哪部分是它要生成的，所以，Prompt 本身就扮演了“历史记录”的角色，替代了经典 Decoder 那个光秃秃的 `<s\>`。
 
-   - **训练原理：为什么 Prompt + 后文能预测出正确答案？**   
+   - **训练原理：为什么 Prompt + 后文能预测出正确答案？**    
+
      **训练时**模型在海量文本中见过无数这种结构：`问题：xxx？ 答案：yyy。`模型学到的是：当上下文呈现出“问题+问号”模式时，接下来的概率分布应倾向于“答案”的模式。   
      **推理时：**当你给出一个 Prompt：`Translate: hello ->`，这个 Prompt 强行构建了一个特定的上下文环境。模型计算 $P(\text{next\_token} | \text{"Translate: hello ->"})$。由于它在训练数据里见过成千上万次类似的 `->` 后面跟着法语单词的模式，它会发现生成“bonjour”的概率最高。   
      **本质上**，Prompt 就是在“诱导”模型进入某种特定的补全模式。 你给它的上文越像某种任务的开头，它接下来的“续写”就越像在执行这个任务。
 
-   - 上下文长度 (Context Window)：截断会很奇怪吗？   
+   - **上下文长度 (Context Window)：截断会很奇怪吗？**   
+
      **上下文包含什么？** $ \text{当前上下文} = \text{输入 Prompt} + \text{模型已经生成的所有内容} $   
      **长度如何控制？** GPT 模型有一个硬性的最大上下文长度限制（Max Context Length），例如 GPT-3 是 2048 个 tokens。**这是由注意力矩阵的大小决定的（硬件显存限制）**。   
      **满了怎么办？**（截断策略） 如果在对话或生成过程中，`Input + Output` 的总长度超过了 2048，通常采取滑动窗口策略：**扔掉最早**的： 我们会把最旧的输入（Prompt 的最开头，或者最早的几轮对话）砍掉；**保留最新**的： 确保剩下的内容 + 新生成的词 $\le$ 2048。   
@@ -1284,6 +1287,70 @@ few-shot —— task description + n\*example + prompt
 ## 其它
 
 ### KV-cache
+
+1. 理论上
+
+   **缓存内容：** 就是两个 PyTorch Tensor（Key 矩阵和 Value 矩阵）。   
+
+   **存储结构：** 形状通常是 `[batch, num_heads, current_seq_len, head_dim]`。   
+
+   **调用逻辑：**   
+
+   *   **计算当前 token** 的 $q, k, v$。
+   *   **读取缓存** 中的 `past_k`, `past_v`。
+   *   **拼接/写入** 将当前的 $k, v$ 加入缓存。
+   *   **计算 Attention** 用当前的 $q$ 去乘 全量的 $K$。
+
+2. Python 代码
+
+计算“最新” Token 的 $Q, K, V$，然后去仓库（Cache）里把前面的 $K, V$ 拿出来拼接。
+
+```python
+import torch
+import torch.nn.functional as F
+
+def attention_with_cache(x_current, past_kv, W_q, W_k, W_v):
+    """
+    x_current: 当前这就这一个 token 的输入，shape [1, 1, hidden_size]
+    past_kv: 之前存下来的 cache，是一个 tuple (past_k, past_v)
+    """
+    
+    # 1. 只计算当前这 1 个 token 的 Q, K, V (计算量极小)
+    # 这一步只发生了矩阵乘法: [1, 1, dim] * [dim, dim]
+    q_current = x_current @ W_q 
+    k_current = x_current @ W_k 
+    v_current = x_current @ W_v 
+    
+    # 2. 如果有缓存，把旧的 K, V 拿出来，和新的拼在一起
+    if past_kv is not None:
+        past_k, past_v = past_kv
+        # 在序列长度维度(seq_len)进行拼接 (torch.cat)
+        # 假设 past_k 是 [1, 10, hidden_size], k_current 是 [1, 1, hidden_size]
+        # 拼接后 K_all 变成 [1, 11, hidden_size]
+        K_all = torch.cat([past_k, k_current], dim=1)
+        V_all = torch.cat([past_v, v_current], dim=1)
+    else:
+        # 刚开始生成第1个词，没缓存
+        K_all = k_current
+        V_all = v_current
+        
+    # 3. 计算 Attention
+    # Q 只用当前的 q_current (我们要看当前的词和过去所有词的关系)
+    # K, V 使用全量的 K_all, V_all
+    attn_weights = torch.matmul(q_current, K_all.transpose(-2, -1)) 
+    # attn_weights shape: [1, 1, 11] -> 表示当前词对这11个词的关注度
+    
+    output = torch.matmul(attn_weights, V_all)
+    
+    # 4. 更新缓存 (把拼接好的全量 KV 返回去，供下一次使用)
+    current_kv = (K_all, V_all)
+    
+    return output, current_kv
+```
+
+（真实 LLM 框架中的实现细节 (Hugging Face / vLLM)：在工业级的代码中，为了性能会稍复杂，主要体现在**内存预分配**上。上面的代码用了 `torch.cat`（拼接）。这在 Python 里其实很慢，因为每次拼接都要开辟一块新的大内存，把旧数据拷过去，再把新数据拷进去。**高级实现 (如 vLLM, PagedAttention)**它不会每次都 cat。它会预先申请一大块显存（比如能存 2048 个 token 的位置）。）
+
+
 
 ### BPE
 
