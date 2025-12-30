@@ -5,7 +5,7 @@
         <link>https://rooobeam.github.io/categories/</link>
         <description>Recent content in Categories on rooobeam</description>
         <generator>Hugo -- gohugo.io</generator>
-        <language>en</language>
+        <language>en-us</language>
         <copyright>rooobeam</copyright>
         <lastBuildDate>Fri, 05 Sep 2025 10:53:13 +0800</lastBuildDate><atom:link href="https://rooobeam.github.io/categories/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>基础</title>
@@ -45,6 +45,22 @@
         <pubDate>Wed, 19 Feb 2025 00:00:00 +0000</pubDate>
         
         <guid>https://rooobeam.github.io/categories/syntax/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>تجربة</title>
+        <link>https://rooobeam.github.io/categories/%D8%AA%D8%AC%D8%B1%D8%A8%D8%A9/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>https://rooobeam.github.io/categories/%D8%AA%D8%AC%D8%B1%D8%A8%D8%A9/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>تجربة مع فراغات</title>
+        <link>https://rooobeam.github.io/categories/%D8%AA%D8%AC%D8%B1%D8%A8%D8%A9-%D9%85%D8%B9-%D9%81%D8%B1%D8%A7%D8%BA%D8%A7%D8%AA/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>https://rooobeam.github.io/categories/%D8%AA%D8%AC%D8%B1%D8%A8%D8%A9-%D9%85%D8%B9-%D9%81%D8%B1%D8%A7%D8%BA%D8%A7%D8%AA/</guid>
         <description></description>
         </item>
         

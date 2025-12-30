@@ -2,6 +2,7 @@
 date = '2025-10-18T22:12:20+08:00'
 draft = true
 title = '语言模型发展论文集'
+
 +++
 
 ## NNLM
@@ -1276,7 +1277,29 @@ few-shot —— task description + n\*example + prompt
 
 要点：**RLHF**
 
+![sft_rm_ppo](.\sft_rm_ppo.png)
+
 ### SFT
+
+说白了用 “prompt-answer” 对来微调大模型，监督因为完全人工写答案。
+
+SFT 本质上仍然是是 **Teacher Forcing**(预训练那里的操作)，但对 Loss 进行了**截断**。
+
+1. 输入构造  
+
+   将 Prompt 和 Answer 拼接为单条序列，并在末尾添加 EOS Token。
+   $$ \text{Seq} = [\text{Prompt Tokens}, \text{Separator}, \text{Answer Tokens}, \text{EOS}] $$
+
+2. 注意力机制
+
+*   **Mask 类型**：标准的 **Causal Mask**。
+*   **逻辑**：Answer 部分的 token 可以 attend 到完整的 Prompt 和之前的 Answer token。Prompt 必须参与 Forward Pass 以构建 KV Cache 上下文。
+
+3. 损失计算    
+
+   仅针对 Answer 部分计算 **NLL Loss (Negative Log-Likelihood)**，Prompt 部分梯度阻断 —— Prompt 位置：`Label = -100` (这里pad位置一样的label)，计算 CrossEntropyLoss 时，ignore_index = Lable 忽略 Prompt 的 logit 预测。
+
+4. 一句话总结：**Prompt 参与 Forward 提供上下文，但在 Backward 时被 Mask 掉，不贡献梯度，模型只学“如何回答”，不学“如何提问”。**
 
 ### RM
 
