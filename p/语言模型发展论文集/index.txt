@@ -1275,9 +1275,13 @@ few-shot —— task description + n\*example + prompt
 
 ### 链接与要点
 
-要点：**RLHF**
+要点：SFT、RM+PPO(**RLHF**)
+
+### 3step概述
 
 ![sft_rm_ppo](.\sft_rm_ppo.png)
+
+
 
 ### SFT
 
@@ -1302,6 +1306,16 @@ SFT 本质上仍然是是 **Teacher Forcing**(预训练那里的操作)，但对
 4. 一句话总结：**Prompt 参与 Forward 提供上下文，但在 Backward 时被 Mask 掉，不贡献梯度，模型只学“如何回答”，不学“如何提问”。**
 
 ### RM
+
+对SFT得到的模型微调得到RM
+
+数据准备
+
+数据标注：标注员对单条 Prompt 下生成的 $K$ 个回答（4~9个）进行整体排序。将标注员的一次排序结果拆解为大量的成对训练数据 $(prompt, answer_w, answer_l)$ 共$\binom{K}{2}$ 对，$answer_w, answer_l$ 分别是“一好一坏”回答（组合数公式 $\frac{K(K-1)}{2}$，标注员读一次 Prompt，即可获得多对标注数据，显著降低成本。）
+
+### 3. 算力零浪费（Computational Optimization）
+工程上将源自同一 Prompt 的所有配对作为一个 Batch Element 处理。
+**核心价值**：模型只需执行**一次前向传播（Forward Pass）**，计算出 $K$ 个标量分数，随即在内存中复用这些分数计算所有配对的 Loss。彻底消除了对同一 Prompt 和同一 Response 的重复特征提取与编码计算，大幅提升训练吞吐量。
 
 ### PPO
 
@@ -1391,3 +1405,7 @@ GPT-2 在 BPE 合并过程中引入了基于正则表达式的预分词约束，
 - 例如，对于输入字符串 "dog."，即使在语料中 "dog" 后面紧接句号的情况非常多，预分词规则也会强制在 "g" 和 "." 之间切分，迫使 BPE 将其解析为 `["dog", "."]` 两个独立的 Token，防止生成 "dog." 这种低复用率的冗余 Token。
 
 - 例如，处理字符串 "Word123" 时，规则会阻止字母 "d" 与数字 "1" 发生合并，确保最终生成的 Token 序列清晰地分为字母部分的 "Word" 和数字部分的 "123"。
+
+### GQA
+
+[MHA, MQA, GQA：别再写三个类了，一个通用注意力模块就够了](https://mp.weixin.qq.com/s/-Le8DYs2T5A9m5KfU1oFAw)
