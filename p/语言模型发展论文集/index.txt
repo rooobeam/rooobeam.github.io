@@ -1309,15 +1309,16 @@ SFT 本质上仍然是是 **Teacher Forcing**(预训练那里的操作)，但对
 
 对SFT得到的模型微调得到RM
 
-数据准备
+- 数据标注：标注员对单条 Prompt 下生成的 $K$ 个回答（4~9个）进行整体排序。将标注员的一次排序结果拆解为大量的成对训练数据 $(prompt, answer_w, answer_l)$ 共$\binom{K}{2}$ 对，$answer_w, answer_l$ 分别是“一好一坏”回答（组合数公式 $\frac{K(K-1)}{2}$，标注员读一次 Prompt，即可获得多对标注数据，显著降低成本。）
 
-数据标注：标注员对单条 Prompt 下生成的 $K$ 个回答（4~9个）进行整体排序。将标注员的一次排序结果拆解为大量的成对训练数据 $(prompt, answer_w, answer_l)$ 共$\binom{K}{2}$ 对，$answer_w, answer_l$ 分别是“一好一坏”回答（组合数公式 $\frac{K(K-1)}{2}$，标注员读一次 Prompt，即可获得多对标注数据，显著降低成本。）
+- 模型和损失计算：$\text{loss}(\theta) = - \frac{1}{\binom{K}{2}} \mathbb{E}_{(x, y_w, y_l) \sim D} \left[ \log \left( \sigma \left( r_\theta(x, y_w) - r_\theta(x, y_l) \right) \right) \right]$，$(x, y_w, y_l)$ 对应前面的 $(prompt, answer_w, answer_l)$，$r_\theta$ 为 rewarding model，具体来说就是SFT后的模型把输出层unembedding和softmax换成线性层输出为一个标量即$r_\theta$的输出。
 
-### 3. 算力零浪费（Computational Optimization）
-工程上将源自同一 Prompt 的所有配对作为一个 Batch Element 处理。
-**核心价值**：模型只需执行**一次前向传播（Forward Pass）**，计算出 $K$ 个标量分数，随即在内存中复用这些分数计算所有配对的 Loss。彻底消除了对同一 Prompt 和同一 Response 的重复特征提取与编码计算，大幅提升训练吞吐量。
+- 算力节省：工程上将源自同一 Prompt 的所有配对作为一个 Batch Element 处理。**一次前向传播（Forward Pass）**，计算出 $K$ 个$r_\theta$，随即计算所有配对的 Loss进行反向传播。
 
 ### PPO
+
+目标：训练一个Policy神经网络π，在所有状态s下，给出相应的Action，得到Return的期望最大
+目标：训练一个Policy神经网络π，在所有的Trajectory中，得到Return的期望最大。
 
 
 
