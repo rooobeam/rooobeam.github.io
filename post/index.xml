@@ -7,7 +7,18 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>rooobeam</copyright>
-        <lastBuildDate>Tue, 02 Dec 2025 11:03:42 +0800</lastBuildDate><atom:link href="https://rooobeam.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 01 Jan 2026 20:49:01 +0800</lastBuildDate><atom:link href="https://rooobeam.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>强化学习的数学原理</title>
+        <link>https://rooobeam.github.io/p/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%9A%84%E6%95%B0%E5%AD%A6%E5%8E%9F%E7%90%86/</link>
+        <pubDate>Thu, 01 Jan 2026 20:49:01 +0800</pubDate>
+        
+        <guid>https://rooobeam.github.io/p/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%9A%84%E6%95%B0%E5%AD%A6%E5%8E%9F%E7%90%86/</guid>
+        <description>&lt;h3 id=&#34;前言&#34;&gt;前言
+&lt;/h3&gt;&lt;p&gt;学习 &lt;a class=&#34;link&#34; href=&#34;https://www.bilibili.com/video/BV1sd4y167NS/?spm_id_from=333.1387.favlist.content.click&amp;amp;vd_source=3e32a51d0489203920eb4337d8de4c31&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;西湖大学网课&lt;/a&gt; 的相关笔记。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>PyTorch_note</title>
         <link>https://rooobeam.github.io/p/pytorch_note/</link>
         <pubDate>Tue, 02 Dec 2025 11:03:42 +0800</pubDate>
