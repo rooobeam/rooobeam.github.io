@@ -935,35 +935,35 @@ df = pd.DataFrame(dic)</p>
 <li><code>df.iloc[100]</code> <strong>会报错！</strong> 因为 DataFrame 只有4行，没有第101个位置（行号100）。</li>
 </ul>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th style="text-align: left">特性</th>
-          <th style="text-align: left"><code>.loc</code> (Location)</th>
-          <th style="text-align: left"><code>.iloc</code> (Integer Location)</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td style="text-align: left"><strong>定位方式</strong></td>
-          <td style="text-align: left"><strong>基于标签 (Label-based)</strong></td>
-          <td style="text-align: left"><strong>基于整数位置 (Integer-based)</strong></td>
-      </tr>
-      <tr>
-          <td style="text-align: left"><strong>输入类型</strong></td>
-          <td style="text-align: left">行/列的<strong>名字</strong></td>
-          <td style="text-align: left">行/列的<strong>数字序号</strong> (从0开始)</td>
-      </tr>
-      <tr>
-          <td style="text-align: left"><strong>切片行为</strong></td>
-          <td style="text-align: left"><strong>包含</strong>结束点 (Inclusive)</td>
-          <td style="text-align: left"><strong>不包含</strong>结束点 (Exclusive)</td>
-      </tr>
-      <tr>
-          <td style="text-align: left"><strong>主要用途</strong></td>
-          <td style="text-align: left">当你的索引有实际意义时（如姓名、日期）</td>
-          <td style="text-align: left">当你需要按位置选取，或索引混乱/无意义时</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th style="text-align: left">特性</th>
+					<th style="text-align: left"><code>.loc</code> (Location)</th>
+					<th style="text-align: left"><code>.iloc</code> (Integer Location)</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: left"><strong>定位方式</strong></td>
+					<td style="text-align: left"><strong>基于标签 (Label-based)</strong></td>
+					<td style="text-align: left"><strong>基于整数位置 (Integer-based)</strong></td>
+			</tr>
+			<tr>
+					<td style="text-align: left"><strong>输入类型</strong></td>
+					<td style="text-align: left">行/列的<strong>名字</strong></td>
+					<td style="text-align: left">行/列的<strong>数字序号</strong> (从0开始)</td>
+			</tr>
+			<tr>
+					<td style="text-align: left"><strong>切片行为</strong></td>
+					<td style="text-align: left"><strong>包含</strong>结束点 (Inclusive)</td>
+					<td style="text-align: left"><strong>不包含</strong>结束点 (Exclusive)</td>
+			</tr>
+			<tr>
+					<td style="text-align: left"><strong>主要用途</strong></td>
+					<td style="text-align: left">当你的索引有实际意义时（如姓名、日期）</td>
+					<td style="text-align: left">当你需要按位置选取，或索引混乱/无意义时</td>
+			</tr>
+	</tbody>
 </table></div>
 <p><strong>最佳实践</strong>：为了避免混淆，尽量保持代码意图清晰。如果你想按位置操作，就用 <code>.iloc</code>；如果你想按名称操作，就用 <code>.loc</code>。</p>
 

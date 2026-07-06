@@ -386,34 +386,34 @@
 <hr>
 <h2 id="11_-1"><strong>1.1_2 操作系统的特征</strong>
 </h2><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>特征</th>
-          <th>定义</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>并发</strong></td>
-          <td>多个事件交替发生（宏观同时发生、微观交替进行）</td>
-      </tr>
-      <tr>
-          <td><strong>并行</strong></td>
-          <td>多个事件同时发生</td>
-      </tr>
-      <tr>
-          <td><strong>共享</strong></td>
-          <td>两种资源共享方式：<br>1. 互斥共享方式（如打印机）<br>2. 同时共享方式（如文件）</td>
-      </tr>
-      <tr>
-          <td><strong>虚拟</strong></td>
-          <td>物理实体映射为多个逻辑实体：<br>- 空分复用技术（如虚拟内存）<br>- 时分复用技术（如CPU分时）</td>
-      </tr>
-      <tr>
-          <td><strong>异步</strong></td>
-          <td>进程执行走走停停，速度不可预知（需并发性支持）</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>特征</th>
+					<th>定义</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>并发</strong></td>
+					<td>多个事件交替发生（宏观同时发生、微观交替进行）</td>
+			</tr>
+			<tr>
+					<td><strong>并行</strong></td>
+					<td>多个事件同时发生</td>
+			</tr>
+			<tr>
+					<td><strong>共享</strong></td>
+					<td>两种资源共享方式：<br>1. 互斥共享方式（如打印机）<br>2. 同时共享方式（如文件）</td>
+			</tr>
+			<tr>
+					<td><strong>虚拟</strong></td>
+					<td>物理实体映射为多个逻辑实体：<br>- 空分复用技术（如虚拟内存）<br>- 时分复用技术（如CPU分时）</td>
+			</tr>
+			<tr>
+					<td><strong>异步</strong></td>
+					<td>进程执行走走停停，速度不可预知（需并发性支持）</td>
+			</tr>
+	</tbody>
 </table></div>
 <hr>
 <h2 id="11_-2"><strong>1.1_3 操作系统的发展与分类</strong>
@@ -488,22 +488,22 @@
 </ol>
 <h3 id="体系结构">体系结构
 </h3><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>类型</th>
-          <th>特点</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>大内核</strong></td>
-          <td>主要功能模块运行在核心态（如Linux）</td>
-      </tr>
-      <tr>
-          <td><strong>微内核</strong></td>
-          <td>仅保留最基本功能（如Windows NT）</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>类型</th>
+					<th>特点</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>大内核</strong></td>
+					<td>主要功能模块运行在核心态（如Linux）</td>
+			</tr>
+			<tr>
+					<td><strong>微内核</strong></td>
+					<td>仅保留最基本功能（如Windows NT）</td>
+			</tr>
+	</tbody>
 </table></div>
 <hr>
 <h2 id="11_-4"><strong>1.1_5 中断和异常</strong>
@@ -536,22 +536,22 @@
 <li><strong>概念</strong>：应用程序通过系统调用请求OS服务</li>
 <li><strong>与库函数的区别</strong>：
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>系统调用</th>
-          <th>库函数</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>OS直接提供的接口</td>
-          <td>可能封装系统调用</td>
-      </tr>
-      <tr>
-          <td>需切换到核心态</td>
-          <td>运行在用户态</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>系统调用</th>
+					<th>库函数</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>OS直接提供的接口</td>
+					<td>可能封装系统调用</td>
+			</tr>
+			<tr>
+					<td>需切换到核心态</td>
+					<td>运行在用户态</td>
+			</tr>
+	</tbody>
 </table></div>
 </li>
 </ul>
@@ -580,40 +580,40 @@
 <h2 id="21_2-进程的状态与转换">2.1_2 进程的状态与转换
 </h2><h3 id="进程状态">进程状态
 </h3><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th><strong>状态</strong></th>
-          <th><strong>描述</strong></th>
-          <th><strong>资源占用情况</strong></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>运行态</strong></td>
-          <td>占有CPU并执行指令（单核CPU同一时刻只能有一个进程处于运行态）</td>
-          <td>CPU√，其他资源√</td>
-      </tr>
-      <tr>
-          <td><strong>就绪态</strong></td>
-          <td>具备运行条件，但无空闲CPU（等待调度）</td>
-          <td>CPU×，其他资源√</td>
-      </tr>
-      <tr>
-          <td><strong>阻塞态</strong></td>
-          <td>等待某事件（如I/O完成）</td>
-          <td>CPU×，其他资源×</td>
-      </tr>
-      <tr>
-          <td><strong>创建态</strong></td>
-          <td>正在分配PCB、程序段和数据段</td>
-          <td>-</td>
-      </tr>
-      <tr>
-          <td><strong>终止态</strong></td>
-          <td>资源回收中</td>
-          <td>-</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th><strong>状态</strong></th>
+					<th><strong>描述</strong></th>
+					<th><strong>资源占用情况</strong></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>运行态</strong></td>
+					<td>占有CPU并执行指令（单核CPU同一时刻只能有一个进程处于运行态）</td>
+					<td>CPU√，其他资源√</td>
+			</tr>
+			<tr>
+					<td><strong>就绪态</strong></td>
+					<td>具备运行条件，但无空闲CPU（等待调度）</td>
+					<td>CPU×，其他资源√</td>
+			</tr>
+			<tr>
+					<td><strong>阻塞态</strong></td>
+					<td>等待某事件（如I/O完成）</td>
+					<td>CPU×，其他资源×</td>
+			</tr>
+			<tr>
+					<td><strong>创建态</strong></td>
+					<td>正在分配PCB、程序段和数据段</td>
+					<td>-</td>
+			</tr>
+			<tr>
+					<td><strong>终止态</strong></td>
+					<td>资源回收中</td>
+					<td>-</td>
+			</tr>
+	</tbody>
 </table></div>
 <h3 id="状态转换">状态转换
 </h3><div class="highlight"><div class="chroma">
@@ -650,113 +650,113 @@
 </ol>
 <h3 id="关键原语">关键原语
 </h3><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th><strong>原语类型</strong></th>
-          <th><strong>触发事件</strong></th>
-          <th><strong>操作</strong></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>创建原语</strong></td>
-          <td>用户登录、作业调度、服务请求</td>
-          <td>申请空白PCB → 分配资源 → 初始化PCB → 加入就绪队列</td>
-      </tr>
-      <tr>
-          <td><strong>终止原语</strong></td>
-          <td>正常结束、异常终止、外界干预</td>
-          <td>回收内存 → 撤销PCB</td>
-      </tr>
-      <tr>
-          <td><strong>阻塞原语</strong></td>
-          <td>等待资源/其他进程</td>
-          <td>运行态 → 阻塞态（主动）</td>
-      </tr>
-      <tr>
-          <td><strong>唤醒原语</strong></td>
-          <td>等待事件发生</td>
-          <td>阻塞态 → 就绪态（被动）</td>
-      </tr>
-      <tr>
-          <td><strong>切换原语</strong></td>
-          <td>时间片耗尽、高优先级进程到达</td>
-          <td>保存当前进程上下文 → 恢复目标进程上下文</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th><strong>原语类型</strong></th>
+					<th><strong>触发事件</strong></th>
+					<th><strong>操作</strong></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>创建原语</strong></td>
+					<td>用户登录、作业调度、服务请求</td>
+					<td>申请空白PCB → 分配资源 → 初始化PCB → 加入就绪队列</td>
+			</tr>
+			<tr>
+					<td><strong>终止原语</strong></td>
+					<td>正常结束、异常终止、外界干预</td>
+					<td>回收内存 → 撤销PCB</td>
+			</tr>
+			<tr>
+					<td><strong>阻塞原语</strong></td>
+					<td>等待资源/其他进程</td>
+					<td>运行态 → 阻塞态（主动）</td>
+			</tr>
+			<tr>
+					<td><strong>唤醒原语</strong></td>
+					<td>等待事件发生</td>
+					<td>阻塞态 → 就绪态（被动）</td>
+			</tr>
+			<tr>
+					<td><strong>切换原语</strong></td>
+					<td>时间片耗尽、高优先级进程到达</td>
+					<td>保存当前进程上下文 → 恢复目标进程上下文</td>
+			</tr>
+	</tbody>
 </table></div>
 <hr>
 <h2 id="21_4-进程通信">2.1_4 进程通信
 </h2><h3 id="通信方式对比">通信方式对比
 </h3><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th><strong>方式</strong></th>
-          <th><strong>实现原理</strong></th>
-          <th><strong>特点</strong></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>共享存储</strong></td>
-          <td>分配共享空间，通过PV操作互斥访问</td>
-          <td>- 基于数据结构（低级）<br>- 基于存储区（高级）</td>
-      </tr>
-      <tr>
-          <td><strong>消息传递</strong></td>
-          <td>直接/间接发送消息（含消息头和消息体）</td>
-          <td>- 直接通信：消息挂载到目标进程<br>- 间接通信：通过信箱中转</td>
-      </tr>
-      <tr>
-          <td><strong>管道通信</strong></td>
-          <td>半双工通信，遵循“写满才能读”的互斥规则</td>
-          <td>适用于父子进程通信，容量固定</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th><strong>方式</strong></th>
+					<th><strong>实现原理</strong></th>
+					<th><strong>特点</strong></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>共享存储</strong></td>
+					<td>分配共享空间，通过PV操作互斥访问</td>
+					<td>- 基于数据结构（低级）<br>- 基于存储区（高级）</td>
+			</tr>
+			<tr>
+					<td><strong>消息传递</strong></td>
+					<td>直接/间接发送消息（含消息头和消息体）</td>
+					<td>- 直接通信：消息挂载到目标进程<br>- 间接通信：通过信箱中转</td>
+			</tr>
+			<tr>
+					<td><strong>管道通信</strong></td>
+					<td>半双工通信，遵循“写满才能读”的互斥规则</td>
+					<td>适用于父子进程通信，容量固定</td>
+			</tr>
+	</tbody>
 </table></div>
 <hr>
 <h2 id="21_5-线程概念与多线程模型">2.1_5 线程概念与多线程模型
 </h2><h3 id="线程-vs-进程">线程 vs 进程
 </h3><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th><strong>特性</strong></th>
-          <th><strong>线程</strong></th>
-          <th><strong>进程</strong></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>单位</strong></td>
-          <td>基本CPU执行（调度）单位</td>
-          <td>资源分配单位（不管系统中是否有线程）</td>
-      </tr>
-      <tr>
-          <td><strong>系统开销</strong></td>
-          <td>切换代价小（同进程内线程<strong>共享进程资源</strong>）</td>
-          <td>切换代价大（需保存整个上下文）</td>
-      </tr>
-      <tr>
-          <td><strong>并发性</strong></td>
-          <td>同一进程的线程可并发</td>
-          <td>进程间并发</td>
-      </tr>
-      <tr>
-          <td><strong>通信方式</strong></td>
-          <td>同进程内 线程 不通过内核</td>
-          <td>进程间通信 需通过内核</td>
-      </tr>
-      <tr>
-          <td><strong>状态</strong></td>
-          <td>只有三种状态转化：运行、就绪、阻塞</td>
-          <td>五种：运行、阻塞、就绪、创建、终止</td>
-      </tr>
-      <tr>
-          <td><strong>独立运行</strong></td>
-          <td>不能独立运行，依赖进程</td>
-          <td>独立</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th><strong>特性</strong></th>
+					<th><strong>线程</strong></th>
+					<th><strong>进程</strong></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>单位</strong></td>
+					<td>基本CPU执行（调度）单位</td>
+					<td>资源分配单位（不管系统中是否有线程）</td>
+			</tr>
+			<tr>
+					<td><strong>系统开销</strong></td>
+					<td>切换代价小（同进程内线程<strong>共享进程资源</strong>）</td>
+					<td>切换代价大（需保存整个上下文）</td>
+			</tr>
+			<tr>
+					<td><strong>并发性</strong></td>
+					<td>同一进程的线程可并发</td>
+					<td>进程间并发</td>
+			</tr>
+			<tr>
+					<td><strong>通信方式</strong></td>
+					<td>同进程内 线程 不通过内核</td>
+					<td>进程间通信 需通过内核</td>
+			</tr>
+			<tr>
+					<td><strong>状态</strong></td>
+					<td>只有三种状态转化：运行、就绪、阻塞</td>
+					<td>五种：运行、阻塞、就绪、创建、终止</td>
+			</tr>
+			<tr>
+					<td><strong>独立运行</strong></td>
+					<td>不能独立运行，依赖进程</td>
+					<td>独立</td>
+			</tr>
+	</tbody>
 </table></div>
 <ul>
 <li>✅  一个进程可创建一个或多个线程
@@ -782,58 +782,58 @@
 </ul>
 <h3 id="线程实现方式">线程实现方式
 </h3><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th><strong>对比维度</strong></th>
-          <th><strong>用户线程 (User-Level Thread)</strong></th>
-          <th><strong>内核线程 (Kernel-Level Thread)</strong></th>
-          <th><strong>组合方式 (Hybrid Model)</strong></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>实现位置</strong></td>
-          <td>用户空间</td>
-          <td>内核空间</td>
-          <td>用户空间 + 内核空间</td>
-      </tr>
-      <tr>
-          <td><strong>OS感知性</strong></td>
-          <td>内核不可感知</td>
-          <td>内核直接管理，设置了一个线程控制块（TCB）</td>
-          <td>用户线程动态绑定内核线程</td>
-      </tr>
-      <tr>
-          <td><strong>线程映射模型</strong></td>
-          <td>多对一（多个用户线程→1个内核线程）</td>
-          <td>一对一（1用户线程→1内核线程）</td>
-          <td>多对多（灵活绑定）</td>
-      </tr>
-      <tr>
-          <td><strong>创建/销毁开销</strong></td>
-          <td>⚡ 极低（无需内核介入）</td>
-          <td>⚠️ 高（需系统调用）</td>
-          <td>🔄 中等（用户线程管理+内核线程绑定）</td>
-      </tr>
-      <tr>
-          <td><strong>阻塞问题</strong></td>
-          <td>🚫 单线程阻塞→整个进程阻塞</td>
-          <td>✅ 单线程阻塞→可调度同进程其他线程</td>
-          <td>✅ 通过内核线程避免完全阻塞</td>
-      </tr>
-      <tr>
-          <td><strong>多核并行能力</strong></td>
-          <td>❌ 多个同进程用户线程只有一个运行（其实就是不能一个进程在多个cpu上）</td>
-          <td>✅ 支持多线程并行</td>
-          <td>✅ 根据内核线程支持</td>
-      </tr>
-      <tr>
-          <td><strong>调度单位</strong></td>
-          <td>进程级调度</td>
-          <td>线程级调度</td>
-          <td>混合调度（用户线程池+内核线程调度）</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th><strong>对比维度</strong></th>
+					<th><strong>用户线程 (User-Level Thread)</strong></th>
+					<th><strong>内核线程 (Kernel-Level Thread)</strong></th>
+					<th><strong>组合方式 (Hybrid Model)</strong></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>实现位置</strong></td>
+					<td>用户空间</td>
+					<td>内核空间</td>
+					<td>用户空间 + 内核空间</td>
+			</tr>
+			<tr>
+					<td><strong>OS感知性</strong></td>
+					<td>内核不可感知</td>
+					<td>内核直接管理，设置了一个线程控制块（TCB）</td>
+					<td>用户线程动态绑定内核线程</td>
+			</tr>
+			<tr>
+					<td><strong>线程映射模型</strong></td>
+					<td>多对一（多个用户线程→1个内核线程）</td>
+					<td>一对一（1用户线程→1内核线程）</td>
+					<td>多对多（灵活绑定）</td>
+			</tr>
+			<tr>
+					<td><strong>创建/销毁开销</strong></td>
+					<td>⚡ 极低（无需内核介入）</td>
+					<td>⚠️ 高（需系统调用）</td>
+					<td>🔄 中等（用户线程管理+内核线程绑定）</td>
+			</tr>
+			<tr>
+					<td><strong>阻塞问题</strong></td>
+					<td>🚫 单线程阻塞→整个进程阻塞</td>
+					<td>✅ 单线程阻塞→可调度同进程其他线程</td>
+					<td>✅ 通过内核线程避免完全阻塞</td>
+			</tr>
+			<tr>
+					<td><strong>多核并行能力</strong></td>
+					<td>❌ 多个同进程用户线程只有一个运行（其实就是不能一个进程在多个cpu上）</td>
+					<td>✅ 支持多线程并行</td>
+					<td>✅ 根据内核线程支持</td>
+			</tr>
+			<tr>
+					<td><strong>调度单位</strong></td>
+					<td>进程级调度</td>
+					<td>线程级调度</td>
+					<td>混合调度（用户线程池+内核线程调度）</td>
+			</tr>
+	</tbody>
 </table></div>
 <ul>
 <li>✅  若系统中只有用户级线程,则处理机调度单位是<strong>进程</strong>
@@ -863,34 +863,34 @@
 <h2 id="22_1-处理机调度的概念与层次">2.2_1 处理机调度的概念与层次
 </h2><h3 id="三级调度对比">三级调度对比
 </h3><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th><strong>调度层次</strong></th>
-          <th><strong>操作对象</strong></th>
-          <th><strong>频率</strong></th>
-          <th><strong>功能</strong></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>高级调度</strong></td>
-          <td>作业（外存→内存）</td>
-          <td>低</td>
-          <td>创建PCB，决定作业调入/调出</td>
-      </tr>
-      <tr>
-          <td><strong>中级调度</strong></td>
-          <td>挂起进程（内存↔外存）</td>
-          <td>中</td>
-          <td>提高内存利用率，管理挂起队列</td>
-      </tr>
-      <tr>
-          <td><strong>低级调度</strong></td>
-          <td>进程（分配CPU）</td>
-          <td>高（ms级）</td>
-          <td>最基本的调度，决定进程执行顺序</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th><strong>调度层次</strong></th>
+					<th><strong>操作对象</strong></th>
+					<th><strong>频率</strong></th>
+					<th><strong>功能</strong></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>高级调度</strong></td>
+					<td>作业（外存→内存）</td>
+					<td>低</td>
+					<td>创建PCB，决定作业调入/调出</td>
+			</tr>
+			<tr>
+					<td><strong>中级调度</strong></td>
+					<td>挂起进程（内存↔外存）</td>
+					<td>中</td>
+					<td>提高内存利用率，管理挂起队列</td>
+			</tr>
+			<tr>
+					<td><strong>低级调度</strong></td>
+					<td>进程（分配CPU）</td>
+					<td>高（ms级）</td>
+					<td>最基本的调度，决定进程执行顺序</td>
+			</tr>
+	</tbody>
 </table></div>
 <h3 id="挂起状态">挂起状态
 </h3><ul>
@@ -901,62 +901,62 @@
 <h2 id="22_2-进程调度时机与方式">2.2_2 进程调度时机与方式
 </h2><h3 id="调度触发条件">调度触发条件
 </h3><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th><strong>场景</strong></th>
-          <th><strong>能否调度</strong></th>
-          <th><strong>原因</strong></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>处理中断过程中</td>
-          <td>×</td>
-          <td>内核态不可抢占</td>
-      </tr>
-      <tr>
-          <td>内核程序临界区</td>
-          <td>×</td>
-          <td>访问就绪队列等关键数据结构</td>
-      </tr>
-      <tr>
-          <td>原子操作（原语）</td>
-          <td>×</td>
-          <td>操作不可分割</td>
-      </tr>
-      <tr>
-          <td>进程主动阻塞/终止</td>
-          <td>√</td>
-          <td>主动放弃CPU</td>
-      </tr>
-      <tr>
-          <td>时间片耗尽</td>
-          <td>√</td>
-          <td>被动剥夺CPU</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th><strong>场景</strong></th>
+					<th><strong>能否调度</strong></th>
+					<th><strong>原因</strong></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>处理中断过程中</td>
+					<td>×</td>
+					<td>内核态不可抢占</td>
+			</tr>
+			<tr>
+					<td>内核程序临界区</td>
+					<td>×</td>
+					<td>访问就绪队列等关键数据结构</td>
+			</tr>
+			<tr>
+					<td>原子操作（原语）</td>
+					<td>×</td>
+					<td>操作不可分割</td>
+			</tr>
+			<tr>
+					<td>进程主动阻塞/终止</td>
+					<td>√</td>
+					<td>主动放弃CPU</td>
+			</tr>
+			<tr>
+					<td>时间片耗尽</td>
+					<td>√</td>
+					<td>被动剥夺CPU</td>
+			</tr>
+	</tbody>
 </table></div>
 <h3 id="调度方式">调度方式
 </h3><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th><strong>类型</strong></th>
-          <th><strong>特点</strong></th>
-          <th><strong>适用场景</strong></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>非抢占式</strong></td>
-          <td>进程主动放弃CPU</td>
-          <td>批处理系统</td>
-      </tr>
-      <tr>
-          <td><strong>抢占式</strong></td>
-          <td>强制剥夺CPU（响应紧急任务）</td>
-          <td>实时/分时系统</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th><strong>类型</strong></th>
+					<th><strong>特点</strong></th>
+					<th><strong>适用场景</strong></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>非抢占式</strong></td>
+					<td>进程主动放弃CPU</td>
+					<td>批处理系统</td>
+			</tr>
+			<tr>
+					<td><strong>抢占式</strong></td>
+					<td>强制剥夺CPU（响应紧急任务）</td>
+					<td>实时/分时系统</td>
+			</tr>
+	</tbody>
 </table></div>
 
 </section>

@@ -354,38 +354,38 @@
 <p>输入: 上下文是 &ldquo;a cat&rdquo;。它们的索引分别是 <code>0</code> 和 <code>1</code>。</p>
 <p>查表 (C): 我们有一个 <code>6x3</code> 的词向量矩阵 <code>C</code> (6个词，每个3维)，它刚被随机初始化：</p>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th style="text-align: left">词 (索引)</th>
-          <th style="text-align: left">词向量 <code>C(word)</code></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td style="text-align: left"><strong>a (0)</strong></td>
-          <td style="text-align: left"><code>[0.1, 0.2, 0.3]</code></td>
-      </tr>
-      <tr>
-          <td style="text-align: left">cat (1)</td>
-          <td style="text-align: left"><code>[0.4, 0.5, 0.6]</code></td>
-      </tr>
-      <tr>
-          <td style="text-align: left">mat (2)</td>
-          <td style="text-align: left"><code>[0.7, 0.8, 0.9]</code></td>
-      </tr>
-      <tr>
-          <td style="text-align: left">on (3)</td>
-          <td style="text-align: left"><code>[1.0, 1.1, 1.2]</code></td>
-      </tr>
-      <tr>
-          <td style="text-align: left">sat (4)</td>
-          <td style="text-align: left"><code>[1.3, 1.4, 1.5]</code></td>
-      </tr>
-      <tr>
-          <td style="text-align: left">the (5)</td>
-          <td style="text-align: left"><code>[1.6, 1.7, 1.8]</code></td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th style="text-align: left">词 (索引)</th>
+					<th style="text-align: left">词向量 <code>C(word)</code></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: left"><strong>a (0)</strong></td>
+					<td style="text-align: left"><code>[0.1, 0.2, 0.3]</code></td>
+			</tr>
+			<tr>
+					<td style="text-align: left">cat (1)</td>
+					<td style="text-align: left"><code>[0.4, 0.5, 0.6]</code></td>
+			</tr>
+			<tr>
+					<td style="text-align: left">mat (2)</td>
+					<td style="text-align: left"><code>[0.7, 0.8, 0.9]</code></td>
+			</tr>
+			<tr>
+					<td style="text-align: left">on (3)</td>
+					<td style="text-align: left"><code>[1.0, 1.1, 1.2]</code></td>
+			</tr>
+			<tr>
+					<td style="text-align: left">sat (4)</td>
+					<td style="text-align: left"><code>[1.3, 1.4, 1.5]</code></td>
+			</tr>
+			<tr>
+					<td style="text-align: left">the (5)</td>
+					<td style="text-align: left"><code>[1.6, 1.7, 1.8]</code></td>
+			</tr>
+	</tbody>
 </table></div>
 <p>我们从这个表里查出输入词的向量：</p>
 <ul>
@@ -549,77 +549,77 @@
 </li>
 </ul>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th style="text-align: left">特性</th>
-          <th style="text-align: left">**CBOW **</th>
-          <th style="text-align: left"><strong>Skip-gram</strong></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td style="text-align: left"><strong>反向传播更新对象</strong></td>
-          <td style="text-align: left">上下文词向量</td>
-          <td style="text-align: left">中心词向量</td>
-      </tr>
-      <tr>
-          <td style="text-align: left"><strong>更新特点</strong></td>
-          <td style="text-align: left">一次更新，梯度被<strong>均摊</strong>，<code>梯度 = “∂L/∂h  除以 上下文词数”</code></td>
-          <td style="text-align: left">梯度<strong>完整作用</strong></td>
-      </tr>
-      <tr>
-          <td style="text-align: left"><strong>训练速度</strong></td>
-          <td style="text-align: left">较快</td>
-          <td style="text-align: left">较慢</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th style="text-align: left">特性</th>
+					<th style="text-align: left">**CBOW **</th>
+					<th style="text-align: left"><strong>Skip-gram</strong></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: left"><strong>反向传播更新对象</strong></td>
+					<td style="text-align: left">上下文词向量</td>
+					<td style="text-align: left">中心词向量</td>
+			</tr>
+			<tr>
+					<td style="text-align: left"><strong>更新特点</strong></td>
+					<td style="text-align: left">一次更新，梯度被<strong>均摊</strong>，<code>梯度 = “∂L/∂h  除以 上下文词数”</code></td>
+					<td style="text-align: left">梯度<strong>完整作用</strong></td>
+			</tr>
+			<tr>
+					<td style="text-align: left"><strong>训练速度</strong></td>
+					<td style="text-align: left">较快</td>
+					<td style="text-align: left">较慢</td>
+			</tr>
+	</tbody>
 </table></div>
 <h3 id="总结">总结
 </h3><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th style="text-align: left">模型</th>
-          <th style="text-align: left">隐藏层</th>
-          <th style="text-align: left">输出层</th>
-          <th style="text-align: left">任务</th>
-          <th style="text-align: left">复杂度概览</th>
-          <th>计算复杂度</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td style="text-align: left"><strong>NNLM</strong></td>
-          <td style="text-align: left">**有 **</td>
-          <td style="text-align: left"><strong>标准Softmax</strong></td>
-          <td style="text-align: left">预测下一个词</td>
-          <td style="text-align: left"><strong>非常高</strong></td>
-          <td><code>N × D + N × D × H + H × V</code></td>
-      </tr>
-      <tr>
-          <td style="text-align: left"><strong>NNLM + HS</strong></td>
-          <td style="text-align: left"><strong>有</strong></td>
-          <td style="text-align: left">分层Softmax</td>
-          <td style="text-align: left">预测下一个词</td>
-          <td style="text-align: left"><strong>高</strong></td>
-          <td><code>N × D + N × D × H + H × log₂(V)</code></td>
-      </tr>
-      <tr>
-          <td style="text-align: left"><strong>CBOW</strong></td>
-          <td style="text-align: left"><strong>无</strong></td>
-          <td style="text-align: left">分层Softmax</td>
-          <td style="text-align: left">上下文 -&gt; 中心词</td>
-          <td style="text-align: left"><strong>非常低</strong></td>
-          <td><code>N × D + D × log₂(V)</code></td>
-      </tr>
-      <tr>
-          <td style="text-align: left"><strong>Skip-gram</strong></td>
-          <td style="text-align: left"><strong>无</strong></td>
-          <td style="text-align: left">分层Softmax</td>
-          <td style="text-align: left">中心词 -&gt; 上下文</td>
-          <td style="text-align: left"><strong>低</strong> (比CBOW略高)</td>
-          <td><code>C × (D + D × log₂(V))</code></td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th style="text-align: left">模型</th>
+					<th style="text-align: left">隐藏层</th>
+					<th style="text-align: left">输出层</th>
+					<th style="text-align: left">任务</th>
+					<th style="text-align: left">复杂度概览</th>
+					<th>计算复杂度</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: left"><strong>NNLM</strong></td>
+					<td style="text-align: left">**有 **</td>
+					<td style="text-align: left"><strong>标准Softmax</strong></td>
+					<td style="text-align: left">预测下一个词</td>
+					<td style="text-align: left"><strong>非常高</strong></td>
+					<td><code>N × D + N × D × H + H × V</code></td>
+			</tr>
+			<tr>
+					<td style="text-align: left"><strong>NNLM + HS</strong></td>
+					<td style="text-align: left"><strong>有</strong></td>
+					<td style="text-align: left">分层Softmax</td>
+					<td style="text-align: left">预测下一个词</td>
+					<td style="text-align: left"><strong>高</strong></td>
+					<td><code>N × D + N × D × H + H × log₂(V)</code></td>
+			</tr>
+			<tr>
+					<td style="text-align: left"><strong>CBOW</strong></td>
+					<td style="text-align: left"><strong>无</strong></td>
+					<td style="text-align: left">分层Softmax</td>
+					<td style="text-align: left">上下文 -&gt; 中心词</td>
+					<td style="text-align: left"><strong>非常低</strong></td>
+					<td><code>N × D + D × log₂(V)</code></td>
+			</tr>
+			<tr>
+					<td style="text-align: left"><strong>Skip-gram</strong></td>
+					<td style="text-align: left"><strong>无</strong></td>
+					<td style="text-align: left">分层Softmax</td>
+					<td style="text-align: left">中心词 -&gt; 上下文</td>
+					<td style="text-align: left"><strong>低</strong> (比CBOW略高)</td>
+					<td><code>C × (D + D × log₂(V))</code></td>
+			</tr>
+	</tbody>
 </table></div>
 <p><strong>核心演进路径</strong>:</p>
 <ol>
@@ -661,73 +661,73 @@
 </li>
 </ul>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th style="text-align: left"><code>X</code></th>
-          <th style="text-align: center">I</th>
-          <th style="text-align: center">like</th>
-          <th style="text-align: center">deep</th>
-          <th style="text-align: center">learning</th>
-          <th style="text-align: center">NLP</th>
-          <th style="text-align: center">enjoy</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td style="text-align: left"><strong>I</strong></td>
-          <td style="text-align: center">0</td>
-          <td style="text-align: center">2</td>
-          <td style="text-align: center">0</td>
-          <td style="text-align: center">0</td>
-          <td style="text-align: center">0</td>
-          <td style="text-align: center">1</td>
-      </tr>
-      <tr>
-          <td style="text-align: left"><strong>like</strong></td>
-          <td style="text-align: center">2</td>
-          <td style="text-align: center">0</td>
-          <td style="text-align: center">1</td>
-          <td style="text-align: center">0</td>
-          <td style="text-align: center">1</td>
-          <td style="text-align: center">0</td>
-      </tr>
-      <tr>
-          <td style="text-align: left"><strong>deep</strong></td>
-          <td style="text-align: center">0</td>
-          <td style="text-align: center">1</td>
-          <td style="text-align: center">0</td>
-          <td style="text-align: center">1</td>
-          <td style="text-align: center">0</td>
-          <td style="text-align: center">0</td>
-      </tr>
-      <tr>
-          <td style="text-align: left"><strong>learning</strong></td>
-          <td style="text-align: center">0</td>
-          <td style="text-align: center">0</td>
-          <td style="text-align: center">1</td>
-          <td style="text-align: center">0</td>
-          <td style="text-align: center">0</td>
-          <td style="text-align: center">1</td>
-      </tr>
-      <tr>
-          <td style="text-align: left"><strong>NLP</strong></td>
-          <td style="text-align: center">0</td>
-          <td style="text-align: center">1</td>
-          <td style="text-align: center">0</td>
-          <td style="text-align: center">0</td>
-          <td style="text-align: center">0</td>
-          <td style="text-align: center">0</td>
-      </tr>
-      <tr>
-          <td style="text-align: left"><strong>enjoy</strong></td>
-          <td style="text-align: center">1</td>
-          <td style="text-align: center">0</td>
-          <td style="text-align: center">0</td>
-          <td style="text-align: center">1</td>
-          <td style="text-align: center">0</td>
-          <td style="text-align: center">0</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th style="text-align: left"><code>X</code></th>
+					<th style="text-align: center">I</th>
+					<th style="text-align: center">like</th>
+					<th style="text-align: center">deep</th>
+					<th style="text-align: center">learning</th>
+					<th style="text-align: center">NLP</th>
+					<th style="text-align: center">enjoy</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: left"><strong>I</strong></td>
+					<td style="text-align: center">0</td>
+					<td style="text-align: center">2</td>
+					<td style="text-align: center">0</td>
+					<td style="text-align: center">0</td>
+					<td style="text-align: center">0</td>
+					<td style="text-align: center">1</td>
+			</tr>
+			<tr>
+					<td style="text-align: left"><strong>like</strong></td>
+					<td style="text-align: center">2</td>
+					<td style="text-align: center">0</td>
+					<td style="text-align: center">1</td>
+					<td style="text-align: center">0</td>
+					<td style="text-align: center">1</td>
+					<td style="text-align: center">0</td>
+			</tr>
+			<tr>
+					<td style="text-align: left"><strong>deep</strong></td>
+					<td style="text-align: center">0</td>
+					<td style="text-align: center">1</td>
+					<td style="text-align: center">0</td>
+					<td style="text-align: center">1</td>
+					<td style="text-align: center">0</td>
+					<td style="text-align: center">0</td>
+			</tr>
+			<tr>
+					<td style="text-align: left"><strong>learning</strong></td>
+					<td style="text-align: center">0</td>
+					<td style="text-align: center">0</td>
+					<td style="text-align: center">1</td>
+					<td style="text-align: center">0</td>
+					<td style="text-align: center">0</td>
+					<td style="text-align: center">1</td>
+			</tr>
+			<tr>
+					<td style="text-align: left"><strong>NLP</strong></td>
+					<td style="text-align: center">0</td>
+					<td style="text-align: center">1</td>
+					<td style="text-align: center">0</td>
+					<td style="text-align: center">0</td>
+					<td style="text-align: center">0</td>
+					<td style="text-align: center">0</td>
+			</tr>
+			<tr>
+					<td style="text-align: left"><strong>enjoy</strong></td>
+					<td style="text-align: center">1</td>
+					<td style="text-align: center">0</td>
+					<td style="text-align: center">0</td>
+					<td style="text-align: center">1</td>
+					<td style="text-align: center">0</td>
+					<td style="text-align: center">0</td>
+			</tr>
+	</tbody>
 </table></div>
 </li>
 <li>

@@ -336,68 +336,68 @@
 <li>
 <p>w从头写   r只读   a追加</p>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>读写方式</th>
-          <th>是否为 二进制</th>
-          <th>是否为 可读可写</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>r</td>
-          <td>空</td>
-          <td>空</td>
-      </tr>
-      <tr>
-          <td>w</td>
-          <td>b</td>
-          <td>+</td>
-      </tr>
-      <tr>
-          <td>a</td>
-          <td></td>
-          <td></td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>读写方式</th>
+					<th>是否为 二进制</th>
+					<th>是否为 可读可写</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>r</td>
+					<td>空</td>
+					<td>空</td>
+			</tr>
+			<tr>
+					<td>w</td>
+					<td>b</td>
+					<td>+</td>
+			</tr>
+			<tr>
+					<td>a</td>
+					<td></td>
+					<td></td>
+			</tr>
+	</tbody>
 </table></div>
 <p>共	3*2*2=12种</p>
 </li>
 <li>
 <p>模式对照表 和 <strong>f.seek(n)</strong></p>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>模式</th>
-          <th>描述</th>
-          <th>文件存在</th>
-          <th>文件不存在</th>
-          <th>指针位置</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>r+</td>
-          <td>读写（文件必须存在）</td>
-          <td>不清空，从指针位置“覆盖写”</td>
-          <td>报错</td>
-          <td>开头</td>
-      </tr>
-      <tr>
-          <td>w+</td>
-          <td>写读（清空后读写）</td>
-          <td>必定清空，从指针位置写</td>
-          <td>创建</td>
-          <td>开头</td>
-      </tr>
-      <tr>
-          <td>a+</td>
-          <td>追加读写</td>
-          <td>必定从末尾写</td>
-          <td>创建</td>
-          <td>末尾</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>模式</th>
+					<th>描述</th>
+					<th>文件存在</th>
+					<th>文件不存在</th>
+					<th>指针位置</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>r+</td>
+					<td>读写（文件必须存在）</td>
+					<td>不清空，从指针位置“覆盖写”</td>
+					<td>报错</td>
+					<td>开头</td>
+			</tr>
+			<tr>
+					<td>w+</td>
+					<td>写读（清空后读写）</td>
+					<td>必定清空，从指针位置写</td>
+					<td>创建</td>
+					<td>开头</td>
+			</tr>
+			<tr>
+					<td>a+</td>
+					<td>追加读写</td>
+					<td>必定从末尾写</td>
+					<td>创建</td>
+					<td>末尾</td>
+			</tr>
+	</tbody>
 </table></div>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">

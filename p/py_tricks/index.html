@@ -393,30 +393,30 @@
 </h2><p>下划线 &lsquo;<strong>_</strong>&rsquo;：<code>_</code> 是一个占位符，表示“我不关心这个索引值”</p>
 <p>len(queue)忽略循环中queue本身的变化</p>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>特性</th>
-          <th><code>for _ in range(len(queue))</code></th>
-          <th><code>for _ in queue</code></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>遍历方式</strong></td>
-          <td>基于索引，范围固定</td>
-          <td>动态跟踪变化</td>
-      </tr>
-      <tr>
-          <td><strong><code>q</code> 增加元素</strong></td>
-          <td>不会遍历到新添加的元素</td>
-          <td>可能会遍历到新添加的元素</td>
-      </tr>
-      <tr>
-          <td>**<code>q</code> 删除元素 **</td>
-          <td>可能导致索引越界</td>
-          <td>可能导致跳过元素或提前结束</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>特性</th>
+					<th><code>for _ in range(len(queue))</code></th>
+					<th><code>for _ in queue</code></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>遍历方式</strong></td>
+					<td>基于索引，范围固定</td>
+					<td>动态跟踪变化</td>
+			</tr>
+			<tr>
+					<td><strong><code>q</code> 增加元素</strong></td>
+					<td>不会遍历到新添加的元素</td>
+					<td>可能会遍历到新添加的元素</td>
+			</tr>
+			<tr>
+					<td>**<code>q</code> 删除元素 **</td>
+					<td>可能导致索引越界</td>
+					<td>可能导致跳过元素或提前结束</td>
+			</tr>
+	</tbody>
 </table></div>
 <p><a class="link" href="https://leetcode.cn/problems/binary-tree-zigzag-level-order-traversal/"  target="_blank" rel="noopener"
     >103. 二叉树的锯齿形层序遍历 - 力扣（LeetCode）</a></p>
@@ -467,58 +467,58 @@
 <li><strong>list[::-1]</strong>——需要对象有__getitem__，<strong>最好用</strong></li>
 </ul>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>特性</th>
-          <th><code>reverse()</code></th>
-          <th><code>reversed()</code></th>
-          <th><code>[::-1]</code></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>‌<strong>功能</strong>‌</td>
-          <td><strong>原地</strong>反转列表</td>
-          <td>返回反转后的<strong>迭代器</strong></td>
-          <td>返回反转后的<strong>新对象</strong></td>
-      </tr>
-      <tr>
-          <td>‌<strong>适用对象</strong>‌</td>
-          <td>仅<strong>列表</strong>（<code>list</code>）</td>
-          <td>所有<strong>可迭代</strong>对象（列表、元组、字符串等）</td>
-          <td>所有<strong>支持切片</strong>的有序序列（列表、字符串、元组等）</td>
-      </tr>
-      <tr>
-          <td>‌<strong>返回值</strong>‌</td>
-          <td><code>None</code></td>
-          <td>迭代器</td>
-          <td>反转后的新对象</td>
-      </tr>
-      <tr>
-          <td>‌<strong>内存效率</strong>‌</td>
-          <td>高（原地操作，不生成新对象）</td>
-          <td>高（返回迭代器，不生成完整副本）</td>
-          <td>低（生成完整副本，占用额外内存）</td>
-      </tr>
-      <tr>
-          <td>‌<strong>时间复杂度</strong>‌</td>
-          <td>O(n)（直接交换元素）</td>
-          <td>O(1)（延迟计算，实际遍历时 O(n)）</td>
-          <td>O(n)（复制所有元素）</td>
-      </tr>
-      <tr>
-          <td>‌<strong>修改原数据</strong>‌</td>
-          <td>✅ 是</td>
-          <td>❌ 否</td>
-          <td>❌ 否</td>
-      </tr>
-      <tr>
-          <td>‌<strong>支持链式操作</strong>‌</td>
-          <td>❌ 否（返回 <code>None</code>）</td>
-          <td>✅ 是（可与 <code>list()</code>、<code>join()</code> 等结合）</td>
-          <td>✅ 是（直接生成新对象）</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>特性</th>
+					<th><code>reverse()</code></th>
+					<th><code>reversed()</code></th>
+					<th><code>[::-1]</code></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>‌<strong>功能</strong>‌</td>
+					<td><strong>原地</strong>反转列表</td>
+					<td>返回反转后的<strong>迭代器</strong></td>
+					<td>返回反转后的<strong>新对象</strong></td>
+			</tr>
+			<tr>
+					<td>‌<strong>适用对象</strong>‌</td>
+					<td>仅<strong>列表</strong>（<code>list</code>）</td>
+					<td>所有<strong>可迭代</strong>对象（列表、元组、字符串等）</td>
+					<td>所有<strong>支持切片</strong>的有序序列（列表、字符串、元组等）</td>
+			</tr>
+			<tr>
+					<td>‌<strong>返回值</strong>‌</td>
+					<td><code>None</code></td>
+					<td>迭代器</td>
+					<td>反转后的新对象</td>
+			</tr>
+			<tr>
+					<td>‌<strong>内存效率</strong>‌</td>
+					<td>高（原地操作，不生成新对象）</td>
+					<td>高（返回迭代器，不生成完整副本）</td>
+					<td>低（生成完整副本，占用额外内存）</td>
+			</tr>
+			<tr>
+					<td>‌<strong>时间复杂度</strong>‌</td>
+					<td>O(n)（直接交换元素）</td>
+					<td>O(1)（延迟计算，实际遍历时 O(n)）</td>
+					<td>O(n)（复制所有元素）</td>
+			</tr>
+			<tr>
+					<td>‌<strong>修改原数据</strong>‌</td>
+					<td>✅ 是</td>
+					<td>❌ 否</td>
+					<td>❌ 否</td>
+			</tr>
+			<tr>
+					<td>‌<strong>支持链式操作</strong>‌</td>
+					<td>❌ 否（返回 <code>None</code>）</td>
+					<td>✅ 是（可与 <code>list()</code>、<code>join()</code> 等结合）</td>
+					<td>✅ 是（直接生成新对象）</td>
+			</tr>
+	</tbody>
 </table></div>
 <h2 id="for-key-in-dic_1-if-key-in-dic_2">for key in dic_1 if key in dic_2
 </h2><div class="highlight"><div class="chroma">
