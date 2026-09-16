@@ -1,669 +1,78 @@
-<!DOCTYPE html>
-<html lang="en-us" dir="ltr">
-    <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="摘要 RAG在特定corpus QA任务上有 成熟应用，然而 大量反例 仍存在。它们不仅仅是LLMs的局限性导致，相反，它们主要由检索不准确信息导致，检索不准的原因是 1 现在RAG技术分块不考虑语义。2 丢失必要信息 和 过多噪声 之间的权衡。\n">
-<title>SAGE_A_Framework_for_RAG_解读</title>
-
-<link rel='canonical' href='https://rooobeam.github.io/p/sage_a_framework_for_rag_%E8%A7%A3%E8%AF%BB/'>
-
-<link rel="stylesheet" href="/scss/style.min.4f77a518c8e8877dfe55e8d90f7ed3f84e82d7a31cd88e8d1dcf983db94f54bc.css"><meta property='og:title' content="SAGE_A_Framework_for_RAG_解读">
-<meta property='og:description' content="摘要 RAG在特定corpus QA任务上有 成熟应用，然而 大量反例 仍存在。它们不仅仅是LLMs的局限性导致，相反，它们主要由检索不准确信息导致，检索不准的原因是 1 现在RAG技术分块不考虑语义。2 丢失必要信息 和 过多噪声 之间的权衡。\n">
-<meta property='og:url' content='https://rooobeam.github.io/p/sage_a_framework_for_rag_%E8%A7%A3%E8%AF%BB/'>
-<meta property='og:site_name' content='rooobeam'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-09-01T22:43:23&#43;08:00'/><meta property='article:modified_time' content='2025-09-01T22:43:23&#43;08:00'/>
-<meta name="twitter:title" content="SAGE_A_Framework_for_RAG_解读">
-<meta name="twitter:description" content="摘要 RAG在特定corpus QA任务上有 成熟应用，然而 大量反例 仍存在。它们不仅仅是LLMs的局限性导致，相反，它们主要由检索不准确信息导致，检索不准的原因是 1 现在RAG技术分块不考虑语义。2 丢失必要信息 和 过多噪声 之间的权衡。\n">
-    <link rel="shortcut icon" href="/favicon.ico" />
-
-    </head>
-    <body class="
-    article-page
-    ">
-    <script>
-        (function() {
-            const colorSchemeKey = 'StackColorScheme';
-            if(!localStorage.getItem(colorSchemeKey)){
-                localStorage.setItem(colorSchemeKey, "auto");
-            }
-        })();
-    </script><script>
-    (function() {
-        const colorSchemeKey = 'StackColorScheme';
-        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
-        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
-
-        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
-            
-
-            document.documentElement.dataset.scheme = 'dark';
-        } else {
-            document.documentElement.dataset.scheme = 'light';
-        }
-    })();
-</script>
-<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
-    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
-        <span class="hamburger-box">
-            <span class="hamburger-inner"></span>
-        </span>
-    </button>
-
-    <header>
-        
-            
-            <figure class="site-avatar">
-                <a href="/">
-                
-                    
-                    
-                    
-                        
-                        <img src="/img/avatar_hu_124ee845b198fb3b.png" width="300"
-                            height="299" class="site-logo" loading="lazy" alt="Avatar">
-                    
-                
-                </a>
-                
-                    <span class="emoji">😚</span>
-                
-            </figure>
-            
-        
-        
-        <div class="site-meta">
-            <h1 class="site-name"><a href="/">rooobeam</a></h1>
-            <h2 class="site-description"></h2>
-        </div>
-    </header><ol class="menu-social">
-            
-                <li>
-                    <a 
-                        href='https://space.bilibili.com/3461571462302229'
-                        target="_blank"
-                        title="Bilibili"
-                        rel="me"
-                    >
-                        
-                        
-                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-brand-bilibili"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z" /><path d="M8 3l2 3" /><path d="M16 3l-2 3" /><path d="M9 13v-2" /><path d="M15 11v2" /></svg>
-                        
-                    </a>
-                </li>
-            
-                <li>
-                    <a 
-                        href='https://blog.csdn.net/rooobeam?'
-                        target="_blank"
-                        title="CSDN"
-                        rel="me"
-                    >
-                        
-                        
-                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-copyright"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M14 9.75a3.016 3.016 0 0 0 -4.163 .173a2.993 2.993 0 0 0 0 4.154a3.016 3.016 0 0 0 4.163 .173" /></svg>
-                        
-                    </a>
-                </li>
-            
-                <li>
-                    <a 
-                        href='https://github.com/rooobeam?'
-                        target="_blank"
-                        title="GitHub"
-                        rel="me"
-                    >
-                        
-                        
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
-</svg>
-
-
-
-                        
-                    </a>
-                </li>
-            
-        </ol><ol class="menu" id="main-menu">
-        
-        
-        
-        <li >
-            <a href='/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <polyline points="5 12 3 12 12 3 21 12 19 12" />
-  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
-  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
-</svg>
-
-
-
-                
-                <span>Home</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/search/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="10" cy="10" r="7" />
-  <line x1="21" y1="21" x2="15" y2="15" />
-</svg>
-
-
-
-                
-                <span>Search</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/links/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
-  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
-</svg>
-
-
-
-                
-                <span>Links</span>
-            </a>
-        </li>
-        
-        <li class="menu-bottom-section">
-            <ol class="menu">
-
-                
-                    <li id="dark-mode-toggle">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="8" cy="12" r="2" />
-  <rect x="2" y="6" width="20" height="12" rx="6" />
-</svg>
-
-
-
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="16" cy="12" r="2" />
-  <rect x="2" y="6" width="20" height="12" rx="6" />
-</svg>
-
-
-
-                        <span>Dark Mode</span>
-                    </li>
-                
-            </ol>
-        </li>
-    </ol>
-</aside>
-
-    <aside class="sidebar right-sidebar sticky">
-        
-            
-                
-    <section class="widget archives">
-        <div class="widget-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <line x1="5" y1="9" x2="19" y2="9" />
-  <line x1="5" y1="15" x2="19" y2="15" />
-  <line x1="11" y1="4" x2="7" y2="20" />
-  <line x1="17" y1="4" x2="13" y2="20" />
-</svg>
-
-
-
-        </div>
-        <h2 class="widget-title section-title">Table of contents</h2>
-        
-        <div class="widget--toc">
-            <nav id="TableOfContents">
-  <ol>
-    <li><a href="#摘要">摘要</a></li>
-    <li><a href="#intruduction">INTRUDUCTION</a></li>
-    <li><a href="#preliminaries预备知识">PRELIMINARIES(预备知识)</a>
-      <ol>
-        <li><a href="#rag-system-phases">RAG system phases:</a></li>
-        <li><a href="#cost-of-llm-inference">Cost of LLM inference:</a></li>
-        <li><a href="#cost-efficeincy-metric-in-rag">Cost efficeincy Metric in RAG:</a></li>
-      </ol>
-    </li>
-    <li><a href="#overview">OVERVIEW</a>
-      <ol>
-        <li><a href="#a-vector-database-building-w">(A) Vector Database Building: W</a></li>
-        <li><a href="#b-retrieval">(B) Retrieval:</a></li>
-        <li><a href="#c-generation-based-on-llm">(C) Generation based on LLM:</a></li>
-      </ol>
-    </li>
-    <li><a href="#semantic-segmentation">SEMANTIC SEGMENTATION</a>
-      <ol>
-        <li><a href="#high-level-idea">High-level Idea</a></li>
-        <li><a href="#model-construction">Model Construction</a></li>
-        <li><a href="#model-training">Model Training</a></li>
-        <li><a href="#model-inference">Model Inference</a></li>
-        <li><a href="#corpus-segmentation">Corpus Segmentation</a></li>
-      </ol>
-    </li>
-    <li><a href="#gradient-based-chunk-selection">GRADIENT-BASED CHUNK SELECTION</a>
-      <ol>
-        <li><a href="#high-level-idea-1">High-level Idea</a></li>
-        <li><a href="#gradient-based-selection">Gradient based Selection</a></li>
-      </ol>
-    </li>
-    <li><a href="#llm-self-feedback">LLM SELF-FEEDBACK</a>
-      <ol>
-        <li><a href="#feedback-loop">Feedback Loop</a></li>
-      </ol>
-    </li>
-    <li><a href="#experiments">EXPERIMENTS</a>
-      <ol>
-        <li><a href="#experimental-setup">Experimental Setup</a></li>
-      </ol>
-    </li>
-  </ol>
-</nav>
-        </div>
-    </section>
-
-            
-        
-    </aside>
-
-
-            <main class="main full-width">
-    <article class="main-article">
-    <header class="article-header">
-
-    <div class="article-details">
+<!doctype html><html lang=zh-cn dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="index, follow"><link rel=icon href=/favicon.ico sizes=any><title>SAGE_A_Framework_for_RAG_解读 – rooobeam</title><meta name=description content="摘要 RAG在特定corpus QA任务上有 成熟应用，然而 大量反例 仍存在。它们不仅仅是LLMs的局限性导致，相反，它们主要由检索不准确信息导致，检索不准的原因是 1 现在RAG技术分块不考虑语义。2 丢失必要信息 和 过多噪声 之间的权衡。"><link rel=canonical href=https://rooobeam.github.io/p/sage_a_framework_for_rag_%E8%A7%A3%E8%AF%BB/ itemprop=url><meta property="og:title" content="SAGE_A_Framework_for_RAG_解读"><meta property="og:description" content="
     
-
-    <div class="article-title-wrapper">
-        <h2 class="article-title">
-            <a href="/p/sage_a_framework_for_rag_%E8%A7%A3%E8%AF%BB/">SAGE_A_Framework_for_RAG_解读</a>
-        </h2>
+      摘要
+    RAG在特定corpus QA任务上有 成熟应用，然而 大量反例 仍存在。它们不仅仅是LLMs的局限性导致，相反，它们主要由检索不准确信息导致，检索不准的原因是 1 现在RAG技术分块不考虑语义。2 丢失必要信息 和 过多噪声 之间的权衡。
     
-        
-    </div>
-
-    
-    
-    
-    
-    <footer class="article-time">
-        
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
-  <circle cx="18" cy="18" r="4" />
-  <path d="M15 3v4" />
-  <path d="M7 3v4" />
-  <path d="M3 11h16" />
-  <path d="M18 16.496v1.504l1 1" />
-</svg>
-                <time class="article-time--published">2025-09-01</time>
-            </div>
-        
-
-        
-    </footer>
-    
-
-    
-</div>
-
-</header>
-
-    <section class="article-content">
-    
-    
-    <h2 id="摘要">摘要
-</h2><p>RAG在特定corpus QA任务上有 成熟应用，然而 大量反例 仍存在。它们不仅仅是LLMs的局限性导致，相反，它们主要由检索不准确信息导致，检索不准的原因是 1 现在RAG技术分块不考虑语义。2 丢失必要信息 和 过多噪声 之间的权衡。</p>
-<p>本文提出一个RAG框架 SAGE。1 解决分块问题上，提出训练一个语义分块模型，能将corpus分成语义完整块。2 设计 一个chunk挑选算法，根据相似度的下降速度（delta）动态选择块。3 为进一步确保精度，提出让LLMs评估检索的块是excessive or lacking. 实验证明很牛逼。</p>
-<h2 id="intruduction">INTRUDUCTION
-</h2><p><strong>bg of problem &ndash; RAG</strong>: enhance a generation model&rsquo;s ability answer questions. With the rise of LLMs, RAG demonstrated proficiency in QA.</p>
-<p><strong>Limitions overview</strong>:</p>
-<p><strong>L1</strong>:</p>
-<p><strong>challenge of addressing L1</strong>:</p>
-<p><strong>L2</strong>:</p>
-<p><strong>challenge of addressing L2</strong>:</p>
-<p><strong>approach overview</strong>:</p>
-<p><strong>contributions</strong>:</p>
-<h2 id="preliminaries预备知识">PRELIMINARIES(预备知识)
-</h2><h3 id="rag-system-phases">RAG system phases:
-</h3><ul>
-<li>vector DB construction: <strong>corpus</strong> is devided into <strong>chunks</strong>. Convert chunks into vector representations (embedding chunks). Stored these vectors.</li>
-<li>Convert the received <strong>question</strong> into vector. (embedding question). Caculate similarity with chunks in vector DB and then identifying the top N chunks which serve as the <strong>context</strong> for an LLM.</li>
-<li>The given question and context fixed into a prompt template forming a complete prompt. Feed the prompt to an LLM. It generates a response as the final answer.</li>
-</ul>
-<h3 id="cost-of-llm-inference">Cost of LLM inference:
-</h3><p>​	The matrix is the money required to obtain ansers from an LLM. Typically, RAG use LLM provided by LLM providers. The charges based on the volume of input and output tokens. OpenAI’s  GPT-4 charge a lot.</p>
-$$
+  "><meta property="og:type" content="
+    article
+  "><meta property="og:url" content="https://rooobeam.github.io/p/sage_a_framework_for_rag_%E8%A7%A3%E8%AF%BB/"><meta property="article:section" content="post"><meta property="article:published_time" content="2025-09-01T22:43:23+08:00"><meta property="article:modified_time" content="2025-09-01T22:43:23+08:00"><meta itemprop=name content="SAGE_A_Framework_for_RAG_解读"><meta itemprop=description content="摘要 RAG在特定corpus QA任务上有 成熟应用，然而 大量反例 仍存在。它们不仅仅是LLMs的局限性导致，相反，它们主要由检索不准确信息导致，检索不准的原因是 1 现在RAG技术分块不考虑语义。2 丢失必要信息 和 过多噪声 之间的权衡。"><meta itemprop=datePublished content="2025-09-01T22:43:23+08:00"><meta itemprop=dateModified content="2025-09-01T22:43:23+08:00"><meta itemprop=wordCount content="1749"><meta name=twitter:card content="summary"><meta name=twitter:title content="SAGE_A_Framework_for_RAG_解读"><meta name=twitter:description content="摘要 RAG在特定corpus QA任务上有 成熟应用，然而 大量反例 仍存在。它们不仅仅是LLMs的局限性导致，相反，它们主要由检索不准确信息导致，检索不准的原因是 1 现在RAG技术分块不考虑语义。2 丢失必要信息 和 过多噪声 之间的权衡。"><link rel=preload href=/css/compiled/main.min.0ecd4a321ffab68460c51522d4255a0df1075a2702f4fb69da0dea5851ad285e.css as=style integrity="sha256-Ds1KMh/6toRgxRUi1CVaDfEHWicC9Ptp2g3qWFGtKF4="><link href=/css/compiled/main.min.0ecd4a321ffab68460c51522d4255a0df1075a2702f4fb69da0dea5851ad285e.css rel=stylesheet integrity="sha256-Ds1KMh/6toRgxRUi1CVaDfEHWicC9Ptp2g3qWFGtKF4="><script src=/js/main-head.min.94da6f95b126542222dab3a6e07ffefe1aaf63ec3ca555e827b58b80e7d3f0b7.js integrity="sha256-lNpvlbEmVCIi2rOm4H/+/hqvY+w8pVXoJ7WLgOfT8Lc="></script><link rel=stylesheet href=/vendor/katex/katex.min.css></head><body><a href=#content class="hx:sr-only hx:focus-visible:not-sr-only hx:focus-visible:fixed hx:focus-visible:z-50 hx:focus-visible:top-2 hx:focus-visible:left-2 hx:focus-visible:bg-primary-500 hx:focus-visible:text-white hx:focus-visible:px-4 hx:focus-visible:py-2 hx:focus-visible:rounded-md hx:focus-visible:text-sm hx:focus-visible:font-medium">跳至内容</a><div class="hextra-nav-container hx:sticky hx:top-0 hx:z-20 hx:w-full hx:bg-transparent hx:print:hidden"><div class="hextra-nav-container-blur hx:pointer-events-none hx:absolute hx:z-[-1] hx:h-full hx:w-full hx:bg-white hx:dark:bg-dark hx:shadow-[0_2px_4px_rgba(0,0,0,.02),0_1px_0_rgba(0,0,0,.06)] hx:contrast-more:shadow-[0_0_0_1px_#000] hx:dark:shadow-[0_-1px_0_rgba(255,255,255,.1)_inset] hx:contrast-more:dark:shadow-[0_0_0_1px_#fff]"></div><nav class="hextra-max-navbar-width hx:mx-auto hx:flex hx:items-center hx:justify-end hx:gap-2 hx:h-16 hx:px-6"><a class="hx:flex hx:items-center hx:hover:opacity-75 hx:ltr:mr-auto hx:rtl:ml-auto" href=/><span class="hx:mr-2 hx:font-extrabold hx:inline hx:select-none">rooobeam</span>
+</a><a title href=/ class="hx:text-sm hx:contrast-more:text-gray-700 hx:contrast-more:dark:text-gray-100 hx:relative hx:-ml-2 hx:hidden hx:whitespace-nowrap hx:p-2 hx:md:inline-flex hx:items-center hx:gap-1 hx:text-gray-600 hx:hover:text-gray-800 hx:dark:text-gray-400 hx:dark:hover:text-gray-200"><span class=hx:text-center>首页</span>
+</a><a title href=/notes class="hx:text-sm hx:contrast-more:text-gray-700 hx:contrast-more:dark:text-gray-100 hx:relative hx:-ml-2 hx:hidden hx:whitespace-nowrap hx:p-2 hx:md:inline-flex hx:items-center hx:gap-1 hx:text-gray-600 hx:hover:text-gray-800 hx:dark:text-gray-400 hx:dark:hover:text-gray-200"><span class=hx:text-center>笔记专题</span>
+</a><a title href=/post/ class="hx:text-sm hx:contrast-more:text-gray-700 hx:contrast-more:dark:text-gray-100 hx:relative hx:-ml-2 hx:hidden hx:whitespace-nowrap hx:p-2 hx:md:inline-flex hx:items-center hx:gap-1 hx:text-gray-600 hx:hover:text-gray-800 hx:dark:text-gray-400 hx:dark:hover:text-gray-200"><span class=hx:text-center>全部笔记</span>
+</a><a title href=/archives/ class="hx:text-sm hx:contrast-more:text-gray-700 hx:contrast-more:dark:text-gray-100 hx:relative hx:-ml-2 hx:hidden hx:whitespace-nowrap hx:p-2 hx:md:inline-flex hx:items-center hx:gap-1 hx:text-gray-600 hx:hover:text-gray-800 hx:dark:text-gray-400 hx:dark:hover:text-gray-200"><span class=hx:text-center>归档</span></a><div class="hextra-search-wrapper hx:relative hx:md:w-64"><div class="hx:relative hx:flex hx:items-center hx:text-gray-900 hx:contrast-more:text-gray-800 hx:dark:text-gray-300 hx:contrast-more:dark:text-gray-300"><input placeholder=搜索笔记… aria-label=搜索笔记… class="hextra-search-input hx:hextra-focus-visible hx:block hx:w-full hx:appearance-none hx:rounded-lg hx:px-3 hx:py-2 hx:transition-colors hx:text-base hx:leading-tight hx:md:text-sm hx:bg-black/[.05] hx:dark:bg-gray-50/10 hx:focus-visible:bg-white hx:dark:focus-visible:bg-dark hx:placeholder:text-gray-500 hx:dark:placeholder:text-gray-400 hx:contrast-more:border hx:contrast-more:border-current" type=search autocomplete=off spellcheck=false>
+<kbd class="hx:absolute hx:my-1.5 hx:select-none hx:ltr:right-1.5 hx:rtl:left-1.5 hx:h-5 hx:rounded-sm hx:bg-white hx:px-1.5 hx:font-mono hx:text-[10px] hx:font-medium hx:text-gray-500 hx:border hx:border-gray-200 hx:dark:border-gray-100/20 hx:dark:bg-dark/50 hx:contrast-more:border-current hx:contrast-more:text-current hx:contrast-more:dark:border-current hx:items-center hx:gap-1 hx:transition-opacity hx:pointer-events-none hx:hidden hx:sm:flex">CTRL K</kbd></div><div><ul class="hextra-search-results hextra-scrollbar hx:hidden hx:border hx:border-gray-200 hx:bg-white hx:text-gray-100 hx:dark:border-neutral-800 hx:dark:bg-neutral-900 hx:absolute hx:top-full hx:z-20 hx:mt-2 hx:overflow-auto hx:overscroll-contain hx:rounded-xl hx:py-2.5 hx:shadow-xl hx:max-h-[min(calc(50vh-11rem-env(safe-area-inset-bottom)),400px)] hx:md:max-h-[min(calc(100vh-5rem-env(safe-area-inset-bottom)),400px)] hx:inset-x-0 hx:ltr:md:left-auto hx:rtl:md:right-auto hx:contrast-more:border hx:contrast-more:border-gray-900 hx:contrast-more:dark:border-gray-50 hx:w-screen hx:min-h-[100px] hx:max-w-[min(calc(100vw-2rem),calc(100%+20rem))]" aria-label=搜索结果 style="transition:max-height .2s ease 0s"></ul><div class="hextra-search-status hx:sr-only" aria-live=polite role=status></div></div></div><a class="hx:p-2 hx:text-current" target=_blank rel=noreferrer href=https://github.com/rooobeam title=GitHub><svg height="24" fill="currentColor" viewBox="3 3 18 18"><path d="M12 3C7.0275 3 3 7.12937 3 12.2276c0 4.0833 2.57625 7.5321 6.15374 8.7548C9.60374 21.0631 9.77249 20.7863 9.77249 20.5441 9.77249 20.3249 9.76125 19.5982 9.76125 18.8254 7.5 19.2522 6.915 18.2602 6.735 17.7412 6.63375 17.4759 6.19499 16.6569 5.8125 16.4378 5.4975 16.2647 5.0475 15.838 5.80124 15.8264 6.51 15.8149 7.01625 16.4954 7.18499 16.7723 7.99499 18.1679 9.28875 17.7758 9.80625 17.5335 9.885 16.9337 10.1212 16.53 10.38 16.2993 8.3775 16.0687 6.285 15.2728 6.285 11.7432c0-1.0035.34875-1.834.92249-2.47994C7.1175 9.03257 6.8025 8.08674 7.2975 6.81794c0 0 .753749999999999-.24223 2.47499.94583.72001-.20762 1.48501-.31143 2.25001-.31143C12.7875 7.45234 13.5525 7.55615 14.2725 7.76377c1.7212-1.19959 2.475-.94583 2.475-.94583C17.2424 8.08674 16.9275 9.03257 16.8375 9.26326 17.4113 9.9092 17.76 10.7281 17.76 11.7432c0 3.5411-2.1037 4.3255-4.1063 4.5561C13.98 16.5877 14.2613 17.1414 14.2613 18.0065 14.2613 19.2407 14.25 20.2326 14.25 20.5441 14.25 20.7863 14.4188 21.0746 14.8688 20.9824 16.6554 20.364 18.2079 19.1866 19.3078 17.6162c1.0999-1.5705 1.6917-3.4551 1.6922-5.3886C21 7.12937 16.9725 3 12 3z"/></svg>
+<span class=hx:sr-only>GitHub</span>
+</a><button type=button aria-label=菜单 aria-expanded=false class="hextra-hamburger-menu hx:cursor-pointer hx:-mr-2 hx:rounded-sm hx:p-2 hx:active:bg-gray-400/20 hx:md:hidden hx:hextra-focus-visible-inset"><svg height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor"><g><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8H20"/></g><g><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16H20"/></g></svg></button></nav></div><div class='hx:mx-auto hx:flex hextra-max-page-width'><aside class="hextra-sidebar-container hx:flex hx:flex-col hx:print:hidden hx:md:top-16 hx:md:shrink-0 hx:md:w-64 hx:md:self-start hx:max-md:[transform:translate3d(0,-100%,0)] hx:md:sticky"><div class="hx:px-4 hx:pt-4 hx:md:hidden"><div class="hextra-search-wrapper hx:relative hx:md:w-64"><div class="hx:relative hx:flex hx:items-center hx:text-gray-900 hx:contrast-more:text-gray-800 hx:dark:text-gray-300 hx:contrast-more:dark:text-gray-300"><input placeholder=搜索笔记… aria-label=搜索笔记… class="hextra-search-input hx:hextra-focus-visible hx:block hx:w-full hx:appearance-none hx:rounded-lg hx:px-3 hx:py-2 hx:transition-colors hx:text-base hx:leading-tight hx:md:text-sm hx:bg-black/[.05] hx:dark:bg-gray-50/10 hx:focus-visible:bg-white hx:dark:focus-visible:bg-dark hx:placeholder:text-gray-500 hx:dark:placeholder:text-gray-400 hx:contrast-more:border hx:contrast-more:border-current" type=search autocomplete=off spellcheck=false>
+<kbd class="hx:absolute hx:my-1.5 hx:select-none hx:ltr:right-1.5 hx:rtl:left-1.5 hx:h-5 hx:rounded-sm hx:bg-white hx:px-1.5 hx:font-mono hx:text-[10px] hx:font-medium hx:text-gray-500 hx:border hx:border-gray-200 hx:dark:border-gray-100/20 hx:dark:bg-dark/50 hx:contrast-more:border-current hx:contrast-more:text-current hx:contrast-more:dark:border-current hx:items-center hx:gap-1 hx:transition-opacity hx:pointer-events-none hx:hidden hx:sm:flex">CTRL K</kbd></div><div><ul class="hextra-search-results hextra-scrollbar hx:hidden hx:border hx:border-gray-200 hx:bg-white hx:text-gray-100 hx:dark:border-neutral-800 hx:dark:bg-neutral-900 hx:absolute hx:top-full hx:z-20 hx:mt-2 hx:overflow-auto hx:overscroll-contain hx:rounded-xl hx:py-2.5 hx:shadow-xl hx:max-h-[min(calc(50vh-11rem-env(safe-area-inset-bottom)),400px)] hx:md:max-h-[min(calc(100vh-5rem-env(safe-area-inset-bottom)),400px)] hx:inset-x-0 hx:ltr:md:left-auto hx:rtl:md:right-auto hx:contrast-more:border hx:contrast-more:border-gray-900 hx:contrast-more:dark:border-gray-50 hx:w-screen hx:min-h-[100px] hx:max-w-[min(calc(100vw-2rem),calc(100%+20rem))]" aria-label=搜索结果 style="transition:max-height .2s ease 0s"></ul><div class="hextra-search-status hx:sr-only" aria-live=polite role=status></div></div></div></div><div class="hextra-scrollbar hx:overflow-y-auto hx:overflow-x-hidden hx:p-4 hx:grow hx:md:h-[calc(100vh-var(--navbar-height)-var(--menu-height))]"><ul class="hx:flex hx:flex-col hx:gap-1 hx:md:hidden"><li><div class="hextra-sidebar-item hx:group hx:relative hx:flex hx:items-center" data-active=false><a class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:grow hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:hextra-focus-visible-inset hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50" href=/><span class="hx:min-w-0 [word-break:break-word]">首页</span></a></div></li><li class=open><div class="hextra-sidebar-item hx:group hx:relative hx:flex hx:items-center" data-active=false><a class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:grow hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:hextra-focus-visible-inset hx:ltr:pr-8 hx:rtl:pl-8 hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50" href=/notes/><span class="hx:min-w-0 [word-break:break-word]">笔记专题</span>
+</a><button type=button class="hextra-sidebar-collapsible-button hx:absolute hx:top-1/2 hx:-translate-y-1/2 hx:ltr:right-2 hx:rtl:left-2 hx:shrink-0 hx:cursor-pointer hx:p-0 hx:text-gray-500 hx:dark:text-neutral-400 hx:group-hover:text-gray-900 hx:dark:group-hover:text-gray-50 hx:group-data-[active=true]:text-primary-800 hx:group-data-[active=true]:dark:text-primary-600 hx:hextra-focus-visible-inset" aria-label=切换章节 aria-expanded=true><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" focusable="false" class="hx:h-[18px] hx:min-w-[18px] hx:rounded-xs hx:p-0.5 hx:hover:bg-gray-800/5 hx:dark:hover:bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="hx:origin-center hx:transition-transform hx:rtl:-rotate-180"/></svg></button></div><div class="hextra-sidebar-children hx:ltr:pr-0 hx:rtl:pl-0 hx:overflow-hidden"><ul class='hx:relative hx:flex hx:flex-col hx:gap-1 hx:before:absolute hx:before:inset-y-1 hx:before:w-px hx:before:bg-gray-200 hx:before:content-[""] hx:ltr:ml-3 hx:ltr:pl-3 hx:ltr:before:left-0 hx:rtl:mr-3 hx:rtl:pr-3 hx:rtl:before:right-0 hx:dark:before:bg-neutral-800'><li class="hx:flex hx:flex-col"><div class="hextra-sidebar-item hx:group hx:relative hx:flex hx:items-center" data-active=false><a class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:grow hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:hextra-focus-visible-inset hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50" href=/notes/ai/><span class="hx:min-w-0 [word-break:break-word]">AI 与论文</span></a></div></li><li class="hx:flex hx:flex-col"><div class="hextra-sidebar-item hx:group hx:relative hx:flex hx:items-center" data-active=false><a class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:grow hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:hextra-focus-visible-inset hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50" href=/notes/algorithms/><span class="hx:min-w-0 [word-break:break-word]">算法与数据结构</span></a></div></li><li class="hx:flex hx:flex-col"><div class="hextra-sidebar-item hx:group hx:relative hx:flex hx:items-center" data-active=false><a class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:grow hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:hextra-focus-visible-inset hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50" href=/notes/python/><span class="hx:min-w-0 [word-break:break-word]">Python 与编程</span></a></div></li><li class="hx:flex hx:flex-col"><div class="hextra-sidebar-item hx:group hx:relative hx:flex hx:items-center" data-active=false><a class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:grow hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:hextra-focus-visible-inset hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50" href=/notes/systems/><span class="hx:min-w-0 [word-break:break-word]">系统与工具</span></a></div></li></ul></div></li><li><div class="hextra-sidebar-item hx:group hx:relative hx:flex hx:items-center" data-active=false><a class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:grow hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:hextra-focus-visible-inset hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50" href=/post/><span class="hx:min-w-0 [word-break:break-word]">全部笔记</span></a></div></li><li><div class="hextra-sidebar-item hx:group hx:relative hx:flex hx:items-center" data-active=false><a class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:grow hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:hextra-focus-visible-inset hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50" href=/archives/><span class="hx:min-w-0 [word-break:break-word]">归档</span></a></div></li><li class="[word-break:break-word] hx:mt-5 hx:mb-2 hx:px-2 hx:py-1.5 hx:text-sm hx:font-semibold hx:text-gray-900 hx:first:mt-0 hx:dark:text-gray-100"><span class=hx:cursor-default>索引</span></li><li><div class="hextra-sidebar-item hx:group hx:relative hx:flex hx:items-center" data-active=false><a class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:grow hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:hextra-focus-visible-inset hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50" href=/post/><span class="hx:min-w-0 [word-break:break-word]">全部笔记</span></a></div></li><li><div class="hextra-sidebar-item hx:group hx:relative hx:flex hx:items-center" data-active=false><a class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:grow hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:hextra-focus-visible-inset hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50" href=/archives/><span class="hx:min-w-0 [word-break:break-word]">按年归档</span></a></div></li><li><div class="hextra-sidebar-item hx:group hx:relative hx:flex hx:items-center" data-active=false><a class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:grow hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:hextra-focus-visible-inset hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50" href=/links/><span class="hx:min-w-0 [word-break:break-word]">链接</span></a></div></li></ul><ul class="hx:flex hx:flex-col hx:gap-1 hx:max-md:hidden"><li class=open><div class="hextra-sidebar-item hx:group hx:relative hx:flex hx:items-center" data-active=false><a class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:grow hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:hextra-focus-visible-inset hx:ltr:pr-8 hx:rtl:pl-8 hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50" href=/notes/><span class="hx:min-w-0 [word-break:break-word]">笔记专题</span>
+</a><button type=button class="hextra-sidebar-collapsible-button hx:absolute hx:top-1/2 hx:-translate-y-1/2 hx:ltr:right-2 hx:rtl:left-2 hx:shrink-0 hx:cursor-pointer hx:p-0 hx:text-gray-500 hx:dark:text-neutral-400 hx:group-hover:text-gray-900 hx:dark:group-hover:text-gray-50 hx:group-data-[active=true]:text-primary-800 hx:group-data-[active=true]:dark:text-primary-600 hx:hextra-focus-visible-inset" aria-label=切换章节 aria-expanded=true><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" focusable="false" class="hx:h-[18px] hx:min-w-[18px] hx:rounded-xs hx:p-0.5 hx:hover:bg-gray-800/5 hx:dark:hover:bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="hx:origin-center hx:transition-transform hx:rtl:-rotate-180"/></svg></button></div><div class="hextra-sidebar-children hx:ltr:pr-0 hx:rtl:pl-0 hx:overflow-hidden"><ul class='hx:relative hx:flex hx:flex-col hx:gap-1 hx:before:absolute hx:before:inset-y-1 hx:before:w-px hx:before:bg-gray-200 hx:before:content-[""] hx:ltr:ml-3 hx:ltr:pl-3 hx:ltr:before:left-0 hx:rtl:mr-3 hx:rtl:pr-3 hx:rtl:before:right-0 hx:dark:before:bg-neutral-800'><li class="hx:flex hx:flex-col"><div class="hextra-sidebar-item hx:group hx:relative hx:flex hx:items-center" data-active=false><a class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:grow hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:hextra-focus-visible-inset hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50" href=/notes/ai/><span class="hx:min-w-0 [word-break:break-word]">AI 与论文</span></a></div></li><li class="hx:flex hx:flex-col"><div class="hextra-sidebar-item hx:group hx:relative hx:flex hx:items-center" data-active=false><a class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:grow hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:hextra-focus-visible-inset hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50" href=/notes/algorithms/><span class="hx:min-w-0 [word-break:break-word]">算法与数据结构</span></a></div></li><li class="hx:flex hx:flex-col"><div class="hextra-sidebar-item hx:group hx:relative hx:flex hx:items-center" data-active=false><a class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:grow hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:hextra-focus-visible-inset hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50" href=/notes/python/><span class="hx:min-w-0 [word-break:break-word]">Python 与编程</span></a></div></li><li class="hx:flex hx:flex-col"><div class="hextra-sidebar-item hx:group hx:relative hx:flex hx:items-center" data-active=false><a class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:grow hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:hextra-focus-visible-inset hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50" href=/notes/systems/><span class="hx:min-w-0 [word-break:break-word]">系统与工具</span></a></div></li></ul></div></li><li class="[word-break:break-word] hx:mt-5 hx:mb-2 hx:px-2 hx:py-1.5 hx:text-sm hx:font-semibold hx:text-gray-900 hx:first:mt-0 hx:dark:text-gray-100"><span class=hx:cursor-default>索引</span></li><li><div class="hextra-sidebar-item hx:group hx:relative hx:flex hx:items-center" data-active=false><a class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:grow hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:hextra-focus-visible-inset hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50" href=/post/><span class="hx:min-w-0 [word-break:break-word]">全部笔记</span></a></div></li><li><div class="hextra-sidebar-item hx:group hx:relative hx:flex hx:items-center" data-active=false><a class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:grow hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:hextra-focus-visible-inset hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50" href=/archives/><span class="hx:min-w-0 [word-break:break-word]">按年归档</span></a></div></li><li><div class="hextra-sidebar-item hx:group hx:relative hx:flex hx:items-center" data-active=false><a class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:grow hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:hextra-focus-visible-inset hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50" href=/links/><span class="hx:min-w-0 [word-break:break-word]">链接</span></a></div></li></ul></div><div class="hx:sticky hx:bottom-0 hx:max-h-(--menu-height) hx:bg-white hx:dark:bg-dark hx:mx-4 hx:py-4 hx:shadow-[0_-12px_16px_#fff] hx:flex hx:items-center hx:gap-2 hx:border-gray-200 hx:dark:border-neutral-800 hx:dark:shadow-[0_-12px_16px_#111] hx:contrast-more:border-neutral-400 hx:contrast-more:shadow-none hx:contrast-more:dark:shadow-none hx:border-t" data-toggle-animation=show><div class="hx:flex hx:grow hx:flex-col"><div class="hx:flex hx:justify-items-start hx:group" data-theme=light><button title=切换主题 data-state=closed data-location=bottom class="hextra-theme-toggle hx:cursor-pointer hx:rounded-md hx:text-left hx:font-medium hx:h-7 hx:px-2 hx:text-xs hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:font-medium hx:text-gray-600 hx:transition-colors hx:dark:text-gray-400 hx:grow" type=button aria-label=切换主题 aria-expanded=false aria-haspopup=menu><div class="hx:flex hx:items-center hx:gap-2 hx:capitalize"><svg height="12" class="hx:group-data-[theme=dark]:hidden hx:group-data-[theme=system]:hidden" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364-.707-.707M6.343 6.343l-.707-.707m12.728.0-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg><span class="hx:group-data-[theme=dark]:hidden hx:group-data-[theme=system]:hidden">浅色</span><svg height="12" class="hx:group-data-[theme=light]:hidden hx:group-data-[theme=system]:hidden" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003.0 0012 21a9.003 9.003.0 008.354-5.646z"/></svg><span class="hx:group-data-[theme=light]:hidden hx:group-data-[theme=system]:hidden">深色</span><svg height="12" class="hx:group-data-[theme=dark]:hidden hx:group-data-[theme=light]:hidden" viewBox="0 0 24 24" fill="currentColor"><path d="M11.996094 2C6.4986225 2.0192368 2.03125 6.5024993 2.03125 12c0 5.497501 4.4673725 9.980763 9.964844 10H12 12.0039c5.497471-.01924 9.964844-4.502499 9.964844-10 0-5.4975007-4.467373-9.9807632-9.964844-10H12zM12 4c4.417218.017598 7.96875 3.5822356 7.96875 8 0 4.417764-3.551532 7.982402-7.96875 8z"/></svg>
+<span class="hx:group-data-[theme=dark]:hidden hx:group-data-[theme=light]:hidden">跟随系统</span></div></button><ul class="hextra-theme-toggle-options hx:hidden hx:z-20 hx:max-h-64 hx:overflow-auto hx:rounded-lg hx:border hx:border-gray-200 hx:bg-white hx:p-1 hx:text-sm hx:shadow-lg hx:dark:border-neutral-700 hx:dark:bg-neutral-900" style="position:fixed;inset:auto auto 0 0;margin:0;min-width:100px" data-theme=light role=menu><li role=none class="hx:flex hx:flex-col"><button type=button role=menuitemradio aria-checked=true tabindex=-1 data-item=light class="hx:text-gray-700 hx:dark:text-gray-300 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:dark:hover:bg-neutral-800 hx:dark:hover:text-gray-100 hx:relative hx:cursor-pointer hx:whitespace-nowrap hx:rounded-sm hx:py-1.5 hx:transition-colors hx:ltr:pl-3 hx:ltr:pr-9 hx:rtl:pr-3 hx:rtl:pl-9 hx:text-left hx:w-full hx:bg-transparent hx:border-0">
+浅色
+<span class="hx:absolute hx:inset-y-0 hx:flex hx:items-center hx:ltr:right-3 hx:rtl:left-3 hx:group-data-[theme=dark]:hidden hx:group-data-[theme=system]:hidden"><svg height="1em" width="1em" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span></button></li><li role=none class="hx:flex hx:flex-col"><button type=button role=menuitemradio aria-checked=false tabindex=-1 data-item=dark class="hx:text-gray-700 hx:dark:text-gray-300 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:dark:hover:bg-neutral-800 hx:dark:hover:text-gray-100 hx:relative hx:cursor-pointer hx:whitespace-nowrap hx:rounded-sm hx:py-1.5 hx:transition-colors hx:ltr:pl-3 hx:ltr:pr-9 hx:rtl:pr-3 hx:rtl:pl-9 hx:text-left hx:w-full hx:bg-transparent hx:border-0">
+深色
+<span class="hx:absolute hx:inset-y-0 hx:flex hx:items-center hx:ltr:right-3 hx:rtl:left-3 hx:group-data-[theme=light]:hidden hx:group-data-[theme=system]:hidden"><svg height="1em" width="1em" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span></button></li><li role=none class="hx:flex hx:flex-col"><button type=button role=menuitemradio aria-checked=false tabindex=-1 data-item=system class="hx:text-gray-700 hx:dark:text-gray-300 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:dark:hover:bg-neutral-800 hx:dark:hover:text-gray-100 hx:relative hx:cursor-pointer hx:whitespace-nowrap hx:rounded-sm hx:py-1.5 hx:transition-colors hx:ltr:pl-3 hx:ltr:pr-9 hx:rtl:pr-3 hx:rtl:pl-9 hx:text-left hx:w-full hx:bg-transparent hx:border-0">
+跟随系统
+<span class="hx:absolute hx:inset-y-0 hx:flex hx:items-center hx:ltr:right-3 hx:rtl:left-3 hx:group-data-[theme=dark]:hidden hx:group-data-[theme=light]:hidden"><svg height="1em" width="1em" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span></button></li></ul></div></div></div></aside><nav class="hextra-toc hx:order-last hx:hidden hx:w-64 hx:shrink-0 hx:xl:block hx:print:hidden hx:px-4" aria-label=目录><div class="hextra-scrollbar hx:sticky hx:top-16 hx:overflow-y-auto hx:pr-4 hx:pt-6 hx:text-sm [hyphens:auto] hx:max-h-[calc(100vh-var(--navbar-height)-env(safe-area-inset-bottom))] hx:ltr:-mr-4 hx:rtl:-ml-4"><p class="hx:mb-4 hx:font-semibold hx:tracking-tight">此页上</p><ul><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:font-medium hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#%e6%91%98%e8%a6%81>摘要</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:font-medium hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#intruduction>INTRUDUCTION</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:font-medium hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#preliminaries%e9%a2%84%e5%a4%87%e7%9f%a5%e8%af%86>PRELIMINARIES(预备知识)</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:ltr:pl-4 hx:rtl:pr-4 hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#rag-system-phases>RAG system phases:</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:ltr:pl-4 hx:rtl:pr-4 hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#cost-of-llm-inference>Cost of LLM inference:</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:ltr:pl-4 hx:rtl:pr-4 hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#cost-efficeincy-metric-in-rag>Cost efficeincy Metric in RAG:</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:font-medium hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#overview>OVERVIEW</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:ltr:pl-4 hx:rtl:pr-4 hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#a-vector-database-building-w>(A) Vector Database Building: W</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:ltr:pl-4 hx:rtl:pr-4 hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#b-retrieval>(B) Retrieval:</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:ltr:pl-4 hx:rtl:pr-4 hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#c-generation-based-on-llm>(C) Generation based on LLM:</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:font-medium hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#semantic-segmentation>SEMANTIC SEGMENTATION</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:ltr:pl-4 hx:rtl:pr-4 hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#high-level-idea>High-level Idea</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:ltr:pl-4 hx:rtl:pr-4 hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#model-construction>Model Construction</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:ltr:pl-4 hx:rtl:pr-4 hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#model-training>Model Training</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:ltr:pl-4 hx:rtl:pr-4 hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#model-inference>Model Inference</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:ltr:pl-4 hx:rtl:pr-4 hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#corpus-segmentation>Corpus Segmentation</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:font-medium hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#gradient-based-chunk-selection>GRADIENT-BASED CHUNK SELECTION</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:ltr:pl-4 hx:rtl:pr-4 hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#high-level-idea-1>High-level Idea</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:ltr:pl-4 hx:rtl:pr-4 hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#gradient-based-selection>Gradient based Selection</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:font-medium hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#llm-self-feedback>LLM SELF-FEEDBACK</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:ltr:pl-4 hx:rtl:pr-4 hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#feedback-loop>Feedback Loop</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:font-medium hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#experiments>EXPERIMENTS</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:ltr:pl-4 hx:rtl:pr-4 hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#experimental-setup>Experimental Setup</a></li></ul><div class="hx:mt-8 hx:border-t hx:bg-white hx:pt-8 hx:shadow-[0_-12px_16px_white] hx:dark:bg-dark hx:dark:shadow-[0_-12px_16px_#111] hx:sticky hx:bottom-0 hx:flex hx:flex-col hx:items-start hx:gap-2 hx:pb-8 hx:border-gray-200 hx:dark:border-neutral-800 hx:contrast-more:border-t hx:contrast-more:border-neutral-400 hx:contrast-more:shadow-none hx:contrast-more:dark:border-neutral-400"><button id=backToTop tabindex=-1 class="hx:cursor-pointer hx:transition-all hx:duration-75 hx:opacity-0 hx:text-xs hx:font-medium hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-100 hx:contrast-more:text-gray-800 hx:contrast-more:dark:text-gray-50">
+<span>返回顶部</span>
+<svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" focusable="false" class="hx:inline hx:ltr:ml-1 hx:rtl:mr-1 hx:h-3.5 hx:w-3.5 hx:rounded-full hx:border hx:border-gray-500 hx:hover:border-gray-900 hx:dark:border-gray-400 hx:dark:hover:border-gray-100 hx:contrast-more:border-gray-800 hx:contrast-more:dark:border-gray-50"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5"/></svg></button></div></div></nav><article class="hx:w-full hx:break-words hx:flex hx:min-h-[calc(100vh-var(--navbar-height))] hx:min-w-0 hx:justify-center hx:pb-8 hx:pr-[calc(env(safe-area-inset-right)-1.5rem)]"><main id=content class="hx:w-full hx:min-w-0 hextra-max-content-width hx:px-6 hx:pt-4 hx:md:px-12"><div class="hx:mt-1.5 hx:flex hx:items-center hx:gap-1 hx:overflow-hidden hx:text-sm hx:text-gray-500 hx:dark:text-gray-400 hx:contrast-more:text-current"><div class="hx:whitespace-nowrap hx:transition-colors hx:min-w-[24px] hx:overflow-hidden hx:text-ellipsis hx:hover:text-gray-900 hx:dark:hover:text-gray-100"><a href=/post/ class="hx:inline-block hx:rounded-sm hx:hextra-focus-visible-inset">全部笔记</a></div><svg class="hx:w-3.5 hx:shrink-0 hx:rtl:-rotate-180" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg><div class="hx:whitespace-nowrap hx:transition-colors hx:font-medium hx:text-gray-700 hx:contrast-more:font-bold hx:contrast-more:text-current hx:dark:text-gray-100 hx:contrast-more:dark:text-current">SAGE_A_Framework_for_RAG_解读</div></div><div class=content><div class="hx:flex hx:flex-col hx:sm:flex-row hx:items-start hx:sm:items-center hx:sm:justify-between hx:gap-4 hx:mb-4"><h1 class=hx:mb-0>SAGE_A_Framework_for_RAG_解读</h1></div><h2>摘要<span class="hx:absolute hx:-mt-20" id=摘要></span>
+<a href=#%e6%91%98%e8%a6%81 class=subheading-anchor aria-label=此章节的永久链接></a></h2><p>RAG在特定corpus QA任务上有 成熟应用，然而 大量反例 仍存在。它们不仅仅是LLMs的局限性导致，相反，它们主要由检索不准确信息导致，检索不准的原因是 1 现在RAG技术分块不考虑语义。2 丢失必要信息 和 过多噪声 之间的权衡。</p><p>本文提出一个RAG框架 SAGE。1 解决分块问题上，提出训练一个语义分块模型，能将corpus分成语义完整块。2 设计 一个chunk挑选算法，根据相似度的下降速度（delta）动态选择块。3 为进一步确保精度，提出让LLMs评估检索的块是excessive or lacking. 实验证明很牛逼。</p><h2>INTRUDUCTION<span class="hx:absolute hx:-mt-20" id=intruduction></span>
+<a href=#intruduction class=subheading-anchor aria-label=此章节的永久链接></a></h2><p><strong>bg of problem &ndash; RAG</strong>: enhance a generation model&rsquo;s ability answer questions. With the rise of LLMs, RAG demonstrated proficiency in QA.</p><p><strong>Limitions overview</strong>:</p><p><strong>L1</strong>:</p><p><strong>challenge of addressing L1</strong>:</p><p><strong>L2</strong>:</p><p><strong>challenge of addressing L2</strong>:</p><p><strong>approach overview</strong>:</p><p><strong>contributions</strong>:</p><h2>PRELIMINARIES(预备知识)<span class="hx:absolute hx:-mt-20" id=preliminaries预备知识></span>
+<a href=#preliminaries%e9%a2%84%e5%a4%87%e7%9f%a5%e8%af%86 class=subheading-anchor aria-label=此章节的永久链接></a></h2><h3>RAG system phases:<span class="hx:absolute hx:-mt-20" id=rag-system-phases></span>
+<a href=#rag-system-phases class=subheading-anchor aria-label=此章节的永久链接></a></h3><ul><li>vector DB construction: <strong>corpus</strong> is devided into <strong>chunks</strong>. Convert chunks into vector representations (embedding chunks). Stored these vectors.</li><li>Convert the received <strong>question</strong> into vector. (embedding question). Caculate similarity with chunks in vector DB and then identifying the top N chunks which serve as the <strong>context</strong> for an LLM.</li><li>The given question and context fixed into a prompt template forming a complete prompt. Feed the prompt to an LLM. It generates a response as the final answer.</li></ul><h3>Cost of LLM inference:<span class="hx:absolute hx:-mt-20" id=cost-of-llm-inference></span>
+<a href=#cost-of-llm-inference class=subheading-anchor aria-label=此章节的永久链接></a></h3><p>​ The matrix is the money required to obtain ansers from an LLM. Typically, RAG use LLM provided by LLM providers. The charges based on the volume of input and output tokens. OpenAI’s GPT-4 charge a lot.</p><span class=katex-display><span class=katex><span class=katex-mathml><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>C</mi><mi>o</mi><mi>s</mi><mi>t</mi><mo>=</mo><msub><mi>I</mi><mi>t</mi></msub><mo>⋅</mo><msub><mi>c</mi><mi>i</mi></msub><mo>+</mo><msub><mi>O</mi><mi>t</mi></msub><mo>⋅</mo><msub><mi>c</mi><mi>o</mi></msub></mrow><annotation encoding="application/x-tex">
 Cost =  I_t \cdot c_i + O_t \cdot c_o
-$$<p>​	<strong>I</strong>: input tokens; <strong>O</strong>: output tokens; <strong>c_i</strong>: cost per input token; <strong>o_i</strong>: cost per output token</p>
-<h3 id="cost-efficeincy-metric-in-rag">Cost efficeincy Metric in RAG:
-</h3>$$
+</annotation></semantics></math></span><span class=katex-html aria-hidden=true><span class=base><span class=strut style=height:.6833em></span><span class="mord mathnormal" style=margin-right:.07153em>C</span><span class="mord mathnormal">os</span><span class="mord mathnormal">t</span><span class=mspace style=margin-right:.2778em></span><span class=mrel>=</span><span class=mspace style=margin-right:.2778em></span></span><span class=base><span class=strut style=height:.8333em;vertical-align:-.15em></span><span class=mord><span class="mord mathnormal" style=margin-right:.07847em>I</span><span class=msupsub><span class="vlist-t vlist-t2"><span class=vlist-r><span class=vlist style=height:.2806em><span style=top:-2.55em;margin-left:-.0785em;margin-right:.05em><span class=pstrut style=height:2.7em></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class=vlist-s>​</span></span><span class=vlist-r><span class=vlist style=height:.15em><span></span></span></span></span></span></span><span class=mspace style=margin-right:.2222em></span><span class=mbin>⋅</span><span class=mspace style=margin-right:.2222em></span></span><span class=base><span class=strut style=height:.7333em;vertical-align:-.15em></span><span class=mord><span class="mord mathnormal">c</span><span class=msupsub><span class="vlist-t vlist-t2"><span class=vlist-r><span class=vlist style=height:.3117em><span style=top:-2.55em;margin-left:0;margin-right:.05em><span class=pstrut style=height:2.7em></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class=vlist-s>​</span></span><span class=vlist-r><span class=vlist style=height:.15em><span></span></span></span></span></span></span><span class=mspace style=margin-right:.2222em></span><span class=mbin>+</span><span class=mspace style=margin-right:.2222em></span></span><span class=base><span class=strut style=height:.8333em;vertical-align:-.15em></span><span class=mord><span class="mord mathnormal" style=margin-right:.02778em>O</span><span class=msupsub><span class="vlist-t vlist-t2"><span class=vlist-r><span class=vlist style=height:.2806em><span style=top:-2.55em;margin-left:-.0278em;margin-right:.05em><span class=pstrut style=height:2.7em></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class=vlist-s>​</span></span><span class=vlist-r><span class=vlist style=height:.15em><span></span></span></span></span></span></span><span class=mspace style=margin-right:.2222em></span><span class=mbin>⋅</span><span class=mspace style=margin-right:.2222em></span></span><span class=base><span class=strut style=height:.5806em;vertical-align:-.15em></span><span class=mord><span class="mord mathnormal">c</span><span class=msupsub><span class="vlist-t vlist-t2"><span class=vlist-r><span class=vlist style=height:.1514em><span style=top:-2.55em;margin-left:0;margin-right:.05em><span class=pstrut style=height:2.7em></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">o</span></span></span></span><span class=vlist-s>​</span></span><span class=vlist-r><span class=vlist style=height:.15em><span></span></span></span></span></span></span></span></span></span></span><p>​ <strong>I</strong>: input tokens; <strong>O</strong>: output tokens; <strong>c_i</strong>: cost per input token; <strong>o_i</strong>: cost per output token</p><h3>Cost efficeincy Metric in RAG:<span class="hx:absolute hx:-mt-20" id=cost-efficeincy-metric-in-rag></span>
+<a href=#cost-efficeincy-metric-in-rag class=subheading-anchor aria-label=此章节的永久链接></a></h3><span class=katex-display><span class=katex><span class=katex-mathml><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>f</mi><mtext>cost-efficiency</mtext></msub><mo>=</mo><mfrac><mrow><mi>A</mi><mi>c</mi><mi>c</mi></mrow><mrow><mi>C</mi><mi>o</mi><mi>s</mi><mi>t</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">
 f_{\text{cost-efficiency}} = \frac{Acc}{Cost}
-$$<p>​	<strong>Acc</strong>: metrics used to eval the quality of an answer（ e.g. F1-Score, BELU-1, Accuracy）; <strong>Cost</strong> : money calcuated by the preceding equation.</p>
-<p><img src="https://i-blog.csdnimg.cn/direct/9a8e28436fb944d4890b84e554a37e15.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="图片"
-	
-	
-></p>
-<p>(用网图链接有水印-.-)</p>
-<h2 id="overview">OVERVIEW
-</h2><h3 id="a-vector-database-building-w">(A) Vector Database Building: W
-</h3><p>A given corpus is split into paragraphs  with &lsquo;\n&rsquo; initially (isn&rsquo;t shown in the figure).</p>
-<ul>
-<li>&ldquo;1 - 2&rdquo;: All those paragraphs are then <strong>segmented</strong> by a pretrained model into short but semantically complete chunks as T.</li>
-<li>“3 - 4”: <strong>Embed</strong> chunks T into vectors.</li>
-<li>&ldquo;5&rdquo;: <strong>Store</strong> vetors in a vector DB.</li>
-</ul>
-<h3 id="b-retrieval">(B) Retrieval:
-</h3><p>A specific question is given.</p>
-<ul>
-<li>&ldquo;1 - 2&rdquo;: The given question is <strong>embedding</strong> into a vector.</li>
-<li>“3 - 4”: Query the vector DB for topN chunk vectors that most align with question&rsquo;s vector, thereby <strong>retrieving</strong> the topN chunks.</li>
-<li>&ldquo;5 - 6&rdquo;: Use a reranking model to <strong>rerank</strong> these N chunks into a new order (scored N chunks).</li>
-<li>&ldquo;7 - 8&rdquo;: Select the top-ranking K chunks that come before the point where <strong>a significant dip in scores</strong> is ovserved</li>
-</ul>
-<h3 id="c-generation-based-on-llm">(C) Generation based on LLM:
-</h3><p>Given the specific question and topK chunks from &ldquo;(B) Retrieval&rdquo;.</p>
-<ul>
-<li>&ldquo;1&rdquo;: Craft a <strong>prompt</strong> incorporating the question and the topK chunks. This process is tailed to the question&rsquo;s type.</li>
-<li>&ldquo;2 - 3&rdquo;: Feed the prompt into an <strong>LLM</strong> to procure the response.</li>
-<li>&ldquo;4 - 5&rdquo;: Organize three things (question, topK chunks, answer from &ldquo;2 - 3&rdquo;) into a feedback prompt and then submitting it to an LLM. Generating a response of <strong>the score of the answer and an assessmen(new K) of the chunks</strong>.</li>
-<li>If the score is enough, execute &ldquo;6 - 7&rdquo;. Else, execute right-side &ldquo;6&rdquo; to adjust the parameter topK.</li>
-<li>If the loop has been executed three times, execute &ldquo;6 - 7&rdquo; only.</li>
-</ul>
-<h2 id="semantic-segmentation">SEMANTIC SEGMENTATION
-</h2><h3 id="high-level-idea">High-level Idea
-</h3><p>corpus segmentation is crucial. Ineffective segmentation results in semantically incomplete chunks leading to irrelevant retrieval (demonstrated in 8. INSIGHTS OF RAG TASKS).</p>
-<p>Two methods predominantly employed: &ldquo;fixed-size&rdquo; and &ldquo;fixed-size with sentence complete&rdquo;.</p>
-<ul>
-<li>&ldquo;fixed-size&rdquo; leads to incomplete sentence in chunks undermining coherence of chunks.</li>
-<li>&ldquo;fixed-size with sentence complete&rdquo; breaks continous sentences seperated into different chunks distorting the meaning of a chunk (e.g. unclear references).</li>
-<li>Increasing the fixed length can mitigate the issue of chunks having incomplete meanings while causing each chunk to contain an excessive amount of information which ruins the similarity caculation and brings more noise to LLM.</li>
-<li>While employing a LLM for segmentation is a conceivable approach, it proves to be costly (demonestrated in 7. EXPERIMENT) and slow.</li>
-</ul>
-<p>We propose to develop a lightweight and effective segmentation model that ensure that each chunk is complete.</p>
-<h3 id="model-construction">Model Construction
-</h3><p>Segmentation model incorporates an embedding model and a Multi-layer Perceptron([pərˈseptrɑn]) (MLP) model.</p>
-<ul>
-<li>An Embedding model utilizing AnglE method, embeds two sentences into two vectors x1 and x2.</li>
-<li>Feature augmentation receives x1 and x2 and then subtracct and mutiply them yielding x1-x2 and x1*x2.</li>
-<li>A MLP model takes x1, x2, x1-x2 and  x1*x2 to  produce a score which determines wether to split or not.</li>
-<li>The decision to make x1-x2 or x1*x2 are based on the observation that embedding still reflect semantic difference （cite Sentence-bert).</li>
-</ul>
-<h3 id="model-training">Model Training
-</h3><p><img src="https://i-blog.csdnimg.cn/direct/f9dad4d0e41f473894138efda69fa01e.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="图片"
-	
-	
-></p>
-<ul>
-<li>First, gather a substantial amount of semantically segmented training data. Recommend Wikipedia dataset where passages have been semantically segmented into paragraphs.</li>
-<li>Construct triplet training data &lt;s1, s2, label&gt;: If s1 and s2 are consecutive([kən&rsquo;sekjətɪv]) within the same paragraph, label = 1 representing they should be grouped into the same chunk. Otherwise, label = 0 suggesting a break.</li>
-<li>The procedure are detailed in the figure above. Keep fedding triplets to learn the parameters of the embedding model and MLP model utilizing SDG.</li>
-</ul>
-<h3 id="model-inference">Model Inference
-</h3><ul>
-<li>Each two sentences are put into the segmentation model to gain a score. If &lt; threshold (e.g., 0.5), then a split occur. Conversly, they retained within the same chunk.</li>
-<li>Segmentation Model runs in parallel processing corpus swiftly. （&ldquo;For instance, gathering all pairs of sentences within a corpus and organize them into multiple batches, each with a size of 512.&rdquo;  batches是不是下面的粗粒度chunks？）</li>
-</ul>
-<h3 id="corpus-segmentation">Corpus Segmentation
-</h3><ul>
-<li>Give a corpus, segment it into coarse-grained([ˌkɔːrsˈɡreɪnd])  chunks with length of approximately <em>l</em> (I call it as &ldquo;large-fixed-size with sentence complete&rdquo;).</li>
-<li>Subsequently, segmentation model evaluates each pair of adjacent sentences in these coarse-grained chunks.</li>
-<li>（So the boarder of coarse-grained chunks is ingored? I think that&rsquo;s fine because each chunk is large enough.）</li>
-</ul>
-<h2 id="gradient-based-chunk-selection">GRADIENT-BASED CHUNK SELECTION
-</h2><p><img src="https://pic2.zhimg.com/v2-37521c9bc74bccdfe33684444ec10c9f_1440w.jpg"
-	
-	
-	
-	loading="lazy"
-	
-		alt="img"
-	
-	
-></p>
-<h3 id="high-level-idea-1">High-level Idea
-</h3><ul>
-<li>Advanced RAG system typically leverage a reranking model to assess first-stage retrieval result (<strong>N</strong> chunks) with a given question. Subsequently, with the relevance scores assigned by the reranking model, top <strong>K</strong> chunks are selected as context for QA.</li>
-<li>The idea of using a large K to avoid missing key chunks will lead to an overload of irrelevant chunks, which may confuse LLMs (illustrated in EXPERIMENTS).</li>
-<li>Figure above shows two general cases, in which if chunks preceding a sharp decline on score are selected can easily get the correct answer (demonstrated in EXPERIMENTS).</li>
-</ul>
-<h3 id="gradient-based-selection">Gradient based Selection
-</h3><ul>
-<li>
-<p>With top K reranked chunks <strong>C_s</strong> and their corresponding scores <strong>S</strong>, preset minimum number <strong>min_k</strong> and threshold of gradient <strong>g</strong>.</p>
-</li>
-<li>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="c1"># chks S min_k g</span>
-</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">chks</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">min_k</span><span class="p">,</span> <span class="n">g</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">    <span class="n">add_chks</span> <span class="o">=</span> <span class="p">[]</span>
-</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">min_k</span><span class="p">,</span> <span class="n">K</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">S</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">S</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="n">g</span><span class="p">:</span> <span class="c1"># didn&#39;t drop too much</span>
-</span></span><span class="line"><span class="cl">            <span class="n">add_chks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">chks</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-</span></span><span class="line"><span class="cl">        <span class="k">else</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">            <span class="k">break</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">add_chks</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>(论文里的伪代码有错误：“score = C[k − 1];” 对不上 原文： “if the score of a chunk exceeds 1/g times the score of its predecessor”)</p>
-</li>
-</ul>
-<h2 id="llm-self-feedback">LLM SELF-FEEDBACK
-</h2><h3 id="feedback-loop">Feedback Loop
-</h3><p>After feeding context and question to LLM for final answer, we need to assess the suitability of context and quality of current answer before presented to user finally. By prompt engineer, LLM&rsquo;s assessment consist of a evaluation score (1-10) and a context adjustment flag (-1/1).</p>
-<p>Upon receiving score and flag, if the score is higher than a preset threshold e.g. 9, the current answer is qualified for user, else adjust the parameter min_k in chunks selection: -1 implies reducing min_k by one, 1 implies increasing min_k by one.</p>
-<h2 id="experiments">EXPERIMENTS
-</h2><h3 id="experimental-setup">Experimental Setup
-</h3><p><strong>Large language models</strong>: GPT3.5 turbo, GPT4, GPT4-o-mini, UnifiedQA-3B.</p>
-<p>Datasets:</p>
-<ul>
-<li>QuALITY: This dataset comprises multiple-choice questions based on articles around 5,000 tokens each, featuring a challenging portion, QuALITYHARD, with questions most annotators got wrong under time constraints.</li>
-<li>QASPER:</li>
-</ul>
-
-</section>
-
-
-    <footer class="article-footer">
-    
-
-    </footer>
-
-
-    
-        <link 
-                rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
-            ><script 
-                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
-                defer
-                >
-            </script><script 
-                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
-                defer
-                >
-            </script><script>
-    window.addEventListener("DOMContentLoaded", () => {
-        renderMathInElement(document.body, {
-            delimiters: [
-                { left: "$$", right: "$$", display: true },
-                { left: "$", right: "$", display: false },
-                { left: "\\(", right: "\\)", display: false },
-                { left: "\\[", right: "\\]", display: true }
-            ],
-            ignoredClasses: ["gist"]
-        });})
-</script>
-    
-</article>
-
-    
-
-    
-
-     
-    
-        
-    
-
-    <footer class="site-footer">
-    <section class="copyright">
-        &copy; 
-        
-            2025 - 
-        
-        2026 rooobeam
-    </section>
-    
-    <section class="powerby">
-        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
-    </section>
-</footer>
-
-
-    
-<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-
-    
-    <div class="pswp__bg"></div>
-
-    
-    <div class="pswp__scroll-wrap">
-
-        
-        <div class="pswp__container">
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-        </div>
-
-        
-        <div class="pswp__ui pswp__ui--hidden">
-
-            <div class="pswp__top-bar">
-
-                
-
-                <div class="pswp__counter"></div>
-
-                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-
-                <button class="pswp__button pswp__button--share" title="Share"></button>
-
-                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-
-                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-
-                
-                
-                <div class="pswp__preloader">
-                    <div class="pswp__preloader__icn">
-                        <div class="pswp__preloader__cut">
-                            <div class="pswp__preloader__donut"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-                <div class="pswp__share-tooltip"></div>
-            </div>
-
-            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
-            </button>
-
-            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
-            </button>
-
-            <div class="pswp__caption">
-                <div class="pswp__caption__center"></div>
-            </div>
-
-        </div>
-
-    </div>
-
-</div><script 
-                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
-                defer
-                >
-            </script><script 
-                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
-                defer
-                >
-            </script><link 
-                rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
-            ><link 
-                rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
-            >
-
-            </main>
-        </div>
-        <script 
-                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
-                
-                >
-            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
-<script>
-    (function () {
-        const customFont = document.createElement('link');
-        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
-
-        customFont.type = "text/css";
-        customFont.rel = "stylesheet";
-
-        document.head.appendChild(customFont);
-    }());
-</script>
-
-    </body>
-</html>
+</annotation></semantics></math></span><span class=katex-html aria-hidden=true><span class=base><span class=strut style=height:.9805em;vertical-align:-.2861em></span><span class=mord><span class="mord mathnormal" style=margin-right:.10764em>f</span><span class=msupsub><span class="vlist-t vlist-t2"><span class=vlist-r><span class=vlist style=height:.3361em><span style=top:-2.55em;margin-left:-.1076em;margin-right:.05em><span class=pstrut style=height:2.7em></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">cost-efficiency</span></span></span></span></span></span><span class=vlist-s>​</span></span><span class=vlist-r><span class=vlist style=height:.2861em><span></span></span></span></span></span></span><span class=mspace style=margin-right:.2778em></span><span class=mrel>=</span><span class=mspace style=margin-right:.2778em></span></span><span class=base><span class=strut style=height:2.0463em;vertical-align:-.686em></span><span class=mord><span class="mopen nulldelimiter"></span><span class=mfrac><span class="vlist-t vlist-t2"><span class=vlist-r><span class=vlist style=height:1.3603em><span style=top:-2.314em><span class=pstrut style=height:3em></span><span class=mord><span class="mord mathnormal" style=margin-right:.07153em>C</span><span class="mord mathnormal">os</span><span class="mord mathnormal">t</span></span></span><span style=top:-3.23em><span class=pstrut style=height:3em></span><span class=frac-line style=border-bottom-width:.04em></span></span><span style=top:-3.677em><span class=pstrut style=height:3em></span><span class=mord><span class="mord mathnormal">A</span><span class="mord mathnormal">cc</span></span></span></span><span class=vlist-s>​</span></span><span class=vlist-r><span class=vlist style=height:.686em><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span><p>​ <strong>Acc</strong>: metrics used to eval the quality of an answer（ e.g. F1-Score, BELU-1, Accuracy）; <strong>Cost</strong> : money calcuated by the preceding equation.</p><p><img src=https://i-blog.csdnimg.cn/direct/9a8e28436fb944d4890b84e554a37e15.png alt=图片 data-zoomable loading=lazy></p><p>(用网图链接有水印-.-)</p><h2>OVERVIEW<span class="hx:absolute hx:-mt-20" id=overview></span>
+<a href=#overview class=subheading-anchor aria-label=此章节的永久链接></a></h2><h3>(A) Vector Database Building: W<span class="hx:absolute hx:-mt-20" id=a-vector-database-building-w></span>
+<a href=#a-vector-database-building-w class=subheading-anchor aria-label=此章节的永久链接></a></h3><p>A given corpus is split into paragraphs with &lsquo;\n&rsquo; initially (isn&rsquo;t shown in the figure).</p><ul><li>&ldquo;1 - 2&rdquo;: All those paragraphs are then <strong>segmented</strong> by a pretrained model into short but semantically complete chunks as T.</li><li>“3 - 4”: <strong>Embed</strong> chunks T into vectors.</li><li>&ldquo;5&rdquo;: <strong>Store</strong> vetors in a vector DB.</li></ul><h3>(B) Retrieval:<span class="hx:absolute hx:-mt-20" id=b-retrieval></span>
+<a href=#b-retrieval class=subheading-anchor aria-label=此章节的永久链接></a></h3><p>A specific question is given.</p><ul><li>&ldquo;1 - 2&rdquo;: The given question is <strong>embedding</strong> into a vector.</li><li>“3 - 4”: Query the vector DB for topN chunk vectors that most align with question&rsquo;s vector, thereby <strong>retrieving</strong> the topN chunks.</li><li>&ldquo;5 - 6&rdquo;: Use a reranking model to <strong>rerank</strong> these N chunks into a new order (scored N chunks).</li><li>&ldquo;7 - 8&rdquo;: Select the top-ranking K chunks that come before the point where <strong>a significant dip in scores</strong> is ovserved</li></ul><h3>(C) Generation based on LLM:<span class="hx:absolute hx:-mt-20" id=c-generation-based-on-llm></span>
+<a href=#c-generation-based-on-llm class=subheading-anchor aria-label=此章节的永久链接></a></h3><p>Given the specific question and topK chunks from &ldquo;(B) Retrieval&rdquo;.</p><ul><li>&ldquo;1&rdquo;: Craft a <strong>prompt</strong> incorporating the question and the topK chunks. This process is tailed to the question&rsquo;s type.</li><li>&ldquo;2 - 3&rdquo;: Feed the prompt into an <strong>LLM</strong> to procure the response.</li><li>&ldquo;4 - 5&rdquo;: Organize three things (question, topK chunks, answer from &ldquo;2 - 3&rdquo;) into a feedback prompt and then submitting it to an LLM. Generating a response of <strong>the score of the answer and an assessmen(new K) of the chunks</strong>.</li><li>If the score is enough, execute &ldquo;6 - 7&rdquo;. Else, execute right-side &ldquo;6&rdquo; to adjust the parameter topK.</li><li>If the loop has been executed three times, execute &ldquo;6 - 7&rdquo; only.</li></ul><h2>SEMANTIC SEGMENTATION<span class="hx:absolute hx:-mt-20" id=semantic-segmentation></span>
+<a href=#semantic-segmentation class=subheading-anchor aria-label=此章节的永久链接></a></h2><h3>High-level Idea<span class="hx:absolute hx:-mt-20" id=high-level-idea></span>
+<a href=#high-level-idea class=subheading-anchor aria-label=此章节的永久链接></a></h3><p>corpus segmentation is crucial. Ineffective segmentation results in semantically incomplete chunks leading to irrelevant retrieval (demonstrated in 8. INSIGHTS OF RAG TASKS).</p><p>Two methods predominantly employed: &ldquo;fixed-size&rdquo; and &ldquo;fixed-size with sentence complete&rdquo;.</p><ul><li>&ldquo;fixed-size&rdquo; leads to incomplete sentence in chunks undermining coherence of chunks.</li><li>&ldquo;fixed-size with sentence complete&rdquo; breaks continous sentences seperated into different chunks distorting the meaning of a chunk (e.g. unclear references).</li><li>Increasing the fixed length can mitigate the issue of chunks having incomplete meanings while causing each chunk to contain an excessive amount of information which ruins the similarity caculation and brings more noise to LLM.</li><li>While employing a LLM for segmentation is a conceivable approach, it proves to be costly (demonestrated in 7. EXPERIMENT) and slow.</li></ul><p>We propose to develop a lightweight and effective segmentation model that ensure that each chunk is complete.</p><h3>Model Construction<span class="hx:absolute hx:-mt-20" id=model-construction></span>
+<a href=#model-construction class=subheading-anchor aria-label=此章节的永久链接></a></h3><p>Segmentation model incorporates an embedding model and a Multi-layer Perceptron([pərˈseptrɑn]) (MLP) model.</p><ul><li>An Embedding model utilizing AnglE method, embeds two sentences into two vectors x1 and x2.</li><li>Feature augmentation receives x1 and x2 and then subtracct and mutiply them yielding x1-x2 and x1*x2.</li><li>A MLP model takes x1, x2, x1-x2 and x1*x2 to produce a score which determines wether to split or not.</li><li>The decision to make x1-x2 or x1*x2 are based on the observation that embedding still reflect semantic difference （cite Sentence-bert).</li></ul><h3>Model Training<span class="hx:absolute hx:-mt-20" id=model-training></span>
+<a href=#model-training class=subheading-anchor aria-label=此章节的永久链接></a></h3><p><img src=https://i-blog.csdnimg.cn/direct/f9dad4d0e41f473894138efda69fa01e.png alt=图片 data-zoomable loading=lazy></p><ul><li>First, gather a substantial amount of semantically segmented training data. Recommend Wikipedia dataset where passages have been semantically segmented into paragraphs.</li><li>Construct triplet training data &lt;s1, s2, label>: If s1 and s2 are consecutive([kən&rsquo;sekjətɪv]) within the same paragraph, label = 1 representing they should be grouped into the same chunk. Otherwise, label = 0 suggesting a break.</li><li>The procedure are detailed in the figure above. Keep fedding triplets to learn the parameters of the embedding model and MLP model utilizing SDG.</li></ul><h3>Model Inference<span class="hx:absolute hx:-mt-20" id=model-inference></span>
+<a href=#model-inference class=subheading-anchor aria-label=此章节的永久链接></a></h3><ul><li>Each two sentences are put into the segmentation model to gain a score. If &lt; threshold (e.g., 0.5), then a split occur. Conversly, they retained within the same chunk.</li><li>Segmentation Model runs in parallel processing corpus swiftly. （&ldquo;For instance, gathering all pairs of sentences within a corpus and organize them into multiple batches, each with a size of 512.&rdquo; batches是不是下面的粗粒度chunks？）</li></ul><h3>Corpus Segmentation<span class="hx:absolute hx:-mt-20" id=corpus-segmentation></span>
+<a href=#corpus-segmentation class=subheading-anchor aria-label=此章节的永久链接></a></h3><ul><li>Give a corpus, segment it into coarse-grained([ˌkɔːrsˈɡreɪnd]) chunks with length of approximately <em>l</em> (I call it as &ldquo;large-fixed-size with sentence complete&rdquo;).</li><li>Subsequently, segmentation model evaluates each pair of adjacent sentences in these coarse-grained chunks.</li><li>（So the boarder of coarse-grained chunks is ingored? I think that&rsquo;s fine because each chunk is large enough.）</li></ul><h2>GRADIENT-BASED CHUNK SELECTION<span class="hx:absolute hx:-mt-20" id=gradient-based-chunk-selection></span>
+<a href=#gradient-based-chunk-selection class=subheading-anchor aria-label=此章节的永久链接></a></h2><p><img src=https://pic2.zhimg.com/v2-37521c9bc74bccdfe33684444ec10c9f_1440w.jpg alt=img data-zoomable loading=lazy></p><h3>High-level Idea<span class="hx:absolute hx:-mt-20" id=high-level-idea-1></span>
+<a href=#high-level-idea-1 class=subheading-anchor aria-label=此章节的永久链接></a></h3><ul><li>Advanced RAG system typically leverage a reranking model to assess first-stage retrieval result (<strong>N</strong> chunks) with a given question. Subsequently, with the relevance scores assigned by the reranking model, top <strong>K</strong> chunks are selected as context for QA.</li><li>The idea of using a large K to avoid missing key chunks will lead to an overload of irrelevant chunks, which may confuse LLMs (illustrated in EXPERIMENTS).</li><li>Figure above shows two general cases, in which if chunks preceding a sharp decline on score are selected can easily get the correct answer (demonstrated in EXPERIMENTS).</li></ul><h3>Gradient based Selection<span class="hx:absolute hx:-mt-20" id=gradient-based-selection></span>
+<a href=#gradient-based-selection class=subheading-anchor aria-label=此章节的永久链接></a></h3><ul><li><p>With top K reranked chunks <strong>C_s</strong> and their corresponding scores <strong>S</strong>, preset minimum number <strong>min_k</strong> and threshold of gradient <strong>g</strong>.</p></li><li><div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"><div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=c1># chks S min_k g</span>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>func</span><span class=p>(</span><span class=n>chks</span><span class=p>,</span> <span class=n>S</span><span class=p>,</span> <span class=n>min_k</span><span class=p>,</span> <span class=n>g</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>add_chks</span> <span class=o>=</span> <span class=p>[]</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>min_k</span><span class=p>,</span> <span class=n>K</span><span class=o>+</span><span class=mi>1</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>S</span><span class=p>[</span><span class=n>i</span><span class=p>]</span> <span class=o>&gt;</span> <span class=n>S</span><span class=p>[</span><span class=n>i</span><span class=o>-</span><span class=mi>1</span><span class=p>]</span><span class=o>/</span><span class=n>g</span><span class=p>:</span> <span class=c1># didn&#39;t drop too much</span>
+</span></span><span class=line><span class=cl>            <span class=n>add_chks</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>chks</span><span class=p>[</span><span class=n>i</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>        <span class=k>else</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>break</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>add_chks</span></span></span></code></pre></td></tr></table></div></div></div><div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"><button class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50" title=复制代码 aria-label=复制代码 data-copied-label=已复制！><div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"></div><div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"></div></button></div></div><p>(论文里的伪代码有错误：“score = C[k − 1];” 对不上 原文： “if the score of a chunk exceeds 1/g times the score of its predecessor”)</p></li></ul><h2>LLM SELF-FEEDBACK<span class="hx:absolute hx:-mt-20" id=llm-self-feedback></span>
+<a href=#llm-self-feedback class=subheading-anchor aria-label=此章节的永久链接></a></h2><h3>Feedback Loop<span class="hx:absolute hx:-mt-20" id=feedback-loop></span>
+<a href=#feedback-loop class=subheading-anchor aria-label=此章节的永久链接></a></h3><p>After feeding context and question to LLM for final answer, we need to assess the suitability of context and quality of current answer before presented to user finally. By prompt engineer, LLM&rsquo;s assessment consist of a evaluation score (1-10) and a context adjustment flag (-1/1).</p><p>Upon receiving score and flag, if the score is higher than a preset threshold e.g. 9, the current answer is qualified for user, else adjust the parameter min_k in chunks selection: -1 implies reducing min_k by one, 1 implies increasing min_k by one.</p><h2>EXPERIMENTS<span class="hx:absolute hx:-mt-20" id=experiments></span>
+<a href=#experiments class=subheading-anchor aria-label=此章节的永久链接></a></h2><h3>Experimental Setup<span class="hx:absolute hx:-mt-20" id=experimental-setup></span>
+<a href=#experimental-setup class=subheading-anchor aria-label=此章节的永久链接></a></h3><p><strong>Large language models</strong>: GPT3.5 turbo, GPT4, GPT4-o-mini, UnifiedQA-3B.</p><p>Datasets:</p><ul><li>QuALITY: This dataset comprises multiple-choice questions based on articles around 5,000 tokens each, featuring a challenging portion, QuALITYHARD, with questions most annotators got wrong under time constraints.</li><li>QASPER:</li></ul></div><div class="hx:mt-12 hx:mb-8 hx:block hx:text-xs hx:text-gray-500 hx:ltr:text-right hx:rtl:text-left hx:dark:text-gray-400">最后更新于 <time datetime=2025-09-01T22:43:23.000Z>2025-09-01</time></div><div class="hx:mb-8 hx:flex hx:items-center hx:border-t hx:pt-8 hx:border-gray-200 hx:dark:border-neutral-800 hx:contrast-more:border-neutral-400 hx:dark:contrast-more:border-neutral-400 hx:print:hidden"><a href=/p/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/ title=动态规划 class="hx:flex hx:max-w-[50%] hx:items-center hx:gap-1 hx:py-4 hx:text-base hx:font-medium hx:text-gray-600 hx:transition-colors [word-break:break-word] hx:hover:text-primary-600 hx:dark:text-gray-300 hx:md:text-lg hx:ltr:pr-4 hx:rtl:pl-4"><svg class="hx:inline hx:h-5 hx:shrink-0 hx:ltr:rotate-180" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>动态规划</a><a href=/p/%E7%8E%8B%E7%88%BD-%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/ title="王爽 汇编语言" class="hx:flex hx:max-w-[50%] hx:items-center hx:gap-1 hx:py-4 hx:text-base hx:font-medium hx:text-gray-600 hx:transition-colors [word-break:break-word] hx:hover:text-primary-600 hx:dark:text-gray-300 hx:md:text-lg hx:ltr:ml-auto hx:ltr:pl-4 hx:ltr:text-right hx:rtl:mr-auto hx:rtl:pr-4 hx:rtl:text-left">王爽 汇编语言<svg class="hx:inline hx:h-5 hx:shrink-0 hx:rtl:-rotate-180" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></a></div></main></article></div><footer class="hextra-footer hx:bg-gray-100 hx:pb-[env(safe-area-inset-bottom)] hx:dark:bg-neutral-900 hx:print:bg-transparent"><div class="hextra-custom-footer hextra-max-footer-width hx:mx-auto hx:pl-[max(env(safe-area-inset-left),1.5rem)] hx:pr-[max(env(safe-area-inset-right),1.5rem)] hx:text-gray-600 hx:dark:text-gray-400"></div><div class="hextra-max-footer-width hx:mx-auto hx:flex hx:justify-center hx:py-12 hx:pl-[max(env(safe-area-inset-left),1.5rem)] hx:pr-[max(env(safe-area-inset-right),1.5rem)] hx:text-gray-600 hx:dark:text-gray-400 hx:md:justify-start"><div class="hx:flex hx:w-full hx:flex-col hx:items-center hx:sm:items-start"><div class=hx:font-semibold><a class="hx:flex hx:text-sm hx:items-center hx:gap-1 hx:text-current" target=_blank rel="noopener noreferrer" title="Hextra GitHub Homepage" href=https://github.com/imfing/hextra><span>由 Hextra 驱动<svg height="1em" class="hx:inline-block hx:ltr:ml-1 hx:rtl:mr-1 hx:align-[-2.5px]" viewBox="0 0 180 180" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="m105.50024 22.224647c-9.59169-5.537563-21.40871-5.537563-31.000093.0L39.054693 42.689119C29.463353 48.226675 23.55484 58.460531 23.55484 69.535642v40.928918c0 11.07542 5.908513 21.3092 15.499853 26.84652l35.445453 20.46446c9.591313 5.53732 21.408404 5.53732 31.000094.0l35.44507-20.46446c9.59131-5.53732 15.49985-15.7711 15.49985-26.84652V69.535642c0-11.075111-5.90854-21.308967-15.49985-26.846523zM34.112797 85.737639c-1.384445 2.397827-1.384445 5.352099.0 7.749927l24.781554 42.922974c1.38437 2.39783 3.942853 3.87496 6.711592 3.87496h49.563107c2.76905.0 5.3273-1.47713 6.71144-3.87496l24.78194-42.922974c1.38414-2.397828 1.38414-5.3521.0-7.749927L121.88049 42.814746c-1.38414-2.397828-3.94239-3.874964-6.71144-3.874964H65.605944c-2.768739.0-5.327223 1.477059-6.711592 3.874964z" style="stroke-width:.774993"/></svg></span></a></div><div class="hx:mt-6 hx:text-xs">© 2025 rooobeam</div></div></div></footer><script defer src=/js/main.min.d9fbefbbac8caeb66025dbb14d569c30defac0effcba45486a78209fba9360af.js integrity="sha256-2fvvu6yMrrZgJduxTVacMN76wO/8ukVIanggn7qTYK8="></script><script defer src=/vendor/flexsearch/flexsearch.bundle.min.5938454b034e37308e8dfa54a4f6e14d1e738f63ed37663cca20076729d62e23.js integrity="sha256-WThFSwNONzCOjfpUpPbhTR5zj2PtN2Y8yiAHZynWLiM=" crossorigin=anonymous></script><script defer src=/zh-cn.search.min.a916de3ee930b2f5a20c815c6ed1231a86d46fce6ac567ce820d2e224b51725a.js integrity="sha256-qRbePukwsvWiDIFcbtEjGobUb85qxWfOgg0uIktRclo="></script><script defer src=/vendor/medium-zoom/medium-zoom.min.6603320c02180d81b16dca4971f52763035ebc6ff18bd38729a47ff062be8d67.js integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin=anonymous></script><script>document.addEventListener("DOMContentLoaded",()=>{if(!window.mediumZoom)return;const e=()=>document.documentElement.classList.contains("dark")?"rgba(17, 17, 17, 0.98)":"rgba(255, 255, 255, 0.98)",n=window.mediumZoom("[data-zoomable]",{background:e()}),t=document.createElement("style");t.textContent=`
+      .medium-zoom-overlay {
+        z-index: 1000;
+      }
+      .medium-zoom-image--opened {
+        z-index: 1001;
+      }
+    `,document.head.appendChild(t),new MutationObserver(()=>{n.update({background:e()})}).observe(document.documentElement,{attributes:!0,attributeFilter:["class"]})})</script></body></html>

@@ -1,1265 +1,349 @@
-<!DOCTYPE html>
-<html lang="en-us" dir="ltr">
-    <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="滑动窗口与双指针 灵神题单：分享丨【算法题单】滑动窗口与双指针（定长/不定长/单序列/双序列/三指针/分组循环）- 讨论 - 力扣（LeetCode）\n场景：连续、遍历各情况\n">
-<title>滑动窗口与双指针</title>
-
-<link rel='canonical' href='https://rooobeam.github.io/p/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E4%B8%8E%E5%8F%8C%E6%8C%87%E9%92%88/'>
-
-<link rel="stylesheet" href="/scss/style.min.4f77a518c8e8877dfe55e8d90f7ed3f84e82d7a31cd88e8d1dcf983db94f54bc.css"><meta property='og:title' content="滑动窗口与双指针">
-<meta property='og:description' content="滑动窗口与双指针 灵神题单：分享丨【算法题单】滑动窗口与双指针（定长/不定长/单序列/双序列/三指针/分组循环）- 讨论 - 力扣（LeetCode）\n场景：连续、遍历各情况\n">
-<meta property='og:url' content='https://rooobeam.github.io/p/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E4%B8%8E%E5%8F%8C%E6%8C%87%E9%92%88/'>
-<meta property='og:site_name' content='rooobeam'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-07-25T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-07-25T00:00:00&#43;00:00'/>
-<meta name="twitter:title" content="滑动窗口与双指针">
-<meta name="twitter:description" content="滑动窗口与双指针 灵神题单：分享丨【算法题单】滑动窗口与双指针（定长/不定长/单序列/双序列/三指针/分组循环）- 讨论 - 力扣（LeetCode）\n场景：连续、遍历各情况\n">
-    <link rel="shortcut icon" href="/favicon.ico" />
-
-    </head>
-    <body class="
-    article-page
-    ">
-    <script>
-        (function() {
-            const colorSchemeKey = 'StackColorScheme';
-            if(!localStorage.getItem(colorSchemeKey)){
-                localStorage.setItem(colorSchemeKey, "auto");
-            }
-        })();
-    </script><script>
-    (function() {
-        const colorSchemeKey = 'StackColorScheme';
-        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
-        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
-
-        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
-            
-
-            document.documentElement.dataset.scheme = 'dark';
-        } else {
-            document.documentElement.dataset.scheme = 'light';
-        }
-    })();
-</script>
-<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
-    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
-        <span class="hamburger-box">
-            <span class="hamburger-inner"></span>
-        </span>
-    </button>
-
-    <header>
-        
-            
-            <figure class="site-avatar">
-                <a href="/">
-                
-                    
-                    
-                    
-                        
-                        <img src="/img/avatar_hu_124ee845b198fb3b.png" width="300"
-                            height="299" class="site-logo" loading="lazy" alt="Avatar">
-                    
-                
-                </a>
-                
-                    <span class="emoji">😚</span>
-                
-            </figure>
-            
-        
-        
-        <div class="site-meta">
-            <h1 class="site-name"><a href="/">rooobeam</a></h1>
-            <h2 class="site-description"></h2>
-        </div>
-    </header><ol class="menu-social">
-            
-                <li>
-                    <a 
-                        href='https://space.bilibili.com/3461571462302229'
-                        target="_blank"
-                        title="Bilibili"
-                        rel="me"
-                    >
-                        
-                        
-                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-brand-bilibili"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z" /><path d="M8 3l2 3" /><path d="M16 3l-2 3" /><path d="M9 13v-2" /><path d="M15 11v2" /></svg>
-                        
-                    </a>
-                </li>
-            
-                <li>
-                    <a 
-                        href='https://blog.csdn.net/rooobeam?'
-                        target="_blank"
-                        title="CSDN"
-                        rel="me"
-                    >
-                        
-                        
-                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-copyright"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M14 9.75a3.016 3.016 0 0 0 -4.163 .173a2.993 2.993 0 0 0 0 4.154a3.016 3.016 0 0 0 4.163 .173" /></svg>
-                        
-                    </a>
-                </li>
-            
-                <li>
-                    <a 
-                        href='https://github.com/rooobeam?'
-                        target="_blank"
-                        title="GitHub"
-                        rel="me"
-                    >
-                        
-                        
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
-</svg>
-
-
-
-                        
-                    </a>
-                </li>
-            
-        </ol><ol class="menu" id="main-menu">
-        
-        
-        
-        <li >
-            <a href='/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <polyline points="5 12 3 12 12 3 21 12 19 12" />
-  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
-  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
-</svg>
-
-
-
-                
-                <span>Home</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/search/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="10" cy="10" r="7" />
-  <line x1="21" y1="21" x2="15" y2="15" />
-</svg>
-
-
-
-                
-                <span>Search</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/links/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
-  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
-</svg>
-
-
-
-                
-                <span>Links</span>
-            </a>
-        </li>
-        
-        <li class="menu-bottom-section">
-            <ol class="menu">
-
-                
-                    <li id="dark-mode-toggle">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="8" cy="12" r="2" />
-  <rect x="2" y="6" width="20" height="12" rx="6" />
-</svg>
-
-
-
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="16" cy="12" r="2" />
-  <rect x="2" y="6" width="20" height="12" rx="6" />
-</svg>
-
-
-
-                        <span>Dark Mode</span>
-                    </li>
-                
-            </ol>
-        </li>
-    </ol>
-</aside>
-
-    <aside class="sidebar right-sidebar sticky">
-        
-            
-                
-    <section class="widget archives">
-        <div class="widget-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <line x1="5" y1="9" x2="19" y2="9" />
-  <line x1="5" y1="15" x2="19" y2="15" />
-  <line x1="11" y1="4" x2="7" y2="20" />
-  <line x1="17" y1="4" x2="13" y2="20" />
-</svg>
-
-
-
-        </div>
-        <h2 class="widget-title section-title">Table of contents</h2>
-        
-        <div class="widget--toc">
-            <nav id="TableOfContents">
-  <ol>
-    <li><a href="#尚未分类">尚未分类</a>
-      <ol>
-        <li><a href="#两数之和">两数之和</a></li>
-        <li><a href="#删除有序数组中的重复项">删除有序数组中的重复项</a></li>
-        <li><a href="#搜索插入位置">搜索插入位置</a></li>
-        <li><a href="#加一">加一</a></li>
-      </ol>
-    </li>
-    <li><a href="#定长滑动窗口">定长滑动窗口</a>
-      <ol>
-        <li><a href="#半径为-k-的子数组平均值">半径为 k 的子数组平均值</a></li>
-        <li><a href="#几乎唯一子数组的最大和">几乎唯一子数组的最大和</a></li>
-        <li><a href="#找到字符串中所有字母异位词">找到字符串中所有字母异位词</a></li>
-        <li><a href="#重新安排会议得到最多空余时间-i">重新安排会议得到最多空余时间 I</a></li>
-        <li><a href="#使二进制字符串字符交替的最少反转次数">使二进制字符串字符交替的最少反转次数</a></li>
-        <li><a href="#查找给定哈希值的子串">查找给定哈希值的子串</a></li>
-        <li><a href="#串联所有单词的子串次定长滑窗">串联所有单词的子串（次定长滑窗）</a></li>
-      </ol>
-    </li>
-    <li><a href="#不定长滑动窗口">不定长滑动窗口</a>
-      <ol>
-        <li><a href="#无重复字符的最长子串最长最大">无重复字符的最长子串（最长最大）</a></li>
-        <li><a href="#找到最长的半重复子字符串">找到最长的半重复子字符串</a></li>
-        <li><a href="#最高频元素的频数">最高频元素的频数</a></li>
-        <li><a href="#将-x-减到-0-的最小操作数">将 x 减到 0 的最小操作数</a></li>
-        <li><a href="#数组的最大美丽值">数组的最大美丽值</a></li>
-        <li><a href="#毯子覆盖的最多白色砖块数">毯子覆盖的最多白色砖块数</a></li>
-        <li><a href="#长度最小的子数组最短最小">长度最小的子数组（最短最小）</a></li>
-      </ol>
-    </li>
-    <li><a href="#相向双指针">相向双指针</a>
-      <ol>
-        <li><a href="#两数之和-ii---输入有序数组">两数之和 II - 输入有序数组</a></li>
-        <li><a href="#统计和小于目标的下标对数目">统计和小于目标的下标对数目</a></li>
-      </ol>
-    </li>
-  </ol>
-</nav>
-        </div>
-    </section>
-
-            
-        
-    </aside>
-
-
-            <main class="main full-width">
-    <article class="main-article">
-    <header class="article-header">
-
-    <div class="article-details">
+<!doctype html><html lang=zh-cn dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="index, follow"><link rel=icon href=/favicon.ico sizes=any><title>滑动窗口与双指针 – rooobeam</title><meta name=description content="滑动窗口与双指针灵神题单：分享丨【算法题单】滑动窗口与双指针（定长/不定长/单序列/双序列/三指针/分组循环）- 讨论 - 力扣（LeetCode）
+场景：连续、遍历各情况
+尚未分类 两数之和 1. 两数之和 - 力扣（LeetCode）"><link rel=canonical href=https://rooobeam.github.io/p/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E4%B8%8E%E5%8F%8C%E6%8C%87%E9%92%88/ itemprop=url><meta property="og:title" content="滑动窗口与双指针"><meta property="og:description" content="
     
-    <header class="article-category">
-        
-            <a href="/categories/%E5%9F%BA%E7%A1%80/" >
-                基础
-            </a>
-        
-            <a href="/categories/%E7%AE%97%E6%B3%95/" >
-                算法
-            </a>
-        
-    </header>
+      滑动窗口与双指针灵神题单：分享丨【算法题单】滑动窗口与双指针（定长/不定长/单序列/双序列/三指针/分组循环）- 讨论 - 力扣（LeetCode）
+场景：连续、遍历各情况
+尚未分类
+    两数之和
+    1. 两数之和 - 力扣（LeetCode）
     
-
-    <div class="article-title-wrapper">
-        <h2 class="article-title">
-            <a href="/p/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E4%B8%8E%E5%8F%8C%E6%8C%87%E9%92%88/">滑动窗口与双指针</a>
-        </h2>
-    
-        
-    </div>
-
-    
-    
-    
-    
-    <footer class="article-time">
-        
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
-  <circle cx="18" cy="18" r="4" />
-  <path d="M15 3v4" />
-  <path d="M7 3v4" />
-  <path d="M3 11h16" />
-  <path d="M18 16.496v1.504l1 1" />
-</svg>
-                <time class="article-time--published">2025-07-25</time>
-            </div>
-        
-
-        
-    </footer>
-    
-
-    
-</div>
-
-</header>
-
-    <section class="article-content">
-    
-    
-    <h1 id="滑动窗口与双指针">滑动窗口与双指针
-</h1><p>灵神题单：<a class="link" href="https://leetcode.cn/discuss/post/3578981/ti-dan-hua-dong-chuang-kou-ding-chang-bu-rzz7/"  target="_blank" rel="noopener"
-    >分享丨【算法题单】滑动窗口与双指针（定长/不定长/单序列/双序列/三指针/分组循环）- 讨论 - 力扣（LeetCode）</a></p>
-<p>场景：连续、遍历各情况</p>
-<h2 id="尚未分类">尚未分类
-</h2><h3 id="两数之和">两数之和
-</h3><p><strong><a class="link" href="https://leetcode.cn/problems/two-sum/description/?envType=problem-list-v2&amp;envId=array"  target="_blank" rel="noopener"
-    >1. 两数之和 - 力扣（LeetCode）</a></strong></p>
-<ul>
-<li>
-<p>给定一个整数数组 <code>nums</code> 和一个整数目标值 <code>target</code>，请你在该数组中找出 <strong>和为目标值</strong> <em><code>target</code></em> 的那 <strong>两个</strong> 整数，并返回它们的数组下标。</p>
-</li>
-<li>
-<p>你可以假设每种输入只会对应一个答案，并且你不能使用两次相同的元素。</p>
-</li>
-<li>
-<p>你可以按任意顺序返回答案。</p>
-</li>
-<li>
-<p>示例</p>
-</li>
-</ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">输入</span><span class="err">：</span><span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> <span class="n">target</span> <span class="o">=</span> <span class="mi">6</span>
-</span></span><span class="line"><span class="cl"><span class="n">输出</span><span class="err">：</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><strong>代码</strong></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">twoSum</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">target</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
-</span></span><span class="line"><span class="cl">        <span class="c1"># #遍历 </span>
-</span></span><span class="line"><span class="cl">        <span class="c1"># for i in range(len(nums)-1):</span>
-</span></span><span class="line"><span class="cl">        <span class="c1">#     for j in range(i+1,len(nums)):</span>
-</span></span><span class="line"><span class="cl">        <span class="c1">#         if nums[i]+nums[j]==target: </span>
-</span></span><span class="line"><span class="cl">        <span class="c1">#             return [i,j]</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="c1"># 哈希表  python 字典最好 键不存在即0个，但是要存索引 </span>
-</span></span><span class="line"><span class="cl">        <span class="n">dic</span><span class="o">=</span><span class="nb">dict</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">e</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">            <span class="c1"># if dic.get(target-e) is not None:</span>
-</span></span><span class="line"><span class="cl">            <span class="c1"># in方法就是用的哈希表查找  </span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">target</span><span class="o">-</span><span class="n">e</span> <span class="ow">in</span> <span class="n">dic</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="p">[</span><span class="n">dic</span><span class="p">[</span><span class="n">target</span><span class="o">-</span><span class="n">e</span><span class="p">],</span> <span class="n">i</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">            <span class="n">dic</span><span class="p">[</span><span class="n">e</span><span class="p">]</span><span class="o">=</span><span class="n">i</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><strong>what I learn</strong></p>
-<ul>
-<li>哈希表的查找用in方法可实现，用dict()或set()最好，用空间换时间。</li>
-<li>集合、字典的 in 方法时间复杂度O(1)，列表和元组的 in 时间复杂度O(n)。</li>
-</ul>
-<h3 id="删除有序数组中的重复项">删除有序数组中的重复项
-</h3><p><strong><a class="link" href="https://leetcode.cn/problems/remove-duplicates-from-sorted-array/description/?envType=problem-list-v2&amp;envId=array"  target="_blank" rel="noopener"
-    >26. 删除有序数组中的重复项 - 力扣（LeetCode）</a></strong></p>
-<ul>
-<li>
-<p>给你一个 <strong>非严格递增排列</strong> 的数组 <code>nums</code> ，请你**<a class="link" href="http://baike.baidu.com/item/%e5%8e%9f%e5%9c%b0%e7%ae%97%e6%b3%95"  target="_blank" rel="noopener"
-    > 原地</a>** 删除重复出现的元素，使每个元素 <strong>只出现一次</strong> ，返回删除后数组的新长度。元素的 <strong>相对顺序</strong> 应该保持 <strong>一致</strong> 。然后返回 <code>nums</code> 中唯一元素的个数。</p>
-</li>
-<li>
-<p>考虑 <code>nums</code> 的唯一元素的数量为 <code>k</code> ，你需要做以下事情确保你的题解可以被通过：</p>
-<ul>
-<li>
-<p>更改数组 <code>nums</code> ，使 <code>nums</code> 的前 <code>k</code> 个元素包含唯一元素，并按照它们最初在 <code>nums</code> 中出现的顺序排列。<code>nums</code> 的其余元素与 <code>nums</code> 的大小不重要。</p>
-</li>
-<li>
-<p>返回 <code>k</code> 。</p>
-</li>
-</ul>
-</li>
-<li>
-<p>示例</p>
-</li>
-</ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">输入</span><span class="err">：</span><span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl"><span class="n">输出</span><span class="err">：</span><span class="mi">5</span><span class="p">,</span> <span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><strong>代码</strong></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">removeDuplicates</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="c1"># 哈希表  空间换时间</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="c1"># dic=set()</span>
-</span></span><span class="line"><span class="cl">        <span class="c1"># for e in nums:</span>
-</span></span><span class="line"><span class="cl">        <span class="c1">#     if e not in dic:</span>
-</span></span><span class="line"><span class="cl">        <span class="c1">#         dic.add(e)</span>
-</span></span><span class="line"><span class="cl">        <span class="c1">#         nums[len(dic)-1]=e</span>
-</span></span><span class="line"><span class="cl">        <span class="c1">#         # print(dic)</span>
-</span></span><span class="line"><span class="cl">        <span class="c1">#         # print(nums)</span>
-</span></span><span class="line"><span class="cl">        <span class="c1">#         # print(&#34;----&#34;)</span>
-</span></span><span class="line"><span class="cl">        <span class="c1"># return len(dic)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="c1"># 双指针  利用有序性</span>
-</span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        <span class="n">p</span><span class="o">=</span><span class="mi">0</span>
-</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">e</span><span class="o">!=</span><span class="n">nums</span><span class="p">[</span><span class="n">p</span><span class="p">]:</span>
-</span></span><span class="line"><span class="cl">                <span class="n">p</span><span class="o">+=</span><span class="mi">1</span>
-</span></span><span class="line"><span class="cl">                <span class="n">nums</span><span class="p">[</span><span class="n">p</span><span class="p">]</span><span class="o">=</span><span class="n">e</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">p</span><span class="o">+</span><span class="mi">1</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><strong>what I learn</strong></p>
-<ul>
-<li>快慢指针，数据需要有有序性。</li>
-</ul>
-<h3 id="搜索插入位置">搜索插入位置
-</h3><p><strong><a class="link" href="https://leetcode.cn/problems/search-insert-position/description/?envType=problem-list-v2&amp;envId=array"  target="_blank" rel="noopener"
-    >35. 搜索插入位置 - 力扣（LeetCode）</a></strong></p>
-<ul>
-<li>
-<p>**（二分法）**记住就好了 T-T</p>
-</li>
-<li>
-<p>给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置。</p>
-</li>
-<li>
-<p>请必须使用时间复杂度为 <code>O(log n)</code> 的算法。</p>
-</li>
-<li>
-<p>示例：</p>
-</li>
-</ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">输入</span><span class="p">:</span> <span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span> <span class="n">target</span> <span class="o">=</span> <span class="mi">5</span>
-</span></span><span class="line"><span class="cl"><span class="n">输出</span><span class="p">:</span> <span class="mi">2</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><strong>代码</strong></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">searchInsert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">target</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">        <span class="c1"># 上下界限设置，target 最大时要放在“第len(nums)个位置”，最小时要放在“第0个位置”</span>
-</span></span><span class="line"><span class="cl">        <span class="n">up</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="n">low</span><span class="o">=</span><span class="mi">0</span>
-</span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="kc">True</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">            <span class="c1"># i为 正中（奇）或 偏上（偶）</span>
-</span></span><span class="line"><span class="cl">            <span class="n">i</span><span class="o">=</span><span class="p">(</span><span class="n">low</span><span class="o">+</span><span class="n">up</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span>
-</span></span><span class="line"><span class="cl">            <span class="c1"># 重合即为最终位置</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">low</span><span class="o">==</span><span class="n">up</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="n">low</span>
-</span></span><span class="line"><span class="cl">            <span class="c1"># 因为是向下取整的i，上界下移到i;下界上移到i+1。</span>
-</span></span><span class="line"><span class="cl">            <span class="c1"># 比如low=0,up=5，则：mid=2.5,i=2，小的区域为0~2(i)，大的区域为3(i+1)~5</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">target</span><span class="o">&lt;</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
-</span></span><span class="line"><span class="cl">                <span class="n">up</span><span class="o">=</span><span class="n">i</span>
-</span></span><span class="line"><span class="cl">            <span class="k">elif</span> <span class="n">target</span><span class="o">&gt;</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
-</span></span><span class="line"><span class="cl">                <span class="n">low</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span>
-</span></span><span class="line"><span class="cl">            <span class="k">else</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="n">i</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><strong>what I learn</strong></p>
-<ul>
-<li>二分法框架：
-<ul>
-<li>上下界up=len(nums)  low=0</li>
-<li>取中间(low+up)//2</li>
-<li>终止条件 low==up</li>
-<li>上界降 up=mid</li>
-<li>下界升 low=mid+1</li>
-</ul>
-</li>
-</ul>
-<h3 id="加一">加一
-</h3><p><strong><a class="link" href="https://leetcode.cn/problems/plus-one/?envType=problem-list-v2&amp;envId=array"  target="_blank" rel="noopener"
-    >66. 加一 - 力扣（LeetCode）</a></strong></p>
-<ul>
-<li>
-<p>给定一个由 <strong>整数</strong> 组成的 <strong>非空</strong> 数组所表示的非负整数，在该数的基础上加一。</p>
-</li>
-<li>
-<p>最高位数字存放在数组的首位， 数组中每个元素只存储<strong>单个</strong>数字。</p>
-</li>
-<li>
-<p>你可以假设除了整数 0 之外，这个整数不会以零开头。</p>
-</li>
-<li>
-<p>示例 1：</p>
-</li>
-</ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">输入</span><span class="err">：</span><span class="n">digits</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl"><span class="n">输出</span><span class="err">：</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl"><span class="n">解释</span><span class="err">：</span><span class="n">输入数组表示数字</span> <span class="mi">123</span><span class="err">。</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><ul>
-<li>示例 2：</li>
-</ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">输入</span><span class="err">：</span><span class="n">digits</span> <span class="o">=</span> <span class="p">[</span><span class="mi">9</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl"><span class="n">输出</span><span class="err">：</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl"><span class="n">解释</span><span class="err">：</span><span class="n">输入数组表示数字</span> <span class="mi">9</span><span class="err">。</span>
-</span></span><span class="line"><span class="cl"><span class="n">加</span> <span class="mi">1</span> <span class="n">得到了</span> <span class="mi">9</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">=</span> <span class="mi">10</span><span class="err">。</span>
-</span></span><span class="line"><span class="cl"><span class="n">因此</span><span class="err">，</span><span class="n">结果应该是</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="err">。</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><strong>代码</strong></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">plusOne</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">digits</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
-</span></span><span class="line"><span class="cl">        <span class="c1"># 逆序，从低位开始，发现小于9的说明不用进位，加一退出，否则+1是10，当前位为0，进入下一位重复</span>
-</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">digits</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">digits</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&lt;</span><span class="mi">9</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">                <span class="n">digits</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+=</span><span class="mi">1</span>
-</span></span><span class="line"><span class="cl">                <span class="k">break</span>
-</span></span><span class="line"><span class="cl">            <span class="n">digits</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span>
-</span></span><span class="line"><span class="cl">		<span class="c1"># 如果最高位为0，说明进位了，前面插入1</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="ow">not</span> <span class="n">digits</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
-</span></span><span class="line"><span class="cl">            <span class="n">digits</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">digits</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><strong>what I learn</strong></p>
-<ul>
-<li>逆序索引  range(len(digits)-1,-1,-1)     从len(digits)-1开始，步长为-1(递减)，到-1，左闭右开[len(digits)-1, -1)。</li>
-</ul>
-<h2 id="定长滑动窗口">定长滑动窗口
-</h2><ul>
-<li>共性在于“一进一出”</li>
-<li>记录变化计算、设置、边界值处理</li>
-<li>逆向、排序、分组等特殊处理</li>
-</ul>
-<h3 id="半径为-k-的子数组平均值">半径为 k 的子数组平均值
-</h3><p><strong><a class="link" href="https://leetcode.cn/problems/k-radius-subarray-averages/description/"  target="_blank" rel="noopener"
-    >2090. 半径为 k 的子数组平均值 - 力扣（LeetCode）</a></strong></p>
-<ul>
-<li>
-<p>给你一个下标从 <strong>0</strong> 开始的数组 <code>nums</code> ，数组中有 <code>n</code> 个整数，另给你一个整数 <code>k</code> 。</p>
-</li>
-<li>
-<p><strong>半径为 k 的子数组平均值</strong> 是指：<code>nums</code> 中一个以下标 <code>i</code> 为 <strong>中心</strong> 且 <strong>半径</strong> 为 <code>k</code> 的子数组中所有元素的平均值，即下标在 <code>i - k</code> 和 <code>i + k</code> 范围（<strong>含</strong> <code>i - k</code> 和 <code>i + k</code>）内所有元素的平均值。如果在下标 <code>i</code> 前或后不足 <code>k</code> 个元素，那么 <strong>半径为 k 的子数组平均值</strong> 是 <code>-1</code> 。</p>
-</li>
-<li>
-<p>构建并返回一个长度为 <code>n</code> 的数组 <code>avgs</code> ，其中 <code>avgs[i]</code> 是以下标 <code>i</code> 为中心的子数组的 <strong>半径为 k 的子数组平均值</strong> 。</p>
-</li>
-<li>
-<p><code>x</code> 个元素的 <strong>平均值</strong> 是 <code>x</code> 个元素相加之和除以 <code>x</code> ，此时使用截断式 <strong>整数除法</strong> ，即需要去掉结果的小数部分。</p>
-</li>
-<li>
-<p>例如，四个元素 <code>2</code>、<code>3</code>、<code>1</code> 和 <code>5</code> 的平均值是 <code>(2 + 3 + 1 + 5) / 4 = 11 / 4 = 2.75</code>，截断后得到 <code>2</code> 。</p>
-</li>
-</ul>
-<img src="https://assets.leetcode.com/uploads/2021/11/07/eg1.png"/>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">输入</span><span class="err">：</span><span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">3</span>
-</span></span><span class="line"><span class="cl"><span class="n">输出</span><span class="err">：</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><strong>代码</strong></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">getAverages</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>        
-</span></span><span class="line"><span class="cl">        <span class="c1"># 我老想着动态得去判断加-1进result列表</span>
-</span></span><span class="line"><span class="cl">        <span class="n">avgs</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="n">s</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># 维护窗口元素和</span>
-</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">            <span class="c1"># 1. 进入窗口</span>
-</span></span><span class="line"><span class="cl">            <span class="n">s</span> <span class="o">+=</span> <span class="n">x</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">k</span> <span class="o">*</span> <span class="mi">2</span><span class="p">:</span>  <span class="c1"># 窗口大小不足 2k+1</span>
-</span></span><span class="line"><span class="cl">                <span class="k">continue</span>
-</span></span><span class="line"><span class="cl">            <span class="c1"># 2. 记录答案</span>
-</span></span><span class="line"><span class="cl">            <span class="n">avgs</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">s</span> <span class="o">//</span> <span class="p">(</span><span class="n">k</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">            <span class="c1"># 3. 离开窗口</span>
-</span></span><span class="line"><span class="cl">            <span class="n">s</span> <span class="o">-=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="n">k</span> <span class="o">*</span> <span class="mi">2</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">avgs</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># 作者-灵神</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><strong>what I learn</strong></p>
-<ul>
-<li>观察问题的本质，不要被方法带着走。
-<ul>
-<li>问题的本质：待到要处理的索引时，得出平均值放入数组。</li>
-<li>方法带偏：想着边遍历边append，开头去append -1，结束了再补充-1。</li>
-<li>解决的关键：初始化nums长度的 -1数组，即 [-1] * len(nums)。</li>
-</ul>
-</li>
-</ul>
-<h3 id="几乎唯一子数组的最大和">几乎唯一子数组的最大和
-</h3><p><strong><a class="link" href="https://leetcode.cn/problems/maximum-sum-of-almost-unique-subarray/"  target="_blank" rel="noopener"
-    >2841. 几乎唯一子数组的最大和 - 力扣（LeetCode）</a></strong></p>
-<ul>
-<li>
-<p>给你一个整数数组 <code>nums</code> 和两个正整数 <code>m</code> 和 <code>k</code> 。</p>
-</li>
-<li>
-<p>请你返回 <code>nums</code> 中长度为 <code>k</code> 的 <strong>几乎唯一</strong> 子数组的 <strong>最大和</strong> ，如果不存在几乎唯一子数组，请你返回 <code>0</code> 。</p>
-</li>
-<li>
-<p>如果 <code>nums</code> 的一个子数组有至少 <code>m</code> 个互不相同的元素，我们称它是 <strong>几乎唯一</strong> 子数组。</p>
-</li>
-<li>
-<p>子数组指的是一个数组中一段连续 <strong>非空</strong> 的元素序列。</p>
-</li>
-<li>
-<p>示例</p>
-</li>
-</ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">输入</span><span class="err">：</span><span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">],</span> <span class="n">m</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">4</span>
-</span></span><span class="line"><span class="cl"><span class="n">输出</span><span class="err">：</span><span class="mi">18</span>
-</span></span><span class="line"><span class="cl"><span class="n">解释</span><span class="err">：</span><span class="n">总共有</span> <span class="mi">3</span> <span class="n">个长度为</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">4</span> <span class="n">的几乎唯一子数组</span><span class="err">。</span><span class="n">分别为</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="err">，</span><span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="n">和</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span> <span class="err">。</span><span class="n">这些子数组中</span><span class="err">，</span><span class="n">和最大的是</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="err">，</span><span class="n">和为</span> <span class="mi">18</span> <span class="err">。</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><strong>代码</strong></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">maxSum</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">m</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">        <span class="n">sum_n</span> <span class="o">=</span> <span class="n">max_sum</span> <span class="o">=</span> <span class="mi">0</span>
-</span></span><span class="line"><span class="cl">        <span class="n">dif_n</span><span class="o">=</span><span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">element</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">            <span class="n">dif_n</span><span class="p">[</span><span class="n">element</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-</span></span><span class="line"><span class="cl">            <span class="n">sum_n</span> <span class="o">+=</span> <span class="n">element</span>
-</span></span><span class="line"><span class="cl">            
-</span></span><span class="line"><span class="cl">            <span class="n">left</span> <span class="o">=</span> <span class="n">i</span><span class="o">-</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span>			
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">left</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">                <span class="k">continue</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">dif_n</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">m</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">                <span class="n">max_sum</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">sum_n</span><span class="p">,</span><span class="n">max_sum</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">            <span class="n">out</span><span class="o">=</span><span class="n">nums</span><span class="p">[</span><span class="n">left</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">            <span class="n">sum_n</span> <span class="o">-=</span> <span class="n">out</span>
-</span></span><span class="line"><span class="cl">            <span class="n">dif_n</span><span class="p">[</span><span class="n">out</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">dif_n</span><span class="p">[</span><span class="n">out</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">                <span class="k">del</span> <span class="n">dif_n</span><span class="p">[</span><span class="n">out</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">			
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">max_sum</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><strong>what I learn</strong></p>
-<ul>
-<li>sum_n = max_sum = 0</li>
-<li>使用defaultdict
-<ul>
-<li>默认值为0，dif_n=defaultdict(int) 因为int()返回0（不如Counter）</li>
-<li>if dif_n[out] == 0:  <strong>del</strong> dif_n[out]  删除其中值为0的键值对</li>
-</ul>
-</li>
-<li>max_sum = max(sum_n,max_sum) 而不用 if 条件判断</li>
-<li>left = i-k+1    &hellip;.   out=nums[left]        使代码更简洁美观</li>
-</ul>
-<h3 id="找到字符串中所有字母异位词">找到字符串中所有字母异位词
-</h3><p><a class="link" href="https://leetcode.cn/problems/find-all-anagrams-in-a-string/description/"  target="_blank" rel="noopener"
-    >438. 找到字符串中所有字母异位词 - 力扣（LeetCode）</a></p>
-<p><strong>what I learn</strong></p>
-<ul>
-<li>Counter</li>
-</ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 示例 1：统计字母频次</span>
-</span></span><span class="line"><span class="cl"><span class="n">cnt_p</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="s2">&#34;aabbc&#34;</span><span class="p">)</span> 
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">cnt_p</span><span class="p">)</span>  <span class="c1"># 输出：Counter({&#39;a&#39;: 2, &#39;b&#39;: 2, &#39;c&#39;: 1})</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 示例 2：访问不存在的键</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">cnt_p</span><span class="p">[</span><span class="s2">&#34;d&#34;</span><span class="p">])</span>  <span class="c1"># 输出：0（不会报错！）</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 改变值，类似字典</span>
-</span></span><span class="line"><span class="cl"><span class="n">cnt_p</span><span class="p">[</span><span class="s2">&#34;a&#34;</span><span class="p">]</span><span class="o">+=</span><span class="mi">1</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 比较和集合操作</span>
-</span></span><span class="line"><span class="cl"><span class="n">cnt_1</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="s2">&#34;bcd&#34;</span><span class="p">)</span> 
-</span></span><span class="line"><span class="cl"><span class="n">cnt_2</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="s2">&#34;abc&#34;</span><span class="p">)</span> 
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">cnt_1</span><span class="o">==</span><span class="n">cnt2</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">cnt_1</span><span class="o">-</span><span class="n">cnt_2</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">cnt_1</span><span class="o">+</span><span class="n">cnt_2</span><span class="p">)</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="重新安排会议得到最多空余时间-i">重新安排会议得到最多空余时间 I
-</h3><p><a class="link" href="https://leetcode.cn/problems/reschedule-meetings-for-maximum-free-time-i/"  target="_blank" rel="noopener"
-    >3439. 重新安排会议得到最多空余时间 I - 力扣（LeetCode）</a></p>
-<ul>
-<li>理解题目意思，转化问题（so called 建模）为某种方法解决，此题很明显，弄出所有时间差gap，然后求最大连续子数组即可。</li>
-<li>注意一些变量的值需要变化，比如这题中的“可以移动k个”，转化为k+1个连续子数组</li>
-<li>注意全面性，比如gap还包括“startTime-第一个会议开始时刻” “endTime-最后一个会议结束时刻”。</li>
-</ul>
-<h3 id="使二进制字符串字符交替的最少反转次数">使二进制字符串字符交替的最少反转次数
-</h3><p><a class="link" href="https://leetcode.cn/problems/minimum-number-of-flips-to-make-the-binary-string-alternating/"  target="_blank" rel="noopener"
-    >1888. 使二进制字符串字符交替的最少反转次数 - 力扣（LeetCode）</a></p>
-<ul>
-<li>枚举法（s + s 上的滑动窗口），不要想当然得觉得 想出的算法能适应所有情况，当测试不通过时，大胆暴力，这里也就是 生成所有第一种操作而成的字符串，然后滑动遍历所有情况。</li>
-<li>ans=min(cnt, k - cnt, ans)，在当前情况下的两种可能和全局最小 中 取最小。</li>
-</ul>
-<h3 id="查找给定哈希值的子串">查找给定哈希值的子串
-</h3><p><a class="link" href="https://leetcode.cn/problems/find-substring-with-given-hash-value/description/"  target="_blank" rel="noopener"
-    >2156. 查找给定哈希值的子串 - 力扣（LeetCode）</a></p>
-<ul>
-<li>第一个字母的 <em>p</em> 的幂次是最小的，这和通常字符串哈希中的定义是<strong>相反</strong>的。所以在计算哈希值时，要<strong>倒序遍历</strong>。</li>
-<li>关键在于，此题正序遍历时，要在mod m下除以p，除法需要逆元，逆元不一定存在；逆序遍历时为乘p，无需逆元。</li>
-</ul>
-<h3 id="串联所有单词的子串次定长滑窗">串联所有单词的子串（次定长滑窗）
-</h3><p><a class="link" href="https://leetcode.cn/problems/substring-with-concatenation-of-all-words/description/"  target="_blank" rel="noopener"
-    >30. 串联所有单词的子串 - 力扣（LeetCode）</a></p>
-<ul>
-<li>&ldquo;barfoothefoobarman&rdquo;，单个“词”长度3，本因3个3个检查，于是为遍历所有情况，起始位置需为0/1，对从0/1位置开始的字符串分别滑窗。</li>
-</ul>
-<h2 id="不定长滑动窗口">不定长滑动窗口
-</h2><ul>
-<li>求最大最长（越短越合法或恰好合法）：内循环while使窗变小，一旦合法则无法继续循环，则此时为合法下的最长。</li>
-<li>求最小最短（越长越合法或恰好合法）：内循环while使窗变小，预计算一步若不合法则无法继续循环，此时为合法下的最短。</li>
-<li>求子数组</li>
-</ul>
-<h3 id="无重复字符的最长子串最长最大">无重复字符的最长子串（最长最大）
-</h3><p><strong><a class="link" href="https://leetcode.cn/problems/longest-substring-without-repeating-characters/"  target="_blank" rel="noopener"
-    >3. 无重复字符的最长子串 - 力扣（LeetCode）</a></strong></p>
-<ul>
-<li>基础模板：左指针while调整，右指针“+1移动”，cnt为int或defaultdict(int)记录信息，ans = max(ans, right-left+1)。</li>
-<li>循环内呈现：right(进入的元素)处理，while循环调整左指针和记录变量，外围答案值是否需要改变。</li>
-</ul>
-<h3 id="找到最长的半重复子字符串">找到最长的半重复子字符串
-</h3><p><a class="link" href="https://leetcode.cn/problems/find-the-longest-semi-repetitive-substring/solutions/2304713/shuang-zhi-zhen-hua-chuang-pythonjavacgo-nurf/"  target="_blank" rel="noopener"
-    >2730. 找到最长的半重复子字符串 - 力扣（LeetCode）</a></p>
-<ul>
-<li>稍作调整使用模板：ans的初始化(默认)值设置；记录变量的如何设置和如何变化</li>
-</ul>
-<h3 id="最高频元素的频数">最高频元素的频数
-</h3><p><a class="link" href="https://leetcode.cn/problems/frequency-of-the-most-frequent-element/description/"  target="_blank" rel="noopener"
-    >1838. 最高频元素的频数 - 力扣（LeetCode）</a></p>
-<ul>
-<li>洞悉“滑窗”特性，主要在于它的只增性质。</li>
-<li>先用在框架下暴力方法分析如何解出，再优化时间复杂度。</li>
-</ul>
-<h3 id="将-x-减到-0-的最小操作数">将 x 减到 0 的最小操作数
-</h3><p><a class="link" href="https://leetcode.cn/problems/minimum-operations-to-reduce-x-to-zero/description/"  target="_blank" rel="noopener"
-    >1658. 将 x 减到 0 的最小操作数 - 力扣（LeetCode）</a></p>
-<p>逆向思维+滑动窗口</p>
-<ul>
-<li>逆向思维</li>
-<li>特殊情况分析</li>
-</ul>
-<h3 id="数组的最大美丽值">数组的最大美丽值
-</h3><p><a class="link" href="https://leetcode.cn/problems/maximum-beauty-of-an-array-after-applying-operation/description/"  target="_blank" rel="noopener"
-    >2779. 数组的最大美丽值 - 力扣（LeetCode）</a></p>
-<p>排序+滑动窗口</p>
-<ul>
-<li>审题，发现排序并不影响子序列的选择；排序后分析left的移动条件即可轻易解出。</li>
-</ul>
-<h3 id="毯子覆盖的最多白色砖块数">毯子覆盖的最多白色砖块数
-</h3><p><a class="link" href="https://leetcode.cn/problems/maximum-white-tiles-covered-by-a-carpet/description/"  target="_blank" rel="noopener"
-    >2271. 毯子覆盖的最多白色砖块数 - 力扣（LeetCode）</a></p>
-<p>排序+滑动窗口+特殊滑动单位</p>
-<ul>
-<li>模拟发现，毯子右端在白瓷内时，覆盖面积非递减，毯子右端在非白瓷内时，覆盖面积非递增。</li>
-<li>相当于每次毯子右端在白瓷右端时，计算覆盖面积看是否大于ans，于是滑动单位为一个个白瓷（一个个区间）</li>
-</ul>
-<h3 id="长度最小的子数组最短最小">长度最小的子数组（最短最小）
-</h3><p><a class="link" href="https://leetcode.cn/problems/minimum-size-subarray-sum/"  target="_blank" rel="noopener"
-    >209. 长度最小的子数组 - 力扣（LeetCode）</a></p>
-<ul>
-<li>while total-nums[left] &gt;= target:    （&ldquo;预计算一步&rdquo;，即下一步不满足，现在是最短）</li>
-</ul>
-<h2 id="相向双指针">相向双指针
-</h2><h3 id="两数之和-ii---输入有序数组">两数之和 II - 输入有序数组
-</h3><p><a class="link" href="https://leetcode.cn/problems/two-sum-ii-input-array-is-sorted/description/"  target="_blank" rel="noopener"
-    >167. 两数之和 II - 输入有序数组 - 力扣（LeetCode）</a></p>
-<ul>
-<li>关键在于利用“有序”进行排除，移动的指针 便是 排除“都小”或“都大”的数。</li>
-<li>最终找到恰好</li>
-</ul>
-<p><img src="https://pic.leetcode-cn.com/9ebb3ff74f0706c3c350b7fb91fea343e54750eb5b6ae6a4a3493421a019922a.gif"
-	
-	
-	
-	loading="lazy"
-	
-		alt="搜索空间的减小过程（动图）"
-	
-	
-></p>
-<h3 id="统计和小于目标的下标对数目">统计和小于目标的下标对数目
-</h3><p><a class="link" href="https://leetcode.cn/problems/count-pairs-whose-sum-is-less-than-target/description/"  target="_blank" rel="noopener"
-    >2824. 统计和小于目标的下标对数目 - 力扣（LeetCode）</a></p>
-<ul>
-<li>对大于/小于的统计，都是right-left，条件不同罢了，对称性：固定左指针，右指针往左，和都小；固定右指针，左指针往右，和都大。</li>
-</ul>
-
-</section>
-
-
-    <footer class="article-footer">
-    
-
-    </footer>
-
-
-    
-        <link 
-                rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
-            ><script 
-                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
-                defer
-                >
-            </script><script 
-                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
-                defer
-                >
-            </script><script>
-    window.addEventListener("DOMContentLoaded", () => {
-        renderMathInElement(document.body, {
-            delimiters: [
-                { left: "$$", right: "$$", display: true },
-                { left: "$", right: "$", display: false },
-                { left: "\\(", right: "\\)", display: false },
-                { left: "\\[", right: "\\]", display: true }
-            ],
-            ignoredClasses: ["gist"]
-        });})
-</script>
-    
-</article>
-
-    
-
-    
-
-<aside class="related-content--wrapper">
-    <h2 class="section-title">Related content</h2>
-    <div class="related-content">
-        <div class="flex article-list--tile">
-            
-                
-<article class="">
-    <a href="/p/introduction_to_multi-armed_bandits/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">Introduction_to_Multi Armed_Bandits</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="">
-    <a href="/p/tree_search/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">Tree_search</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
-    <a href="/p/%E7%8E%8B%E7%88%BD-%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/">
-        
-        
-            <div class="article-image">
-                <img src="/p/%E7%8E%8B%E7%88%BD-%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/vglcjtiwyh9bnm0o.cae4bbd4d430a8db07bfb833efe234d9_hu_5d3a0c5fa0cd7e74.webp" 
-                        width="250" 
-                        height="150" 
-                        loading="lazy"
-                        alt="Featured image of post 王爽 汇编语言"
-                        
-                        data-hash="md5-yuS71NQwqNsHv7gz7&#43;I02Q==">
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">王爽 汇编语言</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="">
-    <a href="/p/%E9%93%BE%E8%A1%A8%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%8E%E5%9B%9E%E6%BA%AF/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">链表、二叉树与回溯</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="">
-    <a href="/p/%E4%BD%8D%E8%BF%90%E7%AE%97/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">位运算</h2>
-        </div>
-    </a>
-</article>
-
-            
-        </div>
-    </div>
-</aside>
-
-     
-    
-        
-    
-
-    <footer class="site-footer">
-    <section class="copyright">
-        &copy; 
-        
-            2025 - 
-        
-        2026 rooobeam
-    </section>
-    
-    <section class="powerby">
-        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
-    </section>
-</footer>
-
-
-    
-<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-
-    
-    <div class="pswp__bg"></div>
-
-    
-    <div class="pswp__scroll-wrap">
-
-        
-        <div class="pswp__container">
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-        </div>
-
-        
-        <div class="pswp__ui pswp__ui--hidden">
-
-            <div class="pswp__top-bar">
-
-                
-
-                <div class="pswp__counter"></div>
-
-                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-
-                <button class="pswp__button pswp__button--share" title="Share"></button>
-
-                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-
-                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-
-                
-                
-                <div class="pswp__preloader">
-                    <div class="pswp__preloader__icn">
-                        <div class="pswp__preloader__cut">
-                            <div class="pswp__preloader__donut"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-                <div class="pswp__share-tooltip"></div>
-            </div>
-
-            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
-            </button>
-
-            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
-            </button>
-
-            <div class="pswp__caption">
-                <div class="pswp__caption__center"></div>
-            </div>
-
-        </div>
-
-    </div>
-
-</div><script 
-                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
-                defer
-                >
-            </script><script 
-                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
-                defer
-                >
-            </script><link 
-                rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
-            ><link 
-                rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
-            >
-
-            </main>
-        </div>
-        <script 
-                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
-                
-                >
-            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
-<script>
-    (function () {
-        const customFont = document.createElement('link');
-        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
-
-        customFont.type = "text/css";
-        customFont.rel = "stylesheet";
-
-        document.head.appendChild(customFont);
-    }());
-</script>
-
-    </body>
-</html>
+  "><meta property="og:type" content="
+    article
+  "><meta property="og:url" content="https://rooobeam.github.io/p/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E4%B8%8E%E5%8F%8C%E6%8C%87%E9%92%88/"><meta property="article:section" content="post"><meta property="article:published_time" content="2025-07-25T00:00:00+00:00"><meta property="article:modified_time" content="2025-07-25T00:00:00+00:00"><meta itemprop=name content="滑动窗口与双指针"><meta itemprop=description content="滑动窗口与双指针灵神题单：分享丨【算法题单】滑动窗口与双指针（定长/不定长/单序列/双序列/三指针/分组循环）- 讨论 - 力扣（LeetCode）
+场景：连续、遍历各情况
+尚未分类 两数之和 1. 两数之和 - 力扣（LeetCode）"><meta itemprop=datePublished content="2025-07-25T00:00:00+00:00"><meta itemprop=dateModified content="2025-07-25T00:00:00+00:00"><meta itemprop=wordCount content="4392"><meta itemprop=keywords content="基础,算法"><meta name=twitter:card content="summary"><meta name=twitter:title content="滑动窗口与双指针"><meta name=twitter:description content="滑动窗口与双指针灵神题单：分享丨【算法题单】滑动窗口与双指针（定长/不定长/单序列/双序列/三指针/分组循环）- 讨论 - 力扣（LeetCode）
+场景：连续、遍历各情况
+尚未分类 两数之和 1. 两数之和 - 力扣（LeetCode）"><link rel=preload href=/css/compiled/main.min.0ecd4a321ffab68460c51522d4255a0df1075a2702f4fb69da0dea5851ad285e.css as=style integrity="sha256-Ds1KMh/6toRgxRUi1CVaDfEHWicC9Ptp2g3qWFGtKF4="><link href=/css/compiled/main.min.0ecd4a321ffab68460c51522d4255a0df1075a2702f4fb69da0dea5851ad285e.css rel=stylesheet integrity="sha256-Ds1KMh/6toRgxRUi1CVaDfEHWicC9Ptp2g3qWFGtKF4="><script src=/js/main-head.min.94da6f95b126542222dab3a6e07ffefe1aaf63ec3ca555e827b58b80e7d3f0b7.js integrity="sha256-lNpvlbEmVCIi2rOm4H/+/hqvY+w8pVXoJ7WLgOfT8Lc="></script></head><body><a href=#content class="hx:sr-only hx:focus-visible:not-sr-only hx:focus-visible:fixed hx:focus-visible:z-50 hx:focus-visible:top-2 hx:focus-visible:left-2 hx:focus-visible:bg-primary-500 hx:focus-visible:text-white hx:focus-visible:px-4 hx:focus-visible:py-2 hx:focus-visible:rounded-md hx:focus-visible:text-sm hx:focus-visible:font-medium">跳至内容</a><div class="hextra-nav-container hx:sticky hx:top-0 hx:z-20 hx:w-full hx:bg-transparent hx:print:hidden"><div class="hextra-nav-container-blur hx:pointer-events-none hx:absolute hx:z-[-1] hx:h-full hx:w-full hx:bg-white hx:dark:bg-dark hx:shadow-[0_2px_4px_rgba(0,0,0,.02),0_1px_0_rgba(0,0,0,.06)] hx:contrast-more:shadow-[0_0_0_1px_#000] hx:dark:shadow-[0_-1px_0_rgba(255,255,255,.1)_inset] hx:contrast-more:dark:shadow-[0_0_0_1px_#fff]"></div><nav class="hextra-max-navbar-width hx:mx-auto hx:flex hx:items-center hx:justify-end hx:gap-2 hx:h-16 hx:px-6"><a class="hx:flex hx:items-center hx:hover:opacity-75 hx:ltr:mr-auto hx:rtl:ml-auto" href=/><span class="hx:mr-2 hx:font-extrabold hx:inline hx:select-none">rooobeam</span>
+</a><a title href=/ class="hx:text-sm hx:contrast-more:text-gray-700 hx:contrast-more:dark:text-gray-100 hx:relative hx:-ml-2 hx:hidden hx:whitespace-nowrap hx:p-2 hx:md:inline-flex hx:items-center hx:gap-1 hx:text-gray-600 hx:hover:text-gray-800 hx:dark:text-gray-400 hx:dark:hover:text-gray-200"><span class=hx:text-center>首页</span>
+</a><a title href=/notes class="hx:text-sm hx:contrast-more:text-gray-700 hx:contrast-more:dark:text-gray-100 hx:relative hx:-ml-2 hx:hidden hx:whitespace-nowrap hx:p-2 hx:md:inline-flex hx:items-center hx:gap-1 hx:text-gray-600 hx:hover:text-gray-800 hx:dark:text-gray-400 hx:dark:hover:text-gray-200"><span class=hx:text-center>笔记专题</span>
+</a><a title href=/post/ class="hx:text-sm hx:contrast-more:text-gray-700 hx:contrast-more:dark:text-gray-100 hx:relative hx:-ml-2 hx:hidden hx:whitespace-nowrap hx:p-2 hx:md:inline-flex hx:items-center hx:gap-1 hx:text-gray-600 hx:hover:text-gray-800 hx:dark:text-gray-400 hx:dark:hover:text-gray-200"><span class=hx:text-center>全部笔记</span>
+</a><a title href=/archives/ class="hx:text-sm hx:contrast-more:text-gray-700 hx:contrast-more:dark:text-gray-100 hx:relative hx:-ml-2 hx:hidden hx:whitespace-nowrap hx:p-2 hx:md:inline-flex hx:items-center hx:gap-1 hx:text-gray-600 hx:hover:text-gray-800 hx:dark:text-gray-400 hx:dark:hover:text-gray-200"><span class=hx:text-center>归档</span></a><div class="hextra-search-wrapper hx:relative hx:md:w-64"><div class="hx:relative hx:flex hx:items-center hx:text-gray-900 hx:contrast-more:text-gray-800 hx:dark:text-gray-300 hx:contrast-more:dark:text-gray-300"><input placeholder=搜索笔记… aria-label=搜索笔记… class="hextra-search-input hx:hextra-focus-visible hx:block hx:w-full hx:appearance-none hx:rounded-lg hx:px-3 hx:py-2 hx:transition-colors hx:text-base hx:leading-tight hx:md:text-sm hx:bg-black/[.05] hx:dark:bg-gray-50/10 hx:focus-visible:bg-white hx:dark:focus-visible:bg-dark hx:placeholder:text-gray-500 hx:dark:placeholder:text-gray-400 hx:contrast-more:border hx:contrast-more:border-current" type=search autocomplete=off spellcheck=false>
+<kbd class="hx:absolute hx:my-1.5 hx:select-none hx:ltr:right-1.5 hx:rtl:left-1.5 hx:h-5 hx:rounded-sm hx:bg-white hx:px-1.5 hx:font-mono hx:text-[10px] hx:font-medium hx:text-gray-500 hx:border hx:border-gray-200 hx:dark:border-gray-100/20 hx:dark:bg-dark/50 hx:contrast-more:border-current hx:contrast-more:text-current hx:contrast-more:dark:border-current hx:items-center hx:gap-1 hx:transition-opacity hx:pointer-events-none hx:hidden hx:sm:flex">CTRL K</kbd></div><div><ul class="hextra-search-results hextra-scrollbar hx:hidden hx:border hx:border-gray-200 hx:bg-white hx:text-gray-100 hx:dark:border-neutral-800 hx:dark:bg-neutral-900 hx:absolute hx:top-full hx:z-20 hx:mt-2 hx:overflow-auto hx:overscroll-contain hx:rounded-xl hx:py-2.5 hx:shadow-xl hx:max-h-[min(calc(50vh-11rem-env(safe-area-inset-bottom)),400px)] hx:md:max-h-[min(calc(100vh-5rem-env(safe-area-inset-bottom)),400px)] hx:inset-x-0 hx:ltr:md:left-auto hx:rtl:md:right-auto hx:contrast-more:border hx:contrast-more:border-gray-900 hx:contrast-more:dark:border-gray-50 hx:w-screen hx:min-h-[100px] hx:max-w-[min(calc(100vw-2rem),calc(100%+20rem))]" aria-label=搜索结果 style="transition:max-height .2s ease 0s"></ul><div class="hextra-search-status hx:sr-only" aria-live=polite role=status></div></div></div><a class="hx:p-2 hx:text-current" target=_blank rel=noreferrer href=https://github.com/rooobeam title=GitHub><svg height="24" fill="currentColor" viewBox="3 3 18 18"><path d="M12 3C7.0275 3 3 7.12937 3 12.2276c0 4.0833 2.57625 7.5321 6.15374 8.7548C9.60374 21.0631 9.77249 20.7863 9.77249 20.5441 9.77249 20.3249 9.76125 19.5982 9.76125 18.8254 7.5 19.2522 6.915 18.2602 6.735 17.7412 6.63375 17.4759 6.19499 16.6569 5.8125 16.4378 5.4975 16.2647 5.0475 15.838 5.80124 15.8264 6.51 15.8149 7.01625 16.4954 7.18499 16.7723 7.99499 18.1679 9.28875 17.7758 9.80625 17.5335 9.885 16.9337 10.1212 16.53 10.38 16.2993 8.3775 16.0687 6.285 15.2728 6.285 11.7432c0-1.0035.34875-1.834.92249-2.47994C7.1175 9.03257 6.8025 8.08674 7.2975 6.81794c0 0 .753749999999999-.24223 2.47499.94583.72001-.20762 1.48501-.31143 2.25001-.31143C12.7875 7.45234 13.5525 7.55615 14.2725 7.76377c1.7212-1.19959 2.475-.94583 2.475-.94583C17.2424 8.08674 16.9275 9.03257 16.8375 9.26326 17.4113 9.9092 17.76 10.7281 17.76 11.7432c0 3.5411-2.1037 4.3255-4.1063 4.5561C13.98 16.5877 14.2613 17.1414 14.2613 18.0065 14.2613 19.2407 14.25 20.2326 14.25 20.5441 14.25 20.7863 14.4188 21.0746 14.8688 20.9824 16.6554 20.364 18.2079 19.1866 19.3078 17.6162c1.0999-1.5705 1.6917-3.4551 1.6922-5.3886C21 7.12937 16.9725 3 12 3z"/></svg>
+<span class=hx:sr-only>GitHub</span>
+</a><button type=button aria-label=菜单 aria-expanded=false class="hextra-hamburger-menu hx:cursor-pointer hx:-mr-2 hx:rounded-sm hx:p-2 hx:active:bg-gray-400/20 hx:md:hidden hx:hextra-focus-visible-inset"><svg height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor"><g><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8H20"/></g><g><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16H20"/></g></svg></button></nav></div><div class='hx:mx-auto hx:flex hextra-max-page-width'><aside class="hextra-sidebar-container hx:flex hx:flex-col hx:print:hidden hx:md:top-16 hx:md:shrink-0 hx:md:w-64 hx:md:self-start hx:max-md:[transform:translate3d(0,-100%,0)] hx:md:sticky"><div class="hx:px-4 hx:pt-4 hx:md:hidden"><div class="hextra-search-wrapper hx:relative hx:md:w-64"><div class="hx:relative hx:flex hx:items-center hx:text-gray-900 hx:contrast-more:text-gray-800 hx:dark:text-gray-300 hx:contrast-more:dark:text-gray-300"><input placeholder=搜索笔记… aria-label=搜索笔记… class="hextra-search-input hx:hextra-focus-visible hx:block hx:w-full hx:appearance-none hx:rounded-lg hx:px-3 hx:py-2 hx:transition-colors hx:text-base hx:leading-tight hx:md:text-sm hx:bg-black/[.05] hx:dark:bg-gray-50/10 hx:focus-visible:bg-white hx:dark:focus-visible:bg-dark hx:placeholder:text-gray-500 hx:dark:placeholder:text-gray-400 hx:contrast-more:border hx:contrast-more:border-current" type=search autocomplete=off spellcheck=false>
+<kbd class="hx:absolute hx:my-1.5 hx:select-none hx:ltr:right-1.5 hx:rtl:left-1.5 hx:h-5 hx:rounded-sm hx:bg-white hx:px-1.5 hx:font-mono hx:text-[10px] hx:font-medium hx:text-gray-500 hx:border hx:border-gray-200 hx:dark:border-gray-100/20 hx:dark:bg-dark/50 hx:contrast-more:border-current hx:contrast-more:text-current hx:contrast-more:dark:border-current hx:items-center hx:gap-1 hx:transition-opacity hx:pointer-events-none hx:hidden hx:sm:flex">CTRL K</kbd></div><div><ul class="hextra-search-results hextra-scrollbar hx:hidden hx:border hx:border-gray-200 hx:bg-white hx:text-gray-100 hx:dark:border-neutral-800 hx:dark:bg-neutral-900 hx:absolute hx:top-full hx:z-20 hx:mt-2 hx:overflow-auto hx:overscroll-contain hx:rounded-xl hx:py-2.5 hx:shadow-xl hx:max-h-[min(calc(50vh-11rem-env(safe-area-inset-bottom)),400px)] hx:md:max-h-[min(calc(100vh-5rem-env(safe-area-inset-bottom)),400px)] hx:inset-x-0 hx:ltr:md:left-auto hx:rtl:md:right-auto hx:contrast-more:border hx:contrast-more:border-gray-900 hx:contrast-more:dark:border-gray-50 hx:w-screen hx:min-h-[100px] hx:max-w-[min(calc(100vw-2rem),calc(100%+20rem))]" aria-label=搜索结果 style="transition:max-height .2s ease 0s"></ul><div class="hextra-search-status hx:sr-only" aria-live=polite role=status></div></div></div></div><div class="hextra-scrollbar hx:overflow-y-auto hx:overflow-x-hidden hx:p-4 hx:grow hx:md:h-[calc(100vh-var(--navbar-height)-var(--menu-height))]"><ul class="hx:flex hx:flex-col hx:gap-1 hx:md:hidden"><li><div class="hextra-sidebar-item hx:group hx:relative hx:flex hx:items-center" data-active=false><a class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:grow hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:hextra-focus-visible-inset hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50" href=/><span class="hx:min-w-0 [word-break:break-word]">首页</span></a></div></li><li class=open><div class="hextra-sidebar-item hx:group hx:relative hx:flex hx:items-center" data-active=false><a class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:grow hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:hextra-focus-visible-inset hx:ltr:pr-8 hx:rtl:pl-8 hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50" href=/notes/><span class="hx:min-w-0 [word-break:break-word]">笔记专题</span>
+</a><button type=button class="hextra-sidebar-collapsible-button hx:absolute hx:top-1/2 hx:-translate-y-1/2 hx:ltr:right-2 hx:rtl:left-2 hx:shrink-0 hx:cursor-pointer hx:p-0 hx:text-gray-500 hx:dark:text-neutral-400 hx:group-hover:text-gray-900 hx:dark:group-hover:text-gray-50 hx:group-data-[active=true]:text-primary-800 hx:group-data-[active=true]:dark:text-primary-600 hx:hextra-focus-visible-inset" aria-label=切换章节 aria-expanded=true><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" focusable="false" class="hx:h-[18px] hx:min-w-[18px] hx:rounded-xs hx:p-0.5 hx:hover:bg-gray-800/5 hx:dark:hover:bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="hx:origin-center hx:transition-transform hx:rtl:-rotate-180"/></svg></button></div><div class="hextra-sidebar-children hx:ltr:pr-0 hx:rtl:pl-0 hx:overflow-hidden"><ul class='hx:relative hx:flex hx:flex-col hx:gap-1 hx:before:absolute hx:before:inset-y-1 hx:before:w-px hx:before:bg-gray-200 hx:before:content-[""] hx:ltr:ml-3 hx:ltr:pl-3 hx:ltr:before:left-0 hx:rtl:mr-3 hx:rtl:pr-3 hx:rtl:before:right-0 hx:dark:before:bg-neutral-800'><li class="hx:flex hx:flex-col"><div class="hextra-sidebar-item hx:group hx:relative hx:flex hx:items-center" data-active=false><a class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:grow hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:hextra-focus-visible-inset hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50" href=/notes/ai/><span class="hx:min-w-0 [word-break:break-word]">AI 与论文</span></a></div></li><li class="hx:flex hx:flex-col"><div class="hextra-sidebar-item hx:group hx:relative hx:flex hx:items-center" data-active=false><a class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:grow hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:hextra-focus-visible-inset hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50" href=/notes/algorithms/><span class="hx:min-w-0 [word-break:break-word]">算法与数据结构</span></a></div></li><li class="hx:flex hx:flex-col"><div class="hextra-sidebar-item hx:group hx:relative hx:flex hx:items-center" data-active=false><a class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:grow hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:hextra-focus-visible-inset hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50" href=/notes/python/><span class="hx:min-w-0 [word-break:break-word]">Python 与编程</span></a></div></li><li class="hx:flex hx:flex-col"><div class="hextra-sidebar-item hx:group hx:relative hx:flex hx:items-center" data-active=false><a class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:grow hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:hextra-focus-visible-inset hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50" href=/notes/systems/><span class="hx:min-w-0 [word-break:break-word]">系统与工具</span></a></div></li></ul></div></li><li><div class="hextra-sidebar-item hx:group hx:relative hx:flex hx:items-center" data-active=false><a class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:grow hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:hextra-focus-visible-inset hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50" href=/post/><span class="hx:min-w-0 [word-break:break-word]">全部笔记</span></a></div></li><li><div class="hextra-sidebar-item hx:group hx:relative hx:flex hx:items-center" data-active=false><a class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:grow hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:hextra-focus-visible-inset hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50" href=/archives/><span class="hx:min-w-0 [word-break:break-word]">归档</span></a></div></li><li class="[word-break:break-word] hx:mt-5 hx:mb-2 hx:px-2 hx:py-1.5 hx:text-sm hx:font-semibold hx:text-gray-900 hx:first:mt-0 hx:dark:text-gray-100"><span class=hx:cursor-default>索引</span></li><li><div class="hextra-sidebar-item hx:group hx:relative hx:flex hx:items-center" data-active=false><a class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:grow hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:hextra-focus-visible-inset hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50" href=/post/><span class="hx:min-w-0 [word-break:break-word]">全部笔记</span></a></div></li><li><div class="hextra-sidebar-item hx:group hx:relative hx:flex hx:items-center" data-active=false><a class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:grow hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:hextra-focus-visible-inset hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50" href=/archives/><span class="hx:min-w-0 [word-break:break-word]">按年归档</span></a></div></li><li><div class="hextra-sidebar-item hx:group hx:relative hx:flex hx:items-center" data-active=false><a class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:grow hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:hextra-focus-visible-inset hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50" href=/links/><span class="hx:min-w-0 [word-break:break-word]">链接</span></a></div></li></ul><ul class="hx:flex hx:flex-col hx:gap-1 hx:max-md:hidden"><li class=open><div class="hextra-sidebar-item hx:group hx:relative hx:flex hx:items-center" data-active=false><a class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:grow hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:hextra-focus-visible-inset hx:ltr:pr-8 hx:rtl:pl-8 hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50" href=/notes/><span class="hx:min-w-0 [word-break:break-word]">笔记专题</span>
+</a><button type=button class="hextra-sidebar-collapsible-button hx:absolute hx:top-1/2 hx:-translate-y-1/2 hx:ltr:right-2 hx:rtl:left-2 hx:shrink-0 hx:cursor-pointer hx:p-0 hx:text-gray-500 hx:dark:text-neutral-400 hx:group-hover:text-gray-900 hx:dark:group-hover:text-gray-50 hx:group-data-[active=true]:text-primary-800 hx:group-data-[active=true]:dark:text-primary-600 hx:hextra-focus-visible-inset" aria-label=切换章节 aria-expanded=true><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" focusable="false" class="hx:h-[18px] hx:min-w-[18px] hx:rounded-xs hx:p-0.5 hx:hover:bg-gray-800/5 hx:dark:hover:bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="hx:origin-center hx:transition-transform hx:rtl:-rotate-180"/></svg></button></div><div class="hextra-sidebar-children hx:ltr:pr-0 hx:rtl:pl-0 hx:overflow-hidden"><ul class='hx:relative hx:flex hx:flex-col hx:gap-1 hx:before:absolute hx:before:inset-y-1 hx:before:w-px hx:before:bg-gray-200 hx:before:content-[""] hx:ltr:ml-3 hx:ltr:pl-3 hx:ltr:before:left-0 hx:rtl:mr-3 hx:rtl:pr-3 hx:rtl:before:right-0 hx:dark:before:bg-neutral-800'><li class="hx:flex hx:flex-col"><div class="hextra-sidebar-item hx:group hx:relative hx:flex hx:items-center" data-active=false><a class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:grow hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:hextra-focus-visible-inset hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50" href=/notes/ai/><span class="hx:min-w-0 [word-break:break-word]">AI 与论文</span></a></div></li><li class="hx:flex hx:flex-col"><div class="hextra-sidebar-item hx:group hx:relative hx:flex hx:items-center" data-active=false><a class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:grow hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:hextra-focus-visible-inset hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50" href=/notes/algorithms/><span class="hx:min-w-0 [word-break:break-word]">算法与数据结构</span></a></div></li><li class="hx:flex hx:flex-col"><div class="hextra-sidebar-item hx:group hx:relative hx:flex hx:items-center" data-active=false><a class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:grow hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:hextra-focus-visible-inset hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50" href=/notes/python/><span class="hx:min-w-0 [word-break:break-word]">Python 与编程</span></a></div></li><li class="hx:flex hx:flex-col"><div class="hextra-sidebar-item hx:group hx:relative hx:flex hx:items-center" data-active=false><a class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:grow hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:hextra-focus-visible-inset hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50" href=/notes/systems/><span class="hx:min-w-0 [word-break:break-word]">系统与工具</span></a></div></li></ul></div></li><li class="[word-break:break-word] hx:mt-5 hx:mb-2 hx:px-2 hx:py-1.5 hx:text-sm hx:font-semibold hx:text-gray-900 hx:first:mt-0 hx:dark:text-gray-100"><span class=hx:cursor-default>索引</span></li><li><div class="hextra-sidebar-item hx:group hx:relative hx:flex hx:items-center" data-active=false><a class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:grow hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:hextra-focus-visible-inset hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50" href=/post/><span class="hx:min-w-0 [word-break:break-word]">全部笔记</span></a></div></li><li><div class="hextra-sidebar-item hx:group hx:relative hx:flex hx:items-center" data-active=false><a class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:grow hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:hextra-focus-visible-inset hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50" href=/archives/><span class="hx:min-w-0 [word-break:break-word]">按年归档</span></a></div></li><li><div class="hextra-sidebar-item hx:group hx:relative hx:flex hx:items-center" data-active=false><a class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:grow hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:hextra-focus-visible-inset hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50" href=/links/><span class="hx:min-w-0 [word-break:break-word]">链接</span></a></div></li></ul></div><div class="hx:sticky hx:bottom-0 hx:max-h-(--menu-height) hx:bg-white hx:dark:bg-dark hx:mx-4 hx:py-4 hx:shadow-[0_-12px_16px_#fff] hx:flex hx:items-center hx:gap-2 hx:border-gray-200 hx:dark:border-neutral-800 hx:dark:shadow-[0_-12px_16px_#111] hx:contrast-more:border-neutral-400 hx:contrast-more:shadow-none hx:contrast-more:dark:shadow-none hx:border-t" data-toggle-animation=show><div class="hx:flex hx:grow hx:flex-col"><div class="hx:flex hx:justify-items-start hx:group" data-theme=light><button title=切换主题 data-state=closed data-location=bottom class="hextra-theme-toggle hx:cursor-pointer hx:rounded-md hx:text-left hx:font-medium hx:h-7 hx:px-2 hx:text-xs hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:font-medium hx:text-gray-600 hx:transition-colors hx:dark:text-gray-400 hx:grow" type=button aria-label=切换主题 aria-expanded=false aria-haspopup=menu><div class="hx:flex hx:items-center hx:gap-2 hx:capitalize"><svg height="12" class="hx:group-data-[theme=dark]:hidden hx:group-data-[theme=system]:hidden" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364-.707-.707M6.343 6.343l-.707-.707m12.728.0-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg><span class="hx:group-data-[theme=dark]:hidden hx:group-data-[theme=system]:hidden">浅色</span><svg height="12" class="hx:group-data-[theme=light]:hidden hx:group-data-[theme=system]:hidden" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003.0 0012 21a9.003 9.003.0 008.354-5.646z"/></svg><span class="hx:group-data-[theme=light]:hidden hx:group-data-[theme=system]:hidden">深色</span><svg height="12" class="hx:group-data-[theme=dark]:hidden hx:group-data-[theme=light]:hidden" viewBox="0 0 24 24" fill="currentColor"><path d="M11.996094 2C6.4986225 2.0192368 2.03125 6.5024993 2.03125 12c0 5.497501 4.4673725 9.980763 9.964844 10H12 12.0039c5.497471-.01924 9.964844-4.502499 9.964844-10 0-5.4975007-4.467373-9.9807632-9.964844-10H12zM12 4c4.417218.017598 7.96875 3.5822356 7.96875 8 0 4.417764-3.551532 7.982402-7.96875 8z"/></svg>
+<span class="hx:group-data-[theme=dark]:hidden hx:group-data-[theme=light]:hidden">跟随系统</span></div></button><ul class="hextra-theme-toggle-options hx:hidden hx:z-20 hx:max-h-64 hx:overflow-auto hx:rounded-lg hx:border hx:border-gray-200 hx:bg-white hx:p-1 hx:text-sm hx:shadow-lg hx:dark:border-neutral-700 hx:dark:bg-neutral-900" style="position:fixed;inset:auto auto 0 0;margin:0;min-width:100px" data-theme=light role=menu><li role=none class="hx:flex hx:flex-col"><button type=button role=menuitemradio aria-checked=true tabindex=-1 data-item=light class="hx:text-gray-700 hx:dark:text-gray-300 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:dark:hover:bg-neutral-800 hx:dark:hover:text-gray-100 hx:relative hx:cursor-pointer hx:whitespace-nowrap hx:rounded-sm hx:py-1.5 hx:transition-colors hx:ltr:pl-3 hx:ltr:pr-9 hx:rtl:pr-3 hx:rtl:pl-9 hx:text-left hx:w-full hx:bg-transparent hx:border-0">
+浅色
+<span class="hx:absolute hx:inset-y-0 hx:flex hx:items-center hx:ltr:right-3 hx:rtl:left-3 hx:group-data-[theme=dark]:hidden hx:group-data-[theme=system]:hidden"><svg height="1em" width="1em" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span></button></li><li role=none class="hx:flex hx:flex-col"><button type=button role=menuitemradio aria-checked=false tabindex=-1 data-item=dark class="hx:text-gray-700 hx:dark:text-gray-300 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:dark:hover:bg-neutral-800 hx:dark:hover:text-gray-100 hx:relative hx:cursor-pointer hx:whitespace-nowrap hx:rounded-sm hx:py-1.5 hx:transition-colors hx:ltr:pl-3 hx:ltr:pr-9 hx:rtl:pr-3 hx:rtl:pl-9 hx:text-left hx:w-full hx:bg-transparent hx:border-0">
+深色
+<span class="hx:absolute hx:inset-y-0 hx:flex hx:items-center hx:ltr:right-3 hx:rtl:left-3 hx:group-data-[theme=light]:hidden hx:group-data-[theme=system]:hidden"><svg height="1em" width="1em" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span></button></li><li role=none class="hx:flex hx:flex-col"><button type=button role=menuitemradio aria-checked=false tabindex=-1 data-item=system class="hx:text-gray-700 hx:dark:text-gray-300 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:dark:hover:bg-neutral-800 hx:dark:hover:text-gray-100 hx:relative hx:cursor-pointer hx:whitespace-nowrap hx:rounded-sm hx:py-1.5 hx:transition-colors hx:ltr:pl-3 hx:ltr:pr-9 hx:rtl:pr-3 hx:rtl:pl-9 hx:text-left hx:w-full hx:bg-transparent hx:border-0">
+跟随系统
+<span class="hx:absolute hx:inset-y-0 hx:flex hx:items-center hx:ltr:right-3 hx:rtl:left-3 hx:group-data-[theme=dark]:hidden hx:group-data-[theme=light]:hidden"><svg height="1em" width="1em" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span></button></li></ul></div></div></div></aside><nav class="hextra-toc hx:order-last hx:hidden hx:w-64 hx:shrink-0 hx:xl:block hx:print:hidden hx:px-4" aria-label=目录><div class="hextra-scrollbar hx:sticky hx:top-16 hx:overflow-y-auto hx:pr-4 hx:pt-6 hx:text-sm [hyphens:auto] hx:max-h-[calc(100vh-var(--navbar-height)-env(safe-area-inset-bottom))] hx:ltr:-mr-4 hx:rtl:-ml-4"><p class="hx:mb-4 hx:font-semibold hx:tracking-tight">此页上</p><ul><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:font-medium hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#%e5%b0%9a%e6%9c%aa%e5%88%86%e7%b1%bb>尚未分类</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:ltr:pl-4 hx:rtl:pr-4 hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#%e4%b8%a4%e6%95%b0%e4%b9%8b%e5%92%8c>两数之和</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:ltr:pl-4 hx:rtl:pr-4 hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#%e5%88%a0%e9%99%a4%e6%9c%89%e5%ba%8f%e6%95%b0%e7%bb%84%e4%b8%ad%e7%9a%84%e9%87%8d%e5%a4%8d%e9%a1%b9>删除有序数组中的重复项</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:ltr:pl-4 hx:rtl:pr-4 hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#%e6%90%9c%e7%b4%a2%e6%8f%92%e5%85%a5%e4%bd%8d%e7%bd%ae>搜索插入位置</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:ltr:pl-4 hx:rtl:pr-4 hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#%e5%8a%a0%e4%b8%80>加一</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:font-medium hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#%e5%ae%9a%e9%95%bf%e6%bb%91%e5%8a%a8%e7%aa%97%e5%8f%a3>定长滑动窗口</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:ltr:pl-4 hx:rtl:pr-4 hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#%e5%8d%8a%e5%be%84%e4%b8%ba-k-%e7%9a%84%e5%ad%90%e6%95%b0%e7%bb%84%e5%b9%b3%e5%9d%87%e5%80%bc>半径为 k 的子数组平均值</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:ltr:pl-4 hx:rtl:pr-4 hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#%e5%87%a0%e4%b9%8e%e5%94%af%e4%b8%80%e5%ad%90%e6%95%b0%e7%bb%84%e7%9a%84%e6%9c%80%e5%a4%a7%e5%92%8c>几乎唯一子数组的最大和</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:ltr:pl-4 hx:rtl:pr-4 hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#%e6%89%be%e5%88%b0%e5%ad%97%e7%ac%a6%e4%b8%b2%e4%b8%ad%e6%89%80%e6%9c%89%e5%ad%97%e6%af%8d%e5%bc%82%e4%bd%8d%e8%af%8d>找到字符串中所有字母异位词</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:ltr:pl-4 hx:rtl:pr-4 hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#%e9%87%8d%e6%96%b0%e5%ae%89%e6%8e%92%e4%bc%9a%e8%ae%ae%e5%be%97%e5%88%b0%e6%9c%80%e5%a4%9a%e7%a9%ba%e4%bd%99%e6%97%b6%e9%97%b4-i>重新安排会议得到最多空余时间 I</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:ltr:pl-4 hx:rtl:pr-4 hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#%e4%bd%bf%e4%ba%8c%e8%bf%9b%e5%88%b6%e5%ad%97%e7%ac%a6%e4%b8%b2%e5%ad%97%e7%ac%a6%e4%ba%a4%e6%9b%bf%e7%9a%84%e6%9c%80%e5%b0%91%e5%8f%8d%e8%bd%ac%e6%ac%a1%e6%95%b0>使二进制字符串字符交替的最少反转次数</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:ltr:pl-4 hx:rtl:pr-4 hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#%e6%9f%a5%e6%89%be%e7%bb%99%e5%ae%9a%e5%93%88%e5%b8%8c%e5%80%bc%e7%9a%84%e5%ad%90%e4%b8%b2>查找给定哈希值的子串</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:ltr:pl-4 hx:rtl:pr-4 hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#%e4%b8%b2%e8%81%94%e6%89%80%e6%9c%89%e5%8d%95%e8%af%8d%e7%9a%84%e5%ad%90%e4%b8%b2%e6%ac%a1%e5%ae%9a%e9%95%bf%e6%bb%91%e7%aa%97>串联所有单词的子串（次定长滑窗）</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:font-medium hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#%e4%b8%8d%e5%ae%9a%e9%95%bf%e6%bb%91%e5%8a%a8%e7%aa%97%e5%8f%a3>不定长滑动窗口</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:ltr:pl-4 hx:rtl:pr-4 hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#%e6%97%a0%e9%87%8d%e5%a4%8d%e5%ad%97%e7%ac%a6%e7%9a%84%e6%9c%80%e9%95%bf%e5%ad%90%e4%b8%b2%e6%9c%80%e9%95%bf%e6%9c%80%e5%a4%a7>无重复字符的最长子串（最长最大）</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:ltr:pl-4 hx:rtl:pr-4 hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#%e6%89%be%e5%88%b0%e6%9c%80%e9%95%bf%e7%9a%84%e5%8d%8a%e9%87%8d%e5%a4%8d%e5%ad%90%e5%ad%97%e7%ac%a6%e4%b8%b2>找到最长的半重复子字符串</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:ltr:pl-4 hx:rtl:pr-4 hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#%e6%9c%80%e9%ab%98%e9%a2%91%e5%85%83%e7%b4%a0%e7%9a%84%e9%a2%91%e6%95%b0>最高频元素的频数</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:ltr:pl-4 hx:rtl:pr-4 hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#%e5%b0%86-x-%e5%87%8f%e5%88%b0-0-%e7%9a%84%e6%9c%80%e5%b0%8f%e6%93%8d%e4%bd%9c%e6%95%b0>将 x 减到 0 的最小操作数</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:ltr:pl-4 hx:rtl:pr-4 hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#%e6%95%b0%e7%bb%84%e7%9a%84%e6%9c%80%e5%a4%a7%e7%be%8e%e4%b8%bd%e5%80%bc>数组的最大美丽值</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:ltr:pl-4 hx:rtl:pr-4 hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#%e6%af%af%e5%ad%90%e8%a6%86%e7%9b%96%e7%9a%84%e6%9c%80%e5%a4%9a%e7%99%bd%e8%89%b2%e7%a0%96%e5%9d%97%e6%95%b0>毯子覆盖的最多白色砖块数</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:ltr:pl-4 hx:rtl:pr-4 hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#%e9%95%bf%e5%ba%a6%e6%9c%80%e5%b0%8f%e7%9a%84%e5%ad%90%e6%95%b0%e7%bb%84%e6%9c%80%e7%9f%ad%e6%9c%80%e5%b0%8f>长度最小的子数组（最短最小）</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:font-medium hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#%e7%9b%b8%e5%90%91%e5%8f%8c%e6%8c%87%e9%92%88>相向双指针</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:ltr:pl-4 hx:rtl:pr-4 hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#%e4%b8%a4%e6%95%b0%e4%b9%8b%e5%92%8c-ii---%e8%be%93%e5%85%a5%e6%9c%89%e5%ba%8f%e6%95%b0%e7%bb%84>两数之和 II - 输入有序数组</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:ltr:pl-4 hx:rtl:pr-4 hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#%e7%bb%9f%e8%ae%a1%e5%92%8c%e5%b0%8f%e4%ba%8e%e7%9b%ae%e6%a0%87%e7%9a%84%e4%b8%8b%e6%a0%87%e5%af%b9%e6%95%b0%e7%9b%ae>统计和小于目标的下标对数目</a></li></ul><div class="hx:mt-8 hx:border-t hx:bg-white hx:pt-8 hx:shadow-[0_-12px_16px_white] hx:dark:bg-dark hx:dark:shadow-[0_-12px_16px_#111] hx:sticky hx:bottom-0 hx:flex hx:flex-col hx:items-start hx:gap-2 hx:pb-8 hx:border-gray-200 hx:dark:border-neutral-800 hx:contrast-more:border-t hx:contrast-more:border-neutral-400 hx:contrast-more:shadow-none hx:contrast-more:dark:border-neutral-400"><button id=backToTop tabindex=-1 class="hx:cursor-pointer hx:transition-all hx:duration-75 hx:opacity-0 hx:text-xs hx:font-medium hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-100 hx:contrast-more:text-gray-800 hx:contrast-more:dark:text-gray-50">
+<span>返回顶部</span>
+<svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" focusable="false" class="hx:inline hx:ltr:ml-1 hx:rtl:mr-1 hx:h-3.5 hx:w-3.5 hx:rounded-full hx:border hx:border-gray-500 hx:hover:border-gray-900 hx:dark:border-gray-400 hx:dark:hover:border-gray-100 hx:contrast-more:border-gray-800 hx:contrast-more:dark:border-gray-50"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5"/></svg></button></div></div></nav><article class="hx:w-full hx:break-words hx:flex hx:min-h-[calc(100vh-var(--navbar-height))] hx:min-w-0 hx:justify-center hx:pb-8 hx:pr-[calc(env(safe-area-inset-right)-1.5rem)]"><main id=content class="hx:w-full hx:min-w-0 hextra-max-content-width hx:px-6 hx:pt-4 hx:md:px-12"><div class="hx:mt-1.5 hx:flex hx:items-center hx:gap-1 hx:overflow-hidden hx:text-sm hx:text-gray-500 hx:dark:text-gray-400 hx:contrast-more:text-current"><div class="hx:whitespace-nowrap hx:transition-colors hx:min-w-[24px] hx:overflow-hidden hx:text-ellipsis hx:hover:text-gray-900 hx:dark:hover:text-gray-100"><a href=/post/ class="hx:inline-block hx:rounded-sm hx:hextra-focus-visible-inset">全部笔记</a></div><svg class="hx:w-3.5 hx:shrink-0 hx:rtl:-rotate-180" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg><div class="hx:whitespace-nowrap hx:transition-colors hx:font-medium hx:text-gray-700 hx:contrast-more:font-bold hx:contrast-more:text-current hx:dark:text-gray-100 hx:contrast-more:dark:text-current">滑动窗口与双指针</div></div><div class=content><div class="hx:flex hx:flex-col hx:sm:flex-row hx:items-start hx:sm:items-center hx:sm:justify-between hx:gap-4 hx:mb-4"><h1 class=hx:mb-0>滑动窗口与双指针</h1></div><h1>滑动窗口与双指针</h1><p>灵神题单：<a href=https://leetcode.cn/discuss/post/3578981/ti-dan-hua-dong-chuang-kou-ding-chang-bu-rzz7/ target=_blank rel=noopener>分享丨【算法题单】滑动窗口与双指针（定长/不定长/单序列/双序列/三指针/分组循环）- 讨论 - 力扣（LeetCode）</a></p><p>场景：连续、遍历各情况</p><h2>尚未分类<span class="hx:absolute hx:-mt-20" id=尚未分类></span>
+<a href=#%e5%b0%9a%e6%9c%aa%e5%88%86%e7%b1%bb class=subheading-anchor aria-label=此章节的永久链接></a></h2><h3>两数之和<span class="hx:absolute hx:-mt-20" id=两数之和></span>
+<a href=#%e4%b8%a4%e6%95%b0%e4%b9%8b%e5%92%8c class=subheading-anchor aria-label=此章节的永久链接></a></h3><p><strong><a href="https://leetcode.cn/problems/two-sum/description/?envType=problem-list-v2&amp;envId=array" target=_blank rel=noopener>1. 两数之和 - 力扣（LeetCode）</a></strong></p><ul><li><p>给定一个整数数组 <code>nums</code> 和一个整数目标值 <code>target</code>，请你在该数组中找出 <strong>和为目标值</strong> <em><code>target</code></em> 的那 <strong>两个</strong> 整数，并返回它们的数组下标。</p></li><li><p>你可以假设每种输入只会对应一个答案，并且你不能使用两次相同的元素。</p></li><li><p>你可以按任意顺序返回答案。</p></li><li><p>示例</p></li></ul><div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"><div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=n>输入</span><span class=err>：</span><span class=n>nums</span> <span class=o>=</span> <span class=p>[</span><span class=mi>3</span><span class=p>,</span><span class=mi>2</span><span class=p>,</span><span class=mi>4</span><span class=p>],</span> <span class=n>target</span> <span class=o>=</span> <span class=mi>6</span>
+</span></span><span class=line><span class=cl><span class=n>输出</span><span class=err>：</span><span class=p>[</span><span class=mi>1</span><span class=p>,</span><span class=mi>2</span><span class=p>]</span></span></span></code></pre></td></tr></table></div></div></div><div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"><button class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50" title=复制代码 aria-label=复制代码 data-copied-label=已复制！><div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"></div><div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"></div></button></div></div><p><strong>代码</strong></p><div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"><div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=k>class</span> <span class=nc>Solution</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>twoSum</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>nums</span><span class=p>:</span> <span class=n>List</span><span class=p>[</span><span class=nb>int</span><span class=p>],</span> <span class=n>target</span><span class=p>:</span> <span class=nb>int</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=n>List</span><span class=p>[</span><span class=nb>int</span><span class=p>]:</span>
+</span></span><span class=line><span class=cl>        <span class=c1># #遍历 </span>
+</span></span><span class=line><span class=cl>        <span class=c1># for i in range(len(nums)-1):</span>
+</span></span><span class=line><span class=cl>        <span class=c1>#     for j in range(i+1,len(nums)):</span>
+</span></span><span class=line><span class=cl>        <span class=c1>#         if nums[i]+nums[j]==target: </span>
+</span></span><span class=line><span class=cl>        <span class=c1>#             return [i,j]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=c1># 哈希表  python 字典最好 键不存在即0个，但是要存索引 </span>
+</span></span><span class=line><span class=cl>        <span class=n>dic</span><span class=o>=</span><span class=nb>dict</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=n>i</span><span class=p>,</span><span class=n>e</span> <span class=ow>in</span> <span class=nb>enumerate</span><span class=p>(</span><span class=n>nums</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>            <span class=c1># if dic.get(target-e) is not None:</span>
+</span></span><span class=line><span class=cl>            <span class=c1># in方法就是用的哈希表查找  </span>
+</span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=n>target</span><span class=o>-</span><span class=n>e</span> <span class=ow>in</span> <span class=n>dic</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                <span class=k>return</span> <span class=p>[</span><span class=n>dic</span><span class=p>[</span><span class=n>target</span><span class=o>-</span><span class=n>e</span><span class=p>],</span> <span class=n>i</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>            <span class=n>dic</span><span class=p>[</span><span class=n>e</span><span class=p>]</span><span class=o>=</span><span class=n>i</span></span></span></code></pre></td></tr></table></div></div></div><div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"><button class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50" title=复制代码 aria-label=复制代码 data-copied-label=已复制！><div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"></div><div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"></div></button></div></div><p><strong>what I learn</strong></p><ul><li>哈希表的查找用in方法可实现，用dict()或set()最好，用空间换时间。</li><li>集合、字典的 in 方法时间复杂度O(1)，列表和元组的 in 时间复杂度O(n)。</li></ul><h3>删除有序数组中的重复项<span class="hx:absolute hx:-mt-20" id=删除有序数组中的重复项></span>
+<a href=#%e5%88%a0%e9%99%a4%e6%9c%89%e5%ba%8f%e6%95%b0%e7%bb%84%e4%b8%ad%e7%9a%84%e9%87%8d%e5%a4%8d%e9%a1%b9 class=subheading-anchor aria-label=此章节的永久链接></a></h3><p><strong><a href="https://leetcode.cn/problems/remove-duplicates-from-sorted-array/description/?envType=problem-list-v2&amp;envId=array" target=_blank rel=noopener>26. 删除有序数组中的重复项 - 力扣（LeetCode）</a></strong></p><ul><li><p>给你一个 <strong>非严格递增排列</strong> 的数组 <code>nums</code> ，请你**<a href=http://baike.baidu.com/item/%e5%8e%9f%e5%9c%b0%e7%ae%97%e6%b3%95 target=_blank rel=noopener> 原地</a>** 删除重复出现的元素，使每个元素 <strong>只出现一次</strong> ，返回删除后数组的新长度。元素的 <strong>相对顺序</strong> 应该保持 <strong>一致</strong> 。然后返回 <code>nums</code> 中唯一元素的个数。</p></li><li><p>考虑 <code>nums</code> 的唯一元素的数量为 <code>k</code> ，你需要做以下事情确保你的题解可以被通过：</p><ul><li><p>更改数组 <code>nums</code> ，使 <code>nums</code> 的前 <code>k</code> 个元素包含唯一元素，并按照它们最初在 <code>nums</code> 中出现的顺序排列。<code>nums</code> 的其余元素与 <code>nums</code> 的大小不重要。</p></li><li><p>返回 <code>k</code> 。</p></li></ul></li><li><p>示例</p></li></ul><div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"><div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=n>输入</span><span class=err>：</span><span class=n>nums</span> <span class=o>=</span> <span class=p>[</span><span class=mi>0</span><span class=p>,</span><span class=mi>0</span><span class=p>,</span><span class=mi>1</span><span class=p>,</span><span class=mi>1</span><span class=p>,</span><span class=mi>1</span><span class=p>,</span><span class=mi>2</span><span class=p>,</span><span class=mi>2</span><span class=p>,</span><span class=mi>3</span><span class=p>,</span><span class=mi>3</span><span class=p>,</span><span class=mi>4</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=n>输出</span><span class=err>：</span><span class=mi>5</span><span class=p>,</span> <span class=n>nums</span> <span class=o>=</span> <span class=p>[</span><span class=mi>0</span><span class=p>,</span><span class=mi>1</span><span class=p>,</span><span class=mi>2</span><span class=p>,</span><span class=mi>3</span><span class=p>,</span><span class=mi>4</span><span class=p>]</span></span></span></code></pre></td></tr></table></div></div></div><div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"><button class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50" title=复制代码 aria-label=复制代码 data-copied-label=已复制！><div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"></div><div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"></div></button></div></div><p><strong>代码</strong></p><div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"><div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=k>class</span> <span class=nc>Solution</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>removeDuplicates</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>nums</span><span class=p>:</span> <span class=n>List</span><span class=p>[</span><span class=nb>int</span><span class=p>])</span> <span class=o>-&gt;</span> <span class=nb>int</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=c1># 哈希表  空间换时间</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=c1># dic=set()</span>
+</span></span><span class=line><span class=cl>        <span class=c1># for e in nums:</span>
+</span></span><span class=line><span class=cl>        <span class=c1>#     if e not in dic:</span>
+</span></span><span class=line><span class=cl>        <span class=c1>#         dic.add(e)</span>
+</span></span><span class=line><span class=cl>        <span class=c1>#         nums[len(dic)-1]=e</span>
+</span></span><span class=line><span class=cl>        <span class=c1>#         # print(dic)</span>
+</span></span><span class=line><span class=cl>        <span class=c1>#         # print(nums)</span>
+</span></span><span class=line><span class=cl>        <span class=c1>#         # print(&#34;----&#34;)</span>
+</span></span><span class=line><span class=cl>        <span class=c1># return len(dic)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=c1># 双指针  利用有序性</span>
+</span></span><span class=line><span class=cl>        
+</span></span><span class=line><span class=cl>        <span class=n>p</span><span class=o>=</span><span class=mi>0</span>
+</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=n>e</span> <span class=ow>in</span> <span class=n>nums</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=n>e</span><span class=o>!=</span><span class=n>nums</span><span class=p>[</span><span class=n>p</span><span class=p>]:</span>
+</span></span><span class=line><span class=cl>                <span class=n>p</span><span class=o>+=</span><span class=mi>1</span>
+</span></span><span class=line><span class=cl>                <span class=n>nums</span><span class=p>[</span><span class=n>p</span><span class=p>]</span><span class=o>=</span><span class=n>e</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>p</span><span class=o>+</span><span class=mi>1</span></span></span></code></pre></td></tr></table></div></div></div><div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"><button class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50" title=复制代码 aria-label=复制代码 data-copied-label=已复制！><div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"></div><div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"></div></button></div></div><p><strong>what I learn</strong></p><ul><li>快慢指针，数据需要有有序性。</li></ul><h3>搜索插入位置<span class="hx:absolute hx:-mt-20" id=搜索插入位置></span>
+<a href=#%e6%90%9c%e7%b4%a2%e6%8f%92%e5%85%a5%e4%bd%8d%e7%bd%ae class=subheading-anchor aria-label=此章节的永久链接></a></h3><p><strong><a href="https://leetcode.cn/problems/search-insert-position/description/?envType=problem-list-v2&amp;envId=array" target=_blank rel=noopener>35. 搜索插入位置 - 力扣（LeetCode）</a></strong></p><ul><li><p>**（二分法）**记住就好了 T-T</p></li><li><p>给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置。</p></li><li><p>请必须使用时间复杂度为 <code>O(log n)</code> 的算法。</p></li><li><p>示例：</p></li></ul><div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"><div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=n>输入</span><span class=p>:</span> <span class=n>nums</span> <span class=o>=</span> <span class=p>[</span><span class=mi>1</span><span class=p>,</span><span class=mi>3</span><span class=p>,</span><span class=mi>5</span><span class=p>,</span><span class=mi>6</span><span class=p>],</span> <span class=n>target</span> <span class=o>=</span> <span class=mi>5</span>
+</span></span><span class=line><span class=cl><span class=n>输出</span><span class=p>:</span> <span class=mi>2</span></span></span></code></pre></td></tr></table></div></div></div><div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"><button class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50" title=复制代码 aria-label=复制代码 data-copied-label=已复制！><div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"></div><div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"></div></button></div></div><p><strong>代码</strong></p><div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"><div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=k>class</span> <span class=nc>Solution</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>searchInsert</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>nums</span><span class=p>:</span> <span class=n>List</span><span class=p>[</span><span class=nb>int</span><span class=p>],</span> <span class=n>target</span><span class=p>:</span> <span class=nb>int</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=nb>int</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=c1># 上下界限设置，target 最大时要放在“第len(nums)个位置”，最小时要放在“第0个位置”</span>
+</span></span><span class=line><span class=cl>        <span class=n>up</span><span class=o>=</span><span class=nb>len</span><span class=p>(</span><span class=n>nums</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>low</span><span class=o>=</span><span class=mi>0</span>
+</span></span><span class=line><span class=cl>        
+</span></span><span class=line><span class=cl>        <span class=k>while</span><span class=p>(</span><span class=kc>True</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>            <span class=c1># i为 正中（奇）或 偏上（偶）</span>
+</span></span><span class=line><span class=cl>            <span class=n>i</span><span class=o>=</span><span class=p>(</span><span class=n>low</span><span class=o>+</span><span class=n>up</span><span class=p>)</span><span class=o>//</span><span class=mi>2</span>
+</span></span><span class=line><span class=cl>            <span class=c1># 重合即为最终位置</span>
+</span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=n>low</span><span class=o>==</span><span class=n>up</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                <span class=k>return</span> <span class=n>low</span>
+</span></span><span class=line><span class=cl>            <span class=c1># 因为是向下取整的i，上界下移到i;下界上移到i+1。</span>
+</span></span><span class=line><span class=cl>            <span class=c1># 比如low=0,up=5，则：mid=2.5,i=2，小的区域为0~2(i)，大的区域为3(i+1)~5</span>
+</span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=n>target</span><span class=o>&lt;</span><span class=n>nums</span><span class=p>[</span><span class=n>i</span><span class=p>]:</span>
+</span></span><span class=line><span class=cl>                <span class=n>up</span><span class=o>=</span><span class=n>i</span>
+</span></span><span class=line><span class=cl>            <span class=k>elif</span> <span class=n>target</span><span class=o>&gt;</span><span class=n>nums</span><span class=p>[</span><span class=n>i</span><span class=p>]:</span>
+</span></span><span class=line><span class=cl>                <span class=n>low</span><span class=o>=</span><span class=n>i</span><span class=o>+</span><span class=mi>1</span>
+</span></span><span class=line><span class=cl>            <span class=k>else</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                <span class=k>return</span> <span class=n>i</span></span></span></code></pre></td></tr></table></div></div></div><div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"><button class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50" title=复制代码 aria-label=复制代码 data-copied-label=已复制！><div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"></div><div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"></div></button></div></div><p><strong>what I learn</strong></p><ul><li>二分法框架：<ul><li>上下界up=len(nums) low=0</li><li>取中间(low+up)//2</li><li>终止条件 low==up</li><li>上界降 up=mid</li><li>下界升 low=mid+1</li></ul></li></ul><h3>加一<span class="hx:absolute hx:-mt-20" id=加一></span>
+<a href=#%e5%8a%a0%e4%b8%80 class=subheading-anchor aria-label=此章节的永久链接></a></h3><p><strong><a href="https://leetcode.cn/problems/plus-one/?envType=problem-list-v2&amp;envId=array" target=_blank rel=noopener>66. 加一 - 力扣（LeetCode）</a></strong></p><ul><li><p>给定一个由 <strong>整数</strong> 组成的 <strong>非空</strong> 数组所表示的非负整数，在该数的基础上加一。</p></li><li><p>最高位数字存放在数组的首位， 数组中每个元素只存储<strong>单个</strong>数字。</p></li><li><p>你可以假设除了整数 0 之外，这个整数不会以零开头。</p></li><li><p>示例 1：</p></li></ul><div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"><div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=n>输入</span><span class=err>：</span><span class=n>digits</span> <span class=o>=</span> <span class=p>[</span><span class=mi>1</span><span class=p>,</span><span class=mi>2</span><span class=p>,</span><span class=mi>3</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=n>输出</span><span class=err>：</span><span class=p>[</span><span class=mi>1</span><span class=p>,</span><span class=mi>2</span><span class=p>,</span><span class=mi>4</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=n>解释</span><span class=err>：</span><span class=n>输入数组表示数字</span> <span class=mi>123</span><span class=err>。</span></span></span></code></pre></td></tr></table></div></div></div><div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"><button class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50" title=复制代码 aria-label=复制代码 data-copied-label=已复制！><div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"></div><div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"></div></button></div></div><ul><li>示例 2：</li></ul><div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"><div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=n>输入</span><span class=err>：</span><span class=n>digits</span> <span class=o>=</span> <span class=p>[</span><span class=mi>9</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=n>输出</span><span class=err>：</span><span class=p>[</span><span class=mi>1</span><span class=p>,</span><span class=mi>0</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=n>解释</span><span class=err>：</span><span class=n>输入数组表示数字</span> <span class=mi>9</span><span class=err>。</span>
+</span></span><span class=line><span class=cl><span class=n>加</span> <span class=mi>1</span> <span class=n>得到了</span> <span class=mi>9</span> <span class=o>+</span> <span class=mi>1</span> <span class=o>=</span> <span class=mi>10</span><span class=err>。</span>
+</span></span><span class=line><span class=cl><span class=n>因此</span><span class=err>，</span><span class=n>结果应该是</span> <span class=p>[</span><span class=mi>1</span><span class=p>,</span><span class=mi>0</span><span class=p>]</span><span class=err>。</span></span></span></code></pre></td></tr></table></div></div></div><div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"><button class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50" title=复制代码 aria-label=复制代码 data-copied-label=已复制！><div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"></div><div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"></div></button></div></div><p><strong>代码</strong></p><div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"><div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=k>class</span> <span class=nc>Solution</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>plusOne</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>digits</span><span class=p>:</span> <span class=n>List</span><span class=p>[</span><span class=nb>int</span><span class=p>])</span> <span class=o>-&gt;</span> <span class=n>List</span><span class=p>[</span><span class=nb>int</span><span class=p>]:</span>
+</span></span><span class=line><span class=cl>        <span class=c1># 逆序，从低位开始，发现小于9的说明不用进位，加一退出，否则+1是10，当前位为0，进入下一位重复</span>
+</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=nb>len</span><span class=p>(</span><span class=n>digits</span><span class=p>)</span><span class=o>-</span><span class=mi>1</span><span class=p>,</span><span class=o>-</span><span class=mi>1</span><span class=p>,</span><span class=o>-</span><span class=mi>1</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=n>digits</span><span class=p>[</span><span class=n>i</span><span class=p>]</span><span class=o>&lt;</span><span class=mi>9</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                <span class=n>digits</span><span class=p>[</span><span class=n>i</span><span class=p>]</span><span class=o>+=</span><span class=mi>1</span>
+</span></span><span class=line><span class=cl>                <span class=k>break</span>
+</span></span><span class=line><span class=cl>            <span class=n>digits</span><span class=p>[</span><span class=n>i</span><span class=p>]</span><span class=o>=</span><span class=mi>0</span>
+</span></span><span class=line><span class=cl>		<span class=c1># 如果最高位为0，说明进位了，前面插入1</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=ow>not</span> <span class=n>digits</span><span class=p>[</span><span class=mi>0</span><span class=p>]:</span>
+</span></span><span class=line><span class=cl>            <span class=n>digits</span><span class=o>.</span><span class=n>insert</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span><span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>digits</span></span></span></code></pre></td></tr></table></div></div></div><div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"><button class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50" title=复制代码 aria-label=复制代码 data-copied-label=已复制！><div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"></div><div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"></div></button></div></div><p><strong>what I learn</strong></p><ul><li>逆序索引 range(len(digits)-1,-1,-1) 从len(digits)-1开始，步长为-1(递减)，到-1，左闭右开[len(digits)-1, -1)。</li></ul><h2>定长滑动窗口<span class="hx:absolute hx:-mt-20" id=定长滑动窗口></span>
+<a href=#%e5%ae%9a%e9%95%bf%e6%bb%91%e5%8a%a8%e7%aa%97%e5%8f%a3 class=subheading-anchor aria-label=此章节的永久链接></a></h2><ul><li>共性在于“一进一出”</li><li>记录变化计算、设置、边界值处理</li><li>逆向、排序、分组等特殊处理</li></ul><h3>半径为 k 的子数组平均值<span class="hx:absolute hx:-mt-20" id=半径为-k-的子数组平均值></span>
+<a href=#%e5%8d%8a%e5%be%84%e4%b8%ba-k-%e7%9a%84%e5%ad%90%e6%95%b0%e7%bb%84%e5%b9%b3%e5%9d%87%e5%80%bc class=subheading-anchor aria-label=此章节的永久链接></a></h3><p><strong><a href=https://leetcode.cn/problems/k-radius-subarray-averages/description/ target=_blank rel=noopener>2090. 半径为 k 的子数组平均值 - 力扣（LeetCode）</a></strong></p><ul><li><p>给你一个下标从 <strong>0</strong> 开始的数组 <code>nums</code> ，数组中有 <code>n</code> 个整数，另给你一个整数 <code>k</code> 。</p></li><li><p><strong>半径为 k 的子数组平均值</strong> 是指：<code>nums</code> 中一个以下标 <code>i</code> 为 <strong>中心</strong> 且 <strong>半径</strong> 为 <code>k</code> 的子数组中所有元素的平均值，即下标在 <code>i - k</code> 和 <code>i + k</code> 范围（<strong>含</strong> <code>i - k</code> 和 <code>i + k</code>）内所有元素的平均值。如果在下标 <code>i</code> 前或后不足 <code>k</code> 个元素，那么 <strong>半径为 k 的子数组平均值</strong> 是 <code>-1</code> 。</p></li><li><p>构建并返回一个长度为 <code>n</code> 的数组 <code>avgs</code> ，其中 <code>avgs[i]</code> 是以下标 <code>i</code> 为中心的子数组的 <strong>半径为 k 的子数组平均值</strong> 。</p></li><li><p><code>x</code> 个元素的 <strong>平均值</strong> 是 <code>x</code> 个元素相加之和除以 <code>x</code> ，此时使用截断式 <strong>整数除法</strong> ，即需要去掉结果的小数部分。</p></li><li><p>例如，四个元素 <code>2</code>、<code>3</code>、<code>1</code> 和 <code>5</code> 的平均值是 <code>(2 + 3 + 1 + 5) / 4 = 11 / 4 = 2.75</code>，截断后得到 <code>2</code> 。</p></li></ul><img src=https://assets.leetcode.com/uploads/2021/11/07/eg1.png><div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"><div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=n>输入</span><span class=err>：</span><span class=n>nums</span> <span class=o>=</span> <span class=p>[</span><span class=mi>7</span><span class=p>,</span><span class=mi>4</span><span class=p>,</span><span class=mi>3</span><span class=p>,</span><span class=mi>9</span><span class=p>,</span><span class=mi>1</span><span class=p>,</span><span class=mi>8</span><span class=p>,</span><span class=mi>5</span><span class=p>,</span><span class=mi>2</span><span class=p>,</span><span class=mi>6</span><span class=p>],</span> <span class=n>k</span> <span class=o>=</span> <span class=mi>3</span>
+</span></span><span class=line><span class=cl><span class=n>输出</span><span class=err>：</span><span class=p>[</span><span class=o>-</span><span class=mi>1</span><span class=p>,</span><span class=o>-</span><span class=mi>1</span><span class=p>,</span><span class=o>-</span><span class=mi>1</span><span class=p>,</span><span class=mi>5</span><span class=p>,</span><span class=mi>4</span><span class=p>,</span><span class=mi>4</span><span class=p>,</span><span class=o>-</span><span class=mi>1</span><span class=p>,</span><span class=o>-</span><span class=mi>1</span><span class=p>,</span><span class=o>-</span><span class=mi>1</span><span class=p>]</span></span></span></code></pre></td></tr></table></div></div></div><div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"><button class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50" title=复制代码 aria-label=复制代码 data-copied-label=已复制！><div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"></div><div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"></div></button></div></div><p><strong>代码</strong></p><div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"><div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=k>class</span> <span class=nc>Solution</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>getAverages</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>nums</span><span class=p>:</span> <span class=n>List</span><span class=p>[</span><span class=nb>int</span><span class=p>],</span> <span class=n>k</span><span class=p>:</span> <span class=nb>int</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=n>List</span><span class=p>[</span><span class=nb>int</span><span class=p>]:</span>        
+</span></span><span class=line><span class=cl>        <span class=c1># 我老想着动态得去判断加-1进result列表</span>
+</span></span><span class=line><span class=cl>        <span class=n>avgs</span> <span class=o>=</span> <span class=p>[</span><span class=o>-</span><span class=mi>1</span><span class=p>]</span> <span class=o>*</span> <span class=nb>len</span><span class=p>(</span><span class=n>nums</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>s</span> <span class=o>=</span> <span class=mi>0</span>  <span class=c1># 维护窗口元素和</span>
+</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=n>i</span><span class=p>,</span> <span class=n>x</span> <span class=ow>in</span> <span class=nb>enumerate</span><span class=p>(</span><span class=n>nums</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>            <span class=c1># 1. 进入窗口</span>
+</span></span><span class=line><span class=cl>            <span class=n>s</span> <span class=o>+=</span> <span class=n>x</span>
+</span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=n>i</span> <span class=o>&lt;</span> <span class=n>k</span> <span class=o>*</span> <span class=mi>2</span><span class=p>:</span>  <span class=c1># 窗口大小不足 2k+1</span>
+</span></span><span class=line><span class=cl>                <span class=k>continue</span>
+</span></span><span class=line><span class=cl>            <span class=c1># 2. 记录答案</span>
+</span></span><span class=line><span class=cl>            <span class=n>avgs</span><span class=p>[</span><span class=n>i</span> <span class=o>-</span> <span class=n>k</span><span class=p>]</span> <span class=o>=</span> <span class=n>s</span> <span class=o>//</span> <span class=p>(</span><span class=n>k</span> <span class=o>*</span> <span class=mi>2</span> <span class=o>+</span> <span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=c1># 3. 离开窗口</span>
+</span></span><span class=line><span class=cl>            <span class=n>s</span> <span class=o>-=</span> <span class=n>nums</span><span class=p>[</span><span class=n>i</span> <span class=o>-</span> <span class=n>k</span> <span class=o>*</span> <span class=mi>2</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>avgs</span>
+</span></span><span class=line><span class=cl><span class=c1># 作者-灵神</span></span></span></code></pre></td></tr></table></div></div></div><div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"><button class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50" title=复制代码 aria-label=复制代码 data-copied-label=已复制！><div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"></div><div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"></div></button></div></div><p><strong>what I learn</strong></p><ul><li>观察问题的本质，不要被方法带着走。<ul><li>问题的本质：待到要处理的索引时，得出平均值放入数组。</li><li>方法带偏：想着边遍历边append，开头去append -1，结束了再补充-1。</li><li>解决的关键：初始化nums长度的 -1数组，即 [-1] * len(nums)。</li></ul></li></ul><h3>几乎唯一子数组的最大和<span class="hx:absolute hx:-mt-20" id=几乎唯一子数组的最大和></span>
+<a href=#%e5%87%a0%e4%b9%8e%e5%94%af%e4%b8%80%e5%ad%90%e6%95%b0%e7%bb%84%e7%9a%84%e6%9c%80%e5%a4%a7%e5%92%8c class=subheading-anchor aria-label=此章节的永久链接></a></h3><p><strong><a href=https://leetcode.cn/problems/maximum-sum-of-almost-unique-subarray/ target=_blank rel=noopener>2841. 几乎唯一子数组的最大和 - 力扣（LeetCode）</a></strong></p><ul><li><p>给你一个整数数组 <code>nums</code> 和两个正整数 <code>m</code> 和 <code>k</code> 。</p></li><li><p>请你返回 <code>nums</code> 中长度为 <code>k</code> 的 <strong>几乎唯一</strong> 子数组的 <strong>最大和</strong> ，如果不存在几乎唯一子数组，请你返回 <code>0</code> 。</p></li><li><p>如果 <code>nums</code> 的一个子数组有至少 <code>m</code> 个互不相同的元素，我们称它是 <strong>几乎唯一</strong> 子数组。</p></li><li><p>子数组指的是一个数组中一段连续 <strong>非空</strong> 的元素序列。</p></li><li><p>示例</p></li></ul><div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"><div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=n>输入</span><span class=err>：</span><span class=n>nums</span> <span class=o>=</span> <span class=p>[</span><span class=mi>2</span><span class=p>,</span><span class=mi>6</span><span class=p>,</span><span class=mi>7</span><span class=p>,</span><span class=mi>3</span><span class=p>,</span><span class=mi>1</span><span class=p>,</span><span class=mi>7</span><span class=p>],</span> <span class=n>m</span> <span class=o>=</span> <span class=mi>3</span><span class=p>,</span> <span class=n>k</span> <span class=o>=</span> <span class=mi>4</span>
+</span></span><span class=line><span class=cl><span class=n>输出</span><span class=err>：</span><span class=mi>18</span>
+</span></span><span class=line><span class=cl><span class=n>解释</span><span class=err>：</span><span class=n>总共有</span> <span class=mi>3</span> <span class=n>个长度为</span> <span class=n>k</span> <span class=o>=</span> <span class=mi>4</span> <span class=n>的几乎唯一子数组</span><span class=err>。</span><span class=n>分别为</span> <span class=p>[</span><span class=mi>2</span><span class=p>,</span> <span class=mi>6</span><span class=p>,</span> <span class=mi>7</span><span class=p>,</span> <span class=mi>3</span><span class=p>]</span> <span class=err>，</span><span class=p>[</span><span class=mi>6</span><span class=p>,</span> <span class=mi>7</span><span class=p>,</span> <span class=mi>3</span><span class=p>,</span> <span class=mi>1</span><span class=p>]</span> <span class=n>和</span> <span class=p>[</span><span class=mi>7</span><span class=p>,</span> <span class=mi>3</span><span class=p>,</span> <span class=mi>1</span><span class=p>,</span> <span class=mi>7</span><span class=p>]</span> <span class=err>。</span><span class=n>这些子数组中</span><span class=err>，</span><span class=n>和最大的是</span> <span class=p>[</span><span class=mi>2</span><span class=p>,</span> <span class=mi>6</span><span class=p>,</span> <span class=mi>7</span><span class=p>,</span> <span class=mi>3</span><span class=p>]</span> <span class=err>，</span><span class=n>和为</span> <span class=mi>18</span> <span class=err>。</span></span></span></code></pre></td></tr></table></div></div></div><div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"><button class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50" title=复制代码 aria-label=复制代码 data-copied-label=已复制！><div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"></div><div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"></div></button></div></div><p><strong>代码</strong></p><div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"><div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=k>class</span> <span class=nc>Solution</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>maxSum</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>nums</span><span class=p>:</span> <span class=n>List</span><span class=p>[</span><span class=nb>int</span><span class=p>],</span> <span class=n>m</span><span class=p>:</span> <span class=nb>int</span><span class=p>,</span> <span class=n>k</span><span class=p>:</span> <span class=nb>int</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=nb>int</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>sum_n</span> <span class=o>=</span> <span class=n>max_sum</span> <span class=o>=</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>        <span class=n>dif_n</span><span class=o>=</span><span class=n>defaultdict</span><span class=p>(</span><span class=nb>int</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=n>i</span><span class=p>,</span> <span class=n>element</span> <span class=ow>in</span> <span class=nb>enumerate</span><span class=p>(</span><span class=n>nums</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>            <span class=n>dif_n</span><span class=p>[</span><span class=n>element</span><span class=p>]</span> <span class=o>+=</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>            <span class=n>sum_n</span> <span class=o>+=</span> <span class=n>element</span>
+</span></span><span class=line><span class=cl>            
+</span></span><span class=line><span class=cl>            <span class=n>left</span> <span class=o>=</span> <span class=n>i</span><span class=o>-</span><span class=n>k</span><span class=o>+</span><span class=mi>1</span>			
+</span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=n>left</span> <span class=o>&lt;</span> <span class=mi>0</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                <span class=k>continue</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=nb>len</span><span class=p>(</span><span class=n>dif_n</span><span class=p>)</span> <span class=o>&gt;=</span> <span class=n>m</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                <span class=n>max_sum</span> <span class=o>=</span> <span class=nb>max</span><span class=p>(</span><span class=n>sum_n</span><span class=p>,</span><span class=n>max_sum</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            <span class=n>out</span><span class=o>=</span><span class=n>nums</span><span class=p>[</span><span class=n>left</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>            <span class=n>sum_n</span> <span class=o>-=</span> <span class=n>out</span>
+</span></span><span class=line><span class=cl>            <span class=n>dif_n</span><span class=p>[</span><span class=n>out</span><span class=p>]</span> <span class=o>-=</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=n>dif_n</span><span class=p>[</span><span class=n>out</span><span class=p>]</span> <span class=o>==</span> <span class=mi>0</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                <span class=k>del</span> <span class=n>dif_n</span><span class=p>[</span><span class=n>out</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>			
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>max_sum</span></span></span></code></pre></td></tr></table></div></div></div><div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"><button class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50" title=复制代码 aria-label=复制代码 data-copied-label=已复制！><div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"></div><div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"></div></button></div></div><p><strong>what I learn</strong></p><ul><li>sum_n = max_sum = 0</li><li>使用defaultdict<ul><li>默认值为0，dif_n=defaultdict(int) 因为int()返回0（不如Counter）</li><li>if dif_n[out] == 0: <strong>del</strong> dif_n[out] 删除其中值为0的键值对</li></ul></li><li>max_sum = max(sum_n,max_sum) 而不用 if 条件判断</li><li>left = i-k+1 &mldr;. out=nums[left] 使代码更简洁美观</li></ul><h3>找到字符串中所有字母异位词<span class="hx:absolute hx:-mt-20" id=找到字符串中所有字母异位词></span>
+<a href=#%e6%89%be%e5%88%b0%e5%ad%97%e7%ac%a6%e4%b8%b2%e4%b8%ad%e6%89%80%e6%9c%89%e5%ad%97%e6%af%8d%e5%bc%82%e4%bd%8d%e8%af%8d class=subheading-anchor aria-label=此章节的永久链接></a></h3><p><a href=https://leetcode.cn/problems/find-all-anagrams-in-a-string/description/ target=_blank rel=noopener>438. 找到字符串中所有字母异位词 - 力扣（LeetCode）</a></p><p><strong>what I learn</strong></p><ul><li>Counter</li></ul><div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"><div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>collections</span> <span class=kn>import</span> <span class=n>Counter</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 示例 1：统计字母频次</span>
+</span></span><span class=line><span class=cl><span class=n>cnt_p</span> <span class=o>=</span> <span class=n>Counter</span><span class=p>(</span><span class=s2>&#34;aabbc&#34;</span><span class=p>)</span> 
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>cnt_p</span><span class=p>)</span>  <span class=c1># 输出：Counter({&#39;a&#39;: 2, &#39;b&#39;: 2, &#39;c&#39;: 1})</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 示例 2：访问不存在的键</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>cnt_p</span><span class=p>[</span><span class=s2>&#34;d&#34;</span><span class=p>])</span>  <span class=c1># 输出：0（不会报错！）</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 改变值，类似字典</span>
+</span></span><span class=line><span class=cl><span class=n>cnt_p</span><span class=p>[</span><span class=s2>&#34;a&#34;</span><span class=p>]</span><span class=o>+=</span><span class=mi>1</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 比较和集合操作</span>
+</span></span><span class=line><span class=cl><span class=n>cnt_1</span> <span class=o>=</span> <span class=n>Counter</span><span class=p>(</span><span class=s2>&#34;bcd&#34;</span><span class=p>)</span> 
+</span></span><span class=line><span class=cl><span class=n>cnt_2</span> <span class=o>=</span> <span class=n>Counter</span><span class=p>(</span><span class=s2>&#34;abc&#34;</span><span class=p>)</span> 
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>cnt_1</span><span class=o>==</span><span class=n>cnt2</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>cnt_1</span><span class=o>-</span><span class=n>cnt_2</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>cnt_1</span><span class=o>+</span><span class=n>cnt_2</span><span class=p>)</span></span></span></code></pre></td></tr></table></div></div></div><div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"><button class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50" title=复制代码 aria-label=复制代码 data-copied-label=已复制！><div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"></div><div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"></div></button></div></div><h3>重新安排会议得到最多空余时间 I<span class="hx:absolute hx:-mt-20" id=重新安排会议得到最多空余时间-i></span>
+<a href=#%e9%87%8d%e6%96%b0%e5%ae%89%e6%8e%92%e4%bc%9a%e8%ae%ae%e5%be%97%e5%88%b0%e6%9c%80%e5%a4%9a%e7%a9%ba%e4%bd%99%e6%97%b6%e9%97%b4-i class=subheading-anchor aria-label=此章节的永久链接></a></h3><p><a href=https://leetcode.cn/problems/reschedule-meetings-for-maximum-free-time-i/ target=_blank rel=noopener>3439. 重新安排会议得到最多空余时间 I - 力扣（LeetCode）</a></p><ul><li>理解题目意思，转化问题（so called 建模）为某种方法解决，此题很明显，弄出所有时间差gap，然后求最大连续子数组即可。</li><li>注意一些变量的值需要变化，比如这题中的“可以移动k个”，转化为k+1个连续子数组</li><li>注意全面性，比如gap还包括“startTime-第一个会议开始时刻” “endTime-最后一个会议结束时刻”。</li></ul><h3>使二进制字符串字符交替的最少反转次数<span class="hx:absolute hx:-mt-20" id=使二进制字符串字符交替的最少反转次数></span>
+<a href=#%e4%bd%bf%e4%ba%8c%e8%bf%9b%e5%88%b6%e5%ad%97%e7%ac%a6%e4%b8%b2%e5%ad%97%e7%ac%a6%e4%ba%a4%e6%9b%bf%e7%9a%84%e6%9c%80%e5%b0%91%e5%8f%8d%e8%bd%ac%e6%ac%a1%e6%95%b0 class=subheading-anchor aria-label=此章节的永久链接></a></h3><p><a href=https://leetcode.cn/problems/minimum-number-of-flips-to-make-the-binary-string-alternating/ target=_blank rel=noopener>1888. 使二进制字符串字符交替的最少反转次数 - 力扣（LeetCode）</a></p><ul><li>枚举法（s + s 上的滑动窗口），不要想当然得觉得 想出的算法能适应所有情况，当测试不通过时，大胆暴力，这里也就是 生成所有第一种操作而成的字符串，然后滑动遍历所有情况。</li><li>ans=min(cnt, k - cnt, ans)，在当前情况下的两种可能和全局最小 中 取最小。</li></ul><h3>查找给定哈希值的子串<span class="hx:absolute hx:-mt-20" id=查找给定哈希值的子串></span>
+<a href=#%e6%9f%a5%e6%89%be%e7%bb%99%e5%ae%9a%e5%93%88%e5%b8%8c%e5%80%bc%e7%9a%84%e5%ad%90%e4%b8%b2 class=subheading-anchor aria-label=此章节的永久链接></a></h3><p><a href=https://leetcode.cn/problems/find-substring-with-given-hash-value/description/ target=_blank rel=noopener>2156. 查找给定哈希值的子串 - 力扣（LeetCode）</a></p><ul><li>第一个字母的 <em>p</em> 的幂次是最小的，这和通常字符串哈希中的定义是<strong>相反</strong>的。所以在计算哈希值时，要<strong>倒序遍历</strong>。</li><li>关键在于，此题正序遍历时，要在mod m下除以p，除法需要逆元，逆元不一定存在；逆序遍历时为乘p，无需逆元。</li></ul><h3>串联所有单词的子串（次定长滑窗）<span class="hx:absolute hx:-mt-20" id=串联所有单词的子串次定长滑窗></span>
+<a href=#%e4%b8%b2%e8%81%94%e6%89%80%e6%9c%89%e5%8d%95%e8%af%8d%e7%9a%84%e5%ad%90%e4%b8%b2%e6%ac%a1%e5%ae%9a%e9%95%bf%e6%bb%91%e7%aa%97 class=subheading-anchor aria-label=此章节的永久链接></a></h3><p><a href=https://leetcode.cn/problems/substring-with-concatenation-of-all-words/description/ target=_blank rel=noopener>30. 串联所有单词的子串 - 力扣（LeetCode）</a></p><ul><li>&ldquo;barfoothefoobarman&rdquo;，单个“词”长度3，本因3个3个检查，于是为遍历所有情况，起始位置需为0/1，对从0/1位置开始的字符串分别滑窗。</li></ul><h2>不定长滑动窗口<span class="hx:absolute hx:-mt-20" id=不定长滑动窗口></span>
+<a href=#%e4%b8%8d%e5%ae%9a%e9%95%bf%e6%bb%91%e5%8a%a8%e7%aa%97%e5%8f%a3 class=subheading-anchor aria-label=此章节的永久链接></a></h2><ul><li>求最大最长（越短越合法或恰好合法）：内循环while使窗变小，一旦合法则无法继续循环，则此时为合法下的最长。</li><li>求最小最短（越长越合法或恰好合法）：内循环while使窗变小，预计算一步若不合法则无法继续循环，此时为合法下的最短。</li><li>求子数组</li></ul><h3>无重复字符的最长子串（最长最大）<span class="hx:absolute hx:-mt-20" id=无重复字符的最长子串最长最大></span>
+<a href=#%e6%97%a0%e9%87%8d%e5%a4%8d%e5%ad%97%e7%ac%a6%e7%9a%84%e6%9c%80%e9%95%bf%e5%ad%90%e4%b8%b2%e6%9c%80%e9%95%bf%e6%9c%80%e5%a4%a7 class=subheading-anchor aria-label=此章节的永久链接></a></h3><p><strong><a href=https://leetcode.cn/problems/longest-substring-without-repeating-characters/ target=_blank rel=noopener>3. 无重复字符的最长子串 - 力扣（LeetCode）</a></strong></p><ul><li>基础模板：左指针while调整，右指针“+1移动”，cnt为int或defaultdict(int)记录信息，ans = max(ans, right-left+1)。</li><li>循环内呈现：right(进入的元素)处理，while循环调整左指针和记录变量，外围答案值是否需要改变。</li></ul><h3>找到最长的半重复子字符串<span class="hx:absolute hx:-mt-20" id=找到最长的半重复子字符串></span>
+<a href=#%e6%89%be%e5%88%b0%e6%9c%80%e9%95%bf%e7%9a%84%e5%8d%8a%e9%87%8d%e5%a4%8d%e5%ad%90%e5%ad%97%e7%ac%a6%e4%b8%b2 class=subheading-anchor aria-label=此章节的永久链接></a></h3><p><a href=https://leetcode.cn/problems/find-the-longest-semi-repetitive-substring/solutions/2304713/shuang-zhi-zhen-hua-chuang-pythonjavacgo-nurf/ target=_blank rel=noopener>2730. 找到最长的半重复子字符串 - 力扣（LeetCode）</a></p><ul><li>稍作调整使用模板：ans的初始化(默认)值设置；记录变量的如何设置和如何变化</li></ul><h3>最高频元素的频数<span class="hx:absolute hx:-mt-20" id=最高频元素的频数></span>
+<a href=#%e6%9c%80%e9%ab%98%e9%a2%91%e5%85%83%e7%b4%a0%e7%9a%84%e9%a2%91%e6%95%b0 class=subheading-anchor aria-label=此章节的永久链接></a></h3><p><a href=https://leetcode.cn/problems/frequency-of-the-most-frequent-element/description/ target=_blank rel=noopener>1838. 最高频元素的频数 - 力扣（LeetCode）</a></p><ul><li>洞悉“滑窗”特性，主要在于它的只增性质。</li><li>先用在框架下暴力方法分析如何解出，再优化时间复杂度。</li></ul><h3>将 x 减到 0 的最小操作数<span class="hx:absolute hx:-mt-20" id=将-x-减到-0-的最小操作数></span>
+<a href=#%e5%b0%86-x-%e5%87%8f%e5%88%b0-0-%e7%9a%84%e6%9c%80%e5%b0%8f%e6%93%8d%e4%bd%9c%e6%95%b0 class=subheading-anchor aria-label=此章节的永久链接></a></h3><p><a href=https://leetcode.cn/problems/minimum-operations-to-reduce-x-to-zero/description/ target=_blank rel=noopener>1658. 将 x 减到 0 的最小操作数 - 力扣（LeetCode）</a></p><p>逆向思维+滑动窗口</p><ul><li>逆向思维</li><li>特殊情况分析</li></ul><h3>数组的最大美丽值<span class="hx:absolute hx:-mt-20" id=数组的最大美丽值></span>
+<a href=#%e6%95%b0%e7%bb%84%e7%9a%84%e6%9c%80%e5%a4%a7%e7%be%8e%e4%b8%bd%e5%80%bc class=subheading-anchor aria-label=此章节的永久链接></a></h3><p><a href=https://leetcode.cn/problems/maximum-beauty-of-an-array-after-applying-operation/description/ target=_blank rel=noopener>2779. 数组的最大美丽值 - 力扣（LeetCode）</a></p><p>排序+滑动窗口</p><ul><li>审题，发现排序并不影响子序列的选择；排序后分析left的移动条件即可轻易解出。</li></ul><h3>毯子覆盖的最多白色砖块数<span class="hx:absolute hx:-mt-20" id=毯子覆盖的最多白色砖块数></span>
+<a href=#%e6%af%af%e5%ad%90%e8%a6%86%e7%9b%96%e7%9a%84%e6%9c%80%e5%a4%9a%e7%99%bd%e8%89%b2%e7%a0%96%e5%9d%97%e6%95%b0 class=subheading-anchor aria-label=此章节的永久链接></a></h3><p><a href=https://leetcode.cn/problems/maximum-white-tiles-covered-by-a-carpet/description/ target=_blank rel=noopener>2271. 毯子覆盖的最多白色砖块数 - 力扣（LeetCode）</a></p><p>排序+滑动窗口+特殊滑动单位</p><ul><li>模拟发现，毯子右端在白瓷内时，覆盖面积非递减，毯子右端在非白瓷内时，覆盖面积非递增。</li><li>相当于每次毯子右端在白瓷右端时，计算覆盖面积看是否大于ans，于是滑动单位为一个个白瓷（一个个区间）</li></ul><h3>长度最小的子数组（最短最小）<span class="hx:absolute hx:-mt-20" id=长度最小的子数组最短最小></span>
+<a href=#%e9%95%bf%e5%ba%a6%e6%9c%80%e5%b0%8f%e7%9a%84%e5%ad%90%e6%95%b0%e7%bb%84%e6%9c%80%e7%9f%ad%e6%9c%80%e5%b0%8f class=subheading-anchor aria-label=此章节的永久链接></a></h3><p><a href=https://leetcode.cn/problems/minimum-size-subarray-sum/ target=_blank rel=noopener>209. 长度最小的子数组 - 力扣（LeetCode）</a></p><ul><li>while total-nums[left] >= target: （&ldquo;预计算一步&rdquo;，即下一步不满足，现在是最短）</li></ul><h2>相向双指针<span class="hx:absolute hx:-mt-20" id=相向双指针></span>
+<a href=#%e7%9b%b8%e5%90%91%e5%8f%8c%e6%8c%87%e9%92%88 class=subheading-anchor aria-label=此章节的永久链接></a></h2><h3>两数之和 II - 输入有序数组<span class="hx:absolute hx:-mt-20" id=两数之和-ii---输入有序数组></span>
+<a href=#%e4%b8%a4%e6%95%b0%e4%b9%8b%e5%92%8c-ii---%e8%be%93%e5%85%a5%e6%9c%89%e5%ba%8f%e6%95%b0%e7%bb%84 class=subheading-anchor aria-label=此章节的永久链接></a></h3><p><a href=https://leetcode.cn/problems/two-sum-ii-input-array-is-sorted/description/ target=_blank rel=noopener>167. 两数之和 II - 输入有序数组 - 力扣（LeetCode）</a></p><ul><li>关键在于利用“有序”进行排除，移动的指针 便是 排除“都小”或“都大”的数。</li><li>最终找到恰好</li></ul><p><img src=https://pic.leetcode-cn.com/9ebb3ff74f0706c3c350b7fb91fea343e54750eb5b6ae6a4a3493421a019922a.gif alt=搜索空间的减小过程（动图） data-zoomable loading=lazy></p><h3>统计和小于目标的下标对数目<span class="hx:absolute hx:-mt-20" id=统计和小于目标的下标对数目></span>
+<a href=#%e7%bb%9f%e8%ae%a1%e5%92%8c%e5%b0%8f%e4%ba%8e%e7%9b%ae%e6%a0%87%e7%9a%84%e4%b8%8b%e6%a0%87%e5%af%b9%e6%95%b0%e7%9b%ae class=subheading-anchor aria-label=此章节的永久链接></a></h3><p><a href=https://leetcode.cn/problems/count-pairs-whose-sum-is-less-than-target/description/ target=_blank rel=noopener>2824. 统计和小于目标的下标对数目 - 力扣（LeetCode）</a></p><ul><li>对大于/小于的统计，都是right-left，条件不同罢了，对称性：固定左指针，右指针往左，和都小；固定右指针，左指针往右，和都大。</li></ul></div><div class="hx:mt-12 hx:mb-8 hx:block hx:text-xs hx:text-gray-500 hx:ltr:text-right hx:rtl:text-left hx:dark:text-gray-400">最后更新于 <time datetime=2025-07-25T00:00:00.000Z>2025-07-25</time></div><div class="hx:mb-8 hx:flex hx:items-center hx:border-t hx:pt-8 hx:border-gray-200 hx:dark:border-neutral-800 hx:contrast-more:border-neutral-400 hx:dark:contrast-more:border-neutral-400 hx:print:hidden"><a href=/p/lumberchunker%E8%A7%A3%E8%AF%BB/ title=LumberChunker解读 class="hx:flex hx:max-w-[50%] hx:items-center hx:gap-1 hx:py-4 hx:text-base hx:font-medium hx:text-gray-600 hx:transition-colors [word-break:break-word] hx:hover:text-primary-600 hx:dark:text-gray-300 hx:md:text-lg hx:ltr:pr-4 hx:rtl:pl-4"><svg class="hx:inline hx:h-5 hx:shrink-0 hx:ltr:rotate-180" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>LumberChunker解读</a><a href=/p/lgmgc%E8%A7%A3%E8%AF%BB/ title=LGMGC解读 class="hx:flex hx:max-w-[50%] hx:items-center hx:gap-1 hx:py-4 hx:text-base hx:font-medium hx:text-gray-600 hx:transition-colors [word-break:break-word] hx:hover:text-primary-600 hx:dark:text-gray-300 hx:md:text-lg hx:ltr:ml-auto hx:ltr:pl-4 hx:ltr:text-right hx:rtl:mr-auto hx:rtl:pr-4 hx:rtl:text-left">LGMGC解读<svg class="hx:inline hx:h-5 hx:shrink-0 hx:rtl:-rotate-180" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></a></div></main></article></div><footer class="hextra-footer hx:bg-gray-100 hx:pb-[env(safe-area-inset-bottom)] hx:dark:bg-neutral-900 hx:print:bg-transparent"><div class="hextra-custom-footer hextra-max-footer-width hx:mx-auto hx:pl-[max(env(safe-area-inset-left),1.5rem)] hx:pr-[max(env(safe-area-inset-right),1.5rem)] hx:text-gray-600 hx:dark:text-gray-400"></div><div class="hextra-max-footer-width hx:mx-auto hx:flex hx:justify-center hx:py-12 hx:pl-[max(env(safe-area-inset-left),1.5rem)] hx:pr-[max(env(safe-area-inset-right),1.5rem)] hx:text-gray-600 hx:dark:text-gray-400 hx:md:justify-start"><div class="hx:flex hx:w-full hx:flex-col hx:items-center hx:sm:items-start"><div class=hx:font-semibold><a class="hx:flex hx:text-sm hx:items-center hx:gap-1 hx:text-current" target=_blank rel="noopener noreferrer" title="Hextra GitHub Homepage" href=https://github.com/imfing/hextra><span>由 Hextra 驱动<svg height="1em" class="hx:inline-block hx:ltr:ml-1 hx:rtl:mr-1 hx:align-[-2.5px]" viewBox="0 0 180 180" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="m105.50024 22.224647c-9.59169-5.537563-21.40871-5.537563-31.000093.0L39.054693 42.689119C29.463353 48.226675 23.55484 58.460531 23.55484 69.535642v40.928918c0 11.07542 5.908513 21.3092 15.499853 26.84652l35.445453 20.46446c9.591313 5.53732 21.408404 5.53732 31.000094.0l35.44507-20.46446c9.59131-5.53732 15.49985-15.7711 15.49985-26.84652V69.535642c0-11.075111-5.90854-21.308967-15.49985-26.846523zM34.112797 85.737639c-1.384445 2.397827-1.384445 5.352099.0 7.749927l24.781554 42.922974c1.38437 2.39783 3.942853 3.87496 6.711592 3.87496h49.563107c2.76905.0 5.3273-1.47713 6.71144-3.87496l24.78194-42.922974c1.38414-2.397828 1.38414-5.3521.0-7.749927L121.88049 42.814746c-1.38414-2.397828-3.94239-3.874964-6.71144-3.874964H65.605944c-2.768739.0-5.327223 1.477059-6.711592 3.874964z" style="stroke-width:.774993"/></svg></span></a></div><div class="hx:mt-6 hx:text-xs">© 2025 rooobeam</div></div></div></footer><script defer src=/js/main.min.d9fbefbbac8caeb66025dbb14d569c30defac0effcba45486a78209fba9360af.js integrity="sha256-2fvvu6yMrrZgJduxTVacMN76wO/8ukVIanggn7qTYK8="></script><script defer src=/vendor/flexsearch/flexsearch.bundle.min.5938454b034e37308e8dfa54a4f6e14d1e738f63ed37663cca20076729d62e23.js integrity="sha256-WThFSwNONzCOjfpUpPbhTR5zj2PtN2Y8yiAHZynWLiM=" crossorigin=anonymous></script><script defer src=/zh-cn.search.min.a916de3ee930b2f5a20c815c6ed1231a86d46fce6ac567ce820d2e224b51725a.js integrity="sha256-qRbePukwsvWiDIFcbtEjGobUb85qxWfOgg0uIktRclo="></script><script defer src=/vendor/medium-zoom/medium-zoom.min.6603320c02180d81b16dca4971f52763035ebc6ff18bd38729a47ff062be8d67.js integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin=anonymous></script><script>document.addEventListener("DOMContentLoaded",()=>{if(!window.mediumZoom)return;const e=()=>document.documentElement.classList.contains("dark")?"rgba(17, 17, 17, 0.98)":"rgba(255, 255, 255, 0.98)",n=window.mediumZoom("[data-zoomable]",{background:e()}),t=document.createElement("style");t.textContent=`
+      .medium-zoom-overlay {
+        z-index: 1000;
+      }
+      .medium-zoom-image--opened {
+        z-index: 1001;
+      }
+    `,document.head.appendChild(t),new MutationObserver(()=>{n.update({background:e()})}).observe(document.documentElement,{attributes:!0,attributeFilter:["class"]})})</script></body></html>

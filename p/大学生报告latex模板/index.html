@@ -1,832 +1,98 @@
-<!DOCTYPE html>
-<html lang="en-us" dir="ltr">
-    <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="大学生LaTeX 报告模板 本模板适用于撰写大作业报告，基于成都理工大学（CDUT）的报告格式规范进行修改，包含完整的文档结构（标题页、摘要、目录、章节、参考文献、附录等），页面和英文字体设置遵循一个英国项目规范Research_Project_Guide.pdf，并提供了详细的使用说明。\n">
-<title>大学生报告LaTeX模板</title>
-
-<link rel='canonical' href='https://rooobeam.github.io/p/%E5%A4%A7%E5%AD%A6%E7%94%9F%E6%8A%A5%E5%91%8Alatex%E6%A8%A1%E6%9D%BF/'>
-
-<link rel="stylesheet" href="/scss/style.min.4f77a518c8e8877dfe55e8d90f7ed3f84e82d7a31cd88e8d1dcf983db94f54bc.css"><meta property='og:title' content="大学生报告LaTeX模板">
-<meta property='og:description' content="大学生LaTeX 报告模板 本模板适用于撰写大作业报告，基于成都理工大学（CDUT）的报告格式规范进行修改，包含完整的文档结构（标题页、摘要、目录、章节、参考文献、附录等），页面和英文字体设置遵循一个英国项目规范Research_Project_Guide.pdf，并提供了详细的使用说明。\n">
-<meta property='og:url' content='https://rooobeam.github.io/p/%E5%A4%A7%E5%AD%A6%E7%94%9F%E6%8A%A5%E5%91%8Alatex%E6%A8%A1%E6%9D%BF/'>
-<meta property='og:site_name' content='rooobeam'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-07-02T12:36:24&#43;08:00'/><meta property='article:modified_time' content='2025-07-02T12:36:24&#43;08:00'/>
-<meta name="twitter:title" content="大学生报告LaTeX模板">
-<meta name="twitter:description" content="大学生LaTeX 报告模板 本模板适用于撰写大作业报告，基于成都理工大学（CDUT）的报告格式规范进行修改，包含完整的文档结构（标题页、摘要、目录、章节、参考文献、附录等），页面和英文字体设置遵循一个英国项目规范Research_Project_Guide.pdf，并提供了详细的使用说明。\n">
-    <link rel="shortcut icon" href="/favicon.ico" />
-
-    </head>
-    <body class="
-    article-page
-    ">
-    <script>
-        (function() {
-            const colorSchemeKey = 'StackColorScheme';
-            if(!localStorage.getItem(colorSchemeKey)){
-                localStorage.setItem(colorSchemeKey, "auto");
-            }
-        })();
-    </script><script>
-    (function() {
-        const colorSchemeKey = 'StackColorScheme';
-        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
-        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
-
-        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
-            
-
-            document.documentElement.dataset.scheme = 'dark';
-        } else {
-            document.documentElement.dataset.scheme = 'light';
-        }
-    })();
-</script>
-<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
-    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
-        <span class="hamburger-box">
-            <span class="hamburger-inner"></span>
-        </span>
-    </button>
-
-    <header>
-        
-            
-            <figure class="site-avatar">
-                <a href="/">
-                
-                    
-                    
-                    
-                        
-                        <img src="/img/avatar_hu_124ee845b198fb3b.png" width="300"
-                            height="299" class="site-logo" loading="lazy" alt="Avatar">
-                    
-                
-                </a>
-                
-                    <span class="emoji">😚</span>
-                
-            </figure>
-            
-        
-        
-        <div class="site-meta">
-            <h1 class="site-name"><a href="/">rooobeam</a></h1>
-            <h2 class="site-description"></h2>
-        </div>
-    </header><ol class="menu-social">
-            
-                <li>
-                    <a 
-                        href='https://space.bilibili.com/3461571462302229'
-                        target="_blank"
-                        title="Bilibili"
-                        rel="me"
-                    >
-                        
-                        
-                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-brand-bilibili"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z" /><path d="M8 3l2 3" /><path d="M16 3l-2 3" /><path d="M9 13v-2" /><path d="M15 11v2" /></svg>
-                        
-                    </a>
-                </li>
-            
-                <li>
-                    <a 
-                        href='https://blog.csdn.net/rooobeam?'
-                        target="_blank"
-                        title="CSDN"
-                        rel="me"
-                    >
-                        
-                        
-                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-copyright"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M14 9.75a3.016 3.016 0 0 0 -4.163 .173a2.993 2.993 0 0 0 0 4.154a3.016 3.016 0 0 0 4.163 .173" /></svg>
-                        
-                    </a>
-                </li>
-            
-                <li>
-                    <a 
-                        href='https://github.com/rooobeam?'
-                        target="_blank"
-                        title="GitHub"
-                        rel="me"
-                    >
-                        
-                        
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
-</svg>
-
-
-
-                        
-                    </a>
-                </li>
-            
-        </ol><ol class="menu" id="main-menu">
-        
-        
-        
-        <li >
-            <a href='/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <polyline points="5 12 3 12 12 3 21 12 19 12" />
-  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
-  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
-</svg>
-
-
-
-                
-                <span>Home</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/search/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="10" cy="10" r="7" />
-  <line x1="21" y1="21" x2="15" y2="15" />
-</svg>
-
-
-
-                
-                <span>Search</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/links/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
-  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
-</svg>
-
-
-
-                
-                <span>Links</span>
-            </a>
-        </li>
-        
-        <li class="menu-bottom-section">
-            <ol class="menu">
-
-                
-                    <li id="dark-mode-toggle">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="8" cy="12" r="2" />
-  <rect x="2" y="6" width="20" height="12" rx="6" />
-</svg>
-
-
-
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="16" cy="12" r="2" />
-  <rect x="2" y="6" width="20" height="12" rx="6" />
-</svg>
-
-
-
-                        <span>Dark Mode</span>
-                    </li>
-                
-            </ol>
-        </li>
-    </ol>
-</aside>
-
-    <aside class="sidebar right-sidebar sticky">
-        
-            
-                
-    <section class="widget archives">
-        <div class="widget-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <line x1="5" y1="9" x2="19" y2="9" />
-  <line x1="5" y1="15" x2="19" y2="15" />
-  <line x1="11" y1="4" x2="7" y2="20" />
-  <line x1="17" y1="4" x2="13" y2="20" />
-</svg>
-
-
-
-        </div>
-        <h2 class="widget-title section-title">Table of contents</h2>
-        
-        <div class="widget--toc">
-            <nav id="TableOfContents">
-  <ol>
-    <li><a href="#-文件结构">📁 文件结构</a></li>
-    <li><a href="#-使用说明">🚀 使用说明</a>
-      <ol>
-        <li><a href="#1-环境要求">1. 环境要求</a></li>
-        <li><a href="#2-编译步骤">2. 编译步骤</a></li>
-        <li><a href="#3-内容填充">3. 内容填充</a></li>
-      </ol>
-    </li>
-    <li><a href="#-配置说明">⚙️ 配置说明</a>
-      <ol>
-        <li><a href="#1-类文件cdutreportcls">1. 类文件（CDUTReport.cls）</a></li>
-        <li><a href="#2-自定义命令mycommandsty">2. 自定义命令（Mycommand.sty）</a></li>
-        <li><a href="#3-字体设置font_settex">3. 字体设置（Font_set.tex）</a></li>
-      </ol>
-    </li>
-    <li><a href="#-示例与手册">📖 示例与手册</a></li>
-    <li><a href="#-注意事项">⚠️ 注意事项</a></li>
-    <li><a href="#-联系方式">📞 联系方式</a></li>
-  </ol>
-
-  <ol>
-    <li><a href="#-file-structure">📁 File Structure</a></li>
-    <li><a href="#-usage-instructions">🚀 Usage Instructions</a>
-      <ol>
-        <li><a href="#1-environment-requirements">1. Environment Requirements</a></li>
-        <li><a href="#2-compilation-steps">2. Compilation Steps</a></li>
-        <li><a href="#3-content-filling">3. Content Filling</a></li>
-      </ol>
-    </li>
-    <li><a href="#-configuration-instructions">⚙️ Configuration Instructions</a>
-      <ol>
-        <li><a href="#1-class-file-cdutreportcls">1. Class File (CDUTReport.cls)</a></li>
-        <li><a href="#2-custom-commands-mycommandsty">2. Custom Commands (Mycommand.sty)</a></li>
-        <li><a href="#3-font-settings-font_settex">3. Font Settings (Font_set.tex)</a></li>
-      </ol>
-    </li>
-    <li><a href="#-examples-and-manual">📖 Examples and Manual</a></li>
-    <li><a href="#-notes">⚠️ Notes</a></li>
-    <li><a href="#-contact-information">📞 Contact Information</a></li>
-  </ol>
-</nav>
-        </div>
-    </section>
-
-            
-        
-    </aside>
-
-
-            <main class="main full-width">
-    <article class="main-article">
-    <header class="article-header">
-
-    <div class="article-details">
+<!doctype html><html lang=zh-cn dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="index, follow"><link rel=icon href=/favicon.ico sizes=any><title>大学生报告LaTeX模板 – rooobeam</title><meta name=description content="大学生LaTeX 报告模板本模板适用于撰写大作业报告，基于成都理工大学（CDUT）的报告格式规范进行修改，包含完整的文档结构（标题页、摘要、目录、章节、参考文献、附录等），页面和英文字体设置遵循一个英国项目规范Research_Project_Guide.pdf，并提供了详细的使用说明。"><link rel=canonical href=https://rooobeam.github.io/p/%E5%A4%A7%E5%AD%A6%E7%94%9F%E6%8A%A5%E5%91%8Alatex%E6%A8%A1%E6%9D%BF/ itemprop=url><meta property="og:title" content="大学生报告LaTeX模板"><meta property="og:description" content="
     
-
-    <div class="article-title-wrapper">
-        <h2 class="article-title">
-            <a href="/p/%E5%A4%A7%E5%AD%A6%E7%94%9F%E6%8A%A5%E5%91%8Alatex%E6%A8%A1%E6%9D%BF/">大学生报告LaTeX模板</a>
-        </h2>
+      大学生LaTeX 报告模板本模板适用于撰写大作业报告，基于成都理工大学（CDUT）的报告格式规范进行修改，包含完整的文档结构（标题页、摘要、目录、章节、参考文献、附录等），页面和英文字体设置遵循一个英国项目规范Research_Project_Guide.pdf，并提供了详细的使用说明。
     
-        
-    </div>
-
-    
-    
-    
-    
-    <footer class="article-time">
-        
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
-  <circle cx="18" cy="18" r="4" />
-  <path d="M15 3v4" />
-  <path d="M7 3v4" />
-  <path d="M3 11h16" />
-  <path d="M18 16.496v1.504l1 1" />
-</svg>
-                <time class="article-time--published">2025-07-02</time>
-            </div>
-        
-
-        
-    </footer>
-    
-
-    
-</div>
-
-</header>
-
-    <section class="article-content">
-    
-    
-    <h1 id="大学生latex-报告模板">大学生LaTeX 报告模板
-</h1><p>本模板适用于撰写<strong>大作业报告</strong>，基于成都理工大学（CDUT）的报告格式规范进行修改，包含完整的文档结构（标题页、摘要、目录、章节、参考文献、附录等），页面和英文字体设置遵循一个英国项目规范Research_Project_Guide.pdf，并提供了详细的使用说明。</p>
-<h2 id="-文件结构">📁 文件结构
-</h2><p>以下是模板的文件结构及各文件用途说明：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">├── main.tex               # 主文档文件（整合所有子文件，编译入口）
-</span></span><span class="line"><span class="cl">├── titlepage.tex          # 标题页模板（包含标题、作者、日期等）
-</span></span><span class="line"><span class="cl">├── abstract.tex           # 摘要部分（中英文摘要）
-</span></span><span class="line"><span class="cl">├── chapter1.tex           # 第一章内容（可扩展为chapter2.tex、chapter3.tex等）
-</span></span><span class="line"><span class="cl">├── reference.tex          # 参考文献部分（引用bib数据库）
-</span></span><span class="line"><span class="cl">├── appendix.tex           # 附录部分（补充数据、代码等）
-</span></span><span class="line"><span class="cl">├── backpage.tex           # 封底页（可选）
-</span></span><span class="line"><span class="cl">├── manual.tex             # 使用手册（详细说明公式、图片、表格等插入方法）
-</span></span><span class="line"><span class="cl">├── ref.bib                # 参考文献数据库（BibTeX格式，需与reference.tex关联）
-</span></span><span class="line"><span class="cl">├── Research_Project_Guide.pdf   # 一个英国项目的规范指导书
-</span></span><span class="line"><span class="cl">├── configuration/         # 配置文件夹（格式、字体、自定义命令）
-</span></span><span class="line"><span class="cl">│   ├── CDUTReport.cls     # 核心类文件（定义页面布局、章节格式等）
-</span></span><span class="line"><span class="cl">│   ├── Mycommand.sty      # 自定义命令（快捷插入图片、表格等）
-</span></span><span class="line"><span class="cl">│   ├── Font set.tex       # 字体设置（使用Fandol系列中文字体）
-</span></span><span class="line"><span class="cl">│   ├── Title set.tex      # 标题格式设置（标题页、章节标题样式）
-</span></span><span class="line"><span class="cl">│   └── Fandol*.otf        # Fandol字体文件（黑体、宋体、楷体，需安装或保留）
-</span></span><span class="line"><span class="cl">├── figs/                  # 图片文件夹（存放文档中使用的所有图片）
-</span></span><span class="line"><span class="cl">└── README.md              # 本说明文件
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="-使用说明">🚀 使用说明
-</h2><h3 id="1-环境要求">1. 环境要求
-</h3><ul>
-<li><strong>LaTeX 编译器</strong>：需使用 <strong>XeLaTeX</strong>。</li>
-<li><strong>字体依赖</strong>：configuration文件夹中的Fandol字体（<code>FandolHei-Bold.otf</code>、<code>FandolSong-Regular.otf</code>等）需保留，或安装到系统字体目录。</li>
-</ul>
-<h3 id="2-编译步骤">2. 编译步骤
-</h3><ol>
-<li><strong>克隆仓库</strong>：
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git clone https://github.com/rooobeam/General-LaTeX-Template-for-College-Students.git
-</span></span></code></pre></td></tr></table>
-</div>
-</div></li>
-<li><strong>编译主文档</strong>（需多次运行以确保交叉引用和参考文献正确）：
-<ul>
-<li>第一步：<code>xelatex main.tex</code>（生成辅助文件）</li>
-<li>第二步：<code>bibtex main</code>（编译参考文献，若使用<code>ref.bib</code>数据库）</li>
-<li>第三步：<code>xelatex main.tex</code>（更新参考文献引用）</li>
-<li>第四步：<code>xelatex main.tex</code>（确保所有交叉引用正确）</li>
-</ul>
-</li>
-</ol>
-<h3 id="3-内容填充">3. 内容填充
-</h3><ul>
-<li><strong>标题页</strong>：修改<code>titlepage.tex</code>中的标题、作者、日期等信息。</li>
-<li><strong>摘要</strong>：在<code>abstract.tex</code>中填写中英文摘要。</li>
-<li><strong>章节内容</strong>：在<code>chapter1.tex</code>、<code>chapter2.tex</code>等文件中撰写章节内容，可通过<code>\input{chapter1}</code>在<code>main.tex</code>中引用。</li>
-<li><strong>参考文献</strong>：将文献条目添加到<code>ref.bib</code>文件中，使用<code>\cite{key}</code>在文档中引用，<code>reference.tex</code>会自动生成参考文献列表。</li>
-<li><strong>图片</strong>：将图片放在<code>figs</code>文件夹中，使用<code>\includegraphics{figs/figure1.png}</code>引用（需加载<code>graphicx</code>包，模板已包含）。</li>
-</ul>
-<h2 id="-配置说明">⚙️ 配置说明
-</h2><h3 id="1-类文件cdutreportcls">1. 类文件（CDUTReport.cls）
-</h3><p>定义了报告的核心格式，包括：</p>
-<ul>
-<li>页面布局（A4纸、页边距、页眉页脚）；</li>
-<li>章节样式（标题字体、编号格式）；</li>
-<li>目录生成（自动提取章节标题）。
-如需修改格式，可编辑此类文件，但建议<strong>先备份</strong>。</li>
-</ul>
-<h3 id="2-自定义命令mycommandsty">2. 自定义命令（Mycommand.sty）
-</h3><p>提供了快捷命令，简化重复操作，例如：</p>
-<ul>
-<li><code>\fig{path}{caption}</code>：插入图片并添加说明；</li>
-<li><code>\tab{label}{caption}{table content}</code>：插入表格并添加标签；</li>
-<li><code>\code{language}{code content}</code>：插入代码块（使用<code>listings</code>包）。
-可根据需要添加或修改自定义命令。</li>
-</ul>
-<h3 id="3-字体设置font_settex">3. 字体设置（Font_set.tex）
-</h3><p><code>Font_set.tex</code> 是模板的<strong>核心字体配置文件</strong>，定义了中文、西文、章节标题及表格的字体样式，确保文档符合学术规范且显示清晰。以下是关键配置说明（详细使用示例请参考 <code>manual.tex</code> 中的 <strong>1.8 字体</strong> 章节，第3页）：</p>
-<h4 id="1基础字体选择">（1）基础字体选择
-</h4><p>模板使用常见西文字体(Arial)并搭配Fandol系列中文字体（需保留 <code>configuration</code> 文件夹中的 <code>.otf</code> 字体文件），具体如下：</p>
-<ul>
-<li><strong>中文字体</strong>：
-<ul>
-<li>主字体（默认正文）：<code>FandolSong-Regular.otf</code>（宋体），加粗时自动切换为 <code>FandolSong-Bold.otf</code>，斜体时使用 <code>FandolKai-Regular.otf</code>（楷体）；</li>
-<li>无衬线字体（用于标题/强调）：<code>FandolHei-Regular.otf</code>（黑体），加粗时使用 <code>FandolHei-Bold.otf</code>；</li>
-<li>等宽字体（用于代码/数据）：<code>FandolHei-Regular.otf</code>（黑体），加粗时使用 <code>FandolHei-Bold.otf</code>。</li>
-</ul>
-</li>
-<li><strong>西文字体</strong>：
-<ul>
-<li>主字体/无衬线字体：<code>Arial</code>（系统默认安装，确保西文显示清晰）；</li>
-<li>正式西文字体（用于表格/公式）：<code>Times New Roman</code>（通过 <code>\timesnewroman</code> 命令调用）。</li>
-</ul>
-</li>
-</ul>
-<h4 id="2自定义字体快捷命令">（2）自定义字体快捷命令
-</h4><p>为方便切换字体，模板定义了以下常用命令（在 <code>manual.tex</code> 中有详细示例）：</p>
-<ul>
-<li><code>\songti</code>：切换为<strong>宋体</strong>（中文正文默认字体，适合大段文字）；</li>
-<li><code>\heiti</code>：切换为<strong>黑体</strong>（用于章节标题、重点内容，增强视觉层次感）；</li>
-<li><code>\kaishu</code>：切换为<strong>楷体</strong>（用于引用、注释或需要区分的内容，风格更正式）。</li>
-</ul>
-<h4 id="3章节标题字体设置">（3）章节标题字体设置
-</h4><p>通过 <code>titlesec</code> 包优化了章节标题的格式，确保层级清晰：</p>
-<ul>
-<li><strong>章节（section）</strong>：黑体、16pt、加粗、居中显示，标题前自动添加“第X章”（如“2. Problem Restatement”）；</li>
-<li><strong>小节（subsection）</strong>：黑体、14pt、加粗，左侧显示小节编号（如“2.1 Problem Background”）；</li>
-<li><strong>子小节（subsubsection）</strong>：黑体、12pt、加粗，左侧显示子小节编号（如“1.1.1 abcd”）。</li>
-</ul>
-<h4 id="4表格字体配置">（4）表格字体配置
-</h4><p>表格内容默认使用<strong>Times New Roman 10pt</strong>字体（符合学术文档的严谨风格），通过重定义 <code>tabular</code> 和 <code>tabularx</code> 环境实现，无需手动设置。</p>
-<h4 id="5注意事项">（5）注意事项
-</h4><ul>
-<li><strong>字体安装</strong>：若系统未安装Fandol字体，需将 <code>configuration</code> 文件夹中的字体文件（如 <code>FandolHei-Bold.otf</code>、<code>FandolSong-Regular.otf</code> 等）复制到系统字体目录（如 Windows 的 <code>C:\Windows\Fonts</code>）；</li>
-<li><strong>西文字体依赖</strong>：Arial 是大多数系统的默认字体，若未安装需手动添加；</li>
-<li><strong>修改字体</strong>：若需调整字体样式（如增大标题字体），可编辑 <code>Font_set.tex</code> 中的 <code>\titleformat</code> 或 <code>\setCJKmainfont</code> 命令，但建议先备份原文件。</li>
-</ul>
-<p>通过以上配置，模板确保了文档的<strong>字体一致性</strong>和<strong>学术规范性</strong>，同时提供了灵活的字体切换功能，满足不同场景的需求。如需更详细的字体使用说明，请参考 <code>manual.tex</code> 中的 <strong>1.8 字体</strong> 章节（第3页）。</p>
-<h2 id="-示例与手册">📖 示例与手册
-</h2><p><code>manual.tex</code>是详细的使用手册，包含以下内容：</p>
-<ol>
-<li>文件结构</li>
-<li>插入公式</li>
-<li>插入图片</li>
-<li>插入表格</li>
-<li>插入伪代码</li>
-<li>粘贴代码</li>
-<li>引用</li>
-<li>字体</li>
-<li>添加脚注并设置链接</li>
-</ol>
-<p>建议用户先查看<code>manual.tex</code>，学习如何使用模板的各项功能。</p>
-<h2 id="-注意事项">⚠️ 注意事项
-</h2><ol>
-<li><strong>编译环境</strong>：必须使用XeLaTeX编译，否则中文字体可能无法正确显示。</li>
-<li><strong>图片路径</strong>：所有图片请放在<code>figs</code>文件夹中，使用相对路径引用（如<code>figs/figure1.png</code>），避免绝对路径导致的问题。</li>
-<li><strong>参考文献</strong>：<code>ref.bib</code>文件需为BibTeX格式，并在<code>reference.tex</code>中使用<code>\bibliography{ref}</code>引用。</li>
-<li><strong>自定义命令</strong>：修改<code>Mycommand.sty</code>前请备份，避免误操作导致模板无法编译。</li>
-<li><strong>交叉引用</strong>：使用<code>\label{chapter1}</code>为章节添加标签，使用<code>\ref{chapter1}</code>引用，编译时需多次运行XeLaTeX以确保引用正确。</li>
-</ol>
-<h2 id="-联系方式">📞 联系方式
-</h2><p>若有问题或建议，可通过以下方式联系作者：</p>
-<ul>
-<li>GitHub Issues：https://github.com/rooobeam/General-LaTeX-Template-for-College-Students.git/issues</li>
-<li>Email：rooobeam@uir.edu.cn</li>
-</ul>
-<h1 id="latex-template-for-college-students-reports">LaTeX Template for College Students&rsquo; Reports
-</h1><p>This template is suitable for writing <strong>term paper reports</strong>. It is modified based on the report format specifications of Chengdu University of Technology (CDUT) and includes a complete document structure (title page, abstract, table of contents, chapters, references, appendices, etc.). The page and English font settings adhere to the British project specification <em>Research_Project_Guide.pdf</em>, and detailed usage instructions are provided.</p>
-<h2 id="-file-structure">📁 File Structure
-</h2><p>The following is the file structure of the template and explanations of each file&rsquo;s purpose:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">├── main.tex               # Main document file (integrates all subfiles, compilation entry point)  
-</span></span><span class="line"><span class="cl">├── titlepage.tex          # Title page template (includes title, author, date, etc.)  
-</span></span><span class="line"><span class="cl">├── abstract.tex           # Abstract section (Chinese and English abstracts)  
-</span></span><span class="line"><span class="cl">├── chapter1.tex           # Chapter 1 content (can be extended to chapter2.tex, chapter3.tex, etc.)  
-</span></span><span class="line"><span class="cl">├── reference.tex          # References section (cites the bib database)  
-</span></span><span class="line"><span class="cl">├── appendix.tex           # Appendix section (supplementary data, code, etc.)  
-</span></span><span class="line"><span class="cl">├── backpage.tex           # Back cover page (optional)  
-</span></span><span class="line"><span class="cl">├── manual.tex             # User manual (details on inserting equations, images, tables, etc.)  
-</span></span><span class="line"><span class="cl">├── ref.bib                # Bibliography database (BibTeX format, must be linked to reference.tex)  
-</span></span><span class="line"><span class="cl">├── Research_Project_Guide.pdf   # British project specification guide  
-</span></span><span class="line"><span class="cl">├── configuration/         # Configuration folder (format, fonts, custom commands)  
-</span></span><span class="line"><span class="cl">│   ├── CDUTReport.cls     # Core class file (defines page layout, chapter styles, etc.)  
-</span></span><span class="line"><span class="cl">│   ├── Mycommand.sty      # Custom commands (quick insertion of images, tables, etc.)  
-</span></span><span class="line"><span class="cl">│   ├── Font set.tex       # Font settings (uses Fandol series Chinese fonts)  
-</span></span><span class="line"><span class="cl">│   ├── Title set.tex      # Title format settings (title page, chapter title styles)  
-</span></span><span class="line"><span class="cl">│   └── Fandol*.otf        # Fandol font files (Hei, Song, Kai; must be retained or installed)  
-</span></span><span class="line"><span class="cl">├── figs/                  # Image folder (stores all images used in the document)  
-</span></span><span class="line"><span class="cl">└── README.md              # This instruction file  
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="-usage-instructions">🚀 Usage Instructions
-</h2><h3 id="1-environment-requirements">1. Environment Requirements
-</h3><ul>
-<li><strong>LaTeX Compiler</strong>: <strong>XeLaTeX</strong> is required.</li>
-<li><strong>Font Dependencies</strong>: Fandol fonts in the <code>configuration</code> folder (e.g., <code>FandolHei-Bold.otf</code>, <code>FandolSong-Regular.otf</code>) must be retained or installed to the system font directory (e.g., <code>C:\Windows\Fonts</code> for Windows).</li>
-</ul>
-<h3 id="2-compilation-steps">2. Compilation Steps
-</h3><ol>
-<li><strong>Clone the Repository</strong>:
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git clone https://github.com/rooobeam/General-LaTeX-Template-for-College-Students.git  
-</span></span></code></pre></td></tr></table>
-</div>
-</div></li>
-<li><strong>Compile the Main Document</strong> (run multiple times to ensure correct cross-references and references):
-<ul>
-<li>Step 1: <code>xelatex main.tex</code> (generate auxiliary files)</li>
-<li>Step 2: <code>bibtex main</code> (compile references if using <code>ref.bib</code>)</li>
-<li>Step 3: <code>xelatex main.tex</code> (update reference citations)</li>
-<li>Step 4: <code>xelatex main.tex</code> (ensure all cross-references are correct)</li>
-</ul>
-</li>
-</ol>
-<h3 id="3-content-filling">3. Content Filling
-</h3><ul>
-<li><strong>Title Page</strong>: Modify the title, author, date, and other information in <code>titlepage.tex</code>.</li>
-<li><strong>Abstract</strong>: Fill in the Chinese and English abstracts in <code>abstract.tex</code>.</li>
-<li><strong>Chapter Content</strong>: Write chapter content in <code>chapter1.tex</code>, <code>chapter2.tex</code>, etc., and reference them in <code>main.tex</code> using <code>\input{chapter1}</code>.</li>
-<li><strong>References</strong>: Add bibliographic entries to <code>ref.bib</code> and cite them in the document using <code>\cite{key}</code>. The <code>reference.tex</code> file will automatically generate the references list.</li>
-<li><strong>Images</strong>: Place images in the <code>figs</code> folder and reference them using <code>\includegraphics{figs/figure1.png}</code> (the <code>graphicx</code> package is included in the template).</li>
-</ul>
-<h2 id="-configuration-instructions">⚙️ Configuration Instructions
-</h2><h3 id="1-class-file-cdutreportcls">1. Class File (CDUTReport.cls)
-</h3><p>Defines the core format of the report, including:</p>
-<ul>
-<li>Page layout (A4 paper, margins, header/footer);</li>
-<li>Chapter styles (title fonts, numbering format);</li>
-<li>Table of contents generation (automatically extracts chapter titles).<br>
-To modify the format, edit this file, but <strong>backup first</strong>.</li>
-</ul>
-<h3 id="2-custom-commands-mycommandsty">2. Custom Commands (Mycommand.sty)
-</h3><p>Provides shortcut commands to simplify repetitive operations, e.g.:</p>
-<ul>
-<li><code>\fig{path}{caption}</code>: Insert an image with a caption;</li>
-<li><code>\tab{label}{caption}{table content}</code>: Insert a table with a label;</li>
-<li><code>\code{language}{code content}</code>: Insert a code block (uses the <code>listings</code> package).<br>
-Add or modify custom commands as needed.</li>
-</ul>
-<h3 id="3-font-settings-font_settex">3. Font Settings (Font_set.tex)
-</h3><p><code>Font_set.tex</code> is the <strong>core font configuration file</strong> of the template, defining the font styles for Chinese, Western text, chapter titles, and tables to ensure the document complies with academic standards and displays clearly. Below are key configuration explanations (for detailed usage examples, refer to Section <strong>1.8 Fonts</strong> in <code>manual.tex</code>, Page 3):</p>
-<h4 id="1-basic-font-selection">(1) Basic Font Selection
-</h4><p>The template uses common Western fonts (Arial) paired with Fandol series Chinese fonts (retain the <code>.otf</code> files in the <code>configuration</code> folder):</p>
-<ul>
-<li><strong>Chinese Fonts</strong>:
-<ul>
-<li>Main font (default body text): <code>FandolSong-Regular.otf</code> (SimSun), automatically switches to <code>FandolSong-Bold.otf</code> when bold, and uses <code>FandolKai-Regular.otf</code> (KaiTi) for italics;</li>
-<li>Sans-serif font (for titles/emphasis): <code>FandolHei-Regular.otf</code> (HeiTi), switches to <code>FandolHei-Bold.otf</code> when bold;</li>
-<li>Monospace font (for code/data): <code>FandolHei-Regular.otf</code> (HeiTi), switches to <code>FandolHei-Bold.otf</code> when bold.</li>
-</ul>
-</li>
-<li><strong>Western Fonts</strong>:
-<ul>
-<li>Main/sans-serif font: <code>Arial</code> (preinstalled on most systems, ensures clear Western text display);</li>
-<li>Formal Western font (for tables/equations): <code>Times New Roman</code> (called via <code>\timesnewroman</code>).</li>
-</ul>
-</li>
-</ul>
-<h4 id="2-custom-font-shortcut-commands">(2) Custom Font Shortcut Commands
-</h4><p>To facilitate font switching, the template defines the following common commands (examples in <code>manual.tex</code>):</p>
-<ul>
-<li><code>\songti</code>: Switch to <strong>SimSun</strong> (default Chinese body text, suitable for long passages);</li>
-<li><code>\heiti</code>: Switch to <strong>HeiTi</strong> (for chapter titles, key content, enhances visual hierarchy);</li>
-<li><code>\kaishu</code>: Switch to <strong>KaiTi</strong> (for quotes, annotations, or differentiated content, more formal style).</li>
-</ul>
-<h4 id="3-chapter-title-font-settings">(3) Chapter Title Font Settings
-</h4><p>Optimizes chapter title formats using the <code>titlesec</code> package for clear hierarchy:</p>
-<ul>
-<li><strong>Section</strong>: HeiTi, 16pt, bold, centered, automatically adds &ldquo;Chapter X&rdquo; before the title (e.g., &ldquo;2. Problem Restatement&rdquo;);</li>
-<li><strong>Subsection</strong>: HeiTi, 14pt, bold, left-aligned with subsection number (e.g., &ldquo;2.1 Problem Background&rdquo;);</li>
-<li><strong>Subsubsection</strong>: HeiTi, 12pt, bold, left-aligned with subsubsection number (e.g., &ldquo;1.1.1 abcd&rdquo;).</li>
-</ul>
-<h4 id="4-table-font-configuration">(4) Table Font Configuration
-</h4><p>Table content uses <strong>Times New Roman 10pt</strong> by default (complies with academic document rigor), implemented by redefining the <code>tabular</code> and <code>tabularx</code> environments—no manual setting required.</p>
-<h4 id="5-notes">(5) Notes
-</h4><ul>
-<li><strong>Font Installation</strong>: If Fandol fonts are not installed, copy the font files (e.g., <code>FandolHei-Bold.otf</code>, <code>FandolSong-Regular.otf</code>) from the <code>configuration</code> folder to the system font directory (e.g., <code>C:\Windows\Fonts</code> for Windows);</li>
-<li><strong>Western Font Dependencies</strong>: Arial is a default font on most systems—install manually if missing;</li>
-<li><strong>Modifying Fonts</strong>: To adjust font styles (e.g., increase title font size), edit the <code>\titleformat</code> or <code>\setCJKmainfont</code> commands in <code>Font_set.tex</code>, but <strong>backup first</strong>.</li>
-</ul>
-<p>Through the above configurations, the template ensures <strong>font consistency</strong> and <strong>academic规范性</strong> (academic standardization) while providing flexible font switching to meet different needs. For more detailed font usage instructions, refer to Section <strong>1.8 Fonts</strong> in <code>manual.tex</code> (Page 3).</p>
-<h2 id="-examples-and-manual">📖 Examples and Manual
-</h2><p><code>manual.tex</code> is a detailed user manual covering the following content:</p>
-<ol>
-<li>File Structure</li>
-<li>Insert Equations</li>
-<li>Insert Images</li>
-<li>Insert Tables</li>
-<li>Insert Pseudocode</li>
-<li>Paste Code</li>
-<li>Citations</li>
-<li>Fonts</li>
-<li>Add Footnotes and Set Links</li>
-</ol>
-<p>It is recommended to read <code>manual.tex</code> first to learn how to use the template&rsquo;s features.</p>
-<h2 id="-notes">⚠️ Notes
-</h2><ol>
-<li><strong>Compilation Environment</strong>: XeLaTeX must be used for compilation—otherwise, Chinese fonts may not display correctly.</li>
-<li><strong>Image Path</strong>: All images must be placed in the <code>figs</code> folder and referenced using relative paths (e.g., <code>figs/figure1.png</code>) to avoid issues with absolute paths.</li>
-<li><strong>References</strong>: The <code>ref.bib</code> file must be in BibTeX format and referenced in <code>reference.tex</code> using <code>\bibliography{ref}</code>.</li>
-<li><strong>Custom Commands</strong>: Backup <code>Mycommand.sty</code> before modifying to avoid template compilation failures due to incorrect operations.</li>
-<li><strong>Cross-References</strong>: Use <code>\label{chapter1}</code> to add labels to chapters and <code>\ref{chapter1}</code> to cite them—run XeLaTeX multiple times to ensure correct cross-references.</li>
-</ol>
-<h2 id="-contact-information">📞 Contact Information
-</h2><p>For questions or suggestions, contact the author via:</p>
-<ul>
-<li>GitHub Issues: <a class="link" href="https://github.com/rooobeam/General-LaTeX-Template-for-College-Students.git/issues"  target="_blank" rel="noopener"
-    >https://github.com/rooobeam/General-LaTeX-Template-for-College-Students.git/issues</a></li>
-<li>Email: <a class="link" href="mailto:rooobeam@uir.edu.cn" >rooobeam@uir.edu.cn</a></li>
-</ul>
-
-</section>
-
-
-    <footer class="article-footer">
-    
-
-    </footer>
-
-
-    
-        <link 
-                rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
-            ><script 
-                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
-                defer
-                >
-            </script><script 
-                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
-                defer
-                >
-            </script><script>
-    window.addEventListener("DOMContentLoaded", () => {
-        renderMathInElement(document.body, {
-            delimiters: [
-                { left: "$$", right: "$$", display: true },
-                { left: "$", right: "$", display: false },
-                { left: "\\(", right: "\\)", display: false },
-                { left: "\\[", right: "\\]", display: true }
-            ],
-            ignoredClasses: ["gist"]
-        });})
-</script>
-    
-</article>
-
-    
-
-    
-
-     
-    
-        
-    
-
-    <footer class="site-footer">
-    <section class="copyright">
-        &copy; 
-        
-            2025 - 
-        
-        2026 rooobeam
-    </section>
-    
-    <section class="powerby">
-        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
-    </section>
-</footer>
-
-
-    
-<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-
-    
-    <div class="pswp__bg"></div>
-
-    
-    <div class="pswp__scroll-wrap">
-
-        
-        <div class="pswp__container">
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-        </div>
-
-        
-        <div class="pswp__ui pswp__ui--hidden">
-
-            <div class="pswp__top-bar">
-
-                
-
-                <div class="pswp__counter"></div>
-
-                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-
-                <button class="pswp__button pswp__button--share" title="Share"></button>
-
-                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-
-                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-
-                
-                
-                <div class="pswp__preloader">
-                    <div class="pswp__preloader__icn">
-                        <div class="pswp__preloader__cut">
-                            <div class="pswp__preloader__donut"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-                <div class="pswp__share-tooltip"></div>
-            </div>
-
-            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
-            </button>
-
-            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
-            </button>
-
-            <div class="pswp__caption">
-                <div class="pswp__caption__center"></div>
-            </div>
-
-        </div>
-
-    </div>
-
-</div><script 
-                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
-                defer
-                >
-            </script><script 
-                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
-                defer
-                >
-            </script><link 
-                rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
-            ><link 
-                rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
-            >
-
-            </main>
-        </div>
-        <script 
-                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
-                
-                >
-            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
-<script>
-    (function () {
-        const customFont = document.createElement('link');
-        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
-
-        customFont.type = "text/css";
-        customFont.rel = "stylesheet";
-
-        document.head.appendChild(customFont);
-    }());
-</script>
-
-    </body>
-</html>
+  "><meta property="og:type" content="
+    article
+  "><meta property="og:url" content="https://rooobeam.github.io/p/%E5%A4%A7%E5%AD%A6%E7%94%9F%E6%8A%A5%E5%91%8Alatex%E6%A8%A1%E6%9D%BF/"><meta property="article:section" content="post"><meta property="article:published_time" content="2025-07-02T12:36:24+08:00"><meta property="article:modified_time" content="2025-07-02T12:36:24+08:00"><meta itemprop=name content="大学生报告LaTeX模板"><meta itemprop=description content="大学生LaTeX 报告模板本模板适用于撰写大作业报告，基于成都理工大学（CDUT）的报告格式规范进行修改，包含完整的文档结构（标题页、摘要、目录、章节、参考文献、附录等），页面和英文字体设置遵循一个英国项目规范Research_Project_Guide.pdf，并提供了详细的使用说明。"><meta itemprop=datePublished content="2025-07-02T12:36:24+08:00"><meta itemprop=dateModified content="2025-07-02T12:36:24+08:00"><meta itemprop=wordCount content="4271"><meta name=twitter:card content="summary"><meta name=twitter:title content="大学生报告LaTeX模板"><meta name=twitter:description content="大学生LaTeX 报告模板本模板适用于撰写大作业报告，基于成都理工大学（CDUT）的报告格式规范进行修改，包含完整的文档结构（标题页、摘要、目录、章节、参考文献、附录等），页面和英文字体设置遵循一个英国项目规范Research_Project_Guide.pdf，并提供了详细的使用说明。"><link rel=preload href=/css/compiled/main.min.0ecd4a321ffab68460c51522d4255a0df1075a2702f4fb69da0dea5851ad285e.css as=style integrity="sha256-Ds1KMh/6toRgxRUi1CVaDfEHWicC9Ptp2g3qWFGtKF4="><link href=/css/compiled/main.min.0ecd4a321ffab68460c51522d4255a0df1075a2702f4fb69da0dea5851ad285e.css rel=stylesheet integrity="sha256-Ds1KMh/6toRgxRUi1CVaDfEHWicC9Ptp2g3qWFGtKF4="><script src=/js/main-head.min.94da6f95b126542222dab3a6e07ffefe1aaf63ec3ca555e827b58b80e7d3f0b7.js integrity="sha256-lNpvlbEmVCIi2rOm4H/+/hqvY+w8pVXoJ7WLgOfT8Lc="></script></head><body><a href=#content class="hx:sr-only hx:focus-visible:not-sr-only hx:focus-visible:fixed hx:focus-visible:z-50 hx:focus-visible:top-2 hx:focus-visible:left-2 hx:focus-visible:bg-primary-500 hx:focus-visible:text-white hx:focus-visible:px-4 hx:focus-visible:py-2 hx:focus-visible:rounded-md hx:focus-visible:text-sm hx:focus-visible:font-medium">跳至内容</a><div class="hextra-nav-container hx:sticky hx:top-0 hx:z-20 hx:w-full hx:bg-transparent hx:print:hidden"><div class="hextra-nav-container-blur hx:pointer-events-none hx:absolute hx:z-[-1] hx:h-full hx:w-full hx:bg-white hx:dark:bg-dark hx:shadow-[0_2px_4px_rgba(0,0,0,.02),0_1px_0_rgba(0,0,0,.06)] hx:contrast-more:shadow-[0_0_0_1px_#000] hx:dark:shadow-[0_-1px_0_rgba(255,255,255,.1)_inset] hx:contrast-more:dark:shadow-[0_0_0_1px_#fff]"></div><nav class="hextra-max-navbar-width hx:mx-auto hx:flex hx:items-center hx:justify-end hx:gap-2 hx:h-16 hx:px-6"><a class="hx:flex hx:items-center hx:hover:opacity-75 hx:ltr:mr-auto hx:rtl:ml-auto" href=/><span class="hx:mr-2 hx:font-extrabold hx:inline hx:select-none">rooobeam</span>
+</a><a title href=/ class="hx:text-sm hx:contrast-more:text-gray-700 hx:contrast-more:dark:text-gray-100 hx:relative hx:-ml-2 hx:hidden hx:whitespace-nowrap hx:p-2 hx:md:inline-flex hx:items-center hx:gap-1 hx:text-gray-600 hx:hover:text-gray-800 hx:dark:text-gray-400 hx:dark:hover:text-gray-200"><span class=hx:text-center>首页</span>
+</a><a title href=/notes class="hx:text-sm hx:contrast-more:text-gray-700 hx:contrast-more:dark:text-gray-100 hx:relative hx:-ml-2 hx:hidden hx:whitespace-nowrap hx:p-2 hx:md:inline-flex hx:items-center hx:gap-1 hx:text-gray-600 hx:hover:text-gray-800 hx:dark:text-gray-400 hx:dark:hover:text-gray-200"><span class=hx:text-center>笔记专题</span>
+</a><a title href=/post/ class="hx:text-sm hx:contrast-more:text-gray-700 hx:contrast-more:dark:text-gray-100 hx:relative hx:-ml-2 hx:hidden hx:whitespace-nowrap hx:p-2 hx:md:inline-flex hx:items-center hx:gap-1 hx:text-gray-600 hx:hover:text-gray-800 hx:dark:text-gray-400 hx:dark:hover:text-gray-200"><span class=hx:text-center>全部笔记</span>
+</a><a title href=/archives/ class="hx:text-sm hx:contrast-more:text-gray-700 hx:contrast-more:dark:text-gray-100 hx:relative hx:-ml-2 hx:hidden hx:whitespace-nowrap hx:p-2 hx:md:inline-flex hx:items-center hx:gap-1 hx:text-gray-600 hx:hover:text-gray-800 hx:dark:text-gray-400 hx:dark:hover:text-gray-200"><span class=hx:text-center>归档</span></a><div class="hextra-search-wrapper hx:relative hx:md:w-64"><div class="hx:relative hx:flex hx:items-center hx:text-gray-900 hx:contrast-more:text-gray-800 hx:dark:text-gray-300 hx:contrast-more:dark:text-gray-300"><input placeholder=搜索笔记… aria-label=搜索笔记… class="hextra-search-input hx:hextra-focus-visible hx:block hx:w-full hx:appearance-none hx:rounded-lg hx:px-3 hx:py-2 hx:transition-colors hx:text-base hx:leading-tight hx:md:text-sm hx:bg-black/[.05] hx:dark:bg-gray-50/10 hx:focus-visible:bg-white hx:dark:focus-visible:bg-dark hx:placeholder:text-gray-500 hx:dark:placeholder:text-gray-400 hx:contrast-more:border hx:contrast-more:border-current" type=search autocomplete=off spellcheck=false>
+<kbd class="hx:absolute hx:my-1.5 hx:select-none hx:ltr:right-1.5 hx:rtl:left-1.5 hx:h-5 hx:rounded-sm hx:bg-white hx:px-1.5 hx:font-mono hx:text-[10px] hx:font-medium hx:text-gray-500 hx:border hx:border-gray-200 hx:dark:border-gray-100/20 hx:dark:bg-dark/50 hx:contrast-more:border-current hx:contrast-more:text-current hx:contrast-more:dark:border-current hx:items-center hx:gap-1 hx:transition-opacity hx:pointer-events-none hx:hidden hx:sm:flex">CTRL K</kbd></div><div><ul class="hextra-search-results hextra-scrollbar hx:hidden hx:border hx:border-gray-200 hx:bg-white hx:text-gray-100 hx:dark:border-neutral-800 hx:dark:bg-neutral-900 hx:absolute hx:top-full hx:z-20 hx:mt-2 hx:overflow-auto hx:overscroll-contain hx:rounded-xl hx:py-2.5 hx:shadow-xl hx:max-h-[min(calc(50vh-11rem-env(safe-area-inset-bottom)),400px)] hx:md:max-h-[min(calc(100vh-5rem-env(safe-area-inset-bottom)),400px)] hx:inset-x-0 hx:ltr:md:left-auto hx:rtl:md:right-auto hx:contrast-more:border hx:contrast-more:border-gray-900 hx:contrast-more:dark:border-gray-50 hx:w-screen hx:min-h-[100px] hx:max-w-[min(calc(100vw-2rem),calc(100%+20rem))]" aria-label=搜索结果 style="transition:max-height .2s ease 0s"></ul><div class="hextra-search-status hx:sr-only" aria-live=polite role=status></div></div></div><a class="hx:p-2 hx:text-current" target=_blank rel=noreferrer href=https://github.com/rooobeam title=GitHub><svg height="24" fill="currentColor" viewBox="3 3 18 18"><path d="M12 3C7.0275 3 3 7.12937 3 12.2276c0 4.0833 2.57625 7.5321 6.15374 8.7548C9.60374 21.0631 9.77249 20.7863 9.77249 20.5441 9.77249 20.3249 9.76125 19.5982 9.76125 18.8254 7.5 19.2522 6.915 18.2602 6.735 17.7412 6.63375 17.4759 6.19499 16.6569 5.8125 16.4378 5.4975 16.2647 5.0475 15.838 5.80124 15.8264 6.51 15.8149 7.01625 16.4954 7.18499 16.7723 7.99499 18.1679 9.28875 17.7758 9.80625 17.5335 9.885 16.9337 10.1212 16.53 10.38 16.2993 8.3775 16.0687 6.285 15.2728 6.285 11.7432c0-1.0035.34875-1.834.92249-2.47994C7.1175 9.03257 6.8025 8.08674 7.2975 6.81794c0 0 .753749999999999-.24223 2.47499.94583.72001-.20762 1.48501-.31143 2.25001-.31143C12.7875 7.45234 13.5525 7.55615 14.2725 7.76377c1.7212-1.19959 2.475-.94583 2.475-.94583C17.2424 8.08674 16.9275 9.03257 16.8375 9.26326 17.4113 9.9092 17.76 10.7281 17.76 11.7432c0 3.5411-2.1037 4.3255-4.1063 4.5561C13.98 16.5877 14.2613 17.1414 14.2613 18.0065 14.2613 19.2407 14.25 20.2326 14.25 20.5441 14.25 20.7863 14.4188 21.0746 14.8688 20.9824 16.6554 20.364 18.2079 19.1866 19.3078 17.6162c1.0999-1.5705 1.6917-3.4551 1.6922-5.3886C21 7.12937 16.9725 3 12 3z"/></svg>
+<span class=hx:sr-only>GitHub</span>
+</a><button type=button aria-label=菜单 aria-expanded=false class="hextra-hamburger-menu hx:cursor-pointer hx:-mr-2 hx:rounded-sm hx:p-2 hx:active:bg-gray-400/20 hx:md:hidden hx:hextra-focus-visible-inset"><svg height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor"><g><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8H20"/></g><g><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16H20"/></g></svg></button></nav></div><div class='hx:mx-auto hx:flex hextra-max-page-width'><aside class="hextra-sidebar-container hx:flex hx:flex-col hx:print:hidden hx:md:top-16 hx:md:shrink-0 hx:md:w-64 hx:md:self-start hx:max-md:[transform:translate3d(0,-100%,0)] hx:md:sticky"><div class="hx:px-4 hx:pt-4 hx:md:hidden"><div class="hextra-search-wrapper hx:relative hx:md:w-64"><div class="hx:relative hx:flex hx:items-center hx:text-gray-900 hx:contrast-more:text-gray-800 hx:dark:text-gray-300 hx:contrast-more:dark:text-gray-300"><input placeholder=搜索笔记… aria-label=搜索笔记… class="hextra-search-input hx:hextra-focus-visible hx:block hx:w-full hx:appearance-none hx:rounded-lg hx:px-3 hx:py-2 hx:transition-colors hx:text-base hx:leading-tight hx:md:text-sm hx:bg-black/[.05] hx:dark:bg-gray-50/10 hx:focus-visible:bg-white hx:dark:focus-visible:bg-dark hx:placeholder:text-gray-500 hx:dark:placeholder:text-gray-400 hx:contrast-more:border hx:contrast-more:border-current" type=search autocomplete=off spellcheck=false>
+<kbd class="hx:absolute hx:my-1.5 hx:select-none hx:ltr:right-1.5 hx:rtl:left-1.5 hx:h-5 hx:rounded-sm hx:bg-white hx:px-1.5 hx:font-mono hx:text-[10px] hx:font-medium hx:text-gray-500 hx:border hx:border-gray-200 hx:dark:border-gray-100/20 hx:dark:bg-dark/50 hx:contrast-more:border-current hx:contrast-more:text-current hx:contrast-more:dark:border-current hx:items-center hx:gap-1 hx:transition-opacity hx:pointer-events-none hx:hidden hx:sm:flex">CTRL K</kbd></div><div><ul class="hextra-search-results hextra-scrollbar hx:hidden hx:border hx:border-gray-200 hx:bg-white hx:text-gray-100 hx:dark:border-neutral-800 hx:dark:bg-neutral-900 hx:absolute hx:top-full hx:z-20 hx:mt-2 hx:overflow-auto hx:overscroll-contain hx:rounded-xl hx:py-2.5 hx:shadow-xl hx:max-h-[min(calc(50vh-11rem-env(safe-area-inset-bottom)),400px)] hx:md:max-h-[min(calc(100vh-5rem-env(safe-area-inset-bottom)),400px)] hx:inset-x-0 hx:ltr:md:left-auto hx:rtl:md:right-auto hx:contrast-more:border hx:contrast-more:border-gray-900 hx:contrast-more:dark:border-gray-50 hx:w-screen hx:min-h-[100px] hx:max-w-[min(calc(100vw-2rem),calc(100%+20rem))]" aria-label=搜索结果 style="transition:max-height .2s ease 0s"></ul><div class="hextra-search-status hx:sr-only" aria-live=polite role=status></div></div></div></div><div class="hextra-scrollbar hx:overflow-y-auto hx:overflow-x-hidden hx:p-4 hx:grow hx:md:h-[calc(100vh-var(--navbar-height)-var(--menu-height))]"><ul class="hx:flex hx:flex-col hx:gap-1 hx:md:hidden"><li><div class="hextra-sidebar-item hx:group hx:relative hx:flex hx:items-center" data-active=false><a class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:grow hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:hextra-focus-visible-inset hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50" href=/><span class="hx:min-w-0 [word-break:break-word]">首页</span></a></div></li><li class=open><div class="hextra-sidebar-item hx:group hx:relative hx:flex hx:items-center" data-active=false><a class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:grow hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:hextra-focus-visible-inset hx:ltr:pr-8 hx:rtl:pl-8 hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50" href=/notes/><span class="hx:min-w-0 [word-break:break-word]">笔记专题</span>
+</a><button type=button class="hextra-sidebar-collapsible-button hx:absolute hx:top-1/2 hx:-translate-y-1/2 hx:ltr:right-2 hx:rtl:left-2 hx:shrink-0 hx:cursor-pointer hx:p-0 hx:text-gray-500 hx:dark:text-neutral-400 hx:group-hover:text-gray-900 hx:dark:group-hover:text-gray-50 hx:group-data-[active=true]:text-primary-800 hx:group-data-[active=true]:dark:text-primary-600 hx:hextra-focus-visible-inset" aria-label=切换章节 aria-expanded=true><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" focusable="false" class="hx:h-[18px] hx:min-w-[18px] hx:rounded-xs hx:p-0.5 hx:hover:bg-gray-800/5 hx:dark:hover:bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="hx:origin-center hx:transition-transform hx:rtl:-rotate-180"/></svg></button></div><div class="hextra-sidebar-children hx:ltr:pr-0 hx:rtl:pl-0 hx:overflow-hidden"><ul class='hx:relative hx:flex hx:flex-col hx:gap-1 hx:before:absolute hx:before:inset-y-1 hx:before:w-px hx:before:bg-gray-200 hx:before:content-[""] hx:ltr:ml-3 hx:ltr:pl-3 hx:ltr:before:left-0 hx:rtl:mr-3 hx:rtl:pr-3 hx:rtl:before:right-0 hx:dark:before:bg-neutral-800'><li class="hx:flex hx:flex-col"><div class="hextra-sidebar-item hx:group hx:relative hx:flex hx:items-center" data-active=false><a class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:grow hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:hextra-focus-visible-inset hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50" href=/notes/ai/><span class="hx:min-w-0 [word-break:break-word]">AI 与论文</span></a></div></li><li class="hx:flex hx:flex-col"><div class="hextra-sidebar-item hx:group hx:relative hx:flex hx:items-center" data-active=false><a class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:grow hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:hextra-focus-visible-inset hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50" href=/notes/algorithms/><span class="hx:min-w-0 [word-break:break-word]">算法与数据结构</span></a></div></li><li class="hx:flex hx:flex-col"><div class="hextra-sidebar-item hx:group hx:relative hx:flex hx:items-center" data-active=false><a class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:grow hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:hextra-focus-visible-inset hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50" href=/notes/python/><span class="hx:min-w-0 [word-break:break-word]">Python 与编程</span></a></div></li><li class="hx:flex hx:flex-col"><div class="hextra-sidebar-item hx:group hx:relative hx:flex hx:items-center" data-active=false><a class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:grow hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:hextra-focus-visible-inset hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50" href=/notes/systems/><span class="hx:min-w-0 [word-break:break-word]">系统与工具</span></a></div></li></ul></div></li><li><div class="hextra-sidebar-item hx:group hx:relative hx:flex hx:items-center" data-active=false><a class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:grow hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:hextra-focus-visible-inset hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50" href=/post/><span class="hx:min-w-0 [word-break:break-word]">全部笔记</span></a></div></li><li><div class="hextra-sidebar-item hx:group hx:relative hx:flex hx:items-center" data-active=false><a class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:grow hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:hextra-focus-visible-inset hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50" href=/archives/><span class="hx:min-w-0 [word-break:break-word]">归档</span></a></div></li><li class="[word-break:break-word] hx:mt-5 hx:mb-2 hx:px-2 hx:py-1.5 hx:text-sm hx:font-semibold hx:text-gray-900 hx:first:mt-0 hx:dark:text-gray-100"><span class=hx:cursor-default>索引</span></li><li><div class="hextra-sidebar-item hx:group hx:relative hx:flex hx:items-center" data-active=false><a class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:grow hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:hextra-focus-visible-inset hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50" href=/post/><span class="hx:min-w-0 [word-break:break-word]">全部笔记</span></a></div></li><li><div class="hextra-sidebar-item hx:group hx:relative hx:flex hx:items-center" data-active=false><a class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:grow hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:hextra-focus-visible-inset hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50" href=/archives/><span class="hx:min-w-0 [word-break:break-word]">按年归档</span></a></div></li><li><div class="hextra-sidebar-item hx:group hx:relative hx:flex hx:items-center" data-active=false><a class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:grow hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:hextra-focus-visible-inset hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50" href=/links/><span class="hx:min-w-0 [word-break:break-word]">链接</span></a></div></li></ul><ul class="hx:flex hx:flex-col hx:gap-1 hx:max-md:hidden"><li class=open><div class="hextra-sidebar-item hx:group hx:relative hx:flex hx:items-center" data-active=false><a class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:grow hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:hextra-focus-visible-inset hx:ltr:pr-8 hx:rtl:pl-8 hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50" href=/notes/><span class="hx:min-w-0 [word-break:break-word]">笔记专题</span>
+</a><button type=button class="hextra-sidebar-collapsible-button hx:absolute hx:top-1/2 hx:-translate-y-1/2 hx:ltr:right-2 hx:rtl:left-2 hx:shrink-0 hx:cursor-pointer hx:p-0 hx:text-gray-500 hx:dark:text-neutral-400 hx:group-hover:text-gray-900 hx:dark:group-hover:text-gray-50 hx:group-data-[active=true]:text-primary-800 hx:group-data-[active=true]:dark:text-primary-600 hx:hextra-focus-visible-inset" aria-label=切换章节 aria-expanded=true><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" focusable="false" class="hx:h-[18px] hx:min-w-[18px] hx:rounded-xs hx:p-0.5 hx:hover:bg-gray-800/5 hx:dark:hover:bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="hx:origin-center hx:transition-transform hx:rtl:-rotate-180"/></svg></button></div><div class="hextra-sidebar-children hx:ltr:pr-0 hx:rtl:pl-0 hx:overflow-hidden"><ul class='hx:relative hx:flex hx:flex-col hx:gap-1 hx:before:absolute hx:before:inset-y-1 hx:before:w-px hx:before:bg-gray-200 hx:before:content-[""] hx:ltr:ml-3 hx:ltr:pl-3 hx:ltr:before:left-0 hx:rtl:mr-3 hx:rtl:pr-3 hx:rtl:before:right-0 hx:dark:before:bg-neutral-800'><li class="hx:flex hx:flex-col"><div class="hextra-sidebar-item hx:group hx:relative hx:flex hx:items-center" data-active=false><a class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:grow hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:hextra-focus-visible-inset hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50" href=/notes/ai/><span class="hx:min-w-0 [word-break:break-word]">AI 与论文</span></a></div></li><li class="hx:flex hx:flex-col"><div class="hextra-sidebar-item hx:group hx:relative hx:flex hx:items-center" data-active=false><a class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:grow hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:hextra-focus-visible-inset hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50" href=/notes/algorithms/><span class="hx:min-w-0 [word-break:break-word]">算法与数据结构</span></a></div></li><li class="hx:flex hx:flex-col"><div class="hextra-sidebar-item hx:group hx:relative hx:flex hx:items-center" data-active=false><a class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:grow hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:hextra-focus-visible-inset hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50" href=/notes/python/><span class="hx:min-w-0 [word-break:break-word]">Python 与编程</span></a></div></li><li class="hx:flex hx:flex-col"><div class="hextra-sidebar-item hx:group hx:relative hx:flex hx:items-center" data-active=false><a class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:grow hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:hextra-focus-visible-inset hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50" href=/notes/systems/><span class="hx:min-w-0 [word-break:break-word]">系统与工具</span></a></div></li></ul></div></li><li class="[word-break:break-word] hx:mt-5 hx:mb-2 hx:px-2 hx:py-1.5 hx:text-sm hx:font-semibold hx:text-gray-900 hx:first:mt-0 hx:dark:text-gray-100"><span class=hx:cursor-default>索引</span></li><li><div class="hextra-sidebar-item hx:group hx:relative hx:flex hx:items-center" data-active=false><a class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:grow hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:hextra-focus-visible-inset hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50" href=/post/><span class="hx:min-w-0 [word-break:break-word]">全部笔记</span></a></div></li><li><div class="hextra-sidebar-item hx:group hx:relative hx:flex hx:items-center" data-active=false><a class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:grow hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:hextra-focus-visible-inset hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50" href=/archives/><span class="hx:min-w-0 [word-break:break-word]">按年归档</span></a></div></li><li><div class="hextra-sidebar-item hx:group hx:relative hx:flex hx:items-center" data-active=false><a class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:grow hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:hextra-focus-visible-inset hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50" href=/links/><span class="hx:min-w-0 [word-break:break-word]">链接</span></a></div></li></ul></div><div class="hx:sticky hx:bottom-0 hx:max-h-(--menu-height) hx:bg-white hx:dark:bg-dark hx:mx-4 hx:py-4 hx:shadow-[0_-12px_16px_#fff] hx:flex hx:items-center hx:gap-2 hx:border-gray-200 hx:dark:border-neutral-800 hx:dark:shadow-[0_-12px_16px_#111] hx:contrast-more:border-neutral-400 hx:contrast-more:shadow-none hx:contrast-more:dark:shadow-none hx:border-t" data-toggle-animation=show><div class="hx:flex hx:grow hx:flex-col"><div class="hx:flex hx:justify-items-start hx:group" data-theme=light><button title=切换主题 data-state=closed data-location=bottom class="hextra-theme-toggle hx:cursor-pointer hx:rounded-md hx:text-left hx:font-medium hx:h-7 hx:px-2 hx:text-xs hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:font-medium hx:text-gray-600 hx:transition-colors hx:dark:text-gray-400 hx:grow" type=button aria-label=切换主题 aria-expanded=false aria-haspopup=menu><div class="hx:flex hx:items-center hx:gap-2 hx:capitalize"><svg height="12" class="hx:group-data-[theme=dark]:hidden hx:group-data-[theme=system]:hidden" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364-.707-.707M6.343 6.343l-.707-.707m12.728.0-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg><span class="hx:group-data-[theme=dark]:hidden hx:group-data-[theme=system]:hidden">浅色</span><svg height="12" class="hx:group-data-[theme=light]:hidden hx:group-data-[theme=system]:hidden" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003.0 0012 21a9.003 9.003.0 008.354-5.646z"/></svg><span class="hx:group-data-[theme=light]:hidden hx:group-data-[theme=system]:hidden">深色</span><svg height="12" class="hx:group-data-[theme=dark]:hidden hx:group-data-[theme=light]:hidden" viewBox="0 0 24 24" fill="currentColor"><path d="M11.996094 2C6.4986225 2.0192368 2.03125 6.5024993 2.03125 12c0 5.497501 4.4673725 9.980763 9.964844 10H12 12.0039c5.497471-.01924 9.964844-4.502499 9.964844-10 0-5.4975007-4.467373-9.9807632-9.964844-10H12zM12 4c4.417218.017598 7.96875 3.5822356 7.96875 8 0 4.417764-3.551532 7.982402-7.96875 8z"/></svg>
+<span class="hx:group-data-[theme=dark]:hidden hx:group-data-[theme=light]:hidden">跟随系统</span></div></button><ul class="hextra-theme-toggle-options hx:hidden hx:z-20 hx:max-h-64 hx:overflow-auto hx:rounded-lg hx:border hx:border-gray-200 hx:bg-white hx:p-1 hx:text-sm hx:shadow-lg hx:dark:border-neutral-700 hx:dark:bg-neutral-900" style="position:fixed;inset:auto auto 0 0;margin:0;min-width:100px" data-theme=light role=menu><li role=none class="hx:flex hx:flex-col"><button type=button role=menuitemradio aria-checked=true tabindex=-1 data-item=light class="hx:text-gray-700 hx:dark:text-gray-300 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:dark:hover:bg-neutral-800 hx:dark:hover:text-gray-100 hx:relative hx:cursor-pointer hx:whitespace-nowrap hx:rounded-sm hx:py-1.5 hx:transition-colors hx:ltr:pl-3 hx:ltr:pr-9 hx:rtl:pr-3 hx:rtl:pl-9 hx:text-left hx:w-full hx:bg-transparent hx:border-0">
+浅色
+<span class="hx:absolute hx:inset-y-0 hx:flex hx:items-center hx:ltr:right-3 hx:rtl:left-3 hx:group-data-[theme=dark]:hidden hx:group-data-[theme=system]:hidden"><svg height="1em" width="1em" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span></button></li><li role=none class="hx:flex hx:flex-col"><button type=button role=menuitemradio aria-checked=false tabindex=-1 data-item=dark class="hx:text-gray-700 hx:dark:text-gray-300 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:dark:hover:bg-neutral-800 hx:dark:hover:text-gray-100 hx:relative hx:cursor-pointer hx:whitespace-nowrap hx:rounded-sm hx:py-1.5 hx:transition-colors hx:ltr:pl-3 hx:ltr:pr-9 hx:rtl:pr-3 hx:rtl:pl-9 hx:text-left hx:w-full hx:bg-transparent hx:border-0">
+深色
+<span class="hx:absolute hx:inset-y-0 hx:flex hx:items-center hx:ltr:right-3 hx:rtl:left-3 hx:group-data-[theme=light]:hidden hx:group-data-[theme=system]:hidden"><svg height="1em" width="1em" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span></button></li><li role=none class="hx:flex hx:flex-col"><button type=button role=menuitemradio aria-checked=false tabindex=-1 data-item=system class="hx:text-gray-700 hx:dark:text-gray-300 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:dark:hover:bg-neutral-800 hx:dark:hover:text-gray-100 hx:relative hx:cursor-pointer hx:whitespace-nowrap hx:rounded-sm hx:py-1.5 hx:transition-colors hx:ltr:pl-3 hx:ltr:pr-9 hx:rtl:pr-3 hx:rtl:pl-9 hx:text-left hx:w-full hx:bg-transparent hx:border-0">
+跟随系统
+<span class="hx:absolute hx:inset-y-0 hx:flex hx:items-center hx:ltr:right-3 hx:rtl:left-3 hx:group-data-[theme=dark]:hidden hx:group-data-[theme=light]:hidden"><svg height="1em" width="1em" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span></button></li></ul></div></div></div></aside><nav class="hextra-toc hx:order-last hx:hidden hx:w-64 hx:shrink-0 hx:xl:block hx:print:hidden hx:px-4" aria-label=目录><div class="hextra-scrollbar hx:sticky hx:top-16 hx:overflow-y-auto hx:pr-4 hx:pt-6 hx:text-sm [hyphens:auto] hx:max-h-[calc(100vh-var(--navbar-height)-env(safe-area-inset-bottom))] hx:ltr:-mr-4 hx:rtl:-ml-4"><p class="hx:mb-4 hx:font-semibold hx:tracking-tight">此页上</p><ul><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:font-medium hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#-%e6%96%87%e4%bb%b6%e7%bb%93%e6%9e%84>📁 文件结构</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:font-medium hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#-%e4%bd%bf%e7%94%a8%e8%af%b4%e6%98%8e>🚀 使用说明</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:ltr:pl-4 hx:rtl:pr-4 hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#1-%e7%8e%af%e5%a2%83%e8%a6%81%e6%b1%82>1. 环境要求</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:ltr:pl-4 hx:rtl:pr-4 hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#2-%e7%bc%96%e8%af%91%e6%ad%a5%e9%aa%a4>2. 编译步骤</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:ltr:pl-4 hx:rtl:pr-4 hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#3-%e5%86%85%e5%ae%b9%e5%a1%ab%e5%85%85>3. 内容填充</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:font-medium hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#-%e9%85%8d%e7%bd%ae%e8%af%b4%e6%98%8e>⚙️ 配置说明</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:ltr:pl-4 hx:rtl:pr-4 hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#1-%e7%b1%bb%e6%96%87%e4%bb%b6cdutreportcls>1. 类文件（CDUTReport.cls）</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:ltr:pl-4 hx:rtl:pr-4 hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#2-%e8%87%aa%e5%ae%9a%e4%b9%89%e5%91%bd%e4%bb%a4mycommandsty>2. 自定义命令（Mycommand.sty）</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:ltr:pl-4 hx:rtl:pr-4 hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#3-%e5%ad%97%e4%bd%93%e8%ae%be%e7%bd%aefont_settex>3. 字体设置（Font_set.tex）</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:ltr:pl-8 hx:rtl:pr-8 hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#1%e5%9f%ba%e7%a1%80%e5%ad%97%e4%bd%93%e9%80%89%e6%8b%a9>（1）基础字体选择</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:ltr:pl-8 hx:rtl:pr-8 hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#2%e8%87%aa%e5%ae%9a%e4%b9%89%e5%ad%97%e4%bd%93%e5%bf%ab%e6%8d%b7%e5%91%bd%e4%bb%a4>（2）自定义字体快捷命令</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:ltr:pl-8 hx:rtl:pr-8 hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#3%e7%ab%a0%e8%8a%82%e6%a0%87%e9%a2%98%e5%ad%97%e4%bd%93%e8%ae%be%e7%bd%ae>（3）章节标题字体设置</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:ltr:pl-8 hx:rtl:pr-8 hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#4%e8%a1%a8%e6%a0%bc%e5%ad%97%e4%bd%93%e9%85%8d%e7%bd%ae>（4）表格字体配置</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:ltr:pl-8 hx:rtl:pr-8 hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#5%e6%b3%a8%e6%84%8f%e4%ba%8b%e9%a1%b9>（5）注意事项</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:font-medium hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#-%e7%a4%ba%e4%be%8b%e4%b8%8e%e6%89%8b%e5%86%8c>📖 示例与手册</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:font-medium hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#-%e6%b3%a8%e6%84%8f%e4%ba%8b%e9%a1%b9>⚠️ 注意事项</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:font-medium hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#-%e8%81%94%e7%b3%bb%e6%96%b9%e5%bc%8f>📞 联系方式</a></li></ul><ul><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:font-medium hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#-file-structure>📁 File Structure</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:font-medium hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#-usage-instructions>🚀 Usage Instructions</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:ltr:pl-4 hx:rtl:pr-4 hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#1-environment-requirements>1. Environment Requirements</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:ltr:pl-4 hx:rtl:pr-4 hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#2-compilation-steps>2. Compilation Steps</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:ltr:pl-4 hx:rtl:pr-4 hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#3-content-filling>3. Content Filling</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:font-medium hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#-configuration-instructions>⚙️ Configuration Instructions</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:ltr:pl-4 hx:rtl:pr-4 hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#1-class-file-cdutreportcls>1. Class File (CDUTReport.cls)</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:ltr:pl-4 hx:rtl:pr-4 hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#2-custom-commands-mycommandsty>2. Custom Commands (Mycommand.sty)</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:ltr:pl-4 hx:rtl:pr-4 hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#3-font-settings-font_settex>3. Font Settings (Font_set.tex)</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:ltr:pl-8 hx:rtl:pr-8 hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#1-basic-font-selection>(1) Basic Font Selection</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:ltr:pl-8 hx:rtl:pr-8 hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#2-custom-font-shortcut-commands>(2) Custom Font Shortcut Commands</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:ltr:pl-8 hx:rtl:pr-8 hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#3-chapter-title-font-settings>(3) Chapter Title Font Settings</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:ltr:pl-8 hx:rtl:pr-8 hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#4-table-font-configuration>(4) Table Font Configuration</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:ltr:pl-8 hx:rtl:pr-8 hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#5-notes>(5) Notes</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:font-medium hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#-examples-and-manual>📖 Examples and Manual</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:font-medium hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#-notes>⚠️ Notes</a></li><li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6"><a class="hx:font-medium hx:inline-block hx:rounded-sm hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:wrap-break-word hx:hextra-focus-visible-inset" href=#-contact-information>📞 Contact Information</a></li></ul><div class="hx:mt-8 hx:border-t hx:bg-white hx:pt-8 hx:shadow-[0_-12px_16px_white] hx:dark:bg-dark hx:dark:shadow-[0_-12px_16px_#111] hx:sticky hx:bottom-0 hx:flex hx:flex-col hx:items-start hx:gap-2 hx:pb-8 hx:border-gray-200 hx:dark:border-neutral-800 hx:contrast-more:border-t hx:contrast-more:border-neutral-400 hx:contrast-more:shadow-none hx:contrast-more:dark:border-neutral-400"><button id=backToTop tabindex=-1 class="hx:cursor-pointer hx:transition-all hx:duration-75 hx:opacity-0 hx:text-xs hx:font-medium hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-100 hx:contrast-more:text-gray-800 hx:contrast-more:dark:text-gray-50">
+<span>返回顶部</span>
+<svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" focusable="false" class="hx:inline hx:ltr:ml-1 hx:rtl:mr-1 hx:h-3.5 hx:w-3.5 hx:rounded-full hx:border hx:border-gray-500 hx:hover:border-gray-900 hx:dark:border-gray-400 hx:dark:hover:border-gray-100 hx:contrast-more:border-gray-800 hx:contrast-more:dark:border-gray-50"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5"/></svg></button></div></div></nav><article class="hx:w-full hx:break-words hx:flex hx:min-h-[calc(100vh-var(--navbar-height))] hx:min-w-0 hx:justify-center hx:pb-8 hx:pr-[calc(env(safe-area-inset-right)-1.5rem)]"><main id=content class="hx:w-full hx:min-w-0 hextra-max-content-width hx:px-6 hx:pt-4 hx:md:px-12"><div class="hx:mt-1.5 hx:flex hx:items-center hx:gap-1 hx:overflow-hidden hx:text-sm hx:text-gray-500 hx:dark:text-gray-400 hx:contrast-more:text-current"><div class="hx:whitespace-nowrap hx:transition-colors hx:min-w-[24px] hx:overflow-hidden hx:text-ellipsis hx:hover:text-gray-900 hx:dark:hover:text-gray-100"><a href=/post/ class="hx:inline-block hx:rounded-sm hx:hextra-focus-visible-inset">全部笔记</a></div><svg class="hx:w-3.5 hx:shrink-0 hx:rtl:-rotate-180" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg><div class="hx:whitespace-nowrap hx:transition-colors hx:font-medium hx:text-gray-700 hx:contrast-more:font-bold hx:contrast-more:text-current hx:dark:text-gray-100 hx:contrast-more:dark:text-current">大学生报告LaTeX模板</div></div><div class=content><div class="hx:flex hx:flex-col hx:sm:flex-row hx:items-start hx:sm:items-center hx:sm:justify-between hx:gap-4 hx:mb-4"><h1 class=hx:mb-0>大学生报告LaTeX模板</h1></div><h1>大学生LaTeX 报告模板</h1><p>本模板适用于撰写<strong>大作业报告</strong>，基于成都理工大学（CDUT）的报告格式规范进行修改，包含完整的文档结构（标题页、摘要、目录、章节、参考文献、附录等），页面和英文字体设置遵循一个英国项目规范Research_Project_Guide.pdf，并提供了详细的使用说明。</p><h2>📁 文件结构<span class="hx:absolute hx:-mt-20" id=-文件结构></span>
+<a href=#-%e6%96%87%e4%bb%b6%e7%bb%93%e6%9e%84 class=subheading-anchor aria-label=此章节的永久链接></a></h2><p>以下是模板的文件结构及各文件用途说明：</p><div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"><div><pre><code>├── main.tex               # 主文档文件（整合所有子文件，编译入口）
+├── titlepage.tex          # 标题页模板（包含标题、作者、日期等）
+├── abstract.tex           # 摘要部分（中英文摘要）
+├── chapter1.tex           # 第一章内容（可扩展为chapter2.tex、chapter3.tex等）
+├── reference.tex          # 参考文献部分（引用bib数据库）
+├── appendix.tex           # 附录部分（补充数据、代码等）
+├── backpage.tex           # 封底页（可选）
+├── manual.tex             # 使用手册（详细说明公式、图片、表格等插入方法）
+├── ref.bib                # 参考文献数据库（BibTeX格式，需与reference.tex关联）
+├── Research_Project_Guide.pdf   # 一个英国项目的规范指导书
+├── configuration/         # 配置文件夹（格式、字体、自定义命令）
+│   ├── CDUTReport.cls     # 核心类文件（定义页面布局、章节格式等）
+│   ├── Mycommand.sty      # 自定义命令（快捷插入图片、表格等）
+│   ├── Font set.tex       # 字体设置（使用Fandol系列中文字体）
+│   ├── Title set.tex      # 标题格式设置（标题页、章节标题样式）
+│   └── Fandol*.otf        # Fandol字体文件（黑体、宋体、楷体，需安装或保留）
+├── figs/                  # 图片文件夹（存放文档中使用的所有图片）
+└── README.md              # 本说明文件</code></pre></div><div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"><button class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50" title=复制代码 aria-label=复制代码 data-copied-label=已复制！><div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"></div><div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"></div></button></div></div><h2>🚀 使用说明<span class="hx:absolute hx:-mt-20" id=-使用说明></span>
+<a href=#-%e4%bd%bf%e7%94%a8%e8%af%b4%e6%98%8e class=subheading-anchor aria-label=此章节的永久链接></a></h2><h3>1. 环境要求<span class="hx:absolute hx:-mt-20" id=1-环境要求></span>
+<a href=#1-%e7%8e%af%e5%a2%83%e8%a6%81%e6%b1%82 class=subheading-anchor aria-label=此章节的永久链接></a></h3><ul><li><strong>LaTeX 编译器</strong>：需使用 <strong>XeLaTeX</strong>。</li><li><strong>字体依赖</strong>：configuration文件夹中的Fandol字体（<code>FandolHei-Bold.otf</code>、<code>FandolSong-Regular.otf</code>等）需保留，或安装到系统字体目录。</li></ul><h3>2. 编译步骤<span class="hx:absolute hx:-mt-20" id=2-编译步骤></span>
+<a href=#2-%e7%bc%96%e8%af%91%e6%ad%a5%e9%aa%a4 class=subheading-anchor aria-label=此章节的永久链接></a></h3><ol><li><strong>克隆仓库</strong>：<div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"><div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>git clone https://github.com/rooobeam/General-LaTeX-Template-for-College-Students.git</span></span></code></pre></td></tr></table></div></div></div><div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"><button class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50" title=复制代码 aria-label=复制代码 data-copied-label=已复制！><div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"></div><div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"></div></button></div></div></li><li><strong>编译主文档</strong>（需多次运行以确保交叉引用和参考文献正确）：<ul><li>第一步：<code>xelatex main.tex</code>（生成辅助文件）</li><li>第二步：<code>bibtex main</code>（编译参考文献，若使用<code>ref.bib</code>数据库）</li><li>第三步：<code>xelatex main.tex</code>（更新参考文献引用）</li><li>第四步：<code>xelatex main.tex</code>（确保所有交叉引用正确）</li></ul></li></ol><h3>3. 内容填充<span class="hx:absolute hx:-mt-20" id=3-内容填充></span>
+<a href=#3-%e5%86%85%e5%ae%b9%e5%a1%ab%e5%85%85 class=subheading-anchor aria-label=此章节的永久链接></a></h3><ul><li><strong>标题页</strong>：修改<code>titlepage.tex</code>中的标题、作者、日期等信息。</li><li><strong>摘要</strong>：在<code>abstract.tex</code>中填写中英文摘要。</li><li><strong>章节内容</strong>：在<code>chapter1.tex</code>、<code>chapter2.tex</code>等文件中撰写章节内容，可通过<code>\input{chapter1}</code>在<code>main.tex</code>中引用。</li><li><strong>参考文献</strong>：将文献条目添加到<code>ref.bib</code>文件中，使用<code>\cite{key}</code>在文档中引用，<code>reference.tex</code>会自动生成参考文献列表。</li><li><strong>图片</strong>：将图片放在<code>figs</code>文件夹中，使用<code>\includegraphics{figs/figure1.png}</code>引用（需加载<code>graphicx</code>包，模板已包含）。</li></ul><h2>⚙️ 配置说明<span class="hx:absolute hx:-mt-20" id=-配置说明></span>
+<a href=#-%e9%85%8d%e7%bd%ae%e8%af%b4%e6%98%8e class=subheading-anchor aria-label=此章节的永久链接></a></h2><h3>1. 类文件（CDUTReport.cls）<span class="hx:absolute hx:-mt-20" id=1-类文件cdutreportcls></span>
+<a href=#1-%e7%b1%bb%e6%96%87%e4%bb%b6cdutreportcls class=subheading-anchor aria-label=此章节的永久链接></a></h3><p>定义了报告的核心格式，包括：</p><ul><li>页面布局（A4纸、页边距、页眉页脚）；</li><li>章节样式（标题字体、编号格式）；</li><li>目录生成（自动提取章节标题）。
+如需修改格式，可编辑此类文件，但建议<strong>先备份</strong>。</li></ul><h3>2. 自定义命令（Mycommand.sty）<span class="hx:absolute hx:-mt-20" id=2-自定义命令mycommandsty></span>
+<a href=#2-%e8%87%aa%e5%ae%9a%e4%b9%89%e5%91%bd%e4%bb%a4mycommandsty class=subheading-anchor aria-label=此章节的永久链接></a></h3><p>提供了快捷命令，简化重复操作，例如：</p><ul><li><code>\fig{path}{caption}</code>：插入图片并添加说明；</li><li><code>\tab{label}{caption}{table content}</code>：插入表格并添加标签；</li><li><code>\code{language}{code content}</code>：插入代码块（使用<code>listings</code>包）。
+可根据需要添加或修改自定义命令。</li></ul><h3>3. 字体设置（Font_set.tex）<span class="hx:absolute hx:-mt-20" id=3-字体设置font_settex></span>
+<a href=#3-%e5%ad%97%e4%bd%93%e8%ae%be%e7%bd%aefont_settex class=subheading-anchor aria-label=此章节的永久链接></a></h3><p><code>Font_set.tex</code> 是模板的<strong>核心字体配置文件</strong>，定义了中文、西文、章节标题及表格的字体样式，确保文档符合学术规范且显示清晰。以下是关键配置说明（详细使用示例请参考 <code>manual.tex</code> 中的 <strong>1.8 字体</strong> 章节，第3页）：</p><h4>（1）基础字体选择<span class="hx:absolute hx:-mt-20" id=1基础字体选择></span>
+<a href=#1%e5%9f%ba%e7%a1%80%e5%ad%97%e4%bd%93%e9%80%89%e6%8b%a9 class=subheading-anchor aria-label=此章节的永久链接></a></h4><p>模板使用常见西文字体(Arial)并搭配Fandol系列中文字体（需保留 <code>configuration</code> 文件夹中的 <code>.otf</code> 字体文件），具体如下：</p><ul><li><strong>中文字体</strong>：<ul><li>主字体（默认正文）：<code>FandolSong-Regular.otf</code>（宋体），加粗时自动切换为 <code>FandolSong-Bold.otf</code>，斜体时使用 <code>FandolKai-Regular.otf</code>（楷体）；</li><li>无衬线字体（用于标题/强调）：<code>FandolHei-Regular.otf</code>（黑体），加粗时使用 <code>FandolHei-Bold.otf</code>；</li><li>等宽字体（用于代码/数据）：<code>FandolHei-Regular.otf</code>（黑体），加粗时使用 <code>FandolHei-Bold.otf</code>。</li></ul></li><li><strong>西文字体</strong>：<ul><li>主字体/无衬线字体：<code>Arial</code>（系统默认安装，确保西文显示清晰）；</li><li>正式西文字体（用于表格/公式）：<code>Times New Roman</code>（通过 <code>\timesnewroman</code> 命令调用）。</li></ul></li></ul><h4>（2）自定义字体快捷命令<span class="hx:absolute hx:-mt-20" id=2自定义字体快捷命令></span>
+<a href=#2%e8%87%aa%e5%ae%9a%e4%b9%89%e5%ad%97%e4%bd%93%e5%bf%ab%e6%8d%b7%e5%91%bd%e4%bb%a4 class=subheading-anchor aria-label=此章节的永久链接></a></h4><p>为方便切换字体，模板定义了以下常用命令（在 <code>manual.tex</code> 中有详细示例）：</p><ul><li><code>\songti</code>：切换为<strong>宋体</strong>（中文正文默认字体，适合大段文字）；</li><li><code>\heiti</code>：切换为<strong>黑体</strong>（用于章节标题、重点内容，增强视觉层次感）；</li><li><code>\kaishu</code>：切换为<strong>楷体</strong>（用于引用、注释或需要区分的内容，风格更正式）。</li></ul><h4>（3）章节标题字体设置<span class="hx:absolute hx:-mt-20" id=3章节标题字体设置></span>
+<a href=#3%e7%ab%a0%e8%8a%82%e6%a0%87%e9%a2%98%e5%ad%97%e4%bd%93%e8%ae%be%e7%bd%ae class=subheading-anchor aria-label=此章节的永久链接></a></h4><p>通过 <code>titlesec</code> 包优化了章节标题的格式，确保层级清晰：</p><ul><li><strong>章节（section）</strong>：黑体、16pt、加粗、居中显示，标题前自动添加“第X章”（如“2. Problem Restatement”）；</li><li><strong>小节（subsection）</strong>：黑体、14pt、加粗，左侧显示小节编号（如“2.1 Problem Background”）；</li><li><strong>子小节（subsubsection）</strong>：黑体、12pt、加粗，左侧显示子小节编号（如“1.1.1 abcd”）。</li></ul><h4>（4）表格字体配置<span class="hx:absolute hx:-mt-20" id=4表格字体配置></span>
+<a href=#4%e8%a1%a8%e6%a0%bc%e5%ad%97%e4%bd%93%e9%85%8d%e7%bd%ae class=subheading-anchor aria-label=此章节的永久链接></a></h4><p>表格内容默认使用<strong>Times New Roman 10pt</strong>字体（符合学术文档的严谨风格），通过重定义 <code>tabular</code> 和 <code>tabularx</code> 环境实现，无需手动设置。</p><h4>（5）注意事项<span class="hx:absolute hx:-mt-20" id=5注意事项></span>
+<a href=#5%e6%b3%a8%e6%84%8f%e4%ba%8b%e9%a1%b9 class=subheading-anchor aria-label=此章节的永久链接></a></h4><ul><li><strong>字体安装</strong>：若系统未安装Fandol字体，需将 <code>configuration</code> 文件夹中的字体文件（如 <code>FandolHei-Bold.otf</code>、<code>FandolSong-Regular.otf</code> 等）复制到系统字体目录（如 Windows 的 <code>C:\Windows\Fonts</code>）；</li><li><strong>西文字体依赖</strong>：Arial 是大多数系统的默认字体，若未安装需手动添加；</li><li><strong>修改字体</strong>：若需调整字体样式（如增大标题字体），可编辑 <code>Font_set.tex</code> 中的 <code>\titleformat</code> 或 <code>\setCJKmainfont</code> 命令，但建议先备份原文件。</li></ul><p>通过以上配置，模板确保了文档的<strong>字体一致性</strong>和<strong>学术规范性</strong>，同时提供了灵活的字体切换功能，满足不同场景的需求。如需更详细的字体使用说明，请参考 <code>manual.tex</code> 中的 <strong>1.8 字体</strong> 章节（第3页）。</p><h2>📖 示例与手册<span class="hx:absolute hx:-mt-20" id=-示例与手册></span>
+<a href=#-%e7%a4%ba%e4%be%8b%e4%b8%8e%e6%89%8b%e5%86%8c class=subheading-anchor aria-label=此章节的永久链接></a></h2><p><code>manual.tex</code>是详细的使用手册，包含以下内容：</p><ol><li>文件结构</li><li>插入公式</li><li>插入图片</li><li>插入表格</li><li>插入伪代码</li><li>粘贴代码</li><li>引用</li><li>字体</li><li>添加脚注并设置链接</li></ol><p>建议用户先查看<code>manual.tex</code>，学习如何使用模板的各项功能。</p><h2>⚠️ 注意事项<span class="hx:absolute hx:-mt-20" id=-注意事项></span>
+<a href=#-%e6%b3%a8%e6%84%8f%e4%ba%8b%e9%a1%b9 class=subheading-anchor aria-label=此章节的永久链接></a></h2><ol><li><strong>编译环境</strong>：必须使用XeLaTeX编译，否则中文字体可能无法正确显示。</li><li><strong>图片路径</strong>：所有图片请放在<code>figs</code>文件夹中，使用相对路径引用（如<code>figs/figure1.png</code>），避免绝对路径导致的问题。</li><li><strong>参考文献</strong>：<code>ref.bib</code>文件需为BibTeX格式，并在<code>reference.tex</code>中使用<code>\bibliography{ref}</code>引用。</li><li><strong>自定义命令</strong>：修改<code>Mycommand.sty</code>前请备份，避免误操作导致模板无法编译。</li><li><strong>交叉引用</strong>：使用<code>\label{chapter1}</code>为章节添加标签，使用<code>\ref{chapter1}</code>引用，编译时需多次运行XeLaTeX以确保引用正确。</li></ol><h2>📞 联系方式<span class="hx:absolute hx:-mt-20" id=-联系方式></span>
+<a href=#-%e8%81%94%e7%b3%bb%e6%96%b9%e5%bc%8f class=subheading-anchor aria-label=此章节的永久链接></a></h2><p>若有问题或建议，可通过以下方式联系作者：</p><ul><li>GitHub Issues：https://github.com/rooobeam/General-LaTeX-Template-for-College-Students.git/issues</li><li>Email：rooobeam@uir.edu.cn</li></ul><h1>LaTeX Template for College Students&rsquo; Reports</h1><p>This template is suitable for writing <strong>term paper reports</strong>. It is modified based on the report format specifications of Chengdu University of Technology (CDUT) and includes a complete document structure (title page, abstract, table of contents, chapters, references, appendices, etc.). The page and English font settings adhere to the British project specification <em>Research_Project_Guide.pdf</em>, and detailed usage instructions are provided.</p><h2>📁 File Structure<span class="hx:absolute hx:-mt-20" id=-file-structure></span>
+<a href=#-file-structure class=subheading-anchor aria-label=此章节的永久链接></a></h2><p>The following is the file structure of the template and explanations of each file&rsquo;s purpose:</p><div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"><div><pre><code>├── main.tex               # Main document file (integrates all subfiles, compilation entry point)  
+├── titlepage.tex          # Title page template (includes title, author, date, etc.)  
+├── abstract.tex           # Abstract section (Chinese and English abstracts)  
+├── chapter1.tex           # Chapter 1 content (can be extended to chapter2.tex, chapter3.tex, etc.)  
+├── reference.tex          # References section (cites the bib database)  
+├── appendix.tex           # Appendix section (supplementary data, code, etc.)  
+├── backpage.tex           # Back cover page (optional)  
+├── manual.tex             # User manual (details on inserting equations, images, tables, etc.)  
+├── ref.bib                # Bibliography database (BibTeX format, must be linked to reference.tex)  
+├── Research_Project_Guide.pdf   # British project specification guide  
+├── configuration/         # Configuration folder (format, fonts, custom commands)  
+│   ├── CDUTReport.cls     # Core class file (defines page layout, chapter styles, etc.)  
+│   ├── Mycommand.sty      # Custom commands (quick insertion of images, tables, etc.)  
+│   ├── Font set.tex       # Font settings (uses Fandol series Chinese fonts)  
+│   ├── Title set.tex      # Title format settings (title page, chapter title styles)  
+│   └── Fandol*.otf        # Fandol font files (Hei, Song, Kai; must be retained or installed)  
+├── figs/                  # Image folder (stores all images used in the document)  
+└── README.md              # This instruction file  </code></pre></div><div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"><button class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50" title=复制代码 aria-label=复制代码 data-copied-label=已复制！><div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"></div><div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"></div></button></div></div><h2>🚀 Usage Instructions<span class="hx:absolute hx:-mt-20" id=-usage-instructions></span>
+<a href=#-usage-instructions class=subheading-anchor aria-label=此章节的永久链接></a></h2><h3>1. Environment Requirements<span class="hx:absolute hx:-mt-20" id=1-environment-requirements></span>
+<a href=#1-environment-requirements class=subheading-anchor aria-label=此章节的永久链接></a></h3><ul><li><strong>LaTeX Compiler</strong>: <strong>XeLaTeX</strong> is required.</li><li><strong>Font Dependencies</strong>: Fandol fonts in the <code>configuration</code> folder (e.g., <code>FandolHei-Bold.otf</code>, <code>FandolSong-Regular.otf</code>) must be retained or installed to the system font directory (e.g., <code>C:\Windows\Fonts</code> for Windows).</li></ul><h3>2. Compilation Steps<span class="hx:absolute hx:-mt-20" id=2-compilation-steps></span>
+<a href=#2-compilation-steps class=subheading-anchor aria-label=此章节的永久链接></a></h3><ol><li><strong>Clone the Repository</strong>:<div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"><div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>git clone https://github.com/rooobeam/General-LaTeX-Template-for-College-Students.git  </span></span></code></pre></td></tr></table></div></div></div><div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"><button class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50" title=复制代码 aria-label=复制代码 data-copied-label=已复制！><div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"></div><div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"></div></button></div></div></li><li><strong>Compile the Main Document</strong> (run multiple times to ensure correct cross-references and references):<ul><li>Step 1: <code>xelatex main.tex</code> (generate auxiliary files)</li><li>Step 2: <code>bibtex main</code> (compile references if using <code>ref.bib</code>)</li><li>Step 3: <code>xelatex main.tex</code> (update reference citations)</li><li>Step 4: <code>xelatex main.tex</code> (ensure all cross-references are correct)</li></ul></li></ol><h3>3. Content Filling<span class="hx:absolute hx:-mt-20" id=3-content-filling></span>
+<a href=#3-content-filling class=subheading-anchor aria-label=此章节的永久链接></a></h3><ul><li><strong>Title Page</strong>: Modify the title, author, date, and other information in <code>titlepage.tex</code>.</li><li><strong>Abstract</strong>: Fill in the Chinese and English abstracts in <code>abstract.tex</code>.</li><li><strong>Chapter Content</strong>: Write chapter content in <code>chapter1.tex</code>, <code>chapter2.tex</code>, etc., and reference them in <code>main.tex</code> using <code>\input{chapter1}</code>.</li><li><strong>References</strong>: Add bibliographic entries to <code>ref.bib</code> and cite them in the document using <code>\cite{key}</code>. The <code>reference.tex</code> file will automatically generate the references list.</li><li><strong>Images</strong>: Place images in the <code>figs</code> folder and reference them using <code>\includegraphics{figs/figure1.png}</code> (the <code>graphicx</code> package is included in the template).</li></ul><h2>⚙️ Configuration Instructions<span class="hx:absolute hx:-mt-20" id=-configuration-instructions></span>
+<a href=#-configuration-instructions class=subheading-anchor aria-label=此章节的永久链接></a></h2><h3>1. Class File (CDUTReport.cls)<span class="hx:absolute hx:-mt-20" id=1-class-file-cdutreportcls></span>
+<a href=#1-class-file-cdutreportcls class=subheading-anchor aria-label=此章节的永久链接></a></h3><p>Defines the core format of the report, including:</p><ul><li>Page layout (A4 paper, margins, header/footer);</li><li>Chapter styles (title fonts, numbering format);</li><li>Table of contents generation (automatically extracts chapter titles).<br>To modify the format, edit this file, but <strong>backup first</strong>.</li></ul><h3>2. Custom Commands (Mycommand.sty)<span class="hx:absolute hx:-mt-20" id=2-custom-commands-mycommandsty></span>
+<a href=#2-custom-commands-mycommandsty class=subheading-anchor aria-label=此章节的永久链接></a></h3><p>Provides shortcut commands to simplify repetitive operations, e.g.:</p><ul><li><code>\fig{path}{caption}</code>: Insert an image with a caption;</li><li><code>\tab{label}{caption}{table content}</code>: Insert a table with a label;</li><li><code>\code{language}{code content}</code>: Insert a code block (uses the <code>listings</code> package).<br>Add or modify custom commands as needed.</li></ul><h3>3. Font Settings (Font_set.tex)<span class="hx:absolute hx:-mt-20" id=3-font-settings-font_settex></span>
+<a href=#3-font-settings-font_settex class=subheading-anchor aria-label=此章节的永久链接></a></h3><p><code>Font_set.tex</code> is the <strong>core font configuration file</strong> of the template, defining the font styles for Chinese, Western text, chapter titles, and tables to ensure the document complies with academic standards and displays clearly. Below are key configuration explanations (for detailed usage examples, refer to Section <strong>1.8 Fonts</strong> in <code>manual.tex</code>, Page 3):</p><h4>(1) Basic Font Selection<span class="hx:absolute hx:-mt-20" id=1-basic-font-selection></span>
+<a href=#1-basic-font-selection class=subheading-anchor aria-label=此章节的永久链接></a></h4><p>The template uses common Western fonts (Arial) paired with Fandol series Chinese fonts (retain the <code>.otf</code> files in the <code>configuration</code> folder):</p><ul><li><strong>Chinese Fonts</strong>:<ul><li>Main font (default body text): <code>FandolSong-Regular.otf</code> (SimSun), automatically switches to <code>FandolSong-Bold.otf</code> when bold, and uses <code>FandolKai-Regular.otf</code> (KaiTi) for italics;</li><li>Sans-serif font (for titles/emphasis): <code>FandolHei-Regular.otf</code> (HeiTi), switches to <code>FandolHei-Bold.otf</code> when bold;</li><li>Monospace font (for code/data): <code>FandolHei-Regular.otf</code> (HeiTi), switches to <code>FandolHei-Bold.otf</code> when bold.</li></ul></li><li><strong>Western Fonts</strong>:<ul><li>Main/sans-serif font: <code>Arial</code> (preinstalled on most systems, ensures clear Western text display);</li><li>Formal Western font (for tables/equations): <code>Times New Roman</code> (called via <code>\timesnewroman</code>).</li></ul></li></ul><h4>(2) Custom Font Shortcut Commands<span class="hx:absolute hx:-mt-20" id=2-custom-font-shortcut-commands></span>
+<a href=#2-custom-font-shortcut-commands class=subheading-anchor aria-label=此章节的永久链接></a></h4><p>To facilitate font switching, the template defines the following common commands (examples in <code>manual.tex</code>):</p><ul><li><code>\songti</code>: Switch to <strong>SimSun</strong> (default Chinese body text, suitable for long passages);</li><li><code>\heiti</code>: Switch to <strong>HeiTi</strong> (for chapter titles, key content, enhances visual hierarchy);</li><li><code>\kaishu</code>: Switch to <strong>KaiTi</strong> (for quotes, annotations, or differentiated content, more formal style).</li></ul><h4>(3) Chapter Title Font Settings<span class="hx:absolute hx:-mt-20" id=3-chapter-title-font-settings></span>
+<a href=#3-chapter-title-font-settings class=subheading-anchor aria-label=此章节的永久链接></a></h4><p>Optimizes chapter title formats using the <code>titlesec</code> package for clear hierarchy:</p><ul><li><strong>Section</strong>: HeiTi, 16pt, bold, centered, automatically adds &ldquo;Chapter X&rdquo; before the title (e.g., &ldquo;2. Problem Restatement&rdquo;);</li><li><strong>Subsection</strong>: HeiTi, 14pt, bold, left-aligned with subsection number (e.g., &ldquo;2.1 Problem Background&rdquo;);</li><li><strong>Subsubsection</strong>: HeiTi, 12pt, bold, left-aligned with subsubsection number (e.g., &ldquo;1.1.1 abcd&rdquo;).</li></ul><h4>(4) Table Font Configuration<span class="hx:absolute hx:-mt-20" id=4-table-font-configuration></span>
+<a href=#4-table-font-configuration class=subheading-anchor aria-label=此章节的永久链接></a></h4><p>Table content uses <strong>Times New Roman 10pt</strong> by default (complies with academic document rigor), implemented by redefining the <code>tabular</code> and <code>tabularx</code> environments—no manual setting required.</p><h4>(5) Notes<span class="hx:absolute hx:-mt-20" id=5-notes></span>
+<a href=#5-notes class=subheading-anchor aria-label=此章节的永久链接></a></h4><ul><li><strong>Font Installation</strong>: If Fandol fonts are not installed, copy the font files (e.g., <code>FandolHei-Bold.otf</code>, <code>FandolSong-Regular.otf</code>) from the <code>configuration</code> folder to the system font directory (e.g., <code>C:\Windows\Fonts</code> for Windows);</li><li><strong>Western Font Dependencies</strong>: Arial is a default font on most systems—install manually if missing;</li><li><strong>Modifying Fonts</strong>: To adjust font styles (e.g., increase title font size), edit the <code>\titleformat</code> or <code>\setCJKmainfont</code> commands in <code>Font_set.tex</code>, but <strong>backup first</strong>.</li></ul><p>Through the above configurations, the template ensures <strong>font consistency</strong> and <strong>academic规范性</strong> (academic standardization) while providing flexible font switching to meet different needs. For more detailed font usage instructions, refer to Section <strong>1.8 Fonts</strong> in <code>manual.tex</code> (Page 3).</p><h2>📖 Examples and Manual<span class="hx:absolute hx:-mt-20" id=-examples-and-manual></span>
+<a href=#-examples-and-manual class=subheading-anchor aria-label=此章节的永久链接></a></h2><p><code>manual.tex</code> is a detailed user manual covering the following content:</p><ol><li>File Structure</li><li>Insert Equations</li><li>Insert Images</li><li>Insert Tables</li><li>Insert Pseudocode</li><li>Paste Code</li><li>Citations</li><li>Fonts</li><li>Add Footnotes and Set Links</li></ol><p>It is recommended to read <code>manual.tex</code> first to learn how to use the template&rsquo;s features.</p><h2>⚠️ Notes<span class="hx:absolute hx:-mt-20" id=-notes></span>
+<a href=#-notes class=subheading-anchor aria-label=此章节的永久链接></a></h2><ol><li><strong>Compilation Environment</strong>: XeLaTeX must be used for compilation—otherwise, Chinese fonts may not display correctly.</li><li><strong>Image Path</strong>: All images must be placed in the <code>figs</code> folder and referenced using relative paths (e.g., <code>figs/figure1.png</code>) to avoid issues with absolute paths.</li><li><strong>References</strong>: The <code>ref.bib</code> file must be in BibTeX format and referenced in <code>reference.tex</code> using <code>\bibliography{ref}</code>.</li><li><strong>Custom Commands</strong>: Backup <code>Mycommand.sty</code> before modifying to avoid template compilation failures due to incorrect operations.</li><li><strong>Cross-References</strong>: Use <code>\label{chapter1}</code> to add labels to chapters and <code>\ref{chapter1}</code> to cite them—run XeLaTeX multiple times to ensure correct cross-references.</li></ol><h2>📞 Contact Information<span class="hx:absolute hx:-mt-20" id=-contact-information></span>
+<a href=#-contact-information class=subheading-anchor aria-label=此章节的永久链接></a></h2><p>For questions or suggestions, contact the author via:</p><ul><li>GitHub Issues: <a href=https://github.com/rooobeam/General-LaTeX-Template-for-College-Students.git/issues target=_blank rel=noopener>https://github.com/rooobeam/General-LaTeX-Template-for-College-Students.git/issues</a></li><li>Email: <a href=mailto:rooobeam@uir.edu.cn>rooobeam@uir.edu.cn</a></li></ul></div><div class="hx:mt-12 hx:mb-8 hx:block hx:text-xs hx:text-gray-500 hx:ltr:text-right hx:rtl:text-left hx:dark:text-gray-400">最后更新于 <time datetime=2025-07-02T12:36:24.000Z>2025-07-02</time></div><div class="hx:mb-8 hx:flex hx:items-center hx:border-t hx:pt-8 hx:border-gray-200 hx:dark:border-neutral-800 hx:contrast-more:border-neutral-400 hx:dark:contrast-more:border-neutral-400 hx:print:hidden"><a href=/p/%E6%96%AF%E5%9D%A6%E7%A6%8F%E9%87%8D%E8%AE%BErag%E6%96%B0%E5%9F%BA%E7%BA%BF%E4%B9%8Bdos_rag/ title=斯坦福重设RAG新基线之DOS_RAG class="hx:flex hx:max-w-[50%] hx:items-center hx:gap-1 hx:py-4 hx:text-base hx:font-medium hx:text-gray-600 hx:transition-colors [word-break:break-word] hx:hover:text-primary-600 hx:dark:text-gray-300 hx:md:text-lg hx:ltr:pr-4 hx:rtl:pl-4"><svg class="hx:inline hx:h-5 hx:shrink-0 hx:ltr:rotate-180" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>斯坦福重设RAG新基线之DOS_RAG</a><a href=/p/ltp/ title=Ltp class="hx:flex hx:max-w-[50%] hx:items-center hx:gap-1 hx:py-4 hx:text-base hx:font-medium hx:text-gray-600 hx:transition-colors [word-break:break-word] hx:hover:text-primary-600 hx:dark:text-gray-300 hx:md:text-lg hx:ltr:ml-auto hx:ltr:pl-4 hx:ltr:text-right hx:rtl:mr-auto hx:rtl:pr-4 hx:rtl:text-left">Ltp<svg class="hx:inline hx:h-5 hx:shrink-0 hx:rtl:-rotate-180" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></a></div></main></article></div><footer class="hextra-footer hx:bg-gray-100 hx:pb-[env(safe-area-inset-bottom)] hx:dark:bg-neutral-900 hx:print:bg-transparent"><div class="hextra-custom-footer hextra-max-footer-width hx:mx-auto hx:pl-[max(env(safe-area-inset-left),1.5rem)] hx:pr-[max(env(safe-area-inset-right),1.5rem)] hx:text-gray-600 hx:dark:text-gray-400"></div><div class="hextra-max-footer-width hx:mx-auto hx:flex hx:justify-center hx:py-12 hx:pl-[max(env(safe-area-inset-left),1.5rem)] hx:pr-[max(env(safe-area-inset-right),1.5rem)] hx:text-gray-600 hx:dark:text-gray-400 hx:md:justify-start"><div class="hx:flex hx:w-full hx:flex-col hx:items-center hx:sm:items-start"><div class=hx:font-semibold><a class="hx:flex hx:text-sm hx:items-center hx:gap-1 hx:text-current" target=_blank rel="noopener noreferrer" title="Hextra GitHub Homepage" href=https://github.com/imfing/hextra><span>由 Hextra 驱动<svg height="1em" class="hx:inline-block hx:ltr:ml-1 hx:rtl:mr-1 hx:align-[-2.5px]" viewBox="0 0 180 180" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="m105.50024 22.224647c-9.59169-5.537563-21.40871-5.537563-31.000093.0L39.054693 42.689119C29.463353 48.226675 23.55484 58.460531 23.55484 69.535642v40.928918c0 11.07542 5.908513 21.3092 15.499853 26.84652l35.445453 20.46446c9.591313 5.53732 21.408404 5.53732 31.000094.0l35.44507-20.46446c9.59131-5.53732 15.49985-15.7711 15.49985-26.84652V69.535642c0-11.075111-5.90854-21.308967-15.49985-26.846523zM34.112797 85.737639c-1.384445 2.397827-1.384445 5.352099.0 7.749927l24.781554 42.922974c1.38437 2.39783 3.942853 3.87496 6.711592 3.87496h49.563107c2.76905.0 5.3273-1.47713 6.71144-3.87496l24.78194-42.922974c1.38414-2.397828 1.38414-5.3521.0-7.749927L121.88049 42.814746c-1.38414-2.397828-3.94239-3.874964-6.71144-3.874964H65.605944c-2.768739.0-5.327223 1.477059-6.711592 3.874964z" style="stroke-width:.774993"/></svg></span></a></div><div class="hx:mt-6 hx:text-xs">© 2025 rooobeam</div></div></div></footer><script defer src=/js/main.min.d9fbefbbac8caeb66025dbb14d569c30defac0effcba45486a78209fba9360af.js integrity="sha256-2fvvu6yMrrZgJduxTVacMN76wO/8ukVIanggn7qTYK8="></script><script defer src=/vendor/flexsearch/flexsearch.bundle.min.5938454b034e37308e8dfa54a4f6e14d1e738f63ed37663cca20076729d62e23.js integrity="sha256-WThFSwNONzCOjfpUpPbhTR5zj2PtN2Y8yiAHZynWLiM=" crossorigin=anonymous></script><script defer src=/zh-cn.search.min.a916de3ee930b2f5a20c815c6ed1231a86d46fce6ac567ce820d2e224b51725a.js integrity="sha256-qRbePukwsvWiDIFcbtEjGobUb85qxWfOgg0uIktRclo="></script></body></html>
