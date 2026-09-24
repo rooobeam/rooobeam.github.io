@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" font-family="Arial" font-size="28" data-pptx-page-role="content">
+  <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="#10243A" stroke-width="2"/></marker></defs>
+  <rect id="background" data-pptx-role="background" width="1280" height="720" fill="#FFFFFF"/>
+  <g id="title" data-pptx-bounds="64 42 1152 104" fill="#10243A">
+    <text x="64" y="63" font-size="16" fill="#5B6B7A">03 / RM TRAINING</text>
+    <text x="64" y="119" font-size="44" font-weight="bold">Train on complete response pairs</text>
+  </g>
+  <g id="shared-training-path" data-pptx-bounds="64 174 1152 206">
+    <rect x="64" y="185" width="301" height="68" fill="#E6F2F3"/>
+    <text x="86" y="229" fill="#087F8C">x₁ = [q, full answer a₁]</text>
+    <rect x="64" y="288" width="301" height="68" fill="#FBEEE4"/>
+    <text x="86" y="332" fill="#C86620">x₂ = [q, full answer a₂]</text>
+    <line x1="379" y1="219" x2="454" y2="246" stroke="#10243A" stroke-width="2" marker-end="url(#arrow)"/>
+    <line x1="379" y1="322" x2="454" y2="295" stroke="#10243A" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="473" y="211" width="248" height="119" fill="#10243A"/>
+    <text x="597" y="259" text-anchor="middle" fill="#FFFFFF" font-weight="bold">Shared RM</text>
+    <text x="597" y="302" text-anchor="middle" fill="#FFFFFF">same θ</text>
+    <line x1="735" y1="246" x2="817" y2="220" stroke="#10243A" stroke-width="2" marker-end="url(#arrow)"/>
+    <line x1="735" y1="294" x2="817" y2="321" stroke="#10243A" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="840" y="229" fill="#087F8C">rθ(x₁)</text>
+    <text x="840" y="332" fill="#C86620">rθ(x₂)</text>
+    <text x="982" y="256" fill="#10243A" font-weight="bold">Compare</text>
+    <text x="982" y="294" fill="#5B6B7A" font-size="22">the score gap</text>
+  </g>
+  <g id="preference-probability" data-pptx-replace-with="formula" data-pptx-x="64" data-pptx-y="390" data-pptx-width="790" data-pptx-height="71" data-pptx-bounds="64 390 790 71">
+    <metadata type="application/json"><![CDATA[{"latex":"p=\\sigma\\left(r_\\theta(x_1)-r_\\theta(x_2)\\right)","display":"block","font_size":30,"color":"#10243A","align":"left"}]]></metadata>
+    <text x="65" y="437" font-size="30" font-family="Cambria Math" fill="#10243A">p = σ(rθ(x₁) − rθ(x₂))</text>
+  </g>
+  <g id="label-meaning" data-pptx-bounds="874 390 342 71" fill="#5B6B7A" font-size="22">
+    <text x="877" y="414">p = probability that a₁ wins<tspan x="877" dy="36">ℓ = 1 if the user prefers a₁</tspan></text>
+  </g>
+  <g id="preference-loss" data-pptx-replace-with="formula" data-pptx-x="64" data-pptx-y="475" data-pptx-width="1152" data-pptx-height="99" data-pptx-bounds="64 475 1152 99">
+    <metadata type="application/json"><![CDATA[{"latex":"\\mathcal L_t(\\theta)=-\\sum_{i=1}^{t}\\left[\\ell_i\\log p_i+(1-\\ell_i)\\log(1-p_i)\\right]+\\lambda\\|\\theta\\|_2^2","display":"block","font_size":30,"color":"#10243A","align":"left"}]]></metadata>
+    <text x="65" y="533" font-size="30" font-family="Cambria Math" fill="#10243A">Lₜ(θ) = −Σᵢ [ℓᵢ log pᵢ + (1 − ℓᵢ) log(1 − pᵢ)] + λ‖θ‖₂²</text>
+  </g>
+  <g id="training-timing" data-pptx-bounds="64 590 1152 60" fill="#10243A">
+    <text x="64" y="627"><tspan font-weight="bold">After feedback:</tspan> train on all observed pairs. LLM and encoder stay frozen.</text>
+  </g>
+  <g id="footer" data-pptx-role="footer" data-pptx-bounds="64 665 1152 33" font-size="16" fill="#5B6B7A">
+    <text x="64" y="685">Source: Eq. (2); Algorithm 1, lines 16–17. θ is fixed while the current pair is generated.</text><text x="1216" y="685" text-anchor="end">03 / 08</text>
+  </g>
+</svg>

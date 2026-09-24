@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" font-family="Arial" font-size="28" data-pptx-page-role="content">
+  <rect id="background" data-pptx-role="background" width="1280" height="720" fill="#FFFFFF"/>
+  <g id="title" data-pptx-bounds="64 42 1152 104" fill="#10243A">
+    <text x="64" y="63" font-size="16" fill="#5B6B7A">05 / ONE DECODING STEP</text>
+    <text x="64" y="119" font-size="44" font-weight="bold">RM reward changes the next token</text>
+  </g>
+  <g id="score-equation" data-pptx-replace-with="formula" data-pptx-x="64" data-pptx-y="166" data-pptx-width="1152" data-pptx-height="70" data-pptx-bounds="64 166 1152 70">
+    <metadata type="application/json"><![CDATA[{"latex":"\\mathbf s=\\boldsymbol\\pi+\\omega\\mathbf r,\\quad \\boldsymbol\\pi,\\mathbf r,\\mathbf s\\in\\mathbb R^C","display":"block","font_size":30,"color":"#10243A","align":"left"}]]></metadata>
+    <text x="65" y="211" font-family="Cambria Math" font-size="30" fill="#10243A">s = π + ωr,      π, r, s ∈ ℝᶜ</text>
+  </g>
+  <g id="example-context" data-pptx-bounds="64 250 1152 45">
+    <text x="64" y="280" fill="#233447">Prefix s: [question; ... Overfitting means]</text>
+    <text x="1216" y="278" text-anchor="end" fill="#5B6B7A" font-size="16">Illustrative values · ω = 1</text>
+  </g>
+  <g id="token-scores" data-pptx-replace-with="table" data-pptx-bounds="64 304 1152 254" data-pptx-fallback-sha256="94397802dbd099a5d2ff8f7ba18d9596fc26645213b1578f333f8b7eeeb85a51">
+    <metadata type="application/json"><![CDATA[{
+      "schema":"ppt-master.semantic-table.v2","name":"token-scores","x":64,"y":304,"width":1152,"height":254,"strict_grid":true,
+      "column_widths":[280,244,206,242,180],"row_heights":[56,66,66,66],
+      "style":{"font_family":"Arial","font_size":28,"header_font_size":22,"header_fill":"#F3F6FA","header_text":"#5B6B7A","body_text":"#233447","band_row":false,"padding":{"left":24,"right":24,"top":10,"bottom":10},"valign":"middle"},
+      "defaults":{"cell":{"borders":{"left":{"style":"none"},"right":{"style":"none"},"top":{"style":"none"},"bottom":{"style":"solid","color":"#CBD4DE","width":1}}}},
+      "columns":[{"text":"Token","bold":true,"align":"l"},{"text":"LLM probability","bold":true,"align":"r"},{"text":"RM reward","bold":true,"align":"r"},{"text":"Combined","bold":true,"align":"r"},{"text":"Pick","bold":true,"align":"ctr"}],
+      "rows":[
+        [{"text":"memorizing","align":"l"},{"text":"0.42","align":"r"},{"text":"0.10","align":"r"},{"text":"0.52","align":"r"},{"text":"—","align":"ctr"}],
+        [{"text":"learning","align":"l"},{"text":"0.35","align":"r"},{"text":"0.02","align":"r"},{"text":"0.37","align":"r"},{"text":"—","align":"ctr"}],
+        [{"text":"fitting","align":"l","fill":"#E6F2F3","color":"#087F8C","bold":true},{"text":"0.18","align":"r","fill":"#E6F2F3","color":"#087F8C","bold":true},{"text":"0.45","align":"r","fill":"#E6F2F3","color":"#087F8C","bold":true},{"text":"0.63","align":"r","fill":"#E6F2F3","color":"#087F8C","bold":true},{"text":"SELECT","align":"ctr","fill":"#E6F2F3","color":"#087F8C","bold":true}]
+      ]}]]></metadata>
+    <rect x="64" y="304" width="1152" height="56" fill="#F3F6FA"/>
+    <rect x="64" y="492" width="1152" height="66" fill="#E6F2F3"/>
+    <g stroke="#CBD4DE" stroke-width="1">
+      <line x1="64" y1="360" x2="1216" y2="360"/><line x1="64" y1="426" x2="1216" y2="426"/><line x1="64" y1="492" x2="1216" y2="492"/><line x1="64" y1="558" x2="1216" y2="558"/>
+    </g>
+    <g font-size="22" font-weight="bold" fill="#5B6B7A">
+      <text x="88" y="341">Token</text><text x="564" y="341" text-anchor="end">LLM probability</text><text x="770" y="341" text-anchor="end">RM reward</text><text x="1012" y="341" text-anchor="end">Combined</text><text x="1126" y="341" text-anchor="middle">Pick</text>
+    </g>
+    <g fill="#233447">
+      <text x="88" y="402">memorizing</text><text x="564" y="402" text-anchor="end">0.42</text><text x="770" y="402" text-anchor="end">0.10</text><text x="1012" y="402" text-anchor="end">0.52</text><text x="1126" y="402" text-anchor="middle">—</text>
+      <text x="88" y="468">learning</text><text x="564" y="468" text-anchor="end">0.35</text><text x="770" y="468" text-anchor="end">0.02</text><text x="1012" y="468" text-anchor="end">0.37</text><text x="1126" y="468" text-anchor="middle">—</text>
+    </g>
+    <g fill="#087F8C" font-weight="bold">
+      <text x="88" y="534">fitting</text><text x="564" y="534" text-anchor="end">0.18</text><text x="770" y="534" text-anchor="end">0.45</text><text x="1012" y="534" text-anchor="end">0.63</text><text x="1126" y="534" text-anchor="middle">SELECT</text>
+    </g>
+  </g>
+  <g id="continuation-rule" data-pptx-bounds="64 584 1152 60" fill="#10243A">
+    <text x="64" y="622">RM input: <tspan font-weight="bold">[s, candidate token]</tspan>. Append the winner and repeat.</text>
+  </g>
+  <g id="footer" data-pptx-role="footer" data-pptx-bounds="64 665 1152 33" font-size="16" fill="#5B6B7A">
+    <text x="64" y="685">Source: Eq. (1); Algorithm 1, lines 7–11. Raw-reward paper rule; all numbers illustrative.</text><text x="1216" y="685" text-anchor="end">06 / 12</text>
+  </g>
+</svg>

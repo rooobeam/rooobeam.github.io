@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" font-family="Arial" font-size="28" data-pptx-page-role="content">
+  <rect id="background" data-pptx-role="background" width="1280" height="720" fill="#FFFFFF"/>
+  <g id="title" data-pptx-bounds="64 42 1152 104" fill="#10243A">
+    <text x="64" y="63" font-size="16" fill="#5B6B7A">08 / LEARNING VS. FINAL INFERENCE</text>
+    <text x="64" y="119" font-size="44" font-weight="bold">Deployment returns one answer</text>
+  </g>
+  <g id="two-phases" data-pptx-bounds="64 180 1152 370">
+    <line x1="640" y1="187" x2="640" y2="534" stroke="#CBD4DE" stroke-width="2"/>
+    <text x="88" y="221" font-size="22" fill="#5B6B7A" font-weight="bold">ONLINE PERSONALIZATION</text>
+    <text x="751" y="221" font-size="22" fill="#087F8C" font-weight="bold">FINAL DEPLOYMENT</text>
+    <text x="85" y="357" font-size="88" fill="#10243A" font-weight="bold">2</text>
+    <text x="749" y="357" font-size="88" fill="#087F8C" font-weight="bold">1</text>
+    <text x="88" y="405" font-size="34" fill="#10243A">answers per query</text>
+    <text x="752" y="405" font-size="34" fill="#10243A">answer per query</text>
+    <text x="88" y="477" fill="#233447">Pairwise feedback<tspan x="88" dy="43">RM keeps learning</tspan></text>
+    <text x="752" y="477" fill="#233447">Exploitation only<tspan x="752" dy="43">Learned RM is frozen</tspan></text>
+  </g>
+  <g id="deployment-takeaway" data-pptx-bounds="64 570 1152 86" fill="#10243A">
+    <text x="64" y="601" font-weight="bold">One RM. Two policies. Two clocks.</text>
+    <text x="64" y="644" font-size="22" fill="#5B6B7A">Evidence: larger Mistral/Qwen gains; near tie with AMULET on Llama.</text>
+  </g>
+  <g id="footer" data-pptx-role="footer" data-pptx-bounds="64 665 1152 33" font-size="16" fill="#5B6B7A">
+    <text x="64" y="685">Source: §3.2; Table 1. Main experiments use simulated preference feedback.</text><text x="1216" y="685" text-anchor="end">08 / 08</text>
+  </g>
+</svg>

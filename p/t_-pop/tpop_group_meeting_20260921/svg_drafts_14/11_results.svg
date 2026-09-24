@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" font-family="Arial" font-size="28" data-pptx-page-role="content">
+  <rect id="background" data-pptx-role="background" width="1280" height="720" fill="#FFFFFF"/>
+  <g id="title" data-pptx-bounds="64 42 1152 104" fill="#10243A">
+    <text x="64" y="63" font-size="16" fill="#5B6B7A">10 / EXPERIMENTAL EVIDENCE</text>
+    <text x="64" y="119" font-size="44" font-weight="bold">Gains depend on the backbone</text>
+  </g>
+  <g id="chart-legend" data-pptx-bounds="64 170 1152 47" font-size="22" fill="#233447">
+    <text x="64" y="201">Mean ArmoRM score · higher is better</text>
+    <rect x="606" y="185" width="20" height="20" fill="#CBD4DE"/><text x="637" y="202">Base</text>
+    <rect x="791" y="185" width="20" height="20" fill="#10243A"/><text x="822" y="202">AMULET</text>
+    <rect x="1040" y="185" width="20" height="20" fill="#087F8C"/><text x="1071" y="202">T-POP</text>
+  </g>
+  <g id="backbone-scores" data-pptx-replace-with="chart" data-pptx-bounds="64 226 1152 369" data-pptx-fallback-sha256="0cec304aba5e275e0881c7a92b4eed257c59cb3211a1840489f1fa5cd27b0bab">
+    <metadata type="application/json"><![CDATA[{
+      "name":"backbone-scores","x":64,"y":226,"width":1152,"height":369,
+      "type":"column","grouping":"clustered","categories":["Mistral-7B","Qwen2-7B","Llama-3.1-8B"],
+      "series":[{"name":"Base","values":[0.355,0.3575,0.345]},{"name":"AMULET","values":[0.415,0.410,0.5325]},{"name":"T-POP","values":[0.4975,0.525,0.535]}],
+      "plot_area":{"x":128,"y":246,"width":1056,"height":280},
+      "show_legend":false,
+      "axes":{"category":{"position":"bottom","font_family":"Arial","font_size":22,"color":"#233447","major_gridlines":false,"tick_marks":"none"},"value":{"position":"left","minimum":0,"maximum":0.6,"major_unit":0.2,"number_format":"0.0","font_family":"Arial","font_size":22,"color":"#5B6B7A","major_gridlines":true,"tick_marks":"none"}},
+      "data_labels":{"show_value":true,"position":"outside_end","number_format":"General","font_family":"Arial","font_size":22,"color":"#233447"},
+      "style":{"colors":["#CBD4DE","#10243A","#087F8C"],"font_family":"Arial","axis_font_size":22,"text_color":"#233447","axis_color":"#CBD4DE","grid_color":"#E3E9EF","chart_area_fill":"none","plot_area_fill":"none"}
+    }]]></metadata>
+    <g id="backbone-scores-chartArea">
+      <g stroke="#E3E9EF" stroke-width="1">
+        <line id="score-grid-high" x1="128" y1="246" x2="1184" y2="246"/>
+        <line id="score-grid-mid" x1="128" y1="339.333" x2="1184" y2="339.333"/>
+        <line id="score-grid-low" x1="128" y1="432.667" x2="1184" y2="432.667"/>
+      </g>
+      <line id="score-axis-x" x1="128" y1="526" x2="1184" y2="526" stroke="#CBD4DE" stroke-width="1"/>
+      <line id="score-axis-y" x1="128" y1="246" x2="128" y2="526" stroke="#CBD4DE" stroke-width="1"/>
+      <g font-size="22" fill="#5B6B7A" text-anchor="end">
+        <text x="111" y="254">0.6</text><text x="111" y="347.333">0.4</text><text x="111" y="440.667">0.2</text><text x="111" y="534">0.0</text>
+      </g>
+      <!-- chart-plot-area: object=backbone-scores | 128,246,1184,526 -->
+      <g fill="#CBD4DE">
+        <rect x="192" y="360.333" width="64" height="165.667"/>
+        <rect x="544" y="359.167" width="64" height="166.833"/>
+        <rect x="896" y="365" width="64" height="161"/>
+      </g>
+      <g fill="#10243A">
+        <rect x="272" y="332.333" width="64" height="193.667"/>
+        <rect x="624" y="334.667" width="64" height="191.333"/>
+        <rect x="976" y="277.5" width="64" height="248.5"/>
+      </g>
+      <g fill="#087F8C">
+        <rect x="352" y="293.833" width="64" height="232.167"/>
+        <rect x="704" y="281" width="64" height="245"/>
+        <rect x="1056" y="276.333" width="64" height="249.667"/>
+      </g>
+      <g font-size="22" fill="#233447" text-anchor="middle">
+        <text x="224" y="349.333">0.355</text><text x="304" y="321.333">0.415</text><text x="384" y="282.833">0.4975</text>
+        <text x="576" y="348.167">0.3575</text><text x="656" y="323.667">0.41</text><text x="736" y="270">0.525</text>
+        <text x="928" y="354">0.345</text><text x="1008" y="266.5">0.5325</text><text x="1088" y="265.333">0.535</text>
+        <text x="304" y="568">Mistral-7B</text><text x="656" y="568">Qwen2-7B</text><text x="1008" y="568">Llama-3.1-8B</text>
+      </g>
+    </g>
+  </g>
+  <g id="result-reading" data-pptx-bounds="64 607 1152 44" fill="#10243A">
+    <text x="64" y="638">vs. AMULET: <tspan font-weight="bold">+19.9%</tspan> on Mistral · <tspan font-weight="bold">+28.0%</tspan> on Qwen · near tie on Llama</text>
+  </g>
+  <g id="footer" data-pptx-role="footer" data-pptx-bounds="64 665 1152 33" font-size="16" fill="#5B6B7A">
+    <text x="64" y="685">Source: Table 1. Exact means calculated from the four published attribute averages.</text><text x="1216" y="685" text-anchor="end">11 / 12</text>
+  </g>
+</svg>

@@ -1,0 +1,456 @@
+{
+  "schema": "ppt-master.svg-quality-report.v1",
+  "stage": "early",
+  "target": "D:\\办公程序\\github_blog\\hugo_extended_withdeploy_0.141.0_windows-amd64\\rublog\\content\\post\\T-POP\\tpop_group_meeting_20260921",
+  "source_fingerprint": {
+    "algorithm": "sha256",
+    "digest": "84490807b4644d4924d791761ce5af05e63394d5f6104c71e534341e26ceb0cb",
+    "file_count": 5,
+    "files": [
+      {
+        "file": "01_tpop.svg",
+        "sha256": "a7b39381ea8080ed933c00ef6c53d7382d43805f839814258a147e464f0d26e1"
+      },
+      {
+        "file": "02_interaction.svg",
+        "sha256": "b9110179cd88fb014bb8194f3f94e3e018da79910fd6076cb709469cf1dd3b56"
+      },
+      {
+        "file": "03_preference_data.svg",
+        "sha256": "27d942bb6537bad8abf59820420c2971cb863bab6d33d25767a557850274ea8c"
+      },
+      {
+        "file": "04_reward_model.svg",
+        "sha256": "47961d54fd31a94305d963b8901421843e7ac2b1cfee1696bfa2a059124445c7"
+      },
+      {
+        "file": "05_rm_training.svg",
+        "sha256": "660b72f71b3e8cd6c67cc437134a1cf48c48ec90e4d82175b913a192185d09d5"
+      }
+    ]
+  },
+  "summary": {
+    "total": 5,
+    "passed": 5,
+    "warnings": 0,
+    "errors": 0
+  },
+  "issue_types": {},
+  "categories": {
+    "blocking": {
+      "count": 0,
+      "issues": []
+    },
+    "introduced": {
+      "count": 0,
+      "issues": []
+    },
+    "inherited": {
+      "count": 0,
+      "issues": []
+    },
+    "source-import": {
+      "count": 0,
+      "summary": {
+        "warning_count": 0,
+        "by_code": {}
+      }
+    }
+  },
+  "drift": {
+    "colors": {
+      "#E6F2F3": [
+        "01_tpop.svg",
+        "02_interaction.svg",
+        "03_preference_data.svg",
+        "05_rm_training.svg"
+      ],
+      "#FBEEE4": [
+        "01_tpop.svg",
+        "02_interaction.svg",
+        "03_preference_data.svg",
+        "05_rm_training.svg"
+      ]
+    },
+    "fonts": {},
+    "sizes": {}
+  },
+  "carrier_receipt": {
+    "scope": "informational-not-a-quota",
+    "pages": 5,
+    "totals": {
+      "text_elements": 78,
+      "image_placements": 0,
+      "icons": 0,
+      "svg_geometry_elements": 43,
+      "preset_shapes": 1,
+      "page_frame_elements": 5,
+      "marker_uses": 18,
+      "inline_emphasis_runs": 4,
+      "gradient_uses": 0,
+      "filter_uses": 0,
+      "text_effects": 0
+    },
+    "pages_with": {
+      "images": 0,
+      "icons": 0,
+      "presets": 1,
+      "charts": 0,
+      "tables": 0,
+      "formulas": 3,
+      "inline_emphasis_runs": 3,
+      "gradient_uses": 0,
+      "filter_uses": 0,
+      "text_effects": 0
+    },
+    "relationship_pages": 0,
+    "geometry_elements": {
+      "circle": 0,
+      "ellipse": 0,
+      "line": 20,
+      "path": 0,
+      "polygon": 0,
+      "polyline": 0,
+      "rect": 23
+    },
+    "preset_names": {
+      "bracketPair": 1
+    },
+    "native_objects": {
+      "chart": 0,
+      "formula_block": 5,
+      "formula_inline": 0,
+      "other": 0,
+      "table": 0
+    },
+    "image_page_max_frame_share_range": []
+  },
+  "project_issues": {
+    "template": [],
+    "animation": [],
+    "illustration": [],
+    "communication_trace": [],
+    "pptx_structure": []
+  },
+  "files": [
+    {
+      "file": "01_tpop.svg",
+      "path": "D:\\办公程序\\github_blog\\hugo_extended_withdeploy_0.141.0_windows-amd64\\rublog\\content\\post\\T-POP\\tpop_group_meeting_20260921\\svg_output\\01_tpop.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "carrier_receipt": {
+          "text_elements": 13,
+          "images": {
+            "placements": 0,
+            "files": [],
+            "max_frame_share": 0.0
+          },
+          "icons": 0,
+          "effects": {
+            "inline_emphasis_runs": 0,
+            "gradient_uses": 0,
+            "filter_uses": 0,
+            "text_effects": 0
+          },
+          "geometry": {
+            "svg_elements": {
+              "rect": 5,
+              "circle": 0,
+              "ellipse": 0,
+              "line": 4,
+              "polyline": 0,
+              "polygon": 0,
+              "path": 0
+            },
+            "preset_shapes": 0,
+            "preset_names": {},
+            "page_frame_elements": 1,
+            "marker_uses": {
+              "start": 0,
+              "mid": 0,
+              "end": 4
+            }
+          },
+          "native_objects": {
+            "chart": 0,
+            "table": 0,
+            "formula_block": 0,
+            "formula_inline": 0,
+            "other": 0
+          }
+        },
+        "fonts": [
+          "Arial"
+        ],
+        "text_elements": 13,
+        "tspan_elements": 2,
+        "contextual_values": {
+          "colors": [
+            "#E6F2F3",
+            "#FBEEE4"
+          ]
+        }
+      },
+      "passed": true,
+      "source_sha256": "a7b39381ea8080ed933c00ef6c53d7382d43805f839814258a147e464f0d26e1"
+    },
+    {
+      "file": "02_interaction.svg",
+      "path": "D:\\办公程序\\github_blog\\hugo_extended_withdeploy_0.141.0_windows-amd64\\rublog\\content\\post\\T-POP\\tpop_group_meeting_20260921\\svg_output\\02_interaction.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "carrier_receipt": {
+          "text_elements": 19,
+          "images": {
+            "placements": 0,
+            "files": [],
+            "max_frame_share": 0.0
+          },
+          "icons": 0,
+          "effects": {
+            "inline_emphasis_runs": 2,
+            "gradient_uses": 0,
+            "filter_uses": 0,
+            "text_effects": 0
+          },
+          "geometry": {
+            "svg_elements": {
+              "rect": 7,
+              "circle": 0,
+              "ellipse": 0,
+              "line": 9,
+              "polyline": 0,
+              "polygon": 0,
+              "path": 0
+            },
+            "preset_shapes": 0,
+            "preset_names": {},
+            "page_frame_elements": 1,
+            "marker_uses": {
+              "start": 0,
+              "mid": 0,
+              "end": 7
+            }
+          },
+          "native_objects": {
+            "chart": 0,
+            "table": 0,
+            "formula_block": 0,
+            "formula_inline": 0,
+            "other": 0
+          }
+        },
+        "fonts": [
+          "Arial"
+        ],
+        "text_elements": 19,
+        "tspan_elements": 2,
+        "contextual_values": {
+          "colors": [
+            "#E6F2F3",
+            "#FBEEE4"
+          ]
+        }
+      },
+      "passed": true,
+      "source_sha256": "b9110179cd88fb014bb8194f3f94e3e018da79910fd6076cb709469cf1dd3b56"
+    },
+    {
+      "file": "03_preference_data.svg",
+      "path": "D:\\办公程序\\github_blog\\hugo_extended_withdeploy_0.141.0_windows-amd64\\rublog\\content\\post\\T-POP\\tpop_group_meeting_20260921\\svg_output\\03_preference_data.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "carrier_receipt": {
+          "text_elements": 13,
+          "images": {
+            "placements": 0,
+            "files": [],
+            "max_frame_share": 0.0
+          },
+          "icons": 0,
+          "effects": {
+            "inline_emphasis_runs": 1,
+            "gradient_uses": 0,
+            "filter_uses": 0,
+            "text_effects": 0
+          },
+          "geometry": {
+            "svg_elements": {
+              "rect": 3,
+              "circle": 0,
+              "ellipse": 0,
+              "line": 0,
+              "polyline": 0,
+              "polygon": 0,
+              "path": 0
+            },
+            "preset_shapes": 0,
+            "preset_names": {},
+            "page_frame_elements": 1,
+            "marker_uses": {
+              "start": 0,
+              "mid": 0,
+              "end": 0
+            }
+          },
+          "native_objects": {
+            "chart": 0,
+            "table": 0,
+            "formula_block": 1,
+            "formula_inline": 0,
+            "other": 0
+          }
+        },
+        "fonts": [
+          "Arial",
+          "Cambria Math"
+        ],
+        "text_elements": 13,
+        "tspan_elements": 4,
+        "contextual_values": {
+          "colors": [
+            "#E6F2F3",
+            "#FBEEE4"
+          ]
+        }
+      },
+      "passed": true,
+      "source_sha256": "27d942bb6537bad8abf59820420c2971cb863bab6d33d25767a557850274ea8c"
+    },
+    {
+      "file": "04_reward_model.svg",
+      "path": "D:\\办公程序\\github_blog\\hugo_extended_withdeploy_0.141.0_windows-amd64\\rublog\\content\\post\\T-POP\\tpop_group_meeting_20260921\\svg_output\\04_reward_model.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "carrier_receipt": {
+          "text_elements": 17,
+          "images": {
+            "placements": 0,
+            "files": [],
+            "max_frame_share": 0.0
+          },
+          "icons": 0,
+          "effects": {
+            "inline_emphasis_runs": 0,
+            "gradient_uses": 0,
+            "filter_uses": 0,
+            "text_effects": 0
+          },
+          "geometry": {
+            "svg_elements": {
+              "rect": 4,
+              "circle": 0,
+              "ellipse": 0,
+              "line": 3,
+              "polyline": 0,
+              "polygon": 0,
+              "path": 0
+            },
+            "preset_shapes": 1,
+            "preset_names": {
+              "bracketPair": 1
+            },
+            "page_frame_elements": 1,
+            "marker_uses": {
+              "start": 0,
+              "mid": 0,
+              "end": 3
+            }
+          },
+          "native_objects": {
+            "chart": 0,
+            "table": 0,
+            "formula_block": 2,
+            "formula_inline": 0,
+            "other": 0
+          }
+        },
+        "fonts": [
+          "Arial",
+          "Cambria Math"
+        ],
+        "text_elements": 17,
+        "tspan_elements": 0
+      },
+      "passed": true,
+      "source_sha256": "47961d54fd31a94305d963b8901421843e7ac2b1cfee1696bfa2a059124445c7"
+    },
+    {
+      "file": "05_rm_training.svg",
+      "path": "D:\\办公程序\\github_blog\\hugo_extended_withdeploy_0.141.0_windows-amd64\\rublog\\content\\post\\T-POP\\tpop_group_meeting_20260921\\svg_output\\05_rm_training.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "carrier_receipt": {
+          "text_elements": 16,
+          "images": {
+            "placements": 0,
+            "files": [],
+            "max_frame_share": 0.0
+          },
+          "icons": 0,
+          "effects": {
+            "inline_emphasis_runs": 1,
+            "gradient_uses": 0,
+            "filter_uses": 0,
+            "text_effects": 0
+          },
+          "geometry": {
+            "svg_elements": {
+              "rect": 4,
+              "circle": 0,
+              "ellipse": 0,
+              "line": 4,
+              "polyline": 0,
+              "polygon": 0,
+              "path": 0
+            },
+            "preset_shapes": 0,
+            "preset_names": {},
+            "page_frame_elements": 1,
+            "marker_uses": {
+              "start": 0,
+              "mid": 0,
+              "end": 4
+            }
+          },
+          "native_objects": {
+            "chart": 0,
+            "table": 0,
+            "formula_block": 2,
+            "formula_inline": 0,
+            "other": 0
+          }
+        },
+        "fonts": [
+          "Arial",
+          "Cambria Math"
+        ],
+        "text_elements": 16,
+        "tspan_elements": 1,
+        "contextual_values": {
+          "colors": [
+            "#E6F2F3",
+            "#FBEEE4"
+          ]
+        }
+      },
+      "passed": true,
+      "source_sha256": "660b72f71b3e8cd6c67cc437134a1cf48c48ec90e4d82175b913a192185d09d5"
+    }
+  ]
+}

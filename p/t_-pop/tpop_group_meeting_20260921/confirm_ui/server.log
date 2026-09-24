@@ -1,0 +1,28 @@
+[18:22:29] [INFO] confirm_ui: running at http://127.0.0.1:5050
+[18:22:29] [INFO] confirm_ui: project: D:\办公程序\github_blog\hugo_extended_withdeploy_0.141.0_windows-amd64\rublog\content\post\T-POP\tpop_group_meeting_20260921
+[18:22:29] [INFO] confirm_ui: idle timeout: 900s (0 = disabled)
+ * Serving Flask app 'server'
+ * Debug mode: off
+[18:22:29] [INFO] confirm_ui: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5050
+[18:22:29] [INFO] confirm_ui: [33mPress CTRL+C to quit[0m
+[18:22:30] [INFO] confirm_ui: 127.0.0.1 - - [21/Sep/2026 18:22:30] "GET /api/health HTTP/1.1" 200 -
+[18:22:31] [INFO] confirm_ui: 127.0.0.1 - - [21/Sep/2026 18:22:31] "GET / HTTP/1.1" 200 -
+[18:22:31] [INFO] confirm_ui: 127.0.0.1 - - [21/Sep/2026 18:22:31] "GET /static/style.css HTTP/1.1" 200 -
+[18:22:31] [INFO] confirm_ui: 127.0.0.1 - - [21/Sep/2026 18:22:31] "GET /static/app.js HTTP/1.1" 200 -
+[18:22:32] [INFO] confirm_ui: 127.0.0.1 - - [21/Sep/2026 18:22:32] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+[18:22:32] [INFO] confirm_ui: 127.0.0.1 - - [21/Sep/2026 18:22:32] "GET /api/session HTTP/1.1" 200 -
+[18:22:32] [INFO] confirm_ui: 127.0.0.1 - - [21/Sep/2026 18:22:32] "GET /api/catalogs HTTP/1.1" 200 -
+[18:22:32] [INFO] confirm_ui: 127.0.0.1 - - [21/Sep/2026 18:22:32] "GET /api/ai-image-comparison HTTP/1.1" 200 -
+[18:22:32] [INFO] confirm_ui: 127.0.0.1 - - [21/Sep/2026 18:22:32] "GET /api/icon-previews HTTP/1.1" 200 -
+[18:22:32] [INFO] confirm_ui: 127.0.0.1 - - [21/Sep/2026 18:22:32] "GET /api/recommendations HTTP/1.1" 200 -
+[18:23:09] [INFO] confirm_ui: 127.0.0.1 - - [21/Sep/2026 18:23:09] "[36mGET / HTTP/1.1[0m" 304 -
+[18:23:09] [INFO] confirm_ui: 127.0.0.1 - - [21/Sep/2026 18:23:09] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+[18:23:09] [INFO] confirm_ui: 127.0.0.1 - - [21/Sep/2026 18:23:09] "[36mGET /static/app.js HTTP/1.1[0m" 304 -
+[18:23:10] [INFO] confirm_ui: 127.0.0.1 - - [21/Sep/2026 18:23:10] "GET /api/session HTTP/1.1" 200 -
+[18:23:10] [INFO] confirm_ui: 127.0.0.1 - - [21/Sep/2026 18:23:10] "GET /api/catalogs HTTP/1.1" 200 -
+[18:23:10] [INFO] confirm_ui: 127.0.0.1 - - [21/Sep/2026 18:23:10] "GET /api/ai-image-comparison HTTP/1.1" 200 -
+[18:23:10] [INFO] confirm_ui: 127.0.0.1 - - [21/Sep/2026 18:23:10] "GET /api/icon-previews HTTP/1.1" 200 -
+[18:23:10] [INFO] confirm_ui: 127.0.0.1 - - [21/Sep/2026 18:23:10] "GET /api/recommendations HTTP/1.1" 200 -
+[18:24:33] [INFO] confirm_ui: 127.0.0.1 - - [21/Sep/2026 18:24:33] "POST /api/shutdown HTTP/1.1" 200 -
+[18:24:33] [INFO] confirm_ui: shutting down (step4-cleanup)

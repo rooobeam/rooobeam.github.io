@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" font-family="Arial" font-size="28" data-pptx-page-role="cover">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="#10243A" stroke-width="2"/></marker>
+  </defs>
+  <rect id="background" data-pptx-role="background" width="1280" height="720" fill="#FFFFFF"/>
+  <g id="paper-title" data-pptx-bounds="64 54 710 315" fill="#10243A">
+    <text x="64" y="81" font-size="16" fill="#5B6B7A">ICML 2026 · PAPER READING</text>
+    <text x="64" y="219" font-size="88" font-weight="bold">T-POP</text>
+    <text x="66" y="291" font-size="34">Test-Time Personalization<tspan x="66" dy="44">with Online Preference Feedback</tspan></text>
+  </g>
+  <g id="core-hook" data-pptx-bounds="64 411 695 142" font-size="32" fill="#10243A">
+    <text x="66" y="454">Learn user preferences.<tspan x="66" dy="46" font-weight="bold">Keep the LLM frozen.</tspan></text>
+  </g>
+  <g id="mechanism-preview" data-pptx-bounds="794 154 422 431">
+    <rect x="912" y="188" width="260" height="94" fill="#10243A"/>
+    <text x="1042" y="230" text-anchor="middle" fill="#FFFFFF" font-weight="bold">Frozen LLM</text>
+    <text x="1042" y="260" text-anchor="middle" fill="#FFFFFF" font-size="22">generate</text>
+    <line x1="989" y1="294" x2="907" y2="355" stroke="#10243A" stroke-width="2" marker-end="url(#arrow)"/>
+    <line x1="1085" y1="294" x2="1124" y2="355" stroke="#10243A" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="806" y="369" width="188" height="68" fill="#E6F2F3"/>
+    <rect x="1026" y="369" width="188" height="68" fill="#FBEEE4"/>
+    <text x="900" y="412" text-anchor="middle" fill="#087F8C" font-weight="bold">Exploit</text>
+    <text x="1120" y="412" text-anchor="middle" fill="#C86620" font-weight="bold">Explore</text>
+    <line x1="908" y1="451" x2="996" y2="504" stroke="#10243A" stroke-width="2" marker-end="url(#arrow)"/>
+    <line x1="1113" y1="451" x2="1044" y2="504" stroke="#10243A" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="1008" y="476" text-anchor="middle" fill="#5B6B7A" font-size="16">preference feedback</text>
+    <rect x="882" y="514" width="302" height="62" fill="#F3F6FA"/>
+    <text x="1033" y="555" text-anchor="middle" fill="#10243A" font-weight="bold">One personal RM</text>
+  </g>
+  <g id="reading-focus" data-pptx-bounds="64 589 1124 48" fill="#5B6B7A" font-size="22">
+    <text x="66" y="618">Reward model · Two-arm decoding · Online feedback</text>
+  </g>
+  <g id="footer" data-pptx-role="footer" data-pptx-bounds="64 665 1152 33" font-size="16" fill="#5B6B7A">
+    <text x="64" y="685">Qu et al. · arXiv:2509.24696v2 · 30 May 2026</text>
+    <text x="1216" y="685" text-anchor="end">01 / 12</text>
+  </g>
+</svg>

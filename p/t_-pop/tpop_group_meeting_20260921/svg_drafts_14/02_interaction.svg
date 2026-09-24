@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" font-family="Arial" font-size="28" data-pptx-page-role="content">
+  <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="#10243A" stroke-width="2"/></marker></defs>
+  <rect id="background" data-pptx-role="background" width="1280" height="720" fill="#FFFFFF"/>
+  <g id="title" data-pptx-bounds="64 42 1152 104" fill="#10243A">
+    <text x="64" y="63" font-size="16" fill="#5B6B7A">01 / THE ONLINE LOOP</text>
+    <text x="64" y="119" font-size="44" font-weight="bold">One interaction, one shared RM</text>
+  </g>
+  <g id="interaction-loop" data-pptx-bounds="64 168 1152 397">
+    <rect x="64" y="270" width="174" height="108" fill="#F3F6FA"/>
+    <text x="151" y="315" text-anchor="middle" fill="#10243A" font-weight="bold">Query q</text>
+    <text x="151" y="350" text-anchor="middle" fill="#5B6B7A" font-size="22">round t</text>
+    <line x1="252" y1="320" x2="310" y2="246" stroke="#10243A" stroke-width="2" marker-end="url(#arrow)"/>
+    <line x1="252" y1="328" x2="310" y2="399" stroke="#10243A" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="327" y="190" width="302" height="113" fill="#E6F2F3"/>
+    <text x="351" y="233" fill="#087F8C" font-weight="bold">Exploitation</text>
+    <text x="351" y="273" fill="#233447">Answer a₁</text>
+    <rect x="327" y="344" width="302" height="113" fill="#FBEEE4"/>
+    <text x="351" y="387" fill="#C86620" font-weight="bold">Exploration</text>
+    <text x="351" y="427" fill="#233447">Answer a₂</text>
+    <line x1="642" y1="246" x2="711" y2="306" stroke="#10243A" stroke-width="2" marker-end="url(#arrow)"/>
+    <line x1="642" y1="400" x2="711" y2="340" stroke="#10243A" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="727" y="270" width="184" height="108" fill="#10243A"/>
+    <text x="819" y="315" text-anchor="middle" fill="#FFFFFF" font-weight="bold">User</text>
+    <text x="819" y="350" text-anchor="middle" fill="#FFFFFF" font-size="22">chooses one</text>
+    <line x1="923" y1="324" x2="967" y2="324" stroke="#10243A" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="981" y="270" width="235" height="108" fill="#F3F6FA"/>
+    <text x="1098" y="315" text-anchor="middle" fill="#10243A" font-weight="bold">History Dₜ</text>
+    <text x="1098" y="350" text-anchor="middle" fill="#5B6B7A" font-size="22">(q, a₁, a₂, ℓ)</text>
+    <line x1="1098" y1="391" x2="1098" y2="485" stroke="#10243A" stroke-width="2"/>
+    <line x1="1098" y1="485" x2="812" y2="485" stroke="#10243A" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="575" y="469" width="223" height="72" fill="#10243A"/>
+    <text x="687" y="514" text-anchor="middle" fill="#FFFFFF">Update RM</text>
+    <line x1="562" y1="505" x2="151" y2="505" stroke="#10243A" stroke-width="2"/>
+    <line x1="151" y1="505" x2="151" y2="393" stroke="#10243A" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="319" y="540" fill="#5B6B7A" font-size="22">next interaction</text>
+    <text x="685" y="206" fill="#5B6B7A" font-size="22">Both arms share</text>
+    <text x="685" y="238" fill="#10243A" font-size="22" font-weight="bold">the frozen LLM + current RM</text>
+  </g>
+  <g id="takeaway" data-pptx-bounds="64 581 1152 62" fill="#10243A" font-size="32">
+    <text x="64" y="622">Two <tspan font-weight="bold">policies</tspan> generate the pair. One <tspan font-weight="bold">RM</tspan> learns from it.</text>
+  </g>
+  <g id="footer" data-pptx-role="footer" data-pptx-bounds="64 665 1152 33" font-size="16" fill="#5B6B7A">
+    <text x="64" y="685">Source: Fig. 1; Algorithm 1, lines 16–18; §3.2</text><text x="1216" y="685" text-anchor="end">02 / 12</text>
+  </g>
+</svg>

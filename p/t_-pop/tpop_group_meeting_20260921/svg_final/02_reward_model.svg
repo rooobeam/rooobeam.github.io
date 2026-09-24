@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" font-family="Arial" font-size="28" data-pptx-page-role="content">
+  <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="#10243A" stroke-width="2"/></marker></defs>
+  <rect id="background" data-pptx-role="background" width="1280" height="720" fill="#FFFFFF"/>
+  <g id="title" data-pptx-bounds="64 42 1152 104" fill="#10243A">
+    <text x="64" y="63" font-size="16" fill="#5B6B7A">02 / RM ARCHITECTURE</text>
+    <text x="64" y="119" font-size="44" font-weight="bold">Text → vector → personal reward</text>
+  </g>
+  <g id="reward-pipeline" data-pptx-bounds="64 170 1152 317">
+    <text x="64" y="314" fill="#233447" font-weight="bold">B texts</text>
+    <line x1="171" y1="304" x2="218" y2="304" stroke="#10243A" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="232" y="249" width="302" height="122" fill="#F3F6FA"/>
+    <text x="383" y="296" text-anchor="middle" fill="#10243A" font-weight="bold">Frozen encoder</text>
+    <text x="383" y="339" text-anchor="middle" fill="#5B6B7A" font-size="22">Qwen3-Embedding-0.6B</text>
+    <line x1="548" y1="304" x2="650" y2="304" stroke="#10243A" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="585" y="405" text-anchor="middle" fill="#10243A" font-size="22">E: (B, 1024)</text>
+    <text x="232" y="442" fill="#5B6B7A" font-size="22">Mean pooling in official code</text>
+    <g id="trainable-head-scope" data-pptx-authoring="preset" data-pptx-object="shape" data-pptx-prst="bracketPair" data-pptx-frame="670 195 542 274" fill="none" stroke="#10243A" stroke-width="2">
+      <path d="M 670 240.67 A 45.67 45.67 0 0 1 715.67 195 L 1166.33 195 A 45.67 45.67 0 0 1 1212 240.67 L 1212 423.33 A 45.67 45.67 0 0 1 1166.33 469 L 715.67 469 A 45.67 45.67 0 0 1 670 423.33 Z" stroke="none"/>
+      <path d="M 715.67 469 A 45.67 45.67 0 0 1 670 423.33 L 670 240.67 A 45.67 45.67 0 0 1 715.67 195 M 1166.33 195 A 45.67 45.67 0 0 1 1212 240.67 L 1212 423.33 A 45.67 45.67 0 0 1 1166.33 469"/>
+    </g>
+    <text x="706" y="235" font-size="22" font-weight="bold" fill="#10243A">TRAINABLE MLP</text>
+    <rect x="705" y="271" width="244" height="124" fill="#E9EEF4"/>
+    <text x="827" y="315" text-anchor="middle" font-weight="bold" fill="#10243A">Linear + ReLU</text>
+    <text x="827" y="360" text-anchor="middle" font-size="22" fill="#5B6B7A">H: (B, 1024)</text>
+    <line x1="963" y1="334" x2="994" y2="334" stroke="#10243A" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="1010" y="271" width="164" height="124" fill="#10243A"/>
+    <text x="1092" y="315" text-anchor="middle" font-weight="bold" fill="#FFFFFF">Linear</text>
+    <text x="1092" y="360" text-anchor="middle" font-size="22" fill="#FFFFFF">r: (B, 1)</text>
+    <text x="706" y="440" font-size="22" fill="#5B6B7A">One scalar reward per text</text>
+  </g>
+  <g id="mlp-equation" data-pptx-replace-with="formula" data-pptx-x="64" data-pptx-y="502" data-pptx-width="1152" data-pptx-height="62" data-pptx-bounds="64 502 1152 62">
+    <metadata type="application/json"><![CDATA[{"latex":"H=\\operatorname{ReLU}(EW_1+b_1),\\quad \\mathbf r=HW_2+b_2","display":"block","font_size":30,"color":"#10243A","align":"left"}]]></metadata>
+    <text x="65" y="547" font-size="30" font-family="Cambria Math" fill="#10243A">H = ReLU(EW₁ + b₁),      r = HW₂ + b₂</text>
+  </g>
+  <g id="weight-shapes" data-pptx-replace-with="formula" data-pptx-x="64" data-pptx-y="575" data-pptx-width="1152" data-pptx-height="67" data-pptx-bounds="64 575 1152 67">
+    <metadata type="application/json"><![CDATA[{"latex":"W_1\\in\\mathbb R^{1024\\times1024},\\quad W_2\\in\\mathbb R^{1024\\times1}","display":"block","font_size":30,"color":"#5B6B7A","align":"left"}]]></metadata>
+    <text x="65" y="619" font-size="30" font-family="Cambria Math" fill="#5B6B7A">W₁ ∈ ℝ¹⁰²⁴×¹⁰²⁴,      W₂ ∈ ℝ¹⁰²⁴×¹</text>
+  </g>
+  <g id="footer" data-pptx-role="footer" data-pptx-bounds="64 665 1152 33" font-size="16" fill="#5B6B7A">
+    <text x="64" y="685">Source: Appendix B; official model.py; Qwen3-Embedding-0.6B configuration.</text><text x="1216" y="685" text-anchor="end">02 / 08</text>
+  </g>
+</svg>

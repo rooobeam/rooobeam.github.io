@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" font-family="Arial" font-size="28" data-pptx-page-role="content">
+  <rect id="background" data-pptx-role="background" width="1280" height="720" fill="#FFFFFF"/>
+  <g id="title" data-pptx-bounds="64 42 1152 104" fill="#10243A">
+    <text x="64" y="63" font-size="16" fill="#5B6B7A">02 / DATA CONSTRUCTION</text>
+    <text x="64" y="119" font-size="44" font-weight="bold">Preference data are generated online</text>
+  </g>
+  <g id="question" data-pptx-bounds="64 177 1152 62">
+    <text x="64" y="215" font-size="32" font-weight="bold" fill="#10243A">What is overfitting?</text>
+    <text x="1216" y="213" text-anchor="end" font-size="16" fill="#5B6B7A">Illustrative preference interaction</text>
+  </g>
+  <g id="answer-one" data-pptx-bounds="64 252 546 184">
+    <rect x="64" y="252" width="546" height="184" fill="#E6F2F3"/>
+    <text x="88" y="288" font-size="22" font-weight="bold" fill="#087F8C">a₁ · EXPLOITATION</text>
+    <text x="88" y="337" fill="#233447">Fitting the training data too<tspan x="88" dy="38">closely to generalize.</tspan></text>
+  </g>
+  <g id="answer-two" data-pptx-bounds="650 252 566 184">
+    <rect x="650" y="252" width="566" height="184" fill="#FBEEE4"/>
+    <text x="674" y="288" font-size="22" font-weight="bold" fill="#C86620">a₂ · EXPLORATION</text>
+    <text x="674" y="337" fill="#233447">Imagine memorizing every practice<tspan x="674" dy="38">question instead of learning</tspan><tspan x="674" dy="38">the rule ...</tspan></text>
+  </g>
+  <g id="choice" data-pptx-bounds="64 451 1152 57" fill="#10243A">
+    <text x="64" y="489">A user who prefers concise answers chooses <tspan font-weight="bold" fill="#087F8C">a₁</tspan>.</text>
+  </g>
+  <g id="training-tuple" data-pptx-replace-with="formula" data-pptx-x="64" data-pptx-y="516" data-pptx-width="1152" data-pptx-height="66" data-pptx-bounds="64 516 1152 66">
+    <metadata type="application/json"><![CDATA[{"latex":"x_1=[q,a_1],\\quad x_2=[q,a_2],\\quad \\ell=\\mathbb{1}[a_1\\succ a_2]=1","display":"block","font_size":30,"color":"#10243A","align":"left"}]]></metadata>
+    <text x="65" y="558" font-family="Cambria Math" font-size="30" fill="#10243A">x₁ = [q, a₁]      x₂ = [q, a₂]      ℓ = 1[a₁ ≻ a₂] = 1</text>
+  </g>
+  <g id="protocol" data-pptx-bounds="64 599 1152 45" font-size="22" fill="#5B6B7A">
+    <text x="64" y="628">Questions only · Complete-response labels · GPT-4o user simulation in experiments</text>
+  </g>
+  <g id="footer" data-pptx-role="footer" data-pptx-bounds="64 665 1152 33" font-size="16" fill="#5B6B7A">
+    <text x="64" y="685">Source: §3.2; §4.1; Appendix B. Example answers and choice are illustrative.</text><text x="1216" y="685" text-anchor="end">03 / 12</text>
+  </g>
+</svg>

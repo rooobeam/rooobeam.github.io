@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" font-family="Arial" font-size="28" data-pptx-page-role="content">
+  <rect id="background" data-pptx-role="background" width="1280" height="720" fill="#FFFFFF"/>
+  <g id="title" data-pptx-bounds="64 42 1152 104" fill="#10243A">
+    <text x="64" y="63" font-size="16" fill="#5B6B7A">07 / EXPLORATION BONUS</text>
+    <text x="64" y="119" font-size="44" font-weight="bold">Explore uncertain preference differences</text>
+  </g>
+  <g id="reference-gradient" data-pptx-bounds="64 170 546 151">
+    <rect x="64" y="170" width="546" height="151" fill="#E6F2F3"/>
+    <text x="88" y="208" font-size="22" fill="#087F8C" font-weight="bold">EXPLOITATION WINNER (FIXED)</text>
+    <g id="g-one" data-pptx-replace-with="formula" data-pptx-x="88" data-pptx-y="227" data-pptx-width="498" data-pptx-height="74" data-pptx-bounds="88 227 498 74">
+      <metadata type="application/json"><![CDATA[{"latex":"g_1^\\star=\\nabla_\\theta r_\\theta([s_1,v_1^\\star])","display":"block","font_size":30,"color":"#087F8C","align":"left"}]]></metadata>
+      <text x="89" y="274" font-family="Cambria Math" font-size="30" fill="#087F8C">g₁* = ∇θ rθ([s₁, v₁*])</text>
+    </g>
+  </g>
+  <g id="candidate-gradient" data-pptx-bounds="650 170 566 151">
+    <rect x="650" y="170" width="566" height="151" fill="#FBEEE4"/>
+    <text x="674" y="208" font-size="22" fill="#C86620" font-weight="bold">EXPLORATION CANDIDATE v</text>
+    <g id="g-two" data-pptx-replace-with="formula" data-pptx-x="674" data-pptx-y="227" data-pptx-width="518" data-pptx-height="74" data-pptx-bounds="674 227 518 74">
+      <metadata type="application/json"><![CDATA[{"latex":"g_2(v)=\\nabla_\\theta r_\\theta([s_2,v])","display":"block","font_size":30,"color":"#C86620","align":"left"}]]></metadata>
+      <text x="675" y="274" font-family="Cambria Math" font-size="30" fill="#C86620">g₂(v) = ∇θ rθ([s₂, v])</text>
+    </g>
+  </g>
+  <g id="uncertainty" data-pptx-replace-with="formula" data-pptx-x="64" data-pptx-y="337" data-pptx-width="1152" data-pptx-height="99" data-pptx-bounds="64 337 1152 99">
+    <metadata type="application/json"><![CDATA[{"latex":"z(v)=g_2(v)-g_1^\\star\\in\\mathbb R^P,\\quad u(v)=\\sqrt{z(v)^\\top V^{-1}z(v)}","display":"block","font_size":30,"color":"#10243A","align":"left"}]]></metadata>
+    <text x="65" y="393" font-size="30" font-family="Cambria Math" fill="#10243A">z(v) = g₂(v) − g₁* ∈ ℝᴾ,      u(v) = √(z(v)ᵀ V⁻¹ z(v))</text>
+  </g>
+  <g id="exploration-policy" data-pptx-bounds="64 451 1152 128">
+    <rect x="64" y="451" width="1152" height="128" fill="#FBEEE4"/>
+    <text x="88" y="484" font-size="22" font-weight="bold" fill="#C86620">EXPLORATION SELECTION</text>
+    <g id="exploration-argmax" data-pptx-replace-with="formula" data-pptx-x="88" data-pptx-y="493" data-pptx-width="1104" data-pptx-height="83" data-pptx-bounds="88 493 1104 83">
+      <metadata type="application/json"><![CDATA[{"latex":"v_2^\\star=\\arg\\max_{v\\in\\mathcal C}\\left[\\pi_2(v)+\\omega r_\\theta([s_2,v])+\\omega\\nu u(v)\\right]","display":"block","font_size":30,"color":"#10243A","align":"left"}]]></metadata>
+      <text x="89" y="542" font-size="30" font-family="Cambria Math" fill="#10243A">v₂* = argmaxᵥ∈C [π₂(v) + ωrθ([s₂, v]) + ωνu(v)]</text>
+    </g>
+  </g>
+  <g id="gradient-meaning" data-pptx-bounds="64 597 1152 57" fill="#5B6B7A" font-size="22">
+    <text x="64" y="628">P = RM parameter count. V tracks covered gradient-difference directions.</text>
+  </g>
+  <g id="footer" data-pptx-role="footer" data-pptx-bounds="64 665 1152 33" font-size="16" fill="#5B6B7A">
+    <text x="64" y="685">Source: Eqs. (4)–(5); Algorithm 1, line 12. g is a parameter gradient, not a text embedding.</text><text x="1216" y="685" text-anchor="end">08 / 12</text>
+  </g>
+</svg>

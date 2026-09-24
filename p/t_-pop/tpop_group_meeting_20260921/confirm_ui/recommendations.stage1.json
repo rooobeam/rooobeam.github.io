@@ -1,0 +1,20 @@
+{
+  "stage": "stage1",
+  "lang": "zh",
+  "primary_language": "en-US",
+  "recommend": { "canvas": "ppt169" },
+  "audience": { "value": "组会中的机器学习研究者与同学，了解 LLM 的自回归生成，但尚未熟悉 T-POP。" },
+  "communication_intent": { "value": "汇报 T-POP 的论文阅读工作，重点解释偏好数据如何构造、共享奖励模型如何训练、双臂如何逐 token 解码，以及在线学习和最终推理的区别。" },
+  "audience_outcome": { "value": "听众能追踪一次完整的在线交互，分清共享 RM 与两种选词策略，并解释每 token 的 V 更新为什么不是 RM 参数训练。" },
+  "core_message": { "value": "T-POP 冻结基础 LLM，利用用户对两条完整回答的偏好训练一个共享的轻量 RM；两个生成分支通过不同选词策略兼顾当前偏好与信息探索。" },
+  "delivery_context": { "value": "约 10–12 分钟的现场组会论文汇报；全英文、简洁的投影页面，配中文逐页讲稿。时长与讲稿语言可按用户补充调整。" },
+  "artifact_afterlife": { "value": "可编辑 PPTX 用于组会展示；独立讲稿与来源说明用于准备演讲及会后复习。" },
+  "content_divergence": { "value": "" },
+  "template_options": {
+    "schema_version": 1,
+    "phase": "template",
+    "lang": "zh",
+    "default_mode": "free_design",
+    "explicit_workspace_roots": []
+  }
+}

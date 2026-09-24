@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" font-family="Arial" font-size="28" data-pptx-page-role="ending">
+  <rect id="background" data-pptx-role="background" width="1280" height="720" fill="#FFFFFF"/>
+  <g id="title" data-pptx-bounds="64 42 1152 104" fill="#10243A">
+    <text x="64" y="63" font-size="16" fill="#5B6B7A">11 / TAKEAWAYS &amp; DISCUSSION</text>
+    <text x="64" y="119" font-size="44" font-weight="bold">One RM. Two policies. Two clocks.</text>
+  </g>
+  <g id="one-rm" data-pptx-bounds="64 179 340 218" fill="#10243A">
+    <text x="64" y="248" font-size="64" font-weight="bold">1</text><text x="132" y="241" font-size="34">RM</text>
+    <text x="64" y="309">Learn preference<tspan x="64" dy="40">from answer pairs.</tspan></text>
+  </g>
+  <g id="two-policies" data-pptx-bounds="450 179 340 218" fill="#10243A">
+    <text x="450" y="248" font-size="64" font-weight="bold">2</text><text x="518" y="241" font-size="34">policies</text>
+    <text x="450" y="309" fill="#087F8C">Exploit reward</text>
+    <text x="450" y="349" fill="#C86620">Explore uncertainty</text>
+  </g>
+  <g id="two-clocks" data-pptx-bounds="836 179 380 218" fill="#10243A">
+    <text x="836" y="248" font-size="64" font-weight="bold">2</text><text x="904" y="241" font-size="34">clocks</text>
+    <text x="836" y="309">V: every token<tspan x="836" dy="40">θ: after feedback</tspan></text>
+  </g>
+  <g id="limitations" data-pptx-bounds="64 420 1152 157">
+    <rect x="64" y="420" width="1152" height="157" fill="#F3F6FA"/>
+    <g font-size="22" fill="#10243A" font-weight="bold">
+      <text x="88" y="459">Transfer</text><text x="473" y="459">Feedback</text><text x="859" y="459">Latency</text>
+    </g>
+    <g font-size="22" fill="#5B6B7A">
+      <text x="88" y="505">Full-answer labels;<tspan x="88" dy="32">prefix-level scoring.</tspan></text>
+      <text x="473" y="505">GPT-4o feedback<tspan x="473" dy="32">in the main experiments.</tspan></text>
+      <text x="859" y="505">23.26 s vs. 11.25 s<tspan x="859" dy="32">per query, T-POP vs. AMULET.</tspan></text>
+    </g>
+  </g>
+  <g id="discussion" data-pptx-bounds="64 598 1152 58" fill="#10243A">
+    <text x="64" y="636">Discussion: does full-answer preference transfer reliably to prefixes?</text>
+  </g>
+  <g id="footer" data-pptx-role="footer" data-pptx-bounds="64 665 1152 33" font-size="16" fill="#5B6B7A">
+    <text x="64" y="685">Source: §§3.2–3.3; §4.1; Table 13 (reported setting). Transfer concern: our analysis.</text><text x="1216" y="685" text-anchor="end">12 / 12</text>
+  </g>
+</svg>

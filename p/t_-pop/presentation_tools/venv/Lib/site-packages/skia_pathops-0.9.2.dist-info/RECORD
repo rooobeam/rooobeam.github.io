@@ -1,0 +1,15 @@
+pathops/__init__.py,sha256=SlxR28ZqjGQ8CsGD-biAjIxzwmDqDEAwcr6JF3Q0Rs4,1789
+pathops/__pycache__/__init__.cpython-312.pyc,,
+pathops/__pycache__/_version.cpython-312.pyc,,
+pathops/__pycache__/operations.cpython-312.pyc,,
+pathops/_pathops.pyd,sha256=MTePDSboUO63Mkm3PA4giDa8C24ARVH6_tPmnf28OKo,282624
+pathops/_version.py,sha256=YhhfGXJNFtZyVEu8YuwVbCp5vyuvPGlCoZqEhfHdcS8,746
+pathops/operations.py,sha256=LM1IKuDQTaIrAg3mS4Urcc793F779YANHm9VKw7bS3o,1307
+pathops/skia.dll,sha256=si-k1fm5KTtyIco7GALkmD8G92k0D8jxznn4G7GqyBk,3517440
+skia_pathops-0.9.2.dist-info/INSTALLER,sha256=zuuue4knoyJ-UwPPXg8fezS7VCrXJQrAP7zeNuwvFQg,4
+skia_pathops-0.9.2.dist-info/METADATA,sha256=EmYxi3ZXPnKb3hnRFVZpUAfuwG3ubSJ__ZrRsnA1iSk,2603
+skia_pathops-0.9.2.dist-info/RECORD,,
+skia_pathops-0.9.2.dist-info/REQUESTED,sha256=47DEQpj8HBSa-_TImW-5JCeuQeRkm5NMpJWZG3hSuFU,0
+skia_pathops-0.9.2.dist-info/WHEEL,sha256=uAVaqjOWbOEKZJ9_CRxwOjt3mPcDcqnblhXLoKotCG4,100
+skia_pathops-0.9.2.dist-info/licenses/LICENSE,sha256=dTljTPd70FwUusHkTFxEyRc3tyxKrr29cHRf4TCXgvU,1502
+skia_pathops-0.9.2.dist-info/top_level.txt,sha256=urHS64kx2OKt5ebS91C49hSYx5a1rfpmDXw47OhV5uc,8

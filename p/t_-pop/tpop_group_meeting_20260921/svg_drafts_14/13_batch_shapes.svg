@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" font-family="Arial" font-size="28" data-pptx-page-role="content">
+  <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="#10243A" stroke-width="2"/></marker></defs>
+  <rect id="background" data-pptx-role="background" width="1280" height="720" fill="#FFFFFF"/>
+  <g id="title" data-pptx-bounds="64 42 1152 104" fill="#10243A">
+    <text x="64" y="63" font-size="16" fill="#5B6B7A">BACKUP A / TRAINING TENSORS</text>
+    <text x="64" y="119" font-size="44" font-weight="bold">From one preference pair to a batch</text>
+  </g>
+  <g id="batch-source" data-pptx-bounds="64 170 1152 57" fill="#10243A">
+    <text x="64" y="207">Sample <tspan font-weight="bold">B preference pairs</tspan> from the accumulated history.</text>
+  </g>
+  <g id="batch-flow" data-pptx-bounds="64 245 1152 193">
+    <rect x="64" y="257" width="220" height="126" fill="#F3F6FA"/>
+    <text x="174" y="303" text-anchor="middle" fill="#10243A" font-weight="bold">2B texts</text>
+    <text x="174" y="349" text-anchor="middle" fill="#5B6B7A" font-size="22">[q, a₁] and [q, a₂]</text>
+    <line x1="296" y1="320" x2="340" y2="320" stroke="#10243A" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="354" y="257" width="268" height="126" fill="#F3F6FA"/>
+    <text x="488" y="303" text-anchor="middle" fill="#10243A" font-weight="bold">Frozen encoder</text>
+    <text x="488" y="349" text-anchor="middle" fill="#5B6B7A" font-size="22">E: (2B, 1024)</text>
+    <line x1="634" y1="320" x2="678" y2="320" stroke="#10243A" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="692" y="257" width="238" height="126" fill="#10243A"/>
+    <text x="811" y="303" text-anchor="middle" fill="#FFFFFF" font-weight="bold">Shared MLP</text>
+    <text x="811" y="349" text-anchor="middle" fill="#FFFFFF" font-size="22">Rewards: (2B, 1)</text>
+    <line x1="942" y1="320" x2="986" y2="320" stroke="#10243A" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="1000" y="257" width="216" height="126" fill="#E9EEF4"/>
+    <text x="1108" y="303" text-anchor="middle" fill="#10243A" font-weight="bold">Pair scores</text>
+    <text x="1108" y="349" text-anchor="middle" fill="#233447" font-size="22">R: (B, 2)</text>
+    <text x="1000" y="420" font-size="22" fill="#5B6B7A">reshape by pair</text>
+  </g>
+  <g id="batch-probabilities" data-pptx-replace-with="formula" data-pptx-x="64" data-pptx-y="447" data-pptx-width="1152" data-pptx-height="93" data-pptx-bounds="64 447 1152 93">
+    <metadata type="application/json"><![CDATA[{"latex":"p_i=\\sigma(R_{i,1}-R_{i,2}),\\quad\\mathbf p,\\boldsymbol\\ell\\in\\mathbb R^B","display":"block","font_size":30,"color":"#10243A","align":"left"}]]></metadata>
+    <text x="65" y="500" font-family="Cambria Math" font-size="30" fill="#10243A">pᵢ = σ(Rᵢ,₁ − Rᵢ,₂),      p, ℓ ∈ ℝᴮ</text>
+  </g>
+  <g id="batch-axis-meaning" data-pptx-bounds="64 566 1152 83" fill="#233447">
+    <text x="64" y="598">Training: B preference pairs → B probabilities and labels.<tspan x="64" dy="39">Inference: C candidate continuations per arm.</tspan></text>
+  </g>
+  <g id="footer" data-pptx-role="footer" data-pptx-bounds="64 665 1152 33" font-size="16" fill="#5B6B7A">
+    <text x="64" y="685">Source: Eq. (2); Appendix B. Tensor organization illustrates the shared pairwise training.</text><text x="1216" y="685" text-anchor="end">BACKUP A</text>
+  </g>
+</svg>

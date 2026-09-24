@@ -1,0 +1,199 @@
+{
+  "schema": "ppt-master.pptx-postflight-report.v1",
+  "status": "passed",
+  "output": {
+    "path": "D:\\办公程序\\github_blog\\hugo_extended_withdeploy_0.141.0_windows-amd64\\rublog\\content\\post\\T-POP\\tpop_group_meeting_20260921\\exports\\tpop_group_meeting_20260921_192151_native_charts_tables.pptx",
+    "bytes": 54612
+  },
+  "source": {
+    "svg_slide_count": 8,
+    "layout_definition_count": 0,
+    "fingerprint": {
+      "algorithm": "sha256",
+      "digest": "7b6380af2dc3fdf8e22df780d17e50ede16bb1c924a91c514cc5c2ccfe0d8794",
+      "file_count": 8,
+      "files": [
+        {
+          "file": "01_tpop_overview.svg",
+          "sha256": "2dfaba3058d64382aa5c4d3f4b038da54166fbd32370928a71fcc2be7b421eb2"
+        },
+        {
+          "file": "02_reward_model.svg",
+          "sha256": "7c9bebe8bff6f3d34e73b600415367fba10eeca4935d3265302192d1892ea8cd"
+        },
+        {
+          "file": "03_rm_training.svg",
+          "sha256": "1782e747b36eca8638db3430de88561ba27985dd5f41d8408f29843d145adb7f"
+        },
+        {
+          "file": "04_token_scoring.svg",
+          "sha256": "a3ef1e04cb5b35ed89695ef482486971098f0ed7a227c91ba5c37fdff72df796"
+        },
+        {
+          "file": "05_two_arms.svg",
+          "sha256": "ed5c833de451adcd7738f77529ce4c340827753dd31ecb61fae9d1ef1cb76bc9"
+        },
+        {
+          "file": "06_exploration.svg",
+          "sha256": "2a4b076042e1124a82314891010794ccf1598f59d195b1ac1d96fd058c4d61e4"
+        },
+        {
+          "file": "07_two_clocks.svg",
+          "sha256": "4808fdae4effcc858e0132a4b8f0b576a7f5df39d8049ba5575f52eca3caa2ef"
+        },
+        {
+          "file": "08_deployment.svg",
+          "sha256": "f32cc7085f7654a991403eb813a504dcc6ea02703e8c9fca9a3979e8116523c1"
+        }
+      ]
+    },
+    "authoring_roundtrip": null
+  },
+  "package": {
+    "zip_integrity": "passed",
+    "corrupt_member": null,
+    "slides": 8,
+    "notes": 8,
+    "masters": 1,
+    "layouts": 1
+  },
+  "checks": {
+    "zip_integrity": "passed",
+    "slide_count": "passed",
+    "internal_relationships": "enforced-at-build",
+    "structured_package": "not-applicable",
+    "transitions": "enforced-at-build",
+    "animations": "enforced-at-build",
+    "project_svg_contract": "enforced-at-build",
+    "compatibility_normalization": "not-applicable",
+    "authoring_roundtrip": "not-applicable",
+    "quality_gate": "passed",
+    "quality_warnings": "passed",
+    "template_tokens": "passed",
+    "external_images": "passed",
+    "font_portability": "passed"
+  },
+  "quality": {
+    "status": "loaded",
+    "path": "D:\\办公程序\\github_blog\\hugo_extended_withdeploy_0.141.0_windows-amd64\\rublog\\content\\post\\T-POP\\tpop_group_meeting_20260921\\validation\\svg_quality_report.json",
+    "schema": "ppt-master.svg-quality-report.v1",
+    "stage": "final",
+    "source_match": "passed",
+    "source_fingerprint": {
+      "algorithm": "sha256",
+      "digest": "7b6380af2dc3fdf8e22df780d17e50ede16bb1c924a91c514cc5c2ccfe0d8794",
+      "file_count": 8,
+      "files": [
+        {
+          "file": "01_tpop_overview.svg",
+          "sha256": "2dfaba3058d64382aa5c4d3f4b038da54166fbd32370928a71fcc2be7b421eb2"
+        },
+        {
+          "file": "02_reward_model.svg",
+          "sha256": "7c9bebe8bff6f3d34e73b600415367fba10eeca4935d3265302192d1892ea8cd"
+        },
+        {
+          "file": "03_rm_training.svg",
+          "sha256": "1782e747b36eca8638db3430de88561ba27985dd5f41d8408f29843d145adb7f"
+        },
+        {
+          "file": "04_token_scoring.svg",
+          "sha256": "a3ef1e04cb5b35ed89695ef482486971098f0ed7a227c91ba5c37fdff72df796"
+        },
+        {
+          "file": "05_two_arms.svg",
+          "sha256": "ed5c833de451adcd7738f77529ce4c340827753dd31ecb61fae9d1ef1cb76bc9"
+        },
+        {
+          "file": "06_exploration.svg",
+          "sha256": "2a4b076042e1124a82314891010794ccf1598f59d195b1ac1d96fd058c4d61e4"
+        },
+        {
+          "file": "07_two_clocks.svg",
+          "sha256": "4808fdae4effcc858e0132a4b8f0b576a7f5df39d8049ba5575f52eca3caa2ef"
+        },
+        {
+          "file": "08_deployment.svg",
+          "sha256": "f32cc7085f7654a991403eb813a504dcc6ea02703e8c9fca9a3979e8116523c1"
+        }
+      ]
+    },
+    "summary": {
+      "total": 8,
+      "passed": 8,
+      "warnings": 0,
+      "errors": 0
+    },
+    "categories": {
+      "blocking": {
+        "count": 0,
+        "issues": []
+      },
+      "introduced": {
+        "count": 0,
+        "issues": []
+      },
+      "inherited": {
+        "count": 0,
+        "issues": []
+      },
+      "source-import": {
+        "count": 0,
+        "summary": {
+          "warning_count": 0,
+          "by_code": {}
+        }
+      }
+    }
+  },
+  "resources": {
+    "unresolved_template_tokens": [],
+    "fonts": {
+      "stacks": [
+        "Arial",
+        "Cambria Math"
+      ],
+      "generic_only_stacks": [],
+      "unsafe_exported_faces": []
+    },
+    "images": {
+      "data_uri": 0,
+      "local": 0,
+      "external": 0,
+      "external_references": []
+    }
+  },
+  "export_policy": {
+    "project_svg_contract": "strict",
+    "dangerous_normalization_count": 0
+  },
+  "deck_motion": {
+    "transition": {
+      "effect": "fade",
+      "effect_options": {},
+      "duration": 0.4,
+      "auto_advance": null,
+      "sound": null
+    },
+    "animation": {
+      "effect": "none",
+      "effect_request": null,
+      "duration": 0.4,
+      "stagger": 0.5,
+      "trigger": "after-previous"
+    },
+    "cli_overrides": {
+      "transition": false,
+      "transition_duration": false,
+      "auto_advance": false,
+      "transition_sound": false,
+      "animation": false,
+      "animation_duration": false,
+      "animation_stagger": false,
+      "animation_trigger": false
+    },
+    "narration_timings": false
+  },
+  "backup_path": "D:\\办公程序\\github_blog\\hugo_extended_withdeploy_0.141.0_windows-amd64\\rublog\\content\\post\\T-POP\\tpop_group_meeting_20260921\\backup\\20260921_192151\\svg_output",
+  "conversion_trace_path": null
+}

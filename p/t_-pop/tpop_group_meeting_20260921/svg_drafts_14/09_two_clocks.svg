@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" font-family="Arial" font-size="28" data-pptx-page-role="content">
+  <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="#10243A" stroke-width="2"/></marker></defs>
+  <rect id="background" data-pptx-role="background" width="1280" height="720" fill="#FFFFFF"/>
+  <g id="title" data-pptx-bounds="64 42 1152 104" fill="#10243A">
+    <text x="64" y="63" font-size="16" fill="#5B6B7A">08 / THE LINE-14 UPDATE</text>
+    <text x="64" y="119" font-size="44" font-weight="bold">Two clocks: update V, then train RM</text>
+  </g>
+  <g id="token-clock" data-pptx-bounds="64 179 1152 203">
+    <rect x="64" y="179" width="1152" height="203" fill="#F3F6FA"/>
+    <rect x="64" y="179" width="8" height="203" fill="#C86620"/>
+    <text x="88" y="228" fill="#C86620" font-size="32" font-weight="bold">Every token</text>
+    <text x="88" y="267" fill="#5B6B7A" font-size="22">Algorithm 1 · line 14</text>
+    <text x="88" y="339" fill="#233447" font-size="22">p = 1, 2, 3, ...</text>
+    <g id="v-update" data-pptx-replace-with="formula" data-pptx-x="365" data-pptx-y="205" data-pptx-width="825" data-pptx-height="94" data-pptx-bounds="365 205 825 94">
+      <metadata type="application/json"><![CDATA[{"latex":"\\delta=g_1^\\star-g_2^\\star,\\quad V\\leftarrow V+\\delta\\delta^\\top,\\quad V\\in\\mathbb R^{P\\times P}","display":"block","font_size":30,"color":"#10243A","align":"left"}]]></metadata>
+      <text x="366" y="260" font-family="Cambria Math" font-size="30" fill="#10243A">δ = g₁* − g₂*,    V ← V + δδᵀ,    V ∈ ℝᴾ×ᴾ</text>
+    </g>
+    <text x="375" y="339" fill="#233447" font-size="22">Selected prefixes · θ fixed · No preference label needed</text>
+  </g>
+  <g id="clock-transition" data-pptx-bounds="64 389 1152 32">
+    <line x1="199" y1="391" x2="199" y2="418" stroke="#10243A" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="375" y="412" fill="#5B6B7A" font-size="16">Both responses finish; the user chooses one.</text>
+  </g>
+  <g id="feedback-clock" data-pptx-bounds="64 430 1152 190">
+    <rect x="64" y="430" width="1152" height="190" fill="#F3F6FA"/>
+    <rect x="64" y="430" width="8" height="190" fill="#10243A"/>
+    <text x="88" y="480" fill="#10243A" font-weight="bold">After feedback</text>
+    <text x="88" y="519" fill="#5B6B7A" font-size="22">Algorithm 1 · line 17</text>
+    <g id="theta-update" data-pptx-replace-with="formula" data-pptx-x="365" data-pptx-y="450" data-pptx-width="825" data-pptx-height="96" data-pptx-bounds="365 450 825 96">
+      <metadata type="application/json"><![CDATA[{"latex":"\\theta_{t+1}=\\arg\\min_\\theta\\mathcal L_t(\\theta)","display":"block","font_size":30,"color":"#10243A","align":"left"}]]></metadata>
+      <text x="366" y="505" font-family="Cambria Math" font-size="30" fill="#10243A">θₜ₊₁ = argminθ Lₜ(θ)</text>
+    </g>
+    <text x="375" y="582" fill="#233447" font-size="22">Complete response pair → add to Dₜ → train the shared RM</text>
+  </g>
+  <g id="footer" data-pptx-role="footer" data-pptx-bounds="64 665 1152 33" font-size="16" fill="#5B6B7A">
+    <text x="64" y="685">Source: Algorithm 1, lines 13–18; Eq. (6). Gradient computation alone does not update θ.</text><text x="1216" y="685" text-anchor="end">09 / 12</text>
+  </g>
+</svg>

@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" font-family="Arial" font-size="28" data-pptx-page-role="content">
+  <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="#10243A" stroke-width="2"/></marker></defs>
+  <rect id="background" data-pptx-role="background" width="1280" height="720" fill="#FFFFFF"/>
+  <g id="title" data-pptx-bounds="64 42 1152 104" fill="#10243A">
+    <text x="64" y="63" font-size="16" fill="#5B6B7A">06 / TWO TOKEN-SELECTION POLICIES</text>
+    <text x="64" y="119" font-size="44" font-weight="bold">Shared candidates, separate prefixes</text>
+  </g>
+  <g id="candidate-union" data-pptx-replace-with="formula" data-pptx-x="64" data-pptx-y="165" data-pptx-width="1152" data-pptx-height="70" data-pptx-bounds="64 165 1152 70">
+    <metadata type="application/json"><![CDATA[{"latex":"\\mathcal C=\\operatorname{Top40}(\\pi_1)\\cup\\operatorname{Top40}(\\pi_2),\\quad |\\mathcal C|\\le80","display":"block","font_size":30,"color":"#10243A","align":"left"}]]></metadata>
+    <text x="65" y="210" font-family="Cambria Math" font-size="30" fill="#10243A">C = Top40(π₁) ∪ Top40(π₂),      |C| ≤ 80</text>
+  </g>
+  <g id="candidate-routing" data-pptx-bounds="64 254 1152 331">
+    <rect x="64" y="263" width="284" height="101" fill="#E6F2F3"/>
+    <text x="87" y="304" font-weight="bold" fill="#087F8C">Prefix s₁ → LLM</text>
+    <text x="87" y="340" font-size="22" fill="#233447">Top 40 next tokens</text>
+    <rect x="64" y="438" width="284" height="101" fill="#FBEEE4"/>
+    <text x="87" y="479" font-weight="bold" fill="#C86620">Prefix s₂ → LLM</text>
+    <text x="87" y="515" font-size="22" fill="#233447">Top 40 next tokens</text>
+    <line x1="364" y1="313" x2="439" y2="361" stroke="#10243A" stroke-width="2" marker-end="url(#arrow)"/>
+    <line x1="364" y1="488" x2="439" y2="428" stroke="#10243A" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="455" y="338" width="246" height="120" fill="#10243A"/>
+    <text x="578" y="381" text-anchor="middle" font-weight="bold" fill="#FFFFFF">Shared pool C</text>
+    <text x="578" y="425" text-anchor="middle" fill="#FFFFFF" font-size="22">Every v ∈ C</text>
+    <line x1="716" y1="360" x2="779" y2="318" stroke="#10243A" stroke-width="2" marker-end="url(#arrow)"/>
+    <line x1="716" y1="429" x2="779" y2="486" stroke="#10243A" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="795" y="262" width="421" height="126" fill="#E6F2F3"/>
+    <text x="819" y="302" font-weight="bold" fill="#087F8C">[s₁, v] → same RM</text>
+    <text x="819" y="340" fill="#233447" font-size="22">Reward vector r₁: (C,)</text>
+    <text x="819" y="373" fill="#087F8C" font-size="22">Pick argmax score₁</text>
+    <rect x="795" y="426" width="421" height="140" fill="#FBEEE4"/>
+    <text x="819" y="467" font-weight="bold" fill="#C86620">[s₂, v] → same RM</text>
+    <text x="819" y="505" fill="#233447" font-size="22">Reward vector r₂: (C,)</text>
+    <text x="819" y="543" fill="#C86620" font-size="22">Pick argmax(score₂ + bonus)</text>
+    <text x="483" y="509" font-size="22" fill="#5B6B7A">Tokens are shared.</text>
+    <text x="483" y="542" font-size="22" fill="#10243A" font-weight="bold">Prefixes are kept.</text>
+  </g>
+  <g id="coupling" data-pptx-bounds="64 598 1152 52" fill="#10243A">
+    <text x="64" y="632">Exploration also uses the <tspan font-weight="bold">selected exploitation continuation</tspan> as its reference.</text>
+  </g>
+  <g id="footer" data-pptx-role="footer" data-pptx-bounds="64 665 1152 33" font-size="16" fill="#5B6B7A">
+    <text x="64" y="685">Source: Algorithm 1, lines 4–12. Both prefixes contain the query.</text><text x="1216" y="685" text-anchor="end">07 / 12</text>
+  </g>
+</svg>

@@ -1,0 +1,130 @@
+{
+  "roles": {
+    "body": {
+      "family": "Arial",
+      "size": 28.0,
+      "weight": "normal",
+      "cjk_chars_per_100px": 3.4,
+      "latin_chars_per_100px": 7.2,
+      "caps_chars_per_100px": 5.6,
+      "digits_chars_per_100px": 6.1,
+      "citation_chars_per_100px": 7.0,
+      "script_clusters_per_100px": {},
+      "longest_planned_line": {
+        "px": 4417.3,
+        "slide": "P04",
+        "text": "B texts → frozen Qwen3-Embedding-0.6B →…"
+      }
+    },
+    "title": {
+      "family": "Arial",
+      "size": 44.0,
+      "weight": "bold",
+      "cjk_chars_per_100px": 2.1,
+      "latin_chars_per_100px": 4.4,
+      "caps_chars_per_100px": 3.5,
+      "digits_chars_per_100px": 3.9,
+      "citation_chars_per_100px": 4.3,
+      "script_clusters_per_100px": {},
+      "longest_planned_line": {
+        "px": 908.6,
+        "slide": "P08",
+        "text": "Explore uncertain preference differences"
+      }
+    },
+    "subtitle": {
+      "family": "Arial",
+      "size": 34.0,
+      "weight": "normal",
+      "cjk_chars_per_100px": 2.8,
+      "latin_chars_per_100px": 5.9,
+      "caps_chars_per_100px": 4.6,
+      "digits_chars_per_100px": 5.0,
+      "citation_chars_per_100px": 5.8,
+      "script_clusters_per_100px": {},
+      "longest_planned_line": {
+        "px": 1133.1,
+        "slide": "P06",
+        "text": "Score candidate continuations and choos…"
+      }
+    },
+    "annotation": {
+      "family": "Arial",
+      "size": 22.0,
+      "weight": "normal",
+      "cjk_chars_per_100px": 4.3,
+      "latin_chars_per_100px": 9.2,
+      "caps_chars_per_100px": 7.1,
+      "digits_chars_per_100px": 7.7,
+      "citation_chars_per_100px": 8.9,
+      "script_clusters_per_100px": {},
+      "longest_planned_line": null
+    },
+    "display": {
+      "family": "Arial",
+      "size": 88.0,
+      "weight": "bold",
+      "cjk_chars_per_100px": 1.1,
+      "latin_chars_per_100px": 2.2,
+      "caps_chars_per_100px": 1.8,
+      "digits_chars_per_100px": 1.9,
+      "citation_chars_per_100px": 2.2,
+      "script_clusters_per_100px": {},
+      "longest_planned_line": null
+    },
+    "footnote": {
+      "family": "Arial",
+      "size": 16.0,
+      "weight": "normal",
+      "cjk_chars_per_100px": 5.9,
+      "latin_chars_per_100px": 12.6,
+      "caps_chars_per_100px": 9.8,
+      "digits_chars_per_100px": 10.6,
+      "citation_chars_per_100px": 12.3,
+      "script_clusters_per_100px": {},
+      "longest_planned_line": null
+    },
+    "formula": {
+      "family": "Cambria Math",
+      "size": 30.0,
+      "weight": "normal",
+      "cjk_chars_per_100px": 3.1,
+      "latin_chars_per_100px": 6.5,
+      "caps_chars_per_100px": 6.0,
+      "digits_chars_per_100px": 5.7,
+      "citation_chars_per_100px": 6.0,
+      "script_clusters_per_100px": {},
+      "longest_planned_line": null
+    },
+    "hero": {
+      "family": "Arial",
+      "size": 64.0,
+      "weight": "bold",
+      "cjk_chars_per_100px": 1.5,
+      "latin_chars_per_100px": 3.0,
+      "caps_chars_per_100px": 2.4,
+      "digits_chars_per_100px": 2.7,
+      "citation_chars_per_100px": 3.0,
+      "script_clusters_per_100px": {},
+      "longest_planned_line": null
+    },
+    "lead": {
+      "family": "Arial",
+      "size": 32.0,
+      "weight": "normal",
+      "cjk_chars_per_100px": 2.9,
+      "latin_chars_per_100px": 6.3,
+      "caps_chars_per_100px": 4.9,
+      "digits_chars_per_100px": 5.3,
+      "citation_chars_per_100px": 6.2,
+      "script_clusters_per_100px": {},
+      "longest_planned_line": null
+    }
+  },
+  "script_samples": {},
+  "source": "spec_lock.md",
+  "generated_at": "2026-09-21T10:38:01Z",
+  "notes": [
+    "rates for display, hero, title are measured at bold weight"
+  ]
+}

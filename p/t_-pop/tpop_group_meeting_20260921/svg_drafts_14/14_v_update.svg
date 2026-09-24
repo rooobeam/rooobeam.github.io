@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" font-family="Arial" font-size="28" data-pptx-page-role="content">
+  <rect id="background" data-pptx-role="background" width="1280" height="720" fill="#FFFFFF"/>
+  <g id="title" data-pptx-bounds="64 42 1152 104" fill="#10243A">
+    <text x="64" y="63" font-size="16" fill="#5B6B7A">BACKUP B / A VECTOR EXAMPLE</text>
+    <text x="64" y="119" font-size="44" font-weight="bold">What the V update accumulates</text>
+  </g>
+  <g id="toy-context" data-pptx-bounds="64 166 1152 44" fill="#5B6B7A" font-size="22">
+    <text x="64" y="197">Illustrative two-parameter example · P = 2 · Hold gradients fixed</text>
+  </g>
+  <g id="matrix-update" data-pptx-replace-with="formula" data-pptx-x="64" data-pptx-y="217" data-pptx-width="1152" data-pptx-height="121" data-pptx-bounds="64 217 1152 121">
+    <metadata type="application/json"><![CDATA[{"latex":"V_{\\rm before}=\\begin{bmatrix}1&0\\\\0&1\\end{bmatrix},\\quad\\delta=\\begin{bmatrix}1\\\\0\\end{bmatrix},\\quad V_{\\rm after}=\\begin{bmatrix}2&0\\\\0&1\\end{bmatrix}","display":"block","font_size":30,"color":"#10243A","align":"left"}]]></metadata>
+    <text x="65" y="285" font-family="Cambria Math" font-size="30" fill="#10243A">Vbefore = [[1, 0], [0, 1]]    δ = [1, 0]ᵀ    Vafter = [[2, 0], [0, 1]]</text>
+  </g>
+  <g id="covered-direction" data-pptx-bounds="64 351 546 124">
+    <rect x="64" y="351" width="546" height="124" fill="#F3F6FA"/>
+    <text x="88" y="382" font-size="22" fill="#10243A" font-weight="bold">COVERED DIRECTION · z = (1, 0)</text>
+    <g id="shrinking-bonus" data-pptx-replace-with="formula" data-pptx-x="88" data-pptx-y="394" data-pptx-width="498" data-pptx-height="77" data-pptx-bounds="88 394 498 77">
+      <metadata type="application/json"><![CDATA[{"latex":"u(z):\\ 1\\longrightarrow\\frac{1}{\\sqrt2}\\approx0.71","display":"block","font_size":30,"color":"#10243A","align":"left"}]]></metadata>
+      <text x="89" y="440" font-family="Cambria Math" font-size="30" fill="#10243A">u(z): 1 → 1/√2 ≈ 0.71</text>
+    </g>
+  </g>
+  <g id="orthogonal-direction" data-pptx-bounds="650 351 566 124">
+    <rect x="650" y="351" width="566" height="124" fill="#F3F6FA"/>
+    <text x="674" y="382" font-size="22" fill="#10243A" font-weight="bold">ORTHOGONAL DIRECTION · z = (0, 1)</text>
+    <g id="unchanged-bonus" data-pptx-replace-with="formula" data-pptx-x="674" data-pptx-y="394" data-pptx-width="518" data-pptx-height="77" data-pptx-bounds="674 394 518 77">
+      <metadata type="application/json"><![CDATA[{"latex":"u(z):\\ 1\\longrightarrow1","display":"block","font_size":30,"color":"#10243A","align":"left"}]]></metadata>
+      <text x="675" y="440" font-family="Cambria Math" font-size="30" fill="#10243A">u(z): 1 → 1</text>
+    </g>
+  </g>
+  <g id="diagonal-explanation" data-pptx-bounds="64 489 1152 38" font-size="22" fill="#5B6B7A">
+    <text x="64" y="517">Diagonal approximation: store P values instead of a P × P matrix.</text>
+  </g>
+  <g id="diagonal-rule" data-pptx-replace-with="formula" data-pptx-x="64" data-pptx-y="533" data-pptx-width="1152" data-pptx-height="120" data-pptx-bounds="64 533 1152 120">
+    <metadata type="application/json"><![CDATA[{"latex":"a\\leftarrow a+\\delta\\odot\\delta,\\quad u(z)=\\sqrt{\\sum_{j=1}^{P}\\frac{z_j^2}{a_j}}","display":"block","font_size":30,"color":"#10243A","align":"left"}]]></metadata>
+    <text x="65" y="598" font-family="Cambria Math" font-size="30" fill="#10243A">a ← a + δ ⊙ δ,      u(z) = √(Σⱼ zⱼ² / aⱼ)</text>
+  </g>
+  <g id="footer" data-pptx-role="footer" data-pptx-bounds="64 665 1152 33" font-size="16" fill="#5B6B7A">
+    <text x="64" y="685">Source: Eqs. (5)–(6); Appendix B. P is RM parameter count, not embedding width.</text><text x="1216" y="685" text-anchor="end">BACKUP B</text>
+  </g>
+</svg>

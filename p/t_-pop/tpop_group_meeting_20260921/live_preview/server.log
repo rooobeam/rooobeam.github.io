@@ -1,0 +1,22 @@
+[18:37:45] [INFO] svg_editor: running at http://127.0.0.1:6060 (live preview (auto-startup))
+[18:37:45] [INFO] svg_editor: project: D:\办公程序\github_blog\hugo_extended_withdeploy_0.141.0_windows-amd64\rublog\content\post\T-POP\tpop_group_meeting_20260921
+[18:37:45] [INFO] svg_editor: svg_output: D:\办公程序\github_blog\hugo_extended_withdeploy_0.141.0_windows-amd64\rublog\content\post\T-POP\tpop_group_meeting_20260921\svg_output (0 slides)
+[18:37:45] [INFO] svg_editor: idle timeout: 7200s (0 = disabled)
+ * Serving Flask app 'server'
+ * Debug mode: off
+[18:37:45] [INFO] svg_editor: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:6060
+[18:37:45] [INFO] svg_editor: [33mPress CTRL+C to quit[0m
+[18:37:46] [INFO] svg_editor: 127.0.0.1 - - [21/Sep/2026 18:37:46] "GET /api/health HTTP/1.1" 200 -
+[18:37:46] [INFO] svg_editor: 127.0.0.1 - - [21/Sep/2026 18:37:46] "GET / HTTP/1.1" 200 -
+[18:37:46] [INFO] svg_editor: 127.0.0.1 - - [21/Sep/2026 18:37:46] "GET /static/style.css HTTP/1.1" 200 -
+[18:37:46] [INFO] svg_editor: 127.0.0.1 - - [21/Sep/2026 18:37:46] "GET /static/app.js HTTP/1.1" 200 -
+[18:37:46] [INFO] svg_editor: 127.0.0.1 - - [21/Sep/2026 18:37:46] "GET /api/config HTTP/1.1" 200 -
+[18:37:46] [INFO] svg_editor: 127.0.0.1 - - [21/Sep/2026 18:37:46] "GET /api/slides HTTP/1.1" 200 -
+[18:37:46] [INFO] svg_editor: 127.0.0.1 - - [21/Sep/2026 18:37:46] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+[18:37:48] [INFO] svg_editor: 127.0.0.1 - - [21/Sep/2026 18:37:48] "GET /api/slides HTTP/1.1" 200 -
+[18:37:50] [INFO] svg_editor: 127.0.0.1 - - [21/Sep/2026 18:37:50] "GET /api/slides HTTP/1.1" 200 -
+[18:37:52] [INFO] svg_editor: 127.0.0.1 - - [21/Sep/2026 18:37:52] "GET /api/slides HTTP/1.1" 200 -
+[18:37:54] [INFO] svg_editor: 127.0.0.1 - - [21/Sep/2026 18:37:54] "GET /api/slides HTTP/1.1" 200 -
+[18:37:56] [INFO] svg_editor: 127.0.0.1 - - [21/Sep/2026 18:37:56] "GET /api/slides HTTP/1.1" 200 -
+[18:37:59] [INFO] svg_editor: 127.0.0.1 - - [21/Sep/2026 18:37:59] "GET /api/slides HTTP/1.1" 200 -
