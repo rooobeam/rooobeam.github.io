@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1280" height="720" viewBox="0 0 1280 720" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif"><rect x="0" y="0" width="1280" height="720" fill="#FFFFFF" />
+<g id="shape-4" data-pptx-object="group" data-pptx-frame="62.24 48.4 702.37 87.47" data-pptx-source-ref="slide:4">
+<g id="shape-2" data-pptx-object="shape" data-pptx-frame="63.36 48.4 701.25 24.64" data-pptx-prst="rect" data-pptx-source-ref="slide:2" data-pptx-semantic-object="shape">
+<path d="M 63.36 48.4 L 764.61 48.4 L 764.61 73.04 L 63.36 73.04 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="63.36" y="62" text-anchor="start" xml:space="preserve" font-size="16" fill="#5B6B7A">T-POP · Test-Time Personalization with Online Preference Feedback · Qu et al., ICML 2026</text>
+</g>
+<g id="shape-3" data-pptx-object="shape" data-pptx-frame="62.24 82.6 623.2 53.27" data-pptx-prst="rect" data-pptx-source-ref="slide:3" data-pptx-semantic-object="shape">
+<path d="M 62.24 82.6 L 685.44 82.6 L 685.44 135.87 L 62.24 135.87 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="62.24" y="120" text-anchor="start" xml:space="preserve" font-size="44" fill="#10243A" font-weight="bold">Alignment for Personalization</text>
+</g>
+</g>
+<g id="shape-7" data-pptx-object="group" data-pptx-frame="62.88 174.2 707.55 95.12" data-pptx-source-ref="slide:7">
+<g id="shape-5" data-pptx-object="shape" data-pptx-frame="62.88 174.2 627.8 33.87" data-pptx-prst="rect" data-pptx-source-ref="slide:5" data-pptx-semantic-object="shape">
+<path d="M 62.88 174.2 L 690.68 174.2 L 690.68 208.07 L 62.88 208.07 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="62.88" y="198" text-anchor="start" xml:space="preserve" font-size="28" fill="#233447"><tspan>General RLHF / DPO only for </tspan><tspan fill="#10243A" font-weight="bold"> generic alignment.</tspan></text>
+</g>
+<g id="shape-6" data-pptx-object="shape" data-pptx-frame="62.88 226.2 707.55 43.12" data-pptx-prst="rect" data-pptx-source-ref="slide:6" data-pptx-semantic-object="shape">
+<path d="M 62.88 226.2 L 770.43 226.2 L 770.43 269.32 L 62.88 269.32 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="62.88" y="250" text-anchor="start" xml:space="preserve" font-size="28" fill="#233447"><tspan>Same question, different users: </tspan><tspan fill="#087F8C" font-weight="bold">concise</tspan><tspan> vs. </tspan><tspan fill="#C86620" font-weight="bold">detailed</tspan><tspan>.</tspan></text>
+</g>
+</g>
+<g id="shape-8" data-pptx-object="graphic-frame" data-pptx-frame="64 292 971.93 290" data-pptx-import-source="pptx" data-pptx-replace-with="table" data-pptx-native-authority="json" data-pptx-source-ref="slide:8" data-pptx-semantic-object="table">
+<metadata type="application/json">{"schema":"ppt-master.semantic-table.v2","x":64,"y":292,"width":971.933,"height":290,"strict_grid":true,"header_rows":1,"column_widths":[470.333,501.6],"row_heights":[50,76,76,88],"style":{"band_row":false,"table_style_id":"{5C22544A-7EE6-4342-B048-85BDC9FD1C3A}"},"defaults":{"cell":{"valign":"middle","borders":{"left":{"style":"none"},"right":{"style":"none"},"top":{"style":"none"},"bottom":{"style":"solid","color":"#CBD4DE","width":1}},"padding_left":18,"padding_right":18,"padding_top":10,"padding_bottom":10},"run":{"bold":true,"color":"#233447","font_size":24,"lang":"en-US"}},"cell_styles":{"cell-1":{"fill":"#F3F6FA","padding_top":9.6,"padding_bottom":9.6}},"rows":[[{"paragraphs":[{"runs":[{"text":"Prior direction","font_size":22,"color":"#5B6B7A"}]}],"cell_style":"cell-1"},{"paragraphs":[{"runs":[{"text":"Features","font_size":22,"color":"#5B6B7A"}]}],"cell_style":"cell-1"}],[{"paragraphs":[{"runs":[{"text":"User-specific fine-tuning"}]}]},{"paragraphs":[{"runs":[{"text":"Update parameters","bold":false}]}]}],[{"paragraphs":[{"runs":[{"text":"Memory / RAG / prompting"}]}]},{"paragraphs":[{"runs":[{"text":"Collect enough user data (static)","bold":false}]}]}],[{"paragraphs":[{"runs":[{"text":"Test-time "},{"text":"Alignment ","alt_lang":"zh-CN"},{"text":"(e.g., LA, AMULET)"}]}]},{"paragraphs":[{"runs":[{"text":"A preference signal or objective (dynamic)","bold":false}]}]}]],"name":"prior-work"}</metadata><image x="0" y="0" width="1280" height="720" preserveAspectRatio="none" href="../images/source-object-previews/semantic-table-preview-f41353d3d5bd999fba54c8397aa10bda2521e2b40e7ee2212686e3d292994c9f.svg" data-pptx-part="authoring-preview" /></g>
+<g id="shape-10" data-pptx-object="group" data-pptx-frame="62.72 606.8 639.27 38.73" data-pptx-source-ref="slide:10">
+<g id="shape-9" data-pptx-object="shape" data-pptx-frame="62.72 606.8 639.27 38.73" data-pptx-prst="rect" data-pptx-source-ref="slide:9" data-pptx-semantic-object="shape">
+<path d="M 62.72 606.8 L 701.99 606.8 L 701.99 645.53 L 62.72 645.53 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="62.72" y="634" text-anchor="start" xml:space="preserve" font-size="32" fill="#10243A" font-weight="bold"><tspan>key point: </tspan><tspan>align with a new user effectively.</tspan></text>
+</g>
+</g>
+<g id="shape-13" data-pptx-object="group" data-pptx-frame="63.36 672.4 1153.28 24.64" data-pptx-source-ref="slide:13">
+<g id="shape-11" data-pptx-object="shape" data-pptx-frame="63.36 672.4 504.58 24.64" data-pptx-prst="rect" data-pptx-source-ref="slide:11" data-pptx-semantic-object="shape">
+<path d="M 63.36 672.4 L 567.94 672.4 L 567.94 697.04 L 63.36 697.04 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="63.36" y="686" text-anchor="start" xml:space="preserve" font-size="16" fill="#5B6B7A">T-POP §§1–2, 6 · Comparison summarizes the paper's motivation.</text>
+</g>
+<g id="shape-12" data-pptx-object="shape" data-pptx-frame="1163.49 672.4 53.15 24.64" data-pptx-prst="rect" data-pptx-source-ref="slide:12" data-pptx-semantic-object="shape">
+<path d="M 1163.49 672.4 L 1216.64 672.4 L 1216.64 697.04 L 1163.49 697.04 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="1216.64" y="686" text-anchor="end" xml:space="preserve" font-size="16" fill="#5B6B7A">01 / 08</text>
+</g>
+</g></svg>

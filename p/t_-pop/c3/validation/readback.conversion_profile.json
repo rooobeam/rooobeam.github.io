@@ -1,0 +1,28 @@
+{
+  "schema": "ppt-master.source_to_md.profile.v1",
+  "converter": "ppt_to_md.py",
+  "conversion_type": "pptx",
+  "source": {
+    "path": "D:/办公程序/github_blog/hugo_extended_withdeploy_0.141.0_windows-amd64/rublog/content/post/T-POP/c3/exports/c3_20260928_195754.pptx",
+    "name": "c3_20260928_195754.pptx",
+    "suffix": ".pptx",
+    "kind": "file",
+    "exists": true,
+    "size_bytes": 382697
+  },
+  "outputs": {
+    "markdown": "readback.md",
+    "asset_dir": "readback_files",
+    "image_manifest": "readback_files/image_manifest.json",
+    "image_count": 1
+  },
+  "markdown": {
+    "line_count": 295,
+    "char_count": 11510,
+    "heading_count": 19,
+    "table_count": 3,
+    "image_ref_count": 1,
+    "link_count": 0
+  },
+  "warnings": []
+}

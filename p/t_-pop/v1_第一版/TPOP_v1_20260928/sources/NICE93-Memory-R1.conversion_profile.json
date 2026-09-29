@@ -1,0 +1,28 @@
+{
+  "schema": "ppt-master.source_to_md.profile.v1",
+  "converter": "ppt_to_md.py",
+  "conversion_type": "pptx",
+  "source": {
+    "path": "D:/办公程序/github_blog/hugo_extended_withdeploy_0.141.0_windows-amd64/rublog/content/post/T-POP/NICE93-Memory-R1.pptx",
+    "name": "NICE93-Memory-R1.pptx",
+    "suffix": ".pptx",
+    "kind": "file",
+    "exists": true,
+    "size_bytes": 19743094
+  },
+  "outputs": {
+    "markdown": "NICE93-Memory-R1.md",
+    "asset_dir": "NICE93-Memory-R1_files",
+    "image_manifest": "NICE93-Memory-R1_files/image_manifest.json",
+    "image_count": 38
+  },
+  "markdown": {
+    "line_count": 519,
+    "char_count": 16410,
+    "heading_count": 27,
+    "table_count": 1,
+    "image_ref_count": 44,
+    "link_count": 2
+  },
+  "warnings": []
+}

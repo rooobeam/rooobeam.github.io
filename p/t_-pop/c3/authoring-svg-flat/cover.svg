@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1280" height="720" viewBox="0 0 1280 720" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif"><rect x="0" y="0" width="1280" height="720" fill="#FFFFFF" />
+<g id="cover-kicker" data-pptx-bounds="80 64 1120 50"><text x="80" y="96" font-family="Arial" font-size="20" fill="#5B6B7A">GROUP MEETING · PAPER READING</text></g>
+<g id="cover-title" data-pptx-bounds="76 162 1124 145"><text x="80" y="271" font-family="Arial" font-size="104" font-weight="bold" fill="#10243A">T-POP</text></g>
+<g id="cover-accent" data-pptx-bounds="80 311 196 8"><rect x="80" y="312" width="136" height="6" fill="#087F8C" /><rect x="228" y="312" width="48" height="6" fill="#C86620" /></g>
+<g id="cover-subtitle" data-pptx-bounds="80 352 1120 131"><text x="80" y="391" font-family="Arial" font-size="44" fill="#10243A">Test-Time Personalization<tspan x="80" dy="64">with Online Preference Feedback</tspan></text></g>
+<g id="cover-citation" data-pptx-bounds="80 505 1120 52"><text x="80" y="539" font-family="Arial" font-size="26" fill="#5B6B7A">Qu et al. · ICML 2026</text></g>
+<g id="cover-footer" data-pptx-bounds="80 625 1120 47"><line x1="80" y1="626" x2="1200" y2="626" stroke="#CBD4DE" stroke-width="1" /><text x="80" y="666" font-family="Arial" font-size="20" fill="#5B6B7A">Learning user preferences during interaction</text></g>
+</svg>

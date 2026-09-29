@@ -1,0 +1,2404 @@
+{
+  "schema": "pptx_intake_slide_library.v1",
+  "source_pptx": "D:\\办公程序\\github_blog\\hugo_extended_withdeploy_0.141.0_windows-amd64\\rublog\\content\\post\\T-POP\\v1_第一版\\TPOP_v1_20260928\\sources\\NICE93-Memory-R1.pptx",
+  "slide_count": 24,
+  "canvas_px": {
+    "width": 1280,
+    "height": 720
+  },
+  "slides": [
+    {
+      "slide_index": 1,
+      "page_type": "cover_candidate",
+      "text_summary": "Memory-R1: Enhancing Large Language Model Agents to Manage and Utilize Memories via Reinforcement Learning\n——LLMs Forget. Memory-R1 Learns to Remember and Use!           Presenter: Sikuan Yan\n作者：Sikuan Yan, Xiufeng Yang, Zuchao Huang, Ercong Nie, Zifeng Ding, Zonggen Li, Xiaowen Ma, Kristian Kersting, Jeff Z. Pan, Hinrich Schütze, Volker Tresp, Yunpu Ma\n机构：慕尼黑大学、慕尼黑机器学习中心、慕尼黑工业大学、剑桥大学、香港大学、 达姆施塔特工业大学、爱丁堡大学",
+      "slots": [
+        {
+          "slot_id": "s01_sh3",
+          "role": "title_candidate",
+          "text": "Memory-R1: Enhancing Large Language Model Agents to Manage and Utilize Memories via Reinforcement Learning\n——LLMs Forget. Memory-R1 Learns to Remember and Use!           Presenter: Sikuan Yan",
+          "paragraph_count": 2,
+          "geometry": {
+            "x": 27,
+            "y": 190,
+            "width": 517,
+            "height": 260
+          },
+          "text_metrics": {
+            "font_size_px": 26.67,
+            "paragraph_count": 2
+          }
+        },
+        {
+          "slot_id": "s01_sh5",
+          "role": "body_candidate",
+          "text": "作者：Sikuan Yan, Xiufeng Yang, Zuchao Huang, Ercong Nie, Zifeng Ding, Zonggen Li, Xiaowen Ma, Kristian Kersting, Jeff Z. Pan, Hinrich Schütze, Volker Tresp, Yunpu Ma\n机构：慕尼黑大学、慕尼黑机器学习中心、慕尼黑工业大学、剑桥大学、香港大学、 达姆施塔特工业大学、爱丁堡大学",
+          "paragraph_count": 2,
+          "geometry": {
+            "x": 27,
+            "y": 555,
+            "width": 517,
+            "height": 147
+          },
+          "text_metrics": {
+            "font_size_px": 21.4,
+            "paragraph_count": 2
+          }
+        }
+      ],
+      "tables": [],
+      "charts": [],
+      "diagrams": []
+    },
+    {
+      "slide_index": 2,
+      "page_type": "content_candidate",
+      "text_summary": "2\nWhy Do We Need Retrieval-Augmented Generation?\nLimitations of vanilla LLMs (e.g. hallucination, lack of up-to-date info)\nNeed for grounding LLMs in external knowledge (LLM needs to know company confidential info during inference)\nExplainability, flexibility & more",
+      "slots": [
+        {
+          "slot_id": "s02_sh2",
+          "role": "title_candidate",
+          "text": "2",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": null,
+            "y": null,
+            "width": null,
+            "height": null
+          },
+          "text_metrics": {
+            "font_size_px": null,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s02_sh3",
+          "role": "title_candidate",
+          "text": "Why Do We Need Retrieval-Augmented Generation?",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": null,
+            "y": null,
+            "width": null,
+            "height": null
+          },
+          "text_metrics": {
+            "font_size_px": 26.67,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s02_sh4",
+          "role": "body_candidate",
+          "text": "Limitations of vanilla LLMs (e.g. hallucination, lack of up-to-date info)\nNeed for grounding LLMs in external knowledge (LLM needs to know company confidential info during inference)\nExplainability, flexibility & more",
+          "paragraph_count": 3,
+          "geometry": {
+            "x": null,
+            "y": null,
+            "width": null,
+            "height": null
+          },
+          "text_metrics": {
+            "font_size_px": 24.0,
+            "paragraph_count": 3
+          }
+        }
+      ],
+      "tables": [],
+      "charts": [],
+      "diagrams": []
+    },
+    {
+      "slide_index": 3,
+      "page_type": "content_candidate",
+      "text_summary": "3\nWhat is Retrieval-Augmented Generation (RAG)?\nShort definition: \"A hybrid approach that combines retrieval and generation\"\nRAG = Retrieval + Generation\nFigure: Pipeline of RAG technique",
+      "slots": [
+        {
+          "slot_id": "s03_sh2",
+          "role": "title_candidate",
+          "text": "3",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": null,
+            "y": null,
+            "width": null,
+            "height": null
+          },
+          "text_metrics": {
+            "font_size_px": null,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s03_sh3",
+          "role": "title_candidate",
+          "text": "What is Retrieval-Augmented Generation (RAG)?",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": null,
+            "y": null,
+            "width": null,
+            "height": null
+          },
+          "text_metrics": {
+            "font_size_px": 26.67,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s03_sh4",
+          "role": "body_candidate",
+          "text": "Short definition: \"A hybrid approach that combines retrieval and generation\"\nRAG = Retrieval + Generation",
+          "paragraph_count": 2,
+          "geometry": {
+            "x": null,
+            "y": null,
+            "width": null,
+            "height": null
+          },
+          "text_metrics": {
+            "font_size_px": 24.0,
+            "paragraph_count": 2
+          }
+        },
+        {
+          "slot_id": "s03_sh7",
+          "role": "label_candidate",
+          "text": "",
+          "paragraph_count": 0,
+          "geometry": {
+            "x": 388,
+            "y": 507,
+            "width": 369,
+            "height": 120
+          },
+          "text_metrics": {
+            "font_size_px": null,
+            "paragraph_count": 0
+          }
+        },
+        {
+          "slot_id": "s03_sh8",
+          "role": "label_candidate",
+          "text": "",
+          "paragraph_count": 0,
+          "geometry": {
+            "x": 572,
+            "y": 415,
+            "width": 207,
+            "height": 70
+          },
+          "text_metrics": {
+            "font_size_px": null,
+            "paragraph_count": 0
+          }
+        },
+        {
+          "slot_id": "s03_sh9",
+          "role": "body_candidate",
+          "text": "Figure: Pipeline of RAG technique",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": 572,
+            "y": 639,
+            "width": 236,
+            "height": 29
+          },
+          "text_metrics": {
+            "font_size_px": 24.0,
+            "paragraph_count": 1
+          }
+        }
+      ],
+      "tables": [],
+      "charts": [],
+      "diagrams": []
+    },
+    {
+      "slide_index": 4,
+      "page_type": "content_candidate",
+      "text_summary": "4\nBeyond RAG: Toward Intelligent Memory Systems\nWhy memory matters?\nWithout Memory\nLLM/Agent is stateless\nAnalogy to humans: Without memory, continuous learning, adaptation, and reasoning are impossible.\nE.g., forgetting users, repeating answers, inability to handle multi-turn conversations\nFigure: Comparison of Stateless LLM vs Memory-Augmented LLM in remembering user dietary needs",
+      "slots": [
+        {
+          "slot_id": "s04_sh2",
+          "role": "title_candidate",
+          "text": "4",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": null,
+            "y": null,
+            "width": null,
+            "height": null
+          },
+          "text_metrics": {
+            "font_size_px": null,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s04_sh3",
+          "role": "title_candidate",
+          "text": "Beyond RAG: Toward Intelligent Memory Systems",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": null,
+            "y": null,
+            "width": null,
+            "height": null
+          },
+          "text_metrics": {
+            "font_size_px": null,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s04_sh4",
+          "role": "body_candidate",
+          "text": "Why memory matters?\nWithout Memory\nLLM/Agent is stateless\nAnalogy to humans: Without memory, continuous learning, adaptation, and reasoning are impossible.\nE.g., forgetting users, repeating answers, inability to handle multi-turn conversations",
+          "paragraph_count": 5,
+          "geometry": {
+            "x": null,
+            "y": null,
+            "width": null,
+            "height": null
+          },
+          "text_metrics": {
+            "font_size_px": 21.33,
+            "paragraph_count": 5
+          }
+        },
+        {
+          "slot_id": "s04_sh7",
+          "role": "body_candidate",
+          "text": "Figure: Comparison of Stateless LLM vs Memory-Augmented LLM in remembering user dietary needs",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": 345,
+            "y": 659,
+            "width": 681,
+            "height": 29
+          },
+          "text_metrics": {
+            "font_size_px": 24.0,
+            "paragraph_count": 1
+          }
+        }
+      ],
+      "tables": [],
+      "charts": [],
+      "diagrams": []
+    },
+    {
+      "slide_index": 5,
+      "page_type": "content_candidate",
+      "text_summary": "5\nWhy Memory Matters?\nHumans\nLearn from past problem-solving\nImprove efficiency & accuracy over time\nLLM Agents (today)\nDo not retain experience\nRestart from scratch every query\nEra of Experience (Proposed by David Silver, Richard S. Sutton)\nBeyond simulation & human data\nAgents that remember, adapt, and improve with use\n“The era of experience marks a pivotal moment in the evolution of AI. Building on today’s strong foundations but moving beyond the limitations of human-derived data, agents will",
+      "slots": [
+        {
+          "slot_id": "s05_sh2",
+          "role": "title_candidate",
+          "text": "5",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": null,
+            "y": null,
+            "width": null,
+            "height": null
+          },
+          "text_metrics": {
+            "font_size_px": null,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s05_sh3",
+          "role": "title_candidate",
+          "text": "Why Memory Matters?",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": null,
+            "y": null,
+            "width": null,
+            "height": null
+          },
+          "text_metrics": {
+            "font_size_px": null,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s05_sh4",
+          "role": "body_candidate",
+          "text": "Humans\nLearn from past problem-solving\nImprove efficiency & accuracy over time\nLLM Agents (today)\nDo not retain experience\nRestart from scratch every query\nEra of Experience (Proposed by David Silver, Richard S. Sutton)\nBeyond simulation & human data\nAgents that remember, adapt, and improve with use\n“The era of experience marks a pivotal moment in the evolution of AI. Building on today’s strong foundations but moving beyond the limitations of human-derived data, agents will increasingly learn from their own interactions with the world. Agents will autonomously interact with environments through rich observations and actions. They will continue to adapt over the course of lifelong streams of experience. Their goals will be directable towards any combination of grounded signals.”",
+          "paragraph_count": 10,
+          "geometry": {
+            "x": 47,
+            "y": 156,
+            "width": 627,
+            "height": 517
+          },
+          "text_metrics": {
+            "font_size_px": 18.67,
+            "paragraph_count": 10
+          }
+        },
+        {
+          "slot_id": "s05_sh6",
+          "role": "label_candidate",
+          "text": "Figure: Evolution of AI — from Simulation & Human Data to the Era of Experience",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": 784,
+            "y": 354,
+            "width": 445,
+            "height": 48
+          },
+          "text_metrics": {
+            "font_size_px": 24.0,
+            "paragraph_count": 1
+          }
+        }
+      ],
+      "tables": [],
+      "charts": [],
+      "diagrams": []
+    },
+    {
+      "slide_index": 6,
+      "page_type": "content_candidate",
+      "text_summary": "6\nBeyond RAG: Toward Intelligent Memory Systems\nTable: Comparison of RAG and Memory\nRAG-Augmented LLMs\nMemory-Augmented LLMs\nRetrieve static external knowledge\nMaintain dynamic, agent-specific memory\nStateless generation per query\nStateful reasoning across time\nQuery-based document recall\nExperience-based task adaptation\nFixed retriever + generator pipeline\nLearnable memory usage & update policies",
+      "slots": [
+        {
+          "slot_id": "s06_sh2",
+          "role": "title_candidate",
+          "text": "6",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": null,
+            "y": null,
+            "width": null,
+            "height": null
+          },
+          "text_metrics": {
+            "font_size_px": null,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s06_sh3",
+          "role": "title_candidate",
+          "text": "Beyond RAG: Toward Intelligent Memory Systems",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": null,
+            "y": null,
+            "width": null,
+            "height": null
+          },
+          "text_metrics": {
+            "font_size_px": null,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s06_sh7",
+          "role": "body_candidate",
+          "text": "Table: Comparison of RAG and Memory",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": 479,
+            "y": 496,
+            "width": 276,
+            "height": 29
+          },
+          "text_metrics": {
+            "font_size_px": 24.0,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s06_sh6",
+          "role": "body_candidate",
+          "text": "RAG-Augmented LLMs\nMemory-Augmented LLMs\nRetrieve static external knowledge\nMaintain dynamic, agent-specific memory\nStateless generation per query\nStateful reasoning across time\nQuery-based document recall\nExperience-based task adaptation\nFixed retriever + generator pipeline\nLearnable memory usage & update policies",
+          "paragraph_count": 10,
+          "geometry": {
+            "x": 165,
+            "y": 269,
+            "width": 950,
+            "height": 216
+          },
+          "text_metrics": {
+            "font_size_px": 21.33,
+            "paragraph_count": 10
+          }
+        }
+      ],
+      "tables": [
+        {
+          "table_id": "s06_tbl6",
+          "row_count": 5,
+          "column_count": 2,
+          "rows": [
+            {
+              "row": 0,
+              "cells": [
+                {
+                  "row": 0,
+                  "col": 0,
+                  "text": "RAG-Augmented LLMs",
+                  "merge_role": "none",
+                  "is_merge_anchor": false,
+                  "is_merge_slave": false,
+                  "row_span": 1,
+                  "col_span": 1,
+                  "h_merge": false,
+                  "v_merge": false,
+                  "anchor_row": 0,
+                  "anchor_col": 0
+                },
+                {
+                  "row": 0,
+                  "col": 1,
+                  "text": "Memory-Augmented LLMs",
+                  "merge_role": "none",
+                  "is_merge_anchor": false,
+                  "is_merge_slave": false,
+                  "row_span": 1,
+                  "col_span": 1,
+                  "h_merge": false,
+                  "v_merge": false,
+                  "anchor_row": 0,
+                  "anchor_col": 1
+                }
+              ]
+            },
+            {
+              "row": 1,
+              "cells": [
+                {
+                  "row": 1,
+                  "col": 0,
+                  "text": "Retrieve static external knowledge",
+                  "merge_role": "none",
+                  "is_merge_anchor": false,
+                  "is_merge_slave": false,
+                  "row_span": 1,
+                  "col_span": 1,
+                  "h_merge": false,
+                  "v_merge": false,
+                  "anchor_row": 1,
+                  "anchor_col": 0
+                },
+                {
+                  "row": 1,
+                  "col": 1,
+                  "text": "Maintain dynamic, agent-specific memory",
+                  "merge_role": "none",
+                  "is_merge_anchor": false,
+                  "is_merge_slave": false,
+                  "row_span": 1,
+                  "col_span": 1,
+                  "h_merge": false,
+                  "v_merge": false,
+                  "anchor_row": 1,
+                  "anchor_col": 1
+                }
+              ]
+            },
+            {
+              "row": 2,
+              "cells": [
+                {
+                  "row": 2,
+                  "col": 0,
+                  "text": "Stateless generation per query",
+                  "merge_role": "none",
+                  "is_merge_anchor": false,
+                  "is_merge_slave": false,
+                  "row_span": 1,
+                  "col_span": 1,
+                  "h_merge": false,
+                  "v_merge": false,
+                  "anchor_row": 2,
+                  "anchor_col": 0
+                },
+                {
+                  "row": 2,
+                  "col": 1,
+                  "text": "Stateful reasoning across time",
+                  "merge_role": "none",
+                  "is_merge_anchor": false,
+                  "is_merge_slave": false,
+                  "row_span": 1,
+                  "col_span": 1,
+                  "h_merge": false,
+                  "v_merge": false,
+                  "anchor_row": 2,
+                  "anchor_col": 1
+                }
+              ]
+            },
+            {
+              "row": 3,
+              "cells": [
+                {
+                  "row": 3,
+                  "col": 0,
+                  "text": "Query-based document recall",
+                  "merge_role": "none",
+                  "is_merge_anchor": false,
+                  "is_merge_slave": false,
+                  "row_span": 1,
+                  "col_span": 1,
+                  "h_merge": false,
+                  "v_merge": false,
+                  "anchor_row": 3,
+                  "anchor_col": 0
+                },
+                {
+                  "row": 3,
+                  "col": 1,
+                  "text": "Experience-based task adaptation",
+                  "merge_role": "none",
+                  "is_merge_anchor": false,
+                  "is_merge_slave": false,
+                  "row_span": 1,
+                  "col_span": 1,
+                  "h_merge": false,
+                  "v_merge": false,
+                  "anchor_row": 3,
+                  "anchor_col": 1
+                }
+              ]
+            },
+            {
+              "row": 4,
+              "cells": [
+                {
+                  "row": 4,
+                  "col": 0,
+                  "text": "Fixed retriever + generator pipeline",
+                  "merge_role": "none",
+                  "is_merge_anchor": false,
+                  "is_merge_slave": false,
+                  "row_span": 1,
+                  "col_span": 1,
+                  "h_merge": false,
+                  "v_merge": false,
+                  "anchor_row": 4,
+                  "anchor_col": 0
+                },
+                {
+                  "row": 4,
+                  "col": 1,
+                  "text": "Learnable memory usage & update policies",
+                  "merge_role": "none",
+                  "is_merge_anchor": false,
+                  "is_merge_slave": false,
+                  "row_span": 1,
+                  "col_span": 1,
+                  "h_merge": false,
+                  "v_merge": false,
+                  "anchor_row": 4,
+                  "anchor_col": 1
+                }
+              ]
+            }
+          ],
+          "merge_topology": {
+            "has_merges": false,
+            "anchors": [],
+            "slave_cells": []
+          }
+        }
+      ],
+      "charts": [],
+      "diagrams": [],
+      "fill_risk": {
+        "has_non_text_content": true,
+        "kinds": [
+          "table"
+        ],
+        "reason": "has non-text content (table) that text-fill does not replace automatically; cover tables/charts with explicit edits"
+      }
+    },
+    {
+      "slide_index": 7,
+      "page_type": "content_candidate",
+      "text_summary": "7\nMainstream Architectures (1): Vector Database-Based Information Retrieval & Generation\nPrinciple\nRetrieve external knowledge (docs, DBs) → generate with context\nCombines information retrieval + language modelling\nWorkflow\nUser inputs query q\nEmbedding retriever finds similar docs D(q) (e.g., FAISS)\nLM generates response using [q, D(q)]\nRepresentative Systems\nRAG (Facebook, 2020)\nLoCoMo (Snap, 2024)\nEmerging: DeepRetriever (2025) → better query–doc matching\nPros\nScalable\nKnowledge easily updata",
+      "slots": [
+        {
+          "slot_id": "s07_sh2",
+          "role": "title_candidate",
+          "text": "7",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": null,
+            "y": null,
+            "width": null,
+            "height": null
+          },
+          "text_metrics": {
+            "font_size_px": null,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s07_sh3",
+          "role": "title_candidate",
+          "text": "Mainstream Architectures (1): Vector Database-Based Information Retrieval & Generation",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": null,
+            "y": null,
+            "width": null,
+            "height": null
+          },
+          "text_metrics": {
+            "font_size_px": 26.67,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s07_sh4",
+          "role": "body_candidate",
+          "text": "Principle\nRetrieve external knowledge (docs, DBs) → generate with context\nCombines information retrieval + language modelling\nWorkflow\nUser inputs query q\nEmbedding retriever finds similar docs D(q) (e.g., FAISS)\nLM generates response using [q, D(q)]\nRepresentative Systems\nRAG (Facebook, 2020)\nLoCoMo (Snap, 2024)\nEmerging: DeepRetriever (2025) → better query–doc matching\nPros\nScalable\nKnowledge easily updatable\nStrong interpretability\nCons\nDependent on retrieval quality\nNo mechanism for long-term memory updates",
+          "paragraph_count": 18,
+          "geometry": {
+            "x": null,
+            "y": null,
+            "width": null,
+            "height": null
+          },
+          "text_metrics": {
+            "font_size_px": 18.67,
+            "paragraph_count": 18
+          }
+        },
+        {
+          "slot_id": "s07_sh6",
+          "role": "label_candidate",
+          "text": "retrieval encoder",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": 761,
+            "y": 387,
+            "width": 138,
+            "height": 29
+          },
+          "text_metrics": {
+            "font_size_px": 16.0,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s07_sh7",
+          "role": "label_candidate",
+          "text": "retriever",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": 937,
+            "y": 440,
+            "width": 78,
+            "height": 29
+          },
+          "text_metrics": {
+            "font_size_px": 16.0,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s07_sh8",
+          "role": "label_candidate",
+          "text": "reranker",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": 1096,
+            "y": 375,
+            "width": 87,
+            "height": 29
+          },
+          "text_metrics": {
+            "font_size_px": 16.0,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s07_sh9",
+          "role": "body_candidate",
+          "text": "Figure: Pipeline of RAG technique",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": 937,
+            "y": 495,
+            "width": 236,
+            "height": 29
+          },
+          "text_metrics": {
+            "font_size_px": 16.0,
+            "paragraph_count": 1
+          }
+        }
+      ],
+      "tables": [],
+      "charts": [],
+      "diagrams": []
+    },
+    {
+      "slide_index": 8,
+      "page_type": "content_candidate",
+      "text_summary": "8\nMainstream Memory Architectures (2): Memory-Augmented Interactive Agents\nPrinciple\nManage memory lifecycle → give LLMs durable internal memory\nMemory operations depend on model behaviour + context\nCore Mechanisms\nLong-term & short-term memory modules\nRead/Write control\nRule-based or heuristic-driven Memory Controller\nRepresentative Systems\nMemGPT (2023)\nMem0 (2025)\nA-Mem (2025)\nPros\nEnables long-term memory with contextual consistency\nSupports multi-turn dialogue & task tracking\nCons\nMemory co",
+      "slots": [
+        {
+          "slot_id": "s08_sh2",
+          "role": "title_candidate",
+          "text": "8",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": null,
+            "y": null,
+            "width": null,
+            "height": null
+          },
+          "text_metrics": {
+            "font_size_px": null,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s08_sh3",
+          "role": "title_candidate",
+          "text": "Mainstream Memory Architectures (2): Memory-Augmented Interactive Agents",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": null,
+            "y": null,
+            "width": null,
+            "height": null
+          },
+          "text_metrics": {
+            "font_size_px": 26.67,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s08_sh4",
+          "role": "body_candidate",
+          "text": "Principle\nManage memory lifecycle → give LLMs durable internal memory\nMemory operations depend on model behaviour + context\nCore Mechanisms\nLong-term & short-term memory modules\nRead/Write control\nRule-based or heuristic-driven Memory Controller\nRepresentative Systems\nMemGPT (2023)\nMem0 (2025)\nA-Mem (2025)\nPros\nEnables long-term memory with contextual consistency\nSupports multi-turn dialogue & task tracking\nCons\nMemory conflicts & redundancy\nForgetting risks\nWorking memory degrades if retrieval is poor",
+          "paragraph_count": 18,
+          "geometry": {
+            "x": null,
+            "y": null,
+            "width": null,
+            "height": null
+          },
+          "text_metrics": {
+            "font_size_px": 21.33,
+            "paragraph_count": 18
+          }
+        },
+        {
+          "slot_id": "s08_sh6",
+          "role": "body_candidate",
+          "text": "Figure: Pipeline of MemGPT",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": 870,
+            "y": 422,
+            "width": 226,
+            "height": 29
+          },
+          "text_metrics": {
+            "font_size_px": 16.0,
+            "paragraph_count": 1
+          }
+        }
+      ],
+      "tables": [],
+      "charts": [],
+      "diagrams": []
+    },
+    {
+      "slide_index": 9,
+      "page_type": "content_candidate",
+      "text_summary": "9\nReinforcement Learning as Cherry on Cake (by Yann LeCun)",
+      "slots": [
+        {
+          "slot_id": "s09_sh2",
+          "role": "title_candidate",
+          "text": "9",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": null,
+            "y": null,
+            "width": null,
+            "height": null
+          },
+          "text_metrics": {
+            "font_size_px": null,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s09_sh3",
+          "role": "title_candidate",
+          "text": "Reinforcement Learning as Cherry on Cake (by Yann LeCun)",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": null,
+            "y": null,
+            "width": null,
+            "height": null
+          },
+          "text_metrics": {
+            "font_size_px": 26.67,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s09_sh4",
+          "role": "label_candidate",
+          "text": "",
+          "paragraph_count": 0,
+          "geometry": {
+            "x": null,
+            "y": null,
+            "width": null,
+            "height": null
+          },
+          "text_metrics": {
+            "font_size_px": null,
+            "paragraph_count": 0
+          }
+        }
+      ],
+      "tables": [],
+      "charts": [],
+      "diagrams": []
+    },
+    {
+      "slide_index": 10,
+      "page_type": "content_candidate",
+      "text_summary": "10\nMotivation of Memory-R1\nChallenges of current external memory system\nMemory Manager\nPrompt LLM to make decisions on Memory\nOperations: {ADD, UPDATE, DELETE, NOOP}\nRely on static, heuristic-driven approach\nAnswer Agent\nRAG relies on a fixed top-k retrieval strategy\nSmall k -> risk of missing crucial information\nLarge k -> context flooded with irrelevant\ninformation, leading to distraction and degradation\nTraining challenges\nNo single “best” rule for memory operations\nMemory usefulness depends ",
+      "slots": [
+        {
+          "slot_id": "s10_sh2",
+          "role": "title_candidate",
+          "text": "10",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": null,
+            "y": null,
+            "width": null,
+            "height": null
+          },
+          "text_metrics": {
+            "font_size_px": null,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s10_sh3",
+          "role": "title_candidate",
+          "text": "Motivation of Memory-R1",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": null,
+            "y": null,
+            "width": null,
+            "height": null
+          },
+          "text_metrics": {
+            "font_size_px": 26.67,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s10_sh4",
+          "role": "body_candidate",
+          "text": "Challenges of current external memory system\nMemory Manager\nPrompt LLM to make decisions on Memory\nOperations: {ADD, UPDATE, DELETE, NOOP}\nRely on static, heuristic-driven approach\nAnswer Agent\nRAG relies on a fixed top-k retrieval strategy\nSmall k -> risk of missing crucial information\nLarge k -> context flooded with irrelevant\ninformation, leading to distraction and degradation\nTraining challenges\nNo single “best” rule for memory operations\nMemory usefulness depends on context & downstream tasks\nHard to handcraft optimal strategies",
+          "paragraph_count": 14,
+          "geometry": {
+            "x": null,
+            "y": null,
+            "width": null,
+            "height": null
+          },
+          "text_metrics": {
+            "font_size_px": 18.67,
+            "paragraph_count": 14
+          }
+        },
+        {
+          "slot_id": "s10_sh6",
+          "role": "body_candidate",
+          "text": "Figure: Comparison of vanilla LLM vs Memory-R1--heuristic approach fails, RL-enhanced approach correctly update memory",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": 677,
+            "y": 399,
+            "width": 504,
+            "height": 49
+          },
+          "text_metrics": {
+            "font_size_px": 16.0,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s10_sh7",
+          "role": "body_candidate",
+          "text": "Solution: Using Reinforcement Learning (RL) to enable adaptive memory management and selective utilization",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": 88,
+            "y": 575,
+            "width": 1105,
+            "height": 36
+          },
+          "text_metrics": {
+            "font_size_px": 21.33,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s10_sh10",
+          "role": "label_candidate",
+          "text": "“Reranker”",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": 358,
+            "y": 278,
+            "width": 122,
+            "height": 32
+          },
+          "text_metrics": {
+            "font_size_px": 18.67,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s10_sh13",
+          "role": "body_candidate",
+          "text": "“External knowledge base”",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": 297,
+            "y": 175,
+            "width": 257,
+            "height": 32
+          },
+          "text_metrics": {
+            "font_size_px": 18.67,
+            "paragraph_count": 1
+          }
+        }
+      ],
+      "tables": [],
+      "charts": [],
+      "diagrams": []
+    },
+    {
+      "slide_index": 11,
+      "page_type": "ending_candidate",
+      "text_summary": "11\nProblem Formulation\nSetting:\nMulti-session dialogues\nFacts spread across distant turns\nExternal memory needed for QA\nGoal:\nAdaptive memory management (Memory Manager)\nSelective memory utilization (Answer Agent)\nCore Challenge:\nGo beyond heuristics & fixed top-k retrieval\nRL to optimize memory ops & answer correctness\nQuestions can only be answered with information from the dialogues\nFigure: Example dialogues and questions from LoCoMo dataset",
+      "slots": [
+        {
+          "slot_id": "s11_sh2",
+          "role": "title_candidate",
+          "text": "11",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": null,
+            "y": null,
+            "width": null,
+            "height": null
+          },
+          "text_metrics": {
+            "font_size_px": null,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s11_sh3",
+          "role": "title_candidate",
+          "text": "Problem Formulation",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": null,
+            "y": null,
+            "width": null,
+            "height": null
+          },
+          "text_metrics": {
+            "font_size_px": 26.67,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s11_sh4",
+          "role": "body_candidate",
+          "text": "Setting:\nMulti-session dialogues\nFacts spread across distant turns\nExternal memory needed for QA\nGoal:\nAdaptive memory management (Memory Manager)\nSelective memory utilization (Answer Agent)\nCore Challenge:\nGo beyond heuristics & fixed top-k retrieval\nRL to optimize memory ops & answer correctness",
+          "paragraph_count": 10,
+          "geometry": {
+            "x": null,
+            "y": null,
+            "width": null,
+            "height": null
+          },
+          "text_metrics": {
+            "font_size_px": 21.33,
+            "paragraph_count": 10
+          }
+        },
+        {
+          "slot_id": "s11_sh7",
+          "role": "body_candidate",
+          "text": "Questions can only be answered with information from the dialogues",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": 941,
+            "y": 493,
+            "width": 311,
+            "height": 48
+          },
+          "text_metrics": {
+            "font_size_px": 21.33,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s11_sh8",
+          "role": "label_candidate",
+          "text": "",
+          "paragraph_count": 0,
+          "geometry": {
+            "x": 725,
+            "y": 548,
+            "width": 376,
+            "height": 74
+          },
+          "text_metrics": {
+            "font_size_px": null,
+            "paragraph_count": 0
+          }
+        },
+        {
+          "slot_id": "s11_sh9",
+          "role": "title_candidate",
+          "text": "Figure: Example dialogues and questions from LoCoMo dataset",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": 749,
+            "y": 77,
+            "width": 430,
+            "height": 29
+          },
+          "text_metrics": {
+            "font_size_px": 16.0,
+            "paragraph_count": 1
+          }
+        }
+      ],
+      "tables": [],
+      "charts": [],
+      "diagrams": []
+    },
+    {
+      "slide_index": 12,
+      "page_type": "ending_candidate",
+      "text_summary": "12\nDataset\nLoCoMo:\nPublished by Snap\nTypes: Single-Hop Reasoning, Multi-Hop Reasoning,\nCommonsense & World Know., Adversarial, Temporal Reasoning\n10 dialogues + 1540 QA\nMSC-self-instruct:\nPublished by MemGPT, derived from Multi-Session Chat (MSC) dataset.\nMemory Retrieval QA – user asks about past details\n(“What city did I visit last month?”).\n500 dialogues + 500 QA\nLongMemEval\nInformation Extraction (IE), Multi-Session Reasoning (MR),\nKnowledge Updates (KU), Temporal Reasoning (TR), Abstention ",
+      "slots": [
+        {
+          "slot_id": "s12_sh2",
+          "role": "title_candidate",
+          "text": "12",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": null,
+            "y": null,
+            "width": null,
+            "height": null
+          },
+          "text_metrics": {
+            "font_size_px": null,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s12_sh3",
+          "role": "title_candidate",
+          "text": "Dataset",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": null,
+            "y": null,
+            "width": null,
+            "height": null
+          },
+          "text_metrics": {
+            "font_size_px": 26.67,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s12_sh4",
+          "role": "body_candidate",
+          "text": "LoCoMo:\nPublished by Snap\nTypes: Single-Hop Reasoning, Multi-Hop Reasoning,\nCommonsense & World Know., Adversarial, Temporal Reasoning\n10 dialogues + 1540 QA\nMSC-self-instruct:\nPublished by MemGPT, derived from Multi-Session Chat (MSC) dataset.\nMemory Retrieval QA – user asks about past details\n(“What city did I visit last month?”).\n500 dialogues + 500 QA\nLongMemEval\nInformation Extraction (IE), Multi-Session Reasoning (MR),\nKnowledge Updates (KU), Temporal Reasoning (TR), Abstention (ABS)\n500 dialogues + 500 QA",
+          "paragraph_count": 14,
+          "geometry": {
+            "x": null,
+            "y": null,
+            "width": null,
+            "height": null
+          },
+          "text_metrics": {
+            "font_size_px": 21.33,
+            "paragraph_count": 14
+          }
+        },
+        {
+          "slot_id": "s12_sh11",
+          "role": "label_candidate",
+          "text": "",
+          "paragraph_count": 0,
+          "geometry": {
+            "x": 320,
+            "y": 314,
+            "width": 640,
+            "height": 39
+          },
+          "text_metrics": {
+            "font_size_px": null,
+            "paragraph_count": 0
+          }
+        },
+        {
+          "slot_id": "s12_sh17",
+          "role": "body_candidate",
+          "text": "Figure a: LoCoMo dataset",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": 761,
+            "y": 257,
+            "width": 206,
+            "height": 29
+          },
+          "text_metrics": {
+            "font_size_px": 16.0,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s12_sh18",
+          "role": "body_candidate",
+          "text": "Figure b: MSC-self-instruct dataset",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": 1005,
+            "y": 564,
+            "width": 269,
+            "height": 29
+          },
+          "text_metrics": {
+            "font_size_px": 16.0,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s12_sh19",
+          "role": "body_candidate",
+          "text": "Figure c: LongMemEval dataset",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": 741,
+            "y": 664,
+            "width": 247,
+            "height": 29
+          },
+          "text_metrics": {
+            "font_size_px": 16.0,
+            "paragraph_count": 1
+          }
+        }
+      ],
+      "tables": [],
+      "charts": [],
+      "diagrams": []
+    },
+    {
+      "slide_index": 13,
+      "page_type": "content_candidate",
+      "text_summary": "13\nPipeline\nStage 1: Memory Construction\nExtract key info from dialogues\nMemory Manager → {ADD, UPDATE, DELETE, NOOP}\nBuild & evolve memory bank\nStage 2: Memory-Guided Answer Generation\nRetrieve candidate memories (30 from each candidate)\nAnswer Agent with Memory Distillation\nGenerate accurate answers\nFormulate memory management & utilization into a Reinforcement Learning problem!\nFigure: Overview of Memory-R1 framework",
+      "slots": [
+        {
+          "slot_id": "s13_sh2",
+          "role": "title_candidate",
+          "text": "13",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": null,
+            "y": null,
+            "width": null,
+            "height": null
+          },
+          "text_metrics": {
+            "font_size_px": null,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s13_sh3",
+          "role": "title_candidate",
+          "text": "Pipeline",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": null,
+            "y": null,
+            "width": null,
+            "height": null
+          },
+          "text_metrics": {
+            "font_size_px": 26.67,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s13_sh4",
+          "role": "body_candidate",
+          "text": "Stage 1: Memory Construction\nExtract key info from dialogues\nMemory Manager → {ADD, UPDATE, DELETE, NOOP}\nBuild & evolve memory bank\nStage 2: Memory-Guided Answer Generation\nRetrieve candidate memories (30 from each candidate)\nAnswer Agent with Memory Distillation\nGenerate accurate answers",
+          "paragraph_count": 8,
+          "geometry": {
+            "x": null,
+            "y": null,
+            "width": null,
+            "height": null
+          },
+          "text_metrics": {
+            "font_size_px": 18.67,
+            "paragraph_count": 8
+          }
+        },
+        {
+          "slot_id": "s13_sh7",
+          "role": "body_candidate",
+          "text": "Formulate memory management & utilization into a Reinforcement Learning problem!",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": 148,
+            "y": 650,
+            "width": 941,
+            "height": 39
+          },
+          "text_metrics": {
+            "font_size_px": null,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s13_sh8",
+          "role": "body_candidate",
+          "text": "Figure: Overview of Memory-R1 framework",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": 775,
+            "y": 384,
+            "width": 303,
+            "height": 29
+          },
+          "text_metrics": {
+            "font_size_px": 16.0,
+            "paragraph_count": 1
+          }
+        }
+      ],
+      "tables": [],
+      "charts": [],
+      "diagrams": []
+    },
+    {
+      "slide_index": 14,
+      "page_type": "ending_candidate",
+      "text_summary": "14\nMemory-R1 Training Pipeline\nMemory Manager\nInput: dialogue turns + memory bank + QA pairs\nOutput: memory operation {ADD, UPDATE, DELETE, NOOP}\nTraining Signal: answer correctness after update\nReward: indirect (via Answer Agent’s success)\nOptimization: PPO / GRPO\nAnswer Agent\nInput: question + retrieved memories\nOutput: distilled memories → final answer\nTraining Signal: answer correctness vs ground truth\nReward: direct (exact match)\nOptimization: PPO / GRPO\nMemory operation\nMemory bank\n+ new f",
+      "slots": [
+        {
+          "slot_id": "s14_sh2",
+          "role": "title_candidate",
+          "text": "14",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": null,
+            "y": null,
+            "width": null,
+            "height": null
+          },
+          "text_metrics": {
+            "font_size_px": null,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s14_sh3",
+          "role": "title_candidate",
+          "text": "Memory-R1 Training Pipeline",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": null,
+            "y": null,
+            "width": null,
+            "height": null
+          },
+          "text_metrics": {
+            "font_size_px": 26.67,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s14_sh4",
+          "role": "body_candidate",
+          "text": "Memory Manager\nInput: dialogue turns + memory bank + QA pairs\nOutput: memory operation {ADD, UPDATE, DELETE, NOOP}\nTraining Signal: answer correctness after update\nReward: indirect (via Answer Agent’s success)\nOptimization: PPO / GRPO\nAnswer Agent\nInput: question + retrieved memories\nOutput: distilled memories → final answer\nTraining Signal: answer correctness vs ground truth\nReward: direct (exact match)\nOptimization: PPO / GRPO",
+          "paragraph_count": 12,
+          "geometry": {
+            "x": null,
+            "y": null,
+            "width": null,
+            "height": null
+          },
+          "text_metrics": {
+            "font_size_px": 18.67,
+            "paragraph_count": 12
+          }
+        },
+        {
+          "slot_id": "s14_sh5",
+          "role": "title_candidate",
+          "text": "",
+          "paragraph_count": 0,
+          "geometry": {
+            "x": 640,
+            "y": 40,
+            "width": 542,
+            "height": 296
+          },
+          "text_metrics": {
+            "font_size_px": null,
+            "paragraph_count": 0
+          }
+        },
+        {
+          "slot_id": "s14_sh6",
+          "role": "label_candidate",
+          "text": "Memory operation",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": 1035,
+            "y": 179,
+            "width": 143,
+            "height": 29
+          },
+          "text_metrics": {
+            "font_size_px": 16.0,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s14_sh8",
+          "role": "title_candidate",
+          "text": "Memory bank\n+ new fact",
+          "paragraph_count": 2,
+          "geometry": {
+            "x": 648,
+            "y": 54,
+            "width": 116,
+            "height": 48
+          },
+          "text_metrics": {
+            "font_size_px": 16.0,
+            "paragraph_count": 2
+          }
+        },
+        {
+          "slot_id": "s14_sh9",
+          "role": "label_candidate",
+          "text": "Memory system",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": 956,
+            "y": 304,
+            "width": 125,
+            "height": 29
+          },
+          "text_metrics": {
+            "font_size_px": 16.0,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s14_sh11",
+          "role": "title_candidate",
+          "text": "Answer correctness",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": 763,
+            "y": 152,
+            "width": 101,
+            "height": 48
+          },
+          "text_metrics": {
+            "font_size_px": 24.0,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s14_sh26",
+          "role": "label_candidate",
+          "text": "",
+          "paragraph_count": 0,
+          "geometry": {
+            "x": 639,
+            "y": 381,
+            "width": 543,
+            "height": 298
+          },
+          "text_metrics": {
+            "font_size_px": null,
+            "paragraph_count": 0
+          }
+        },
+        {
+          "slot_id": "s14_sh28",
+          "role": "body_candidate",
+          "text": "Retrieved memories + Question",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": 642,
+            "y": 396,
+            "width": 116,
+            "height": 68
+          },
+          "text_metrics": {
+            "font_size_px": 16.0,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s14_sh29",
+          "role": "label_candidate",
+          "text": "Memory system",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": 955,
+            "y": 648,
+            "width": 125,
+            "height": 29
+          },
+          "text_metrics": {
+            "font_size_px": 16.0,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s14_sh30",
+          "role": "label_candidate",
+          "text": "Answer correctness",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": 762,
+            "y": 496,
+            "width": 101,
+            "height": 48
+          },
+          "text_metrics": {
+            "font_size_px": 24.0,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s14_sh41",
+          "role": "label_candidate",
+          "text": "Answer Agent",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": 894,
+            "y": 381,
+            "width": 111,
+            "height": 29
+          },
+          "text_metrics": {
+            "font_size_px": 16.0,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s14_sh43",
+          "role": "body_candidate",
+          "text": "Memory distillation + answer",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": 1026,
+            "y": 522,
+            "width": 158,
+            "height": 48
+          },
+          "text_metrics": {
+            "font_size_px": 16.0,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s14_sh44",
+          "role": "title_candidate",
+          "text": "Memory Manager",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": 888,
+            "y": 38,
+            "width": 138,
+            "height": 29
+          },
+          "text_metrics": {
+            "font_size_px": 16.0,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s14_sh45",
+          "role": "body_candidate",
+          "text": "Figure: Training pipeline of Memory Manager",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": 754,
+            "y": 338,
+            "width": 316,
+            "height": 29
+          },
+          "text_metrics": {
+            "font_size_px": 16.0,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s14_sh46",
+          "role": "body_candidate",
+          "text": "Figure: Training pipeline of Answer Agent",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": 772,
+            "y": 680,
+            "width": 288,
+            "height": 29
+          },
+          "text_metrics": {
+            "font_size_px": 16.0,
+            "paragraph_count": 1
+          }
+        }
+      ],
+      "tables": [],
+      "charts": [],
+      "diagrams": []
+    },
+    {
+      "slide_index": 15,
+      "page_type": "ending_candidate",
+      "text_summary": "15\nExperiments\nBenchmark\nDataset: LoCoMo\nSplit: 1 train (152 QA), 1 val (81 QA), 8 test (1,307 QA)\nBackbones: LLaMA-3.1-8B-Instruct,\nQwen-2.5-3,7,14B-Instruct\nMain Results (Table a)\nMemory-R1 sets new SOTA across both backbones\nRelative improvements on LLaMA:\n+69% F1, +48% BLEU-1, +37% LLM-as-Judge\nRelative improvements on Qwen:\n+57% F1, +41% BLEU-1, +34% LLM-as-Judge\nScalability (Figure b)\nConsistent Scaling: Memory-R1 shows consistent gains as model size.\nStable RL Performance \\ Backbone-Indep",
+      "slots": [
+        {
+          "slot_id": "s15_sh2",
+          "role": "title_candidate",
+          "text": "15",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": null,
+            "y": null,
+            "width": null,
+            "height": null
+          },
+          "text_metrics": {
+            "font_size_px": null,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s15_sh3",
+          "role": "title_candidate",
+          "text": "Experiments",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": null,
+            "y": null,
+            "width": null,
+            "height": null
+          },
+          "text_metrics": {
+            "font_size_px": 26.67,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s15_sh4",
+          "role": "body_candidate",
+          "text": "Benchmark\nDataset: LoCoMo\nSplit: 1 train (152 QA), 1 val (81 QA), 8 test (1,307 QA)\nBackbones: LLaMA-3.1-8B-Instruct,\nQwen-2.5-3,7,14B-Instruct\nMain Results (Table a)\nMemory-R1 sets new SOTA across both backbones\nRelative improvements on LLaMA:\n+69% F1, +48% BLEU-1, +37% LLM-as-Judge\nRelative improvements on Qwen:\n+57% F1, +41% BLEU-1, +34% LLM-as-Judge\nScalability (Figure b)\nConsistent Scaling: Memory-R1 shows consistent gains as model size.\nStable RL Performance \\ Backbone-Independent:\nImprovement trend holds across different backbones (Qwen-2.5 family).\nGeneralization (Figure c)\nZero-shot Generalization:\nTrained only on LoCoMo, yet performs well on MSC & LongMemEval.\nCross-domain Robustness:\nMaintains strong results across reasoning types (single-hop, temporal, etc.).",
+          "paragraph_count": 20,
+          "geometry": {
+            "x": null,
+            "y": null,
+            "width": null,
+            "height": null
+          },
+          "text_metrics": {
+            "font_size_px": 16.0,
+            "paragraph_count": 20
+          }
+        },
+        {
+          "slot_id": "s15_sh5",
+          "role": "body_candidate",
+          "text": "a) Overall benchmark",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": 847,
+            "y": 250,
+            "width": 160,
+            "height": 29
+          },
+          "text_metrics": {
+            "font_size_px": 16.0,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s15_sh8",
+          "role": "body_candidate",
+          "text": "b) Scalability across different model sizes",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": 777,
+            "y": 437,
+            "width": 285,
+            "height": 29
+          },
+          "text_metrics": {
+            "font_size_px": 16.0,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s15_sh10",
+          "role": "body_candidate",
+          "text": "c) Generalization analysis across LoCoMo, MSC, and LongMemEval",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": 701,
+            "y": 671,
+            "width": 523,
+            "height": 29
+          },
+          "text_metrics": {
+            "font_size_px": 16.0,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s15_sh11",
+          "role": "title_candidate",
+          "text": "Data-Efficient Training!",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": 304,
+            "y": 126,
+            "width": 244,
+            "height": 39
+          },
+          "text_metrics": {
+            "font_size_px": null,
+            "paragraph_count": 1
+          }
+        }
+      ],
+      "tables": [],
+      "charts": [],
+      "diagrams": []
+    },
+    {
+      "slide_index": 16,
+      "page_type": "ending_candidate",
+      "text_summary": "16\nExperiments\nBenchmark\nDataset: LoCoMo\nSplit: 1 train (152 QA), 1 val (81 QA), 8 test (1,307 QA)\nBackbones: LLaMA-3.1-8B-Instruct,\nQwen-2.5-3,7,14B-Instruct\nMain Results (Table a)\nMemory-R1 sets new SOTA across both backbones\nRelative improvements on LLaMA:\n+69% F1, +48% BLEU-1, +37% LLM-as-Judge\nRelative improvements on Qwen:\n+57% F1, +41% BLEU-1, +34% LLM-as-Judge\nOutperforms BC-based SFT even when trained with\nGPT-5 supervision\nFigure: Overall benchmark\nData-Efficient Training!",
+      "slots": [
+        {
+          "slot_id": "s16_sh2",
+          "role": "title_candidate",
+          "text": "16",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": null,
+            "y": null,
+            "width": null,
+            "height": null
+          },
+          "text_metrics": {
+            "font_size_px": null,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s16_sh3",
+          "role": "title_candidate",
+          "text": "Experiments",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": null,
+            "y": null,
+            "width": null,
+            "height": null
+          },
+          "text_metrics": {
+            "font_size_px": 26.67,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s16_sh4",
+          "role": "body_candidate",
+          "text": "Benchmark\nDataset: LoCoMo\nSplit: 1 train (152 QA), 1 val (81 QA), 8 test (1,307 QA)\nBackbones: LLaMA-3.1-8B-Instruct,\nQwen-2.5-3,7,14B-Instruct\nMain Results (Table a)\nMemory-R1 sets new SOTA across both backbones\nRelative improvements on LLaMA:\n+69% F1, +48% BLEU-1, +37% LLM-as-Judge\nRelative improvements on Qwen:\n+57% F1, +41% BLEU-1, +34% LLM-as-Judge\nOutperforms BC-based SFT even when trained with\nGPT-5 supervision",
+          "paragraph_count": 13,
+          "geometry": {
+            "x": null,
+            "y": null,
+            "width": null,
+            "height": null
+          },
+          "text_metrics": {
+            "font_size_px": 18.67,
+            "paragraph_count": 13
+          }
+        },
+        {
+          "slot_id": "s16_sh5",
+          "role": "body_candidate",
+          "text": "Figure: Overall benchmark",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": 811,
+            "y": 419,
+            "width": 209,
+            "height": 29
+          },
+          "text_metrics": {
+            "font_size_px": 16.0,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s16_sh11",
+          "role": "title_candidate",
+          "text": "Data-Efficient Training!",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": 304,
+            "y": 126,
+            "width": 244,
+            "height": 39
+          },
+          "text_metrics": {
+            "font_size_px": null,
+            "paragraph_count": 1
+          }
+        }
+      ],
+      "tables": [],
+      "charts": [],
+      "diagrams": []
+    },
+    {
+      "slide_index": 17,
+      "page_type": "content_candidate",
+      "text_summary": "17\nExperiments\nScalability (Figure b)\nConsistent Scaling: Memory-R1 shows consistent gains as model size.\nStable RL Performance \\ Backbone-Independent:\nImprovement trend holds across different backbones (Qwen-2.5 family).\nFigure a) Scalability across different model sizes\nFigure b) Generalization analysis across LoCoMo, MSC, and LongMemEval\nGeneralization (Figure c)\nZero-shot Generalization:\nTrained only on LoCoMo, yet performs well on MSC & LongMemEval.\nCross-domain Robustness:\nMaintains strong",
+      "slots": [
+        {
+          "slot_id": "s17_sh2",
+          "role": "title_candidate",
+          "text": "17",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": null,
+            "y": null,
+            "width": null,
+            "height": null
+          },
+          "text_metrics": {
+            "font_size_px": null,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s17_sh3",
+          "role": "title_candidate",
+          "text": "Experiments",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": null,
+            "y": null,
+            "width": null,
+            "height": null
+          },
+          "text_metrics": {
+            "font_size_px": 26.67,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s17_sh4",
+          "role": "body_candidate",
+          "text": "Scalability (Figure b)\nConsistent Scaling: Memory-R1 shows consistent gains as model size.\nStable RL Performance \\ Backbone-Independent:\nImprovement trend holds across different backbones (Qwen-2.5 family).",
+          "paragraph_count": 4,
+          "geometry": {
+            "x": 47,
+            "y": 156,
+            "width": 602,
+            "height": 517
+          },
+          "text_metrics": {
+            "font_size_px": 16.0,
+            "paragraph_count": 4
+          }
+        },
+        {
+          "slot_id": "s17_sh8",
+          "role": "body_candidate",
+          "text": "Figure a) Scalability across different model sizes",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": 155,
+            "y": 531,
+            "width": 365,
+            "height": 29
+          },
+          "text_metrics": {
+            "font_size_px": 16.0,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s17_sh10",
+          "role": "body_candidate",
+          "text": "Figure b) Generalization analysis across LoCoMo, MSC, and LongMemEval",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": 668,
+            "y": 531,
+            "width": 580,
+            "height": 29
+          },
+          "text_metrics": {
+            "font_size_px": 16.0,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s17_sh13",
+          "role": "body_candidate",
+          "text": "Generalization (Figure c)\nZero-shot Generalization:\nTrained only on LoCoMo, yet performs well on MSC & LongMemEval.\nCross-domain Robustness:\nMaintains strong results across reasoning types.",
+          "paragraph_count": 5,
+          "geometry": {
+            "x": 664,
+            "y": 156,
+            "width": 593,
+            "height": 517
+          },
+          "text_metrics": {
+            "font_size_px": 29.33,
+            "paragraph_count": 5
+          }
+        }
+      ],
+      "tables": [],
+      "charts": [],
+      "diagrams": []
+    },
+    {
+      "slide_index": 18,
+      "page_type": "ending_candidate",
+      "text_summary": "18\nAblation study\nEach Component Helps!\nFigure a: Memory Manager (RL > heuristic)\nFigure b: Answer Agent (RL > baseline)\nFigure c: Memory Distillation (fewer noisy memories → better QA)\nFigure d: Full Pipeline",
+      "slots": [
+        {
+          "slot_id": "s18_sh2",
+          "role": "title_candidate",
+          "text": "18",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": null,
+            "y": null,
+            "width": null,
+            "height": null
+          },
+          "text_metrics": {
+            "font_size_px": null,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s18_sh3",
+          "role": "title_candidate",
+          "text": "Ablation study",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": null,
+            "y": null,
+            "width": null,
+            "height": null
+          },
+          "text_metrics": {
+            "font_size_px": null,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s18_sh4",
+          "role": "body_candidate",
+          "text": "Each Component Helps!\nFigure a: Memory Manager (RL > heuristic)\nFigure b: Answer Agent (RL > baseline)\nFigure c: Memory Distillation (fewer noisy memories → better QA)\nFigure d: Full Pipeline",
+          "paragraph_count": 5,
+          "geometry": {
+            "x": null,
+            "y": null,
+            "width": null,
+            "height": null
+          },
+          "text_metrics": {
+            "font_size_px": 21.33,
+            "paragraph_count": 5
+          }
+        }
+      ],
+      "tables": [],
+      "charts": [],
+      "diagrams": []
+    },
+    {
+      "slide_index": 19,
+      "page_type": "ending_candidate",
+      "text_summary": "19\nDiscussion / Insights\nAnswer Agent Synergy:\nGains are larger when paired with a stronger Memory Manager\nReward Design Choice Comparison\nLLM-as-Judge reward → higher J score but generates longer, verbose answers\nExact Match (EM) reward → more balanced across F1, BLEU-1, and J\nTrade-off insight: choosing reward function impacts model behaviour\n- optimizing for semantic richness vs precision and conciseness\nRL Algorithm Comparison:\nGRPO converges faster than PPO\nBoth PPO & GRPO outperform baseli",
+      "slots": [
+        {
+          "slot_id": "s19_sh2",
+          "role": "title_candidate",
+          "text": "19",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": null,
+            "y": null,
+            "width": null,
+            "height": null
+          },
+          "text_metrics": {
+            "font_size_px": null,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s19_sh3",
+          "role": "title_candidate",
+          "text": "Discussion / Insights",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": null,
+            "y": null,
+            "width": null,
+            "height": null
+          },
+          "text_metrics": {
+            "font_size_px": 26.67,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s19_sh4",
+          "role": "body_candidate",
+          "text": "Answer Agent Synergy:\nGains are larger when paired with a stronger Memory Manager\nReward Design Choice Comparison\nLLM-as-Judge reward → higher J score but generates longer, verbose answers\nExact Match (EM) reward → more balanced across F1, BLEU-1, and J\nTrade-off insight: choosing reward function impacts model behaviour\n- optimizing for semantic richness vs precision and conciseness\nRL Algorithm Comparison:\nGRPO converges faster than PPO\nBoth PPO & GRPO outperform baseline\nAdaptive Learning & Generalization:\nLearns memory operations from experience, scales efficiently across model\nsizes, and generalizes zero-shot to unseen datasets\nRL Efficiency:\nWith only 152 QA pairs, Memory-R1 achieves large improvements\nshowing strong data-efficiency",
+          "paragraph_count": 16,
+          "geometry": {
+            "x": null,
+            "y": null,
+            "width": null,
+            "height": null
+          },
+          "text_metrics": {
+            "font_size_px": 21.33,
+            "paragraph_count": 16
+          }
+        },
+        {
+          "slot_id": "s19_sh5",
+          "role": "body_candidate",
+          "text": "Figure c: Training convergence comparison",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": 856,
+            "y": 604,
+            "width": 334,
+            "height": 29
+          },
+          "text_metrics": {
+            "font_size_px": 16.0,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s19_sh6",
+          "role": "body_candidate",
+          "text": "Figure a: Answer Agent potential with more powerful Memory Manager",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": 756,
+            "y": 224,
+            "width": 524,
+            "height": 29
+          },
+          "text_metrics": {
+            "font_size_px": 16.0,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s19_sh10",
+          "role": "body_candidate",
+          "text": "Figure b: Answer Agent potential with more powerful Memory Manager",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": 756,
+            "y": 389,
+            "width": 524,
+            "height": 29
+          },
+          "text_metrics": {
+            "font_size_px": 16.0,
+            "paragraph_count": 1
+          }
+        }
+      ],
+      "tables": [],
+      "charts": [],
+      "diagrams": []
+    },
+    {
+      "slide_index": 20,
+      "page_type": "ending_candidate",
+      "text_summary": "20\nLimitations & Future work\nLimitations\nBenchmarks (e.g., LOCOMO) limited in scale & diversity\nNo dataset for evaluating memory ops {ADD, UPDATE, DELETE, NOOP}\nSystem depends on QA supervision\nSupports only one memory type (no separation of episodic, semantic, procedural, etc.)\nText only (no multimodal support yet)\nFuture Work\nBuild memory-centric datasets\nIncorporate different memory types (episodic, semantic, procedural, and etc.)\nExtend to multimodal memory (text + images + audio)\nApply to r",
+      "slots": [
+        {
+          "slot_id": "s20_sh2",
+          "role": "title_candidate",
+          "text": "20",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": null,
+            "y": null,
+            "width": null,
+            "height": null
+          },
+          "text_metrics": {
+            "font_size_px": null,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s20_sh3",
+          "role": "title_candidate",
+          "text": "Limitations & Future work",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": null,
+            "y": null,
+            "width": null,
+            "height": null
+          },
+          "text_metrics": {
+            "font_size_px": 26.67,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s20_sh4",
+          "role": "body_candidate",
+          "text": "Limitations\nBenchmarks (e.g., LOCOMO) limited in scale & diversity\nNo dataset for evaluating memory ops {ADD, UPDATE, DELETE, NOOP}\nSystem depends on QA supervision\nSupports only one memory type (no separation of episodic, semantic, procedural, etc.)\nText only (no multimodal support yet)\nFuture Work\nBuild memory-centric datasets\nIncorporate different memory types (episodic, semantic, procedural, and etc.)\nExtend to multimodal memory (text + images + audio)\nApply to real-world domains",
+          "paragraph_count": 11,
+          "geometry": {
+            "x": null,
+            "y": null,
+            "width": null,
+            "height": null
+          },
+          "text_metrics": {
+            "font_size_px": 24.0,
+            "paragraph_count": 11
+          }
+        }
+      ],
+      "tables": [],
+      "charts": [],
+      "diagrams": []
+    },
+    {
+      "slide_index": 21,
+      "page_type": "content_candidate",
+      "text_summary": "21\nImpact\nOver 500k views on X & LinkedIn\n#1 Hottest paper of the day on AlphaXiv\nYoutubers spontaneously made videos explaining the paper",
+      "slots": [
+        {
+          "slot_id": "s21_sh2",
+          "role": "title_candidate",
+          "text": "21",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": null,
+            "y": null,
+            "width": null,
+            "height": null
+          },
+          "text_metrics": {
+            "font_size_px": null,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s21_sh3",
+          "role": "title_candidate",
+          "text": "Impact",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": null,
+            "y": null,
+            "width": null,
+            "height": null
+          },
+          "text_metrics": {
+            "font_size_px": null,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s21_sh5",
+          "role": "title_candidate",
+          "text": "Over 500k views on X & LinkedIn",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": 43,
+            "y": 138,
+            "width": 316,
+            "height": 36
+          },
+          "text_metrics": {
+            "font_size_px": 21.33,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s21_sh7",
+          "role": "title_candidate",
+          "text": "#1 Hottest paper of the day on AlphaXiv",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": 410,
+            "y": 137,
+            "width": 385,
+            "height": 36
+          },
+          "text_metrics": {
+            "font_size_px": 21.33,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s21_sh9",
+          "role": "title_candidate",
+          "text": "Youtubers spontaneously made videos explaining the paper",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": 815,
+            "y": 137,
+            "width": 411,
+            "height": 61
+          },
+          "text_metrics": {
+            "font_size_px": 21.33,
+            "paragraph_count": 1
+          }
+        }
+      ],
+      "tables": [],
+      "charts": [],
+      "diagrams": []
+    },
+    {
+      "slide_index": 22,
+      "page_type": "content_candidate",
+      "text_summary": "22\nScaling Reinforcement Learning (by Dan Roberts)\n“OpenAI are attempting to flip the old cherry-on-top meme about Scaling RL”\nDan Roberts, AI Ascent, OpenAI, 2025\nLLM-Based RL Agent",
+      "slots": [
+        {
+          "slot_id": "s22_sh2",
+          "role": "title_candidate",
+          "text": "22",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": null,
+            "y": null,
+            "width": null,
+            "height": null
+          },
+          "text_metrics": {
+            "font_size_px": null,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s22_sh3",
+          "role": "title_candidate",
+          "text": "Scaling Reinforcement Learning (by Dan Roberts)",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": null,
+            "y": null,
+            "width": null,
+            "height": null
+          },
+          "text_metrics": {
+            "font_size_px": null,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s22_sh7",
+          "role": "label_candidate",
+          "text": "“OpenAI are attempting to flip the old cherry-on-top meme about Scaling RL”\nDan Roberts, AI Ascent, OpenAI, 2025",
+          "paragraph_count": 2,
+          "geometry": {
+            "x": 68,
+            "y": 546,
+            "width": 1145,
+            "height": 130
+          },
+          "text_metrics": {
+            "font_size_px": null,
+            "paragraph_count": 2
+          }
+        },
+        {
+          "slot_id": "s22_sh8",
+          "role": "label_candidate",
+          "text": "LLM-Based RL Agent",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": 90,
+            "y": 622,
+            "width": 264,
+            "height": 39
+          },
+          "text_metrics": {
+            "font_size_px": null,
+            "paragraph_count": 1
+          }
+        }
+      ],
+      "tables": [],
+      "charts": [],
+      "diagrams": []
+    },
+    {
+      "slide_index": 23,
+      "page_type": "content_candidate",
+      "text_summary": "23\nScaling Reinforcement Learning (by Dan Roberts)\n“OpenAI are attempting to flip the old cherry-on-top meme about Scaling RL”\nDan Roberts, AI Ascent, OpenAI, 2025\nLLM-Based RL Agent",
+      "slots": [
+        {
+          "slot_id": "s23_sh2",
+          "role": "title_candidate",
+          "text": "23",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": null,
+            "y": null,
+            "width": null,
+            "height": null
+          },
+          "text_metrics": {
+            "font_size_px": null,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s23_sh3",
+          "role": "title_candidate",
+          "text": "Scaling Reinforcement Learning (by Dan Roberts)",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": null,
+            "y": null,
+            "width": null,
+            "height": null
+          },
+          "text_metrics": {
+            "font_size_px": null,
+            "paragraph_count": 1
+          }
+        },
+        {
+          "slot_id": "s23_sh6",
+          "role": "label_candidate",
+          "text": "“OpenAI are attempting to flip the old cherry-on-top meme about Scaling RL”\nDan Roberts, AI Ascent, OpenAI, 2025",
+          "paragraph_count": 2,
+          "geometry": {
+            "x": 68,
+            "y": 546,
+            "width": 1145,
+            "height": 130
+          },
+          "text_metrics": {
+            "font_size_px": null,
+            "paragraph_count": 2
+          }
+        },
+        {
+          "slot_id": "s23_sh7",
+          "role": "label_candidate",
+          "text": "LLM-Based RL Agent",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": 90,
+            "y": 622,
+            "width": 265,
+            "height": 39
+          },
+          "text_metrics": {
+            "font_size_px": null,
+            "paragraph_count": 1
+          }
+        }
+      ],
+      "tables": [],
+      "charts": [],
+      "diagrams": []
+    },
+    {
+      "slide_index": 24,
+      "page_type": "ending_candidate",
+      "text_summary": "Thank you for your attention! Questions?",
+      "slots": [
+        {
+          "slot_id": "s24_sh3",
+          "role": "title_candidate",
+          "text": "Thank you for your attention! Questions?",
+          "paragraph_count": 1,
+          "geometry": {
+            "x": 67,
+            "y": 208,
+            "width": 941,
+            "height": 134
+          },
+          "text_metrics": {
+            "font_size_px": 48.0,
+            "paragraph_count": 1
+          }
+        }
+      ],
+      "tables": [],
+      "charts": [],
+      "diagrams": []
+    }
+  ]
+}

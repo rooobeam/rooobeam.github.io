@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1280" height="720" viewBox="0 0 1280 720"><g id="shape-7" data-pptx-object="graphic-frame" data-pptx-frame="64 238 708 246" data-pptx-import-source="pptx" data-pptx-replace-with="table" data-pptx-native-authority="json" data-pptx-semantic-object="table">
+<rect x="64" y="238" width="240" height="48" fill="#F3F6FA" />
+<rect x="304" y="238" width="146" height="48" fill="#F3F6FA" />
+<rect x="450" y="238" width="155" height="48" fill="#F3F6FA" />
+<rect x="605" y="238" width="167" height="48" fill="#087F8C" />
+<rect x="64" y="286" width="240" height="66" fill="none" />
+<rect x="304" y="286" width="146" height="66" fill="none" />
+<rect x="450" y="286" width="155" height="66" fill="none" />
+<rect x="605" y="286" width="167" height="66" fill="#E6F2F3" />
+<rect x="64" y="352" width="240" height="66" fill="none" />
+<rect x="304" y="352" width="146" height="66" fill="none" />
+<rect x="450" y="352" width="155" height="66" fill="none" />
+<rect x="605" y="352" width="167" height="66" fill="#E6F2F3" />
+<rect x="64" y="418" width="240" height="66" fill="none" />
+<rect x="304" y="418" width="146" height="66" fill="none" />
+<rect x="450" y="418" width="155" height="66" fill="none" />
+<rect x="605" y="418" width="167" height="66" fill="#E6F2F3" />
+<text x="82" y="265.3" text-anchor="start" xml:space="preserve" font-family="Arial, &quot;微软雅黑&quot;, sans-serif" font-size="22" fill="#5B6B7A" font-weight="bold">Backbone</text>
+<text x="432" y="265.3" text-anchor="end" xml:space="preserve" font-family="Arial, &quot;微软雅黑&quot;, sans-serif" font-size="22" fill="#5B6B7A" font-weight="bold">Base</text>
+<text x="587" y="265.3" text-anchor="end" xml:space="preserve" font-family="Arial, &quot;微软雅黑&quot;, sans-serif" font-size="22" fill="#5B6B7A" font-weight="bold">AMULET</text>
+<text x="754" y="265.3" text-anchor="end" xml:space="preserve" font-family="Arial, &quot;微软雅黑&quot;, sans-serif" font-size="22" fill="#FFFFFF" font-weight="bold">T-POP</text>
+<text x="82" y="316.4" text-anchor="start" xml:space="preserve" font-family="Arial, &quot;微软雅黑&quot;, sans-serif" font-size="24" fill="#233447">Mistral-7B</text>
+<text x="432" y="316.4" text-anchor="end" xml:space="preserve" font-family="Arial, &quot;微软雅黑&quot;, sans-serif" font-size="24" fill="#233447">0.3550</text>
+<text x="587" y="316.4" text-anchor="end" xml:space="preserve" font-family="Arial, &quot;微软雅黑&quot;, sans-serif" font-size="24" fill="#233447">0.4150</text>
+<text x="754" y="316.4" text-anchor="end" xml:space="preserve" font-family="Arial, &quot;微软雅黑&quot;, sans-serif" font-size="24" fill="#087F8C" font-weight="bold">0.4975</text>
+<text x="82" y="382.4" text-anchor="start" xml:space="preserve" font-family="Arial, &quot;微软雅黑&quot;, sans-serif" font-size="24" fill="#233447">Qwen2-7B</text>
+<text x="432" y="382.4" text-anchor="end" xml:space="preserve" font-family="Arial, &quot;微软雅黑&quot;, sans-serif" font-size="24" fill="#233447">0.3575</text>
+<text x="587" y="382.4" text-anchor="end" xml:space="preserve" font-family="Arial, &quot;微软雅黑&quot;, sans-serif" font-size="24" fill="#233447">0.4100</text>
+<text x="754" y="382.4" text-anchor="end" xml:space="preserve" font-family="Arial, &quot;微软雅黑&quot;, sans-serif" font-size="24" fill="#087F8C" font-weight="bold">0.5250</text>
+<text x="82" y="448.4" text-anchor="start" xml:space="preserve" font-family="Arial, &quot;微软雅黑&quot;, sans-serif" font-size="24" fill="#233447">Llama-3.1-8B</text>
+<text x="432" y="448.4" text-anchor="end" xml:space="preserve" font-family="Arial, &quot;微软雅黑&quot;, sans-serif" font-size="24" fill="#233447">0.3450</text>
+<text x="587" y="448.4" text-anchor="end" xml:space="preserve" font-family="Arial, &quot;微软雅黑&quot;, sans-serif" font-size="24" fill="#233447">0.5325</text>
+<text x="754" y="448.4" text-anchor="end" xml:space="preserve" font-family="Arial, &quot;微软雅黑&quot;, sans-serif" font-size="24" fill="#087F8C" font-weight="bold">0.5350</text>
+<line x1="64" y1="286" x2="304" y2="286" stroke-width="1" stroke="#CBD4DE" />
+<line x1="304" y1="286" x2="450" y2="286" stroke-width="1" stroke="#CBD4DE" />
+<line x1="450" y1="286" x2="605" y2="286" stroke-width="1" stroke="#CBD4DE" />
+<line x1="605" y1="286" x2="772" y2="286" stroke-width="1" stroke="#CBD4DE" />
+<line x1="64" y1="352" x2="304" y2="352" stroke-width="1" stroke="#CBD4DE" />
+<line x1="304" y1="352" x2="450" y2="352" stroke-width="1" stroke="#CBD4DE" />
+<line x1="450" y1="352" x2="605" y2="352" stroke-width="1" stroke="#CBD4DE" />
+<line x1="605" y1="352" x2="772" y2="352" stroke-width="1" stroke="#CBD4DE" />
+<line x1="64" y1="418" x2="304" y2="418" stroke-width="1" stroke="#CBD4DE" />
+<line x1="304" y1="418" x2="450" y2="418" stroke-width="1" stroke="#CBD4DE" />
+<line x1="450" y1="418" x2="605" y2="418" stroke-width="1" stroke="#CBD4DE" />
+<line x1="605" y1="418" x2="772" y2="418" stroke-width="1" stroke="#CBD4DE" />
+<line x1="64" y1="484" x2="304" y2="484" stroke-width="1" stroke="#CBD4DE" />
+<line x1="304" y1="484" x2="450" y2="484" stroke-width="1" stroke="#CBD4DE" />
+<line x1="450" y1="484" x2="605" y2="484" stroke-width="1" stroke="#CBD4DE" />
+<line x1="605" y1="484" x2="772" y2="484" stroke-width="1" stroke="#CBD4DE" />
+</g>
+</svg>

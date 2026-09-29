@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1280" height="720" viewBox="0 0 1280 720"><g id="shape-8" data-pptx-object="graphic-frame" data-pptx-frame="64 292 971.93 290" data-pptx-import-source="pptx" data-pptx-replace-with="table" data-pptx-native-authority="json" data-pptx-semantic-object="table">
+<rect x="64" y="292" width="470.33" height="50" fill="#F3F6FA" />
+<rect x="534.33" y="292" width="501.6" height="50" fill="#F3F6FA" />
+<rect x="64" y="342" width="470.33" height="76" fill="none" />
+<rect x="534.33" y="342" width="501.6" height="76" fill="none" />
+<rect x="64" y="418" width="470.33" height="76" fill="none" />
+<rect x="534.33" y="418" width="501.6" height="76" fill="none" />
+<rect x="64" y="494" width="470.33" height="88" fill="none" />
+<rect x="534.33" y="494" width="501.6" height="88" fill="none" />
+<text x="82" y="320.3" text-anchor="start" xml:space="preserve" font-family="Arial, &quot;微软雅黑&quot;, sans-serif" font-size="22" fill="#5B6B7A" font-weight="bold">Prior direction</text>
+<text x="552.33" y="320.3" text-anchor="start" xml:space="preserve" font-family="Arial, &quot;微软雅黑&quot;, sans-serif" font-size="22" fill="#5B6B7A" font-weight="bold">Features</text>
+<text x="82" y="372.4" text-anchor="start" xml:space="preserve" font-family="Arial, &quot;微软雅黑&quot;, sans-serif" font-size="24" fill="#233447" font-weight="bold">User-specific fine-tuning</text>
+<text x="552.33" y="372.4" text-anchor="start" xml:space="preserve" font-family="Arial, &quot;微软雅黑&quot;, sans-serif" font-size="24" fill="#233447">Update parameters</text>
+<text x="82" y="448.4" text-anchor="start" xml:space="preserve" font-family="Arial, &quot;微软雅黑&quot;, sans-serif" font-size="24" fill="#233447" font-weight="bold">Memory / RAG / prompting</text>
+<text x="552.33" y="448.4" text-anchor="start" xml:space="preserve" font-family="Arial, &quot;微软雅黑&quot;, sans-serif" font-size="24" fill="#233447">Collect enough user data (static)</text>
+<text x="82" y="524.4" text-anchor="start" xml:space="preserve" font-family="Arial, &quot;微软雅黑&quot;, sans-serif" font-size="24" fill="#233447" font-weight="bold"><tspan>Test-time </tspan><tspan>Alignment </tspan><tspan>(e.g., LA, </tspan><tspan x="82" dy="28.8">AMULET)</tspan></text>
+<text x="552.33" y="524.4" text-anchor="start" xml:space="preserve" font-family="Arial, &quot;微软雅黑&quot;, sans-serif" font-size="24" fill="#233447"><tspan>A preference signal or objective </tspan><tspan x="552.33" dy="28.8">(dynamic)</tspan></text>
+<line x1="64" y1="342" x2="534.33" y2="342" stroke-width="1" stroke="#CBD4DE" />
+<line x1="534.33" y1="342" x2="1035.93" y2="342" stroke-width="1" stroke="#CBD4DE" />
+<line x1="64" y1="418" x2="534.33" y2="418" stroke-width="1" stroke="#CBD4DE" />
+<line x1="534.33" y1="418" x2="1035.93" y2="418" stroke-width="1" stroke="#CBD4DE" />
+<line x1="64" y1="494" x2="534.33" y2="494" stroke-width="1" stroke="#CBD4DE" />
+<line x1="534.33" y1="494" x2="1035.93" y2="494" stroke-width="1" stroke="#CBD4DE" />
+<line x1="64" y1="582" x2="534.33" y2="582" stroke-width="1" stroke="#CBD4DE" />
+<line x1="534.33" y1="582" x2="1035.93" y2="582" stroke-width="1" stroke="#CBD4DE" />
+</g>
+</svg>

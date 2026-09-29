@@ -1,0 +1,77 @@
+{
+  "masters": [
+    {
+      "file": "master_01_slideMaster1.svg",
+      "partPath": "ppt/slideMasters/slideMaster1.xml",
+      "themePath": "ppt/theme/theme1.xml"
+    }
+  ],
+  "layouts": [
+    {
+      "file": "layout_01_slideLayout1.svg",
+      "partPath": "ppt/slideLayouts/slideLayout1.xml",
+      "master": "master_01_slideMaster1.svg",
+      "parentPartPath": "ppt/slideMasters/slideMaster1.xml",
+      "themePath": "ppt/theme/theme1.xml",
+      "showMasterShapes": true
+    }
+  ],
+  "slides": [
+    {
+      "file": "slide_01.svg",
+      "index": 1,
+      "layout": "layout_01_slideLayout1.svg",
+      "master": "master_01_slideMaster1.svg",
+      "showInheritedShapes": true
+    },
+    {
+      "file": "slide_02.svg",
+      "index": 2,
+      "layout": "layout_01_slideLayout1.svg",
+      "master": "master_01_slideMaster1.svg",
+      "showInheritedShapes": true
+    },
+    {
+      "file": "slide_03.svg",
+      "index": 3,
+      "layout": "layout_01_slideLayout1.svg",
+      "master": "master_01_slideMaster1.svg",
+      "showInheritedShapes": true
+    },
+    {
+      "file": "slide_04.svg",
+      "index": 4,
+      "layout": "layout_01_slideLayout1.svg",
+      "master": "master_01_slideMaster1.svg",
+      "showInheritedShapes": true
+    },
+    {
+      "file": "slide_05.svg",
+      "index": 5,
+      "layout": "layout_01_slideLayout1.svg",
+      "master": "master_01_slideMaster1.svg",
+      "showInheritedShapes": true
+    },
+    {
+      "file": "slide_06.svg",
+      "index": 6,
+      "layout": "layout_01_slideLayout1.svg",
+      "master": "master_01_slideMaster1.svg",
+      "showInheritedShapes": true
+    },
+    {
+      "file": "slide_07.svg",
+      "index": 7,
+      "layout": "layout_01_slideLayout1.svg",
+      "master": "master_01_slideMaster1.svg",
+      "showInheritedShapes": true
+    },
+    {
+      "file": "slide_08.svg",
+      "index": 8,
+      "layout": "layout_01_slideLayout1.svg",
+      "master": "master_01_slideMaster1.svg",
+      "showInheritedShapes": true
+    }
+  ]
+}

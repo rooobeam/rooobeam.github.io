@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" font-family="Arial" font-size="28" data-pptx-page-role="content">
+<rect id="background" data-pptx-role="background" width="1280" height="720" fill="#FFFFFF"/>
+<g id="title" data-pptx-bounds="64 38 1152 109" fill="#10243A"><text x="64" y="62" font-size="16" fill="#5B6B7A">MOTIVATION → PROBLEM FORMULATION</text><text x="64" y="120" font-size="44" font-weight="bold">Cold start is also a data problem</text></g>
+<g id="starting-point" data-pptx-bounds="64 167 1152 53"><text x="64" y="199" fill="#233447">New user: <tspan font-weight="bold">empty history</tspan>, unknown preference, a frozen base LLM.</text></g>
+<g id="interaction-formula" data-pptx-replace-with="formula" data-pptx-x="64" data-pptx-y="228" data-pptx-width="920" data-pptx-height="64" data-pptx-bounds="64 228 920 64"><metadata type="application/json"><![CDATA[{"latex":"q_t\\longrightarrow(a_{t,1},a_{t,2})\\longrightarrow\\ell_t\\in\\{0,1\\}","display":"block","font_size":32,"color":"#10243A","align":"left"}]]></metadata><text x="66" y="270" font-family="Cambria Math" font-size="32" fill="#10243A">qₜ → (aₜ,₁, aₜ,₂) → ℓₜ ∈ {0, 1}</text></g>
+<g id="feedback-unit" data-pptx-bounds="64 294 1152 38"><text x="64" y="317" font-size="22" fill="#5B6B7A">One label per complete answer pair. ℓₜ = 1 means the user prefers answer 1.</text></g>
+<g id="two-objectives" data-pptx-bounds="64 349 1152 153">
+<rect x="64" y="349" width="554" height="153" fill="#E6F2F3"/><rect x="662" y="349" width="554" height="153" fill="#FBEEE4"/>
+<text x="86" y="387" font-weight="bold" fill="#087F8C">Exploit learned preferences</text>
+<text x="86" y="432" fill="#233447">Produce a high-reward answer.</text><text x="86" y="475" font-size="22" fill="#5B6B7A">Test-time alignment steers generation.</text>
+<text x="684" y="387" font-weight="bold" fill="#C86620">Explore unknown preferences</text>
+<text x="684" y="432" fill="#233447">Generate an informative alternative.</text><text x="684" y="475" font-size="22" fill="#5B6B7A">Dueling bandits guide the comparison.</text>
+</g>
+<g id="history" data-pptx-replace-with="formula" data-pptx-x="64" data-pptx-y="521" data-pptx-width="1152" data-pptx-height="68" data-pptx-bounds="64 521 1152 68"><metadata type="application/json"><![CDATA[{"latex":"\\mathcal D_t=\\mathcal D_{t-1}\\cup\\{(q_t,a_{t,1},a_{t,2},\\ell_t)\\}","display":"block","font_size":28,"color":"#10243A","align":"left"}]]></metadata><text x="66" y="566" font-family="Cambria Math" fill="#10243A">Dₜ = Dₜ₋₁ ∪ {(qₜ, aₜ,₁, aₜ,₂, ℓₜ)}</text></g>
+<g id="objective" data-pptx-bounds="64 604 1152 49"><text x="64" y="638" fill="#10243A">Keep π<tspan baseline-shift="sub" font-size="22">base</tspan> frozen; learn rθ ≈ f<tspan baseline-shift="sub" font-size="22">user</tspan> from the growing history.</text></g>
+<g id="footer" data-pptx-role="footer" data-pptx-bounds="64 666 1152 29" font-size="16" fill="#5B6B7A"><text x="64" y="686">T-POP §§1–3.1; Algorithm 1 · fuser denotes the unknown user reward.</text><text x="1216" y="686" text-anchor="end">02 / 08</text></g>
+</svg>

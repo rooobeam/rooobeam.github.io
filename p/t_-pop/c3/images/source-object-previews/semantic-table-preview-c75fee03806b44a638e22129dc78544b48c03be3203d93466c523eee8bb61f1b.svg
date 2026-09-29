@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1280" height="720" viewBox="0 0 1280 720"><g id="shape-5" data-pptx-object="graphic-frame" data-pptx-frame="64 176 632 282" data-pptx-import-source="pptx" data-pptx-replace-with="table" data-pptx-native-authority="json" data-pptx-semantic-object="table">
+<rect x="64" y="176" width="480" height="50" fill="#F3F6FA" />
+<rect x="544" y="176" width="152" height="50" fill="#F3F6FA" />
+<rect x="64" y="226" width="480" height="58" fill="none" />
+<rect x="544" y="226" width="152" height="58" fill="none" />
+<rect x="64" y="284" width="480" height="58" fill="none" />
+<rect x="544" y="284" width="152" height="58" fill="none" />
+<rect x="64" y="342" width="480" height="58" fill="none" />
+<rect x="544" y="342" width="152" height="58" fill="none" />
+<rect x="64" y="400" width="480" height="58" fill="none" />
+<rect x="544" y="400" width="152" height="58" fill="none" />
+<text x="82" y="204.3" text-anchor="start" xml:space="preserve" font-family="Arial, &quot;微软雅黑&quot;, sans-serif" font-size="22" fill="#5B6B7A" font-weight="bold">Question pool</text>
+<text x="678" y="204.3" text-anchor="end" xml:space="preserve" font-family="Arial, &quot;微软雅黑&quot;, sans-serif" font-size="22" fill="#5B6B7A" font-weight="bold">Size</text>
+<text x="82" y="256.4" text-anchor="start" xml:space="preserve" font-family="Arial, &quot;微软雅黑&quot;, sans-serif" font-size="24" fill="#233447">HelpSteer</text>
+<text x="678" y="256.4" text-anchor="end" xml:space="preserve" font-family="Arial, &quot;微软雅黑&quot;, sans-serif" font-size="24" fill="#233447">1,236</text>
+<text x="82" y="314.4" text-anchor="start" xml:space="preserve" font-family="Arial, &quot;微软雅黑&quot;, sans-serif" font-size="24" fill="#233447">TruthfulQA</text>
+<text x="678" y="314.4" text-anchor="end" xml:space="preserve" font-family="Arial, &quot;微软雅黑&quot;, sans-serif" font-size="24" fill="#233447">811</text>
+<text x="82" y="372.4" text-anchor="start" xml:space="preserve" font-family="Arial, &quot;微软雅黑&quot;, sans-serif" font-size="24" fill="#233447">UltraChat</text>
+<text x="678" y="372.4" text-anchor="end" xml:space="preserve" font-family="Arial, &quot;微软雅黑&quot;, sans-serif" font-size="24" fill="#233447">3,845</text>
+<text x="82" y="430.4" text-anchor="start" xml:space="preserve" font-family="Arial, &quot;微软雅黑&quot;, sans-serif" font-size="24" fill="#233447">Personal Preference Eval</text>
+<text x="678" y="430.4" text-anchor="end" xml:space="preserve" font-family="Arial, &quot;微软雅黑&quot;, sans-serif" font-size="24" fill="#233447">548</text>
+<line x1="64" y1="226" x2="544" y2="226" stroke-width="1" stroke="#CBD4DE" />
+<line x1="544" y1="226" x2="696" y2="226" stroke-width="1" stroke="#CBD4DE" />
+<line x1="64" y1="284" x2="544" y2="284" stroke-width="1" stroke="#CBD4DE" />
+<line x1="544" y1="284" x2="696" y2="284" stroke-width="1" stroke="#CBD4DE" />
+<line x1="64" y1="342" x2="544" y2="342" stroke-width="1" stroke="#CBD4DE" />
+<line x1="544" y1="342" x2="696" y2="342" stroke-width="1" stroke="#CBD4DE" />
+<line x1="64" y1="400" x2="544" y2="400" stroke-width="1" stroke="#CBD4DE" />
+<line x1="544" y1="400" x2="696" y2="400" stroke-width="1" stroke="#CBD4DE" />
+<line x1="64" y1="458" x2="544" y2="458" stroke-width="1" stroke="#CBD4DE" />
+<line x1="544" y1="458" x2="696" y2="458" stroke-width="1" stroke="#CBD4DE" />
+</g>
+</svg>

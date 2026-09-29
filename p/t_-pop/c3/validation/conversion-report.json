@@ -1,0 +1,222 @@
+{
+  "schemaVersion": 1,
+  "source": "TPOP_v3_EN_加封面前_20260928_195538.pptx",
+  "mode": "tolerant",
+  "summary": {
+    "slides": 8,
+    "warnings": 15
+  },
+  "artifacts": {
+    "animationConfig": "animations.json",
+    "animationMedia": [],
+    "resources": [
+      "images/image1.png",
+      "images/image2.png",
+      "images/image3.png",
+      "images/image4.png",
+      "images/image5.png",
+      "images/image6.png",
+      "images/image7.png",
+      "images/image8.png"
+    ],
+    "notes": [
+      "notes/slide_01.md",
+      "notes/slide_02.md",
+      "notes/slide_03.md",
+      "notes/slide_04.md",
+      "notes/slide_05.md",
+      "notes/slide_06.md",
+      "notes/slide_07.md",
+      "notes/slide_08.md"
+    ],
+    "sourceTemplate": "sources/source.pptx",
+    "nativeStructure": "analysis/native_structure.json",
+    "roundtripManifest": "analysis/roundtrip_manifest.json"
+  },
+  "sourceDocument": {
+    "canvasPx": {
+      "width": 1280.0,
+      "height": 720.0
+    },
+    "theme": {
+      "colors": {
+        "dk1": "#233447",
+        "lt1": "#FFFFFF",
+        "dk2": "#1F497D",
+        "lt2": "#F3F6FA",
+        "accent1": "#10243A",
+        "accent2": "#087F8C",
+        "accent3": "#C86620",
+        "accent4": "#10243A",
+        "accent5": "#5B6B7A",
+        "accent6": "#CBD4DE",
+        "hlink": "#087F8C",
+        "folHlink": "#C86620"
+      },
+      "fonts": {
+        "majorLatin": "Arial",
+        "majorEastAsia": "Microsoft YaHei",
+        "majorComplexScript": "Arial",
+        "majorScriptJpan": "Microsoft YaHei",
+        "majorScriptHang": "Microsoft YaHei",
+        "majorScriptHans": "Microsoft YaHei",
+        "majorScriptHant": "Microsoft YaHei",
+        "minorLatin": "Arial",
+        "minorEastAsia": "Microsoft YaHei",
+        "minorComplexScript": "Arial",
+        "minorScriptJpan": "Microsoft YaHei",
+        "minorScriptHang": "Microsoft YaHei",
+        "minorScriptHans": "Microsoft YaHei",
+        "minorScriptHant": "Microsoft YaHei"
+      },
+      "ooxml": {
+        "encoding": "base64",
+        "sha256": "e10d06645dc4c6bd353a04f376275c22bac9dcf267a783b2e18314c916f8d032",
+        "payload": "PGE6dGhlbWUgeG1sbnM6YT0iaHR0cDovL3NjaGVtYXMub3BlbnhtbGZvcm1hdHMub3JnL2RyYXdpbmdtbC8yMDA2L21haW4iIHhtbG5zOm5zMT0iaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS9vZmZpY2UvdGhlbWVtbC8yMDEyL21haW4iIG5hbWU9IlRQT1BfdjMiPjxhOnRoZW1lRWxlbWVudHM+PGE6Y2xyU2NoZW1lIG5hbWU9IlRQT1BfdjMiPjxhOmRrMT48YTpzcmdiQ2xyIHZhbD0iMjMzNDQ3IiAvPjwvYTpkazE+PGE6bHQxPjxhOnNyZ2JDbHIgdmFsPSJGRkZGRkYiIC8+PC9hOmx0MT48YTpkazI+PGE6c3JnYkNsciB2YWw9IjFGNDk3RCIgLz48L2E6ZGsyPjxhOmx0Mj48YTpzcmdiQ2xyIHZhbD0iRjNGNkZBIiAvPjwvYTpsdDI+PGE6YWNjZW50MT48YTpzcmdiQ2xyIHZhbD0iMTAyNDNBIiAvPjwvYTphY2NlbnQxPjxhOmFjY2VudDI+PGE6c3JnYkNsciB2YWw9IjA4N0Y4QyIgLz48L2E6YWNjZW50Mj48YTphY2NlbnQzPjxhOnNyZ2JDbHIgdmFsPSJDODY2MjAiIC8+PC9hOmFjY2VudDM+PGE6YWNjZW50ND48YTpzcmdiQ2xyIHZhbD0iMTAyNDNBIiAvPjwvYTphY2NlbnQ0PjxhOmFjY2VudDU+PGE6c3JnYkNsciB2YWw9IjVCNkI3QSIgLz48L2E6YWNjZW50NT48YTphY2NlbnQ2PjxhOnNyZ2JDbHIgdmFsPSJDQkQ0REUiIC8+PC9hOmFjY2VudDY+PGE6aGxpbms+PGE6c3JnYkNsciB2YWw9IjA4N0Y4QyIgLz48L2E6aGxpbms+PGE6Zm9sSGxpbms+PGE6c3JnYkNsciB2YWw9IkM4NjYyMCIgLz48L2E6Zm9sSGxpbms+PC9hOmNsclNjaGVtZT48YTpmb250U2NoZW1lIG5hbWU9IlRQT1BfdjMiPjxhOm1ham9yRm9udD48YTpsYXRpbiB0eXBlZmFjZT0iQXJpYWwiIC8+PGE6ZWEgdHlwZWZhY2U9Ik1pY3Jvc29mdCBZYUhlaSIgLz48YTpjcyB0eXBlZmFjZT0iQXJpYWwiIC8+PGE6Zm9udCBzY3JpcHQ9IkpwYW4iIHR5cGVmYWNlPSJNaWNyb3NvZnQgWWFIZWkiIC8+PGE6Zm9udCBzY3JpcHQ9IkhhbmciIHR5cGVmYWNlPSJNaWNyb3NvZnQgWWFIZWkiIC8+PGE6Zm9udCBzY3JpcHQ9IkhhbnMiIHR5cGVmYWNlPSJNaWNyb3NvZnQgWWFIZWkiIC8+PGE6Zm9udCBzY3JpcHQ9IkhhbnQiIHR5cGVmYWNlPSJNaWNyb3NvZnQgWWFIZWkiIC8+PGE6Zm9udCBzY3JpcHQ9IkFyYWIiIHR5cGVmYWNlPSJUaW1lcyBOZXcgUm9tYW4iIC8+PGE6Zm9udCBzY3JpcHQ9IkhlYnIiIHR5cGVmYWNlPSJUaW1lcyBOZXcgUm9tYW4iIC8+PGE6Zm9udCBzY3JpcHQ9IlRoYWkiIHR5cGVmYWNlPSJBbmdzYW5hIE5ldyIgLz48YTpmb250IHNjcmlwdD0iRXRoaSIgdHlwZWZhY2U9Ik55YWxhIiAvPjxhOmZvbnQgc2NyaXB0PSJCZW5nIiB0eXBlZmFjZT0iVnJpbmRhIiAvPjxhOmZvbnQgc2NyaXB0PSJHdWpyIiB0eXBlZmFjZT0iU2hydXRpIiAvPjxhOmZvbnQgc2NyaXB0PSJLaG1yIiB0eXBlZmFjZT0iTW9vbEJvcmFuIiAvPjxhOmZvbnQgc2NyaXB0PSJLbmRhIiB0eXBlZmFjZT0iVHVuZ2EiIC8+PGE6Zm9udCBzY3JpcHQ9Ikd1cnUiIHR5cGVmYWNlPSJSYWF2aSIgLz48YTpmb250IHNjcmlwdD0iQ2FucyIgdHlwZWZhY2U9IkV1cGhlbWlhIiAvPjxhOmZvbnQgc2NyaXB0PSJDaGVyIiB0eXBlZmFjZT0iUGxhbnRhZ2VuZXQgQ2hlcm9rZWUiIC8+PGE6Zm9udCBzY3JpcHQ9IllpaWkiIHR5cGVmYWNlPSJNaWNyb3NvZnQgWWkgQmFpdGkiIC8+PGE6Zm9udCBzY3JpcHQ9IlRpYnQiIHR5cGVmYWNlPSJNaWNyb3NvZnQgSGltYWxheWEiIC8+PGE6Zm9udCBzY3JpcHQ9IlRoYWEiIHR5cGVmYWNlPSJNViBCb2xpIiAvPjxhOmZvbnQgc2NyaXB0PSJEZXZhIiB0eXBlZmFjZT0iTWFuZ2FsIiAvPjxhOmZvbnQgc2NyaXB0PSJUZWx1IiB0eXBlZmFjZT0iR2F1dGFtaSIgLz48YTpmb250IHNjcmlwdD0iVGFtbCIgdHlwZWZhY2U9IkxhdGhhIiAvPjxhOmZvbnQgc2NyaXB0PSJTeXJjIiB0eXBlZmFjZT0iRXN0cmFuZ2VsbyBFZGVzc2EiIC8+PGE6Zm9udCBzY3JpcHQ9Ik9yeWEiIHR5cGVmYWNlPSJLYWxpbmdhIiAvPjxhOmZvbnQgc2NyaXB0PSJNbHltIiB0eXBlZmFjZT0iS2FydGlrYSIgLz48YTpmb250IHNjcmlwdD0iTGFvbyIgdHlwZWZhY2U9IkRva0NoYW1wYSIgLz48YTpmb250IHNjcmlwdD0iU2luaCIgdHlwZWZhY2U9Iklza29vbGEgUG90YSIgLz48YTpmb250IHNjcmlwdD0iTW9uZyIgdHlwZWZhY2U9Ik1vbmdvbGlhbiBCYWl0aSIgLz48YTpmb250IHNjcmlwdD0iVmlldCIgdHlwZWZhY2U9IlRpbWVzIE5ldyBSb21hbiIgLz48YTpmb250IHNjcmlwdD0iVWlnaCIgdHlwZWZhY2U9Ik1pY3Jvc29mdCBVaWdodXIiIC8+PGE6Zm9udCBzY3JpcHQ9Ikdlb3IiIHR5cGVmYWNlPSJTeWxmYWVuIiAvPjwvYTptYWpvckZvbnQ+PGE6bWlub3JGb250PjxhOmxhdGluIHR5cGVmYWNlPSJBcmlhbCIgLz48YTplYSB0eXBlZmFjZT0iTWljcm9zb2Z0IFlhSGVpIiAvPjxhOmNzIHR5cGVmYWNlPSJBcmlhbCIgLz48YTpmb250IHNjcmlwdD0iSnBhbiIgdHlwZWZhY2U9Ik1pY3Jvc29mdCBZYUhlaSIgLz48YTpmb250IHNjcmlwdD0iSGFuZyIgdHlwZWZhY2U9Ik1pY3Jvc29mdCBZYUhlaSIgLz48YTpmb250IHNjcmlwdD0iSGFucyIgdHlwZWZhY2U9Ik1pY3Jvc29mdCBZYUhlaSIgLz48YTpmb250IHNjcmlwdD0iSGFudCIgdHlwZWZhY2U9Ik1pY3Jvc29mdCBZYUhlaSIgLz48YTpmb250IHNjcmlwdD0iQXJhYiIgdHlwZWZhY2U9IkFyaWFsIiAvPjxhOmZvbnQgc2NyaXB0PSJIZWJyIiB0eXBlZmFjZT0iQXJpYWwiIC8+PGE6Zm9udCBzY3JpcHQ9IlRoYWkiIHR5cGVmYWNlPSJDb3JkaWEgTmV3IiAvPjxhOmZvbnQgc2NyaXB0PSJFdGhpIiB0eXBlZmFjZT0iTnlhbGEiIC8+PGE6Zm9udCBzY3JpcHQ9IkJlbmciIHR5cGVmYWNlPSJWcmluZGEiIC8+PGE6Zm9udCBzY3JpcHQ9Ikd1anIiIHR5cGVmYWNlPSJTaHJ1dGkiIC8+PGE6Zm9udCBzY3JpcHQ9IktobXIiIHR5cGVmYWNlPSJEYXVuUGVuaCIgLz48YTpmb250IHNjcmlwdD0iS25kYSIgdHlwZWZhY2U9IlR1bmdhIiAvPjxhOmZvbnQgc2NyaXB0PSJHdXJ1IiB0eXBlZmFjZT0iUmFhdmkiIC8+PGE6Zm9udCBzY3JpcHQ9IkNhbnMiIHR5cGVmYWNlPSJFdXBoZW1pYSIgLz48YTpmb250IHNjcmlwdD0iQ2hlciIgdHlwZWZhY2U9IlBsYW50YWdlbmV0IENoZXJva2VlIiAvPjxhOmZvbnQgc2NyaXB0PSJZaWlpIiB0eXBlZmFjZT0iTWljcm9zb2Z0IFlpIEJhaXRpIiAvPjxhOmZvbnQgc2NyaXB0PSJUaWJ0IiB0eXBlZmFjZT0iTWljcm9zb2Z0IEhpbWFsYXlhIiAvPjxhOmZvbnQgc2NyaXB0PSJUaGFhIiB0eXBlZmFjZT0iTVYgQm9saSIgLz48YTpmb250IHNjcmlwdD0iRGV2YSIgdHlwZWZhY2U9Ik1hbmdhbCIgLz48YTpmb250IHNjcmlwdD0iVGVsdSIgdHlwZWZhY2U9IkdhdXRhbWkiIC8+PGE6Zm9udCBzY3JpcHQ9IlRhbWwiIHR5cGVmYWNlPSJMYXRoYSIgLz48YTpmb250IHNjcmlwdD0iU3lyYyIgdHlwZWZhY2U9IkVzdHJhbmdlbG8gRWRlc3NhIiAvPjxhOmZvbnQgc2NyaXB0PSJPcnlhIiB0eXBlZmFjZT0iS2FsaW5nYSIgLz48YTpmb250IHNjcmlwdD0iTWx5bSIgdHlwZWZhY2U9IkthcnRpa2EiIC8+PGE6Zm9udCBzY3JpcHQ9Ikxhb28iIHR5cGVmYWNlPSJEb2tDaGFtcGEiIC8+PGE6Zm9udCBzY3JpcHQ9IlNpbmgiIHR5cGVmYWNlPSJJc2tvb2xhIFBvdGEiIC8+PGE6Zm9udCBzY3JpcHQ9Ik1vbmciIHR5cGVmYWNlPSJNb25nb2xpYW4gQmFpdGkiIC8+PGE6Zm9udCBzY3JpcHQ9IlZpZXQiIHR5cGVmYWNlPSJBcmlhbCIgLz48YTpmb250IHNjcmlwdD0iVWlnaCIgdHlwZWZhY2U9Ik1pY3Jvc29mdCBVaWdodXIiIC8+PGE6Zm9udCBzY3JpcHQ9Ikdlb3IiIHR5cGVmYWNlPSJTeWxmYWVuIiAvPjwvYTptaW5vckZvbnQ+PC9hOmZvbnRTY2hlbWU+PGE6Zm10U2NoZW1lIG5hbWU9IlRQT1BfdjMiPjxhOmZpbGxTdHlsZUxzdD48YTpzb2xpZEZpbGw+PGE6c2NoZW1lQ2xyIHZhbD0icGhDbHIiIC8+PC9hOnNvbGlkRmlsbD48YTpncmFkRmlsbCByb3RXaXRoU2hhcGU9IjEiPjxhOmdzTHN0PjxhOmdzIHBvcz0iMCI+PGE6c2NoZW1lQ2xyIHZhbD0icGhDbHIiPjxhOnRpbnQgdmFsPSI1MDAwMCIgLz48YTpzYXRNb2QgdmFsPSIzMDAwMDAiIC8+PC9hOnNjaGVtZUNscj48L2E6Z3M+PGE6Z3MgcG9zPSIzNTAwMCI+PGE6c2NoZW1lQ2xyIHZhbD0icGhDbHIiPjxhOnRpbnQgdmFsPSIzNzAwMCIgLz48YTpzYXRNb2QgdmFsPSIzMDAwMDAiIC8+PC9hOnNjaGVtZUNscj48L2E6Z3M+PGE6Z3MgcG9zPSIxMDAwMDAiPjxhOnNjaGVtZUNsciB2YWw9InBoQ2xyIj48YTp0aW50IHZhbD0iMTUwMDAiIC8+PGE6c2F0TW9kIHZhbD0iMzUwMDAwIiAvPjwvYTpzY2hlbWVDbHI+PC9hOmdzPjwvYTpnc0xzdD48YTpsaW4gYW5nPSIxNjIwMDAwMCIgc2NhbGVkPSIxIiAvPjwvYTpncmFkRmlsbD48YTpncmFkRmlsbCByb3RXaXRoU2hhcGU9IjEiPjxhOmdzTHN0PjxhOmdzIHBvcz0iMCI+PGE6c2NoZW1lQ2xyIHZhbD0icGhDbHIiPjxhOnRpbnQgdmFsPSIxMDAwMDAiIC8+PGE6c2hhZGUgdmFsPSIxMDAwMDAiIC8+PGE6c2F0TW9kIHZhbD0iMTMwMDAwIiAvPjwvYTpzY2hlbWVDbHI+PC9hOmdzPjxhOmdzIHBvcz0iMTAwMDAwIj48YTpzY2hlbWVDbHIgdmFsPSJwaENsciI+PGE6dGludCB2YWw9IjUwMDAwIiAvPjxhOnNoYWRlIHZhbD0iMTAwMDAwIiAvPjxhOnNhdE1vZCB2YWw9IjM1MDAwMCIgLz48L2E6c2NoZW1lQ2xyPjwvYTpncz48L2E6Z3NMc3Q+PGE6bGluIGFuZz0iMTYyMDAwMDAiIHNjYWxlZD0iMCIgLz48L2E6Z3JhZEZpbGw+PC9hOmZpbGxTdHlsZUxzdD48YTpsblN0eWxlTHN0PjxhOmxuIHc9Ijk1MjUiIGNhcD0iZmxhdCIgY21wZD0ic25nIiBhbGduPSJjdHIiPjxhOnNvbGlkRmlsbD48YTpzY2hlbWVDbHIgdmFsPSJwaENsciI+PGE6c2hhZGUgdmFsPSI5NTAwMCIgLz48YTpzYXRNb2QgdmFsPSIxMDUwMDAiIC8+PC9hOnNjaGVtZUNscj48L2E6c29saWRGaWxsPjxhOnByc3REYXNoIHZhbD0ic29saWQiIC8+PC9hOmxuPjxhOmxuIHc9IjI1NDAwIiBjYXA9ImZsYXQiIGNtcGQ9InNuZyIgYWxnbj0iY3RyIj48YTpzb2xpZEZpbGw+PGE6c2NoZW1lQ2xyIHZhbD0icGhDbHIiIC8+PC9hOnNvbGlkRmlsbD48YTpwcnN0RGFzaCB2YWw9InNvbGlkIiAvPjwvYTpsbj48YTpsbiB3PSIzODEwMCIgY2FwPSJmbGF0IiBjbXBkPSJzbmciIGFsZ249ImN0ciI+PGE6c29saWRGaWxsPjxhOnNjaGVtZUNsciB2YWw9InBoQ2xyIiAvPjwvYTpzb2xpZEZpbGw+PGE6cHJzdERhc2ggdmFsPSJzb2xpZCIgLz48L2E6bG4+PC9hOmxuU3R5bGVMc3Q+PGE6ZWZmZWN0U3R5bGVMc3Q+PGE6ZWZmZWN0U3R5bGU+PGE6ZWZmZWN0THN0PjxhOm91dGVyU2hkdyBibHVyUmFkPSI0MDAwMCIgZGlzdD0iMjAwMDAiIGRpcj0iNTQwMDAwMCIgcm90V2l0aFNoYXBlPSIwIj48YTpzcmdiQ2xyIHZhbD0iMDAwMDAwIj48YTphbHBoYSB2YWw9IjM4MDAwIiAvPjwvYTpzcmdiQ2xyPjwvYTpvdXRlclNoZHc+PC9hOmVmZmVjdExzdD48L2E6ZWZmZWN0U3R5bGU+PGE6ZWZmZWN0U3R5bGU+PGE6ZWZmZWN0THN0PjxhOm91dGVyU2hkdyBibHVyUmFkPSI0MDAwMCIgZGlzdD0iMjMwMDAiIGRpcj0iNTQwMDAwMCIgcm90V2l0aFNoYXBlPSIwIj48YTpzcmdiQ2xyIHZhbD0iMDAwMDAwIj48YTphbHBoYSB2YWw9IjM1MDAwIiAvPjwvYTpzcmdiQ2xyPjwvYTpvdXRlclNoZHc+PC9hOmVmZmVjdExzdD48L2E6ZWZmZWN0U3R5bGU+PGE6ZWZmZWN0U3R5bGU+PGE6ZWZmZWN0THN0PjxhOm91dGVyU2hkdyBibHVyUmFkPSI0MDAwMCIgZGlzdD0iMjMwMDAiIGRpcj0iNTQwMDAwMCIgcm90V2l0aFNoYXBlPSIwIj48YTpzcmdiQ2xyIHZhbD0iMDAwMDAwIj48YTphbHBoYSB2YWw9IjM1MDAwIiAvPjwvYTpzcmdiQ2xyPjwvYTpvdXRlclNoZHc+PC9hOmVmZmVjdExzdD48YTpzY2VuZTNkPjxhOmNhbWVyYSBwcnN0PSJvcnRob2dyYXBoaWNGcm9udCI+PGE6cm90IGxhdD0iMCIgbG9uPSIwIiByZXY9IjAiIC8+PC9hOmNhbWVyYT48YTpsaWdodFJpZyByaWc9InRocmVlUHQiIGRpcj0idCI+PGE6cm90IGxhdD0iMCIgbG9uPSIwIiByZXY9IjEyMDAwMDAiIC8+PC9hOmxpZ2h0UmlnPjwvYTpzY2VuZTNkPjxhOnNwM2Q+PGE6YmV2ZWxUIHc9IjYzNTAwIiBoPSIyNTQwMCIgLz48L2E6c3AzZD48L2E6ZWZmZWN0U3R5bGU+PC9hOmVmZmVjdFN0eWxlTHN0PjxhOmJnRmlsbFN0eWxlTHN0PjxhOnNvbGlkRmlsbD48YTpzY2hlbWVDbHIgdmFsPSJwaENsciIgLz48L2E6c29saWRGaWxsPjxhOmdyYWRGaWxsIHJvdFdpdGhTaGFwZT0iMSI+PGE6Z3NMc3Q+PGE6Z3MgcG9zPSIwIj48YTpzY2hlbWVDbHIgdmFsPSJwaENsciI+PGE6dGludCB2YWw9IjQwMDAwIiAvPjxhOnNhdE1vZCB2YWw9IjM1MDAwMCIgLz48L2E6c2NoZW1lQ2xyPjwvYTpncz48YTpncyBwb3M9IjQwMDAwIj48YTpzY2hlbWVDbHIgdmFsPSJwaENsciI+PGE6dGludCB2YWw9IjQ1MDAwIiAvPjxhOnNoYWRlIHZhbD0iOTkwMDAiIC8+PGE6c2F0TW9kIHZhbD0iMzUwMDAwIiAvPjwvYTpzY2hlbWVDbHI+PC9hOmdzPjxhOmdzIHBvcz0iMTAwMDAwIj48YTpzY2hlbWVDbHIgdmFsPSJwaENsciI+PGE6c2hhZGUgdmFsPSIyMDAwMCIgLz48YTpzYXRNb2QgdmFsPSIyNTUwMDAiIC8+PC9hOnNjaGVtZUNscj48L2E6Z3M+PC9hOmdzTHN0PjxhOnBhdGggcGF0aD0iY2lyY2xlIj48YTpmaWxsVG9SZWN0IGw9IjUwMDAwIiB0PSItODAwMDAiIHI9IjUwMDAwIiBiPSIxODAwMDAiIC8+PC9hOnBhdGg+PC9hOmdyYWRGaWxsPjxhOmdyYWRGaWxsIHJvdFdpdGhTaGFwZT0iMSI+PGE6Z3NMc3Q+PGE6Z3MgcG9zPSIwIj48YTpzY2hlbWVDbHIgdmFsPSJwaENsciI+PGE6dGludCB2YWw9IjgwMDAwIiAvPjxhOnNhdE1vZCB2YWw9IjMwMDAwMCIgLz48L2E6c2NoZW1lQ2xyPjwvYTpncz48YTpncyBwb3M9IjEwMDAwMCI+PGE6c2NoZW1lQ2xyIHZhbD0icGhDbHIiPjxhOnNoYWRlIHZhbD0iMzAwMDAiIC8+PGE6c2F0TW9kIHZhbD0iMjAwMDAwIiAvPjwvYTpzY2hlbWVDbHI+PC9hOmdzPjwvYTpnc0xzdD48YTpwYXRoIHBhdGg9ImNpcmNsZSI+PGE6ZmlsbFRvUmVjdCBsPSI1MDAwMCIgdD0iNTAwMDAiIHI9IjUwMDAwIiBiPSI1MDAwMCIgLz48L2E6cGF0aD48L2E6Z3JhZEZpbGw+PC9hOmJnRmlsbFN0eWxlTHN0PjwvYTpmbXRTY2hlbWU+PC9hOnRoZW1lRWxlbWVudHM+PGE6b2JqZWN0RGVmYXVsdHM+PGE6c3BEZWY+PGE6c3BQciAvPjxhOmJvZHlQciAvPjxhOmxzdFN0eWxlIC8+PGE6c3R5bGU+PGE6bG5SZWYgaWR4PSIxIj48YTpzY2hlbWVDbHIgdmFsPSJhY2NlbnQxIiAvPjwvYTpsblJlZj48YTpmaWxsUmVmIGlkeD0iMyI+PGE6c2NoZW1lQ2xyIHZhbD0iYWNjZW50MSIgLz48L2E6ZmlsbFJlZj48YTplZmZlY3RSZWYgaWR4PSIyIj48YTpzY2hlbWVDbHIgdmFsPSJhY2NlbnQxIiAvPjwvYTplZmZlY3RSZWY+PGE6Zm9udFJlZiBpZHg9Im1pbm9yIj48YTpzY2hlbWVDbHIgdmFsPSJsdDEiIC8+PC9hOmZvbnRSZWY+PC9hOnN0eWxlPjwvYTpzcERlZj48YTpsbkRlZj48YTpzcFByIC8+PGE6Ym9keVByIC8+PGE6bHN0U3R5bGUgLz48YTpzdHlsZT48YTpsblJlZiBpZHg9IjIiPjxhOnNjaGVtZUNsciB2YWw9ImFjY2VudDEiIC8+PC9hOmxuUmVmPjxhOmZpbGxSZWYgaWR4PSIwIj48YTpzY2hlbWVDbHIgdmFsPSJhY2NlbnQxIiAvPjwvYTpmaWxsUmVmPjxhOmVmZmVjdFJlZiBpZHg9IjEiPjxhOnNjaGVtZUNsciB2YWw9ImFjY2VudDEiIC8+PC9hOmVmZmVjdFJlZj48YTpmb250UmVmIGlkeD0ibWlub3IiPjxhOnNjaGVtZUNsciB2YWw9InR4MSIgLz48L2E6Zm9udFJlZj48L2E6c3R5bGU+PC9hOmxuRGVmPjwvYTpvYmplY3REZWZhdWx0cz48YTpleHRMc3Q+PGE6ZXh0IHVyaT0iezA1QTRDMjVDLTA4NUUtNDM0MC04NUEzLUE1NTMxRTUxMERCMn0iPjxuczE6dGhlbWVGYW1pbHkgbmFtZT0iT2ZmaWNlIFRoZW1lIiBpZD0iezYyRjkzOUI2LTkzQUYtNERCOC05QzZCLUQ2QzdERkRDNTg5Rn0iIHZpZD0iezRBM0M0NkU4LTYxQ0MtNDYwMy1BNTg5LTc0MjJBNDdBOEU0QX0iIC8+PC9hOmV4dD48L2E6ZXh0THN0PjwvYTp0aGVtZT4="
+      }
+    }
+  },
+  "diagnostics": [
+    {
+      "code": "transition-not-reconstructed",
+      "message": "Slide transition was not reconstructed: generated transition read-back does not match its settings",
+      "fallback": "keep this transition in the source PPTX through direct native preservation",
+      "part_path": "ppt/slides/slide1.xml",
+      "slide_index": 1,
+      "severity": "warning"
+    },
+    {
+      "code": "transition-not-reconstructed",
+      "message": "Slide transition was not reconstructed: generated transition read-back does not match its settings",
+      "fallback": "keep this transition in the source PPTX through direct native preservation",
+      "part_path": "ppt/slides/slide2.xml",
+      "slide_index": 2,
+      "severity": "warning"
+    },
+    {
+      "code": "transition-not-reconstructed",
+      "message": "Slide transition was not reconstructed: generated transition read-back does not match its settings",
+      "fallback": "keep this transition in the source PPTX through direct native preservation",
+      "part_path": "ppt/slides/slide3.xml",
+      "slide_index": 3,
+      "severity": "warning"
+    },
+    {
+      "code": "transition-not-reconstructed",
+      "message": "Slide transition was not reconstructed: generated transition read-back does not match its settings",
+      "fallback": "keep this transition in the source PPTX through direct native preservation",
+      "part_path": "ppt/slides/slide4.xml",
+      "slide_index": 4,
+      "severity": "warning"
+    },
+    {
+      "code": "formula-not-reconstructed",
+      "message": "Office Math was not reconstructed: OMML contains unsupported attribute 'panose'",
+      "fallback": "render a linear text preview and preserve the relationship-free source txBody",
+      "part_path": "ppt/slides/slide4.xml",
+      "slide_index": 4,
+      "shape_id": "40",
+      "shape_name": "TextBox 40",
+      "shape_kind": "sp",
+      "severity": "warning"
+    },
+    {
+      "code": "formula-not-reconstructed",
+      "message": "Office Math was not reconstructed: grouped block formula carrier is not reversible",
+      "fallback": "render a linear text preview and preserve the relationship-free source txBody",
+      "part_path": "ppt/slides/slide4.xml",
+      "slide_index": 4,
+      "shape_id": "43",
+      "shape_name": "covariance-update",
+      "shape_kind": "sp",
+      "severity": "warning"
+    },
+    {
+      "code": "formula-not-reconstructed",
+      "message": "Office Math was not reconstructed: grouped block formula carrier is not reversible",
+      "fallback": "render a linear text preview and preserve the relationship-free source txBody",
+      "part_path": "ppt/slides/slide4.xml",
+      "slide_index": 4,
+      "shape_id": "49",
+      "shape_name": "rm-training",
+      "shape_kind": "sp",
+      "severity": "warning"
+    },
+    {
+      "code": "transition-not-reconstructed",
+      "message": "Slide transition was not reconstructed: generated transition read-back does not match its settings",
+      "fallback": "keep this transition in the source PPTX through direct native preservation",
+      "part_path": "ppt/slides/slide5.xml",
+      "slide_index": 5,
+      "severity": "warning"
+    },
+    {
+      "code": "transition-not-reconstructed",
+      "message": "Slide transition was not reconstructed: generated transition read-back does not match its settings",
+      "fallback": "keep this transition in the source PPTX through direct native preservation",
+      "part_path": "ppt/slides/slide6.xml",
+      "slide_index": 6,
+      "severity": "warning"
+    },
+    {
+      "code": "formula-not-reconstructed",
+      "message": "Office Math was not reconstructed: grouped block formula carrier is not reversible",
+      "fallback": "render a linear text preview and preserve the relationship-free source txBody",
+      "part_path": "ppt/slides/slide6.xml",
+      "slide_index": 6,
+      "shape_id": "7",
+      "shape_name": "score-definition",
+      "shape_kind": "sp",
+      "severity": "warning"
+    },
+    {
+      "code": "formula-not-reconstructed",
+      "message": "Office Math was not reconstructed: grouped block formula carrier is not reversible",
+      "fallback": "render a linear text preview and preserve the relationship-free source txBody",
+      "part_path": "ppt/slides/slide6.xml",
+      "slide_index": 6,
+      "shape_id": "11",
+      "shape_name": "first-token",
+      "shape_kind": "sp",
+      "severity": "warning"
+    },
+    {
+      "code": "formula-not-reconstructed",
+      "message": "Office Math was not reconstructed: grouped block formula carrier is not reversible",
+      "fallback": "render a linear text preview and preserve the relationship-free source txBody",
+      "part_path": "ppt/slides/slide6.xml",
+      "slide_index": 6,
+      "shape_id": "15",
+      "shape_name": "second-token",
+      "shape_kind": "sp",
+      "severity": "warning"
+    },
+    {
+      "code": "formula-not-reconstructed",
+      "message": "Office Math was not reconstructed: grouped block formula carrier is not reversible",
+      "fallback": "render a linear text preview and preserve the relationship-free source txBody",
+      "part_path": "ppt/slides/slide6.xml",
+      "slide_index": 6,
+      "shape_id": "16",
+      "shape_name": "comparison-gradient",
+      "shape_kind": "sp",
+      "severity": "warning"
+    },
+    {
+      "code": "transition-not-reconstructed",
+      "message": "Slide transition was not reconstructed: generated transition read-back does not match its settings",
+      "fallback": "keep this transition in the source PPTX through direct native preservation",
+      "part_path": "ppt/slides/slide7.xml",
+      "slide_index": 7,
+      "severity": "warning"
+    },
+    {
+      "code": "transition-not-reconstructed",
+      "message": "Slide transition was not reconstructed: generated transition read-back does not match its settings",
+      "fallback": "keep this transition in the source PPTX through direct native preservation",
+      "part_path": "ppt/slides/slide8.xml",
+      "slide_index": 8,
+      "severity": "warning"
+    }
+  ]
+}

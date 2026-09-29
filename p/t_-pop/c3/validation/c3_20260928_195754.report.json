@@ -1,0 +1,843 @@
+{
+  "schema": "ppt-master.pptx-postflight-report.v1",
+  "status": "passed",
+  "output": {
+    "path": "D:\\办公程序\\github_blog\\hugo_extended_withdeploy_0.141.0_windows-amd64\\rublog\\content\\post\\T-POP\\c3\\exports\\c3_20260928_195754.pptx",
+    "bytes": 382697
+  },
+  "source": {
+    "svg_slide_count": 9,
+    "layout_definition_count": 0,
+    "fingerprint": {
+      "algorithm": "sha256",
+      "digest": "80b2731efa0f08c73b193696b298468bcdcded07b36e576e7919b10a1e979fd7",
+      "file_count": 10,
+      "files": [
+        {
+          "file": "authoring-svg-flat/cover.svg",
+          "sha256": "a8a35ae02ad5876cc09e8352a0951d7ae2a8b7641fe54f3fbdc547d58fc9d438"
+        },
+        {
+          "file": "authoring-svg-flat/slide_01.svg",
+          "sha256": "e9262070450d15f10752924f45925314766ba7b576d0f75292366db829a9f288"
+        },
+        {
+          "file": "authoring-svg-flat/slide_02.svg",
+          "sha256": "e874eb395c8bcdd2086d8ec0c6c59f86efc6b4a5f108afe2134fa71adb8db4e2"
+        },
+        {
+          "file": "authoring-svg-flat/slide_03.svg",
+          "sha256": "c0d2004b251e6228b1690debe93297789d0915d2cfffd97846db9d41e38a4e0e"
+        },
+        {
+          "file": "authoring-svg-flat/slide_04.svg",
+          "sha256": "90da9e4ee482f7423b3768229f977e3c74ca04382ce3cbea50011cb891f75c50"
+        },
+        {
+          "file": "authoring-svg-flat/slide_05.svg",
+          "sha256": "ce3df3c91dd4ad3124bdc43491326322f00780afbecef1717aeca3f91cebcc70"
+        },
+        {
+          "file": "authoring-svg-flat/slide_06.svg",
+          "sha256": "3fd3249faae44fd4c524dc2c603ed60d9bc5398de51ffe66690a7d3f9523de26"
+        },
+        {
+          "file": "authoring-svg-flat/slide_07.svg",
+          "sha256": "37aa33c174f2de6a0f39f54292ba1a8173442315d5e963cf4160e0b5c8ec16d2"
+        },
+        {
+          "file": "authoring-svg-flat/slide_08.svg",
+          "sha256": "403e2c1b7e7bbea2fc8d7393f5da1c9d5a72dff2324283d3d15b6ffba2536c7b"
+        },
+        {
+          "file": "page_plan.json",
+          "sha256": "665735621177939d6506a5d2a741defc22d541e2eac2ce1f87c6edc1b5dc328b"
+        }
+      ]
+    },
+    "authoring_roundtrip": {
+      "schema": "ppt-master.authoring-roundtrip-materialization.v1",
+      "authoring_root": "D:\\办公程序\\github_blog\\hugo_extended_withdeploy_0.141.0_windows-amd64\\rublog\\content\\post\\T-POP\\c3\\authoring-svg-flat",
+      "manifest_schema": "ppt-master.svg-authoring-ir.v1",
+      "projection_kind": "flat",
+      "materialized_slide_count": 9,
+      "page_plan": {
+        "schema": "ppt-master.roundtrip-page-plan.v1",
+        "output_pages": 9,
+        "pages": [
+          {
+            "output_index": 1,
+            "source_slide": 1,
+            "svg": "cover.svg"
+          },
+          {
+            "output_index": 2,
+            "source_slide": 1,
+            "svg": "slide_01.svg"
+          },
+          {
+            "output_index": 3,
+            "source_slide": 2,
+            "svg": "slide_02.svg"
+          },
+          {
+            "output_index": 4,
+            "source_slide": 3,
+            "svg": "slide_03.svg"
+          },
+          {
+            "output_index": 5,
+            "source_slide": 4,
+            "svg": "slide_04.svg"
+          },
+          {
+            "output_index": 6,
+            "source_slide": 5,
+            "svg": "slide_05.svg"
+          },
+          {
+            "output_index": 7,
+            "source_slide": 6,
+            "svg": "slide_06.svg"
+          },
+          {
+            "output_index": 8,
+            "source_slide": 7,
+            "svg": "slide_07.svg"
+          },
+          {
+            "output_index": 9,
+            "source_slide": 8,
+            "svg": "slide_08.svg"
+          }
+        ]
+      },
+      "totals": {
+        "source_ref_count": 185,
+        "unchanged_refs": 173,
+        "edited_refs": 0,
+        "deleted_refs": 12,
+        "authored_unreferenced": 6,
+        "expanded_vector_uses": 0
+      },
+      "documents": [
+        {
+          "file": "cover.svg",
+          "source_file": "slide_01.svg",
+          "source_slide": 1,
+          "document_unchanged": false,
+          "source_ref_count": 12,
+          "source_ref_ids": [
+            "slide:10",
+            "slide:11",
+            "slide:12",
+            "slide:13",
+            "slide:2",
+            "slide:3",
+            "slide:4",
+            "slide:5",
+            "slide:6",
+            "slide:7",
+            "slide:8",
+            "slide:9"
+          ],
+          "unchanged_refs": 0,
+          "unchanged_ref_ids": [],
+          "edited_refs": 0,
+          "edited_ref_ids": [],
+          "deleted_refs": 12,
+          "deleted_ref_ids": [
+            "slide:10",
+            "slide:11",
+            "slide:12",
+            "slide:13",
+            "slide:2",
+            "slide:3",
+            "slide:4",
+            "slide:5",
+            "slide:6",
+            "slide:7",
+            "slide:8",
+            "slide:9"
+          ],
+          "authored_unreferenced": 6,
+          "expanded_vector_uses": 0,
+          "defs_changed": false
+        },
+        {
+          "file": "slide_01.svg",
+          "source_file": "slide_01.svg",
+          "source_slide": 1,
+          "document_unchanged": true,
+          "source_ref_count": 12,
+          "source_ref_ids": [
+            "slide:10",
+            "slide:11",
+            "slide:12",
+            "slide:13",
+            "slide:2",
+            "slide:3",
+            "slide:4",
+            "slide:5",
+            "slide:6",
+            "slide:7",
+            "slide:8",
+            "slide:9"
+          ],
+          "unchanged_refs": 12,
+          "unchanged_ref_ids": [
+            "slide:10",
+            "slide:11",
+            "slide:12",
+            "slide:13",
+            "slide:2",
+            "slide:3",
+            "slide:4",
+            "slide:5",
+            "slide:6",
+            "slide:7",
+            "slide:8",
+            "slide:9"
+          ],
+          "edited_refs": 0,
+          "edited_ref_ids": [],
+          "deleted_refs": 0,
+          "deleted_ref_ids": [],
+          "authored_unreferenced": 0,
+          "expanded_vector_uses": 0,
+          "defs_changed": false
+        },
+        {
+          "file": "slide_02.svg",
+          "source_file": "slide_02.svg",
+          "source_slide": 2,
+          "document_unchanged": true,
+          "source_ref_count": 22,
+          "source_ref_ids": [
+            "slide:10",
+            "slide:11",
+            "slide:13",
+            "slide:14",
+            "slide:15",
+            "slide:16",
+            "slide:18",
+            "slide:19",
+            "slide:2",
+            "slide:20",
+            "slide:21",
+            "slide:23",
+            "slide:24",
+            "slide:25",
+            "slide:26",
+            "slide:3",
+            "slide:4",
+            "slide:5",
+            "slide:6",
+            "slide:7",
+            "slide:8",
+            "slide:9"
+          ],
+          "unchanged_refs": 22,
+          "unchanged_ref_ids": [
+            "slide:10",
+            "slide:11",
+            "slide:13",
+            "slide:14",
+            "slide:15",
+            "slide:16",
+            "slide:18",
+            "slide:19",
+            "slide:2",
+            "slide:20",
+            "slide:21",
+            "slide:23",
+            "slide:24",
+            "slide:25",
+            "slide:26",
+            "slide:3",
+            "slide:4",
+            "slide:5",
+            "slide:6",
+            "slide:7",
+            "slide:8",
+            "slide:9"
+          ],
+          "edited_refs": 0,
+          "edited_ref_ids": [],
+          "deleted_refs": 0,
+          "deleted_ref_ids": [],
+          "authored_unreferenced": 0,
+          "expanded_vector_uses": 0,
+          "defs_changed": false
+        },
+        {
+          "file": "slide_03.svg",
+          "source_file": "slide_03.svg",
+          "source_slide": 3,
+          "document_unchanged": true,
+          "source_ref_count": 16,
+          "source_ref_ids": [
+            "slide:10",
+            "slide:11",
+            "slide:15",
+            "slide:16",
+            "slide:17",
+            "slide:18",
+            "slide:19",
+            "slide:2",
+            "slide:20",
+            "slide:3",
+            "slide:4",
+            "slide:5",
+            "slide:6",
+            "slide:7",
+            "slide:8",
+            "slide:9"
+          ],
+          "unchanged_refs": 16,
+          "unchanged_ref_ids": [
+            "slide:10",
+            "slide:11",
+            "slide:15",
+            "slide:16",
+            "slide:17",
+            "slide:18",
+            "slide:19",
+            "slide:2",
+            "slide:20",
+            "slide:3",
+            "slide:4",
+            "slide:5",
+            "slide:6",
+            "slide:7",
+            "slide:8",
+            "slide:9"
+          ],
+          "edited_refs": 0,
+          "edited_ref_ids": [],
+          "deleted_refs": 0,
+          "deleted_ref_ids": [],
+          "authored_unreferenced": 0,
+          "expanded_vector_uses": 0,
+          "defs_changed": false
+        },
+        {
+          "file": "slide_04.svg",
+          "source_file": "slide_04.svg",
+          "source_slide": 4,
+          "document_unchanged": true,
+          "source_ref_count": 55,
+          "source_ref_ids": [
+            "slide:10",
+            "slide:11",
+            "slide:12",
+            "slide:13",
+            "slide:14",
+            "slide:15",
+            "slide:16",
+            "slide:17",
+            "slide:19",
+            "slide:2",
+            "slide:20",
+            "slide:21",
+            "slide:22",
+            "slide:23",
+            "slide:24",
+            "slide:25",
+            "slide:26",
+            "slide:27",
+            "slide:28",
+            "slide:29",
+            "slide:3",
+            "slide:30",
+            "slide:31",
+            "slide:32",
+            "slide:33",
+            "slide:34",
+            "slide:35",
+            "slide:36",
+            "slide:37",
+            "slide:38",
+            "slide:39",
+            "slide:4",
+            "slide:40",
+            "slide:41",
+            "slide:42",
+            "slide:43",
+            "slide:47",
+            "slide:48",
+            "slide:49",
+            "slide:5",
+            "slide:53",
+            "slide:54",
+            "slide:55",
+            "slide:56",
+            "slide:57",
+            "slide:58",
+            "slide:59",
+            "slide:6",
+            "slide:60",
+            "slide:61",
+            "slide:62",
+            "slide:63",
+            "slide:7",
+            "slide:8",
+            "slide:9"
+          ],
+          "unchanged_refs": 55,
+          "unchanged_ref_ids": [
+            "slide:10",
+            "slide:11",
+            "slide:12",
+            "slide:13",
+            "slide:14",
+            "slide:15",
+            "slide:16",
+            "slide:17",
+            "slide:19",
+            "slide:2",
+            "slide:20",
+            "slide:21",
+            "slide:22",
+            "slide:23",
+            "slide:24",
+            "slide:25",
+            "slide:26",
+            "slide:27",
+            "slide:28",
+            "slide:29",
+            "slide:3",
+            "slide:30",
+            "slide:31",
+            "slide:32",
+            "slide:33",
+            "slide:34",
+            "slide:35",
+            "slide:36",
+            "slide:37",
+            "slide:38",
+            "slide:39",
+            "slide:4",
+            "slide:40",
+            "slide:41",
+            "slide:42",
+            "slide:43",
+            "slide:47",
+            "slide:48",
+            "slide:49",
+            "slide:5",
+            "slide:53",
+            "slide:54",
+            "slide:55",
+            "slide:56",
+            "slide:57",
+            "slide:58",
+            "slide:59",
+            "slide:6",
+            "slide:60",
+            "slide:61",
+            "slide:62",
+            "slide:63",
+            "slide:7",
+            "slide:8",
+            "slide:9"
+          ],
+          "edited_refs": 0,
+          "edited_ref_ids": [],
+          "deleted_refs": 0,
+          "deleted_ref_ids": [],
+          "authored_unreferenced": 0,
+          "expanded_vector_uses": 0,
+          "defs_changed": false
+        },
+        {
+          "file": "slide_05.svg",
+          "source_file": "slide_05.svg",
+          "source_slide": 5,
+          "document_unchanged": true,
+          "source_ref_count": 8,
+          "source_ref_ids": [
+            "slide:2",
+            "slide:3",
+            "slide:4",
+            "slide:5",
+            "slide:6",
+            "slide:7",
+            "slide:8",
+            "slide:9"
+          ],
+          "unchanged_refs": 8,
+          "unchanged_ref_ids": [
+            "slide:2",
+            "slide:3",
+            "slide:4",
+            "slide:5",
+            "slide:6",
+            "slide:7",
+            "slide:8",
+            "slide:9"
+          ],
+          "edited_refs": 0,
+          "edited_ref_ids": [],
+          "deleted_refs": 0,
+          "deleted_ref_ids": [],
+          "authored_unreferenced": 0,
+          "expanded_vector_uses": 0,
+          "defs_changed": false
+        },
+        {
+          "file": "slide_06.svg",
+          "source_file": "slide_06.svg",
+          "source_slide": 6,
+          "document_unchanged": true,
+          "source_ref_count": 20,
+          "source_ref_ids": [
+            "slide:10",
+            "slide:11",
+            "slide:12",
+            "slide:13",
+            "slide:14",
+            "slide:15",
+            "slide:16",
+            "slide:17",
+            "slide:18",
+            "slide:19",
+            "slide:2",
+            "slide:20",
+            "slide:21",
+            "slide:3",
+            "slide:4",
+            "slide:5",
+            "slide:6",
+            "slide:7",
+            "slide:8",
+            "slide:9"
+          ],
+          "unchanged_refs": 20,
+          "unchanged_ref_ids": [
+            "slide:10",
+            "slide:11",
+            "slide:12",
+            "slide:13",
+            "slide:14",
+            "slide:15",
+            "slide:16",
+            "slide:17",
+            "slide:18",
+            "slide:19",
+            "slide:2",
+            "slide:20",
+            "slide:21",
+            "slide:3",
+            "slide:4",
+            "slide:5",
+            "slide:6",
+            "slide:7",
+            "slide:8",
+            "slide:9"
+          ],
+          "edited_refs": 0,
+          "edited_ref_ids": [],
+          "deleted_refs": 0,
+          "deleted_ref_ids": [],
+          "authored_unreferenced": 0,
+          "expanded_vector_uses": 0,
+          "defs_changed": false
+        },
+        {
+          "file": "slide_07.svg",
+          "source_file": "slide_07.svg",
+          "source_slide": 7,
+          "document_unchanged": true,
+          "source_ref_count": 19,
+          "source_ref_ids": [
+            "slide:10",
+            "slide:11",
+            "slide:12",
+            "slide:13",
+            "slide:14",
+            "slide:15",
+            "slide:16",
+            "slide:17",
+            "slide:18",
+            "slide:19",
+            "slide:2",
+            "slide:20",
+            "slide:3",
+            "slide:4",
+            "slide:5",
+            "slide:6",
+            "slide:7",
+            "slide:8",
+            "slide:9"
+          ],
+          "unchanged_refs": 19,
+          "unchanged_ref_ids": [
+            "slide:10",
+            "slide:11",
+            "slide:12",
+            "slide:13",
+            "slide:14",
+            "slide:15",
+            "slide:16",
+            "slide:17",
+            "slide:18",
+            "slide:19",
+            "slide:2",
+            "slide:20",
+            "slide:3",
+            "slide:4",
+            "slide:5",
+            "slide:6",
+            "slide:7",
+            "slide:8",
+            "slide:9"
+          ],
+          "edited_refs": 0,
+          "edited_ref_ids": [],
+          "deleted_refs": 0,
+          "deleted_ref_ids": [],
+          "authored_unreferenced": 0,
+          "expanded_vector_uses": 0,
+          "defs_changed": false
+        },
+        {
+          "file": "slide_08.svg",
+          "source_file": "slide_08.svg",
+          "source_slide": 8,
+          "document_unchanged": true,
+          "source_ref_count": 21,
+          "source_ref_ids": [
+            "slide:10",
+            "slide:11",
+            "slide:12",
+            "slide:13",
+            "slide:14",
+            "slide:15",
+            "slide:16",
+            "slide:17",
+            "slide:18",
+            "slide:19",
+            "slide:2",
+            "slide:20",
+            "slide:21",
+            "slide:22",
+            "slide:3",
+            "slide:4",
+            "slide:5",
+            "slide:6",
+            "slide:7",
+            "slide:8",
+            "slide:9"
+          ],
+          "unchanged_refs": 21,
+          "unchanged_ref_ids": [
+            "slide:10",
+            "slide:11",
+            "slide:12",
+            "slide:13",
+            "slide:14",
+            "slide:15",
+            "slide:16",
+            "slide:17",
+            "slide:18",
+            "slide:19",
+            "slide:2",
+            "slide:20",
+            "slide:21",
+            "slide:22",
+            "slide:3",
+            "slide:4",
+            "slide:5",
+            "slide:6",
+            "slide:7",
+            "slide:8",
+            "slide:9"
+          ],
+          "edited_refs": 0,
+          "edited_ref_ids": [],
+          "deleted_refs": 0,
+          "deleted_ref_ids": [],
+          "authored_unreferenced": 0,
+          "expanded_vector_uses": 0,
+          "defs_changed": false
+        }
+      ],
+      "source_slide_passthrough": {
+        "count": 8,
+        "slides": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ]
+      },
+      "export_summary": {
+        "output_pages": 9,
+        "passthrough": 0,
+        "cloned_passthrough": 8,
+        "patched": 0,
+        "rebuilt": 1
+      }
+    }
+  },
+  "package": {
+    "zip_integrity": "passed",
+    "corrupt_member": null,
+    "slides": 9,
+    "notes": 9,
+    "masters": 1,
+    "layouts": 1
+  },
+  "checks": {
+    "zip_integrity": "passed",
+    "slide_count": "passed",
+    "internal_relationships": "enforced-at-build",
+    "structured_package": "not-applicable",
+    "transitions": "enforced-at-build",
+    "animations": "enforced-at-build",
+    "project_svg_contract": "enforced-at-build",
+    "compatibility_normalization": "not-applicable",
+    "authoring_roundtrip": "materialized-from-flat-authoring",
+    "quality_gate": "passed",
+    "quality_warnings": "passed",
+    "template_tokens": "passed",
+    "external_images": "passed",
+    "font_portability": "passed"
+  },
+  "quality": {
+    "status": "loaded",
+    "path": "D:\\办公程序\\github_blog\\hugo_extended_withdeploy_0.141.0_windows-amd64\\rublog\\content\\post\\T-POP\\c3\\validation\\svg_quality_report.json",
+    "schema": "ppt-master.svg-quality-report.v1",
+    "stage": "final",
+    "source_match": "passed",
+    "source_fingerprint": {
+      "algorithm": "sha256",
+      "digest": "80b2731efa0f08c73b193696b298468bcdcded07b36e576e7919b10a1e979fd7",
+      "file_count": 10,
+      "files": [
+        {
+          "file": "authoring-svg-flat/cover.svg",
+          "sha256": "a8a35ae02ad5876cc09e8352a0951d7ae2a8b7641fe54f3fbdc547d58fc9d438"
+        },
+        {
+          "file": "authoring-svg-flat/slide_01.svg",
+          "sha256": "e9262070450d15f10752924f45925314766ba7b576d0f75292366db829a9f288"
+        },
+        {
+          "file": "authoring-svg-flat/slide_02.svg",
+          "sha256": "e874eb395c8bcdd2086d8ec0c6c59f86efc6b4a5f108afe2134fa71adb8db4e2"
+        },
+        {
+          "file": "authoring-svg-flat/slide_03.svg",
+          "sha256": "c0d2004b251e6228b1690debe93297789d0915d2cfffd97846db9d41e38a4e0e"
+        },
+        {
+          "file": "authoring-svg-flat/slide_04.svg",
+          "sha256": "90da9e4ee482f7423b3768229f977e3c74ca04382ce3cbea50011cb891f75c50"
+        },
+        {
+          "file": "authoring-svg-flat/slide_05.svg",
+          "sha256": "ce3df3c91dd4ad3124bdc43491326322f00780afbecef1717aeca3f91cebcc70"
+        },
+        {
+          "file": "authoring-svg-flat/slide_06.svg",
+          "sha256": "3fd3249faae44fd4c524dc2c603ed60d9bc5398de51ffe66690a7d3f9523de26"
+        },
+        {
+          "file": "authoring-svg-flat/slide_07.svg",
+          "sha256": "37aa33c174f2de6a0f39f54292ba1a8173442315d5e963cf4160e0b5c8ec16d2"
+        },
+        {
+          "file": "authoring-svg-flat/slide_08.svg",
+          "sha256": "403e2c1b7e7bbea2fc8d7393f5da1c9d5a72dff2324283d3d15b6ffba2536c7b"
+        },
+        {
+          "file": "page_plan.json",
+          "sha256": "665735621177939d6506a5d2a741defc22d541e2eac2ce1f87c6edc1b5dc328b"
+        }
+      ]
+    },
+    "summary": {
+      "total": 9,
+      "passed": 9,
+      "warnings": 0,
+      "errors": 0
+    },
+    "categories": {
+      "blocking": {
+        "count": 0,
+        "issues": []
+      },
+      "introduced": {
+        "count": 0,
+        "issues": []
+      },
+      "inherited": {
+        "count": 0,
+        "issues": []
+      },
+      "source-import": {
+        "count": 0,
+        "summary": {
+          "warning_count": 0,
+          "by_code": {}
+        }
+      }
+    }
+  },
+  "resources": {
+    "unresolved_template_tokens": [],
+    "fonts": {
+      "stacks": [
+        "Arial",
+        "Arial, \"Microsoft YaHei\", sans-serif"
+      ],
+      "generic_only_stacks": [],
+      "unsafe_exported_faces": []
+    },
+    "images": {
+      "data_uri": 0,
+      "local": 0,
+      "external": 0,
+      "external_references": []
+    }
+  },
+  "export_policy": {
+    "project_svg_contract": "strict",
+    "dangerous_normalization_count": 0
+  },
+  "deck_motion": {
+    "transition": {
+      "effect": null,
+      "effect_options": {},
+      "duration": 0.0,
+      "auto_advance": null,
+      "sound": null
+    },
+    "animation": {
+      "effect": "none",
+      "effect_request": null,
+      "duration": 0.4,
+      "stagger": 0.5,
+      "trigger": "after-previous"
+    },
+    "cli_overrides": {
+      "transition": false,
+      "transition_duration": false,
+      "auto_advance": false,
+      "transition_sound": false,
+      "animation": false,
+      "animation_duration": false,
+      "animation_stagger": false,
+      "animation_trigger": false
+    },
+    "narration_timings": false
+  },
+  "backup_path": null,
+  "conversion_trace_path": null
+}

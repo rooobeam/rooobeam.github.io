@@ -1,0 +1,33 @@
+{
+  "schema": "ppt-master.roundtrip-page-plan.v1",
+  "pages": [
+    {
+      "source_slide": 1,
+      "svg": "cover.svg"
+    },
+    {
+      "source_slide": 1
+    },
+    {
+      "source_slide": 2
+    },
+    {
+      "source_slide": 3
+    },
+    {
+      "source_slide": 4
+    },
+    {
+      "source_slide": 5
+    },
+    {
+      "source_slide": 6
+    },
+    {
+      "source_slide": 7
+    },
+    {
+      "source_slide": 8
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1280" height="720" viewBox="0 0 1280 720" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif"><rect x="0" y="0" width="1280" height="720" fill="#FFFFFF" />
+<g id="shape-4" data-pptx-object="group" data-pptx-frame="62.24 48.4 956.15 101.96" data-pptx-source-ref="slide:4">
+<g id="shape-2" data-pptx-object="shape" data-pptx-frame="63.36 48.4 293.02 24.64" data-pptx-prst="rect" data-pptx-source-ref="slide:2" data-pptx-semantic-object="shape">
+<path d="M 63.36 48.4 L 356.38 48.4 L 356.38 73.04 L 63.36 73.04 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="63.36" y="62" text-anchor="start" xml:space="preserve" font-size="16" fill="#5B6B7A">DATA AND EVALUATION SETTING</text>
+</g>
+<g id="shape-3" data-pptx-object="shape" data-pptx-frame="62.24 82.6 956.15 67.76" data-pptx-prst="rect" data-pptx-source-ref="slide:3" data-pptx-semantic-object="shape">
+<path d="M 62.24 82.6 L 1018.39 82.6 L 1018.39 150.36 L 62.24 150.36 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="62.24" y="120" text-anchor="start" xml:space="preserve" font-size="44" fill="#10243A" font-weight="bold">What is personalized, and how is it tested?</text>
+</g>
+</g>
+<g id="shape-5" data-pptx-object="graphic-frame" data-pptx-frame="64 176 632 282" data-pptx-import-source="pptx" data-pptx-replace-with="table" data-pptx-native-authority="json" data-pptx-source-ref="slide:5" data-pptx-semantic-object="table">
+<metadata type="application/json">{"schema":"ppt-master.semantic-table.v2","x":64,"y":176,"width":632,"height":282,"strict_grid":true,"header_rows":1,"column_widths":[480,152],"row_heights":[50,58,58,58,58],"style":{"band_row":false,"table_style_id":"{5C22544A-7EE6-4342-B048-85BDC9FD1C3A}"},"defaults":{"cell":{"valign":"middle","borders":{"left":{"style":"none"},"right":{"style":"none"},"top":{"style":"none"},"bottom":{"style":"solid","color":"#CBD4DE","width":1}},"padding_left":18,"padding_right":18,"padding_top":10,"padding_bottom":10},"run":{"bold":false,"color":"#233447","font_size":24,"lang":"en-US"}},"rows":[[{"paragraphs":[{"runs":[{"text":"Question pool","bold":true,"font_size":22,"color":"#5B6B7A"}]}],"fill":"#F3F6FA","padding_top":9.6,"padding_bottom":9.6},{"paragraphs":[{"runs":[{"text":"Size","bold":true,"font_size":22,"color":"#5B6B7A"}],"align":"r"}],"fill":"#F3F6FA","align":"r","padding_top":9.6,"padding_bottom":9.6}],[{"paragraphs":[{"runs":[{"text":"HelpSteer"}]}]},{"paragraphs":[{"runs":[{"text":"1,236"}],"align":"r"}],"align":"r"}],[{"paragraphs":[{"runs":[{"text":"TruthfulQA"}]}]},{"paragraphs":[{"runs":[{"text":"811"}],"align":"r"}],"align":"r"}],[{"paragraphs":[{"runs":[{"text":"UltraChat"}]}]},{"paragraphs":[{"runs":[{"text":"3,845"}],"align":"r"}],"align":"r"}],[{"paragraphs":[{"runs":[{"text":"Personal Preference Eval"}]}]},{"paragraphs":[{"runs":[{"text":"548"}],"align":"r"}],"align":"r"}]],"name":"question-pools"}</metadata><image x="0" y="0" width="1280" height="720" preserveAspectRatio="none" href="../images/source-object-previews/semantic-table-preview-c75fee03806b44a638e22129dc78544b48c03be3203d93466c523eee8bb61f1b.svg" data-pptx-part="authoring-preview" /></g>
+<g id="shape-11" data-pptx-object="group" data-pptx-frame="750.88 187.3 366.56 259.6" data-pptx-source-ref="slide:11">
+<g id="shape-6" data-pptx-object="shape" data-pptx-frame="751.12 187.3 238.58 33.88" data-pptx-prst="rect" data-pptx-source-ref="slide:6" data-pptx-semantic-object="shape">
+<path d="M 751.12 187.3 L 989.7 187.3 L 989.7 221.18 L 751.12 221.18 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="751.12" y="206" text-anchor="start" xml:space="preserve" font-size="22" fill="#087F8C" font-weight="bold">ONLINE FEEDBACK</text>
+</g>
+<g id="shape-7" data-pptx-object="shape" data-pptx-frame="750.88 222.2 366.56 43.12" data-pptx-prst="rect" data-pptx-source-ref="slide:7" data-pptx-semantic-object="shape">
+<path d="M 750.88 222.2 L 1117.44 222.2 L 1117.44 265.32 L 750.88 265.32 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="750.88" y="246" text-anchor="start" xml:space="preserve" font-size="28" fill="#233447">GPT-4o simulates the user.</text>
+</g>
+<g id="shape-8" data-pptx-object="shape" data-pptx-frame="751.12 287.3 161.92 33.88" data-pptx-prst="rect" data-pptx-source-ref="slide:8" data-pptx-semantic-object="shape">
+<path d="M 751.12 287.3 L 913.04 287.3 L 913.04 321.18 L 751.12 321.18 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="751.12" y="306" text-anchor="start" xml:space="preserve" font-size="22" fill="#10243A" font-weight="bold">EVALUATION</text>
+</g>
+<g id="shape-9" data-pptx-object="shape" data-pptx-frame="750.88 322.2 321.25 85.12" data-pptx-prst="rect" data-pptx-source-ref="slide:9" data-pptx-semantic-object="shape">
+<path d="M 750.88 322.2 L 1072.13 322.2 L 1072.13 407.32 L 750.88 407.32 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="750.88" y="346" text-anchor="start" xml:space="preserve" font-size="28" fill="#233447" data-pptx-text-model="lines" data-paragraph-line-height="33.6"><tspan><tspan>ArmoRM reward scores</tspan></tspan><tspan data-paragraph-line-break="1">GPT-4o win rate vs. Base</tspan></text>
+</g>
+<g id="shape-10" data-pptx-object="shape" data-pptx-frame="751.12 420.3 13.33 26.6" data-pptx-prst="rect" data-pptx-source-ref="slide:10" data-pptx-semantic-object="shape">
+<path d="M 751.12 420.3 L 764.45 420.3 L 764.45 446.9 L 751.12 446.9 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+</g>
+</g>
+<g id="shape-17" data-pptx-object="group" data-pptx-frame="70.65 512.83 813.11 72.88" data-pptx-source-ref="slide:17">
+<g id="shape-15" data-pptx-object="shape" data-pptx-frame="70.65 512.83 625.33 33.88" data-pptx-prst="rect" data-pptx-source-ref="slide:15" data-pptx-semantic-object="shape">
+<path d="M 70.65 512.83 L 695.98 512.83 L 695.98 546.71 L 70.65 546.71 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="70.65" y="531.53" text-anchor="start" xml:space="preserve" font-size="22" fill="#233447" font-weight="bold"><tspan>Frozen backbones:</tspan><tspan> Mistral-7B · Qwen2-7B · Llama-3.1-8B</tspan></text>
+</g>
+<g id="shape-16" data-pptx-object="shape" data-pptx-frame="70.65 551.83 813.11 33.88" data-pptx-prst="rect" data-pptx-source-ref="slide:16" data-pptx-semantic-object="shape">
+<path d="M 70.65 551.83 L 883.77 551.83 L 883.77 585.71 L 70.65 585.71 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="70.65" y="570.53" text-anchor="start" xml:space="preserve" font-size="22" fill="#233447" font-weight="bold"><tspan>Baselines:</tspan><tspan> Base · Preference Prompting · Beam Search (16) · LA · AMULET</tspan></text>
+</g>
+</g>
+<g id="shape-20" data-pptx-object="group" data-pptx-frame="63.36 672.4 1153.28 24.64" data-pptx-source-ref="slide:20">
+<g id="shape-18" data-pptx-object="shape" data-pptx-frame="63.36 672.4 717.1 24.64" data-pptx-prst="rect" data-pptx-source-ref="slide:18" data-pptx-semantic-object="shape">
+<path d="M 63.36 672.4 L 780.46 672.4 L 780.46 697.04 L 63.36 697.04 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="63.36" y="686" text-anchor="start" xml:space="preserve" font-size="16" fill="#5B6B7A">T-POP §4.1; Appendix B · Sizes describe question pools, not observed preference-pair counts.</text>
+</g>
+<g id="shape-19" data-pptx-object="shape" data-pptx-frame="1163.49 672.4 53.15 24.64" data-pptx-prst="rect" data-pptx-source-ref="slide:19" data-pptx-semantic-object="shape">
+<path d="M 1163.49 672.4 L 1216.64 672.4 L 1216.64 697.04 L 1163.49 697.04 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="1216.64" y="686" text-anchor="end" xml:space="preserve" font-size="16" fill="#5B6B7A">03 / 08</text>
+</g>
+</g></svg>

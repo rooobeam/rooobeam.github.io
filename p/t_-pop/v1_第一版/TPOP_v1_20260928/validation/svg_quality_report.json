@@ -1,0 +1,642 @@
+{
+  "schema": "ppt-master.svg-quality-report.v1",
+  "stage": "final",
+  "target": "D:\\办公程序\\github_blog\\hugo_extended_withdeploy_0.141.0_windows-amd64\\rublog\\content\\post\\T-POP\\v1_第一版\\TPOP_v1_20260928",
+  "source_fingerprint": {
+    "algorithm": "sha256",
+    "digest": "7e4be2e4d5841e27f320df03350fb3b353f53d335036c8b9b7967e6213b262ab",
+    "file_count": 8,
+    "files": [
+      {
+        "file": "01_background.svg",
+        "sha256": "2646fcf7872c628d05fabf2f9f4e6bff6e09c23f646deaca0009611a8354d27c"
+      },
+      {
+        "file": "02_motivation.svg",
+        "sha256": "990e7e27e0474bff451450f6722d3d46baa134a39a0e4f2c0a07bc1118038bb1"
+      },
+      {
+        "file": "03_setting.svg",
+        "sha256": "479bd3b50aa6aa2c7254754eb8131276030b0929a27387c25faade1df92a0dde"
+      },
+      {
+        "file": "04_overview.svg",
+        "sha256": "7cd11ad4801086314162de4043945d12a8b667eff107b7dbf176c419fe425bf6"
+      },
+      {
+        "file": "05_training.svg",
+        "sha256": "bdc21931557ef476e7f679a5ee5b3d25642d20ac466fb32cd52bd9f5bb9e3b9a"
+      },
+      {
+        "file": "06_decoding.svg",
+        "sha256": "49ff184dca0ebf53bcf8c13a857c3e39f3685b349f627ed5e37770b5b033be9d"
+      },
+      {
+        "file": "07_evidence.svg",
+        "sha256": "d2687750cbff0a060ca822880e17abe8dd5f566e3b3a01d6dd986a21a98a82c5"
+      },
+      {
+        "file": "08_discussion.svg",
+        "sha256": "776cf7b2119eb29b391383d0a6ae6160ca49cccbe13dfe687d803b8dd267dfd2"
+      }
+    ]
+  },
+  "summary": {
+    "total": 8,
+    "passed": 8,
+    "warnings": 0,
+    "errors": 0
+  },
+  "issue_types": {},
+  "categories": {
+    "blocking": {
+      "count": 0,
+      "issues": []
+    },
+    "introduced": {
+      "count": 0,
+      "issues": []
+    },
+    "inherited": {
+      "count": 0,
+      "issues": []
+    },
+    "source-import": {
+      "count": 0,
+      "summary": {
+        "warning_count": 0,
+        "by_code": {}
+      }
+    }
+  },
+  "drift": {
+    "colors": {
+      "#E6F2F3": [
+        "02_motivation.svg",
+        "04_overview.svg",
+        "05_training.svg",
+        "06_decoding.svg",
+        "07_evidence.svg"
+      ],
+      "#FBEEE4": [
+        "02_motivation.svg",
+        "04_overview.svg",
+        "06_decoding.svg"
+      ]
+    },
+    "fonts": {},
+    "sizes": {}
+  },
+  "carrier_receipt": {
+    "scope": "informational-not-a-quota",
+    "pages": 8,
+    "totals": {
+      "text_elements": 154,
+      "image_placements": 0,
+      "icons": 0,
+      "svg_geometry_elements": 54,
+      "preset_shapes": 0,
+      "page_frame_elements": 8,
+      "marker_uses": 10,
+      "inline_emphasis_runs": 15,
+      "gradient_uses": 0,
+      "filter_uses": 0,
+      "text_effects": 0
+    },
+    "pages_with": {
+      "images": 0,
+      "icons": 0,
+      "presets": 0,
+      "charts": 0,
+      "tables": 3,
+      "formulas": 3,
+      "inline_emphasis_runs": 7,
+      "gradient_uses": 0,
+      "filter_uses": 0,
+      "text_effects": 0
+    },
+    "relationship_pages": 8,
+    "geometry_elements": {
+      "circle": 0,
+      "ellipse": 0,
+      "line": 25,
+      "path": 0,
+      "polygon": 0,
+      "polyline": 0,
+      "rect": 29
+    },
+    "preset_names": {},
+    "native_objects": {
+      "chart": 0,
+      "formula_block": 10,
+      "formula_inline": 0,
+      "other": 0,
+      "table": 3
+    },
+    "image_page_max_frame_share_range": []
+  },
+  "project_issues": {
+    "template": [],
+    "animation": [],
+    "illustration": [],
+    "communication_trace": [],
+    "pptx_structure": []
+  },
+  "files": [
+    {
+      "file": "01_background.svg",
+      "path": "D:\\办公程序\\github_blog\\hugo_extended_withdeploy_0.141.0_windows-amd64\\rublog\\content\\post\\T-POP\\v1_第一版\\TPOP_v1_20260928\\svg_output\\01_background.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "carrier_receipt": {
+          "text_elements": 19,
+          "images": {
+            "placements": 0,
+            "files": [],
+            "max_frame_share": 0.0
+          },
+          "icons": 0,
+          "effects": {
+            "inline_emphasis_runs": 4,
+            "gradient_uses": 0,
+            "filter_uses": 0,
+            "text_effects": 0
+          },
+          "geometry": {
+            "svg_elements": {
+              "rect": 2,
+              "circle": 0,
+              "ellipse": 0,
+              "line": 4,
+              "polyline": 0,
+              "polygon": 0,
+              "path": 0
+            },
+            "preset_shapes": 0,
+            "preset_names": {},
+            "page_frame_elements": 1,
+            "marker_uses": {
+              "start": 0,
+              "mid": 0,
+              "end": 0
+            }
+          },
+          "native_objects": {
+            "chart": 0,
+            "table": 1,
+            "formula_block": 0,
+            "formula_inline": 0,
+            "other": 0
+          }
+        },
+        "fonts": [
+          "Arial"
+        ],
+        "text_elements": 19,
+        "tspan_elements": 6
+      },
+      "passed": true,
+      "source_sha256": "2646fcf7872c628d05fabf2f9f4e6bff6e09c23f646deaca0009611a8354d27c"
+    },
+    {
+      "file": "02_motivation.svg",
+      "path": "D:\\办公程序\\github_blog\\hugo_extended_withdeploy_0.141.0_windows-amd64\\rublog\\content\\post\\T-POP\\v1_第一版\\TPOP_v1_20260928\\svg_output\\02_motivation.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "carrier_receipt": {
+          "text_elements": 15,
+          "images": {
+            "placements": 0,
+            "files": [],
+            "max_frame_share": 0.0
+          },
+          "icons": 0,
+          "effects": {
+            "inline_emphasis_runs": 3,
+            "gradient_uses": 0,
+            "filter_uses": 0,
+            "text_effects": 0
+          },
+          "geometry": {
+            "svg_elements": {
+              "rect": 3,
+              "circle": 0,
+              "ellipse": 0,
+              "line": 0,
+              "polyline": 0,
+              "polygon": 0,
+              "path": 0
+            },
+            "preset_shapes": 0,
+            "preset_names": {},
+            "page_frame_elements": 1,
+            "marker_uses": {
+              "start": 0,
+              "mid": 0,
+              "end": 0
+            }
+          },
+          "native_objects": {
+            "chart": 0,
+            "table": 0,
+            "formula_block": 2,
+            "formula_inline": 0,
+            "other": 0
+          }
+        },
+        "fonts": [
+          "Arial",
+          "Cambria Math"
+        ],
+        "text_elements": 15,
+        "tspan_elements": 3,
+        "contextual_values": {
+          "colors": [
+            "#E6F2F3",
+            "#FBEEE4"
+          ]
+        }
+      },
+      "passed": true,
+      "source_sha256": "990e7e27e0474bff451450f6722d3d46baa134a39a0e4f2c0a07bc1118038bb1"
+    },
+    {
+      "file": "03_setting.svg",
+      "path": "D:\\办公程序\\github_blog\\hugo_extended_withdeploy_0.141.0_windows-amd64\\rublog\\content\\post\\T-POP\\v1_第一版\\TPOP_v1_20260928\\svg_output\\03_setting.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "carrier_receipt": {
+          "text_elements": 23,
+          "images": {
+            "placements": 0,
+            "files": [],
+            "max_frame_share": 0.0
+          },
+          "icons": 0,
+          "effects": {
+            "inline_emphasis_runs": 3,
+            "gradient_uses": 0,
+            "filter_uses": 0,
+            "text_effects": 0
+          },
+          "geometry": {
+            "svg_elements": {
+              "rect": 2,
+              "circle": 0,
+              "ellipse": 0,
+              "line": 5,
+              "polyline": 0,
+              "polygon": 0,
+              "path": 0
+            },
+            "preset_shapes": 0,
+            "preset_names": {},
+            "page_frame_elements": 1,
+            "marker_uses": {
+              "start": 0,
+              "mid": 0,
+              "end": 0
+            }
+          },
+          "native_objects": {
+            "chart": 0,
+            "table": 1,
+            "formula_block": 0,
+            "formula_inline": 0,
+            "other": 0
+          }
+        },
+        "fonts": [
+          "Arial"
+        ],
+        "text_elements": 23,
+        "tspan_elements": 4
+      },
+      "passed": true,
+      "source_sha256": "479bd3b50aa6aa2c7254754eb8131276030b0929a27387c25faade1df92a0dde"
+    },
+    {
+      "file": "04_overview.svg",
+      "path": "D:\\办公程序\\github_blog\\hugo_extended_withdeploy_0.141.0_windows-amd64\\rublog\\content\\post\\T-POP\\v1_第一版\\TPOP_v1_20260928\\svg_output\\04_overview.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "carrier_receipt": {
+          "text_elements": 19,
+          "images": {
+            "placements": 0,
+            "files": [],
+            "max_frame_share": 0.0
+          },
+          "icons": 0,
+          "effects": {
+            "inline_emphasis_runs": 2,
+            "gradient_uses": 0,
+            "filter_uses": 0,
+            "text_effects": 0
+          },
+          "geometry": {
+            "svg_elements": {
+              "rect": 8,
+              "circle": 0,
+              "ellipse": 0,
+              "line": 9,
+              "polyline": 0,
+              "polygon": 0,
+              "path": 0
+            },
+            "preset_shapes": 0,
+            "preset_names": {},
+            "page_frame_elements": 1,
+            "marker_uses": {
+              "start": 0,
+              "mid": 0,
+              "end": 7
+            }
+          },
+          "native_objects": {
+            "chart": 0,
+            "table": 0,
+            "formula_block": 0,
+            "formula_inline": 0,
+            "other": 0
+          }
+        },
+        "fonts": [
+          "Arial"
+        ],
+        "text_elements": 19,
+        "tspan_elements": 2,
+        "contextual_values": {
+          "colors": [
+            "#E6F2F3",
+            "#FBEEE4"
+          ]
+        }
+      },
+      "passed": true,
+      "source_sha256": "7cd11ad4801086314162de4043945d12a8b667eff107b7dbf176c419fe425bf6"
+    },
+    {
+      "file": "05_training.svg",
+      "path": "D:\\办公程序\\github_blog\\hugo_extended_withdeploy_0.141.0_windows-amd64\\rublog\\content\\post\\T-POP\\v1_第一版\\TPOP_v1_20260928\\svg_output\\05_training.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "carrier_receipt": {
+          "text_elements": 21,
+          "images": {
+            "placements": 0,
+            "files": [],
+            "max_frame_share": 0.0
+          },
+          "icons": 0,
+          "effects": {
+            "inline_emphasis_runs": 1,
+            "gradient_uses": 0,
+            "filter_uses": 0,
+            "text_effects": 0
+          },
+          "geometry": {
+            "svg_elements": {
+              "rect": 5,
+              "circle": 0,
+              "ellipse": 0,
+              "line": 3,
+              "polyline": 0,
+              "polygon": 0,
+              "path": 0
+            },
+            "preset_shapes": 0,
+            "preset_names": {},
+            "page_frame_elements": 1,
+            "marker_uses": {
+              "start": 0,
+              "mid": 0,
+              "end": 3
+            }
+          },
+          "native_objects": {
+            "chart": 0,
+            "table": 0,
+            "formula_block": 2,
+            "formula_inline": 0,
+            "other": 0
+          }
+        },
+        "fonts": [
+          "Arial",
+          "Cambria Math"
+        ],
+        "text_elements": 21,
+        "tspan_elements": 5,
+        "contextual_values": {
+          "colors": [
+            "#E6F2F3"
+          ]
+        }
+      },
+      "passed": true,
+      "source_sha256": "bdc21931557ef476e7f679a5ee5b3d25642d20ac466fb32cd52bd9f5bb9e3b9a"
+    },
+    {
+      "file": "06_decoding.svg",
+      "path": "D:\\办公程序\\github_blog\\hugo_extended_withdeploy_0.141.0_windows-amd64\\rublog\\content\\post\\T-POP\\v1_第一版\\TPOP_v1_20260928\\svg_output\\06_decoding.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "carrier_receipt": {
+          "text_elements": 16,
+          "images": {
+            "placements": 0,
+            "files": [],
+            "max_frame_share": 0.0
+          },
+          "icons": 0,
+          "effects": {
+            "inline_emphasis_runs": 0,
+            "gradient_uses": 0,
+            "filter_uses": 0,
+            "text_effects": 0
+          },
+          "geometry": {
+            "svg_elements": {
+              "rect": 3,
+              "circle": 0,
+              "ellipse": 0,
+              "line": 0,
+              "polyline": 0,
+              "polygon": 0,
+              "path": 0
+            },
+            "preset_shapes": 0,
+            "preset_names": {},
+            "page_frame_elements": 1,
+            "marker_uses": {
+              "start": 0,
+              "mid": 0,
+              "end": 0
+            }
+          },
+          "native_objects": {
+            "chart": 0,
+            "table": 0,
+            "formula_block": 6,
+            "formula_inline": 0,
+            "other": 0
+          }
+        },
+        "fonts": [
+          "Arial",
+          "Cambria Math"
+        ],
+        "text_elements": 16,
+        "tspan_elements": 1,
+        "contextual_values": {
+          "colors": [
+            "#E6F2F3",
+            "#FBEEE4"
+          ]
+        }
+      },
+      "passed": true,
+      "source_sha256": "49ff184dca0ebf53bcf8c13a857c3e39f3685b349f627ed5e37770b5b033be9d"
+    },
+    {
+      "file": "07_evidence.svg",
+      "path": "D:\\办公程序\\github_blog\\hugo_extended_withdeploy_0.141.0_windows-amd64\\rublog\\content\\post\\T-POP\\v1_第一版\\TPOP_v1_20260928\\svg_output\\07_evidence.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "carrier_receipt": {
+          "text_elements": 28,
+          "images": {
+            "placements": 0,
+            "files": [],
+            "max_frame_share": 0.0
+          },
+          "icons": 0,
+          "effects": {
+            "inline_emphasis_runs": 1,
+            "gradient_uses": 0,
+            "filter_uses": 0,
+            "text_effects": 0
+          },
+          "geometry": {
+            "svg_elements": {
+              "rect": 4,
+              "circle": 0,
+              "ellipse": 0,
+              "line": 4,
+              "polyline": 0,
+              "polygon": 0,
+              "path": 0
+            },
+            "preset_shapes": 0,
+            "preset_names": {},
+            "page_frame_elements": 1,
+            "marker_uses": {
+              "start": 0,
+              "mid": 0,
+              "end": 0
+            }
+          },
+          "native_objects": {
+            "chart": 0,
+            "table": 1,
+            "formula_block": 0,
+            "formula_inline": 0,
+            "other": 0
+          }
+        },
+        "fonts": [
+          "Arial"
+        ],
+        "text_elements": 28,
+        "tspan_elements": 3,
+        "contextual_values": {
+          "colors": [
+            "#E6F2F3"
+          ]
+        }
+      },
+      "passed": true,
+      "source_sha256": "d2687750cbff0a060ca822880e17abe8dd5f566e3b3a01d6dd986a21a98a82c5"
+    },
+    {
+      "file": "08_discussion.svg",
+      "path": "D:\\办公程序\\github_blog\\hugo_extended_withdeploy_0.141.0_windows-amd64\\rublog\\content\\post\\T-POP\\v1_第一版\\TPOP_v1_20260928\\svg_output\\08_discussion.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "carrier_receipt": {
+          "text_elements": 13,
+          "images": {
+            "placements": 0,
+            "files": [],
+            "max_frame_share": 0.0
+          },
+          "icons": 0,
+          "effects": {
+            "inline_emphasis_runs": 1,
+            "gradient_uses": 0,
+            "filter_uses": 0,
+            "text_effects": 0
+          },
+          "geometry": {
+            "svg_elements": {
+              "rect": 2,
+              "circle": 0,
+              "ellipse": 0,
+              "line": 0,
+              "polyline": 0,
+              "polygon": 0,
+              "path": 0
+            },
+            "preset_shapes": 0,
+            "preset_names": {},
+            "page_frame_elements": 1,
+            "marker_uses": {
+              "start": 0,
+              "mid": 0,
+              "end": 0
+            }
+          },
+          "native_objects": {
+            "chart": 0,
+            "table": 0,
+            "formula_block": 0,
+            "formula_inline": 0,
+            "other": 0
+          }
+        },
+        "fonts": [
+          "Arial"
+        ],
+        "text_elements": 13,
+        "tspan_elements": 4
+      },
+      "passed": true,
+      "source_sha256": "776cf7b2119eb29b391383d0a6ae6160ca49cccbe13dfe687d803b8dd267dfd2"
+    }
+  ]
+}

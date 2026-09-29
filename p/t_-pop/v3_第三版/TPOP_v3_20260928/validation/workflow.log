@@ -1,0 +1,86 @@
+
+=== 2026-09-28T09:49:25.725Z NOTE id=96d734b1edcb ===
+Project initialized: profile=default; canvas=ppt169; path=D:\办公程序\github_blog\hugo_extended_withdeploy_0.141.0_windows-amd64\rublog\content\post\T-POP\v3_第三版\TPOP_v3_20260928
+
+=== 2026-09-28T09:51:05.304Z PYTHON run=9e3fcebd4d87 ===
+cwd: D:\办公程序\github_blog\hugo_extended_withdeploy_0.141.0_windows-amd64\rublog\content\post\T-POP
+argv: ["D:\\办公程序\\github_blog\\hugo_extended_withdeploy_0.141.0_windows-amd64\\rublog\\content\\post\\T-POP\\presentation_tools\\venv\\Scripts\\python.exe", "D:/办公程序/github_blog/hugo_extended_withdeploy_0.141.0_windows-amd64/rublog/content/post/T-POP/presentation_tools/skills/ppt-master/scripts/svg_editor/server.py", "D:/办公程序/github_blog/hugo_extended_withdeploy_0.141.0_windows-amd64/rublog/content/post/T-POP/v3_第三版/TPOP_v3_20260928", "--port", "6062", "--live", "--daemon", "--no-browser"]
+stderr:
+  [17:51:06] [INFO] svg_editor: started live preview in background: http://127.0.0.1:6062 (pid=2688)
+  [17:51:06] [INFO] svg_editor: log: D:\办公程序\github_blog\hugo_extended_withdeploy_0.141.0_windows-amd64\rublog\content\post\T-POP\v3_第三版\TPOP_v3_20260928\live_preview\server.log
+=== 2026-09-28T09:51:06.745Z END run=9e3fcebd4d87 elapsed_ms=1438 output_lines=2 retained=2 omitted=0 ===
+
+=== 2026-09-28T09:56:00.438Z PYTHON run=c7c49425f9c1 ===
+cwd: D:\办公程序\github_blog\hugo_extended_withdeploy_0.141.0_windows-amd64\rublog\content\post\T-POP
+argv: ["D:\\办公程序\\github_blog\\hugo_extended_withdeploy_0.141.0_windows-amd64\\rublog\\content\\post\\T-POP\\presentation_tools\\venv\\Scripts\\python.exe", "D:/办公程序/github_blog/hugo_extended_withdeploy_0.141.0_windows-amd64/rublog/content/post/T-POP/presentation_tools/skills/ppt-master/scripts/text_measure.py", "calibrate", "D:/办公程序/github_blog/hugo_extended_withdeploy_0.141.0_windows-amd64/rublog/content/post/T-POP/v3_第三版/TPOP_v3_20260928", "--outline", "--role", "title:Arial:44:bold", "--role", "display:Arial:88:bold", "--role", "hero:Arial:64:bold"]
+=== 2026-09-28T09:56:00.857Z END run=c7c49425f9c1 elapsed_ms=422 output_lines=19 retained=0 omitted=19 ===
+
+=== 2026-09-28T09:58:33.729Z PYTHON run=56922042c059 ===
+cwd: D:\办公程序\github_blog\hugo_extended_withdeploy_0.141.0_windows-amd64\rublog\content\post\T-POP
+argv: ["D:\\办公程序\\github_blog\\hugo_extended_withdeploy_0.141.0_windows-amd64\\rublog\\content\\post\\T-POP\\presentation_tools\\venv\\Scripts\\python.exe", "D:/办公程序/github_blog/hugo_extended_withdeploy_0.141.0_windows-amd64/rublog/content/post/T-POP/presentation_tools/skills/ppt-master/scripts/svg_quality_checker.py", "D:/办公程序/github_blog/hugo_extended_withdeploy_0.141.0_windows-amd64/rublog/content/post/T-POP/v3_第三版/TPOP_v3_20260928", "--canonical-authoring", "--stage", "early", "--json"]
+stdout:
+  [OK] 01_background.svg - Passed
+  [SUMMARY] Check Summary
+  Total files: 8
+    [OK] Fully passed: 8 (100%)
+    [WARN] With warnings: 0 (0%)
+    [ERROR] With errors: 0 (0%)
+  Provenance categories:
+    blocking: 0          hard findings; gate also requires exit 0
+    introduced: 0        advisory; new or changed
+    inherited: 0         informational; prototype-identical
+    source-import: 0     informational; source-conversion loss
+  [CARRIERS] Actual-use receipt (informational; not a quota)
+    Pages: 8 | text: 149 | images: 1 | icons: 0
+    Geometry: SVG elements 54 | native presets 0 | page-frame elements 8 | marker uses 10
+  [REPORT] JSON quality report exported: D:\办公程序\github_blog\hugo_extended_withdeploy_0.141.0_windows-amd64\rublog\content\post\T-POP\v3_第三版\TPOP_v3_20260928\validation\svg_quality_early_report.json
+=== 2026-09-28T09:58:35.419Z END run=56922042c059 elapsed_ms=1688 output_lines=44 retained=15 omitted=29 ===
+
+=== 2026-09-28T10:01:05.179Z PYTHON run=6158632eb00c ===
+cwd: D:\办公程序\github_blog\hugo_extended_withdeploy_0.141.0_windows-amd64\rublog\content\post\T-POP
+argv: ["D:\\办公程序\\github_blog\\hugo_extended_withdeploy_0.141.0_windows-amd64\\rublog\\content\\post\\T-POP\\presentation_tools\\venv\\Scripts\\python.exe", "D:/办公程序/github_blog/hugo_extended_withdeploy_0.141.0_windows-amd64/rublog/content/post/T-POP/presentation_tools/skills/ppt-master/scripts/svg_quality_checker.py", "D:/办公程序/github_blog/hugo_extended_withdeploy_0.141.0_windows-amd64/rublog/content/post/T-POP/v3_第三版/TPOP_v3_20260928", "--canonical-authoring", "--stage", "final", "--json"]
+stdout:
+  [OK] 01_background.svg - Passed
+  [SUMMARY] Check Summary
+  Total files: 8
+    [OK] Fully passed: 8 (100%)
+    [WARN] With warnings: 0 (0%)
+    [ERROR] With errors: 0 (0%)
+  Provenance categories:
+    blocking: 0          hard findings; gate also requires exit 0
+    introduced: 0        advisory; new or changed
+    inherited: 0         informational; prototype-identical
+    source-import: 0     informational; source-conversion loss
+  [CARRIERS] Actual-use receipt (informational; not a quota)
+    Pages: 8 | text: 145 | images: 1 | icons: 0
+    Geometry: SVG elements 56 | native presets 0 | page-frame elements 8 | marker uses 11
+  [REPORT] JSON quality report exported: D:\办公程序\github_blog\hugo_extended_withdeploy_0.141.0_windows-amd64\rublog\content\post\T-POP\v3_第三版\TPOP_v3_20260928\validation\svg_quality_report.json
+=== 2026-09-28T10:01:06.758Z END run=6158632eb00c elapsed_ms=1579 output_lines=44 retained=15 omitted=29 ===
+
+=== 2026-09-28T10:03:25.318Z PYTHON run=fcbeb85df6f8 ===
+cwd: D:\办公程序\github_blog\hugo_extended_withdeploy_0.141.0_windows-amd64\rublog\content\post\T-POP
+argv: ["D:\\办公程序\\github_blog\\hugo_extended_withdeploy_0.141.0_windows-amd64\\rublog\\content\\post\\T-POP\\presentation_tools\\venv\\Scripts\\python.exe", "D:/办公程序/github_blog/hugo_extended_withdeploy_0.141.0_windows-amd64/rublog/content/post/T-POP/presentation_tools/skills/ppt-master/scripts/total_md_split.py", "D:/办公程序/github_blog/hugo_extended_withdeploy_0.141.0_windows-amd64/rublog/content/post/T-POP/v3_第三版/TPOP_v3_20260928"]
+stdout:
+  [OK] SVG files and notes have one-to-one correspondence
+  [Done] Successfully generated 8/8 file(s)
+  [Done] Notes splitting complete
+=== 2026-09-28T10:03:25.341Z END run=fcbeb85df6f8 elapsed_ms=16 output_lines=17 retained=3 omitted=14 ===
+
+=== 2026-09-28T10:03:31.768Z PYTHON run=d2eb57e22e5f ===
+cwd: D:\办公程序\github_blog\hugo_extended_withdeploy_0.141.0_windows-amd64\rublog\content\post\T-POP
+argv: ["D:\\办公程序\\github_blog\\hugo_extended_withdeploy_0.141.0_windows-amd64\\rublog\\content\\post\\T-POP\\presentation_tools\\venv\\Scripts\\python.exe", "D:/办公程序/github_blog/hugo_extended_withdeploy_0.141.0_windows-amd64/rublog/content/post/T-POP/presentation_tools/skills/ppt-master/scripts/finalize_svg.py", "D:/办公程序/github_blog/hugo_extended_withdeploy_0.141.0_windows-amd64/rublog/content/post/T-POP/v3_第三版/TPOP_v3_20260928"]
+stdout:
+  [OK] Done!
+=== 2026-09-28T10:03:32.789Z END run=d2eb57e22e5f elapsed_ms=1016 output_lines=12 retained=1 omitted=11 ===
+
+=== 2026-09-28T10:03:40.954Z PYTHON run=a9201e1f550c ===
+cwd: D:\办公程序\github_blog\hugo_extended_withdeploy_0.141.0_windows-amd64\rublog\content\post\T-POP
+argv: ["D:\\办公程序\\github_blog\\hugo_extended_withdeploy_0.141.0_windows-amd64\\rublog\\content\\post\\T-POP\\presentation_tools\\venv\\Scripts\\python.exe", "D:/办公程序/github_blog/hugo_extended_withdeploy_0.141.0_windows-amd64/rublog/content/post/T-POP/presentation_tools/skills/ppt-master/scripts/svg_to_pptx.py", "D:/办公程序/github_blog/hugo_extended_withdeploy_0.141.0_windows-amd64/rublog/content/post/T-POP/v3_第三版/TPOP_v3_20260928", "--native-charts-and-tables"]
+stderr:
+  Warning: --native-charts-and-tables replaces shape-based SVG fallbacks with PowerPoint Chart/Table objects. The native objects may normalize styling or omit SVG details that are not represented by marker metadata; use the default shape-based export when exact fallback artwork is required.
+stdout:
+  [Done] Saved: D:\办公程序\github_blog\hugo_extended_withdeploy_0.141.0_windows-amd64\rublog\content\post\T-POP\v3_第三版\TPOP_v3_20260928\exports\TPOP_v3_20260928_180342_native_charts_tables.pptx
+    [POSTFLIGHT] status=passed quality_gate=passed slides=8 warning_categories=0
+    [PPTX] D:\办公程序\github_blog\hugo_extended_withdeploy_0.141.0_windows-amd64\rublog\content\post\T-POP\v3_第三版\TPOP_v3_20260928\exports\TPOP_v3_20260928_180342_native_charts_tables.pptx
+    [REPORT] D:\办公程序\github_blog\hugo_extended_withdeploy_0.141.0_windows-amd64\rublog\content\post\T-POP\v3_第三版\TPOP_v3_20260928\validation\TPOP_v3_20260928_180342_native_charts_tables.report.json
+=== 2026-09-28T10:03:43.493Z END run=a9201e1f550c elapsed_ms=2531 output_lines=44 retained=5 omitted=39 ===

@@ -1,0 +1,311 @@
+{
+  "schema": "ppt-master.svg-quality-report.v1",
+  "stage": "final",
+  "target": "D:\\办公程序\\github_blog\\hugo_extended_withdeploy_0.141.0_windows-amd64\\rublog\\content\\post\\T-POP\\c3",
+  "source_fingerprint": {
+    "algorithm": "sha256",
+    "digest": "80b2731efa0f08c73b193696b298468bcdcded07b36e576e7919b10a1e979fd7",
+    "file_count": 10,
+    "files": [
+      {
+        "file": "authoring-svg-flat/cover.svg",
+        "sha256": "a8a35ae02ad5876cc09e8352a0951d7ae2a8b7641fe54f3fbdc547d58fc9d438"
+      },
+      {
+        "file": "authoring-svg-flat/slide_01.svg",
+        "sha256": "e9262070450d15f10752924f45925314766ba7b576d0f75292366db829a9f288"
+      },
+      {
+        "file": "authoring-svg-flat/slide_02.svg",
+        "sha256": "e874eb395c8bcdd2086d8ec0c6c59f86efc6b4a5f108afe2134fa71adb8db4e2"
+      },
+      {
+        "file": "authoring-svg-flat/slide_03.svg",
+        "sha256": "c0d2004b251e6228b1690debe93297789d0915d2cfffd97846db9d41e38a4e0e"
+      },
+      {
+        "file": "authoring-svg-flat/slide_04.svg",
+        "sha256": "90da9e4ee482f7423b3768229f977e3c74ca04382ce3cbea50011cb891f75c50"
+      },
+      {
+        "file": "authoring-svg-flat/slide_05.svg",
+        "sha256": "ce3df3c91dd4ad3124bdc43491326322f00780afbecef1717aeca3f91cebcc70"
+      },
+      {
+        "file": "authoring-svg-flat/slide_06.svg",
+        "sha256": "3fd3249faae44fd4c524dc2c603ed60d9bc5398de51ffe66690a7d3f9523de26"
+      },
+      {
+        "file": "authoring-svg-flat/slide_07.svg",
+        "sha256": "37aa33c174f2de6a0f39f54292ba1a8173442315d5e963cf4160e0b5c8ec16d2"
+      },
+      {
+        "file": "authoring-svg-flat/slide_08.svg",
+        "sha256": "403e2c1b7e7bbea2fc8d7393f5da1c9d5a72dff2324283d3d15b6ffba2536c7b"
+      },
+      {
+        "file": "page_plan.json",
+        "sha256": "665735621177939d6506a5d2a741defc22d541e2eac2ce1f87c6edc1b5dc328b"
+      }
+    ]
+  },
+  "summary": {
+    "total": 9,
+    "passed": 9,
+    "warnings": 0,
+    "errors": 0
+  },
+  "issue_types": {},
+  "categories": {
+    "blocking": {
+      "count": 0,
+      "issues": []
+    },
+    "introduced": {
+      "count": 0,
+      "issues": []
+    },
+    "inherited": {
+      "count": 0,
+      "issues": []
+    },
+    "source-import": {
+      "count": 0,
+      "summary": {
+        "warning_count": 0,
+        "by_code": {}
+      }
+    }
+  },
+  "drift": {
+    "colors": {},
+    "fonts": {},
+    "sizes": {}
+  },
+  "carrier_receipt": {
+    "scope": "informational-not-a-quota",
+    "pages": 0,
+    "totals": {
+      "text_elements": 0,
+      "image_placements": 0,
+      "icons": 0,
+      "svg_geometry_elements": 0,
+      "preset_shapes": 0,
+      "page_frame_elements": 0,
+      "marker_uses": 0,
+      "inline_emphasis_runs": 0,
+      "gradient_uses": 0,
+      "filter_uses": 0,
+      "text_effects": 0
+    },
+    "pages_with": {
+      "images": 0,
+      "icons": 0,
+      "presets": 0,
+      "charts": 0,
+      "tables": 0,
+      "formulas": 0,
+      "inline_emphasis_runs": 0,
+      "gradient_uses": 0,
+      "filter_uses": 0,
+      "text_effects": 0
+    },
+    "relationship_pages": null,
+    "geometry_elements": {},
+    "preset_names": {},
+    "native_objects": {},
+    "image_page_max_frame_share_range": []
+  },
+  "project_issues": {
+    "template": [],
+    "animation": [],
+    "illustration": [],
+    "communication_trace": [],
+    "pptx_structure": []
+  },
+  "files": [
+    {
+      "file": "cover.svg",
+      "path": "D:\\办公程序\\github_blog\\hugo_extended_withdeploy_0.141.0_windows-amd64\\rublog\\content\\post\\T-POP\\c3\\authoring-svg-flat\\cover.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "output_page": 1,
+        "source_slide": 1,
+        "viewbox": "0 0 1280 720",
+        "edited_text_elements": 5,
+        "fonts": [
+          "Arial"
+        ],
+        "roundtrip_text_calibration": {
+          "factor": 0.0,
+          "measured_unchanged": 0,
+          "positive_unchanged": 0
+        }
+      },
+      "passed": true,
+      "source_sha256": "a8a35ae02ad5876cc09e8352a0951d7ae2a8b7641fe54f3fbdc547d58fc9d438"
+    },
+    {
+      "file": "slide_01.svg",
+      "path": "D:\\办公程序\\github_blog\\hugo_extended_withdeploy_0.141.0_windows-amd64\\rublog\\content\\post\\T-POP\\c3\\authoring-svg-flat\\slide_01.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "output_page": 2,
+        "source_slide": 1,
+        "viewbox": "0 0 1280 720",
+        "edited_text_elements": 0,
+        "roundtrip_text_calibration": {
+          "factor": 0.08801661895599688,
+          "measured_unchanged": 7,
+          "positive_unchanged": 3
+        }
+      },
+      "passed": true,
+      "source_sha256": "e9262070450d15f10752924f45925314766ba7b576d0f75292366db829a9f288"
+    },
+    {
+      "file": "slide_02.svg",
+      "path": "D:\\办公程序\\github_blog\\hugo_extended_withdeploy_0.141.0_windows-amd64\\rublog\\content\\post\\T-POP\\c3\\authoring-svg-flat\\slide_02.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "output_page": 3,
+        "source_slide": 2,
+        "viewbox": "0 0 1280 720",
+        "edited_text_elements": 0,
+        "roundtrip_text_calibration": {
+          "factor": 0.05545804469273749,
+          "measured_unchanged": 12,
+          "positive_unchanged": 2
+        }
+      },
+      "passed": true,
+      "source_sha256": "e874eb395c8bcdd2086d8ec0c6c59f86efc6b4a5f108afe2134fa71adb8db4e2"
+    },
+    {
+      "file": "slide_03.svg",
+      "path": "D:\\办公程序\\github_blog\\hugo_extended_withdeploy_0.141.0_windows-amd64\\rublog\\content\\post\\T-POP\\c3\\authoring-svg-flat\\slide_03.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "output_page": 4,
+        "source_slide": 3,
+        "viewbox": "0 0 1280 720",
+        "edited_text_elements": 0,
+        "roundtrip_text_calibration": {
+          "factor": 0.06662674222934298,
+          "measured_unchanged": 10,
+          "positive_unchanged": 3
+        }
+      },
+      "passed": true,
+      "source_sha256": "c0d2004b251e6228b1690debe93297789d0915d2cfffd97846db9d41e38a4e0e"
+    },
+    {
+      "file": "slide_04.svg",
+      "path": "D:\\办公程序\\github_blog\\hugo_extended_withdeploy_0.141.0_windows-amd64\\rublog\\content\\post\\T-POP\\c3\\authoring-svg-flat\\slide_04.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "output_page": 5,
+        "source_slide": 4,
+        "viewbox": "0 0 1280 720",
+        "edited_text_elements": 0,
+        "roundtrip_text_calibration": {
+          "factor": 0.03129504627109388,
+          "measured_unchanged": 31,
+          "positive_unchanged": 8
+        }
+      },
+      "passed": true,
+      "source_sha256": "90da9e4ee482f7423b3768229f977e3c74ca04382ce3cbea50011cb891f75c50"
+    },
+    {
+      "file": "slide_05.svg",
+      "path": "D:\\办公程序\\github_blog\\hugo_extended_withdeploy_0.141.0_windows-amd64\\rublog\\content\\post\\T-POP\\c3\\authoring-svg-flat\\slide_05.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "output_page": 6,
+        "source_slide": 5,
+        "viewbox": "0 0 1280 720",
+        "edited_text_elements": 0,
+        "roundtrip_text_calibration": {
+          "factor": 0.0,
+          "measured_unchanged": 4,
+          "positive_unchanged": 0
+        }
+      },
+      "passed": true,
+      "source_sha256": "ce3df3c91dd4ad3124bdc43491326322f00780afbecef1717aeca3f91cebcc70"
+    },
+    {
+      "file": "slide_06.svg",
+      "path": "D:\\办公程序\\github_blog\\hugo_extended_withdeploy_0.141.0_windows-amd64\\rublog\\content\\post\\T-POP\\c3\\authoring-svg-flat\\slide_06.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "output_page": 7,
+        "source_slide": 6,
+        "viewbox": "0 0 1280 720",
+        "edited_text_elements": 0,
+        "roundtrip_text_calibration": {
+          "factor": 0.0,
+          "measured_unchanged": 12,
+          "positive_unchanged": 0
+        }
+      },
+      "passed": true,
+      "source_sha256": "3fd3249faae44fd4c524dc2c603ed60d9bc5398de51ffe66690a7d3f9523de26"
+    },
+    {
+      "file": "slide_07.svg",
+      "path": "D:\\办公程序\\github_blog\\hugo_extended_withdeploy_0.141.0_windows-amd64\\rublog\\content\\post\\T-POP\\c3\\authoring-svg-flat\\slide_07.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "output_page": 8,
+        "source_slide": 7,
+        "viewbox": "0 0 1280 720",
+        "edited_text_elements": 0,
+        "roundtrip_text_calibration": {
+          "factor": 0.05864131902845753,
+          "measured_unchanged": 12,
+          "positive_unchanged": 3
+        }
+      },
+      "passed": true,
+      "source_sha256": "37aa33c174f2de6a0f39f54292ba1a8173442315d5e963cf4160e0b5c8ec16d2"
+    },
+    {
+      "file": "slide_08.svg",
+      "path": "D:\\办公程序\\github_blog\\hugo_extended_withdeploy_0.141.0_windows-amd64\\rublog\\content\\post\\T-POP\\c3\\authoring-svg-flat\\slide_08.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "output_page": 9,
+        "source_slide": 8,
+        "viewbox": "0 0 1280 720",
+        "edited_text_elements": 0,
+        "roundtrip_text_calibration": {
+          "factor": 0.059825254317482805,
+          "measured_unchanged": 13,
+          "positive_unchanged": 1
+        }
+      },
+      "passed": true,
+      "source_sha256": "403e2c1b7e7bbea2fc8d7393f5da1c9d5a72dff2324283d3d15b6ffba2536c7b"
+    }
+  ]
+}

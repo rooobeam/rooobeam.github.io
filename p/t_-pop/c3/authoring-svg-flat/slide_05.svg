@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1280" height="720" viewBox="0 0 1280 720" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif"><rect x="0" y="0" width="1280" height="720" fill="#FFFFFF" />
+<g id="shape-4" data-pptx-object="group" data-pptx-frame="62.24 41.4 443 94.96" data-pptx-source-ref="slide:4">
+<g id="shape-2" data-pptx-object="shape" data-pptx-frame="63.36 41.4 408.54 24.64" data-pptx-prst="rect" data-pptx-source-ref="slide:2" data-pptx-semantic-object="shape">
+<path d="M 63.36 41.4 L 471.9 41.4 L 471.9 66.04 L 63.36 66.04 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="63.36" y="55" text-anchor="start" xml:space="preserve" font-size="16" fill="#5B6B7A">METHOD 2/3 · ORIGINAL PAPER PSEUDOCODE</text>
+</g>
+<g id="shape-3" data-pptx-object="shape" data-pptx-frame="62.24 68.6 443 67.76" data-pptx-prst="rect" data-pptx-source-ref="slide:3" data-pptx-semantic-object="shape">
+<path d="M 62.24 68.6 L 505.24 68.6 L 505.24 136.36 L 62.24 136.36 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="62.24" y="106" text-anchor="start" xml:space="preserve" font-size="44" fill="#10243A" font-weight="bold">Algorithm 1: T-POP</text>
+</g>
+</g>
+<g id="shape-6" data-pptx-object="group" data-pptx-frame="123.36 132 1033.28 524" data-pptx-source-ref="slide:6">
+<g id="shape-5" data-pptx-object="picture" data-pptx-frame="123.36 132 1033.28 524" data-pptx-source-ref="slide:5">
+<image data-pptx-object="picture" data-pptx-frame="123.36 132 1033.28 524" href="../images/image4.png" x="123.36" y="132" width="1033.28" height="524" preserveAspectRatio="none" />
+</g>
+</g>
+<g id="shape-9" data-pptx-object="group" data-pptx-frame="63.36 672.4 1153.28 24.64" data-pptx-source-ref="slide:9">
+<g id="shape-7" data-pptx-object="shape" data-pptx-frame="63.36 672.4 442.04 24.64" data-pptx-prst="rect" data-pptx-source-ref="slide:7" data-pptx-semantic-object="shape">
+<path d="M 63.36 672.4 L 505.4 672.4 L 505.4 697.04 L 63.36 697.04 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="63.36" y="686" text-anchor="start" xml:space="preserve" font-size="16" fill="#5B6B7A">Source: T-POP.pdf, p. 4 · Original Algorithm 1 (unaltered).</text>
+</g>
+<g id="shape-8" data-pptx-object="shape" data-pptx-frame="1163.49 672.4 53.15 24.64" data-pptx-prst="rect" data-pptx-source-ref="slide:8" data-pptx-semantic-object="shape">
+<path d="M 1163.49 672.4 L 1216.64 672.4 L 1216.64 697.04 L 1163.49 697.04 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="1216.64" y="686" text-anchor="end" xml:space="preserve" font-size="16" fill="#5B6B7A">05 / 08</text>
+</g>
+</g></svg>

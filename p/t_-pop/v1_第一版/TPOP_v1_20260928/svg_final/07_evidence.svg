@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" font-family="Arial" font-size="28" data-pptx-page-role="content">
+<rect id="background" data-pptx-role="background" width="1280" height="720" fill="#FFFFFF" />
+<g id="title" data-pptx-bounds="64 38 1152 109" fill="#10243A"><text x="64" y="62" font-size="16" fill="#5B6B7A">EXPERIMENTS · MAIN RESULT AND TWO CHECKS</text><text x="64" y="120" font-size="44" font-weight="bold">Evidence: stronger alignment, uneven gains</text></g>
+<g id="metric" data-pptx-bounds="64 167 1152 47"><text x="64" y="199" font-size="22" fill="#5B6B7A">Mean ArmoRM score across four preference attributes · Higher is better.</text></g>
+<g id="alignment-scores" data-pptx-replace-with="table" data-pptx-bounds="64 238 708 246" data-pptx-fallback-sha256="108f234fa648dc666818bcbb73a907d2fda3e883ab3d7eb6aab200277eefd5aa">
+<metadata type="application/json">{"schema":"ppt-master.semantic-table.v2","name":"alignment-scores","x":64,"y":238,"width":708,"height":246,"strict_grid":true,"column_widths":[240,146,155,167],"row_heights":[48,66,66,66],"style":{"font_family":"Arial","font_size":24,"header_font_size":22,"header_fill":"#F3F6FA","header_text":"#5B6B7A","body_text":"#233447","band_row":false,"padding":{"left":18,"right":18,"top":10,"bottom":10},"valign":"middle"},"defaults":{"cell":{"borders":{"left":{"style":"none"},"right":{"style":"none"},"top":{"style":"none"},"bottom":{"style":"solid","color":"#CBD4DE","width":1}}}},"columns":[{"text":"Backbone","bold":true,"align":"l"},{"text":"Base","bold":true,"align":"r"},{"text":"AMULET","bold":true,"align":"r"},{"text":"T-POP","bold":true,"align":"r","fill":"#087F8C","color":"#FFFFFF"}],"rows":[["Mistral-7B",{"text":"0.3550","align":"r"},{"text":"0.4150","align":"r"},{"text":"0.4975","align":"r","bold":true,"fill":"#E6F2F3","color":"#087F8C"}],["Qwen2-7B",{"text":"0.3575","align":"r"},{"text":"0.4100","align":"r"},{"text":"0.5250","align":"r","bold":true,"fill":"#E6F2F3","color":"#087F8C"}],["Llama-3.1-8B",{"text":"0.3450","align":"r"},{"text":"0.5325","align":"r"},{"text":"0.5350","align":"r","bold":true,"fill":"#E6F2F3","color":"#087F8C"}]]}</metadata>
+<rect x="64" y="238" width="708" height="48" fill="#F3F6FA" /><rect x="605" y="238" width="167" height="48" fill="#087F8C" /><rect x="605" y="286" width="167" height="198" fill="#E6F2F3" />
+<g font-size="22" font-weight="bold" fill="#5B6B7A"><text x="82" y="270">Backbone</text><text x="432" y="270" text-anchor="end">Base</text><text x="587" y="270" text-anchor="end">AMULET</text><text x="754" y="270" text-anchor="end" fill="#FFFFFF">T-POP</text></g>
+<g font-size="24" fill="#233447"><text x="82" y="328">Mistral-7B</text><text x="432" y="328" text-anchor="end">0.3550</text><text x="587" y="328" text-anchor="end">0.4150</text><text x="754" y="328" text-anchor="end" font-weight="bold" fill="#087F8C">0.4975</text>
+<text x="82" y="394">Qwen2-7B</text><text x="432" y="394" text-anchor="end">0.3575</text><text x="587" y="394" text-anchor="end">0.4100</text><text x="754" y="394" text-anchor="end" font-weight="bold" fill="#087F8C">0.5250</text>
+<text x="82" y="460">Llama-3.1-8B</text><text x="432" y="460" text-anchor="end">0.3450</text><text x="587" y="460" text-anchor="end">0.5325</text><text x="754" y="460" text-anchor="end" font-weight="bold" fill="#087F8C">0.5350</text></g>
+<g stroke="#CBD4DE" stroke-width="1"><line x1="64" y1="286" x2="772" y2="286" /><line x1="64" y1="352" x2="772" y2="352" /><line x1="64" y1="418" x2="772" y2="418" /><line x1="64" y1="484" x2="772" y2="484" /></g>
+</g>
+<g id="early-adaptation" data-pptx-bounds="816 227 400 163">
+<text x="818" y="254" font-size="22" font-weight="bold" fill="#087F8C">EARLY ADAPTATION</text>
+<text fill="#233447" x="818" y="298">Fast gains in the first</text><text fill="#233447" x="818" y="335">20 interaction rounds.</text><text x="818" y="376" font-size="22" fill="#5B6B7A">Fig. 2 · concise · two datasets</text>
+</g>
+<g id="exploration-evidence" data-pptx-bounds="816 406 400 115" font-size="22">
+<text x="818" y="433" font-weight="bold" fill="#C86620">EXPLORATION MATTERS</text>
+<text fill="#233447" x="818" y="472">Beats entropy / Boltzmann.</text><text fill="#233447" x="818" y="504">Llama · Personal · concise</text></g>
+<g id="evidence-takeaway" data-pptx-bounds="64 541 1152 109" fill="#10243A">
+<text x="64" y="575"><tspan font-weight="bold">Qwen: +28.0% · Mistral: +19.9%</tspan> vs. AMULET.</text>
+<text x="64" y="629">Llama is near a tie; gains are not uniform across attributes.</text>
+</g>
+<g id="footer" data-pptx-role="footer" data-pptx-bounds="64 666 1152 29" font-size="16" fill="#5B6B7A"><text x="64" y="686">Table 1: means calculated from its four “Average” rows per model; Fig. 2; Table 8 (20-round ablation).</text><text x="1216" y="686" text-anchor="end">07 / 08</text></g>
+</svg>

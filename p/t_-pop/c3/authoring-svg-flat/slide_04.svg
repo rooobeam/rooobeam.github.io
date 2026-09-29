@@ -1,0 +1,278 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1280" height="720" viewBox="0 0 1280 720" font-family="Arial, &quot;Microsoft YaHei&quot;, sans-serif"><defs><marker id="marrow1" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="2.5" markerHeight="2.5" orient="auto" markerUnits="strokeWidth"><path d="M 0 0 L 10 5 L 0 10" fill="none" stroke="#10243A" /></marker><marker id="marrow2" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="2.5" markerHeight="2.5" orient="auto" markerUnits="strokeWidth"><path d="M 0 0 L 10 5 L 0 10" fill="none" stroke="#087F8C" /></marker></defs><rect x="0" y="0" width="1280" height="720" fill="#FFFFFF" />
+<g id="shape-4" data-pptx-object="group" data-pptx-frame="62.24 48.4 1016.37 101.96" data-pptx-source-ref="slide:4">
+<g id="shape-2" data-pptx-object="shape" data-pptx-frame="63.36 48.4 358.72 24.64" data-pptx-prst="rect" data-pptx-source-ref="slide:2" data-pptx-semantic-object="shape">
+<path d="M 63.36 48.4 L 422.08 48.4 L 422.08 73.04 L 63.36 73.04 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="63.36" y="62" text-anchor="start" xml:space="preserve" font-size="16" fill="#5B6B7A">METHOD 1/3 · FOLLOWING ALGORITHM 1</text>
+</g>
+<g id="shape-3" data-pptx-object="shape" data-pptx-frame="62.24 82.6 1016.37 67.76" data-pptx-prst="rect" data-pptx-source-ref="slide:3" data-pptx-semantic-object="shape">
+<path d="M 62.24 82.6 L 1078.61 82.6 L 1078.61 150.36 L 62.24 150.36 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="62.24" y="120" text-anchor="start" xml:space="preserve" font-size="44" fill="#10243A" font-weight="bold">Two loops: token generation and RM updates</text>
+</g>
+</g>
+<g id="shape-53" data-pptx-object="group" data-pptx-frame="64 162 1152 494" data-pptx-source-ref="slide:53">
+<g id="shape-5" data-pptx-object="shape" data-pptx-frame="64 162 1152 494" data-pptx-prst="rect" data-pptx-source-ref="slide:5" data-pptx-semantic-object="shape">
+<path d="M 64 162 L 1216 162 L 1216 656 L 64 656 Z" fill="#FFFFFF" stroke-width="2" stroke="#CBD4DE" data-pptx-part="geometry" />
+
+</g>
+<g id="shape-6" data-pptx-object="shape" data-pptx-frame="85.12 174.3 362.46 33.88" data-pptx-prst="rect" data-pptx-source-ref="slide:6" data-pptx-semantic-object="shape">
+<path d="M 85.12 174.3 L 447.58 174.3 L 447.58 208.18 L 85.12 208.18 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="85.12" y="193" text-anchor="start" xml:space="preserve" font-size="22" fill="#10243A" font-weight="bold">RM UPDATE LOOP · t = 1, …, T</text>
+</g>
+<g id="shape-7" data-pptx-object="shape" data-pptx-frame="794.12 174.3 331.1 33.88" data-pptx-prst="rect" data-pptx-source-ref="slide:7" data-pptx-semantic-object="shape">
+<path d="M 794.12 174.3 L 1125.22 174.3 L 1125.22 208.18 L 794.12 208.18 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="794.12" y="193" text-anchor="start" xml:space="preserve" font-size="22" fill="#5B6B7A">Start: θ₁, V₀ = λI, empty history</text>
+</g>
+<g id="shape-8" data-pptx-object="shape" data-pptx-frame="318 218 870 293" data-pptx-prst="rect" data-pptx-source-ref="slide:8" data-pptx-semantic-object="shape">
+<path d="M 318 218 L 1188 218 L 1188 511 L 318 511 Z" fill="#F3F6FA" stroke="none" data-pptx-part="geometry" />
+
+</g>
+<g id="shape-9" data-pptx-object="shape" data-pptx-frame="337.12 232.3 314.4 33.88" data-pptx-prst="rect" data-pptx-source-ref="slide:9" data-pptx-semantic-object="shape">
+<path d="M 337.12 232.3 L 651.52 232.3 L 651.52 266.18 L 337.12 266.18 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="337.12" y="251" text-anchor="start" xml:space="preserve" font-size="22" fill="#087F8C" font-weight="bold">TOKEN LOOP · p = 1, …, M</text>
+</g>
+<g id="shape-10" data-pptx-object="shape" data-pptx-frame="835.12 232.3 301.1 33.88" data-pptx-prst="rect" data-pptx-source-ref="slide:10" data-pptx-semantic-object="shape">
+<path d="M 835.12 232.3 L 1136.22 232.3 L 1136.22 266.18 L 835.12 266.18 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="835.12" y="251" text-anchor="start" xml:space="preserve" font-size="22" fill="#5B6B7A">RM parameters θₜ stay fixed</text>
+</g>
+<g id="shape-11" data-pptx-object="shape" data-pptx-frame="275.8 305.93 59.2 0.07" data-pptx-prst="line" transform="translate(305.4 305.97) scale(1 -1) translate(-305.4 -305.97)" data-pptx-source-ref="slide:11" data-pptx-semantic-object="shape">
+<path d="M 275.8 305.93 L 335 306" fill="none" stroke-width="2" stroke="#10243A" marker-end="url(#marrow1)" data-pptx-part="geometry" />
+
+</g>
+<g id="shape-12" data-pptx-object="shape" data-pptx-frame="532.4 328 32 0" data-pptx-prst="line" data-pptx-source-ref="slide:12" data-pptx-semantic-object="shape">
+<path d="M 532.4 328 L 564.4 328" fill="none" stroke-width="2" stroke="#087F8C" marker-end="url(#marrow2)" data-pptx-part="geometry" />
+
+</g>
+<g id="shape-13" data-pptx-object="shape" data-pptx-frame="822.67 328 35 0" data-pptx-prst="line" data-pptx-source-ref="slide:13" data-pptx-semantic-object="shape">
+<path d="M 822.67 328 L 857.67 328" fill="none" stroke-width="2" stroke="#087F8C" marker-end="url(#marrow2)" data-pptx-part="geometry" />
+
+</g>
+<g id="shape-14" data-pptx-object="shape" data-pptx-frame="1011 378 0 18" data-pptx-prst="line" data-pptx-source-ref="slide:14" data-pptx-semantic-object="shape">
+<path d="M 1011 378 L 1011 396" fill="none" stroke-width="2" stroke="#087F8C" marker-end="url(#marrow2)" data-pptx-part="geometry" />
+
+</g>
+<g id="shape-15" data-pptx-object="shape" data-pptx-frame="794.13 440 59.2 0.07" data-pptx-prst="line" transform="translate(823.73 440.03) scale(-1 1) translate(-823.73 -440.03)" data-pptx-source-ref="slide:15" data-pptx-semantic-object="shape">
+<path d="M 794.13 440 L 853.33 440.07" fill="none" stroke-width="2" stroke="#087F8C" marker-end="url(#marrow2)" data-pptx-part="geometry" />
+
+</g>
+<g id="shape-16" data-pptx-object="shape" data-pptx-frame="435 383 68 57" data-pptx-geometry-kind="custom" data-pptx-source-ref="slide:16" data-pptx-semantic-object="shape">
+<path d="M 503 440 L 435 440 L 435 383" data-pptx-part="geometry" fill="none" stroke-width="2" stroke="#087F8C" marker-end="url(#marrow2)" />
+</g>
+<g id="shape-17" data-pptx-object="shape" data-pptx-frame="337.12 474.3 182.22 33.88" data-pptx-prst="rect" data-pptx-source-ref="slide:17" data-pptx-semantic-object="shape">
+<path d="M 337.12 474.3 L 519.34 474.3 L 519.34 508.18 L 337.12 508.18 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="337.12" y="493" text-anchor="start" xml:space="preserve" font-size="22" fill="#087F8C">p &lt; M: next token</text>
+</g>
+<g id="shape-19" data-pptx-object="shape" data-pptx-frame="862.36 516.4 215.4 24.64" data-pptx-prst="rect" data-pptx-source-ref="slide:19" data-pptx-semantic-object="shape">
+<path d="M 862.36 516.4 L 1077.76 516.4 L 1077.76 541.04 L 862.36 541.04 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="862.36" y="530" text-anchor="start" xml:space="preserve" font-size="16" fill="#5B6B7A">p = M: complete answer pair</text>
+</g>
+<g id="shape-20" data-pptx-object="shape" data-pptx-frame="855 593 58 0" data-pptx-prst="line" transform="translate(884 593) scale(-1 1) translate(-884 -593)" data-pptx-source-ref="slide:20" data-pptx-semantic-object="shape">
+<path d="M 855 593 L 913 593" fill="none" stroke-width="2" stroke="#10243A" marker-end="url(#marrow1)" data-pptx-part="geometry" />
+
+</g>
+<g id="shape-21" data-pptx-object="shape" data-pptx-frame="500.73 593 51 0" data-pptx-prst="line" transform="translate(526.23 593) scale(-1 1) translate(-526.23 -593)" data-pptx-source-ref="slide:21" data-pptx-semantic-object="shape">
+<path d="M 500.73 593 L 551.73 593" fill="none" stroke-width="2" stroke="#10243A" marker-end="url(#marrow1)" data-pptx-part="geometry" />
+
+</g>
+<g id="shape-22" data-pptx-object="shape" data-pptx-frame="183.6 358 92.07 235" data-pptx-geometry-kind="custom" data-pptx-source-ref="slide:22" data-pptx-semantic-object="shape">
+<path d="M 275.67 593 L 183.6 593 L 183.6 358" data-pptx-part="geometry" fill="none" stroke-width="2" stroke="#10243A" marker-end="url(#marrow1)" />
+</g>
+<g id="shape-23" data-pptx-object="shape" data-pptx-frame="90.12 438.3 56.8 63.88" data-pptx-prst="rect" data-pptx-source-ref="slide:23" data-pptx-semantic-object="shape">
+<path d="M 90.12 438.3 L 146.92 438.3 L 146.92 502.18 L 90.12 502.18 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="90.12" y="457" text-anchor="start" xml:space="preserve" font-size="22" fill="#10243A" data-pptx-text-model="lines" data-paragraph-line-height="26.4"><tspan><tspan>Next</tspan></tspan><tspan data-paragraph-line-break="1">query</tspan></text>
+</g>
+<g id="shape-24" data-pptx-object="shape" data-pptx-frame="198.12 468.3 47.78 33.88" data-pptx-prst="rect" data-pptx-source-ref="slide:24" data-pptx-semantic-object="shape">
+<path d="M 198.12 468.3 L 245.9 468.3 L 245.9 502.18 L 198.12 502.18 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="198.12" y="487" text-anchor="start" xml:space="preserve" font-size="22" fill="#5B6B7A">t + 1</text>
+</g>
+<g id="shape-25" data-pptx-object="shape" data-pptx-frame="88 252 182 102" data-pptx-prst="rect" data-pptx-source-ref="slide:25" data-pptx-semantic-object="shape">
+<path d="M 88 252 L 270 252 L 270 354 L 88 354 Z" fill="#10243A" stroke="none" data-pptx-part="geometry" />
+
+</g>
+<g id="shape-26" data-pptx-object="shape" data-pptx-frame="116.51 263.3 124.99 33.88" data-pptx-prst="rect" data-pptx-source-ref="slide:26" data-pptx-semantic-object="shape">
+<path d="M 116.51 263.3 L 241.49 263.3 L 241.49 297.18 L 116.51 297.18 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="179" y="282" text-anchor="middle" xml:space="preserve" font-size="22" fill="#FFFFFF" font-weight="bold">Receive qₜ</text>
+</g>
+<g id="shape-27" data-pptx-object="shape" data-pptx-frame="100.9 293.3 156.2 56.53" data-pptx-prst="rect" data-pptx-source-ref="slide:27" data-pptx-semantic-object="shape">
+<path d="M 100.9 293.3 L 257.1 293.3 L 257.1 349.83 L 100.9 349.83 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="179" y="312" text-anchor="middle" xml:space="preserve" font-size="22" fill="#FFFFFF" data-pptx-text-model="paragraphs" data-paragraph-line-height="26.4"><tspan><tspan>Initialize both </tspan></tspan><tspan><tspan>prefixes </tspan><tspan>to y=[q]</tspan></tspan></text>
+</g>
+<g id="shape-28" data-pptx-object="shape" data-pptx-frame="339 276 192 102" data-pptx-prst="rect" data-pptx-source-ref="slide:28" data-pptx-semantic-object="shape">
+<path d="M 339 276 L 531 276 L 531 378 L 339 378 Z" fill="#E6F2F3" stroke="none" data-pptx-part="geometry" />
+
+</g>
+<g id="shape-29" data-pptx-object="shape" data-pptx-frame="367.06 285.3 135.88 33.88" data-pptx-prst="rect" data-pptx-source-ref="slide:29" data-pptx-semantic-object="shape">
+<path d="M 367.06 285.3 L 502.94 285.3 L 502.94 319.18 L 367.06 319.18 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="435" y="304" text-anchor="middle" xml:space="preserve" font-size="22" fill="#10243A" font-weight="bold">Frozen LLM</text>
+</g>
+<g id="shape-30" data-pptx-object="shape" data-pptx-frame="345.53 334.3 178.93 28.27" data-pptx-prst="rect" data-pptx-source-ref="slide:30" data-pptx-semantic-object="shape">
+<path d="M 345.53 334.3 L 524.47 334.3 L 524.47 362.57 L 345.53 362.57 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="435" y="353" text-anchor="middle" xml:space="preserve" font-size="22" fill="#233447">candidate tokens  </text>
+</g>
+<g id="shape-31" data-pptx-object="shape" data-pptx-frame="568 276 250 102" data-pptx-prst="rect" data-pptx-source-ref="slide:31" data-pptx-semantic-object="shape">
+<path d="M 568 276 L 818 276 L 818 378 L 568 378 Z" fill="#E6F2F3" stroke="#E6F2F3" data-pptx-part="geometry" />
+
+</g>
+<g id="shape-32" data-pptx-object="shape" data-pptx-frame="571.85 285.3 242.3 33.88" data-pptx-prst="rect" data-pptx-source-ref="slide:32" data-pptx-semantic-object="shape">
+<path d="M 571.85 285.3 L 814.15 285.3 L 814.15 319.18 L 571.85 319.18 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="693" y="304" text-anchor="middle" xml:space="preserve" font-size="22" fill="#10243A" font-weight="bold">Score each candidate</text>
+</g>
+<g id="shape-33" data-pptx-object="shape" data-pptx-frame="605.5 314.3 175 56.53" data-pptx-prst="rect" data-pptx-source-ref="slide:33" data-pptx-semantic-object="shape">
+<path d="M 605.5 314.3 L 780.5 314.3 L 780.5 370.83 L 605.5 370.83 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="693" y="333" text-anchor="middle" xml:space="preserve" font-size="22" fill="#233447" data-pptx-text-model="lines" data-paragraph-line-height="26.4"><tspan><tspan>Shared RM: [y, v]</tspan></tspan><tspan data-paragraph-line-break="1">π + ωr → scoreⱼ</tspan></text>
+</g>
+<g id="shape-34" data-pptx-object="shape" data-pptx-frame="858 276 306 102" data-pptx-prst="rect" data-pptx-source-ref="slide:34" data-pptx-semantic-object="shape">
+<path d="M 858 276 L 1164 276 L 1164 378 L 858 378 Z" fill="#E6F2F3" stroke="none" data-pptx-part="geometry" />
+
+</g>
+<g id="shape-35" data-pptx-object="shape" data-pptx-frame="900.8 285.3 220.4 26.6" data-pptx-prst="rect" data-pptx-source-ref="slide:35" data-pptx-semantic-object="shape">
+<path d="M 900.8 285.3 L 1121.2 285.3 L 1121.2 311.9 L 900.8 311.9 Z" fill="none" stroke="#E6F2F3" data-pptx-part="geometry" />
+
+
+<text x="1011" y="304" text-anchor="middle" xml:space="preserve" font-size="22" fill="#10243A" font-weight="bold">Choose v₁, then v₂</text>
+</g>
+<g id="shape-36" data-pptx-object="shape" data-pptx-frame="936.96 314.3 148.07 33.88" data-pptx-prst="rect" data-pptx-source-ref="slide:36" data-pptx-semantic-object="shape">
+<path d="M 936.96 314.3 L 1085.04 314.3 L 1085.04 348.18 L 936.96 348.18 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="1011" y="333" text-anchor="middle" xml:space="preserve" font-size="22" fill="#087F8C">1: max score₁</text>
+</g>
+<g id="shape-37" data-pptx-object="shape" data-pptx-frame="890.07 342.3 241.87 26.6" data-pptx-prst="rect" data-pptx-source-ref="slide:37" data-pptx-semantic-object="shape">
+<path d="M 890.07 342.3 L 1131.93 342.3 L 1131.93 368.9 L 890.07 368.9 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="1011" y="361" text-anchor="middle" xml:space="preserve" font-size="22" fill="#C86620">2: max (score₂+ bonus)</text>
+</g>
+<g id="shape-38" data-pptx-object="shape" data-pptx-frame="858 401 306 85" data-pptx-prst="rect" data-pptx-source-ref="slide:38" data-pptx-semantic-object="shape">
+<path d="M 858 401 L 1164 401 L 1164 486 L 858 486 Z" fill="#E6F2F3" stroke="none" data-pptx-part="geometry" />
+
+</g>
+<g id="shape-39" data-pptx-object="shape" data-pptx-frame="928.33 414.3 165.33 26.6" data-pptx-prst="rect" data-pptx-source-ref="slide:39" data-pptx-semantic-object="shape">
+<path d="M 928.33 414.3 L 1093.67 414.3 L 1093.67 440.9 L 928.33 440.9 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="1011" y="433" text-anchor="middle" xml:space="preserve" font-size="22" fill="#10243A" font-weight="bold">Update prefixes</text>
+</g>
+<g id="shape-40" data-pptx-object="shape" data-pptx-frame="967.7 446.3 86.6 26.6" data-pptx-prst="rect" data-pptx-source-ref="slide:40" data-pptx-semantic-object="shape">
+<path d="M 967.7 446.3 L 1054.3 446.3 L 1054.3 472.9 L 967.7 472.9 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="1011" y="465" text-anchor="middle" xml:space="preserve" font-size="22" fill="#233447"><tspan>y </tspan><tspan fill="#10243A" font-family="&quot;Cambria Math&quot;, sans-serif">←</tspan><tspan> [y, v]</tspan></text>
+</g>
+<g id="shape-41" data-pptx-object="shape" data-pptx-frame="514 401 278.07 85" data-pptx-prst="rect" data-pptx-source-ref="slide:41" data-pptx-semantic-object="shape">
+<path d="M 514 401 L 792.07 401 L 792.07 486 L 514 486 Z" fill="#E6F2F3" stroke="none" data-pptx-part="geometry" />
+
+</g>
+<g id="shape-42" data-pptx-object="shape" data-pptx-frame="548 407.3 198.14 33.88" data-pptx-prst="rect" data-pptx-source-ref="slide:42" data-pptx-semantic-object="shape">
+<path d="M 548 407.3 L 746.14 407.3 L 746.14 441.18 L 548 441.18 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="647.07" y="426" text-anchor="middle" xml:space="preserve" font-size="22" fill="#10243A" font-weight="bold">Update V · line 14</text>
+</g>
+<g id="shape-43" data-pptx-object="shape" data-pptx-frame="522.07 433 250 47" data-pptx-prst="rect" data-pptx-source-ref="slide:43" data-pptx-semantic-object="shape">
+<path d="M 522.07 433 L 772.07 433 L 772.07 480 L 522.07 480 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="647.07" y="462.5" text-anchor="middle" xml:space="preserve" font-family="&quot;Cambria Math&quot;, sans-serif" font-size="24" fill="#10243A">𝑉←𝑉+𝛿𝛿⊤</text>
+</g>
+<g id="shape-47" data-pptx-object="shape" data-pptx-frame="555 554 295 78" data-pptx-prst="rect" data-pptx-source-ref="slide:47" data-pptx-semantic-object="shape">
+<path d="M 555 554 L 850 554 L 850 632 L 555 632 Z" fill="#10243A" stroke="none" data-pptx-part="geometry" />
+
+</g>
+<g id="shape-48" data-pptx-object="shape" data-pptx-frame="571.55 560.3 260.9 33.88" data-pptx-prst="rect" data-pptx-source-ref="slide:48" data-pptx-semantic-object="shape">
+<path d="M 571.55 560.3 L 832.45 560.3 L 832.45 594.18 L 571.55 594.18 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="702" y="579" text-anchor="middle" xml:space="preserve" font-size="22" fill="#FFFFFF" font-weight="bold">Train RM on history Dₜ</text>
+</g>
+<g id="shape-49" data-pptx-object="shape" data-pptx-frame="570 583 265 44" data-pptx-prst="rect" data-pptx-source-ref="slide:49" data-pptx-semantic-object="shape">
+<path d="M 570 583 L 835 583 L 835 627 L 570 627 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="702.5" y="611" text-anchor="middle" xml:space="preserve" font-size="24" fill="#000000">𝜃𝑡+1=argmin𝜃ℒ𝑡𝜃</text>
+</g>
+</g>
+<g id="shape-56" data-pptx-object="group" data-pptx-frame="63.36 672.4 1153.28 24.64" data-pptx-source-ref="slide:56">
+<g id="shape-54" data-pptx-object="shape" data-pptx-frame="63.36 672.4 761.26 24.64" data-pptx-prst="rect" data-pptx-source-ref="slide:54" data-pptx-semantic-object="shape">
+<path d="M 63.36 672.4 L 824.62 672.4 L 824.62 697.04 L 63.36 697.04 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="63.36" y="686" text-anchor="start" xml:space="preserve" font-size="16" fill="#5B6B7A">Algorithm 1, lines 1–19 · δ is the selected gradient difference in line 14. V denotes the running matrix.</text>
+</g>
+<g id="shape-55" data-pptx-object="shape" data-pptx-frame="1163.49 672.4 53.15 24.64" data-pptx-prst="rect" data-pptx-source-ref="slide:55" data-pptx-semantic-object="shape">
+<path d="M 1163.49 672.4 L 1216.64 672.4 L 1216.64 697.04 L 1163.49 697.04 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="1216.64" y="686" text-anchor="end" xml:space="preserve" font-size="16" fill="#5B6B7A">04 / 08</text>
+</g>
+</g>
+<g id="shape-57" data-pptx-object="shape" data-pptx-frame="1001.4 518.6 64.73 0.07" data-pptx-prst="line" transform="rotate(90 1033.77 518.63)" data-pptx-source-ref="slide:57" data-pptx-semantic-object="shape">
+<path d="M 1001.4 518.6 L 1066.13 518.67" fill="none" stroke-width="2" stroke="#10243A" marker-end="url(#marrow1)" data-pptx-part="geometry" />
+
+</g>
+<g id="shape-58" data-pptx-object="shape" data-pptx-frame="284.73 544.67 215.4 78" data-pptx-prst="rect" data-pptx-source-ref="slide:58" data-pptx-semantic-object="shape">
+<path d="M 284.73 544.67 L 500.13 544.67 L 500.13 622.67 L 284.73 622.67 Z" fill="#10243A" stroke="none" data-pptx-part="geometry" />
+
+</g>
+<g id="shape-59" data-pptx-object="shape" data-pptx-frame="305.93 551 170.87 53.27" data-pptx-prst="rect" data-pptx-source-ref="slide:59" data-pptx-semantic-object="shape">
+<path d="M 305.93 551 L 476.8 551 L 476.8 604.27 L 305.93 604.27 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="391.37" y="569.7" text-anchor="middle" xml:space="preserve" font-size="22" fill="#FFFFFF" font-weight="bold">Carry V forward</text>
+
+</g>
+<g id="shape-60" data-pptx-object="shape" data-pptx-frame="285.87 573.67 205.6 44" data-pptx-prst="rect" data-pptx-source-ref="slide:60" data-pptx-semantic-object="shape">
+<path d="M 285.87 573.67 L 491.47 573.67 L 491.47 617.67 L 285.87 617.67 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="388.67" y="601.67" text-anchor="middle" xml:space="preserve" font-size="24" fill="#FFFFFF"><tspan>V</tspan><tspan>ₜ ← </tspan><tspan>V</tspan><tspan>ₜ₋₁</tspan></text>
+</g>
+<g id="shape-61" data-pptx-object="shape" data-pptx-frame="919.33 554 244.2 78" data-pptx-prst="rect" data-pptx-source-ref="slide:61" data-pptx-semantic-object="shape">
+<path d="M 919.33 554 L 1163.53 554 L 1163.53 632 L 919.33 632 Z" fill="#10243A" stroke="none" data-pptx-part="geometry" />
+
+
+</g>
+<g id="shape-62" data-pptx-object="shape" data-pptx-frame="936.93 560.33 220.33 24.67" data-pptx-prst="rect" data-pptx-source-ref="slide:62" data-pptx-semantic-object="shape">
+<path d="M 936.93 560.33 L 1157.27 560.33 L 1157.27 585 L 936.93 585 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="1047.1" y="579.03" text-anchor="middle" xml:space="preserve" font-size="22" fill="#FFFFFF" font-weight="bold"><tspan>Get user choice </tspan><tspan>ℓ</tspan><tspan>ₜ</tspan></text>
+</g>
+<g id="shape-63" data-pptx-object="shape" data-pptx-frame="928.33 588 244.2 44" data-pptx-prst="rect" data-pptx-source-ref="slide:63" data-pptx-semantic-object="shape">
+<path d="M 928.33 588 L 1172.53 588 L 1172.53 632 L 928.33 632 Z" fill="none" stroke="none" data-pptx-part="geometry" />
+
+
+<text x="1050.43" y="616" text-anchor="middle" xml:space="preserve" font-size="24" fill="#FFFFFF"><tspan>Save pair + label in D</tspan><tspan>ₜ</tspan></text>
+</g></svg>
