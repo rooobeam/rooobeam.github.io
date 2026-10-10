@@ -1,0 +1,158 @@
+[
+  {
+    "inner_offset": 2,
+    "outer_offset": 7,
+    "castle_symmetry": "mirror",
+    "ring_capacities": [
+      0,
+      12,
+      12,
+      28,
+      0
+    ],
+    "total_capacity": 52
+  },
+  {
+    "inner_offset": 2,
+    "outer_offset": 7,
+    "castle_symmetry": "rotate",
+    "ring_capacities": [
+      4,
+      16,
+      16,
+      32,
+      0
+    ],
+    "total_capacity": 68
+  },
+  {
+    "inner_offset": 2,
+    "outer_offset": 8,
+    "castle_symmetry": "mirror",
+    "ring_capacities": [
+      0,
+      12,
+      20,
+      16,
+      36
+    ],
+    "total_capacity": 84
+  },
+  {
+    "inner_offset": 2,
+    "outer_offset": 8,
+    "castle_symmetry": "rotate",
+    "ring_capacities": [
+      4,
+      16,
+      24,
+      20,
+      40
+    ],
+    "total_capacity": 104
+  },
+  {
+    "inner_offset": 3,
+    "outer_offset": 7,
+    "castle_symmetry": "mirror",
+    "ring_capacities": [
+      4,
+      12,
+      16,
+      28,
+      0
+    ],
+    "total_capacity": 60
+  },
+  {
+    "inner_offset": 3,
+    "outer_offset": 7,
+    "castle_symmetry": "rotate",
+    "ring_capacities": [
+      8,
+      16,
+      16,
+      32,
+      0
+    ],
+    "total_capacity": 72
+  },
+  {
+    "inner_offset": 3,
+    "outer_offset": 8,
+    "castle_symmetry": "mirror",
+    "ring_capacities": [
+      4,
+      12,
+      20,
+      24,
+      36
+    ],
+    "total_capacity": 96
+  },
+  {
+    "inner_offset": 3,
+    "outer_offset": 8,
+    "castle_symmetry": "rotate",
+    "ring_capacities": [
+      8,
+      16,
+      24,
+      24,
+      40
+    ],
+    "total_capacity": 112
+  },
+  {
+    "inner_offset": 4,
+    "outer_offset": 7,
+    "castle_symmetry": "mirror",
+    "ring_capacities": [
+      4,
+      8,
+      12,
+      28,
+      0
+    ],
+    "total_capacity": 52
+  },
+  {
+    "inner_offset": 4,
+    "outer_offset": 7,
+    "castle_symmetry": "rotate",
+    "ring_capacities": [
+      4,
+      8,
+      12,
+      28,
+      0
+    ],
+    "total_capacity": 52
+  },
+  {
+    "inner_offset": 4,
+    "outer_offset": 8,
+    "castle_symmetry": "mirror",
+    "ring_capacities": [
+      4,
+      8,
+      20,
+      16,
+      36
+    ],
+    "total_capacity": 84
+  },
+  {
+    "inner_offset": 4,
+    "outer_offset": 8,
+    "castle_symmetry": "rotate",
+    "ring_capacities": [
+      4,
+      8,
+      20,
+      16,
+      36
+    ],
+    "total_capacity": 84
+  }
+]

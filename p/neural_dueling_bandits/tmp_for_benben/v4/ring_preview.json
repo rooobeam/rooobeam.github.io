@@ -1,0 +1,1711 @@
+{
+  "status": "制作前核对稿；已求解100座几何，仅展示前两圈完整姓名",
+  "bear_center": [
+    474,
+    650
+  ],
+  "ring_width": 2,
+  "ring_outer_side_lengths": [
+    7,
+    11,
+    15,
+    19,
+    23
+  ],
+  "ring_counts": {
+    "1": 8,
+    "2": 16,
+    "3": 24,
+    "4": 24,
+    "5": 28
+  },
+  "ring_capacities_for_selected_flags": [
+    8,
+    16,
+    24,
+    24,
+    40
+  ],
+  "flag_positions": [
+    [
+      466,
+      642
+    ],
+    [
+      466,
+      647
+    ],
+    [
+      466,
+      653
+    ],
+    [
+      466,
+      658
+    ],
+    [
+      471,
+      642
+    ],
+    [
+      471,
+      647
+    ],
+    [
+      471,
+      653
+    ],
+    [
+      471,
+      658
+    ],
+    [
+      477,
+      642
+    ],
+    [
+      477,
+      647
+    ],
+    [
+      477,
+      653
+    ],
+    [
+      477,
+      658
+    ],
+    [
+      482,
+      642
+    ],
+    [
+      482,
+      647
+    ],
+    [
+      482,
+      653
+    ],
+    [
+      482,
+      658
+    ]
+  ],
+  "flag_symmetry": "上下镜像、左右镜像、90度旋转",
+  "castle_symmetry": "90度旋转；不要求每一行上下左右镜像",
+  "coverage": "每座城堡完整落在至少一面旗子的7×7范围内",
+  "validated": {
+    "castle_count": 100,
+    "castle_cells": 400,
+    "flag_count": 16,
+    "no_overlap": true,
+    "inside_bounds": true,
+    "all_castles_in_one_ring": true,
+    "rank_distance_monotonic": true
+  },
+  "capacity_comparison_scope": "仅比较内偏移2/3/4、外偏移7/8的12种组合，未宣称所有旗阵全局最优",
+  "placements_for_review": [
+    {
+      "name": "刀锋战士",
+      "order": 1,
+      "screenshot_rank": 1,
+      "power": 11000,
+      "ring": 1,
+      "relative_anchor": [
+        -1,
+        2
+      ],
+      "anchor": [
+        473,
+        652
+      ],
+      "distance": 2.5495097567963927
+    },
+    {
+      "name": "光风霁月",
+      "order": 2,
+      "screenshot_rank": 2,
+      "power": 7000,
+      "ring": 1,
+      "relative_anchor": [
+        2,
+        0
+      ],
+      "anchor": [
+        476,
+        650
+      ],
+      "distance": 2.5495097567963927
+    },
+    {
+      "name": "北月啊",
+      "order": 3,
+      "screenshot_rank": 3,
+      "power": 8000,
+      "ring": 1,
+      "relative_anchor": [
+        0,
+        -3
+      ],
+      "anchor": [
+        474,
+        647
+      ],
+      "distance": 2.5495097567963927
+    },
+    {
+      "name": "甜柴不是柴甜",
+      "order": 4,
+      "screenshot_rank": 5,
+      "power": 9300,
+      "ring": 1,
+      "relative_anchor": [
+        -3,
+        -1
+      ],
+      "anchor": [
+        471,
+        649
+      ],
+      "distance": 2.5495097567963927
+    },
+    {
+      "name": "一岁～帅",
+      "order": 5,
+      "screenshot_rank": 6,
+      "power": null,
+      "ring": 1,
+      "relative_anchor": [
+        -3,
+        1
+      ],
+      "anchor": [
+        471,
+        651
+      ],
+      "distance": 2.91547594742265
+    },
+    {
+      "name": "jennie",
+      "order": 6,
+      "screenshot_rank": 7,
+      "power": 6800,
+      "ring": 1,
+      "relative_anchor": [
+        1,
+        2
+      ],
+      "anchor": [
+        475,
+        652
+      ],
+      "distance": 2.91547594742265
+    },
+    {
+      "name": "不会玩",
+      "order": 7,
+      "screenshot_rank": 8,
+      "power": 6000,
+      "ring": 1,
+      "relative_anchor": [
+        2,
+        -2
+      ],
+      "anchor": [
+        476,
+        648
+      ],
+      "distance": 2.91547594742265
+    },
+    {
+      "name": "陈小刀",
+      "order": 8,
+      "screenshot_rank": 10,
+      "power": null,
+      "ring": 1,
+      "relative_anchor": [
+        -2,
+        -3
+      ],
+      "anchor": [
+        472,
+        647
+      ],
+      "distance": 2.91547594742265
+    },
+    {
+      "name": "雨夜城堡",
+      "order": 9,
+      "screenshot_rank": 11,
+      "power": 5800,
+      "ring": 2,
+      "relative_anchor": [
+        -5,
+        0
+      ],
+      "anchor": [
+        469,
+        650
+      ],
+      "distance": 4.527692569068709
+    },
+    {
+      "name": "抖动摩天轮",
+      "order": 10,
+      "screenshot_rank": 13,
+      "power": 4900,
+      "ring": 2,
+      "relative_anchor": [
+        0,
+        4
+      ],
+      "anchor": [
+        474,
+        654
+      ],
+      "distance": 4.527692569068709
+    },
+    {
+      "name": "茶猫九月",
+      "order": 11,
+      "screenshot_rank": 14,
+      "power": null,
+      "ring": 2,
+      "relative_anchor": [
+        4,
+        -1
+      ],
+      "anchor": [
+        478,
+        649
+      ],
+      "distance": 4.527692569068709
+    },
+    {
+      "name": "赌神高进",
+      "order": 12,
+      "screenshot_rank": 15,
+      "power": null,
+      "ring": 2,
+      "relative_anchor": [
+        -1,
+        -5
+      ],
+      "anchor": [
+        473,
+        645
+      ],
+      "distance": 4.527692569068709
+    },
+    {
+      "name": "红烧排骨",
+      "order": 13,
+      "screenshot_rank": 16,
+      "power": null,
+      "ring": 2,
+      "relative_anchor": [
+        -2,
+        4
+      ],
+      "anchor": [
+        472,
+        654
+      ],
+      "distance": 4.743416490252569
+    },
+    {
+      "name": "哒哒哒一起",
+      "order": 14,
+      "screenshot_rank": 17,
+      "power": null,
+      "ring": 2,
+      "relative_anchor": [
+        4,
+        1
+      ],
+      "anchor": [
+        478,
+        651
+      ],
+      "distance": 4.743416490252569
+    },
+    {
+      "name": "音格尔",
+      "order": 15,
+      "screenshot_rank": 18,
+      "power": 4500,
+      "ring": 2,
+      "relative_anchor": [
+        1,
+        -5
+      ],
+      "anchor": [
+        475,
+        645
+      ],
+      "distance": 4.743416490252569
+    },
+    {
+      "name": "滔滔不决吖",
+      "order": 16,
+      "screenshot_rank": 20,
+      "power": 3800,
+      "ring": 2,
+      "relative_anchor": [
+        -5,
+        -2
+      ],
+      "anchor": [
+        469,
+        648
+      ],
+      "distance": 4.743416490252569
+    },
+    {
+      "name": "悍匪唐三葬",
+      "order": 17,
+      "screenshot_rank": 21,
+      "power": null,
+      "ring": 2,
+      "relative_anchor": [
+        -5,
+        2
+      ],
+      "anchor": [
+        469,
+        652
+      ],
+      "distance": 5.1478150704935
+    },
+    {
+      "name": "仙水",
+      "order": 18,
+      "screenshot_rank": 22,
+      "power": 4400,
+      "ring": 2,
+      "relative_anchor": [
+        2,
+        4
+      ],
+      "anchor": [
+        476,
+        654
+      ],
+      "distance": 5.1478150704935
+    },
+    {
+      "name": "看看海",
+      "order": 19,
+      "screenshot_rank": 23,
+      "power": 4600,
+      "ring": 2,
+      "relative_anchor": [
+        4,
+        -3
+      ],
+      "anchor": [
+        478,
+        647
+      ],
+      "distance": 5.1478150704935
+    },
+    {
+      "name": "古 塵",
+      "order": 20,
+      "screenshot_rank": 24,
+      "power": 4100,
+      "ring": 2,
+      "relative_anchor": [
+        -3,
+        -5
+      ],
+      "anchor": [
+        471,
+        645
+      ],
+      "distance": 5.1478150704935
+    },
+    {
+      "name": "可以吖",
+      "order": 21,
+      "screenshot_rank": 25,
+      "power": 4200,
+      "ring": 2,
+      "relative_anchor": [
+        -4,
+        4
+      ],
+      "anchor": [
+        470,
+        654
+      ],
+      "distance": 5.70087712549569
+    },
+    {
+      "name": "安妮也",
+      "order": 22,
+      "screenshot_rank": 26,
+      "power": 4000,
+      "ring": 2,
+      "relative_anchor": [
+        4,
+        3
+      ],
+      "anchor": [
+        478,
+        653
+      ],
+      "distance": 5.70087712549569
+    },
+    {
+      "name": "曹孟德",
+      "order": 23,
+      "screenshot_rank": 28,
+      "power": 4100,
+      "ring": 2,
+      "relative_anchor": [
+        3,
+        -5
+      ],
+      "anchor": [
+        477,
+        645
+      ],
+      "distance": 5.70087712549569
+    },
+    {
+      "name": "刘千亿",
+      "order": 24,
+      "screenshot_rank": 29,
+      "power": 3700,
+      "ring": 2,
+      "relative_anchor": [
+        -5,
+        -4
+      ],
+      "anchor": [
+        469,
+        646
+      ],
+      "distance": 5.70087712549569
+    },
+    {
+      "name": "萌动",
+      "order": 25,
+      "screenshot_rank": 30,
+      "power": 3700,
+      "ring": 3,
+      "relative_anchor": [
+        -7,
+        0
+      ],
+      "anchor": [
+        467,
+        650
+      ],
+      "distance": 6.519202405202649
+    },
+    {
+      "name": "诸葛村夫",
+      "order": 26,
+      "screenshot_rank": 31,
+      "power": 3900,
+      "ring": 3,
+      "relative_anchor": [
+        0,
+        6
+      ],
+      "anchor": [
+        474,
+        656
+      ],
+      "distance": 6.519202405202649
+    },
+    {
+      "name": "神隐浪人",
+      "order": 27,
+      "screenshot_rank": 32,
+      "power": null,
+      "ring": 3,
+      "relative_anchor": [
+        6,
+        -1
+      ],
+      "anchor": [
+        480,
+        649
+      ],
+      "distance": 6.519202405202649
+    },
+    {
+      "name": "小刺猬",
+      "order": 28,
+      "screenshot_rank": 34,
+      "power": 3400,
+      "ring": 3,
+      "relative_anchor": [
+        -1,
+        -7
+      ],
+      "anchor": [
+        473,
+        643
+      ],
+      "distance": 6.519202405202649
+    },
+    {
+      "name": "大令吖",
+      "order": 29,
+      "screenshot_rank": 35,
+      "power": 3600,
+      "ring": 3,
+      "relative_anchor": [
+        -2,
+        6
+      ],
+      "anchor": [
+        472,
+        656
+      ],
+      "distance": 6.670832032063167
+    },
+    {
+      "name": "王麻子",
+      "order": 30,
+      "screenshot_rank": 36,
+      "power": 3400,
+      "ring": 3,
+      "relative_anchor": [
+        6,
+        1
+      ],
+      "anchor": [
+        480,
+        651
+      ],
+      "distance": 6.670832032063167
+    },
+    {
+      "name": "路慢漫",
+      "order": 31,
+      "screenshot_rank": 38,
+      "power": 3800,
+      "ring": 3,
+      "relative_anchor": [
+        1,
+        -7
+      ],
+      "anchor": [
+        475,
+        643
+      ],
+      "distance": 6.670832032063167
+    },
+    {
+      "name": "大兔子",
+      "order": 32,
+      "screenshot_rank": 41,
+      "power": 4200,
+      "ring": 3,
+      "relative_anchor": [
+        -7,
+        -2
+      ],
+      "anchor": [
+        467,
+        648
+      ],
+      "distance": 6.670832032063167
+    },
+    {
+      "name": "L大王",
+      "order": 33,
+      "screenshot_rank": 43,
+      "power": 3800,
+      "ring": 3,
+      "relative_anchor": [
+        -7,
+        2
+      ],
+      "anchor": [
+        467,
+        652
+      ],
+      "distance": 6.96419413859206
+    },
+    {
+      "name": "是壮士吖",
+      "order": 34,
+      "screenshot_rank": 44,
+      "power": 3400,
+      "ring": 3,
+      "relative_anchor": [
+        2,
+        6
+      ],
+      "anchor": [
+        476,
+        656
+      ],
+      "distance": 6.96419413859206
+    },
+    {
+      "name": "天下吖",
+      "order": 35,
+      "screenshot_rank": 45,
+      "power": 3500,
+      "ring": 3,
+      "relative_anchor": [
+        6,
+        -3
+      ],
+      "anchor": [
+        480,
+        647
+      ],
+      "distance": 6.96419413859206
+    },
+    {
+      "name": "Goya",
+      "order": 36,
+      "screenshot_rank": 46,
+      "power": 4200,
+      "ring": 3,
+      "relative_anchor": [
+        -3,
+        -7
+      ],
+      "anchor": [
+        471,
+        643
+      ],
+      "distance": 6.96419413859206
+    },
+    {
+      "name": "快乐小土匪",
+      "order": 37,
+      "screenshot_rank": 48,
+      "power": 3200,
+      "ring": 3,
+      "relative_anchor": [
+        -4,
+        6
+      ],
+      "anchor": [
+        470,
+        656
+      ],
+      "distance": 7.3824115301167
+    },
+    {
+      "name": "鸡大王",
+      "order": 38,
+      "screenshot_rank": 51,
+      "power": 3200,
+      "ring": 3,
+      "relative_anchor": [
+        6,
+        3
+      ],
+      "anchor": [
+        480,
+        653
+      ],
+      "distance": 7.3824115301167
+    },
+    {
+      "name": "一棵大树",
+      "order": 39,
+      "screenshot_rank": 52,
+      "power": 3100,
+      "ring": 3,
+      "relative_anchor": [
+        3,
+        -7
+      ],
+      "anchor": [
+        477,
+        643
+      ],
+      "distance": 7.3824115301167
+    },
+    {
+      "name": "桃子吖",
+      "order": 40,
+      "screenshot_rank": 53,
+      "power": 3300,
+      "ring": 3,
+      "relative_anchor": [
+        -7,
+        -4
+      ],
+      "anchor": [
+        467,
+        646
+      ],
+      "distance": 7.3824115301167
+    },
+    {
+      "name": "必胜无疑",
+      "order": 41,
+      "screenshot_rank": null,
+      "power": 4300,
+      "ring": 3,
+      "relative_anchor": [
+        -7,
+        4
+      ],
+      "anchor": [
+        467,
+        654
+      ],
+      "distance": 7.905694150420948
+    },
+    {
+      "name": "肉枣酸奶",
+      "order": 42,
+      "screenshot_rank": null,
+      "power": 4000,
+      "ring": 3,
+      "relative_anchor": [
+        4,
+        6
+      ],
+      "anchor": [
+        478,
+        656
+      ],
+      "distance": 7.905694150420948
+    },
+    {
+      "name": "瞎闹闹",
+      "order": 43,
+      "screenshot_rank": null,
+      "power": 4000,
+      "ring": 3,
+      "relative_anchor": [
+        6,
+        -5
+      ],
+      "anchor": [
+        480,
+        645
+      ],
+      "distance": 7.905694150420948
+    },
+    {
+      "name": "秋叶",
+      "order": 44,
+      "screenshot_rank": null,
+      "power": 3800,
+      "ring": 3,
+      "relative_anchor": [
+        -5,
+        -7
+      ],
+      "anchor": [
+        469,
+        643
+      ],
+      "distance": 7.905694150420948
+    },
+    {
+      "name": "五十男",
+      "order": 45,
+      "screenshot_rank": null,
+      "power": 3800,
+      "ring": 3,
+      "relative_anchor": [
+        -6,
+        6
+      ],
+      "anchor": [
+        468,
+        656
+      ],
+      "distance": 8.514693182963201
+    },
+    {
+      "name": "平平大王",
+      "order": 46,
+      "screenshot_rank": null,
+      "power": 3800,
+      "ring": 3,
+      "relative_anchor": [
+        6,
+        5
+      ],
+      "anchor": [
+        480,
+        655
+      ],
+      "distance": 8.514693182963201
+    },
+    {
+      "name": "条野太郎",
+      "order": 47,
+      "screenshot_rank": null,
+      "power": 3700,
+      "ring": 3,
+      "relative_anchor": [
+        5,
+        -7
+      ],
+      "anchor": [
+        479,
+        643
+      ],
+      "distance": 8.514693182963201
+    },
+    {
+      "name": "雪梨大王",
+      "order": 48,
+      "screenshot_rank": null,
+      "power": 3700,
+      "ring": 3,
+      "relative_anchor": [
+        -7,
+        -6
+      ],
+      "anchor": [
+        467,
+        644
+      ],
+      "distance": 8.514693182963201
+    },
+    {
+      "name": "边城小铁匠",
+      "order": 49,
+      "screenshot_rank": null,
+      "power": 3700,
+      "ring": 4,
+      "relative_anchor": [
+        -1,
+        8
+      ],
+      "anchor": [
+        473,
+        658
+      ],
+      "distance": 8.514693182963201
+    },
+    {
+      "name": "兰博基牛",
+      "order": 50,
+      "screenshot_rank": null,
+      "power": 3600,
+      "ring": 4,
+      "relative_anchor": [
+        8,
+        0
+      ],
+      "anchor": [
+        482,
+        650
+      ],
+      "distance": 8.514693182963201
+    },
+    {
+      "name": "七月的肖邦",
+      "order": 51,
+      "screenshot_rank": null,
+      "power": 3500,
+      "ring": 4,
+      "relative_anchor": [
+        0,
+        -9
+      ],
+      "anchor": [
+        474,
+        641
+      ],
+      "distance": 8.514693182963201
+    },
+    {
+      "name": "1111111",
+      "order": 52,
+      "screenshot_rank": null,
+      "power": 3500,
+      "ring": 4,
+      "relative_anchor": [
+        -9,
+        -1
+      ],
+      "anchor": [
+        465,
+        649
+      ],
+      "distance": 8.514693182963201
+    },
+    {
+      "name": "念念吖",
+      "order": 53,
+      "screenshot_rank": null,
+      "power": 3500,
+      "ring": 4,
+      "relative_anchor": [
+        -9,
+        1
+      ],
+      "anchor": [
+        465,
+        651
+      ],
+      "distance": 8.631338250816034
+    },
+    {
+      "name": "特工冲锋",
+      "order": 54,
+      "screenshot_rank": null,
+      "power": 3500,
+      "ring": 4,
+      "relative_anchor": [
+        1,
+        8
+      ],
+      "anchor": [
+        475,
+        658
+      ],
+      "distance": 8.631338250816034
+    },
+    {
+      "name": "canfly",
+      "order": 55,
+      "screenshot_rank": null,
+      "power": 3500,
+      "ring": 4,
+      "relative_anchor": [
+        8,
+        -2
+      ],
+      "anchor": [
+        482,
+        648
+      ],
+      "distance": 8.631338250816034
+    },
+    {
+      "name": "烽烟熊大",
+      "order": 56,
+      "screenshot_rank": null,
+      "power": 3400,
+      "ring": 4,
+      "relative_anchor": [
+        -2,
+        -9
+      ],
+      "anchor": [
+        472,
+        641
+      ],
+      "distance": 8.631338250816034
+    },
+    {
+      "name": "悲伤小伍",
+      "order": 57,
+      "screenshot_rank": null,
+      "power": 3400,
+      "ring": 4,
+      "relative_anchor": [
+        -9,
+        4
+      ],
+      "anchor": [
+        465,
+        654
+      ],
+      "distance": 9.617692030835672
+    },
+    {
+      "name": "Fat 猪是只猫",
+      "order": 58,
+      "screenshot_rank": null,
+      "power": 3400,
+      "ring": 4,
+      "relative_anchor": [
+        -5,
+        8
+      ],
+      "anchor": [
+        469,
+        658
+      ],
+      "distance": 9.617692030835672
+    },
+    {
+      "name": "有志则鸣",
+      "order": 59,
+      "screenshot_rank": null,
+      "power": 3300,
+      "ring": 4,
+      "relative_anchor": [
+        4,
+        8
+      ],
+      "anchor": [
+        478,
+        658
+      ],
+      "distance": 9.617692030835672
+    },
+    {
+      "name": "呆呆鱼",
+      "order": 60,
+      "screenshot_rank": null,
+      "power": 3300,
+      "ring": 4,
+      "relative_anchor": [
+        8,
+        4
+      ],
+      "anchor": [
+        482,
+        654
+      ],
+      "distance": 9.617692030835672
+    },
+    {
+      "name": "时 倾",
+      "order": 61,
+      "screenshot_rank": null,
+      "power": 3300,
+      "ring": 4,
+      "relative_anchor": [
+        8,
+        -5
+      ],
+      "anchor": [
+        482,
+        645
+      ],
+      "distance": 9.617692030835672
+    },
+    {
+      "name": "美式咖啡",
+      "order": 62,
+      "screenshot_rank": null,
+      "power": 3300,
+      "ring": 4,
+      "relative_anchor": [
+        4,
+        -9
+      ],
+      "anchor": [
+        478,
+        641
+      ],
+      "distance": 9.617692030835672
+    },
+    {
+      "name": "金圭峰",
+      "order": 63,
+      "screenshot_rank": null,
+      "power": 3200,
+      "ring": 4,
+      "relative_anchor": [
+        -5,
+        -9
+      ],
+      "anchor": [
+        469,
+        641
+      ],
+      "distance": 9.617692030835672
+    },
+    {
+      "name": "真会玩",
+      "order": 64,
+      "screenshot_rank": null,
+      "power": 3200,
+      "ring": 4,
+      "relative_anchor": [
+        -9,
+        -5
+      ],
+      "anchor": [
+        465,
+        645
+      ],
+      "distance": 9.617692030835672
+    },
+    {
+      "name": "落云代桃",
+      "order": 65,
+      "screenshot_rank": null,
+      "power": 3200,
+      "ring": 5,
+      "relative_anchor": [
+        -11,
+        0
+      ],
+      "anchor": [
+        463,
+        650
+      ],
+      "distance": 10.511898020814318
+    },
+    {
+      "name": "梨梨大王",
+      "order": 66,
+      "screenshot_rank": null,
+      "power": 3200,
+      "ring": 5,
+      "relative_anchor": [
+        0,
+        10
+      ],
+      "anchor": [
+        474,
+        660
+      ],
+      "distance": 10.511898020814318
+    },
+    {
+      "name": "啫啫吖",
+      "order": 67,
+      "screenshot_rank": null,
+      "power": 3200,
+      "ring": 5,
+      "relative_anchor": [
+        10,
+        -1
+      ],
+      "anchor": [
+        484,
+        649
+      ],
+      "distance": 10.511898020814318
+    },
+    {
+      "name": "牛牛呀",
+      "order": 68,
+      "screenshot_rank": null,
+      "power": 3200,
+      "ring": 5,
+      "relative_anchor": [
+        -1,
+        -11
+      ],
+      "anchor": [
+        473,
+        639
+      ],
+      "distance": 10.511898020814318
+    },
+    {
+      "name": "我喜欢挖矿",
+      "order": 69,
+      "screenshot_rank": null,
+      "power": 3200,
+      "ring": 5,
+      "relative_anchor": [
+        -2,
+        10
+      ],
+      "anchor": [
+        472,
+        660
+      ],
+      "distance": 10.606601717798213
+    },
+    {
+      "name": "渡鸦 1234",
+      "order": 70,
+      "screenshot_rank": null,
+      "power": 3200,
+      "ring": 5,
+      "relative_anchor": [
+        10,
+        1
+      ],
+      "anchor": [
+        484,
+        651
+      ],
+      "distance": 10.606601717798213
+    },
+    {
+      "name": "消消乐",
+      "order": 71,
+      "screenshot_rank": null,
+      "power": 3100,
+      "ring": 5,
+      "relative_anchor": [
+        1,
+        -11
+      ],
+      "anchor": [
+        475,
+        639
+      ],
+      "distance": 10.606601717798213
+    },
+    {
+      "name": "liys",
+      "order": 72,
+      "screenshot_rank": null,
+      "power": 3100,
+      "ring": 5,
+      "relative_anchor": [
+        -11,
+        -2
+      ],
+      "anchor": [
+        463,
+        648
+      ],
+      "distance": 10.606601717798213
+    },
+    {
+      "name": "延边F4",
+      "order": 73,
+      "screenshot_rank": null,
+      "power": 3100,
+      "ring": 4,
+      "relative_anchor": [
+        -9,
+        6
+      ],
+      "anchor": [
+        465,
+        656
+      ],
+      "distance": 10.700467279516348
+    },
+    {
+      "name": "心蕊",
+      "order": 74,
+      "screenshot_rank": null,
+      "power": 3100,
+      "ring": 4,
+      "relative_anchor": [
+        -7,
+        8
+      ],
+      "anchor": [
+        467,
+        658
+      ],
+      "distance": 10.700467279516348
+    },
+    {
+      "name": "半岛铁盒",
+      "order": 75,
+      "screenshot_rank": null,
+      "power": 3000,
+      "ring": 4,
+      "relative_anchor": [
+        6,
+        8
+      ],
+      "anchor": [
+        480,
+        658
+      ],
+      "distance": 10.700467279516348
+    },
+    {
+      "name": "奔波儿灞",
+      "order": 76,
+      "screenshot_rank": null,
+      "power": 3000,
+      "ring": 4,
+      "relative_anchor": [
+        8,
+        6
+      ],
+      "anchor": [
+        482,
+        656
+      ],
+      "distance": 10.700467279516348
+    },
+    {
+      "name": "大耳朵图图",
+      "order": 77,
+      "screenshot_rank": null,
+      "power": 2900,
+      "ring": 4,
+      "relative_anchor": [
+        8,
+        -7
+      ],
+      "anchor": [
+        482,
+        643
+      ],
+      "distance": 10.700467279516348
+    },
+    {
+      "name": "初学者",
+      "order": 78,
+      "screenshot_rank": null,
+      "power": 2900,
+      "ring": 4,
+      "relative_anchor": [
+        6,
+        -9
+      ],
+      "anchor": [
+        480,
+        641
+      ],
+      "distance": 10.700467279516348
+    },
+    {
+      "name": "笨笨国王",
+      "order": 79,
+      "screenshot_rank": null,
+      "power": 2900,
+      "ring": 4,
+      "relative_anchor": [
+        -7,
+        -9
+      ],
+      "anchor": [
+        467,
+        641
+      ],
+      "distance": 10.700467279516348
+    },
+    {
+      "name": "王者荣耀30星",
+      "order": 80,
+      "screenshot_rank": null,
+      "power": 2900,
+      "ring": 4,
+      "relative_anchor": [
+        -9,
+        -7
+      ],
+      "anchor": [
+        465,
+        643
+      ],
+      "distance": 10.700467279516348
+    },
+    {
+      "name": "耗子尾汁",
+      "order": 81,
+      "screenshot_rank": null,
+      "power": 2900,
+      "ring": 5,
+      "relative_anchor": [
+        -11,
+        2
+      ],
+      "anchor": [
+        463,
+        652
+      ],
+      "distance": 10.793516572461451
+    },
+    {
+      "name": "奔霸儿波",
+      "order": 82,
+      "screenshot_rank": null,
+      "power": 2900,
+      "ring": 5,
+      "relative_anchor": [
+        2,
+        10
+      ],
+      "anchor": [
+        476,
+        660
+      ],
+      "distance": 10.793516572461451
+    },
+    {
+      "name": "无序吖",
+      "order": 83,
+      "screenshot_rank": null,
+      "power": 2800,
+      "ring": 5,
+      "relative_anchor": [
+        10,
+        -3
+      ],
+      "anchor": [
+        484,
+        647
+      ],
+      "distance": 10.793516572461451
+    },
+    {
+      "name": "邪恶大肥猫",
+      "order": 84,
+      "screenshot_rank": null,
+      "power": 2800,
+      "ring": 5,
+      "relative_anchor": [
+        -3,
+        -11
+      ],
+      "anchor": [
+        471,
+        639
+      ],
+      "distance": 10.793516572461451
+    },
+    {
+      "name": "伊伊说",
+      "order": 85,
+      "screenshot_rank": null,
+      "power": 2700,
+      "ring": 5,
+      "relative_anchor": [
+        -4,
+        10
+      ],
+      "anchor": [
+        470,
+        660
+      ],
+      "distance": 11.067971810589329
+    },
+    {
+      "name": "代代王",
+      "order": 86,
+      "screenshot_rank": null,
+      "power": 2700,
+      "ring": 5,
+      "relative_anchor": [
+        10,
+        3
+      ],
+      "anchor": [
+        484,
+        653
+      ],
+      "distance": 11.067971810589329
+    },
+    {
+      "name": "wm",
+      "order": 87,
+      "screenshot_rank": null,
+      "power": 2700,
+      "ring": 5,
+      "relative_anchor": [
+        3,
+        -11
+      ],
+      "anchor": [
+        477,
+        639
+      ],
+      "distance": 11.067971810589329
+    },
+    {
+      "name": "长歌行",
+      "order": 88,
+      "screenshot_rank": null,
+      "power": 2700,
+      "ring": 5,
+      "relative_anchor": [
+        -11,
+        -4
+      ],
+      "anchor": [
+        463,
+        646
+      ],
+      "distance": 11.067971810589329
+    },
+    {
+      "name": "吱吱不",
+      "order": 89,
+      "screenshot_rank": null,
+      "power": 2700,
+      "ring": 5,
+      "relative_anchor": [
+        -11,
+        4
+      ],
+      "anchor": [
+        463,
+        654
+      ],
+      "distance": 11.423659658795863
+    },
+    {
+      "name": "添添添",
+      "order": 90,
+      "screenshot_rank": null,
+      "power": 2600,
+      "ring": 5,
+      "relative_anchor": [
+        4,
+        10
+      ],
+      "anchor": [
+        478,
+        660
+      ],
+      "distance": 11.423659658795863
+    },
+    {
+      "name": "千帆已过",
+      "order": 91,
+      "screenshot_rank": null,
+      "power": 2600,
+      "ring": 5,
+      "relative_anchor": [
+        10,
+        -5
+      ],
+      "anchor": [
+        484,
+        645
+      ],
+      "distance": 11.423659658795863
+    },
+    {
+      "name": "崽崽吖",
+      "order": 92,
+      "screenshot_rank": null,
+      "power": 2600,
+      "ring": 5,
+      "relative_anchor": [
+        -5,
+        -11
+      ],
+      "anchor": [
+        469,
+        639
+      ],
+      "distance": 11.423659658795863
+    },
+    {
+      "name": "啦啦啦",
+      "order": 93,
+      "screenshot_rank": null,
+      "power": 2600,
+      "ring": 5,
+      "relative_anchor": [
+        -6,
+        10
+      ],
+      "anchor": [
+        468,
+        660
+      ],
+      "distance": 11.853269591129697
+    },
+    {
+      "name": "到不了的远方",
+      "order": 94,
+      "screenshot_rank": null,
+      "power": 2500,
+      "ring": 5,
+      "relative_anchor": [
+        10,
+        5
+      ],
+      "anchor": [
+        484,
+        655
+      ],
+      "distance": 11.853269591129697
+    },
+    {
+      "name": "小克学长",
+      "order": 95,
+      "screenshot_rank": null,
+      "power": 2500,
+      "ring": 5,
+      "relative_anchor": [
+        5,
+        -11
+      ],
+      "anchor": [
+        479,
+        639
+      ],
+      "distance": 11.853269591129697
+    },
+    {
+      "name": "哦哦哦",
+      "order": 96,
+      "screenshot_rank": null,
+      "power": 2500,
+      "ring": 5,
+      "relative_anchor": [
+        -11,
+        -6
+      ],
+      "anchor": [
+        463,
+        644
+      ],
+      "distance": 11.853269591129697
+    },
+    {
+      "name": "小潇湘",
+      "order": 97,
+      "screenshot_rank": null,
+      "power": 2400,
+      "ring": 5,
+      "relative_anchor": [
+        -11,
+        6
+      ],
+      "anchor": [
+        463,
+        656
+      ],
+      "distance": 12.349089035228468
+    },
+    {
+      "name": "小咩吖",
+      "order": 98,
+      "screenshot_rank": null,
+      "power": 2400,
+      "ring": 5,
+      "relative_anchor": [
+        6,
+        10
+      ],
+      "anchor": [
+        480,
+        660
+      ],
+      "distance": 12.349089035228468
+    },
+    {
+      "name": "小土豆吖",
+      "order": 99,
+      "screenshot_rank": null,
+      "power": 2400,
+      "ring": 5,
+      "relative_anchor": [
+        10,
+        -7
+      ],
+      "anchor": [
+        484,
+        643
+      ],
+      "distance": 12.349089035228468
+    },
+    {
+      "name": "不改名",
+      "order": 100,
+      "screenshot_rank": null,
+      "power": 2400,
+      "ring": 5,
+      "relative_anchor": [
+        -7,
+        -11
+      ],
+      "anchor": [
+        467,
+        639
+      ],
+      "distance": 12.349089035228468
+    }
+  ],
+  "final_production_approved": false
+}

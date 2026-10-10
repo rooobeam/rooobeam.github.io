@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" font-family="Arial" font-size="28" data-pptx-page-role="content">
-<rect id="background" data-pptx-role="background" width="1280" height="720" fill="#FFFFFF"/>
-<g id="title" data-pptx-bounds="64 33 1152 90" fill="#10243A"><text x="64" y="55" font-size="16" fill="#5B6B7A">METHOD 2/3 · ORIGINAL PAPER PSEUDOCODE</text><text x="64" y="106" font-size="44" font-weight="bold">Algorithm 1: T-POP</text></g>
-<g id="original-algorithm" data-pptx-bounds="123.36 132 1033.28 524"><image id="algorithm1" href="../images/algorithm_1_original.png" x="123.36" y="132" width="1033.28" height="524" preserveAspectRatio="xMidYMid meet"/></g>
-<g id="footer" data-pptx-role="footer" data-pptx-bounds="64 666 1152 29" font-size="16" fill="#5B6B7A"><text x="64" y="686">Source: T-POP.pdf, p. 4 · Original Algorithm 1 (unaltered).</text><text x="1216" y="686" text-anchor="end">05 / 08</text></g>
-</svg>

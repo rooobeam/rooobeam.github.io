@@ -1,0 +1,4217 @@
+{
+  "version": "v4",
+  "status": "100人正式版",
+  "approved_by_user": true,
+  "approval": "用户：可以，给我100人的版本，也在V4里；还要给个表格，有每个人的四个格的坐标",
+  "approved_geometry_sha256": "2890e24bad718e3177aee17870c91fc6539570d28e793787c07932793ee825a2",
+  "bounds_inclusive": [
+    463,
+    485,
+    637,
+    662
+  ],
+  "bear_center": [
+    474,
+    650
+  ],
+  "bear_cells": [
+    [
+      473,
+      649
+    ],
+    [
+      473,
+      650
+    ],
+    [
+      473,
+      651
+    ],
+    [
+      474,
+      649
+    ],
+    [
+      474,
+      650
+    ],
+    [
+      474,
+      651
+    ],
+    [
+      475,
+      649
+    ],
+    [
+      475,
+      650
+    ],
+    [
+      475,
+      651
+    ]
+  ],
+  "ring_width": 2,
+  "ring_statistics": [
+    {
+      "ring": 1,
+      "outer_side": 7,
+      "area": 40,
+      "castles": 8,
+      "flags": 4,
+      "empty": 4
+    },
+    {
+      "ring": 2,
+      "outer_side": 11,
+      "area": 72,
+      "castles": 16,
+      "flags": 0,
+      "empty": 8
+    },
+    {
+      "ring": 3,
+      "outer_side": 15,
+      "area": 104,
+      "castles": 24,
+      "flags": 0,
+      "empty": 8
+    },
+    {
+      "ring": 4,
+      "outer_side": 19,
+      "area": 136,
+      "castles": 24,
+      "flags": 12,
+      "empty": 28
+    },
+    {
+      "ring": 5,
+      "outer_side": 23,
+      "area": 168,
+      "castles": 28,
+      "flags": 0,
+      "empty": 56
+    }
+  ],
+  "flag_positions": [
+    {
+      "id": "F01",
+      "x": 466,
+      "y": 658,
+      "xmin": 463,
+      "xmax": 469,
+      "ymin": 655,
+      "ymax": 661
+    },
+    {
+      "id": "F02",
+      "x": 471,
+      "y": 658,
+      "xmin": 468,
+      "xmax": 474,
+      "ymin": 655,
+      "ymax": 661
+    },
+    {
+      "id": "F03",
+      "x": 477,
+      "y": 658,
+      "xmin": 474,
+      "xmax": 480,
+      "ymin": 655,
+      "ymax": 661
+    },
+    {
+      "id": "F04",
+      "x": 482,
+      "y": 658,
+      "xmin": 479,
+      "xmax": 485,
+      "ymin": 655,
+      "ymax": 661
+    },
+    {
+      "id": "F05",
+      "x": 466,
+      "y": 653,
+      "xmin": 463,
+      "xmax": 469,
+      "ymin": 650,
+      "ymax": 656
+    },
+    {
+      "id": "F06",
+      "x": 471,
+      "y": 653,
+      "xmin": 468,
+      "xmax": 474,
+      "ymin": 650,
+      "ymax": 656
+    },
+    {
+      "id": "F07",
+      "x": 477,
+      "y": 653,
+      "xmin": 474,
+      "xmax": 480,
+      "ymin": 650,
+      "ymax": 656
+    },
+    {
+      "id": "F08",
+      "x": 482,
+      "y": 653,
+      "xmin": 479,
+      "xmax": 485,
+      "ymin": 650,
+      "ymax": 656
+    },
+    {
+      "id": "F09",
+      "x": 466,
+      "y": 647,
+      "xmin": 463,
+      "xmax": 469,
+      "ymin": 644,
+      "ymax": 650
+    },
+    {
+      "id": "F10",
+      "x": 471,
+      "y": 647,
+      "xmin": 468,
+      "xmax": 474,
+      "ymin": 644,
+      "ymax": 650
+    },
+    {
+      "id": "F11",
+      "x": 477,
+      "y": 647,
+      "xmin": 474,
+      "xmax": 480,
+      "ymin": 644,
+      "ymax": 650
+    },
+    {
+      "id": "F12",
+      "x": 482,
+      "y": 647,
+      "xmin": 479,
+      "xmax": 485,
+      "ymin": 644,
+      "ymax": 650
+    },
+    {
+      "id": "F13",
+      "x": 466,
+      "y": 642,
+      "xmin": 463,
+      "xmax": 469,
+      "ymin": 639,
+      "ymax": 645
+    },
+    {
+      "id": "F14",
+      "x": 471,
+      "y": 642,
+      "xmin": 468,
+      "xmax": 474,
+      "ymin": 639,
+      "ymax": 645
+    },
+    {
+      "id": "F15",
+      "x": 477,
+      "y": 642,
+      "xmin": 474,
+      "xmax": 480,
+      "ymin": 639,
+      "ymax": 645
+    },
+    {
+      "id": "F16",
+      "x": 482,
+      "y": 642,
+      "xmin": 479,
+      "xmax": 485,
+      "ymin": 639,
+      "ymax": 645
+    }
+  ],
+  "cell_order": [
+    "左下格",
+    "右下格",
+    "左上格",
+    "右上格"
+  ],
+  "coordinate_meaning": "坐标标识格子中心；每座城堡占用所列四个相邻格，城堡几何中心为左下格坐标各加0.5",
+  "placements": [
+    {
+      "name": "刀锋战士",
+      "order": 1,
+      "screenshot_rank": 1,
+      "power": 11000,
+      "ring": 1,
+      "relative_anchor": [
+        -1,
+        2
+      ],
+      "anchor": [
+        473,
+        652
+      ],
+      "distance": 2.5495097567963927,
+      "four_cells": [
+        [
+          473,
+          652
+        ],
+        [
+          474,
+          652
+        ],
+        [
+          473,
+          653
+        ],
+        [
+          474,
+          653
+        ]
+      ],
+      "group": "sss",
+      "ranking_basis": "截图排名",
+      "covering_flags": [
+        "F06"
+      ]
+    },
+    {
+      "name": "光风霁月",
+      "order": 2,
+      "screenshot_rank": 2,
+      "power": 7000,
+      "ring": 1,
+      "relative_anchor": [
+        2,
+        0
+      ],
+      "anchor": [
+        476,
+        650
+      ],
+      "distance": 2.5495097567963927,
+      "four_cells": [
+        [
+          476,
+          650
+        ],
+        [
+          477,
+          650
+        ],
+        [
+          476,
+          651
+        ],
+        [
+          477,
+          651
+        ]
+      ],
+      "group": "FJG",
+      "ranking_basis": "截图排名",
+      "covering_flags": [
+        "F07"
+      ]
+    },
+    {
+      "name": "北月啊",
+      "order": 3,
+      "screenshot_rank": 3,
+      "power": 8000,
+      "ring": 1,
+      "relative_anchor": [
+        0,
+        -3
+      ],
+      "anchor": [
+        474,
+        647
+      ],
+      "distance": 2.5495097567963927,
+      "four_cells": [
+        [
+          474,
+          647
+        ],
+        [
+          475,
+          647
+        ],
+        [
+          474,
+          648
+        ],
+        [
+          475,
+          648
+        ]
+      ],
+      "group": "sss",
+      "ranking_basis": "截图排名",
+      "covering_flags": [
+        "F11"
+      ]
+    },
+    {
+      "name": "甜柴不是柴甜",
+      "order": 4,
+      "screenshot_rank": 5,
+      "power": 9300,
+      "ring": 1,
+      "relative_anchor": [
+        -3,
+        -1
+      ],
+      "anchor": [
+        471,
+        649
+      ],
+      "distance": 2.5495097567963927,
+      "four_cells": [
+        [
+          471,
+          649
+        ],
+        [
+          472,
+          649
+        ],
+        [
+          471,
+          650
+        ],
+        [
+          472,
+          650
+        ]
+      ],
+      "group": "sss",
+      "ranking_basis": "截图排名",
+      "covering_flags": [
+        "F10"
+      ]
+    },
+    {
+      "name": "一岁～帅",
+      "order": 5,
+      "screenshot_rank": 6,
+      "power": null,
+      "ring": 1,
+      "relative_anchor": [
+        -3,
+        1
+      ],
+      "anchor": [
+        471,
+        651
+      ],
+      "distance": 2.91547594742265,
+      "four_cells": [
+        [
+          471,
+          651
+        ],
+        [
+          472,
+          651
+        ],
+        [
+          471,
+          652
+        ],
+        [
+          472,
+          652
+        ]
+      ],
+      "group": "sss",
+      "ranking_basis": "截图排名",
+      "covering_flags": [
+        "F06"
+      ]
+    },
+    {
+      "name": "jennie",
+      "order": 6,
+      "screenshot_rank": 7,
+      "power": 6800,
+      "ring": 1,
+      "relative_anchor": [
+        1,
+        2
+      ],
+      "anchor": [
+        475,
+        652
+      ],
+      "distance": 2.91547594742265,
+      "four_cells": [
+        [
+          475,
+          652
+        ],
+        [
+          476,
+          652
+        ],
+        [
+          475,
+          653
+        ],
+        [
+          476,
+          653
+        ]
+      ],
+      "group": "VPH",
+      "ranking_basis": "截图排名",
+      "covering_flags": [
+        "F07"
+      ]
+    },
+    {
+      "name": "不会玩",
+      "order": 7,
+      "screenshot_rank": 8,
+      "power": 6000,
+      "ring": 1,
+      "relative_anchor": [
+        2,
+        -2
+      ],
+      "anchor": [
+        476,
+        648
+      ],
+      "distance": 2.91547594742265,
+      "four_cells": [
+        [
+          476,
+          648
+        ],
+        [
+          477,
+          648
+        ],
+        [
+          476,
+          649
+        ],
+        [
+          477,
+          649
+        ]
+      ],
+      "group": "sss",
+      "ranking_basis": "截图排名",
+      "covering_flags": [
+        "F11"
+      ]
+    },
+    {
+      "name": "陈小刀",
+      "order": 8,
+      "screenshot_rank": 10,
+      "power": null,
+      "ring": 1,
+      "relative_anchor": [
+        -2,
+        -3
+      ],
+      "anchor": [
+        472,
+        647
+      ],
+      "distance": 2.91547594742265,
+      "four_cells": [
+        [
+          472,
+          647
+        ],
+        [
+          473,
+          647
+        ],
+        [
+          472,
+          648
+        ],
+        [
+          473,
+          648
+        ]
+      ],
+      "group": "sss",
+      "ranking_basis": "截图排名",
+      "covering_flags": [
+        "F10"
+      ]
+    },
+    {
+      "name": "雨夜城堡",
+      "order": 9,
+      "screenshot_rank": 11,
+      "power": 5800,
+      "ring": 2,
+      "relative_anchor": [
+        -5,
+        0
+      ],
+      "anchor": [
+        469,
+        650
+      ],
+      "distance": 4.527692569068709,
+      "four_cells": [
+        [
+          469,
+          650
+        ],
+        [
+          470,
+          650
+        ],
+        [
+          469,
+          651
+        ],
+        [
+          470,
+          651
+        ]
+      ],
+      "group": "VNR",
+      "ranking_basis": "截图排名",
+      "covering_flags": [
+        "F06"
+      ]
+    },
+    {
+      "name": "抖动摩天轮",
+      "order": 10,
+      "screenshot_rank": 13,
+      "power": 4900,
+      "ring": 2,
+      "relative_anchor": [
+        0,
+        4
+      ],
+      "anchor": [
+        474,
+        654
+      ],
+      "distance": 4.527692569068709,
+      "four_cells": [
+        [
+          474,
+          654
+        ],
+        [
+          475,
+          654
+        ],
+        [
+          474,
+          655
+        ],
+        [
+          475,
+          655
+        ]
+      ],
+      "group": "VPH",
+      "ranking_basis": "截图排名",
+      "covering_flags": [
+        "F07"
+      ]
+    },
+    {
+      "name": "茶猫九月",
+      "order": 11,
+      "screenshot_rank": 14,
+      "power": null,
+      "ring": 2,
+      "relative_anchor": [
+        4,
+        -1
+      ],
+      "anchor": [
+        478,
+        649
+      ],
+      "distance": 4.527692569068709,
+      "four_cells": [
+        [
+          478,
+          649
+        ],
+        [
+          479,
+          649
+        ],
+        [
+          478,
+          650
+        ],
+        [
+          479,
+          650
+        ]
+      ],
+      "group": "sss",
+      "ranking_basis": "截图排名",
+      "covering_flags": [
+        "F11"
+      ]
+    },
+    {
+      "name": "赌神高进",
+      "order": 12,
+      "screenshot_rank": 15,
+      "power": null,
+      "ring": 2,
+      "relative_anchor": [
+        -1,
+        -5
+      ],
+      "anchor": [
+        473,
+        645
+      ],
+      "distance": 4.527692569068709,
+      "four_cells": [
+        [
+          473,
+          645
+        ],
+        [
+          474,
+          645
+        ],
+        [
+          473,
+          646
+        ],
+        [
+          474,
+          646
+        ]
+      ],
+      "group": "sss",
+      "ranking_basis": "截图排名",
+      "covering_flags": [
+        "F10"
+      ]
+    },
+    {
+      "name": "红烧排骨",
+      "order": 13,
+      "screenshot_rank": 16,
+      "power": null,
+      "ring": 2,
+      "relative_anchor": [
+        -2,
+        4
+      ],
+      "anchor": [
+        472,
+        654
+      ],
+      "distance": 4.743416490252569,
+      "four_cells": [
+        [
+          472,
+          654
+        ],
+        [
+          473,
+          654
+        ],
+        [
+          472,
+          655
+        ],
+        [
+          473,
+          655
+        ]
+      ],
+      "group": "sss",
+      "ranking_basis": "截图排名",
+      "covering_flags": [
+        "F06"
+      ]
+    },
+    {
+      "name": "哒哒哒一起",
+      "order": 14,
+      "screenshot_rank": 17,
+      "power": null,
+      "ring": 2,
+      "relative_anchor": [
+        4,
+        1
+      ],
+      "anchor": [
+        478,
+        651
+      ],
+      "distance": 4.743416490252569,
+      "four_cells": [
+        [
+          478,
+          651
+        ],
+        [
+          479,
+          651
+        ],
+        [
+          478,
+          652
+        ],
+        [
+          479,
+          652
+        ]
+      ],
+      "group": "sss",
+      "ranking_basis": "截图排名",
+      "covering_flags": [
+        "F07"
+      ]
+    },
+    {
+      "name": "音格尔",
+      "order": 15,
+      "screenshot_rank": 18,
+      "power": 4500,
+      "ring": 2,
+      "relative_anchor": [
+        1,
+        -5
+      ],
+      "anchor": [
+        475,
+        645
+      ],
+      "distance": 4.743416490252569,
+      "four_cells": [
+        [
+          475,
+          645
+        ],
+        [
+          476,
+          645
+        ],
+        [
+          475,
+          646
+        ],
+        [
+          476,
+          646
+        ]
+      ],
+      "group": "VPH",
+      "ranking_basis": "截图排名",
+      "covering_flags": [
+        "F11"
+      ]
+    },
+    {
+      "name": "滔滔不决吖",
+      "order": 16,
+      "screenshot_rank": 20,
+      "power": 3800,
+      "ring": 2,
+      "relative_anchor": [
+        -5,
+        -2
+      ],
+      "anchor": [
+        469,
+        648
+      ],
+      "distance": 4.743416490252569,
+      "four_cells": [
+        [
+          469,
+          648
+        ],
+        [
+          470,
+          648
+        ],
+        [
+          469,
+          649
+        ],
+        [
+          470,
+          649
+        ]
+      ],
+      "group": "OVO",
+      "ranking_basis": "截图排名",
+      "covering_flags": [
+        "F10"
+      ]
+    },
+    {
+      "name": "悍匪唐三葬",
+      "order": 17,
+      "screenshot_rank": 21,
+      "power": null,
+      "ring": 2,
+      "relative_anchor": [
+        -5,
+        2
+      ],
+      "anchor": [
+        469,
+        652
+      ],
+      "distance": 5.1478150704935,
+      "four_cells": [
+        [
+          469,
+          652
+        ],
+        [
+          470,
+          652
+        ],
+        [
+          469,
+          653
+        ],
+        [
+          470,
+          653
+        ]
+      ],
+      "group": "sss",
+      "ranking_basis": "截图排名",
+      "covering_flags": [
+        "F06"
+      ]
+    },
+    {
+      "name": "仙水",
+      "order": 18,
+      "screenshot_rank": 22,
+      "power": 4400,
+      "ring": 2,
+      "relative_anchor": [
+        2,
+        4
+      ],
+      "anchor": [
+        476,
+        654
+      ],
+      "distance": 5.1478150704935,
+      "four_cells": [
+        [
+          476,
+          654
+        ],
+        [
+          477,
+          654
+        ],
+        [
+          476,
+          655
+        ],
+        [
+          477,
+          655
+        ]
+      ],
+      "group": "FJG",
+      "ranking_basis": "截图排名",
+      "covering_flags": [
+        "F07"
+      ]
+    },
+    {
+      "name": "看看海",
+      "order": 19,
+      "screenshot_rank": 23,
+      "power": 4600,
+      "ring": 2,
+      "relative_anchor": [
+        4,
+        -3
+      ],
+      "anchor": [
+        478,
+        647
+      ],
+      "distance": 5.1478150704935,
+      "four_cells": [
+        [
+          478,
+          647
+        ],
+        [
+          479,
+          647
+        ],
+        [
+          478,
+          648
+        ],
+        [
+          479,
+          648
+        ]
+      ],
+      "group": "VNR",
+      "ranking_basis": "截图排名",
+      "covering_flags": [
+        "F11"
+      ]
+    },
+    {
+      "name": "古 塵",
+      "order": 20,
+      "screenshot_rank": 24,
+      "power": 4100,
+      "ring": 2,
+      "relative_anchor": [
+        -3,
+        -5
+      ],
+      "anchor": [
+        471,
+        645
+      ],
+      "distance": 5.1478150704935,
+      "four_cells": [
+        [
+          471,
+          645
+        ],
+        [
+          472,
+          645
+        ],
+        [
+          471,
+          646
+        ],
+        [
+          472,
+          646
+        ]
+      ],
+      "group": "sss",
+      "ranking_basis": "截图排名",
+      "covering_flags": [
+        "F10"
+      ]
+    },
+    {
+      "name": "可以吖",
+      "order": 21,
+      "screenshot_rank": 25,
+      "power": 4200,
+      "ring": 2,
+      "relative_anchor": [
+        -4,
+        4
+      ],
+      "anchor": [
+        470,
+        654
+      ],
+      "distance": 5.70087712549569,
+      "four_cells": [
+        [
+          470,
+          654
+        ],
+        [
+          471,
+          654
+        ],
+        [
+          470,
+          655
+        ],
+        [
+          471,
+          655
+        ]
+      ],
+      "group": "OVO",
+      "ranking_basis": "截图排名",
+      "covering_flags": [
+        "F06"
+      ]
+    },
+    {
+      "name": "安妮也",
+      "order": 22,
+      "screenshot_rank": 26,
+      "power": 4000,
+      "ring": 2,
+      "relative_anchor": [
+        4,
+        3
+      ],
+      "anchor": [
+        478,
+        653
+      ],
+      "distance": 5.70087712549569,
+      "four_cells": [
+        [
+          478,
+          653
+        ],
+        [
+          479,
+          653
+        ],
+        [
+          478,
+          654
+        ],
+        [
+          479,
+          654
+        ]
+      ],
+      "group": "sss",
+      "ranking_basis": "截图排名",
+      "covering_flags": [
+        "F07"
+      ]
+    },
+    {
+      "name": "曹孟德",
+      "order": 23,
+      "screenshot_rank": 28,
+      "power": 4100,
+      "ring": 2,
+      "relative_anchor": [
+        3,
+        -5
+      ],
+      "anchor": [
+        477,
+        645
+      ],
+      "distance": 5.70087712549569,
+      "four_cells": [
+        [
+          477,
+          645
+        ],
+        [
+          478,
+          645
+        ],
+        [
+          477,
+          646
+        ],
+        [
+          478,
+          646
+        ]
+      ],
+      "group": "VPH",
+      "ranking_basis": "截图排名",
+      "covering_flags": [
+        "F11"
+      ]
+    },
+    {
+      "name": "刘千亿",
+      "order": 24,
+      "screenshot_rank": 29,
+      "power": 3700,
+      "ring": 2,
+      "relative_anchor": [
+        -5,
+        -4
+      ],
+      "anchor": [
+        469,
+        646
+      ],
+      "distance": 5.70087712549569,
+      "four_cells": [
+        [
+          469,
+          646
+        ],
+        [
+          470,
+          646
+        ],
+        [
+          469,
+          647
+        ],
+        [
+          470,
+          647
+        ]
+      ],
+      "group": "VPH",
+      "ranking_basis": "截图排名",
+      "covering_flags": [
+        "F10"
+      ]
+    },
+    {
+      "name": "萌动",
+      "order": 25,
+      "screenshot_rank": 30,
+      "power": 3700,
+      "ring": 3,
+      "relative_anchor": [
+        -7,
+        0
+      ],
+      "anchor": [
+        467,
+        650
+      ],
+      "distance": 6.519202405202649,
+      "four_cells": [
+        [
+          467,
+          650
+        ],
+        [
+          468,
+          650
+        ],
+        [
+          467,
+          651
+        ],
+        [
+          468,
+          651
+        ]
+      ],
+      "group": "FJG",
+      "ranking_basis": "截图排名",
+      "covering_flags": [
+        "F05"
+      ]
+    },
+    {
+      "name": "诸葛村夫",
+      "order": 26,
+      "screenshot_rank": 31,
+      "power": 3900,
+      "ring": 3,
+      "relative_anchor": [
+        0,
+        6
+      ],
+      "anchor": [
+        474,
+        656
+      ],
+      "distance": 6.519202405202649,
+      "four_cells": [
+        [
+          474,
+          656
+        ],
+        [
+          475,
+          656
+        ],
+        [
+          474,
+          657
+        ],
+        [
+          475,
+          657
+        ]
+      ],
+      "group": "VPH",
+      "ranking_basis": "截图排名",
+      "covering_flags": [
+        "F03"
+      ]
+    },
+    {
+      "name": "神隐浪人",
+      "order": 27,
+      "screenshot_rank": 32,
+      "power": null,
+      "ring": 3,
+      "relative_anchor": [
+        6,
+        -1
+      ],
+      "anchor": [
+        480,
+        649
+      ],
+      "distance": 6.519202405202649,
+      "four_cells": [
+        [
+          480,
+          649
+        ],
+        [
+          481,
+          649
+        ],
+        [
+          480,
+          650
+        ],
+        [
+          481,
+          650
+        ]
+      ],
+      "group": "sss",
+      "ranking_basis": "截图排名",
+      "covering_flags": [
+        "F12"
+      ]
+    },
+    {
+      "name": "小刺猬",
+      "order": 28,
+      "screenshot_rank": 34,
+      "power": 3400,
+      "ring": 3,
+      "relative_anchor": [
+        -1,
+        -7
+      ],
+      "anchor": [
+        473,
+        643
+      ],
+      "distance": 6.519202405202649,
+      "four_cells": [
+        [
+          473,
+          643
+        ],
+        [
+          474,
+          643
+        ],
+        [
+          473,
+          644
+        ],
+        [
+          474,
+          644
+        ]
+      ],
+      "group": "OVO",
+      "ranking_basis": "截图排名",
+      "covering_flags": [
+        "F14"
+      ]
+    },
+    {
+      "name": "大令吖",
+      "order": 29,
+      "screenshot_rank": 35,
+      "power": 3600,
+      "ring": 3,
+      "relative_anchor": [
+        -2,
+        6
+      ],
+      "anchor": [
+        472,
+        656
+      ],
+      "distance": 6.670832032063167,
+      "four_cells": [
+        [
+          472,
+          656
+        ],
+        [
+          473,
+          656
+        ],
+        [
+          472,
+          657
+        ],
+        [
+          473,
+          657
+        ]
+      ],
+      "group": "OVO",
+      "ranking_basis": "截图排名",
+      "covering_flags": [
+        "F02"
+      ]
+    },
+    {
+      "name": "王麻子",
+      "order": 30,
+      "screenshot_rank": 36,
+      "power": 3400,
+      "ring": 3,
+      "relative_anchor": [
+        6,
+        1
+      ],
+      "anchor": [
+        480,
+        651
+      ],
+      "distance": 6.670832032063167,
+      "four_cells": [
+        [
+          480,
+          651
+        ],
+        [
+          481,
+          651
+        ],
+        [
+          480,
+          652
+        ],
+        [
+          481,
+          652
+        ]
+      ],
+      "group": "OVO",
+      "ranking_basis": "截图排名",
+      "covering_flags": [
+        "F08"
+      ]
+    },
+    {
+      "name": "路慢漫",
+      "order": 31,
+      "screenshot_rank": 38,
+      "power": 3800,
+      "ring": 3,
+      "relative_anchor": [
+        1,
+        -7
+      ],
+      "anchor": [
+        475,
+        643
+      ],
+      "distance": 6.670832032063167,
+      "four_cells": [
+        [
+          475,
+          643
+        ],
+        [
+          476,
+          643
+        ],
+        [
+          475,
+          644
+        ],
+        [
+          476,
+          644
+        ]
+      ],
+      "group": "sss",
+      "ranking_basis": "截图排名",
+      "covering_flags": [
+        "F15"
+      ]
+    },
+    {
+      "name": "大兔子",
+      "order": 32,
+      "screenshot_rank": 41,
+      "power": 4200,
+      "ring": 3,
+      "relative_anchor": [
+        -7,
+        -2
+      ],
+      "anchor": [
+        467,
+        648
+      ],
+      "distance": 6.670832032063167,
+      "four_cells": [
+        [
+          467,
+          648
+        ],
+        [
+          468,
+          648
+        ],
+        [
+          467,
+          649
+        ],
+        [
+          468,
+          649
+        ]
+      ],
+      "group": "KUY",
+      "ranking_basis": "截图排名",
+      "covering_flags": [
+        "F09"
+      ]
+    },
+    {
+      "name": "L大王",
+      "order": 33,
+      "screenshot_rank": 43,
+      "power": 3800,
+      "ring": 3,
+      "relative_anchor": [
+        -7,
+        2
+      ],
+      "anchor": [
+        467,
+        652
+      ],
+      "distance": 6.96419413859206,
+      "four_cells": [
+        [
+          467,
+          652
+        ],
+        [
+          468,
+          652
+        ],
+        [
+          467,
+          653
+        ],
+        [
+          468,
+          653
+        ]
+      ],
+      "group": "OVO",
+      "ranking_basis": "截图排名",
+      "covering_flags": [
+        "F05"
+      ]
+    },
+    {
+      "name": "是壮士吖",
+      "order": 34,
+      "screenshot_rank": 44,
+      "power": 3400,
+      "ring": 3,
+      "relative_anchor": [
+        2,
+        6
+      ],
+      "anchor": [
+        476,
+        656
+      ],
+      "distance": 6.96419413859206,
+      "four_cells": [
+        [
+          476,
+          656
+        ],
+        [
+          477,
+          656
+        ],
+        [
+          476,
+          657
+        ],
+        [
+          477,
+          657
+        ]
+      ],
+      "group": "OVO",
+      "ranking_basis": "截图排名",
+      "covering_flags": [
+        "F03"
+      ]
+    },
+    {
+      "name": "天下吖",
+      "order": 35,
+      "screenshot_rank": 45,
+      "power": 3500,
+      "ring": 3,
+      "relative_anchor": [
+        6,
+        -3
+      ],
+      "anchor": [
+        480,
+        647
+      ],
+      "distance": 6.96419413859206,
+      "four_cells": [
+        [
+          480,
+          647
+        ],
+        [
+          481,
+          647
+        ],
+        [
+          480,
+          648
+        ],
+        [
+          481,
+          648
+        ]
+      ],
+      "group": "OVO",
+      "ranking_basis": "截图排名",
+      "covering_flags": [
+        "F12"
+      ]
+    },
+    {
+      "name": "Goya",
+      "order": 36,
+      "screenshot_rank": 46,
+      "power": 4200,
+      "ring": 3,
+      "relative_anchor": [
+        -3,
+        -7
+      ],
+      "anchor": [
+        471,
+        643
+      ],
+      "distance": 6.96419413859206,
+      "four_cells": [
+        [
+          471,
+          643
+        ],
+        [
+          472,
+          643
+        ],
+        [
+          471,
+          644
+        ],
+        [
+          472,
+          644
+        ]
+      ],
+      "group": "KUY",
+      "ranking_basis": "截图排名",
+      "covering_flags": [
+        "F14"
+      ]
+    },
+    {
+      "name": "快乐小土匪",
+      "order": 37,
+      "screenshot_rank": 48,
+      "power": 3200,
+      "ring": 3,
+      "relative_anchor": [
+        -4,
+        6
+      ],
+      "anchor": [
+        470,
+        656
+      ],
+      "distance": 7.3824115301167,
+      "four_cells": [
+        [
+          470,
+          656
+        ],
+        [
+          471,
+          656
+        ],
+        [
+          470,
+          657
+        ],
+        [
+          471,
+          657
+        ]
+      ],
+      "group": "KUY",
+      "ranking_basis": "截图排名",
+      "covering_flags": [
+        "F02"
+      ]
+    },
+    {
+      "name": "鸡大王",
+      "order": 38,
+      "screenshot_rank": 51,
+      "power": 3200,
+      "ring": 3,
+      "relative_anchor": [
+        6,
+        3
+      ],
+      "anchor": [
+        480,
+        653
+      ],
+      "distance": 7.3824115301167,
+      "four_cells": [
+        [
+          480,
+          653
+        ],
+        [
+          481,
+          653
+        ],
+        [
+          480,
+          654
+        ],
+        [
+          481,
+          654
+        ]
+      ],
+      "group": "FJG",
+      "ranking_basis": "截图排名",
+      "covering_flags": [
+        "F08"
+      ]
+    },
+    {
+      "name": "一棵大树",
+      "order": 39,
+      "screenshot_rank": 52,
+      "power": 3100,
+      "ring": 3,
+      "relative_anchor": [
+        3,
+        -7
+      ],
+      "anchor": [
+        477,
+        643
+      ],
+      "distance": 7.3824115301167,
+      "four_cells": [
+        [
+          477,
+          643
+        ],
+        [
+          478,
+          643
+        ],
+        [
+          477,
+          644
+        ],
+        [
+          478,
+          644
+        ]
+      ],
+      "group": "FJG",
+      "ranking_basis": "截图排名",
+      "covering_flags": [
+        "F15"
+      ]
+    },
+    {
+      "name": "桃子吖",
+      "order": 40,
+      "screenshot_rank": 53,
+      "power": 3300,
+      "ring": 3,
+      "relative_anchor": [
+        -7,
+        -4
+      ],
+      "anchor": [
+        467,
+        646
+      ],
+      "distance": 7.3824115301167,
+      "four_cells": [
+        [
+          467,
+          646
+        ],
+        [
+          468,
+          646
+        ],
+        [
+          467,
+          647
+        ],
+        [
+          468,
+          647
+        ]
+      ],
+      "group": "OVO",
+      "ranking_basis": "截图排名",
+      "covering_flags": [
+        "F09"
+      ]
+    },
+    {
+      "name": "必胜无疑",
+      "order": 41,
+      "screenshot_rank": null,
+      "power": 4300,
+      "ring": 3,
+      "relative_anchor": [
+        -7,
+        4
+      ],
+      "anchor": [
+        467,
+        654
+      ],
+      "distance": 7.905694150420948,
+      "four_cells": [
+        [
+          467,
+          654
+        ],
+        [
+          468,
+          654
+        ],
+        [
+          467,
+          655
+        ],
+        [
+          468,
+          655
+        ]
+      ],
+      "group": "sss",
+      "ranking_basis": "战力",
+      "covering_flags": [
+        "F05"
+      ]
+    },
+    {
+      "name": "肉枣酸奶",
+      "order": 42,
+      "screenshot_rank": null,
+      "power": 4000,
+      "ring": 3,
+      "relative_anchor": [
+        4,
+        6
+      ],
+      "anchor": [
+        478,
+        656
+      ],
+      "distance": 7.905694150420948,
+      "four_cells": [
+        [
+          478,
+          656
+        ],
+        [
+          479,
+          656
+        ],
+        [
+          478,
+          657
+        ],
+        [
+          479,
+          657
+        ]
+      ],
+      "group": "VNR",
+      "ranking_basis": "战力",
+      "covering_flags": [
+        "F03"
+      ]
+    },
+    {
+      "name": "瞎闹闹",
+      "order": 43,
+      "screenshot_rank": null,
+      "power": 4000,
+      "ring": 3,
+      "relative_anchor": [
+        6,
+        -5
+      ],
+      "anchor": [
+        480,
+        645
+      ],
+      "distance": 7.905694150420948,
+      "four_cells": [
+        [
+          480,
+          645
+        ],
+        [
+          481,
+          645
+        ],
+        [
+          480,
+          646
+        ],
+        [
+          481,
+          646
+        ]
+      ],
+      "group": "sss",
+      "ranking_basis": "战力",
+      "covering_flags": [
+        "F12"
+      ]
+    },
+    {
+      "name": "秋叶",
+      "order": 44,
+      "screenshot_rank": null,
+      "power": 3800,
+      "ring": 3,
+      "relative_anchor": [
+        -5,
+        -7
+      ],
+      "anchor": [
+        469,
+        643
+      ],
+      "distance": 7.905694150420948,
+      "four_cells": [
+        [
+          469,
+          643
+        ],
+        [
+          470,
+          643
+        ],
+        [
+          469,
+          644
+        ],
+        [
+          470,
+          644
+        ]
+      ],
+      "group": "VNR",
+      "ranking_basis": "战力",
+      "covering_flags": [
+        "F14"
+      ]
+    },
+    {
+      "name": "五十男",
+      "order": 45,
+      "screenshot_rank": null,
+      "power": 3800,
+      "ring": 3,
+      "relative_anchor": [
+        -6,
+        6
+      ],
+      "anchor": [
+        468,
+        656
+      ],
+      "distance": 8.514693182963201,
+      "four_cells": [
+        [
+          468,
+          656
+        ],
+        [
+          469,
+          656
+        ],
+        [
+          468,
+          657
+        ],
+        [
+          469,
+          657
+        ]
+      ],
+      "group": "VPH",
+      "ranking_basis": "战力",
+      "covering_flags": [
+        "F01",
+        "F02"
+      ]
+    },
+    {
+      "name": "平平大王",
+      "order": 46,
+      "screenshot_rank": null,
+      "power": 3800,
+      "ring": 3,
+      "relative_anchor": [
+        6,
+        5
+      ],
+      "anchor": [
+        480,
+        655
+      ],
+      "distance": 8.514693182963201,
+      "four_cells": [
+        [
+          480,
+          655
+        ],
+        [
+          481,
+          655
+        ],
+        [
+          480,
+          656
+        ],
+        [
+          481,
+          656
+        ]
+      ],
+      "group": "sss",
+      "ranking_basis": "战力",
+      "covering_flags": [
+        "F04",
+        "F08"
+      ]
+    },
+    {
+      "name": "条野太郎",
+      "order": 47,
+      "screenshot_rank": null,
+      "power": 3700,
+      "ring": 3,
+      "relative_anchor": [
+        5,
+        -7
+      ],
+      "anchor": [
+        479,
+        643
+      ],
+      "distance": 8.514693182963201,
+      "four_cells": [
+        [
+          479,
+          643
+        ],
+        [
+          480,
+          643
+        ],
+        [
+          479,
+          644
+        ],
+        [
+          480,
+          644
+        ]
+      ],
+      "group": "FJG",
+      "ranking_basis": "战力",
+      "covering_flags": [
+        "F15",
+        "F16"
+      ]
+    },
+    {
+      "name": "雪梨大王",
+      "order": 48,
+      "screenshot_rank": null,
+      "power": 3700,
+      "ring": 3,
+      "relative_anchor": [
+        -7,
+        -6
+      ],
+      "anchor": [
+        467,
+        644
+      ],
+      "distance": 8.514693182963201,
+      "four_cells": [
+        [
+          467,
+          644
+        ],
+        [
+          468,
+          644
+        ],
+        [
+          467,
+          645
+        ],
+        [
+          468,
+          645
+        ]
+      ],
+      "group": "VNR",
+      "ranking_basis": "战力",
+      "covering_flags": [
+        "F09",
+        "F13"
+      ]
+    },
+    {
+      "name": "边城小铁匠",
+      "order": 49,
+      "screenshot_rank": null,
+      "power": 3700,
+      "ring": 4,
+      "relative_anchor": [
+        -1,
+        8
+      ],
+      "anchor": [
+        473,
+        658
+      ],
+      "distance": 8.514693182963201,
+      "four_cells": [
+        [
+          473,
+          658
+        ],
+        [
+          474,
+          658
+        ],
+        [
+          473,
+          659
+        ],
+        [
+          474,
+          659
+        ]
+      ],
+      "group": "VNR",
+      "ranking_basis": "战力",
+      "covering_flags": [
+        "F02"
+      ]
+    },
+    {
+      "name": "兰博基牛",
+      "order": 50,
+      "screenshot_rank": null,
+      "power": 3600,
+      "ring": 4,
+      "relative_anchor": [
+        8,
+        0
+      ],
+      "anchor": [
+        482,
+        650
+      ],
+      "distance": 8.514693182963201,
+      "four_cells": [
+        [
+          482,
+          650
+        ],
+        [
+          483,
+          650
+        ],
+        [
+          482,
+          651
+        ],
+        [
+          483,
+          651
+        ]
+      ],
+      "group": "sss",
+      "ranking_basis": "战力",
+      "covering_flags": [
+        "F08"
+      ]
+    },
+    {
+      "name": "七月的肖邦",
+      "order": 51,
+      "screenshot_rank": null,
+      "power": 3500,
+      "ring": 4,
+      "relative_anchor": [
+        0,
+        -9
+      ],
+      "anchor": [
+        474,
+        641
+      ],
+      "distance": 8.514693182963201,
+      "four_cells": [
+        [
+          474,
+          641
+        ],
+        [
+          475,
+          641
+        ],
+        [
+          474,
+          642
+        ],
+        [
+          475,
+          642
+        ]
+      ],
+      "group": "VNR",
+      "ranking_basis": "战力",
+      "covering_flags": [
+        "F15"
+      ]
+    },
+    {
+      "name": "1111111",
+      "order": 52,
+      "screenshot_rank": null,
+      "power": 3500,
+      "ring": 4,
+      "relative_anchor": [
+        -9,
+        -1
+      ],
+      "anchor": [
+        465,
+        649
+      ],
+      "distance": 8.514693182963201,
+      "four_cells": [
+        [
+          465,
+          649
+        ],
+        [
+          466,
+          649
+        ],
+        [
+          465,
+          650
+        ],
+        [
+          466,
+          650
+        ]
+      ],
+      "group": "VPH",
+      "ranking_basis": "战力",
+      "covering_flags": [
+        "F09"
+      ]
+    },
+    {
+      "name": "念念吖",
+      "order": 53,
+      "screenshot_rank": null,
+      "power": 3500,
+      "ring": 4,
+      "relative_anchor": [
+        -9,
+        1
+      ],
+      "anchor": [
+        465,
+        651
+      ],
+      "distance": 8.631338250816034,
+      "four_cells": [
+        [
+          465,
+          651
+        ],
+        [
+          466,
+          651
+        ],
+        [
+          465,
+          652
+        ],
+        [
+          466,
+          652
+        ]
+      ],
+      "group": "OVO",
+      "ranking_basis": "战力",
+      "covering_flags": [
+        "F05"
+      ]
+    },
+    {
+      "name": "特工冲锋",
+      "order": 54,
+      "screenshot_rank": null,
+      "power": 3500,
+      "ring": 4,
+      "relative_anchor": [
+        1,
+        8
+      ],
+      "anchor": [
+        475,
+        658
+      ],
+      "distance": 8.631338250816034,
+      "four_cells": [
+        [
+          475,
+          658
+        ],
+        [
+          476,
+          658
+        ],
+        [
+          475,
+          659
+        ],
+        [
+          476,
+          659
+        ]
+      ],
+      "group": "sss",
+      "ranking_basis": "战力",
+      "covering_flags": [
+        "F03"
+      ]
+    },
+    {
+      "name": "canfly",
+      "order": 55,
+      "screenshot_rank": null,
+      "power": 3500,
+      "ring": 4,
+      "relative_anchor": [
+        8,
+        -2
+      ],
+      "anchor": [
+        482,
+        648
+      ],
+      "distance": 8.631338250816034,
+      "four_cells": [
+        [
+          482,
+          648
+        ],
+        [
+          483,
+          648
+        ],
+        [
+          482,
+          649
+        ],
+        [
+          483,
+          649
+        ]
+      ],
+      "group": "sss",
+      "ranking_basis": "战力",
+      "covering_flags": [
+        "F12"
+      ]
+    },
+    {
+      "name": "烽烟熊大",
+      "order": 56,
+      "screenshot_rank": null,
+      "power": 3400,
+      "ring": 4,
+      "relative_anchor": [
+        -2,
+        -9
+      ],
+      "anchor": [
+        472,
+        641
+      ],
+      "distance": 8.631338250816034,
+      "four_cells": [
+        [
+          472,
+          641
+        ],
+        [
+          473,
+          641
+        ],
+        [
+          472,
+          642
+        ],
+        [
+          473,
+          642
+        ]
+      ],
+      "group": "VPH",
+      "ranking_basis": "战力",
+      "covering_flags": [
+        "F14"
+      ]
+    },
+    {
+      "name": "悲伤小伍",
+      "order": 57,
+      "screenshot_rank": null,
+      "power": 3400,
+      "ring": 4,
+      "relative_anchor": [
+        -9,
+        4
+      ],
+      "anchor": [
+        465,
+        654
+      ],
+      "distance": 9.617692030835672,
+      "four_cells": [
+        [
+          465,
+          654
+        ],
+        [
+          466,
+          654
+        ],
+        [
+          465,
+          655
+        ],
+        [
+          466,
+          655
+        ]
+      ],
+      "group": "sss",
+      "ranking_basis": "战力",
+      "covering_flags": [
+        "F05"
+      ]
+    },
+    {
+      "name": "Fat 猪是只猫",
+      "order": 58,
+      "screenshot_rank": null,
+      "power": 3400,
+      "ring": 4,
+      "relative_anchor": [
+        -5,
+        8
+      ],
+      "anchor": [
+        469,
+        658
+      ],
+      "distance": 9.617692030835672,
+      "four_cells": [
+        [
+          469,
+          658
+        ],
+        [
+          470,
+          658
+        ],
+        [
+          469,
+          659
+        ],
+        [
+          470,
+          659
+        ]
+      ],
+      "group": "sss",
+      "ranking_basis": "战力",
+      "covering_flags": [
+        "F02"
+      ]
+    },
+    {
+      "name": "有志则鸣",
+      "order": 59,
+      "screenshot_rank": null,
+      "power": 3300,
+      "ring": 4,
+      "relative_anchor": [
+        4,
+        8
+      ],
+      "anchor": [
+        478,
+        658
+      ],
+      "distance": 9.617692030835672,
+      "four_cells": [
+        [
+          478,
+          658
+        ],
+        [
+          479,
+          658
+        ],
+        [
+          478,
+          659
+        ],
+        [
+          479,
+          659
+        ]
+      ],
+      "group": "VNR",
+      "ranking_basis": "战力",
+      "covering_flags": [
+        "F03"
+      ]
+    },
+    {
+      "name": "呆呆鱼",
+      "order": 60,
+      "screenshot_rank": null,
+      "power": 3300,
+      "ring": 4,
+      "relative_anchor": [
+        8,
+        4
+      ],
+      "anchor": [
+        482,
+        654
+      ],
+      "distance": 9.617692030835672,
+      "four_cells": [
+        [
+          482,
+          654
+        ],
+        [
+          483,
+          654
+        ],
+        [
+          482,
+          655
+        ],
+        [
+          483,
+          655
+        ]
+      ],
+      "group": "sss",
+      "ranking_basis": "战力",
+      "covering_flags": [
+        "F08"
+      ]
+    },
+    {
+      "name": "时 倾",
+      "order": 61,
+      "screenshot_rank": null,
+      "power": 3300,
+      "ring": 4,
+      "relative_anchor": [
+        8,
+        -5
+      ],
+      "anchor": [
+        482,
+        645
+      ],
+      "distance": 9.617692030835672,
+      "four_cells": [
+        [
+          482,
+          645
+        ],
+        [
+          483,
+          645
+        ],
+        [
+          482,
+          646
+        ],
+        [
+          483,
+          646
+        ]
+      ],
+      "group": "sss",
+      "ranking_basis": "战力",
+      "covering_flags": [
+        "F12"
+      ]
+    },
+    {
+      "name": "美式咖啡",
+      "order": 62,
+      "screenshot_rank": null,
+      "power": 3300,
+      "ring": 4,
+      "relative_anchor": [
+        4,
+        -9
+      ],
+      "anchor": [
+        478,
+        641
+      ],
+      "distance": 9.617692030835672,
+      "four_cells": [
+        [
+          478,
+          641
+        ],
+        [
+          479,
+          641
+        ],
+        [
+          478,
+          642
+        ],
+        [
+          479,
+          642
+        ]
+      ],
+      "group": "sss",
+      "ranking_basis": "战力",
+      "covering_flags": [
+        "F15"
+      ]
+    },
+    {
+      "name": "金圭峰",
+      "order": 63,
+      "screenshot_rank": null,
+      "power": 3200,
+      "ring": 4,
+      "relative_anchor": [
+        -5,
+        -9
+      ],
+      "anchor": [
+        469,
+        641
+      ],
+      "distance": 9.617692030835672,
+      "four_cells": [
+        [
+          469,
+          641
+        ],
+        [
+          470,
+          641
+        ],
+        [
+          469,
+          642
+        ],
+        [
+          470,
+          642
+        ]
+      ],
+      "group": "FJG",
+      "ranking_basis": "战力",
+      "covering_flags": [
+        "F14"
+      ]
+    },
+    {
+      "name": "真会玩",
+      "order": 64,
+      "screenshot_rank": null,
+      "power": 3200,
+      "ring": 4,
+      "relative_anchor": [
+        -9,
+        -5
+      ],
+      "anchor": [
+        465,
+        645
+      ],
+      "distance": 9.617692030835672,
+      "four_cells": [
+        [
+          465,
+          645
+        ],
+        [
+          466,
+          645
+        ],
+        [
+          465,
+          646
+        ],
+        [
+          466,
+          646
+        ]
+      ],
+      "group": "FJG",
+      "ranking_basis": "战力",
+      "covering_flags": [
+        "F09"
+      ]
+    },
+    {
+      "name": "落云代桃",
+      "order": 65,
+      "screenshot_rank": null,
+      "power": 3200,
+      "ring": 5,
+      "relative_anchor": [
+        -11,
+        0
+      ],
+      "anchor": [
+        463,
+        650
+      ],
+      "distance": 10.511898020814318,
+      "four_cells": [
+        [
+          463,
+          650
+        ],
+        [
+          464,
+          650
+        ],
+        [
+          463,
+          651
+        ],
+        [
+          464,
+          651
+        ]
+      ],
+      "group": "VNR",
+      "ranking_basis": "战力",
+      "covering_flags": [
+        "F05"
+      ]
+    },
+    {
+      "name": "梨梨大王",
+      "order": 66,
+      "screenshot_rank": null,
+      "power": 3200,
+      "ring": 5,
+      "relative_anchor": [
+        0,
+        10
+      ],
+      "anchor": [
+        474,
+        660
+      ],
+      "distance": 10.511898020814318,
+      "four_cells": [
+        [
+          474,
+          660
+        ],
+        [
+          475,
+          660
+        ],
+        [
+          474,
+          661
+        ],
+        [
+          475,
+          661
+        ]
+      ],
+      "group": "VPH",
+      "ranking_basis": "战力",
+      "covering_flags": [
+        "F03"
+      ]
+    },
+    {
+      "name": "啫啫吖",
+      "order": 67,
+      "screenshot_rank": null,
+      "power": 3200,
+      "ring": 5,
+      "relative_anchor": [
+        10,
+        -1
+      ],
+      "anchor": [
+        484,
+        649
+      ],
+      "distance": 10.511898020814318,
+      "four_cells": [
+        [
+          484,
+          649
+        ],
+        [
+          485,
+          649
+        ],
+        [
+          484,
+          650
+        ],
+        [
+          485,
+          650
+        ]
+      ],
+      "group": "OVO",
+      "ranking_basis": "战力",
+      "covering_flags": [
+        "F12"
+      ]
+    },
+    {
+      "name": "牛牛呀",
+      "order": 68,
+      "screenshot_rank": null,
+      "power": 3200,
+      "ring": 5,
+      "relative_anchor": [
+        -1,
+        -11
+      ],
+      "anchor": [
+        473,
+        639
+      ],
+      "distance": 10.511898020814318,
+      "four_cells": [
+        [
+          473,
+          639
+        ],
+        [
+          474,
+          639
+        ],
+        [
+          473,
+          640
+        ],
+        [
+          474,
+          640
+        ]
+      ],
+      "group": "KUY",
+      "ranking_basis": "战力",
+      "covering_flags": [
+        "F14"
+      ]
+    },
+    {
+      "name": "我喜欢挖矿",
+      "order": 69,
+      "screenshot_rank": null,
+      "power": 3200,
+      "ring": 5,
+      "relative_anchor": [
+        -2,
+        10
+      ],
+      "anchor": [
+        472,
+        660
+      ],
+      "distance": 10.606601717798213,
+      "four_cells": [
+        [
+          472,
+          660
+        ],
+        [
+          473,
+          660
+        ],
+        [
+          472,
+          661
+        ],
+        [
+          473,
+          661
+        ]
+      ],
+      "group": "KUY",
+      "ranking_basis": "战力",
+      "covering_flags": [
+        "F02"
+      ]
+    },
+    {
+      "name": "渡鸦 1234",
+      "order": 70,
+      "screenshot_rank": null,
+      "power": 3200,
+      "ring": 5,
+      "relative_anchor": [
+        10,
+        1
+      ],
+      "anchor": [
+        484,
+        651
+      ],
+      "distance": 10.606601717798213,
+      "four_cells": [
+        [
+          484,
+          651
+        ],
+        [
+          485,
+          651
+        ],
+        [
+          484,
+          652
+        ],
+        [
+          485,
+          652
+        ]
+      ],
+      "group": "sss",
+      "ranking_basis": "战力",
+      "covering_flags": [
+        "F08"
+      ]
+    },
+    {
+      "name": "消消乐",
+      "order": 71,
+      "screenshot_rank": null,
+      "power": 3100,
+      "ring": 5,
+      "relative_anchor": [
+        1,
+        -11
+      ],
+      "anchor": [
+        475,
+        639
+      ],
+      "distance": 10.606601717798213,
+      "four_cells": [
+        [
+          475,
+          639
+        ],
+        [
+          476,
+          639
+        ],
+        [
+          475,
+          640
+        ],
+        [
+          476,
+          640
+        ]
+      ],
+      "group": "FJG",
+      "ranking_basis": "战力",
+      "covering_flags": [
+        "F15"
+      ]
+    },
+    {
+      "name": "liys",
+      "order": 72,
+      "screenshot_rank": null,
+      "power": 3100,
+      "ring": 5,
+      "relative_anchor": [
+        -11,
+        -2
+      ],
+      "anchor": [
+        463,
+        648
+      ],
+      "distance": 10.606601717798213,
+      "four_cells": [
+        [
+          463,
+          648
+        ],
+        [
+          464,
+          648
+        ],
+        [
+          463,
+          649
+        ],
+        [
+          464,
+          649
+        ]
+      ],
+      "group": "FJG",
+      "ranking_basis": "战力",
+      "covering_flags": [
+        "F09"
+      ]
+    },
+    {
+      "name": "延边F4",
+      "order": 73,
+      "screenshot_rank": null,
+      "power": 3100,
+      "ring": 4,
+      "relative_anchor": [
+        -9,
+        6
+      ],
+      "anchor": [
+        465,
+        656
+      ],
+      "distance": 10.700467279516348,
+      "four_cells": [
+        [
+          465,
+          656
+        ],
+        [
+          466,
+          656
+        ],
+        [
+          465,
+          657
+        ],
+        [
+          466,
+          657
+        ]
+      ],
+      "group": "FJG",
+      "ranking_basis": "战力",
+      "covering_flags": [
+        "F01"
+      ]
+    },
+    {
+      "name": "心蕊",
+      "order": 74,
+      "screenshot_rank": null,
+      "power": 3100,
+      "ring": 4,
+      "relative_anchor": [
+        -7,
+        8
+      ],
+      "anchor": [
+        467,
+        658
+      ],
+      "distance": 10.700467279516348,
+      "four_cells": [
+        [
+          467,
+          658
+        ],
+        [
+          468,
+          658
+        ],
+        [
+          467,
+          659
+        ],
+        [
+          468,
+          659
+        ]
+      ],
+      "group": "FJG",
+      "ranking_basis": "战力",
+      "covering_flags": [
+        "F01"
+      ]
+    },
+    {
+      "name": "半岛铁盒",
+      "order": 75,
+      "screenshot_rank": null,
+      "power": 3000,
+      "ring": 4,
+      "relative_anchor": [
+        6,
+        8
+      ],
+      "anchor": [
+        480,
+        658
+      ],
+      "distance": 10.700467279516348,
+      "four_cells": [
+        [
+          480,
+          658
+        ],
+        [
+          481,
+          658
+        ],
+        [
+          480,
+          659
+        ],
+        [
+          481,
+          659
+        ]
+      ],
+      "group": "FJG",
+      "ranking_basis": "战力",
+      "covering_flags": [
+        "F04"
+      ]
+    },
+    {
+      "name": "奔波儿灞",
+      "order": 76,
+      "screenshot_rank": null,
+      "power": 3000,
+      "ring": 4,
+      "relative_anchor": [
+        8,
+        6
+      ],
+      "anchor": [
+        482,
+        656
+      ],
+      "distance": 10.700467279516348,
+      "four_cells": [
+        [
+          482,
+          656
+        ],
+        [
+          483,
+          656
+        ],
+        [
+          482,
+          657
+        ],
+        [
+          483,
+          657
+        ]
+      ],
+      "group": "待分组",
+      "ranking_basis": "战力",
+      "covering_flags": [
+        "F04"
+      ]
+    },
+    {
+      "name": "大耳朵图图",
+      "order": 77,
+      "screenshot_rank": null,
+      "power": 2900,
+      "ring": 4,
+      "relative_anchor": [
+        8,
+        -7
+      ],
+      "anchor": [
+        482,
+        643
+      ],
+      "distance": 10.700467279516348,
+      "four_cells": [
+        [
+          482,
+          643
+        ],
+        [
+          483,
+          643
+        ],
+        [
+          482,
+          644
+        ],
+        [
+          483,
+          644
+        ]
+      ],
+      "group": "FJG",
+      "ranking_basis": "战力",
+      "covering_flags": [
+        "F16"
+      ]
+    },
+    {
+      "name": "初学者",
+      "order": 78,
+      "screenshot_rank": null,
+      "power": 2900,
+      "ring": 4,
+      "relative_anchor": [
+        6,
+        -9
+      ],
+      "anchor": [
+        480,
+        641
+      ],
+      "distance": 10.700467279516348,
+      "four_cells": [
+        [
+          480,
+          641
+        ],
+        [
+          481,
+          641
+        ],
+        [
+          480,
+          642
+        ],
+        [
+          481,
+          642
+        ]
+      ],
+      "group": "FJG",
+      "ranking_basis": "战力",
+      "covering_flags": [
+        "F16"
+      ]
+    },
+    {
+      "name": "笨笨国王",
+      "order": 79,
+      "screenshot_rank": null,
+      "power": 2900,
+      "ring": 4,
+      "relative_anchor": [
+        -7,
+        -9
+      ],
+      "anchor": [
+        467,
+        641
+      ],
+      "distance": 10.700467279516348,
+      "four_cells": [
+        [
+          467,
+          641
+        ],
+        [
+          468,
+          641
+        ],
+        [
+          467,
+          642
+        ],
+        [
+          468,
+          642
+        ]
+      ],
+      "group": "FJG",
+      "ranking_basis": "战力",
+      "covering_flags": [
+        "F13"
+      ]
+    },
+    {
+      "name": "王者荣耀30星",
+      "order": 80,
+      "screenshot_rank": null,
+      "power": 2900,
+      "ring": 4,
+      "relative_anchor": [
+        -9,
+        -7
+      ],
+      "anchor": [
+        465,
+        643
+      ],
+      "distance": 10.700467279516348,
+      "four_cells": [
+        [
+          465,
+          643
+        ],
+        [
+          466,
+          643
+        ],
+        [
+          465,
+          644
+        ],
+        [
+          466,
+          644
+        ]
+      ],
+      "group": "OVO",
+      "ranking_basis": "战力",
+      "covering_flags": [
+        "F13"
+      ]
+    },
+    {
+      "name": "耗子尾汁",
+      "order": 81,
+      "screenshot_rank": null,
+      "power": 2900,
+      "ring": 5,
+      "relative_anchor": [
+        -11,
+        2
+      ],
+      "anchor": [
+        463,
+        652
+      ],
+      "distance": 10.793516572461451,
+      "four_cells": [
+        [
+          463,
+          652
+        ],
+        [
+          464,
+          652
+        ],
+        [
+          463,
+          653
+        ],
+        [
+          464,
+          653
+        ]
+      ],
+      "group": "OVO",
+      "ranking_basis": "战力",
+      "covering_flags": [
+        "F05"
+      ]
+    },
+    {
+      "name": "奔霸儿波",
+      "order": 82,
+      "screenshot_rank": null,
+      "power": 2900,
+      "ring": 5,
+      "relative_anchor": [
+        2,
+        10
+      ],
+      "anchor": [
+        476,
+        660
+      ],
+      "distance": 10.793516572461451,
+      "four_cells": [
+        [
+          476,
+          660
+        ],
+        [
+          477,
+          660
+        ],
+        [
+          476,
+          661
+        ],
+        [
+          477,
+          661
+        ]
+      ],
+      "group": "OVO",
+      "ranking_basis": "战力",
+      "covering_flags": [
+        "F03"
+      ]
+    },
+    {
+      "name": "无序吖",
+      "order": 83,
+      "screenshot_rank": null,
+      "power": 2800,
+      "ring": 5,
+      "relative_anchor": [
+        10,
+        -3
+      ],
+      "anchor": [
+        484,
+        647
+      ],
+      "distance": 10.793516572461451,
+      "four_cells": [
+        [
+          484,
+          647
+        ],
+        [
+          485,
+          647
+        ],
+        [
+          484,
+          648
+        ],
+        [
+          485,
+          648
+        ]
+      ],
+      "group": "OVO",
+      "ranking_basis": "战力",
+      "covering_flags": [
+        "F12"
+      ]
+    },
+    {
+      "name": "邪恶大肥猫",
+      "order": 84,
+      "screenshot_rank": null,
+      "power": 2800,
+      "ring": 5,
+      "relative_anchor": [
+        -3,
+        -11
+      ],
+      "anchor": [
+        471,
+        639
+      ],
+      "distance": 10.793516572461451,
+      "four_cells": [
+        [
+          471,
+          639
+        ],
+        [
+          472,
+          639
+        ],
+        [
+          471,
+          640
+        ],
+        [
+          472,
+          640
+        ]
+      ],
+      "group": "OVO",
+      "ranking_basis": "战力",
+      "covering_flags": [
+        "F14"
+      ]
+    },
+    {
+      "name": "伊伊说",
+      "order": 85,
+      "screenshot_rank": null,
+      "power": 2700,
+      "ring": 5,
+      "relative_anchor": [
+        -4,
+        10
+      ],
+      "anchor": [
+        470,
+        660
+      ],
+      "distance": 11.067971810589329,
+      "four_cells": [
+        [
+          470,
+          660
+        ],
+        [
+          471,
+          660
+        ],
+        [
+          470,
+          661
+        ],
+        [
+          471,
+          661
+        ]
+      ],
+      "group": "FJG",
+      "ranking_basis": "战力",
+      "covering_flags": [
+        "F02"
+      ]
+    },
+    {
+      "name": "代代王",
+      "order": 86,
+      "screenshot_rank": null,
+      "power": 2700,
+      "ring": 5,
+      "relative_anchor": [
+        10,
+        3
+      ],
+      "anchor": [
+        484,
+        653
+      ],
+      "distance": 11.067971810589329,
+      "four_cells": [
+        [
+          484,
+          653
+        ],
+        [
+          485,
+          653
+        ],
+        [
+          484,
+          654
+        ],
+        [
+          485,
+          654
+        ]
+      ],
+      "group": "FJG",
+      "ranking_basis": "战力",
+      "covering_flags": [
+        "F08"
+      ]
+    },
+    {
+      "name": "wm",
+      "order": 87,
+      "screenshot_rank": null,
+      "power": 2700,
+      "ring": 5,
+      "relative_anchor": [
+        3,
+        -11
+      ],
+      "anchor": [
+        477,
+        639
+      ],
+      "distance": 11.067971810589329,
+      "four_cells": [
+        [
+          477,
+          639
+        ],
+        [
+          478,
+          639
+        ],
+        [
+          477,
+          640
+        ],
+        [
+          478,
+          640
+        ]
+      ],
+      "group": "FJG",
+      "ranking_basis": "战力",
+      "covering_flags": [
+        "F15"
+      ]
+    },
+    {
+      "name": "长歌行",
+      "order": 88,
+      "screenshot_rank": null,
+      "power": 2700,
+      "ring": 5,
+      "relative_anchor": [
+        -11,
+        -4
+      ],
+      "anchor": [
+        463,
+        646
+      ],
+      "distance": 11.067971810589329,
+      "four_cells": [
+        [
+          463,
+          646
+        ],
+        [
+          464,
+          646
+        ],
+        [
+          463,
+          647
+        ],
+        [
+          464,
+          647
+        ]
+      ],
+      "group": "VNR",
+      "ranking_basis": "战力",
+      "covering_flags": [
+        "F09"
+      ]
+    },
+    {
+      "name": "吱吱不",
+      "order": 89,
+      "screenshot_rank": null,
+      "power": 2700,
+      "ring": 5,
+      "relative_anchor": [
+        -11,
+        4
+      ],
+      "anchor": [
+        463,
+        654
+      ],
+      "distance": 11.423659658795863,
+      "four_cells": [
+        [
+          463,
+          654
+        ],
+        [
+          464,
+          654
+        ],
+        [
+          463,
+          655
+        ],
+        [
+          464,
+          655
+        ]
+      ],
+      "group": "KUY",
+      "ranking_basis": "战力",
+      "covering_flags": [
+        "F05"
+      ]
+    },
+    {
+      "name": "添添添",
+      "order": 90,
+      "screenshot_rank": null,
+      "power": 2600,
+      "ring": 5,
+      "relative_anchor": [
+        4,
+        10
+      ],
+      "anchor": [
+        478,
+        660
+      ],
+      "distance": 11.423659658795863,
+      "four_cells": [
+        [
+          478,
+          660
+        ],
+        [
+          479,
+          660
+        ],
+        [
+          478,
+          661
+        ],
+        [
+          479,
+          661
+        ]
+      ],
+      "group": "FJG",
+      "ranking_basis": "战力",
+      "covering_flags": [
+        "F03"
+      ]
+    },
+    {
+      "name": "千帆已过",
+      "order": 91,
+      "screenshot_rank": null,
+      "power": 2600,
+      "ring": 5,
+      "relative_anchor": [
+        10,
+        -5
+      ],
+      "anchor": [
+        484,
+        645
+      ],
+      "distance": 11.423659658795863,
+      "four_cells": [
+        [
+          484,
+          645
+        ],
+        [
+          485,
+          645
+        ],
+        [
+          484,
+          646
+        ],
+        [
+          485,
+          646
+        ]
+      ],
+      "group": "FJG",
+      "ranking_basis": "战力",
+      "covering_flags": [
+        "F12"
+      ]
+    },
+    {
+      "name": "崽崽吖",
+      "order": 92,
+      "screenshot_rank": null,
+      "power": 2600,
+      "ring": 5,
+      "relative_anchor": [
+        -5,
+        -11
+      ],
+      "anchor": [
+        469,
+        639
+      ],
+      "distance": 11.423659658795863,
+      "four_cells": [
+        [
+          469,
+          639
+        ],
+        [
+          470,
+          639
+        ],
+        [
+          469,
+          640
+        ],
+        [
+          470,
+          640
+        ]
+      ],
+      "group": "OVO",
+      "ranking_basis": "战力",
+      "covering_flags": [
+        "F14"
+      ]
+    },
+    {
+      "name": "啦啦啦",
+      "order": 93,
+      "screenshot_rank": null,
+      "power": 2600,
+      "ring": 5,
+      "relative_anchor": [
+        -6,
+        10
+      ],
+      "anchor": [
+        468,
+        660
+      ],
+      "distance": 11.853269591129697,
+      "four_cells": [
+        [
+          468,
+          660
+        ],
+        [
+          469,
+          660
+        ],
+        [
+          468,
+          661
+        ],
+        [
+          469,
+          661
+        ]
+      ],
+      "group": "KUY",
+      "ranking_basis": "战力",
+      "covering_flags": [
+        "F01",
+        "F02"
+      ]
+    },
+    {
+      "name": "到不了的远方",
+      "order": 94,
+      "screenshot_rank": null,
+      "power": 2500,
+      "ring": 5,
+      "relative_anchor": [
+        10,
+        5
+      ],
+      "anchor": [
+        484,
+        655
+      ],
+      "distance": 11.853269591129697,
+      "four_cells": [
+        [
+          484,
+          655
+        ],
+        [
+          485,
+          655
+        ],
+        [
+          484,
+          656
+        ],
+        [
+          485,
+          656
+        ]
+      ],
+      "group": "OVO",
+      "ranking_basis": "战力",
+      "covering_flags": [
+        "F04",
+        "F08"
+      ]
+    },
+    {
+      "name": "小克学长",
+      "order": 95,
+      "screenshot_rank": null,
+      "power": 2500,
+      "ring": 5,
+      "relative_anchor": [
+        5,
+        -11
+      ],
+      "anchor": [
+        479,
+        639
+      ],
+      "distance": 11.853269591129697,
+      "four_cells": [
+        [
+          479,
+          639
+        ],
+        [
+          480,
+          639
+        ],
+        [
+          479,
+          640
+        ],
+        [
+          480,
+          640
+        ]
+      ],
+      "group": "OVO",
+      "ranking_basis": "战力",
+      "covering_flags": [
+        "F15",
+        "F16"
+      ]
+    },
+    {
+      "name": "哦哦哦",
+      "order": 96,
+      "screenshot_rank": null,
+      "power": 2500,
+      "ring": 5,
+      "relative_anchor": [
+        -11,
+        -6
+      ],
+      "anchor": [
+        463,
+        644
+      ],
+      "distance": 11.853269591129697,
+      "four_cells": [
+        [
+          463,
+          644
+        ],
+        [
+          464,
+          644
+        ],
+        [
+          463,
+          645
+        ],
+        [
+          464,
+          645
+        ]
+      ],
+      "group": "KUY",
+      "ranking_basis": "战力",
+      "covering_flags": [
+        "F09",
+        "F13"
+      ]
+    },
+    {
+      "name": "小潇湘",
+      "order": 97,
+      "screenshot_rank": null,
+      "power": 2400,
+      "ring": 5,
+      "relative_anchor": [
+        -11,
+        6
+      ],
+      "anchor": [
+        463,
+        656
+      ],
+      "distance": 12.349089035228468,
+      "four_cells": [
+        [
+          463,
+          656
+        ],
+        [
+          464,
+          656
+        ],
+        [
+          463,
+          657
+        ],
+        [
+          464,
+          657
+        ]
+      ],
+      "group": "OVO",
+      "ranking_basis": "战力",
+      "covering_flags": [
+        "F01"
+      ]
+    },
+    {
+      "name": "小咩吖",
+      "order": 98,
+      "screenshot_rank": null,
+      "power": 2400,
+      "ring": 5,
+      "relative_anchor": [
+        6,
+        10
+      ],
+      "anchor": [
+        480,
+        660
+      ],
+      "distance": 12.349089035228468,
+      "four_cells": [
+        [
+          480,
+          660
+        ],
+        [
+          481,
+          660
+        ],
+        [
+          480,
+          661
+        ],
+        [
+          481,
+          661
+        ]
+      ],
+      "group": "OVO",
+      "ranking_basis": "战力",
+      "covering_flags": [
+        "F04"
+      ]
+    },
+    {
+      "name": "小土豆吖",
+      "order": 99,
+      "screenshot_rank": null,
+      "power": 2400,
+      "ring": 5,
+      "relative_anchor": [
+        10,
+        -7
+      ],
+      "anchor": [
+        484,
+        643
+      ],
+      "distance": 12.349089035228468,
+      "four_cells": [
+        [
+          484,
+          643
+        ],
+        [
+          485,
+          643
+        ],
+        [
+          484,
+          644
+        ],
+        [
+          485,
+          644
+        ]
+      ],
+      "group": "OVO",
+      "ranking_basis": "战力",
+      "covering_flags": [
+        "F16"
+      ]
+    },
+    {
+      "name": "不改名",
+      "order": 100,
+      "screenshot_rank": null,
+      "power": 2400,
+      "ring": 5,
+      "relative_anchor": [
+        -7,
+        -11
+      ],
+      "anchor": [
+        467,
+        639
+      ],
+      "distance": 12.349089035228468,
+      "four_cells": [
+        [
+          467,
+          639
+        ],
+        [
+          468,
+          639
+        ],
+        [
+          467,
+          640
+        ],
+        [
+          468,
+          640
+        ]
+      ],
+      "group": "KUY",
+      "ranking_basis": "战力",
+      "covering_flags": [
+        "F13"
+      ]
+    }
+  ],
+  "validation": [
+    [
+      "名单",
+      "通过",
+      "100人、100个姓名无重复，内部排位1～100"
+    ],
+    [
+      "沿用已确认格位",
+      "通过",
+      "直接读取v4预览，不重新优化或调换格位"
+    ],
+    [
+      "四格坐标",
+      "通过",
+      "每人4个整数格坐标，共400格"
+    ],
+    [
+      "无重叠",
+      "通过",
+      "城堡之间、城堡与旗子、城堡与熊坑均不重叠"
+    ],
+    [
+      "边界",
+      "通过",
+      "所有建筑均在x=463～485、y=637～662内"
+    ],
+    [
+      "覆盖",
+      "通过",
+      "每人4格均完整处于至少一面旗子的7×7范围内"
+    ],
+    [
+      "圈宽",
+      "通过",
+      "每圈严格宽2格，每座城堡只属于一个圈"
+    ],
+    [
+      "城堡对称",
+      "通过",
+      "格位满足90度旋转对称"
+    ],
+    [
+      "旗子对称",
+      "通过",
+      "同时满足上下镜像、左右镜像、90度旋转对称"
+    ],
+    [
+      "排位与距离",
+      "通过",
+      "按成员优先级，中心到熊坑中心的距离不递减"
+    ]
+  ],
+  "image_name_counts": {
+    "100人_斜视全图.png": 100,
+    "100人_俯视坐标图.png": 100
+  }
+}

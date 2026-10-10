@@ -1,0 +1,2618 @@
+{
+  "status": "数据核对稿；昵称和人数差异待确认；尚未生成正式布局。",
+  "sorting_rule": "有截图排名的成员按原始排名升序；其余有战力的成员按战力降序；两项均缺的成员标为待补。",
+  "summary": {
+    "source_member_count": 104,
+    "red_excluded_count": 5,
+    "active_member_count": 99,
+    "user_target_member_count": 100,
+    "count_gap_to_target": 1,
+    "screenshot_observations": 65,
+    "unique_screenshot_ranks": 55,
+    "matched_ranked_members_including_candidate_aliases": 40,
+    "candidate_alias_count": 3,
+    "unranked_members_with_power": 52,
+    "members_missing_both_rank_and_power": 7,
+    "ranked_members_without_power": 8,
+    "unmatched_screenshot_names": 15,
+    "active_group_counts": {
+      "sss": 27,
+      "FJG": 21,
+      "VPH": 10,
+      "VNR": 10,
+      "OVO": 22,
+      "KUY": 9
+    }
+  },
+  "active_members": [
+    {
+      "name": "刀锋战士",
+      "group": "sss",
+      "power": 11000,
+      "original_power": 11000,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!AB3",
+      "role": "车头",
+      "source_cell": "AA3",
+      "excluded_red": false,
+      "source_order": 77,
+      "screenshot_rank": 1,
+      "screenshot_name": "[Lin]刀锋战士",
+      "match_status": "标准化匹配",
+      "provisional_order": 1
+    },
+    {
+      "name": "光风霁月",
+      "group": "FJG",
+      "power": 7000,
+      "original_power": 7000,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!C3",
+      "role": "车头",
+      "source_cell": "B3",
+      "excluded_red": false,
+      "source_order": 0,
+      "screenshot_rank": 2,
+      "screenshot_name": "[Lin]光风霁月",
+      "match_status": "标准化匹配",
+      "provisional_order": 2
+    },
+    {
+      "name": "北月啊",
+      "group": "sss",
+      "power": 8000,
+      "original_power": 8000,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!AB5",
+      "role": "车头",
+      "source_cell": "AA5",
+      "excluded_red": false,
+      "source_order": 79,
+      "screenshot_rank": 3,
+      "screenshot_name": "[SSS]北月呀",
+      "match_status": "别名暂匹配，待确认",
+      "provisional_order": 3
+    },
+    {
+      "name": "甜柴不是柴甜",
+      "group": "sss",
+      "power": 9300,
+      "original_power": 9300,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!AB4",
+      "role": "车头",
+      "source_cell": "AA4",
+      "excluded_red": false,
+      "source_order": 78,
+      "screenshot_rank": 5,
+      "screenshot_name": "[vpH]甜柴不是柴甜",
+      "match_status": "标准化匹配",
+      "provisional_order": 4
+    },
+    {
+      "name": "一岁～帅",
+      "group": "sss",
+      "power": null,
+      "original_power": null,
+      "power_source": null,
+      "role": null,
+      "source_cell": "AA7",
+      "excluded_red": false,
+      "source_order": 81,
+      "screenshot_rank": 6,
+      "screenshot_name": "[SSS]一岁~帅",
+      "match_status": "标准化匹配",
+      "provisional_order": 5
+    },
+    {
+      "name": "jennie",
+      "group": "VPH",
+      "power": 6800,
+      "original_power": 6800,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!M3",
+      "role": "车头",
+      "source_cell": "L3",
+      "excluded_red": false,
+      "source_order": 35,
+      "screenshot_rank": 7,
+      "screenshot_name": "[vpH]Jennie",
+      "match_status": "标准化匹配",
+      "provisional_order": 6
+    },
+    {
+      "name": "不会玩",
+      "group": "sss",
+      "power": 6000,
+      "original_power": 6000,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!AB11",
+      "role": null,
+      "source_cell": "AA11",
+      "excluded_red": false,
+      "source_order": 85,
+      "screenshot_rank": 8,
+      "screenshot_name": "[SSS]不会玩",
+      "match_status": "标准化匹配",
+      "provisional_order": 7
+    },
+    {
+      "name": "陈小刀",
+      "group": "sss",
+      "power": null,
+      "original_power": null,
+      "power_source": null,
+      "role": null,
+      "source_cell": "AA13",
+      "excluded_red": false,
+      "source_order": 87,
+      "screenshot_rank": 10,
+      "screenshot_name": "[SSS]陈小刀",
+      "match_status": "标准化匹配",
+      "provisional_order": 8
+    },
+    {
+      "name": "雨夜城堡",
+      "group": "VNR",
+      "power": 5800,
+      "original_power": 5800,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!H3",
+      "role": "车头",
+      "source_cell": "G3",
+      "excluded_red": false,
+      "source_order": 25,
+      "screenshot_rank": 11,
+      "screenshot_name": "[Lin]雨夜城堡",
+      "match_status": "标准化匹配",
+      "provisional_order": 9
+    },
+    {
+      "name": "抖动摩天轮",
+      "group": "VPH",
+      "power": 4900,
+      "original_power": 4900,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!M4",
+      "role": null,
+      "source_cell": "L4",
+      "excluded_red": false,
+      "source_order": 36,
+      "screenshot_rank": 13,
+      "screenshot_name": "抖动的摩天轮",
+      "match_status": "别名暂匹配，待确认",
+      "provisional_order": 10
+    },
+    {
+      "name": "茶猫九月",
+      "group": "sss",
+      "power": null,
+      "original_power": null,
+      "power_source": null,
+      "role": null,
+      "source_cell": "AA12",
+      "excluded_red": false,
+      "source_order": 86,
+      "screenshot_rank": 14,
+      "screenshot_name": "[SSS]茶猫九月",
+      "match_status": "标准化匹配",
+      "provisional_order": 11
+    },
+    {
+      "name": "赌神高进",
+      "group": "sss",
+      "power": null,
+      "original_power": null,
+      "power_source": null,
+      "role": null,
+      "source_cell": "AA20",
+      "excluded_red": false,
+      "source_order": 94,
+      "screenshot_rank": 15,
+      "screenshot_name": "[SSS]赌神高进",
+      "match_status": "标准化匹配",
+      "provisional_order": 12
+    },
+    {
+      "name": "红烧排骨",
+      "group": "sss",
+      "power": null,
+      "original_power": null,
+      "power_source": null,
+      "role": null,
+      "source_cell": "AA8",
+      "excluded_red": false,
+      "source_order": 82,
+      "screenshot_rank": 16,
+      "screenshot_name": "[SSS]红烧排骨",
+      "match_status": "标准化匹配",
+      "provisional_order": 13
+    },
+    {
+      "name": "哒哒哒一起",
+      "group": "sss",
+      "power": null,
+      "original_power": null,
+      "power_source": null,
+      "role": null,
+      "source_cell": "AA17",
+      "excluded_red": false,
+      "source_order": 91,
+      "screenshot_rank": 17,
+      "screenshot_name": "[SSS]哒哒哒一起",
+      "match_status": "标准化匹配",
+      "provisional_order": 14
+    },
+    {
+      "name": "音格尔",
+      "group": "VPH",
+      "power": 4500,
+      "original_power": 4500,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!M5",
+      "role": null,
+      "source_cell": "L5",
+      "excluded_red": false,
+      "source_order": 37,
+      "screenshot_rank": 18,
+      "screenshot_name": "[vpH]音格尔",
+      "match_status": "标准化匹配",
+      "provisional_order": 15
+    },
+    {
+      "name": "滔滔不决吖",
+      "group": "OVO",
+      "power": 3800,
+      "original_power": 3800,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!R4",
+      "role": null,
+      "source_cell": "Q4",
+      "excluded_red": false,
+      "source_order": 46,
+      "screenshot_rank": 20,
+      "screenshot_name": "[Lin]滔滔不绝@吖",
+      "match_status": "别名暂匹配，待确认",
+      "provisional_order": 16
+    },
+    {
+      "name": "悍匪唐三葬",
+      "group": "sss",
+      "power": null,
+      "original_power": null,
+      "power_source": null,
+      "role": null,
+      "source_cell": "AA19",
+      "excluded_red": false,
+      "source_order": 93,
+      "screenshot_rank": 21,
+      "screenshot_name": "[SSS]悍匪唐三葬",
+      "match_status": "标准化匹配",
+      "provisional_order": 17
+    },
+    {
+      "name": "仙水",
+      "group": "FJG",
+      "power": 4400,
+      "original_power": 4400,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!C4",
+      "role": null,
+      "source_cell": "B4",
+      "excluded_red": false,
+      "source_order": 1,
+      "screenshot_rank": 22,
+      "screenshot_name": "[Lin]仙水。",
+      "match_status": "标准化匹配",
+      "provisional_order": 18
+    },
+    {
+      "name": "看看海",
+      "group": "VNR",
+      "power": 4600,
+      "original_power": 4600,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!H4",
+      "role": null,
+      "source_cell": "G4",
+      "excluded_red": false,
+      "source_order": 26,
+      "screenshot_rank": 23,
+      "screenshot_name": "[VnR]看看海",
+      "match_status": "标准化匹配",
+      "provisional_order": 19
+    },
+    {
+      "name": "古 塵",
+      "group": "sss",
+      "power": 4100,
+      "original_power": null,
+      "power_source": "用户消息：古 4100",
+      "role": null,
+      "source_cell": "AA6",
+      "excluded_red": false,
+      "source_order": 80,
+      "screenshot_rank": 24,
+      "screenshot_name": "[SSS]古 塵",
+      "match_status": "标准化匹配",
+      "provisional_order": 20
+    },
+    {
+      "name": "可以吖",
+      "group": "OVO",
+      "power": 4200,
+      "original_power": 4200,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!R3",
+      "role": null,
+      "source_cell": "Q3",
+      "excluded_red": false,
+      "source_order": 45,
+      "screenshot_rank": 25,
+      "screenshot_name": "[Lin]可以吖",
+      "match_status": "标准化匹配",
+      "provisional_order": 21
+    },
+    {
+      "name": "安妮也",
+      "group": "sss",
+      "power": 4000,
+      "original_power": 4000,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!AB27",
+      "role": null,
+      "source_cell": "AA27",
+      "excluded_red": false,
+      "source_order": 101,
+      "screenshot_rank": 26,
+      "screenshot_name": "[Lin]安妮也",
+      "match_status": "标准化匹配",
+      "provisional_order": 22
+    },
+    {
+      "name": "曹孟德",
+      "group": "VPH",
+      "power": 4100,
+      "original_power": 4100,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!M6",
+      "role": null,
+      "source_cell": "L6",
+      "excluded_red": false,
+      "source_order": 38,
+      "screenshot_rank": 28,
+      "screenshot_name": "[vpH]曹孟德",
+      "match_status": "标准化匹配",
+      "provisional_order": 23
+    },
+    {
+      "name": "刘千亿",
+      "group": "VPH",
+      "power": 3700,
+      "original_power": 3700,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!M9",
+      "role": null,
+      "source_cell": "L9",
+      "excluded_red": false,
+      "source_order": 41,
+      "screenshot_rank": 29,
+      "screenshot_name": "[vpH]刘千亿",
+      "match_status": "标准化匹配",
+      "provisional_order": 24
+    },
+    {
+      "name": "萌动",
+      "group": "FJG",
+      "power": 3700,
+      "original_power": 3700,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!C5",
+      "role": null,
+      "source_cell": "B5",
+      "excluded_red": false,
+      "source_order": 2,
+      "screenshot_rank": 30,
+      "screenshot_name": "[Lin]萌动。",
+      "match_status": "标准化匹配",
+      "provisional_order": 25
+    },
+    {
+      "name": "诸葛村夫",
+      "group": "VPH",
+      "power": 3900,
+      "original_power": 3900,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!M7",
+      "role": null,
+      "source_cell": "L7",
+      "excluded_red": false,
+      "source_order": 39,
+      "screenshot_rank": 31,
+      "screenshot_name": "[vpH]诸葛村夫",
+      "match_status": "标准化匹配",
+      "provisional_order": 26
+    },
+    {
+      "name": "神隐浪人",
+      "group": "sss",
+      "power": null,
+      "original_power": null,
+      "power_source": null,
+      "role": null,
+      "source_cell": "AA9",
+      "excluded_red": false,
+      "source_order": 83,
+      "screenshot_rank": 32,
+      "screenshot_name": "[SSS]神隐浪人",
+      "match_status": "标准化匹配",
+      "provisional_order": 27
+    },
+    {
+      "name": "小刺猬",
+      "group": "OVO",
+      "power": 3400,
+      "original_power": 3400,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!R5",
+      "role": null,
+      "source_cell": "Q5",
+      "excluded_red": false,
+      "source_order": 47,
+      "screenshot_rank": 34,
+      "screenshot_name": "[Lin]小刺猬",
+      "match_status": "标准化匹配",
+      "provisional_order": 28
+    },
+    {
+      "name": "大令吖",
+      "group": "OVO",
+      "power": 3600,
+      "original_power": 3600,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!R16",
+      "role": null,
+      "source_cell": "Q16",
+      "excluded_red": false,
+      "source_order": 58,
+      "screenshot_rank": 35,
+      "screenshot_name": "[Lin]大令吖",
+      "match_status": "标准化匹配",
+      "provisional_order": 29
+    },
+    {
+      "name": "王麻子",
+      "group": "OVO",
+      "power": 3400,
+      "original_power": 3400,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!R19",
+      "role": null,
+      "source_cell": "Q19",
+      "excluded_red": false,
+      "source_order": 61,
+      "screenshot_rank": 36,
+      "screenshot_name": "[Lin]王麻子",
+      "match_status": "标准化匹配",
+      "provisional_order": 30
+    },
+    {
+      "name": "路慢漫",
+      "group": "sss",
+      "power": 3800,
+      "original_power": 3800,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!AB28",
+      "role": null,
+      "source_cell": "AA28",
+      "excluded_red": false,
+      "source_order": 102,
+      "screenshot_rank": 38,
+      "screenshot_name": "[Lin]路慢漫",
+      "match_status": "标准化匹配",
+      "provisional_order": 31
+    },
+    {
+      "name": "大兔子",
+      "group": "KUY",
+      "power": 4200,
+      "original_power": 4200,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!W3",
+      "role": null,
+      "source_cell": "V3",
+      "excluded_red": false,
+      "source_order": 68,
+      "screenshot_rank": 41,
+      "screenshot_name": "[AuC]大兔子",
+      "match_status": "标准化匹配",
+      "provisional_order": 32
+    },
+    {
+      "name": "L大王",
+      "group": "OVO",
+      "power": 3800,
+      "original_power": 3800,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!R20",
+      "role": null,
+      "source_cell": "Q20",
+      "excluded_red": false,
+      "source_order": 62,
+      "screenshot_rank": 43,
+      "screenshot_name": "[Lin]L大王",
+      "match_status": "标准化匹配",
+      "provisional_order": 33
+    },
+    {
+      "name": "是壮士吖",
+      "group": "OVO",
+      "power": 3400,
+      "original_power": 3400,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!R18",
+      "role": null,
+      "source_cell": "Q18",
+      "excluded_red": false,
+      "source_order": 60,
+      "screenshot_rank": 44,
+      "screenshot_name": "[Lin]是壮士吖",
+      "match_status": "标准化匹配",
+      "provisional_order": 34
+    },
+    {
+      "name": "天下吖",
+      "group": "OVO",
+      "power": 3500,
+      "original_power": 3500,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!R17",
+      "role": null,
+      "source_cell": "Q17",
+      "excluded_red": false,
+      "source_order": 59,
+      "screenshot_rank": 45,
+      "screenshot_name": "[Lin]天下吖",
+      "match_status": "标准化匹配",
+      "provisional_order": 35
+    },
+    {
+      "name": "Goya",
+      "group": "KUY",
+      "power": 4200,
+      "original_power": 4200,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!W4",
+      "role": null,
+      "source_cell": "V4",
+      "excluded_red": false,
+      "source_order": 69,
+      "screenshot_rank": 46,
+      "screenshot_name": "[Lin]Goya",
+      "match_status": "标准化匹配",
+      "provisional_order": 36
+    },
+    {
+      "name": "快乐小土匪",
+      "group": "KUY",
+      "power": 3200,
+      "original_power": 3200,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!W8",
+      "role": null,
+      "source_cell": "V8",
+      "excluded_red": false,
+      "source_order": 73,
+      "screenshot_rank": 48,
+      "screenshot_name": "[vpH]快乐小土匪",
+      "match_status": "标准化匹配",
+      "provisional_order": 37
+    },
+    {
+      "name": "鸡大王",
+      "group": "FJG",
+      "power": 3200,
+      "original_power": 3200,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!C8",
+      "role": null,
+      "source_cell": "B8",
+      "excluded_red": false,
+      "source_order": 5,
+      "screenshot_rank": 51,
+      "screenshot_name": "[Lin]鸡大王",
+      "match_status": "标准化匹配",
+      "provisional_order": 38
+    },
+    {
+      "name": "一棵大树",
+      "group": "FJG",
+      "power": 3100,
+      "original_power": 3100,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!C10",
+      "role": null,
+      "source_cell": "B10",
+      "excluded_red": false,
+      "source_order": 7,
+      "screenshot_rank": 52,
+      "screenshot_name": "[Lin]一棵大树",
+      "match_status": "标准化匹配",
+      "provisional_order": 39
+    },
+    {
+      "name": "桃子吖",
+      "group": "OVO",
+      "power": 3300,
+      "original_power": 3300,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!R6",
+      "role": null,
+      "source_cell": "Q6",
+      "excluded_red": false,
+      "source_order": 48,
+      "screenshot_rank": 53,
+      "screenshot_name": "[Lin]桃子吖",
+      "match_status": "标准化匹配",
+      "provisional_order": 40
+    },
+    {
+      "name": "肉枣酸奶",
+      "group": "VNR",
+      "power": 4000,
+      "original_power": 4000,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!H8",
+      "role": null,
+      "source_cell": "G8",
+      "excluded_red": false,
+      "source_order": 30,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名",
+      "provisional_order": 41
+    },
+    {
+      "name": "瞎闹闹",
+      "group": "sss",
+      "power": 4000,
+      "original_power": 4000,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!AB29",
+      "role": null,
+      "source_cell": "AA29",
+      "excluded_red": false,
+      "source_order": 103,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名",
+      "provisional_order": 42
+    },
+    {
+      "name": "秋叶",
+      "group": "VNR",
+      "power": 3800,
+      "original_power": 3800,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!H7",
+      "role": null,
+      "source_cell": "G7",
+      "excluded_red": false,
+      "source_order": 29,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名",
+      "provisional_order": 43
+    },
+    {
+      "name": "五十男",
+      "group": "VPH",
+      "power": 3800,
+      "original_power": 3800,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!M8",
+      "role": null,
+      "source_cell": "L8",
+      "excluded_red": false,
+      "source_order": 40,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名",
+      "provisional_order": 44
+    },
+    {
+      "name": "条野太郎",
+      "group": "FJG",
+      "power": 3700,
+      "original_power": 3700,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!C6",
+      "role": null,
+      "source_cell": "B6",
+      "excluded_red": false,
+      "source_order": 3,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名",
+      "provisional_order": 45
+    },
+    {
+      "name": "雪梨大王",
+      "group": "VNR",
+      "power": 3700,
+      "original_power": 3700,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!H5",
+      "role": null,
+      "source_cell": "G5",
+      "excluded_red": false,
+      "source_order": 27,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名",
+      "provisional_order": 46
+    },
+    {
+      "name": "边城小铁匠",
+      "group": "VNR",
+      "power": 3700,
+      "original_power": 3700,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!H10",
+      "role": null,
+      "source_cell": "G10",
+      "excluded_red": false,
+      "source_order": 32,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名",
+      "provisional_order": 47
+    },
+    {
+      "name": "兰博基牛",
+      "group": "sss",
+      "power": 3600,
+      "original_power": 3600,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!AB25",
+      "role": null,
+      "source_cell": "AA25",
+      "excluded_red": false,
+      "source_order": 99,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名",
+      "provisional_order": 48
+    },
+    {
+      "name": "七月的肖邦",
+      "group": "VNR",
+      "power": 3500,
+      "original_power": 3500,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!H12",
+      "role": null,
+      "source_cell": "G12",
+      "excluded_red": false,
+      "source_order": 34,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名",
+      "provisional_order": 49
+    },
+    {
+      "name": "1111111",
+      "group": "VPH",
+      "power": 3500,
+      "original_power": 3500,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!M10",
+      "role": null,
+      "source_cell": "L10",
+      "excluded_red": false,
+      "source_order": 42,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名",
+      "provisional_order": 50
+    },
+    {
+      "name": "念念吖",
+      "group": "OVO",
+      "power": 3500,
+      "original_power": 3500,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!R21",
+      "role": null,
+      "source_cell": "Q21",
+      "excluded_red": false,
+      "source_order": 63,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名",
+      "provisional_order": 51
+    },
+    {
+      "name": "特工冲锋",
+      "group": "sss",
+      "power": 3500,
+      "original_power": 3500,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!AB23",
+      "role": null,
+      "source_cell": "AA23",
+      "excluded_red": false,
+      "source_order": 97,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名",
+      "provisional_order": 52
+    },
+    {
+      "name": "烽烟熊大",
+      "group": "VPH",
+      "power": 3400,
+      "original_power": 3400,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!M11",
+      "role": null,
+      "source_cell": "L11",
+      "excluded_red": false,
+      "source_order": 43,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名",
+      "provisional_order": 53
+    },
+    {
+      "name": "有志则鸣",
+      "group": "VNR",
+      "power": 3300,
+      "original_power": 3300,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!H11",
+      "role": null,
+      "source_cell": "G11",
+      "excluded_red": false,
+      "source_order": 33,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名",
+      "provisional_order": 54
+    },
+    {
+      "name": "时 倾",
+      "group": "sss",
+      "power": 3300,
+      "original_power": 3300,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!AB21",
+      "role": null,
+      "source_cell": "AA21",
+      "excluded_red": false,
+      "source_order": 95,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名",
+      "provisional_order": 55
+    },
+    {
+      "name": "美式咖啡",
+      "group": "sss",
+      "power": 3300,
+      "original_power": 3300,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!AB26",
+      "role": null,
+      "source_cell": "AA26",
+      "excluded_red": false,
+      "source_order": 100,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名",
+      "provisional_order": 56
+    },
+    {
+      "name": "金圭峰",
+      "group": "FJG",
+      "power": 3200,
+      "original_power": 3200,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!C9",
+      "role": null,
+      "source_cell": "B9",
+      "excluded_red": false,
+      "source_order": 6,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名",
+      "provisional_order": 57
+    },
+    {
+      "name": "真会玩",
+      "group": "FJG",
+      "power": 3200,
+      "original_power": 3200,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!C15",
+      "role": null,
+      "source_cell": "B15",
+      "excluded_red": false,
+      "source_order": 12,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名",
+      "provisional_order": 58
+    },
+    {
+      "name": "落云代桃",
+      "group": "VNR",
+      "power": 3200,
+      "original_power": 3200,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!H6",
+      "role": null,
+      "source_cell": "G6",
+      "excluded_red": false,
+      "source_order": 28,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名",
+      "provisional_order": 59
+    },
+    {
+      "name": "梨梨大王",
+      "group": "VPH",
+      "power": 3200,
+      "original_power": 3200,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!M12",
+      "role": null,
+      "source_cell": "L12",
+      "excluded_red": false,
+      "source_order": 44,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名",
+      "provisional_order": 60
+    },
+    {
+      "name": "啫啫吖",
+      "group": "OVO",
+      "power": 3200,
+      "original_power": 3200,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!R22",
+      "role": null,
+      "source_cell": "Q22",
+      "excluded_red": false,
+      "source_order": 64,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名",
+      "provisional_order": 61
+    },
+    {
+      "name": "牛牛呀",
+      "group": "KUY",
+      "power": 3200,
+      "original_power": 3200,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!W7",
+      "role": null,
+      "source_cell": "V7",
+      "excluded_red": false,
+      "source_order": 72,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名",
+      "provisional_order": 62
+    },
+    {
+      "name": "我喜欢挖矿",
+      "group": "KUY",
+      "power": 3200,
+      "original_power": 3200,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!W11",
+      "role": null,
+      "source_cell": "V11",
+      "excluded_red": false,
+      "source_order": 76,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名",
+      "provisional_order": 63
+    },
+    {
+      "name": "消消乐",
+      "group": "FJG",
+      "power": 3100,
+      "original_power": 3100,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!C11",
+      "role": null,
+      "source_cell": "B11",
+      "excluded_red": false,
+      "source_order": 8,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名",
+      "provisional_order": 64
+    },
+    {
+      "name": "liys",
+      "group": "FJG",
+      "power": 3100,
+      "original_power": 3100,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!C12",
+      "role": null,
+      "source_cell": "B12",
+      "excluded_red": false,
+      "source_order": 9,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名",
+      "provisional_order": 65
+    },
+    {
+      "name": "延边F4",
+      "group": "FJG",
+      "power": 3100,
+      "original_power": 3100,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!C13",
+      "role": null,
+      "source_cell": "B13",
+      "excluded_red": false,
+      "source_order": 10,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名",
+      "provisional_order": 66
+    },
+    {
+      "name": "心蕊",
+      "group": "FJG",
+      "power": 3100,
+      "original_power": 3100,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!C16",
+      "role": null,
+      "source_cell": "B16",
+      "excluded_red": false,
+      "source_order": 13,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名",
+      "provisional_order": 67
+    },
+    {
+      "name": "半岛铁盒",
+      "group": "FJG",
+      "power": 3000,
+      "original_power": 3000,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!C7",
+      "role": null,
+      "source_cell": "B7",
+      "excluded_red": false,
+      "source_order": 4,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名",
+      "provisional_order": 68
+    },
+    {
+      "name": "大耳朵图图",
+      "group": "FJG",
+      "power": 2900,
+      "original_power": 2900,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!C14",
+      "role": null,
+      "source_cell": "B14",
+      "excluded_red": false,
+      "source_order": 11,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名",
+      "provisional_order": 69
+    },
+    {
+      "name": "初学者",
+      "group": "FJG",
+      "power": 2900,
+      "original_power": 2900,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!C17",
+      "role": null,
+      "source_cell": "B17",
+      "excluded_red": false,
+      "source_order": 14,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名",
+      "provisional_order": 70
+    },
+    {
+      "name": "笨笨国王",
+      "group": "FJG",
+      "power": 2900,
+      "original_power": 2900,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!C18",
+      "role": null,
+      "source_cell": "B18",
+      "excluded_red": false,
+      "source_order": 15,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名",
+      "provisional_order": 71
+    },
+    {
+      "name": "王者荣耀30星",
+      "group": "OVO",
+      "power": 2900,
+      "original_power": 2900,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!R11",
+      "role": null,
+      "source_cell": "Q11",
+      "excluded_red": false,
+      "source_order": 53,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名",
+      "provisional_order": 72
+    },
+    {
+      "name": "耗子尾汁",
+      "group": "OVO",
+      "power": 2900,
+      "original_power": 2900,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!R12",
+      "role": null,
+      "source_cell": "Q12",
+      "excluded_red": false,
+      "source_order": 54,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名",
+      "provisional_order": 73
+    },
+    {
+      "name": "奔霸儿波",
+      "group": "OVO",
+      "power": 2900,
+      "original_power": 2900,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!R15",
+      "role": null,
+      "source_cell": "Q15",
+      "excluded_red": false,
+      "source_order": 57,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名",
+      "provisional_order": 74
+    },
+    {
+      "name": "无序吖",
+      "group": "OVO",
+      "power": 2800,
+      "original_power": 2800,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!R23",
+      "role": null,
+      "source_cell": "Q23",
+      "excluded_red": false,
+      "source_order": 65,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名",
+      "provisional_order": 75
+    },
+    {
+      "name": "邪恶大肥猫",
+      "group": "OVO",
+      "power": 2800,
+      "original_power": 2800,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!R24",
+      "role": null,
+      "source_cell": "Q24",
+      "excluded_red": false,
+      "source_order": 66,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名",
+      "provisional_order": 76
+    },
+    {
+      "name": "伊伊说",
+      "group": "FJG",
+      "power": 2700,
+      "original_power": 2700,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!C20",
+      "role": null,
+      "source_cell": "B20",
+      "excluded_red": false,
+      "source_order": 17,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名",
+      "provisional_order": 77
+    },
+    {
+      "name": "代代王",
+      "group": "FJG",
+      "power": 2700,
+      "original_power": 2700,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!C21",
+      "role": null,
+      "source_cell": "B21",
+      "excluded_red": false,
+      "source_order": 18,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名",
+      "provisional_order": 78
+    },
+    {
+      "name": "wm",
+      "group": "FJG",
+      "power": 2700,
+      "original_power": 2700,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!C22",
+      "role": null,
+      "source_cell": "B22",
+      "excluded_red": false,
+      "source_order": 19,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名",
+      "provisional_order": 79
+    },
+    {
+      "name": "长歌行",
+      "group": "VNR",
+      "power": 2700,
+      "original_power": 2700,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!H9",
+      "role": null,
+      "source_cell": "G9",
+      "excluded_red": false,
+      "source_order": 31,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名",
+      "provisional_order": 80
+    },
+    {
+      "name": "吱吱不",
+      "group": "KUY",
+      "power": 2700,
+      "original_power": 2700,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!W9",
+      "role": null,
+      "source_cell": "V9",
+      "excluded_red": false,
+      "source_order": 74,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名",
+      "provisional_order": 81
+    },
+    {
+      "name": "添添添",
+      "group": "FJG",
+      "power": 2600,
+      "original_power": 2600,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!C19",
+      "role": null,
+      "source_cell": "B19",
+      "excluded_red": false,
+      "source_order": 16,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名",
+      "provisional_order": 82
+    },
+    {
+      "name": "千帆已过",
+      "group": "FJG",
+      "power": 2600,
+      "original_power": 2600,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!C23",
+      "role": null,
+      "source_cell": "B23",
+      "excluded_red": false,
+      "source_order": 20,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名",
+      "provisional_order": 83
+    },
+    {
+      "name": "崽崽吖",
+      "group": "OVO",
+      "power": 2600,
+      "original_power": 2600,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!R25",
+      "role": null,
+      "source_cell": "Q25",
+      "excluded_red": false,
+      "source_order": 67,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名",
+      "provisional_order": 84
+    },
+    {
+      "name": "啦啦啦",
+      "group": "KUY",
+      "power": 2600,
+      "original_power": 2600,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!W5",
+      "role": null,
+      "source_cell": "V5",
+      "excluded_red": false,
+      "source_order": 70,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名",
+      "provisional_order": 85
+    },
+    {
+      "name": "到不了的远方",
+      "group": "OVO",
+      "power": 2500,
+      "original_power": 2500,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!R13",
+      "role": null,
+      "source_cell": "Q13",
+      "excluded_red": false,
+      "source_order": 55,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名",
+      "provisional_order": 86
+    },
+    {
+      "name": "小克学长",
+      "group": "OVO",
+      "power": 2500,
+      "original_power": 2500,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!R14",
+      "role": null,
+      "source_cell": "Q14",
+      "excluded_red": false,
+      "source_order": 56,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名",
+      "provisional_order": 87
+    },
+    {
+      "name": "哦哦哦",
+      "group": "KUY",
+      "power": 2500,
+      "original_power": 2500,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!W6",
+      "role": null,
+      "source_cell": "V6",
+      "excluded_red": false,
+      "source_order": 71,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名",
+      "provisional_order": 88
+    },
+    {
+      "name": "小潇湘",
+      "group": "OVO",
+      "power": 2400,
+      "original_power": 2400,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!R8",
+      "role": null,
+      "source_cell": "Q8",
+      "excluded_red": false,
+      "source_order": 50,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名",
+      "provisional_order": 89
+    },
+    {
+      "name": "小咩吖",
+      "group": "OVO",
+      "power": 2400,
+      "original_power": 2400,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!R9",
+      "role": null,
+      "source_cell": "Q9",
+      "excluded_red": false,
+      "source_order": 51,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名",
+      "provisional_order": 90
+    },
+    {
+      "name": "小土豆吖",
+      "group": "OVO",
+      "power": 2400,
+      "original_power": 2400,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!R10",
+      "role": null,
+      "source_cell": "Q10",
+      "excluded_red": false,
+      "source_order": 52,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名",
+      "provisional_order": 91
+    },
+    {
+      "name": "不改名",
+      "group": "KUY",
+      "power": 2400,
+      "original_power": 2400,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!W10",
+      "role": null,
+      "source_cell": "V10",
+      "excluded_red": false,
+      "source_order": 75,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名",
+      "provisional_order": 92
+    },
+    {
+      "name": "渡鸦 1234",
+      "group": "sss",
+      "power": null,
+      "original_power": null,
+      "power_source": null,
+      "role": null,
+      "source_cell": "AA10",
+      "excluded_red": false,
+      "source_order": 84,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名",
+      "provisional_order": null
+    },
+    {
+      "name": "呆呆鱼",
+      "group": "sss",
+      "power": null,
+      "original_power": null,
+      "power_source": null,
+      "role": null,
+      "source_cell": "AA14",
+      "excluded_red": false,
+      "source_order": 88,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名",
+      "provisional_order": null
+    },
+    {
+      "name": "必胜无疑",
+      "group": "sss",
+      "power": null,
+      "original_power": null,
+      "power_source": null,
+      "role": null,
+      "source_cell": "AA15",
+      "excluded_red": false,
+      "source_order": 89,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名",
+      "provisional_order": null
+    },
+    {
+      "name": "悲伤小伍",
+      "group": "sss",
+      "power": null,
+      "original_power": null,
+      "power_source": null,
+      "role": null,
+      "source_cell": "AA16",
+      "excluded_red": false,
+      "source_order": 90,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名",
+      "provisional_order": null
+    },
+    {
+      "name": "Fat 猪是只猫",
+      "group": "sss",
+      "power": null,
+      "original_power": null,
+      "power_source": null,
+      "role": null,
+      "source_cell": "AA18",
+      "excluded_red": false,
+      "source_order": 92,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名",
+      "provisional_order": null
+    },
+    {
+      "name": "步青雲",
+      "group": "sss",
+      "power": null,
+      "original_power": null,
+      "power_source": null,
+      "role": null,
+      "source_cell": "AA22",
+      "excluded_red": false,
+      "source_order": 96,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名",
+      "provisional_order": null
+    },
+    {
+      "name": "canfly",
+      "group": "sss",
+      "power": null,
+      "original_power": null,
+      "power_source": null,
+      "role": null,
+      "source_cell": "AA24",
+      "excluded_red": false,
+      "source_order": 98,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名",
+      "provisional_order": null
+    }
+  ],
+  "excluded_members": [
+    {
+      "name": "牛蛙爱上紫苏",
+      "group": "FJG",
+      "power": 2500,
+      "original_power": 2500,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!C24",
+      "role": null,
+      "source_cell": "B24",
+      "excluded_red": true,
+      "source_order": 21,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名"
+    },
+    {
+      "name": "bob",
+      "group": "FJG",
+      "power": 2500,
+      "original_power": 2500,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!C25",
+      "role": null,
+      "source_cell": "B25",
+      "excluded_red": true,
+      "source_order": 22,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名"
+    },
+    {
+      "name": "猪与羊乐园",
+      "group": "FJG",
+      "power": 2400,
+      "original_power": 2400,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!C26",
+      "role": null,
+      "source_cell": "B26",
+      "excluded_red": true,
+      "source_order": 23,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名"
+    },
+    {
+      "name": "nanako",
+      "group": "FJG",
+      "power": 2200,
+      "original_power": 2200,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!C27",
+      "role": null,
+      "source_cell": "B27",
+      "excluded_red": true,
+      "source_order": 24,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名"
+    },
+    {
+      "name": "生之静美吖",
+      "group": "OVO",
+      "power": 1900,
+      "original_power": 1900,
+      "power_source": "复仇者联盟统计表.xlsx!工作表1!R7",
+      "role": null,
+      "source_cell": "Q7",
+      "excluded_red": true,
+      "source_order": 49,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名"
+    }
+  ],
+  "screenshot_ranks": [
+    {
+      "rank": 1,
+      "raw_name": "[Lin]刀锋战士",
+      "stage": "25-10",
+      "sources": [
+        "战力1.jpg"
+      ],
+      "matched_member": "刀锋战士",
+      "match_status": "标准化匹配",
+      "transcription_note": ""
+    },
+    {
+      "rank": 2,
+      "raw_name": "[Lin]光风霁月",
+      "stage": "25-9",
+      "sources": [
+        "战力1.jpg"
+      ],
+      "matched_member": "光风霁月",
+      "match_status": "标准化匹配",
+      "transcription_note": ""
+    },
+    {
+      "rank": 3,
+      "raw_name": "[SSS]北月呀",
+      "stage": "22-9",
+      "sources": [
+        "战力1.jpg"
+      ],
+      "matched_member": "北月啊",
+      "match_status": "别名暂匹配，待确认",
+      "transcription_note": ""
+    },
+    {
+      "rank": 4,
+      "raw_name": "鹏鹏大人",
+      "stage": "22-9",
+      "sources": [
+        "战力1.jpg"
+      ],
+      "matched_member": null,
+      "match_status": "成员表未找到",
+      "transcription_note": ""
+    },
+    {
+      "rank": 5,
+      "raw_name": "[vpH]甜柴不是柴甜",
+      "stage": "22-4",
+      "sources": [
+        "战力1.jpg"
+      ],
+      "matched_member": "甜柴不是柴甜",
+      "match_status": "标准化匹配",
+      "transcription_note": ""
+    },
+    {
+      "rank": 6,
+      "raw_name": "[SSS]一岁~帅",
+      "stage": "22-4",
+      "sources": [
+        "战力1.jpg"
+      ],
+      "matched_member": "一岁～帅",
+      "match_status": "标准化匹配",
+      "transcription_note": ""
+    },
+    {
+      "rank": 7,
+      "raw_name": "[vpH]Jennie",
+      "stage": "21-4",
+      "sources": [
+        "战力1.jpg"
+      ],
+      "matched_member": "jennie",
+      "match_status": "标准化匹配",
+      "transcription_note": ""
+    },
+    {
+      "rank": 8,
+      "raw_name": "[SSS]不会玩",
+      "stage": "20-4",
+      "sources": [
+        "战力1.jpg"
+      ],
+      "matched_member": "不会玩",
+      "match_status": "标准化匹配",
+      "transcription_note": ""
+    },
+    {
+      "rank": 9,
+      "raw_name": "[AuC]老爷子",
+      "stage": "19-9",
+      "sources": [
+        "战力1.jpg",
+        "4844.jpg"
+      ],
+      "matched_member": null,
+      "match_status": "成员表未找到",
+      "transcription_note": ""
+    },
+    {
+      "rank": 10,
+      "raw_name": "[SSS]陈小刀",
+      "stage": "19-4",
+      "sources": [
+        "4844.jpg"
+      ],
+      "matched_member": "陈小刀",
+      "match_status": "标准化匹配",
+      "transcription_note": ""
+    },
+    {
+      "rank": 11,
+      "raw_name": "[Lin]雨夜城堡",
+      "stage": "19-4",
+      "sources": [
+        "4844.jpg"
+      ],
+      "matched_member": "雨夜城堡",
+      "match_status": "标准化匹配",
+      "transcription_note": ""
+    },
+    {
+      "rank": 12,
+      "raw_name": "雨落情长",
+      "stage": "18-4",
+      "sources": [
+        "4844.jpg"
+      ],
+      "matched_member": null,
+      "match_status": "成员表未找到",
+      "transcription_note": ""
+    },
+    {
+      "rank": 13,
+      "raw_name": "抖动的摩天轮",
+      "stage": "18-4",
+      "sources": [
+        "4844.jpg"
+      ],
+      "matched_member": "抖动摩天轮",
+      "match_status": "别名暂匹配，待确认",
+      "transcription_note": ""
+    },
+    {
+      "rank": 14,
+      "raw_name": "[SSS]茶猫九月",
+      "stage": "17-9",
+      "sources": [
+        "4844.jpg"
+      ],
+      "matched_member": "茶猫九月",
+      "match_status": "标准化匹配",
+      "transcription_note": ""
+    },
+    {
+      "rank": 15,
+      "raw_name": "[SSS]赌神高进",
+      "stage": "17-4",
+      "sources": [
+        "4844.jpg"
+      ],
+      "matched_member": "赌神高进",
+      "match_status": "标准化匹配",
+      "transcription_note": ""
+    },
+    {
+      "rank": 16,
+      "raw_name": "[SSS]红烧排骨",
+      "stage": "17-4",
+      "sources": [
+        "4844.jpg"
+      ],
+      "matched_member": "红烧排骨",
+      "match_status": "标准化匹配",
+      "transcription_note": ""
+    },
+    {
+      "rank": 17,
+      "raw_name": "[SSS]哒哒哒一起",
+      "stage": "16-4",
+      "sources": [
+        "4844.jpg",
+        "微信图片_20261009164854.jpg"
+      ],
+      "matched_member": "哒哒哒一起",
+      "match_status": "标准化匹配",
+      "transcription_note": ""
+    },
+    {
+      "rank": 18,
+      "raw_name": "[vpH]音格尔",
+      "stage": "15-9",
+      "sources": [
+        "微信图片_20261009164854.jpg"
+      ],
+      "matched_member": "音格尔",
+      "match_status": "标准化匹配",
+      "transcription_note": ""
+    },
+    {
+      "rank": 19,
+      "raw_name": "小謾崽",
+      "stage": "15-4",
+      "sources": [
+        "微信图片_20261009164854.jpg"
+      ],
+      "matched_member": null,
+      "match_status": "成员表未找到",
+      "transcription_note": "昵称暂读作“小謾崽”，生僻字待核；成员表无对应项。"
+    },
+    {
+      "rank": 20,
+      "raw_name": "[Lin]滔滔不绝@吖",
+      "stage": "15-4",
+      "sources": [
+        "战力1.jpg",
+        "4844.jpg",
+        "微信图片_20261009164854.jpg",
+        "微信图片_20261009164900.jpg",
+        "微信图片_20261009164913.jpg",
+        "微信图片_20261009164918.jpg",
+        "微信图片_20261009164924.jpg"
+      ],
+      "matched_member": "滔滔不决吖",
+      "match_status": "别名暂匹配，待确认",
+      "transcription_note": "截图中的昵称末尾有装饰字符，按“滔滔不绝@吖”记录；与成员表“滔滔不决吖”的对应待确认。"
+    },
+    {
+      "rank": 21,
+      "raw_name": "[SSS]悍匪唐三葬",
+      "stage": "15-4",
+      "sources": [
+        "微信图片_20261009164854.jpg"
+      ],
+      "matched_member": "悍匪唐三葬",
+      "match_status": "标准化匹配",
+      "transcription_note": ""
+    },
+    {
+      "rank": 22,
+      "raw_name": "[Lin]仙水。",
+      "stage": "14-9",
+      "sources": [
+        "微信图片_20261009164854.jpg"
+      ],
+      "matched_member": "仙水",
+      "match_status": "标准化匹配",
+      "transcription_note": ""
+    },
+    {
+      "rank": 23,
+      "raw_name": "[VnR]看看海",
+      "stage": "14-9",
+      "sources": [
+        "微信图片_20261009164854.jpg"
+      ],
+      "matched_member": "看看海",
+      "match_status": "标准化匹配",
+      "transcription_note": ""
+    },
+    {
+      "rank": 24,
+      "raw_name": "[SSS]古 塵",
+      "stage": "14-9",
+      "sources": [
+        "微信图片_20261009164854.jpg"
+      ],
+      "matched_member": "古 塵",
+      "match_status": "标准化匹配",
+      "transcription_note": ""
+    },
+    {
+      "rank": 25,
+      "raw_name": "[Lin]可以吖",
+      "stage": "14-9",
+      "sources": [
+        "微信图片_20261009164900.jpg"
+      ],
+      "matched_member": "可以吖",
+      "match_status": "标准化匹配",
+      "transcription_note": ""
+    },
+    {
+      "rank": 26,
+      "raw_name": "[Lin]安妮也",
+      "stage": "14-9",
+      "sources": [
+        "微信图片_20261009164900.jpg"
+      ],
+      "matched_member": "安妮也",
+      "match_status": "标准化匹配",
+      "transcription_note": ""
+    },
+    {
+      "rank": 27,
+      "raw_name": "[eUM]花木溪",
+      "stage": "14-9",
+      "sources": [
+        "微信图片_20261009164900.jpg"
+      ],
+      "matched_member": null,
+      "match_status": "成员表未找到",
+      "transcription_note": ""
+    },
+    {
+      "rank": 28,
+      "raw_name": "[vpH]曹孟德",
+      "stage": "14-4",
+      "sources": [
+        "微信图片_20261009164900.jpg"
+      ],
+      "matched_member": "曹孟德",
+      "match_status": "标准化匹配",
+      "transcription_note": ""
+    },
+    {
+      "rank": 29,
+      "raw_name": "[vpH]刘千亿",
+      "stage": "13-10",
+      "sources": [
+        "微信图片_20261009164900.jpg"
+      ],
+      "matched_member": "刘千亿",
+      "match_status": "标准化匹配",
+      "transcription_note": ""
+    },
+    {
+      "rank": 30,
+      "raw_name": "[Lin]萌动。",
+      "stage": "13-9",
+      "sources": [
+        "微信图片_20261009164900.jpg"
+      ],
+      "matched_member": "萌动",
+      "match_status": "标准化匹配",
+      "transcription_note": ""
+    },
+    {
+      "rank": 31,
+      "raw_name": "[vpH]诸葛村夫",
+      "stage": "13-9",
+      "sources": [
+        "微信图片_20261009164900.jpg"
+      ],
+      "matched_member": "诸葛村夫",
+      "match_status": "标准化匹配",
+      "transcription_note": ""
+    },
+    {
+      "rank": 32,
+      "raw_name": "[SSS]神隐浪人",
+      "stage": "13-4",
+      "sources": [
+        "微信图片_20261009164900.jpg",
+        "微信图片_20261009164913.jpg"
+      ],
+      "matched_member": "神隐浪人",
+      "match_status": "标准化匹配",
+      "transcription_note": ""
+    },
+    {
+      "rank": 33,
+      "raw_name": "[eUM]起源111",
+      "stage": "13-4",
+      "sources": [
+        "微信图片_20261009164913.jpg"
+      ],
+      "matched_member": null,
+      "match_status": "成员表未找到",
+      "transcription_note": ""
+    },
+    {
+      "rank": 34,
+      "raw_name": "[Lin]小刺猬",
+      "stage": "13-4",
+      "sources": [
+        "微信图片_20261009164913.jpg"
+      ],
+      "matched_member": "小刺猬",
+      "match_status": "标准化匹配",
+      "transcription_note": ""
+    },
+    {
+      "rank": 35,
+      "raw_name": "[Lin]大令吖",
+      "stage": "13-4",
+      "sources": [
+        "微信图片_20261009164913.jpg"
+      ],
+      "matched_member": "大令吖",
+      "match_status": "标准化匹配",
+      "transcription_note": ""
+    },
+    {
+      "rank": 36,
+      "raw_name": "[Lin]王麻子",
+      "stage": "13-4",
+      "sources": [
+        "微信图片_20261009164913.jpg"
+      ],
+      "matched_member": "王麻子",
+      "match_status": "标准化匹配",
+      "transcription_note": ""
+    },
+    {
+      "rank": 37,
+      "raw_name": "[OVO]夜幕吖",
+      "stage": "13-4",
+      "sources": [
+        "微信图片_20261009164913.jpg"
+      ],
+      "matched_member": null,
+      "match_status": "成员表未找到",
+      "transcription_note": ""
+    },
+    {
+      "rank": 38,
+      "raw_name": "[Lin]路慢漫",
+      "stage": "13-4",
+      "sources": [
+        "微信图片_20261009164913.jpg"
+      ],
+      "matched_member": "路慢漫",
+      "match_status": "标准化匹配",
+      "transcription_note": ""
+    },
+    {
+      "rank": 39,
+      "raw_name": "[VnR]晨小晨",
+      "stage": "13-4",
+      "sources": [
+        "微信图片_20261009164913.jpg",
+        "微信图片_20261009164918.jpg"
+      ],
+      "matched_member": null,
+      "match_status": "成员表未找到",
+      "transcription_note": ""
+    },
+    {
+      "rank": 40,
+      "raw_name": "[SSS]GoDoG",
+      "stage": "13-4",
+      "sources": [
+        "微信图片_20261009164918.jpg"
+      ],
+      "matched_member": null,
+      "match_status": "成员表未找到",
+      "transcription_note": ""
+    },
+    {
+      "rank": 41,
+      "raw_name": "[AuC]大兔子",
+      "stage": "13-4",
+      "sources": [
+        "微信图片_20261009164918.jpg"
+      ],
+      "matched_member": "大兔子",
+      "match_status": "标准化匹配",
+      "transcription_note": ""
+    },
+    {
+      "rank": 42,
+      "raw_name": "[eUM]千里江河",
+      "stage": "13-4",
+      "sources": [
+        "微信图片_20261009164918.jpg"
+      ],
+      "matched_member": null,
+      "match_status": "成员表未找到",
+      "transcription_note": ""
+    },
+    {
+      "rank": 43,
+      "raw_name": "[Lin]L大王",
+      "stage": "13-4",
+      "sources": [
+        "微信图片_20261009164918.jpg"
+      ],
+      "matched_member": "L大王",
+      "match_status": "标准化匹配",
+      "transcription_note": ""
+    },
+    {
+      "rank": 44,
+      "raw_name": "[Lin]是壮士吖",
+      "stage": "13-4",
+      "sources": [
+        "微信图片_20261009164918.jpg"
+      ],
+      "matched_member": "是壮士吖",
+      "match_status": "标准化匹配",
+      "transcription_note": ""
+    },
+    {
+      "rank": 45,
+      "raw_name": "[Lin]天下吖",
+      "stage": "13-4",
+      "sources": [
+        "微信图片_20261009164918.jpg"
+      ],
+      "matched_member": "天下吖",
+      "match_status": "标准化匹配",
+      "transcription_note": ""
+    },
+    {
+      "rank": 46,
+      "raw_name": "[Lin]Goya",
+      "stage": "13-4",
+      "sources": [
+        "微信图片_20261009164918.jpg"
+      ],
+      "matched_member": "Goya",
+      "match_status": "标准化匹配",
+      "transcription_note": ""
+    },
+    {
+      "rank": 47,
+      "raw_name": "万国福地",
+      "stage": "13-4",
+      "sources": [
+        "微信图片_20261009164918.jpg"
+      ],
+      "matched_member": null,
+      "match_status": "成员表未找到",
+      "transcription_note": ""
+    },
+    {
+      "rank": 48,
+      "raw_name": "[vpH]快乐小土匪",
+      "stage": "12-9",
+      "sources": [
+        "微信图片_20261009164924.jpg"
+      ],
+      "matched_member": "快乐小土匪",
+      "match_status": "标准化匹配",
+      "transcription_note": ""
+    },
+    {
+      "rank": 49,
+      "raw_name": "[SSS]黑芝麻糊",
+      "stage": "12-9",
+      "sources": [
+        "微信图片_20261009164924.jpg"
+      ],
+      "matched_member": null,
+      "match_status": "成员表未找到",
+      "transcription_note": ""
+    },
+    {
+      "rank": 50,
+      "raw_name": "[QYM]宁采臣",
+      "stage": "12-9",
+      "sources": [
+        "微信图片_20261009164924.jpg"
+      ],
+      "matched_member": null,
+      "match_status": "成员表未找到",
+      "transcription_note": ""
+    },
+    {
+      "rank": 51,
+      "raw_name": "[Lin]鸡大王",
+      "stage": "12-9",
+      "sources": [
+        "微信图片_20261009164924.jpg"
+      ],
+      "matched_member": "鸡大王",
+      "match_status": "标准化匹配",
+      "transcription_note": ""
+    },
+    {
+      "rank": 52,
+      "raw_name": "[Lin]一棵大树",
+      "stage": "12-9",
+      "sources": [
+        "微信图片_20261009164924.jpg"
+      ],
+      "matched_member": "一棵大树",
+      "match_status": "标准化匹配",
+      "transcription_note": ""
+    },
+    {
+      "rank": 53,
+      "raw_name": "[Lin]桃子吖",
+      "stage": "12-9",
+      "sources": [
+        "微信图片_20261009164924.jpg"
+      ],
+      "matched_member": "桃子吖",
+      "match_status": "标准化匹配",
+      "transcription_note": ""
+    },
+    {
+      "rank": 54,
+      "raw_name": "[eUM]肝肝肝",
+      "stage": "12-9",
+      "sources": [
+        "微信图片_20261009164924.jpg"
+      ],
+      "matched_member": null,
+      "match_status": "成员表未找到",
+      "transcription_note": ""
+    },
+    {
+      "rank": 55,
+      "raw_name": "大王驾到",
+      "stage": "12-9",
+      "sources": [
+        "微信图片_20261009164924.jpg"
+      ],
+      "matched_member": null,
+      "match_status": "成员表未找到",
+      "transcription_note": ""
+    }
+  ],
+  "needs_power_or_rank": [
+    {
+      "name": "渡鸦 1234",
+      "group": "sss",
+      "power": null,
+      "original_power": null,
+      "power_source": null,
+      "role": null,
+      "source_cell": "AA10",
+      "excluded_red": false,
+      "source_order": 84,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名",
+      "provisional_order": null
+    },
+    {
+      "name": "呆呆鱼",
+      "group": "sss",
+      "power": null,
+      "original_power": null,
+      "power_source": null,
+      "role": null,
+      "source_cell": "AA14",
+      "excluded_red": false,
+      "source_order": 88,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名",
+      "provisional_order": null
+    },
+    {
+      "name": "必胜无疑",
+      "group": "sss",
+      "power": null,
+      "original_power": null,
+      "power_source": null,
+      "role": null,
+      "source_cell": "AA15",
+      "excluded_red": false,
+      "source_order": 89,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名",
+      "provisional_order": null
+    },
+    {
+      "name": "悲伤小伍",
+      "group": "sss",
+      "power": null,
+      "original_power": null,
+      "power_source": null,
+      "role": null,
+      "source_cell": "AA16",
+      "excluded_red": false,
+      "source_order": 90,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名",
+      "provisional_order": null
+    },
+    {
+      "name": "Fat 猪是只猫",
+      "group": "sss",
+      "power": null,
+      "original_power": null,
+      "power_source": null,
+      "role": null,
+      "source_cell": "AA18",
+      "excluded_red": false,
+      "source_order": 92,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名",
+      "provisional_order": null
+    },
+    {
+      "name": "步青雲",
+      "group": "sss",
+      "power": null,
+      "original_power": null,
+      "power_source": null,
+      "role": null,
+      "source_cell": "AA22",
+      "excluded_red": false,
+      "source_order": 96,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名",
+      "provisional_order": null
+    },
+    {
+      "name": "canfly",
+      "group": "sss",
+      "power": null,
+      "original_power": null,
+      "power_source": null,
+      "role": null,
+      "source_cell": "AA24",
+      "excluded_red": false,
+      "source_order": 98,
+      "screenshot_rank": null,
+      "screenshot_name": null,
+      "match_status": "无截图排名",
+      "provisional_order": null
+    }
+  ],
+  "ranked_without_power": [
+    {
+      "name": "一岁～帅",
+      "group": "sss",
+      "power": null,
+      "original_power": null,
+      "power_source": null,
+      "role": null,
+      "source_cell": "AA7",
+      "excluded_red": false,
+      "source_order": 81,
+      "screenshot_rank": 6,
+      "screenshot_name": "[SSS]一岁~帅",
+      "match_status": "标准化匹配",
+      "provisional_order": 5
+    },
+    {
+      "name": "陈小刀",
+      "group": "sss",
+      "power": null,
+      "original_power": null,
+      "power_source": null,
+      "role": null,
+      "source_cell": "AA13",
+      "excluded_red": false,
+      "source_order": 87,
+      "screenshot_rank": 10,
+      "screenshot_name": "[SSS]陈小刀",
+      "match_status": "标准化匹配",
+      "provisional_order": 8
+    },
+    {
+      "name": "茶猫九月",
+      "group": "sss",
+      "power": null,
+      "original_power": null,
+      "power_source": null,
+      "role": null,
+      "source_cell": "AA12",
+      "excluded_red": false,
+      "source_order": 86,
+      "screenshot_rank": 14,
+      "screenshot_name": "[SSS]茶猫九月",
+      "match_status": "标准化匹配",
+      "provisional_order": 11
+    },
+    {
+      "name": "赌神高进",
+      "group": "sss",
+      "power": null,
+      "original_power": null,
+      "power_source": null,
+      "role": null,
+      "source_cell": "AA20",
+      "excluded_red": false,
+      "source_order": 94,
+      "screenshot_rank": 15,
+      "screenshot_name": "[SSS]赌神高进",
+      "match_status": "标准化匹配",
+      "provisional_order": 12
+    },
+    {
+      "name": "红烧排骨",
+      "group": "sss",
+      "power": null,
+      "original_power": null,
+      "power_source": null,
+      "role": null,
+      "source_cell": "AA8",
+      "excluded_red": false,
+      "source_order": 82,
+      "screenshot_rank": 16,
+      "screenshot_name": "[SSS]红烧排骨",
+      "match_status": "标准化匹配",
+      "provisional_order": 13
+    },
+    {
+      "name": "哒哒哒一起",
+      "group": "sss",
+      "power": null,
+      "original_power": null,
+      "power_source": null,
+      "role": null,
+      "source_cell": "AA17",
+      "excluded_red": false,
+      "source_order": 91,
+      "screenshot_rank": 17,
+      "screenshot_name": "[SSS]哒哒哒一起",
+      "match_status": "标准化匹配",
+      "provisional_order": 14
+    },
+    {
+      "name": "悍匪唐三葬",
+      "group": "sss",
+      "power": null,
+      "original_power": null,
+      "power_source": null,
+      "role": null,
+      "source_cell": "AA19",
+      "excluded_red": false,
+      "source_order": 93,
+      "screenshot_rank": 21,
+      "screenshot_name": "[SSS]悍匪唐三葬",
+      "match_status": "标准化匹配",
+      "provisional_order": 17
+    },
+    {
+      "name": "神隐浪人",
+      "group": "sss",
+      "power": null,
+      "original_power": null,
+      "power_source": null,
+      "role": null,
+      "source_cell": "AA9",
+      "excluded_red": false,
+      "source_order": 83,
+      "screenshot_rank": 32,
+      "screenshot_name": "[SSS]神隐浪人",
+      "match_status": "标准化匹配",
+      "provisional_order": 27
+    }
+  ],
+  "unmatched_screenshot_names": [
+    {
+      "rank": 4,
+      "raw_name": "鹏鹏大人",
+      "stage": "22-9",
+      "sources": [
+        "战力1.jpg"
+      ],
+      "matched_member": null,
+      "match_status": "成员表未找到",
+      "transcription_note": ""
+    },
+    {
+      "rank": 9,
+      "raw_name": "[AuC]老爷子",
+      "stage": "19-9",
+      "sources": [
+        "战力1.jpg",
+        "4844.jpg"
+      ],
+      "matched_member": null,
+      "match_status": "成员表未找到",
+      "transcription_note": ""
+    },
+    {
+      "rank": 12,
+      "raw_name": "雨落情长",
+      "stage": "18-4",
+      "sources": [
+        "4844.jpg"
+      ],
+      "matched_member": null,
+      "match_status": "成员表未找到",
+      "transcription_note": ""
+    },
+    {
+      "rank": 19,
+      "raw_name": "小謾崽",
+      "stage": "15-4",
+      "sources": [
+        "微信图片_20261009164854.jpg"
+      ],
+      "matched_member": null,
+      "match_status": "成员表未找到",
+      "transcription_note": "昵称暂读作“小謾崽”，生僻字待核；成员表无对应项。"
+    },
+    {
+      "rank": 27,
+      "raw_name": "[eUM]花木溪",
+      "stage": "14-9",
+      "sources": [
+        "微信图片_20261009164900.jpg"
+      ],
+      "matched_member": null,
+      "match_status": "成员表未找到",
+      "transcription_note": ""
+    },
+    {
+      "rank": 33,
+      "raw_name": "[eUM]起源111",
+      "stage": "13-4",
+      "sources": [
+        "微信图片_20261009164913.jpg"
+      ],
+      "matched_member": null,
+      "match_status": "成员表未找到",
+      "transcription_note": ""
+    },
+    {
+      "rank": 37,
+      "raw_name": "[OVO]夜幕吖",
+      "stage": "13-4",
+      "sources": [
+        "微信图片_20261009164913.jpg"
+      ],
+      "matched_member": null,
+      "match_status": "成员表未找到",
+      "transcription_note": ""
+    },
+    {
+      "rank": 39,
+      "raw_name": "[VnR]晨小晨",
+      "stage": "13-4",
+      "sources": [
+        "微信图片_20261009164913.jpg",
+        "微信图片_20261009164918.jpg"
+      ],
+      "matched_member": null,
+      "match_status": "成员表未找到",
+      "transcription_note": ""
+    },
+    {
+      "rank": 40,
+      "raw_name": "[SSS]GoDoG",
+      "stage": "13-4",
+      "sources": [
+        "微信图片_20261009164918.jpg"
+      ],
+      "matched_member": null,
+      "match_status": "成员表未找到",
+      "transcription_note": ""
+    },
+    {
+      "rank": 42,
+      "raw_name": "[eUM]千里江河",
+      "stage": "13-4",
+      "sources": [
+        "微信图片_20261009164918.jpg"
+      ],
+      "matched_member": null,
+      "match_status": "成员表未找到",
+      "transcription_note": ""
+    },
+    {
+      "rank": 47,
+      "raw_name": "万国福地",
+      "stage": "13-4",
+      "sources": [
+        "微信图片_20261009164918.jpg"
+      ],
+      "matched_member": null,
+      "match_status": "成员表未找到",
+      "transcription_note": ""
+    },
+    {
+      "rank": 49,
+      "raw_name": "[SSS]黑芝麻糊",
+      "stage": "12-9",
+      "sources": [
+        "微信图片_20261009164924.jpg"
+      ],
+      "matched_member": null,
+      "match_status": "成员表未找到",
+      "transcription_note": ""
+    },
+    {
+      "rank": 50,
+      "raw_name": "[QYM]宁采臣",
+      "stage": "12-9",
+      "sources": [
+        "微信图片_20261009164924.jpg"
+      ],
+      "matched_member": null,
+      "match_status": "成员表未找到",
+      "transcription_note": ""
+    },
+    {
+      "rank": 54,
+      "raw_name": "[eUM]肝肝肝",
+      "stage": "12-9",
+      "sources": [
+        "微信图片_20261009164924.jpg"
+      ],
+      "matched_member": null,
+      "match_status": "成员表未找到",
+      "transcription_note": ""
+    },
+    {
+      "rank": 55,
+      "raw_name": "大王驾到",
+      "stage": "12-9",
+      "sources": [
+        "微信图片_20261009164924.jpg"
+      ],
+      "matched_member": null,
+      "match_status": "成员表未找到",
+      "transcription_note": ""
+    }
+  ],
+  "candidate_aliases": [
+    {
+      "screenshot_name": "北月呀",
+      "member_name": "北月啊",
+      "confirmed": false
+    },
+    {
+      "screenshot_name": "抖动的摩天轮",
+      "member_name": "抖动摩天轮",
+      "confirmed": false
+    },
+    {
+      "screenshot_name": "滔滔不绝@吖",
+      "member_name": "滔滔不决吖",
+      "confirmed": false
+    }
+  ]
+}

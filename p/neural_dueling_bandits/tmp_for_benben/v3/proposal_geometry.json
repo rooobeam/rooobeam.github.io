@@ -1,0 +1,134 @@
+{
+  "status": "仅供制作前核对；不是正式100人格位分配",
+  "range_inclusive": {
+    "x": [
+      463,
+      485
+    ],
+    "y": [
+      637,
+      662
+    ]
+  },
+  "grid_size": [
+    23,
+    26
+  ],
+  "bear_center": [
+    474,
+    650
+  ],
+  "bear_cells": [
+    [
+      473,
+      649
+    ],
+    [
+      473,
+      650
+    ],
+    [
+      473,
+      651
+    ],
+    [
+      474,
+      649
+    ],
+    [
+      474,
+      650
+    ],
+    [
+      474,
+      651
+    ],
+    [
+      475,
+      649
+    ],
+    [
+      475,
+      650
+    ],
+    [
+      475,
+      651
+    ]
+  ],
+  "flag_positions": [
+    [
+      466,
+      641
+    ],
+    [
+      466,
+      647
+    ],
+    [
+      466,
+      653
+    ],
+    [
+      466,
+      659
+    ],
+    [
+      471,
+      641
+    ],
+    [
+      471,
+      647
+    ],
+    [
+      471,
+      653
+    ],
+    [
+      471,
+      659
+    ],
+    [
+      477,
+      641
+    ],
+    [
+      477,
+      647
+    ],
+    [
+      477,
+      653
+    ],
+    [
+      477,
+      659
+    ],
+    [
+      482,
+      641
+    ],
+    [
+      482,
+      647
+    ],
+    [
+      482,
+      653
+    ],
+    [
+      482,
+      659
+    ]
+  ],
+  "flag_count": 16,
+  "flag_reflection_symmetry_x_and_y": true,
+  "castle_coverage_rule": "2×2全部四格均落在至少一面旗子的7×7范围内",
+  "covered_cell_count": 575,
+  "feasible_capacity_with_four_style_samples": 118,
+  "solver_proved_maximum_for_this_fixed_flag_array": true,
+  "capacity_satisfies_100": true,
+  "final_layout_approved": false,
+  "sample_names_are_final_positions": false
+}
