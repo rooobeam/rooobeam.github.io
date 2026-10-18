@@ -1,0 +1,1016 @@
+
+
+## 3.0
+
+算法表格
+
+<img src=".\算法表.png" alt="算法表" style="zoom:37%;" />
+
+## 3.1
+
+这一节要推导的是：**为什么根据用户的比较反馈估计参数，会得到“二分类交叉熵损失 + $L_2$ 正则项”。**Clean_Proof_for_Dueling_Bandits.pdf
+
+现在站在第 $t$ 轮开始时，已经收集了前 $t-1$ 轮反馈。我们要利用这些历史数据，求出 $\hat\theta_t$。
+
+**1. 先写出一次比较的概率模型。**
+
+对于任意待估计参数 $\theta$，候选 $x$ 的效用为：
+
+$$
+f_\theta(x)=\langle\theta,x\rangle.
+$$
+
+第 $s$ 轮比较 $x_{s,1}$ 和 $x_{s,2}$，两者的效用差为：
+
+$$
+\begin{aligned}
+\Delta_s(\theta)
+&=f_\theta(x_{s,1})-f_\theta(x_{s,2})\\
+&=\langle\theta,x_{s,1}-x_{s,2}\rangle\\
+&=\langle\theta,\tilde x_s\rangle.
+\end{aligned}
+$$
+
+BTL 模型假设，用户选择第一个候选的概率为：
+
+$$
+P(y_s=1\mid\mathcal F_{s-1};\theta)
+=\mu(\Delta_s(\theta)),
+\qquad
+\mu(z)=\frac{1}{1+e^{-z}}.
+$$
+
+$\mathcal F_{s-1}$ 表示此前已知的信息。这里把本轮选定的比较对象视为已知。
+
+效用差越大，选择第一个的概率越大；效用差为 $0$ 时，两者各有 $0.5$ 的概率被选中。相应地：
+
+$$
+P(y_s=0\mid\mathcal F_{s-1};\theta)
+=1-\mu(\Delta_s(\theta)).
+$$
+
+**2. 把两种反馈合并成一个表达式。**
+
+因为 $y_s$ 只有 $0$ 和 $1$，可以写成：
+
+$$
+p(y_s\mid\mathcal F_{s-1};\theta)
+=
+\mu(\Delta_s(\theta))^{y_s}
+\left[1-\mu(\Delta_s(\theta))\right]^{1-y_s}.
+$$
+
+两个指数起到“选择对应概率”的作用：
+
+| 实际反馈 | 代入后的表达式 |
+|---|---|
+| $y_s=1$ | $\mu(\Delta_s(\theta))^1[1-\mu(\Delta_s(\theta))]^0=\mu(\Delta_s(\theta))$ |
+| $y_s=0$ | $\mu(\Delta_s(\theta))^0[1-\mu(\Delta_s(\theta))]^1=1-\mu(\Delta_s(\theta))$ |
+
+**当反馈已经观察到并固定下来，$\theta$ 是待调整的变量时，这个表达式就是关于 $\theta$ 的似然函数。**
+
+**3. 将全部历史反馈的条件概率乘起来。**
+
+利用条件概率的链式法则，历史反馈序列的似然为：
+
+$$
+\operatorname{Lik}_{t-1}(\theta)
+=
+\prod_{s=1}^{t-1}
+p(y_s\mid\mathcal F_{s-1};\theta).
+$$
+
+代入刚才的表达式：
+
+$$
+\operatorname{Lik}_{t-1}(\theta)
+=
+\prod_{s=1}^{t-1}
+\mu(\Delta_s(\theta))^{y_s}
+\left[1-\mu(\Delta_s(\theta))\right]^{1-y_s}.
+$$
+
+例如，只有两条反馈，分别为 $y_1=1$、$y_2=0$，那么：
+
+$$
+\operatorname{Lik}_2(\theta)
+=
+\underbrace{\mu(\Delta_1(\theta))}_{\text{第一轮选第一个的概率}}
+\underbrace{\left[1-\mu(\Delta_2(\theta))\right]}_{\text{第二轮选第二个的概率}}.
+$$
+
+**最大似然估计就是调整 $\theta$，让实际观察到的这串反馈具有尽可能大的似然。**
+
+这里使用的是条件概率，因此允许后续选臂依赖之前的反馈。
+
+**4. 取对数，把连乘变成求和。**
+
+对数函数严格递增，所以最大化似然，等价于最大化它的对数：
+
+$$
+\arg\max_\theta\operatorname{Lik}_{t-1}(\theta)
+=
+\arg\max_\theta\log\operatorname{Lik}_{t-1}(\theta).
+$$
+
+利用 $\log(ab)=\log a+\log b$ 和 $\log(a^c)=c\log a$：
+
+$$
+\log\operatorname{Lik}_{t-1}(\theta)
+=
+\sum_{s=1}^{t-1}
+\left[
+y_s\log\mu(\Delta_s(\theta))
++
+(1-y_s)\log\left(1-\mu(\Delta_s(\theta))\right)
+\right].
+$$
+
+这就把“所有反馈的概率相乘”，变成了“每条反馈的对数概率相加”。
+
+**5. 加上负号，得到要最小化的损失。**
+
+最大化一个函数，等价于最小化它的相反数。因此定义单条数据的损失：
+
+$$
+\boxed{
+\ell(y,z)
+=
+-y\log\mu(z)
+-(1-y)\log(1-\mu(z))
+}
+$$
+
+这就是二分类交叉熵损失，也就是这里的 logistic loss。
+
+于是：
+
+$$
+-\log\operatorname{Lik}_{t-1}(\theta)
+=
+\sum_{s=1}^{t-1}
+\ell\left(y_s,\langle\theta,\tilde x_s\rangle\right).
+$$
+
+它的作用可以直接从两种反馈看出来：
+
+$$
+\ell(y_s,\Delta_s(\theta))
+=
+\begin{cases}
+-\log p_s,&y_s=1,\\
+-\log(1-p_s),&y_s=0,
+\end{cases}
+$$
+
+其中 $p_s=\mu(\Delta_s(\theta))$。**模型给实际发生结果分配的概率越高，损失就越小。**
+
+**6. 最后加入 ridge 正则项。**
+
+在负对数似然上，再加上参数大小的惩罚：
+
+$$
+\boxed{
+L_{t-1}(\theta)
+=
+\sum_{s=1}^{t-1}
+\ell\left(y_s,\langle\theta,\tilde x_s\rangle\right)
++
+\frac{\lambda}{2}\|\theta\|_2^2
+}
+$$
+
+其中：
+
+$$
+\frac{\lambda}{2}\|\theta\|_2^2
+=
+\frac{\lambda}{2}\sum_{j=1}^{d}\theta_j^2.
+$$
+
+如果参数变得很大，这一项就会增大。算法由此在**拟合历史反馈**和**控制参数大小**之间进行权衡。
+
+最终得到：
+
+$$
+\boxed{
+\hat\theta_t
+=
+\arg\min_{\theta\in\mathbb R^d}L_{t-1}(\theta)
+}
+$$
+
+这就是 Algorithm 1 第 5 行的来源。其中，交叉熵部分由 BTL 模型的负对数似然推导而来，ridge 项是额外加入的正则化约束。
+
+汇总表
+
+| 原文位置   | 关键概念（英文／中文）                                       | 含义与对应表达                                               |
+| ---------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| **步骤前** | **Parametric utility**／参数化效用函数                       | 用参数 $\theta$ 给候选打分：$f_\theta(x)=\langle\theta,x\rangle$。真实效用对应 $\theta=\theta^\star$。 |
+| **Step 1** | **Conditional model for a single duel**／单次比较的条件概率模型 | 给定历史信息和参数，规定用户选择第一个的概率：$P(y_s=1\mid\mathcal F_{s-1};\theta)=\mu(f_\theta(x_{s,1})-f_\theta(x_{s,2}))$。这里采用 Logistic／BTL 模型。 |
+| **Step 2** | **Utility gap**／效用差                                      | 两个候选的效用之差：$\Delta_s(\theta)=f_\theta(x_{s,1})-f_\theta(x_{s,2})=\langle\theta,\tilde x_s\rangle$。 |
+| **Step 2** | **Bernoulli likelihood**／伯努利似然                         | 将 $y_s=1$ 和 $y_s=0$ 两种情况合并：$p(y_s\mid\mathcal F_{s-1};\theta)=p_s^{y_s}(1-p_s)^{1-y_s}$。观察到反馈后，将它视为 $\theta$ 的函数。 |
+| **Step 3** | **Conditional likelihood of the full sequence**／整个反馈序列的条件似然 | 把各轮对应的条件概率相乘：$\operatorname{Lik}_{t-1}(\theta)=\prod_{s=1}^{t-1}p(y_s\mid\mathcal F_{s-1};\theta)$ |
+| **Step 4** | **Log-likelihood**／对数似然                                 | 对似然取对数：$\log\operatorname{Lik}_{t-1}(\theta)$。连乘变为求和，而且最大化它与最大化原似然等价。 |
+| **Step 5** | **Negative log-likelihood（NLL）**／负对数似然               | 在对数似然前加负号：$-\log\operatorname{Lik}_{t-1}(\theta)$，将目标改写为最小化问题。 |
+| **Step 5** | **Logistic loss**／逻辑损失，也就是这里的二分类交叉熵        | 单条反馈的负对数似然：$\ell(y_s,\Delta_s(\theta))=-y_s\log p_s-(1-y_s)\log(1-p_s)$。全部历史反馈的 NLL 等于这些损失之和。 |
+| **Step 6** | **Ridge regularization／$\ell_2$ penalty**／岭正则化、$L_2$ 惩罚项 | 加入 $\frac{\lambda}{2}\lVert\theta\rVert_2^2$，惩罚过大的参数。 |
+| **Step 6** | **Ridge-MLE objective**／岭正则化最大似然的目标函数          | 将负对数似然与正则项相加：$L_{t-1}(\theta)=\sum_{s=1}^{t-1}\ell(y_s,\Delta_s(\theta))+\frac{\lambda}{2}\lVert\theta\rVert_2^2$。 |
+| **Step 6** | **Ridge logistic MLE**／岭正则化逻辑模型的最大似然估计量     | 最小化上述目标所得到的参数：$\hat\theta_t=\arg\min_{\theta\in\mathbb R^d}L_{t-1}(\theta)$。其中 **objective 是被优化的函数，estimator 是优化得到的参数**。 |
+
+## 3.2
+
+这一节要做的是：**把上一节“寻找损失最小的参数”，转化为“最优参数必须满足的梯度方程”**。这个方程会成为下一节证明置信界的起点。
+
+上一节得到的目标函数是：
+
+$$
+L_{t-1}(\theta)
+=
+\sum_{s=1}^{t-1}
+\ell\bigl(y_s,\langle\theta,\tilde x_s\rangle\bigr)
++
+\frac{\lambda}{2}\|\theta\|_2^2.
+$$
+
+现在按照原文的四步，对它求导。
+
+**Step 1：先求单条损失对标量 $z$ 的导数。**
+
+暂时把 $\langle\theta,\tilde x_s\rangle$ 写成 $z$。单条损失是：
+
+$$
+\ell(y,z)
+=
+-y\log\mu(z)
+-(1-y)\log(1-\mu(z)).
+$$
+
+这里 $y$ 是已经观察到的标签，求导时视为常数。利用链式法则：
+
+$$
+\begin{aligned}
+\frac{\partial\ell(y,z)}{\partial z}
+&=
+-y\frac{\mu'(z)}{\mu(z)}
++
+(1-y)\frac{\mu'(z)}{1-\mu(z)}
+\\[2mm]
+&=
+\mu'(z)
+\left[
+\frac{1-y}{1-\mu(z)}
+-
+\frac{y}{\mu(z)}
+\right]
+\\[2mm]
+&=
+\mu'(z)
+\frac{\mu(z)-y}{\mu(z)(1-\mu(z))}.
+\end{aligned}
+$$
+
+注意第二项前面的正号：原来损失前有一个负号，对 $1-\mu(z)$ 求导又产生一个负号，两者相乘得到正号。
+
+对于这里的 sigmoid 函数：
+
+$$
+\mu(z)=\frac{1}{1+e^{-z}},
+$$
+
+它的导数恰好满足：
+
+$$
+\mu'(z)
+=
+\frac{e^{-z}}{(1+e^{-z})^2}
+=
+\mu(z)(1-\mu(z)).
+$$
+
+代回去，分子、分母中的这一部分抵消，得到：
+
+$$
+\boxed{
+\frac{\partial\ell(y,z)}{\partial z}
+=
+\mu(z)-y
+}
+$$
+
+也就是：**单条损失对分数 $z$ 的导数，等于“预测概率减去实际标签”。**
+
+**Step 2：5188**
+
+实际的 $z$ 由参数决定：
+
+$$
+z=\langle\theta,\tilde x_s\rangle
+=\sum_{j=1}^{d}\theta_j\tilde x_{s,j}.
+$$
+
+因此，对其中任意一个参数 $\theta_j$ 求偏导：
+
+$$
+\frac{\partial z}{\partial\theta_j}
+=
+\tilde x_{s,j}.
+$$
+
+把这些偏导排列成一个列向量，就是梯度：
+
+$$
+\nabla_\theta z
+=
+\begin{bmatrix}
+\tilde x_{s,1}\\
+\vdots\\
+\tilde x_{s,d}
+\end{bmatrix}
+=
+\tilde x_s.
+$$
+
+现在应用链式法则：
+
+$$
+\begin{aligned}
+\nabla_\theta
+\ell\bigl(y_s,\langle\theta,\tilde x_s\rangle\bigr)
+&=
+\frac{\partial\ell(y_s,z)}{\partial z}
+\cdot\nabla_\theta z
+\\[1mm]
+&=
+\boxed{
+\bigl[\mu(\langle\theta,\tilde x_s\rangle)-y_s\bigr]\tilde x_s
+}.
+\end{aligned}
+$$
+
+这里的维度是：
+
+$$
+\underbrace{
+\mu(\langle\theta,\tilde x_s\rangle)-y_s
+}_{\text{一个标量}}
+\;\times\;
+\underbrace{\tilde x_s}_{d\times1}
+\quad\Longrightarrow\quad
+\underbrace{\nabla_\theta\ell}_{d\times1}.
+$$
+
+**Step 3：对整个目标函数求梯度。**
+
+历史样本的损失是相加的，所以梯度也直接相加。
+
+正则项的梯度则是：
+
+$$
+\nabla_\theta
+\left(\frac{\lambda}{2}\|\theta\|_2^2\right)
+=
+\nabla_\theta
+\left(\frac{\lambda}{2}\sum_{j=1}^{d}\theta_j^2\right)
+=
+\lambda\theta.
+$$
+
+因此，总梯度为：
+
+$$
+\boxed{
+\nabla_\theta L_{t-1}(\theta)
+=
+\sum_{s=1}^{t-1}
+\bigl[\mu(\langle\theta,\tilde x_s\rangle)-y_s\bigr]\tilde x_s
++
+\lambda\theta
+}
+$$
+
+它由两部分组成：**所有历史样本产生的梯度，以及正则项产生的梯度。**
+
+**Step 4：在最优参数处，让梯度等于零。**
+
+上一节将最优参数定义为：
+
+$$
+\hat\theta_t
+=
+\arg\min_{\theta\in\mathbb R^d}L_{t-1}(\theta).
+$$
+
+这里是一个**可微、无约束**的最小化问题，所以最小点必须满足：
+
+$$
+\nabla_\theta L_{t-1}(\hat\theta_t)=0.
+$$
+
+直观上，如果某个偏导不为零，就可以沿相应方向稍微调整参数，让损失继续下降，因此当前位置还没有达到最小值。
+
+把 Step 3 的梯度公式代入，便得到原文的式 $(10)$：
+
+$$
+\boxed{
+\sum_{s=1}^{t-1}
+\bigl[
+\mu(\langle\hat\theta_t,\tilde x_s\rangle)-y_s
+\bigr]\tilde x_s
++
+\lambda\hat\theta_t
+=
+0
+}
+$$
+
+右侧的 $0$ 是 **$d$ 维零向量**：这个式子实际上包含 $d$ 个方程，表示对每一个参数的偏导都等于零。这就是 **First-Order Optimality Condition（一阶最优性条件）**。
+
+此外，本节的目标函数是凸函数，因此梯度为零也足以保证全局最优；$\lambda>0$ 进一步保证了最优解的唯一性。下一节会从上面这个方程出发，研究估计参数 $\hat\theta_t$ 与真实参数 $\theta^\star$ 之间的误差。
+
+## 4
+
+Confidence Bound
+
+这一节承接 3.2 的最优性方程，证明：**估计参数 $\hat\theta_t$ 与真实参数 $\theta^\star$ 的误差有多大，并由此得到算法中的 UCB 探索项。**Clean_Proof_for_Dueling_Bandits.pdf
+
+先明确本节使用的信息矩阵：
+
+$$
+V_{t-1}
+=
+\frac{\lambda}{\kappa_\mu}I_d
++
+\sum_{s=1}^{t-1}\tilde x_s\tilde x_s^\top.
+$$
+
+对于正定矩阵 $V$，加权范数定义为：
+
+$$
+\|v\|_V=\sqrt{v^\top Vv},
+\qquad
+\|v\|_{V^{-1}}=\sqrt{v^\top V^{-1}v}.
+$$
+
+后面的证明会反复使用这两种范数。
+
+**先定义噪声：实际反馈减去真实选择概率。**
+
+在真实参数下，第 $s$ 轮选择第一个候选的概率为：
+
+$$
+p_s^\star=\mu(\langle\theta^\star,\tilde x_s\rangle).
+$$
+
+实际观察到的 $y_s$ 只能是 $0$ 或 $1$，因此定义：
+
+$$
+\varepsilon_s:=y_s-p_s^\star
+=
+\begin{cases}
+1-p_s^\star,&\text{概率为 }p_s^\star,\\
+-p_s^\star,&\text{概率为 }1-p_s^\star.
+\end{cases}
+$$
+
+例如，真实选择概率是 $0.8$，那么反馈为 $1$ 时噪声是 $0.2$，反馈为 $0$ 时噪声是 $-0.8$。
+
+给定历史信息，它的期望为：
+
+$$
+\mathbb E[\varepsilon_s\mid\mathcal F_{s-1}]
+=
+\mathbb E[y_s\mid\mathcal F_{s-1}]-p_s^\star
+=
+0.
+$$
+
+同时 $|\varepsilon_s|\le1$。由此可以使用文中的 **1-subgaussian** 界，即对任意实数 $a$：
+
+$$
+\mathbb E[e^{a\varepsilon_s}\mid\mathcal F_{s-1}]
+\le e^{a^2/2}.
+$$
+
+这个性质使我们能够用集中不等式控制历史噪声的累积。
+
+**Lemma 1 要证明：参数误差落在一个置信椭球内。**
+
+记参数误差向量为：
+
+$$
+\boldsymbol\Delta_t:=\hat\theta_t-\theta^\star.
+$$
+
+目标是证明，以至少 $1-\delta$ 的概率，**所有 $t\le T$ 同时满足**：
+
+$$
+\boxed{
+\|\boldsymbol\Delta_t\|_{V_{t-1}}
+\le
+\frac{\beta_T}{\kappa_\mu}
+=:b
+}
+$$
+
+这给出了以 $\hat\theta_t$ 为中心的参数置信椭球：$V_{t-1}$ 决定不同方向上的约束，$b$ 决定整体大小。
+
+下面按原文的五步推导。
+
+**Step 1：把最优性方程改写成包含“参数误差”和“噪声”的形式。**
+
+上一节已经得到：
+
+$$
+\sum_{s<t}
+\bigl[
+\mu(\langle\hat\theta_t,\tilde x_s\rangle)-y_s
+\bigr]\tilde x_s
++
+\lambda\hat\theta_t
+=
+0.
+$$
+
+这里 $\sum_{s<t}$ 就是 $\sum_{s=1}^{t-1}$。
+
+代入：
+
+$$
+y_s=\mu(\langle\theta^\star,\tilde x_s\rangle)+\varepsilon_s,
+\qquad
+\hat\theta_t=\theta^\star+\boldsymbol\Delta_t,
+$$
+
+整理得到：
+
+$$
+\boxed{
+\sum_{s<t}
+\left[
+\mu(\langle\hat\theta_t,\tilde x_s\rangle)
+-
+\mu(\langle\theta^\star,\tilde x_s\rangle)
+\right]\tilde x_s
++
+\lambda\boldsymbol\Delta_t
+=
+\sum_{s<t}\varepsilon_s\tilde x_s
+-
+\lambda\theta^\star
+}
+$$
+
+左边包含估计参数与真实参数造成的概率差，右边包含随机噪声和正则项。
+
+接着使用**中值定理**：
+
+$$
+\mu(a)-\mu(b)=\mu'(\xi)(a-b),
+$$
+
+其中 $\xi$ 位于 $a$ 和 $b$ 之间。因此：
+
+$$
+\mu(\langle\hat\theta_t,\tilde x_s\rangle)
+-
+\mu(\langle\theta^\star,\tilde x_s\rangle)
+=
+\mu'(\xi_{s,t})
+\langle\boldsymbol\Delta_t,\tilde x_s\rangle.
+$$
+
+利用：
+
+$$
+\langle\boldsymbol\Delta_t,\tilde x_s\rangle\tilde x_s
+=
+\tilde x_s\tilde x_s^\top\boldsymbol\Delta_t,
+$$
+
+再在等式两侧左乘 $\boldsymbol\Delta_t^\top$，得到：
+
+$$
+\boldsymbol\Delta_t^\top
+\left(
+\sum_{s<t}
+\mu'(\xi_{s,t})\tilde x_s\tilde x_s^\top
++\lambda I_d
+\right)
+\boldsymbol\Delta_t
+=
+\boldsymbol\Delta_t^\top
+\left(
+\sum_{s<t}\varepsilon_s\tilde x_s-\lambda\theta^\star
+\right).
+$$
+
+两边现在都是标量，接下来分别给左边找下界、给右边找上界。
+
+**Step 2：用曲率下界控制左边。**
+
+假设在这些中间点处：
+
+$$
+\mu'(\xi_{s,t})\ge\kappa_\mu.
+$$
+
+又因为：
+
+$$
+\boldsymbol\Delta_t^\top
+\tilde x_s\tilde x_s^\top
+\boldsymbol\Delta_t
+=
+(\tilde x_s^\top\boldsymbol\Delta_t)^2
+\ge0,
+$$
+
+所以把每个系数 $\mu'(\xi_{s,t})$ 替换成更小的 $\kappa_\mu$，便得到下界：
+
+$$
+\begin{aligned}
+\text{左边}
+&\ge
+\kappa_\mu
+\boldsymbol\Delta_t^\top
+\left(
+\sum_{s<t}\tilde x_s\tilde x_s^\top
++\frac{\lambda}{\kappa_\mu}I_d
+\right)
+\boldsymbol\Delta_t
+\\
+&=
+\boxed{
+\kappa_\mu
+\|\boldsymbol\Delta_t\|_{V_{t-1}}^2
+}.
+\end{aligned}
+$$
+
+**这里也解释了为什么初始化取 $V_0=\frac{\lambda}{\kappa_\mu}I_d$：**这样乘上 $\kappa_\mu$ 后，正好与原来的正则项系数 $\lambda$ 对齐。
+
+**Step 3：用 Cauchy–Schwarz 不等式控制右边。**
+
+这里使用的是加权形式：
+
+$$
+|a^\top c|
+\le
+\|a\|_V\|c\|_{V^{-1}}.
+$$
+
+注意，两侧分别使用 $V$ 和 $V^{-1}$。
+
+应用这个不等式，再使用范数的三角不等式：
+
+$$
+\begin{aligned}
+\text{右边}
+&\le
+\|\boldsymbol\Delta_t\|_{V_{t-1}}
+\left\|
+\sum_{s<t}\varepsilon_s\tilde x_s-\lambda\theta^\star
+\right\|_{V_{t-1}^{-1}}
+\\
+&\le
+\|\boldsymbol\Delta_t\|_{V_{t-1}}
+\left(
+\left\|
+\sum_{s<t}\varepsilon_s\tilde x_s
+\right\|_{V_{t-1}^{-1}}
++
+\lambda\|\theta^\star\|_{V_{t-1}^{-1}}
+\right).
+\end{aligned}
+$$
+
+结合 Step 2，约去一项 $\|\boldsymbol\Delta_t\|_{V_{t-1}}$，便得到：
+
+$$
+\boxed{
+\|\boldsymbol\Delta_t\|_{V_{t-1}}
+\le
+\frac{1}{\kappa_\mu}
+\left(
+\underbrace{
+\left\|\sum_{s<t}\varepsilon_s\tilde x_s\right\|_{V_{t-1}^{-1}}
+}_{\text{累积噪声项}}
++
+\underbrace{
+\lambda\|\theta^\star\|_{V_{t-1}^{-1}}
+}_{\text{正则项}}
+\right)
+}
+$$
+
+如果被约去的范数为 $0$，参数误差已经为 $0$，结论直接成立。
+
+至此，问题就变成了：**分别控制括号里的这两项。**
+
+**Step 4：控制正则项。**
+
+因为：
+
+$$
+V_{t-1}\succeq\frac{\lambda}{\kappa_\mu}I_d,
+$$
+
+求逆后有：
+
+$$
+V_{t-1}^{-1}\preceq\frac{\kappa_\mu}{\lambda}I_d.
+$$
+
+这里的矩阵大小关系按二次型理解。因此：
+
+$$
+\begin{aligned}
+\|\theta^\star\|_{V_{t-1}^{-1}}^2
+&=
+(\theta^\star)^\top V_{t-1}^{-1}\theta^\star\\
+&\le
+\frac{\kappa_\mu}{\lambda}\|\theta^\star\|_2^2\\
+&\le
+\frac{\kappa_\mu}{\lambda}S^2.
+\end{aligned}
+$$
+
+开平方，再乘 $\lambda$：
+
+$$
+\boxed{
+\lambda\|\theta^\star\|_{V_{t-1}^{-1}}
+\le
+\sqrt{\lambda\kappa_\mu}\,S
+}
+$$
+
+这就是 $\beta_T$ 中第一项的来源。
+
+**Step 5：用自归一化集中不等式控制累积噪声。**
+
+文中调用的集中不等式给出：以至少 $1-\delta$ 的概率，对所有 $t\le T$ 同时成立：
+
+$$
+\boxed{
+\left\|
+\sum_{s<t}\varepsilon_s\tilde x_s
+\right\|_{V_{t-1}^{-1}}
+\le
+\sqrt{
+2\log(1/\delta)
++
+\log\frac{\det(V_{t-1})}{\det(V_0)}
+}
+}
+$$
+
+这里的“自归一化”，体现在：**累积噪声由同一批特征构成的矩阵 $V_{t-1}$ 进行归一化。** 这个不等式允许特征根据过去的反馈自适应选择，但必须在本轮反馈出现之前确定。
+
+接下来把行列式这一项换成显式上界。由于 $\|\tilde x_s\|_2\le2$：
+
+$$
+\operatorname{tr}(V_{t-1})
+=
+\frac{\lambda d}{\kappa_\mu}
++
+\sum_{s<t}\|\tilde x_s\|_2^2
+\le
+\frac{\lambda d}{\kappa_\mu}+4T.
+$$
+
+其中 $\operatorname{tr}$ 是矩阵对角元素之和。利用正定矩阵的行列式—迹不等式：
+
+$$
+\det(A)\le\left(\frac{\operatorname{tr}(A)}d\right)^d,
+$$
+
+以及 $\det(V_0)=(\lambda/\kappa_\mu)^d$，可得：
+
+$$
+\log\frac{\det(V_{t-1})}{\det(V_0)}
+\le
+d\log\left(1+\frac{4\kappa_\mu T}{\lambda d}\right).
+$$
+
+于是噪声项满足：
+
+$$
+\left\|
+\sum_{s<t}\varepsilon_s\tilde x_s
+\right\|_{V_{t-1}^{-1}}
+\le
+\sqrt{
+2\log(1/\delta)
++
+d\log\left(1+\frac{4\kappa_\mu T}{\lambda d}\right)
+}.
+$$
+
+把 Step 4 和 Step 5 的结果代回 Step 3：
+
+$$
+\|\hat\theta_t-\theta^\star\|_{V_{t-1}}
+\le
+\frac{
+\overbrace{\sqrt{\lambda\kappa_\mu}\,S}^{\text{正则项上界}}
++
+\overbrace{
+\sqrt{
+2\log(1/\delta)
++d\log\left(1+\frac{4\kappa_\mu T}{\lambda d}\right)
+}
+}^{\text{累积噪声上界}}
+}{\kappa_\mu}.
+$$
+
+分子就是文中定义的 $\beta_T$，因此 Lemma 1 得证：
+
+$$
+\boxed{
+\|\hat\theta_t-\theta^\star\|_{V_{t-1}}
+\le \frac{\beta_T}{\kappa_\mu}=b
+}
+$$
+
+**Corollary 1：将参数误差界转换成效用差的误差界。**
+
+真实效用差与预测效用差之间的误差为：
+
+$$
+\begin{aligned}
+&f(x)-f(x')
+-\langle\hat\theta_t,x-x'\rangle\\
+&\qquad=
+\langle\theta^\star-\hat\theta_t,x-x'\rangle.
+\end{aligned}
+$$
+
+再次使用加权 Cauchy–Schwarz 不等式：
+
+$$
+\begin{aligned}
+\left|
+f(x)-f(x')
+-\langle\hat\theta_t,x-x'\rangle
+\right|
+&\le
+\|\theta^\star-\hat\theta_t\|_{V_{t-1}}
+\|x-x'\|_{V_{t-1}^{-1}}\\
+&\le
+b\|x-x'\|_{V_{t-1}^{-1}}.
+\end{aligned}
+$$
+
+取其中的上界：
+
+$$
+\boxed{
+f(x)-f(x')
+\le
+\underbrace{\langle\hat\theta_t,x-x'\rangle}_{\text{预测效用差}}
++
+\underbrace{b\|x-x'\|_{V_{t-1}^{-1}}}_{\text{误差上界}}
+}
+$$
+
+令 $x'=x_{t,1}$，右边就是算法选择第二个候选时最大化的表达式。**这为算法中的探索奖励提供了理论依据。**
+
+原文这里还有一个需要补清的条件：Step 2 的曲率下界必须覆盖 $\hat\theta_t$ 与 $\theta^\star$ 对应分数之间的全部中间点。仅有 $\|\theta^\star\|_2\le S$，并不能保证无约束估计量 $\hat\theta_t$ 也在这个范围内。因此，原文关于“真实参数有界即可保证该曲率条件”的说明不充分；上述证明需要把相关中间点处的曲率下界作为有效前提。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---
+关键在于：**logistic 损失是凸的；$\lambda>0$ 的平方正则项进一步让整个目标函数变成严格凸函数。凸性保证梯度为零时是全局最优，严格凸性保证最优解至多有一个。**
+
+我们来看为什么。
+
+目标函数是：
+
+$$
+L(\theta)
+=
+\sum_{s=1}^{t-1}
+\ell\bigl(y_s,\langle\theta,\tilde x_s\rangle\bigr)
++\frac{\lambda}{2}\|\theta\|_2^2.
+$$
+
+**先看单条 logistic 损失的二阶导数。** 将它写成：
+$$
+\ell(y,z)=\log(1+e^z)-yz.
+$$
+
+对标量 $z$ 求导：
+
+$$
+\frac{\partial\ell}{\partial z}=\mu(z)-y,
+\qquad
+\frac{\partial^2\ell}{\partial z^2}
+=\mu(z)\bigl(1-\mu(z)\bigr)>0.
+$$
+
+因为 sigmoid 的值始终在 $0$ 和 $1$ 之间，所以二阶导数为正，说明 **$\ell(y,z)$ 关于 $z$ 严格凸**。
+
+但这里需要注意：**关于标量 $z$ 严格凸，不代表关于整个参数向量 $\theta$ 也严格凸。** 不同的 $\theta$ 可能给出相同的内积 $z=\langle\theta,\tilde x_s\rangle$。
+
+---
+
+**判断关于向量 $\theta$ 的凸性，可以沿任意方向，把它变成一元函数。**
+
+固定一个参数点 $\theta$，任选一个非零方向向量 $v$，沿这个方向移动：
+
+$$
+\theta+av,
+\qquad a\in\mathbb R.
+$$
+
+这里 $a$ 是控制移动距离的标量。定义：
+
+$$
+g(a):=L(\theta+av).
+$$
+
+此时，每条数据对应的内积为：
+
+$$
+z_s(a)
+=\langle\theta+av,\tilde x_s\rangle
+=\langle\theta,\tilde x_s\rangle
++a\langle v,\tilde x_s\rangle.
+$$
+
+它对 $a$ 的导数是 $\langle v,\tilde x_s\rangle$，二阶导数是 $0$。由链式法则：
+
+$$
+\boxed{
+g''(a)
+=
+\sum_{s=1}^{t-1}
+\underbrace{\mu(z_s(a))(1-\mu(z_s(a)))}_{>0}
+\underbrace{\langle v,\tilde x_s\rangle^2}_{\geq0}
++
+\underbrace{\lambda\|v\|_2^2}_{>0}
+}
+$$
+
+最后一项来自正则项：
+
+$$
+\frac{\mathrm d^2}{\mathrm da^2}
+\left[\frac{\lambda}{2}\|\theta+av\|_2^2\right]
+=\lambda\|v\|_2^2.
+$$
+
+因此：
+
+- **只看损失部分**，沿任意方向的二阶导数都 $\geq0$，所以它是凸函数。
+- **加上 $\lambda>0$ 的正则项**，沿任意非零方向的二阶导数都 $>0$，所以整个目标函数严格凸。
+
+例如，如果某个方向 $v$ 满足所有 $\langle v,\tilde x_s\rangle=0$，那么沿这个方向改变参数，所有预测都不变，损失就是平的。**正则项使这个方向上也有正的二阶导数。**
