@@ -432,7 +432,7 @@ $$
 
 Confidence Bound
 
-这一节承接 3.2 的最优性方程，证明：**估计参数 $\hat\theta_t$ 与真实参数 $\theta^\star$ 的误差有多大，并由此得到算法中的 UCB 探索项。**Clean_Proof_for_Dueling_Bandits.pdf
+这一节承接 3.2 的最优性方程，证明：**估计参数 $\hat\theta_t$ 与真实参数 $\theta^\star$ 的误差有多大，并由此得到算法中的 UCB 探索项。**
 
 先明确本节使用的信息矩阵：
 
