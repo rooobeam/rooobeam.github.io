@@ -1,0 +1,305 @@
+\[
+f_\theta(x)=\langle\theta,x\rangle.
+\]  这里这样定义是什么意思 <>是什么意思
+凭什么“\[
+\begin{aligned}
+\Delta_s(\theta)
+&=f_\theta(x_{s,1})-f_\theta(x_{s,2})\\
+&=\langle\theta,x_{s,1}-x_{s,2}\rangle\\
+&=\langle\theta,\tilde x_s\rangle.
+\end{aligned}
+\]” 这里效用差 这里能等价于输入xs,1-xs,2
+
+
+
+把 Step 3 的梯度公式代入，便得到原文的式 (10)：
+$$
+\boxed{ \sum_{s=1}^{t-1} \bigl[ \mu(\langle\hat\theta_t,\tilde x_s\rangle)-y_s \bigr]\tilde x_s + \lambda\hat\theta_t = 0 }
+$$
+
+
+
+右侧的 0 是 **d 维零向量**：这个式子实际上包含 d 个方程，表示对每一个参数的偏导都等于零。这就是 **First-Order Optimality Condition（一阶最优性条件）**。
+此外，本节的目标函数是凸函数，因此梯度为零也足以保证全局最优；\lambda>0 进一步保证了最优解的唯一性。下一节会从上面这个方程出发，研究估计参数 \hat\theta_t 与真实参数 \theta^\star 之间的误差。
+3.2这里是，为什么目标函数是凸函数，为什么保证了最优解的唯一性
+
+
+
+
+
+
+
+其中 $\xi$ 位于 $a$ 和 $b$ 之间。因此：
+
+$$
+\mu(\langle\hat\theta_t,\tilde x_s\rangle)
+-
+\mu(\langle\theta^\star,\tilde x_s\rangle)
+=
+\mu'(\xi_{s,t})
+\langle\boldsymbol\Delta_t,\tilde x_s\rangle.
+$$
+
+利用：
+
+$$
+\langle\boldsymbol\Delta_t,\tilde x_s\rangle\tilde x_s
+=
+\tilde x_s\tilde x_s^\top\boldsymbol\Delta_t,
+$$
+
+再在等式两侧左乘 $\boldsymbol\Delta_t^\top$，得到：
+
+$$
+\boldsymbol\Delta_t^\top
+\left(
+\sum_{s<t}
+\mu'(\xi_{s,t})\tilde x_s\tilde x_s^\top
++\lambda I_d
+\right)
+\boldsymbol\Delta_t
+=
+\boldsymbol\Delta_t^\top
+\left(
+\sum_{s<t}\varepsilon_s\tilde x_s-\lambda\theta^\star
+\right).
+$$
+
+这里详细讲点，而且“\langle\boldsymbol\Delta_t,\tilde x_s\rangle\tilde x_s
+=
+\tilde x_s\tilde x_s^\top\boldsymbol\Delta_t,” 是怎么回事，我不知道它怎么算的
+
+
+
+
+
+
+
+
+
+**Step 3: Upper bound the right-hand side by Cauchy–Schwarz.** 
+By 
+Cauchy–Schwarz in the ***V**t−*1-norm, 
+**∆***⊤ t*  X 
+*s<t* 
+*εs**x***˜*s − λ**θ** ⋆*  *≤ ∥***∆***t∥*
+***V**t−*1 *·*     
+  X 
+*s<t* 
+*εs**x***˜*s − λ**θ** ⋆*    
+***V**t −*1 
+*−*
+1 
+*≤ ∥***∆***t∥*
+***V**t−*1         X 
+*s<t* 
+*εs**x***˜*s*    
+***V**t − −* 1 1 
+\+     
+*λ**θ** ⋆*    
+***V**t − −* 1 1 !
+
+
+
+这里为什么柯西不等式会突然用上了Vt-1前面step2V
+
+
+
+
+
+
+
+
+
+
+我只想问，为什么“在 V^{-1} 范数下使用**三角不等式**  ” 这里能成立？这个范数下的柯西不等式为什么成立？它v的定义是那啥嘛，然后这个不等式成立条件是什么，V的要求是什么
+
+
+
+
+
+
+
+
+
+对称正定是什么，\[
+V^\top=V,
+\qquad
+u^\top Vu>0\quad\text{对任意 }u\neq0.
+\]是对称，正定是什么，再简化一下刚才的证明
+
+**第一条是“对称”，第二条就是“正定”。它们是两个不同的条件：**
+
+- **对称**：$V^\top=V$，即矩阵沿主对角线两侧的元素对应相等。
+- **正定**：任取一个非零向量 $u$，算出来的数 $u^\top Vu$ 都严格大于 $0$。
+
+例如：
+
+\[ V= \begin{bmatrix} 2&0\\ 0&3 \end{bmatrix}, \qquad u= \begin{bmatrix}u_1\\u_2\end{bmatrix}. \]
+
+它显然对称；再计算：
+
+\[ u^\top Vu = \begin{bmatrix}u_1&u_2\end{bmatrix} \begin{bmatrix}2u_1\\3u_2\end{bmatrix} = 2u_1^2+3u_2^2. \]
+
+只要 $u\neq0$，就至少有一个分量不为零，因此：
+
+\[ 2u_1^2+3u_2^2>0. \]
+
+所以它也正定。**“正定”检查的是这个乘法结果始终为正，不是要求矩阵每个元素都为正。**
+
+------
+
+刚才的不等式证明，可以用高中二次函数的判别式来简化。
+
+**先证明柯西不等式。** 记 $A=V^{-1}$，它也对称正定，并定义：
+
+\[ \|u\|_A^2=u^\top Au. \]
+
+因为 $A$ 正定，对任意实数 $c$ 都有：
+
+\[ \begin{aligned} 0 &\leq(u-cw)^\top A(u-cw)\\ &=\|u\|_A^2-2c\,u^\top Aw+c^2\|w\|_A^2. \end{aligned} \]
+
+把最后一行看作**关于 $c$ 的二次函数**。当 $w\neq0$ 时，它开口向上，而且始终非负，因此判别式必须 $\leq0$：
+
+\[ (-2u^\top Aw)^2 - 4\|w\|_A^2\|u\|_A^2 \leq0. \]
+
+整理并开平方：
+
+\[ \boxed{ |u^\top Aw| \leq\|u\|_A\|w\|_A. } \]
+
+这就是加权内积下的柯西不等式。$w=0$ 时，两边都是零，也成立。
+
+**再证明三角不等式。** 展开后，把中间的交叉项用柯西不等式放大：
+
+\[ \begin{aligned} \|u+w\|_A^2 &=\|u\|_A^2+2u^\top Aw+\|w\|_A^2\\ &\leq\|u\|_A^2+2\|u\|_A\|w\|_A+\|w\|_A^2\\ &=(\|u\|_A+\|w\|_A)^2. \end{aligned} \]
+
+两边开平方：
+
+\[ \boxed{ \|u+w\|_A\leq\|u\|_A+\|w\|_A. } \]
+
+因此，**正定性保证二次式非负，二次式非负推出柯西不等式，再由柯西不等式推出三角不等式。** 取 $A=V^{-1}$，就是原文使用的那一套不等式。
+
+
+
+
+
+
+
+
+
+
+
+
+
+— 2c u Aw 这里是怎么得来的？
+
+
+
+
+
+
+
+\[
+\|u\|_A^2=u^\top Au.
+\]  这个就是加权的的norm吗
+
+
+
+
+
+
+
+
+
+V_{t-1}\succeq\frac{\lambda}{\kappa_\mu}I_d,啥意思这是
+
+
+
+
+
+
+
+
+
+Since ***V**t−*1 *⪰ **V***0 = *κ λ µ* 
+***I**d*, we 
+have ***V**t −*1 
+*−*
+1 *⪯ κ*
+*µ* 
+*λ* 
+***I**d*, hence 
+*∥**θ** ⋆ ∥*
+***V**t −*1 
+*−*
+1 *≤* r *κ*
+*µ* 
+*λ* 
+*∥**θ** ⋆ ∥*
+2 
+*≤* r *κ*
+*µ* 
+*λ* 
+*S,* 
+so 
+*λ∥**θ** ⋆ ∥*
+***V**t −*1 
+*−*
+1 *≤* p *λκµ S.??*
+
+
+
+这里讲解
+
+
+
+
+
+
+
+
+
+为啥*∥***∆***t∥*
+***V**t−*1 *≤* 
+1 
+*κµ* 
+     
+  X 
+*s<t* 
+*εs**x***˜*s*    
+***V**t −*1 
+*−*
+1 
+\+ *λ∥**θ** ⋆ ∥*
+***V**t − −* 1 1  *.*外边那个 1 /*κµ 不放进去形成λ/κµ ∥**θ** ⋆ ∥*
+***V**t − −* 1 1  这样才算是**ridge term?**
+
+**可以放进去。如果指的是最终误差界中的正则化贡献，确实应该把外面的 $1/\kappa_\mu$ 一起算上。**
+
+展开括号就是：
+
+\[ \|\Delta_t\|_{V_{t-1}} \leq \underbrace{ \frac1{\kappa_\mu} \left\|\sum_{s<t}\varepsilon_s\tilde x_s\right\|_{V_{t-1}^{-1}} }_{\text{噪声带来的贡献}} + \underbrace{ \frac{\lambda}{\kappa_\mu} \|\theta^\star\|_{V_{t-1}^{-1}} }_{\text{正则化带来的贡献}}. \]
+
+前面只是在给**括号里面**的那一项建立上界：
+
+\[ \lambda\|\theta^\star\|_{V_{t-1}^{-1}} \leq\sqrt{\lambda\kappa_\mu}\,S. \]
+
+放回完整误差界，还要乘上外面的 $1/\kappa_\mu$，因此最终的正则化贡献满足：
+
+\[ \boxed{ \frac{\lambda}{\kappa_\mu} \|\theta^\star\|_{V_{t-1}^{-1}} \leq \frac{\sqrt{\lambda\kappa_\mu}}{\kappa_\mu}S = \sqrt{\frac{\lambda}{\kappa_\mu}}\,S. } \]
+
+这里称它为 **ridge term**，是按照“这一项来源于 ridge 正则化”来命名。括号内的项与最终误差界中的贡献，相差的就是这个公共系数 $1/\kappa_\mu$。
+
+目标函数中的正则化系数仍然是 $\lambda$；额外的 $1/\kappa_\mu$ 来自前面的曲率下界。
+
+
+
+
+
+
+
+
+
+
+
+

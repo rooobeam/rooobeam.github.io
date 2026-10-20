@@ -897,15 +897,168 @@ $$
 
 
 
+---
 
+## detail 1
 
+**这里选用 $V_{t-1}$，是为了让右边出现与 Step 2 相同的误差范数 $\|\Delta_t\|_{V_{t-1}}$，随后把它约掉。** 这种写法来自加权内积下的柯西不等式。
 
+先简记：
 
+$$
+V:=V_{t-1},
+\qquad
+q:=\sum_{s<t}\varepsilon_s\tilde x_s-\lambda\theta^\star.
+$$
 
+那么右边就是 $\Delta_t^\top q$。
 
+**先看 Step 2 留下了什么。**
 
+前面定义：
 
+$$
+V=\sum_{s<t}\tilde x_s\tilde x_s^\top
++\frac{\lambda}{\kappa_\mu}I_d.
+$$
 
+Step 2 利用 $\mu'(\xi_{s,t})\geq\kappa_\mu$，给左边建立下界，得到：
+
+$$
+\boxed{
+\kappa_\mu\|\Delta_t\|_V^2
+\leq
+\Delta_t^\top q.
+}
+$$
+
+现在需要给右侧 $\Delta_t^\top q$ 建立上界。**我们希望这个上界中也出现 $\|\Delta_t\|_V$，这样才能与左边衔接。**
+
+**原本 $\Delta_t^\top q$ 没有 $V$，怎样合法地用上它？关键是插入 $VV^{-1}=I_d$。**
+$$
+\Delta_t^\top q
+=
+\Delta_t^\top VV^{-1}q
+=
+\Delta_t^\top V(V^{-1}q).
+$$
+
+这个等式没有改变原来的数值。
+
+因为 $V$ 对称正定，可以定义一个加权内积：
+
+$$
+\langle u,w\rangle_V:=u^\top Vw,
+$$
+
+以及对应的范数：
+
+$$
+\|u\|_V:=\sqrt{u^\top Vu}.
+$$
+
+因此，刚才的式子可以写成：
+
+$$
+\boxed{
+\Delta_t^\top q
+=
+\langle\Delta_t,V^{-1}q\rangle_V.
+}
+$$
+
+注意：**这里参加加权内积的两个向量是 $\Delta_t$ 和 $V^{-1}q$。**
+
+柯西不等式对这个内积同样成立：
+
+$$
+|\langle u,w\rangle_V|
+\leq
+\|u\|_V\|w\|_V.
+$$
+
+代入这两个向量：
+
+$$
+|\Delta_t^\top q|
+\leq
+\|\Delta_t\|_V\,
+\|V^{-1}q\|_V.
+$$
+
+再把最后一个范数展开：
+
+$$
+\begin{aligned}
+\|V^{-1}q\|_V^2
+&=(V^{-1}q)^\top V(V^{-1}q)\\
+&=q^\top V^{-1}VV^{-1}q\\
+&=q^\top V^{-1}q\\
+&=\|q\|_{V^{-1}}^2.
+\end{aligned}
+$$
+
+这里用了 $V^{-1}$ 也是对称矩阵，所以 $(V^{-1})^\top=V^{-1}$。
+
+因此：
+
+$$
+\boxed{
+|\Delta_t^\top q|
+\leq
+\|\Delta_t\|_V\,
+\|q\|_{V^{-1}}.
+}
+$$
+
+**这就是为什么一个范数带 $V$，另一个带 $V^{-1}$：它们来自刚才插入的 $VV^{-1}$，必须配套出现。**
+
+原文写成不带绝对值的形式也成立，因为：
+
+$$
+\Delta_t^\top q
+\leq|\Delta_t^\top q|.
+$$
+
+**现在就能与 Step 2 合起来了。**
+$$
+\kappa_\mu\|\Delta_t\|_V^2
+\leq
+\Delta_t^\top q
+\leq
+\|\Delta_t\|_V\|q\|_{V^{-1}}.
+$$
+
+当 $\Delta_t\neq0$ 时，两边除以共同的 $\|\Delta_t\|_V$：
+
+$$
+\boxed{
+\|\Delta_t\|_V
+\leq
+\frac{1}{\kappa_\mu}\|q\|_{V^{-1}}.
+}
+$$
+
+如果 $\Delta_t=0$，这个界直接成立。
+
+所以，选择 $V$ 的用意很具体：**左边已经是 $\|\Delta_t\|_V^2$，右边就构造出一个 $\|\Delta_t\|_V$，约掉后得到参数误差的上界。** 用普通欧氏范数的柯西不等式也成立，但会出现 $\|\Delta_t\|_2$，不能这样直接相消。
+
+你贴出的下一行，则是在 $V^{-1}$ 范数下使用**三角不等式**：
+
+$$
+\begin{aligned}
+\|q\|_{V^{-1}}
+&=
+\left\|
+\sum_{s<t}\varepsilon_s\tilde x_s-\lambda\theta^\star
+\right\|_{V^{-1}}\\
+&\leq
+\left\|\sum_{s<t}\varepsilon_s\tilde x_s\right\|_{V^{-1}}
++\lambda\|\theta^\star\|_{V^{-1}}.
+\end{aligned}
+$$
+
+这样，右边就被拆成了可以分别处理的噪声项与正则项。
 
 
 
@@ -928,6 +1081,8 @@ $$
 
 
 ---
+
+
 关键在于：**logistic 损失是凸的；$\lambda>0$ 的平方正则项进一步让整个目标函数变成严格凸函数。凸性保证梯度为零时是全局最优，严格凸性保证最优解至多有一个。**
 
 我们来看为什么。

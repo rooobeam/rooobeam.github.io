@@ -1,0 +1,242 @@
+[
+  {
+    "file": "equation-001.png",
+    "latex": "\\mathcal{X}_t\\subseteq\\mathbb{R}^{d}",
+    "slide": 3,
+    "effective_font_pt": 31.0
+  },
+  {
+    "file": "equation-002.png",
+    "latex": "x_{t,1},\\ x_{t,2}\\in\\mathcal{X}_t",
+    "slide": 3,
+    "effective_font_pt": 29.0
+  },
+  {
+    "file": "equation-003.png",
+    "latex": "y_t\\in\\{0,1\\}",
+    "slide": 3,
+    "effective_font_pt": 31.0
+  },
+  {
+    "file": "equation-004.png",
+    "latex": "f(x)=\\langle\\theta^{\\star},x\\rangle",
+    "slide": 3,
+    "effective_font_pt": 27.0
+  },
+  {
+    "file": "equation-005.png",
+    "latex": "\\widetilde{x}_t=x_{t,1}-x_{t,2}",
+    "slide": 3,
+    "effective_font_pt": 25.0
+  },
+  {
+    "file": "equation-006.png",
+    "latex": "\\Pr(y_t=1\\mid\\mathcal{F}_{t-1})=\\mu(\\langle\\theta^{\\star},\\widetilde{x}_t\\rangle)",
+    "slide": 4,
+    "effective_font_pt": 25.0
+  },
+  {
+    "file": "equation-007.png",
+    "latex": "\\mu(z)=\\frac{1}{1+e^{-z}}",
+    "slide": 4,
+    "effective_font_pt": 25.0
+  },
+  {
+    "file": "equation-008.png",
+    "latex": "x_t^{\\star}\\in\\arg\\max_{x\\in\\mathcal{X}_t}f(x)",
+    "slide": 4,
+    "effective_font_pt": 27.0
+  },
+  {
+    "file": "equation-009.png",
+    "latex": "r_t=[f(x_t^{\\star})-f(x_{t,1})]",
+    "slide": 4,
+    "effective_font_pt": 27.0
+  },
+  {
+    "file": "equation-010.png",
+    "latex": "\\quad+[f(x_t^{\\star})-f(x_{t,2})]",
+    "slide": 4,
+    "effective_font_pt": 27.0
+  },
+  {
+    "file": "equation-011.png",
+    "latex": "R_T=\\sum_{t=1}^{T}r_t",
+    "slide": 4,
+    "effective_font_pt": 25.0
+  },
+  {
+    "file": "equation-012.png",
+    "latex": "\\Vert x\\Vert _2\\leq 1",
+    "slide": 5,
+    "effective_font_pt": 34.0
+  },
+  {
+    "file": "equation-013.png",
+    "latex": "\\Vert \\theta^{\\star}\\Vert _2\\leq S",
+    "slide": 5,
+    "effective_font_pt": 34.0
+  },
+  {
+    "file": "equation-014.png",
+    "latex": "\\Vert \\widetilde{x}_t\\Vert _2\\leq\\Vert x_{t,1}\\Vert _2+\\Vert x_{t,2}\\Vert _2\\leq2",
+    "slide": 5,
+    "effective_font_pt": 27.0
+  },
+  {
+    "file": "equation-015.png",
+    "latex": "|\\langle\\theta^{\\star},\\widetilde{x}_t\\rangle|\\leq2S",
+    "slide": 5,
+    "effective_font_pt": 31.0
+  },
+  {
+    "file": "equation-016.png",
+    "latex": "\\mu'(z)=\\mu(z)(1-\\mu(z))\\geq\\kappa_\\mu>0",
+    "slide": 6,
+    "effective_font_pt": 28.0
+  },
+  {
+    "file": "equation-017.png",
+    "latex": "\\xi_{s,t}\\ \\mathrm{between}\\ \\langle\\theta^{\\star},\\widetilde{x}_s\\rangle\\ \\mathrm{and}\\ \\langle\\widehat\\theta_t,\\widetilde{x}_s\\rangle",
+    "slide": 6,
+    "effective_font_pt": 24.0
+  },
+  {
+    "file": "equation-018.png",
+    "latex": "\\ell(y,z)=-y\\log\\mu(z)-(1-y)\\log(1-\\mu(z))",
+    "slide": 7,
+    "effective_font_pt": 27.0
+  },
+  {
+    "file": "equation-019.png",
+    "latex": "z=\\langle\\theta,\\widetilde{x}_s\\rangle",
+    "slide": 7,
+    "effective_font_pt": 23.0
+  },
+  {
+    "file": "equation-020.png",
+    "latex": "\\widehat\\theta_t=\\arg\\min_{\\theta\\in\\mathbb{R}^{d}}\\left\\{\\sum_{s<t}\\ell(y_s,\\langle\\theta,\\widetilde{x}_s\\rangle)+\\frac{\\lambda}{2}\\Vert \\theta\\Vert _2^2\\right\\}",
+    "slide": 7,
+    "effective_font_pt": 30.0
+  },
+  {
+    "file": "equation-021.png",
+    "latex": "\\frac{\\partial\\ell(y,z)}{\\partial z}=\\mu(z)-y",
+    "slide": 8,
+    "effective_font_pt": 30.0
+  },
+  {
+    "file": "equation-022.png",
+    "latex": "\\nabla_\\theta\\ell(y_s,\\langle\\theta,\\widetilde{x}_s\\rangle)=[\\mu(\\langle\\theta,\\widetilde{x}_s\\rangle)-y_s]\\widetilde{x}_s",
+    "slide": 8,
+    "effective_font_pt": 27.0
+  },
+  {
+    "file": "equation-023.png",
+    "latex": "\\sum_{s<t}[\\mu(\\langle\\widehat\\theta_t,\\widetilde{x}_s\\rangle)-y_s]\\widetilde{x}_s+\\lambda\\widehat\\theta_t=0",
+    "slide": 8,
+    "effective_font_pt": 30.0
+  },
+  {
+    "file": "equation-024.png",
+    "latex": "x_{t,1}\\in\\arg\\max_{x\\in\\mathcal{X}_t}\\langle\\widehat\\theta_t,x\\rangle",
+    "slide": 9,
+    "effective_font_pt": 28.0
+  },
+  {
+    "file": "equation-025.png",
+    "latex": "x_{t,2}\\in\\arg\\max_{x\\in\\mathcal{X}_t}\\{\\langle\\widehat\\theta_t,x-x_{t,1}\\rangle",
+    "slide": 9,
+    "effective_font_pt": 29.0
+  },
+  {
+    "file": "equation-026.png",
+    "latex": "\\qquad\\qquad\\quad+b\\,\\Vert x-x_{t,1}\\Vert _{V_{t-1}^{-1}}\\}",
+    "slide": 9,
+    "effective_font_pt": 29.0
+  },
+  {
+    "file": "equation-027.png",
+    "latex": "V_0=\\frac{\\lambda}{\\kappa_\\mu}I_d",
+    "slide": 9,
+    "effective_font_pt": 28.0
+  },
+  {
+    "file": "equation-028.png",
+    "latex": "V_t=V_{t-1}+\\widetilde{x}_t\\widetilde{x}_t^{\\top}",
+    "slide": 9,
+    "effective_font_pt": 26.0
+  },
+  {
+    "file": "equation-029.png",
+    "latex": "\\Vert \\widehat\\theta_t-\\theta^{\\star}\\Vert _{V_{t-1}}\\leq\\frac{\\beta_T}{\\kappa_\\mu}=b",
+    "slide": 10,
+    "effective_font_pt": 35.0
+  },
+  {
+    "file": "equation-030.png",
+    "latex": "\\Vert u\\Vert _V=\\sqrt{u^{\\top}Vu}",
+    "slide": 10,
+    "effective_font_pt": 29.0
+  },
+  {
+    "file": "equation-031.png",
+    "latex": "\\widehat\\theta_t",
+    "slide": 10,
+    "effective_font_pt": 24.0
+  },
+  {
+    "file": "equation-032.png",
+    "latex": "\\theta^{\\star}",
+    "slide": 10,
+    "effective_font_pt": 24.0
+  },
+  {
+    "file": "equation-033.png",
+    "latex": "\\Delta_t=\\widehat\\theta_t-\\theta^{\\star}",
+    "slide": 11,
+    "effective_font_pt": 23.0
+  },
+  {
+    "file": "equation-034.png",
+    "latex": "\\varepsilon_s=y_s-\\mu(\\langle\\theta^{\\star},\\widetilde{x}_s\\rangle),\\quad\\mathbb{E}[\\varepsilon_s\\mid\\mathcal{F}_{s-1}]=0,\\quad|\\varepsilon_s|\\leq1",
+    "slide": 11,
+    "effective_font_pt": 22.0
+  },
+  {
+    "file": "equation-035.png",
+    "latex": "H_t\\Delta_t=N_t-\\lambda\\theta^{\\star}",
+    "slide": 11,
+    "effective_font_pt": 31.0
+  },
+  {
+    "file": "equation-036.png",
+    "latex": "N_t:=\\sum_{s<t}\\varepsilon_s\\widetilde{x}_s",
+    "slide": 11,
+    "effective_font_pt": 22.0
+  },
+  {
+    "file": "equation-037.png",
+    "latex": "H_t=\\sum_{s<t}\\mu'(\\xi_{s,t})\\widetilde{x}_s\\widetilde{x}_s^{\\top}+\\lambda I_d\\succeq\\kappa_\\mu V_{t-1}",
+    "slide": 11,
+    "effective_font_pt": 28.0
+  },
+  {
+    "file": "equation-038.png",
+    "latex": "\\Vert \\Delta_t\\Vert _{V_{t-1}}\\leq\\frac{1}{\\kappa_\\mu}\\left(\\Vert N_t\\Vert _{V_{t-1}^{-1}}+\\sqrt{\\lambda\\kappa_\\mu}\\,S\\right)",
+    "slide": 11,
+    "effective_font_pt": 29.0
+  },
+  {
+    "file": "equation-039.png",
+    "latex": "\\beta_T=\\sqrt{\\lambda\\kappa_\\mu}\\,S+\\sqrt{2\\log(1/\\delta)+d\\log\\left(1+\\frac{4\\kappa_\\mu T}{\\lambda d}\\right)}\\,,\\qquad b=\\frac{\\beta_T}{\\kappa_\\mu}",
+    "slide": 12,
+    "effective_font_pt": 31.0
+  },
+  {
+    "file": "equation-040.png",
+    "latex": "|f(x)-f(x')-\\langle\\widehat\\theta_t,x-x'\\rangle|\\leq b\\,\\Vert x-x'\\Vert _{V_{t-1}^{-1}}",
+    "slide": 12,
+    "effective_font_pt": 31.0
+  }
+]

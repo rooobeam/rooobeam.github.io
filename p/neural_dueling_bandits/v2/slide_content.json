@@ -1,0 +1,145 @@
+[
+  {
+    "page": 1,
+    "title": "From Pairwise Preferences to Confidence Bounds",
+    "section": "Opening",
+    "seconds": 10,
+    "key": "Preference feedback → parameter estimation → confident comparisons",
+    "notes": "This talk follows Sections 1 to 4 of the note, from pairwise preference feedback to an arm-selection rule with a confidence guarantee.",
+    "optional": "The cumulative regret proof in Sections 5 and 6 is outside this presentation.",
+    "source": "Source: Sections 1–4, pp.1–7",
+    "spoken_words": 22
+  },
+  {
+    "page": 2,
+    "title": "Contents",
+    "section": "Contents",
+    "seconds": 20,
+    "key": "Problem setup → assumptions → algorithm → confidence bound",
+    "notes": "We will answer four questions. What do we observe, and what do we optimize? Which assumptions make the analysis work? How does the algorithm estimate utility and select two arms? Finally, why does the confidence bound justify its exploration bonus? Each main part takes roughly two minutes.",
+    "optional": "",
+    "source": "Source: Sections 1–4, pp.1–7",
+    "spoken_words": 47
+  },
+  {
+    "page": 3,
+    "title": "Compare two arms; observe one preference",
+    "section": "1 Problem Setup",
+    "seconds": 65,
+    "key": "Separate observed preferences from latent utilities.",
+    "notes": "At round t, the learner receives a decision set. Each arm is represented by a d-dimensional feature vector. The setting is contextual because decisions depend on these features, and the available set may change from round to round. The learner selects two arms and observes one binary preference: one means that the first arm wins.\n\nThe underlying utility is linear in an unknown parameter, theta star. We never directly observe this utility. Instead, comparisons provide indirect information about it. Subtracting the two utilities gives the inner product of theta star with the difference of the two feature vectors. This difference feature is therefore the basic input used throughout the algorithm and the proof.",
+    "optional": "For the conditional model and martingale arguments, the decision set, selected arms, and relevant algorithm randomness are included in the information available before observing the current preference.",
+    "source": "Source: Section 1, p.1",
+    "spoken_words": 113
+  },
+  {
+    "page": 4,
+    "title": "Preference probabilities and utility regret",
+    "section": "1 Problem Setup",
+    "seconds": 65,
+    "key": "Preferences are random feedback; regret measures latent utility loss.",
+    "notes": "The logistic, or BTL, model converts a utility gap into a win probability. Equal utilities give probability one half. A larger gap makes the first arm more likely to win, but does not make the outcome deterministic. The sigmoid on the left illustrates this observation model.\n\nThe objective on the right is different: it measures the quality of our choices through latent utility. Compare each selected arm with the truly best arm in the current set. Instantaneous regret is the sum of these two utility losses, and cumulative regret adds them over time. Both selected arms therefore matter. The goal is to choose strong pairs while learning from their noisy comparisons.",
+    "optional": "This uses the note's regret convention without a factor of one half. We assume the displayed maxima are attained; for infinite decision sets, compactness and continuity are one sufficient route.",
+    "source": "Source: Section 1, p.1",
+    "spoken_words": 111
+  },
+  {
+    "page": 5,
+    "title": "Bounded features and parameters control the scale",
+    "section": "2 Assumptions",
+    "seconds": 65,
+    "key": "Boundedness supports control of features, curvature and ridge bias.",
+    "notes": "The first assumptions control scale. Every feature vector has Euclidean norm at most one, and the true parameter has norm at most a known constant S. The triangle inequality then bounds each difference feature by two. Cauchy–Schwarz bounds the absolute true utility gap by two S.\n\nThese bounds play three roles later. Bounded difference features control the growth of the design matrix and its determinant. A bounded true parameter controls the bias introduced by ridge regularization. Bounded true scores also identify a finite interval on the logistic curve. Notice, however, that bounding the true parameter does not automatically bound the fitted parameter. That distinction matters for the next assumption.",
+    "optional": "",
+    "source": "Source: Sections 1–2, pp.1–2",
+    "spoken_words": 110
+  },
+  {
+    "page": 6,
+    "title": "Local curvature makes parameter error controllable",
+    "section": "2 Assumptions",
+    "seconds": 65,
+    "key": "The curvature bound must cover scores between the true and fitted values.",
+    "notes": "The logistic derivative is largest near zero and approaches zero in the tails. In a flat region, a substantial change in the parameter can produce only a small change in probability. To control parameter error, the proof assumes a positive lower bound, kappa mu, on the relevant derivatives.\n\nThe relevant scores are the intermediate points between the true and fitted scores, introduced by the mean value theorem. This is a qualification in the original note: a bound on theta star alone only bounds the true scores. The algorithm's unconstrained estimate need not lie in the same parameter ball. We therefore explicitly require the curvature bound at those intermediate points. The confidence result is conditional on this requirement. The plotted choice S equals one is only an illustration.",
+    "optional": "The identity mu prime equals mu times one minus mu is also the scalar second derivative of the logistic loss. The note's claim that bounded true parameters alone suffice for the chosen curvature interval requires an additional argument.",
+    "source": "Source: Section 2, p.2; Section 4, p.5. The scope note makes a required condition explicit.",
+    "spoken_words": 127
+  },
+  {
+    "page": 7,
+    "title": "Estimate utility with ridge logistic regression",
+    "section": "3 Algorithm",
+    "seconds": 50,
+    "key": "Bernoulli preferences yield logistic loss; ridge regularization stabilizes estimation.",
+    "notes": "For any candidate parameter, each preference is a Bernoulli observation with a logistic success probability. Maximizing the conditional likelihood is equivalent to minimizing the negative log-likelihood shown here: binary cross-entropy.\n\nSum this loss over the previous t minus one comparisons and add a ridge penalty. Its minimizer is the estimate used in round t. A positive lambda makes the objective strictly convex and stabilizes estimation. It also pulls the estimate toward zero, so the confidence bound must account for regularization bias. With no observations in the first round, the minimizer is zero. This establishes the estimator before we discuss how it chooses arms.",
+    "optional": "The likelihood factors by the conditional chain rule under adaptive arm selection; unconditional independence of the observations is not needed.",
+    "source": "Source: Section 3.1, pp.2–4",
+    "spoken_words": 103
+  },
+  {
+    "page": 8,
+    "title": "The first-order condition starts the proof",
+    "section": "3 Algorithm",
+    "seconds": 50,
+    "key": "Use the stationarity equation as the starting point of the error analysis.",
+    "notes": "Only three derivative steps are essential. First, differentiating the logistic loss with respect to its score gives predicted probability minus observed label. The logistic derivative identity makes the expression simplify. Second, the chain rule multiplies that residual by the difference feature. Third, sum these gradients, add the ridge gradient, and set the result to zero at the minimizer.\n\nThis stationarity equation is the starting point for the confidence proof. Adding and subtracting the true success probability will separate estimation error from observation noise and ridge bias. Thus an optimization condition becomes the bridge to a statistical error bound.",
+    "optional": "The zero-gradient equation applies to the note's unconstrained estimator. If a parameter-ball constraint is introduced, use the corresponding optimality inequality instead.",
+    "source": "Source: Section 3.2, p.4",
+    "spoken_words": 98
+  },
+  {
+    "page": 9,
+    "title": "Choose a greedy arm, then an optimistic challenger",
+    "section": "3 Algorithm",
+    "seconds": 50,
+    "key": "The two selection rules and matrix update define the learning loop.",
+    "notes": "The first arm maximizes estimated utility: it is the greedy choice. The second arm maximizes an optimistic estimate of its utility relative to that first arm. Its score combines the predicted utility difference with an uncertainty bonus. Because the first arm is already a maximizer, the predicted difference is nonpositive; uncertainty can still make a challenger worth comparing.\n\nThe inverse design matrix measures uncertainty along each difference direction. Initialize V as shown, then add the outer product of each observed difference feature. Repeated comparisons reduce uncertainty in the directions they cover. After receiving the label, update the data and repeat. The remaining question is how large the bonus coefficient b must be.",
+    "optional": "",
+    "source": "Source: Algorithm 1, p.2",
+    "spoken_words": 112
+  },
+  {
+    "page": 10,
+    "title": "One confidence event covers every round",
+    "section": "4 Confidence Bound",
+    "seconds": 45,
+    "key": "A simultaneous parameter-error bound for all rounds.",
+    "notes": "The target guarantee is a confidence ellipsoid around the estimate. With probability at least one minus delta, the displayed parameter error bound holds for every round simultaneously. Delta is the failure probability.\n\nThe distance is weighted by V rather than measured in the ordinary Euclidean norm. V records information about observed comparison directions and determines the ellipsoid's shape. The coefficient b controls its overall size. The picture is a schematic view in parameter space. We will obtain a single event covering the whole horizon using a time-uniform concentration inequality, rather than assigning a separate failure budget to each round.",
+    "optional": "",
+    "source": "Source: Lemma 1, p.5",
+    "spoken_words": 99
+  },
+  {
+    "page": 11,
+    "title": "Proof sketch: noise plus regularization bias",
+    "section": "4 Confidence Bound",
+    "seconds": 60,
+    "key": "Error ≤ inverse curvature × (noise + ridge bias).",
+    "notes": "The proof has three steps. Define the parameter error Delta and the noise epsilon, which is the observed label minus its true success probability. This noise has conditional mean zero and absolute value at most one.\n\nFirst, rewrite stationarity around the true parameter. The mean value theorem gives H times Delta equal to accumulated noise minus the ridge term. Second, the curvature assumption makes H at least kappa mu times V. Third, multiply by Delta transpose and apply weighted Cauchy–Schwarz. Cancel the error norm when it is nonzero; the zero case is immediate. Finally, the initial regularization matrix bounds the ridge contribution by the square root of lambda kappa mu, times S. Only the noise term still needs a probabilistic bound.",
+    "optional": "A conditionally centered variable bounded in absolute value by one is conditionally 1-subgaussian, which suffices for the concentration bound used in the note.",
+    "source": "Source: Lemma 1, Steps 1–4, pp.5–6",
+    "spoken_words": 122
+  },
+  {
+    "page": 12,
+    "title": "The confidence bound determines the UCB bonus",
+    "section": "4 Confidence Bound",
+    "seconds": 45,
+    "key": "The utility-gap confidence bound supplies the exploration bonus.",
+    "notes": "A self-normalized martingale inequality controls the noise even though comparison directions depend on past observations. A determinant bound then gives the explicit logarithmic term shown here. Adding the ridge contribution defines beta T; dividing by kappa mu gives b.\n\nOne more application of weighted Cauchy–Schwarz turns the parameter bound into a bound on any pairwise utility difference. The true gap is at most its estimated gap plus the displayed uncertainty term. This is exactly the upper confidence bound used to choose the second arm. The proof therefore supplies the exploration bonus that the algorithm needs.",
+    "optional": "The intermediate noise bound is sqrt[2 log(1/delta) + log(det(V_{t-1})/det(V_0))]. The log-determinant ratio is at most d log(1 + 4 kappa_mu T/(lambda d)), using the difference-feature norm bound of two.",
+    "source": "Source: Lemma 1, Step 5 and Corollary 1, pp.6–7",
+    "spoken_words": 96
+  },
+  {
+    "page": 13,
+    "title": "Connecting the four parts",
+    "section": "Closing",
+    "seconds": 10,
+    "key": "The model, assumptions, algorithm and confidence bound form one argument.",
+    "notes": "The key connection is that parameter confidence gives pairwise utility confidence. That confidence defines the exploration bonus and guides the next comparison.",
+    "optional": "",
+    "source": "Source: Sections 1–4, pp.1–7",
+    "spoken_words": 22
+  }
+]
